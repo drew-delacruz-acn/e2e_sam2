@@ -1,0 +1,15 @@
+embedding:
+  device: cpu
+  model_types:
+  - clip
+image:
+  image_path: /Users/andrewdelacruz/e2e_sam2/data/thor_hammer.jpeg
+mode: image
+segmentation:
+  detection_threshold: 0.1
+  queries:
+  - hammer
+  results_dir: results/test_pipeline
+  segmentation_threshold: 0.5
+serialization:
+  output_json: results/test_pipeline/crop_embeddings.json

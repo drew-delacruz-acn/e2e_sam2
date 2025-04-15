@@ -1,0 +1,37 @@
+# Ignore JPEG and image files
+*.jpg
+*.jpeg
+*.png
+*.bmp
+*.gif
+
+# Ignore PyTorch model files
+*.pt
+*.pth
+
+# Ignore dataset files
+*.csv
+*.tsv
+*.zip
+*.tar
+*.tar.gz
+*.h5
+*.npz
+*.npy
+
+# Ignore Python cache and compiled files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Ignore environment and dependency folders
+venv/
+.env/
+
+# Ignore results and checkpoints
+results/
+checkpoints/
+
+# Ignore notebook checkpoints
+.ipynb_checkpoints/

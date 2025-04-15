@@ -35,3 +35,7 @@ checkpoints/
 
 # Ignore notebook checkpoints
 .ipynb_checkpoints/
+
+# Allow JPEGs in the data folder
+!/data/*.jpeg
+!/data/*.jpg

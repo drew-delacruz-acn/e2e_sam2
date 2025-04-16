@@ -141,3 +141,6 @@ The pipeline generates several visualizations:
 - **SAM2 Import Errors**: Make sure SAM2 is properly installed with `pip install -e .` from the SAM2 directory
 - **Memory Issues**: Try using a smaller SAM2 model (tiny or small) by changing the config
 - **No Objects Detected**: Try lowering the detection threshold or using different text queries 
+
+
+python -m e2e_pipeline_v2.process_embeddings --image data/thor_hammer.jpeg --queries "hammer" --threshold 0.03 --models clip vit resnet50 --output_dir results/embeddings_full --force_cpu

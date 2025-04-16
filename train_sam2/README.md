@@ -46,23 +46,57 @@ python train_sam.py --data_dir /path/to/dataset \
 
 The `sam2_fintune_inference.py` script runs inference with the fine-tuned SAM2 model.
 
+### Basic Inference
+
 ```bash
 python sam2_fintune_inference.py --image_path /path/to/image.jpg \
                                --mask_path /path/to/mask.png \
                                --sam2_checkpoint /path/to/fine_tuned_model.torch \
                                --model_cfg /path/to/config \
-                               --num_points 30 \
                                --output_path segmentation_result.png
 ```
+
+### Comparing with Original Model
+
+The script can compare performance between your fine-tuned model and the original pre-trained model:
+
+```bash
+python sam2_fintune_inference.py --image_path /path/to/image.jpg \
+                               --mask_path /path/to/mask.png \
+                               --gt_mask_path /path/to/ground_truth.png \
+                               --sam2_checkpoint /path/to/fine_tuned_model.torch \
+                               --original_checkpoint /path/to/original_model.torch \
+                               --model_cfg /path/to/config \
+                               --compare \
+                               --output_path segmentation_result.png
+```
+
+With this command, the script will:
+1. Run inference with both models
+2. Generate segmentation visualizations for both models
+3. Create a side-by-side comparison image
+4. Calculate and report accuracy metrics if a ground truth mask is provided
 
 ### Inference Arguments
 
 - `--image_path`: Path to input image
 - `--mask_path`: Path to mask defining region to segment
-- `--sam2_checkpoint`: Path to SAM2 checkpoint
+- `--gt_mask_path`: Path to ground truth mask for evaluation (optional)
+- `--sam2_checkpoint`: Path to fine-tuned SAM2 checkpoint
+- `--original_checkpoint`: Path to original SAM2 checkpoint for comparison (optional)
 - `--model_cfg`: Path to model config
 - `--num_points`: Number of points to sample from the mask (default: 30)
 - `--output_path`: Path to save output segmentation (default: output_segmentation.png)
+- `--compare`: Enable comparison between fine-tuned and original models
+
+### Metrics
+
+When a ground truth mask is provided, the script calculates the following metrics:
+- IoU (Intersection over Union)
+- Dice coefficient
+- Precision
+- Recall
+- F1 score
 
 ## Dataset Format
 
@@ -73,4 +107,4 @@ The scripts are configured to work with the DAVIS dataset format. For other data
 - The scripts default to using GPU with mixed precision if available
 - For Apple Silicon Macs, MPS backend is used if CUDA is not available
 - The training script logs IOU accuracy during training
-- The inference script generates a visualization with colored segments 
+- The inference script generates visualizations with colored segments

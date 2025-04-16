@@ -194,6 +194,23 @@ def run_inference(model, image, input_points, device, model_name="Model"):
     
     return seg_map, masks, scores
 
+def load_model(model_path, model_cfg, device, is_state_dict=False):
+    """Load the model from checkpoint or state dict"""
+    if is_state_dict:
+        # Load from state dict (fine-tuned model)
+        print(f"Loading model from state dict: {model_path}")
+        # First load the base model with the architecture
+        model = build_sam2(model_cfg, None, device=device)
+        # Then load the state dict
+        state_dict = torch.load(model_path, map_location=device)
+        model.load_state_dict(state_dict)
+    else:
+        # Load regular checkpoint
+        print(f"Loading model from checkpoint: {model_path}")
+        model = build_sam2(model_cfg, model_path, device=device)
+    
+    return model
+
 def main():
     """Main inference function"""
     args = parse_args()
@@ -213,9 +230,12 @@ def main():
     
     results = {}
     
+    # Determine if the fine-tuned model is a state dict
+    finetuned_is_state_dict = args.sam2_checkpoint.endswith('.torch') or args.sam2_checkpoint.endswith('.pt')
+    
     # Load and run fine-tuned model
     print(f"Loading fine-tuned model from {args.sam2_checkpoint}")
-    finetuned_model = build_sam2(args.model_cfg, args.sam2_checkpoint, device=device)
+    finetuned_model = load_model(args.sam2_checkpoint, args.model_cfg, device, is_state_dict=finetuned_is_state_dict)
     finetuned_seg_map, finetuned_masks, finetuned_scores = run_inference(
         finetuned_model, image, input_points, device, "Fine-tuned Model"
     )
@@ -237,7 +257,7 @@ def main():
     # If comparison is enabled, load and run original model
     if args.compare and args.original_checkpoint:
         print(f"\nLoading original model from {args.original_checkpoint}")
-        original_model = build_sam2(args.model_cfg, args.original_checkpoint, device=device)
+        original_model = load_model(args.original_checkpoint, args.model_cfg, device, is_state_dict=False)
         original_seg_map, original_masks, original_scores = run_inference(
             original_model, image, input_points, device, "Original Model"
         )

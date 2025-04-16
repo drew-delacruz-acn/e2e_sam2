@@ -17,7 +17,7 @@ os.environ["PYTORCH_ENABLE_MPS_FALLBACK"] = "1"
 def parse_args():
     """Parse command line arguments"""
     parser = argparse.ArgumentParser(description="Fine-tune SAM2 model")
-    parser.add_argument("--data_dir", type=str, default="../../../data/davis-2017/DAVIS/",
+    parser.add_argument("--data_dir", type=str, default="../data/davis-2017/DAVIS/",
                       help="Path to dataset")
     parser.add_argument("--sam2_checkpoint", type=str, default="../checkpoints/sam2.1_hiera_large.pt",
                       help="Path to SAM2 checkpoint")
@@ -115,6 +115,9 @@ def main():
 
     # Load model
     print(f"Current working directory: {os.getcwd()}")
+    print(f'Loading model from {args.sam2_checkpoint}')
+    print(f'Loading model config from {args.model_cfg}')
+    print(f'Using device: {device}')
     sam2_model = build_sam2(args.model_cfg, args.sam2_checkpoint, device=device)
     predictor = SAM2ImagePredictor(sam2_model)
 

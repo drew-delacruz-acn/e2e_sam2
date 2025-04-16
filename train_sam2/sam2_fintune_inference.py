@@ -107,7 +107,9 @@ def main():
     print(f"Sampled {len(input_points)} points from mask")
     
     # Load model
+    print(os.getcwd())
     print(f"Loading model from {args.sam2_checkpoint}")
+    print(f"Loading model config from {args.model_cfg}")
     sam2_model = build_sam2(args.model_cfg, args.sam2_checkpoint, device=device)
     predictor = SAM2ImagePredictor(sam2_model)
     

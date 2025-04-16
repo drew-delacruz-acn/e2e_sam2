@@ -7,6 +7,7 @@ Generates embeddings for crops and masked images.
 import os
 import sys
 import json
+import time
 import argparse
 from pathlib import Path
 import cv2
@@ -79,13 +80,36 @@ def save_image(image, path):
     else:
         raise ValueError(f"Unsupported image type: {type(image)}")
 
+def format_time(seconds):
+    """Format time in seconds to a human-readable string."""
+    if seconds < 60:
+        return f"{seconds:.2f} seconds"
+    elif seconds < 3600:
+        minutes = seconds // 60
+        seconds %= 60
+        return f"{int(minutes)} minutes and {seconds:.2f} seconds"
+    else:
+        hours = seconds // 3600
+        seconds %= 3600
+        minutes = seconds // 60
+        seconds %= 60
+        return f"{int(hours)} hours, {int(minutes)} minutes and {seconds:.2f} seconds"
+
 def main():
+    start_time = time.time()
     args = parse_args()
+    
+    # Track input images count
+    image_count = 0
+    detection_count = 0
     
     # Check if image file exists
     if not os.path.exists(args.image):
         print(f"Error: Image file '{args.image}' does not exist.")
         return 1
+    
+    # Increment image count
+    image_count += 1
     
     # Create output directory
     os.makedirs(args.output_dir, exist_ok=True)
@@ -108,6 +132,9 @@ def main():
         if args.force_cpu and hasattr(pipeline.detector, 'config'):
             pipeline.detector.config['force_cpu'] = True
         
+        pipeline_start = time.time()
+        print("Running detection and segmentation pipeline...")
+        
         # Run detection and segmentation
         results = pipeline.run(
             image_path=args.image,
@@ -116,6 +143,10 @@ def main():
             save_results=True,
             generate_embeddings=False  # We'll handle embedding generation ourselves
         )
+        
+        pipeline_end = time.time()
+        pipeline_time = pipeline_end - pipeline_start
+        print(f"Pipeline completed in {format_time(pipeline_time)}")
         
         # Check if detection and segmentation were successful
         if not results or "success" in results and not results["success"]:
@@ -144,7 +175,17 @@ def main():
         # Check if we have any detections
         if not detection_results or not detection_results.get("boxes", []):
             print("No objects detected in the image.")
+            end_time = time.time()
+            print(f"\nProcessing completed in {format_time(end_time - start_time)}")
+            print(f"Processed {image_count} images with {detection_count} detections")
             return 0
+        
+        # Track how many detections we have
+        if detection_results.get("boxes"):
+            detection_count += len(detection_results["boxes"])
+        
+        embedding_start = time.time()
+        print("Generating embeddings for detections...")
         
         # Process detections
         for i, (box, label, score) in enumerate(zip(
@@ -233,6 +274,10 @@ def main():
                 "embedding_path": embeddings_path
             })
         
+        embedding_end = time.time()
+        embedding_time = embedding_end - embedding_start
+        print(f"Embedding generation completed in {format_time(embedding_time)}")
+        
         # Save summary of all embeddings
         summary_path = os.path.join(args.output_dir, f"{image_name}_embeddings_summary.json")
         with open(summary_path, 'w') as f:
@@ -240,11 +285,26 @@ def main():
                 "image_path": args.image,
                 "model_types": args.models,
                 "num_embeddings": len(all_embeddings),
-                "embeddings": all_embeddings
+                "embeddings": all_embeddings,
+                "processing_time": {
+                    "pipeline_time": pipeline_time,
+                    "embedding_time": embedding_time,
+                    "total_time": time.time() - start_time
+                }
             }, f, indent=2)
         
         print(f"\nSaved summary to {summary_path}")
         print(f"Total number of processed items: {len(all_embeddings)}")
+        
+        # Print final timing information
+        end_time = time.time()
+        total_time = end_time - start_time
+        print(f"\n== Performance Summary ==")
+        print(f"Total execution time: {format_time(total_time)}")
+        print(f"Pipeline processing: {format_time(pipeline_time)} ({pipeline_time/total_time*100:.1f}%)")
+        print(f"Embedding generation: {format_time(embedding_time)} ({embedding_time/total_time*100:.1f}%)")
+        print(f"Processed {image_count} images with {detection_count} detections")
+        print(f"Average time per detection: {format_time(embedding_time/max(1, detection_count))}")
         
         return 0
         
@@ -252,6 +312,11 @@ def main():
         print(f"Error: {str(e)}")
         import traceback
         traceback.print_exc()
+        
+        # Print timing even if there was an error
+        end_time = time.time()
+        print(f"\nExecution failed after {format_time(end_time - start_time)}")
+        print(f"Processed {image_count} images with {detection_count} detections")
         return 1
 
 if __name__ == "__main__":

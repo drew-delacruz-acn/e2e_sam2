@@ -26,8 +26,7 @@ logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
     handlers=[
-        logging.StreamHandler(sys.stdout),
-        logging.FileHandler('embedding_debug.log')
+        logging.StreamHandler(sys.stdout)
     ]
 )
 logger = logging.getLogger('embedding_process')
@@ -112,14 +111,17 @@ def format_time(seconds):
 
 def log_tensor_info(tensor, name="tensor"):
     """Log detailed information about a tensor."""
+    if logger.level > logging.DEBUG:
+        return  # Skip detailed tensor logging if not in debug mode
+    
     if not isinstance(tensor, torch.Tensor):
-        logger.info(f"{name} is not a tensor but {type(tensor)}")
+        logger.debug(f"{name} is not a tensor but {type(tensor)}")
         return
     
     try:
-        logger.info(f"{name} - Type: {tensor.dtype}, Shape: {tensor.shape}, Device: {tensor.device}")
-        logger.info(f"{name} - Min: {tensor.min().item()}, Max: {tensor.max().item()}, Mean: {tensor.mean().item()}")
-        logger.info(f"{name} - Contains NaN: {torch.isnan(tensor).any().item()}, Contains Inf: {torch.isinf(tensor).any().item()}")
+        logger.debug(f"{name} - Type: {tensor.dtype}, Shape: {tensor.shape}, Device: {tensor.device}")
+        logger.debug(f"{name} - Min: {tensor.min().item()}, Max: {tensor.max().item()}, Mean: {tensor.mean().item()}")
+        logger.debug(f"{name} - Contains NaN: {torch.isnan(tensor).any().item()}, Contains Inf: {torch.isinf(tensor).any().item()}")
     except Exception as e:
         logger.warning(f"Could not log complete tensor info for {name}: {str(e)}")
         
@@ -140,53 +142,62 @@ def log_system_info():
     logger.info(f"NumPy Version: {np.__version__}")
     logger.info(f"OpenCV Version: {cv2.__version__}")
     
-    # Log available dtypes in PyTorch
-    logger.info("=== PyTorch Data Types ===")
-    dtypes = [
-        torch.float, torch.float16, torch.float32, torch.float64,
-        torch.int, torch.int8, torch.int16, torch.int32, torch.int64,
-        torch.uint8, torch.bool
-    ]
-    
-    # Check for bfloat16 support
-    if hasattr(torch, 'bfloat16'):
-        dtypes.append(torch.bfloat16)
-        logger.info("BFloat16 is available in this PyTorch version")
-    else:
-        logger.info("BFloat16 is NOT available in this PyTorch version")
-    
-    for dtype in dtypes:
-        try:
-            x = torch.tensor([1.0], dtype=dtype)
-            logger.info(f"Dtype {dtype} - test successful on CPU")
-            
-            if torch.cuda.is_available():
-                try:
-                    x_cuda = x.cuda()
-                    logger.info(f"Dtype {dtype} - test successful on CUDA")
-                except Exception as e:
-                    logger.warning(f"Dtype {dtype} - CUDA test failed: {str(e)}")
-            
-            if hasattr(torch.backends, 'mps') and torch.backends.mps.is_available():
-                try:
-                    x_mps = x.to('mps')
-                    logger.info(f"Dtype {dtype} - test successful on MPS")
-                except Exception as e:
-                    logger.warning(f"Dtype {dtype} - MPS test failed: {str(e)}")
-                    
-        except Exception as e:
-            logger.warning(f"Dtype {dtype} - test failed: {str(e)}")
+    # Only do detailed dtype testing in debug mode
+    if logger.level <= logging.DEBUG:
+        # Log available dtypes in PyTorch
+        logger.debug("=== PyTorch Data Types ===")
+        dtypes = [
+            torch.float, torch.float16, torch.float32, torch.float64,
+            torch.int, torch.int8, torch.int16, torch.int32, torch.int64,
+            torch.uint8, torch.bool
+        ]
+        
+        # Check for bfloat16 support
+        if hasattr(torch, 'bfloat16'):
+            dtypes.append(torch.bfloat16)
+            logger.debug("BFloat16 is available in this PyTorch version")
+        else:
+            logger.debug("BFloat16 is NOT available in this PyTorch version")
+        
+        for dtype in dtypes:
+            try:
+                x = torch.tensor([1.0], dtype=dtype)
+                logger.debug(f"Dtype {dtype} - test successful on CPU")
+                
+                if torch.cuda.is_available():
+                    try:
+                        x_cuda = x.cuda()
+                        logger.debug(f"Dtype {dtype} - test successful on CUDA")
+                    except Exception as e:
+                        logger.warning(f"Dtype {dtype} - CUDA test failed: {str(e)}")
+                
+                if hasattr(torch.backends, 'mps') and torch.backends.mps.is_available():
+                    try:
+                        x_mps = x.to('mps')
+                        logger.debug(f"Dtype {dtype} - test successful on MPS")
+                    except Exception as e:
+                        logger.warning(f"Dtype {dtype} - MPS test failed: {str(e)}")
+                        
+            except Exception as e:
+                logger.warning(f"Dtype {dtype} - test failed: {str(e)}")
 
 def main():
     start_time = time.time()
     args = parse_args()
     
-    # Set debug logging level if requested
+    # Set up debug logging if requested
     if args.debug:
         logger.setLevel(logging.DEBUG)
+        # Add file handler for debug logs
+        debug_file_handler = logging.FileHandler('embedding_debug.log')
+        debug_file_handler.setFormatter(logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s'))
+        logger.addHandler(debug_file_handler)
         
-    # Log system information
-    log_system_info()
+        # Log system information only in debug mode
+        log_system_info()
+    else:
+        # In non-debug mode, only show INFO and higher in console
+        logger.setLevel(logging.INFO)
     
     # Track input images count
     image_count = 0

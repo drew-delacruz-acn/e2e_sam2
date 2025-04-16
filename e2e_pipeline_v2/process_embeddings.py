@@ -16,80 +16,6 @@ from PIL import Image
 import torch
 import matplotlib.pyplot as plt
 
-# Monkey patch torch to better handle BFloat16 errors
-# This needs to be done before importing any model code
-def patch_torch_bfloat16():
-    """Apply patches to handle BFloat16 issues in PyTorch."""
-    
-    # Original tensor creation method
-    original_tensor = torch.Tensor
-    original_from_numpy = torch.from_numpy
-    
-    # Override tensor creation to prevent BFloat16
-    def safe_tensor(*args, **kwargs):
-        if 'dtype' in kwargs and kwargs['dtype'] == torch.bfloat16:
-            print("Warning: BFloat16 tensor requested. Converting to Float32 for compatibility.")
-            kwargs['dtype'] = torch.float32
-        return original_tensor(*args, **kwargs)
-    
-    def safe_from_numpy(ndarray, *args, **kwargs):
-        if 'dtype' in kwargs and kwargs['dtype'] == torch.bfloat16:
-            print("Warning: BFloat16 tensor requested from NumPy array. Converting to Float32.")
-            kwargs['dtype'] = torch.float32
-        return original_from_numpy(ndarray, *args, **kwargs)
-    
-    # Apply the patches
-    torch.Tensor = safe_tensor
-    torch.from_numpy = safe_from_numpy
-    
-    # Disable BFloat16 in amp if available
-    if hasattr(torch.cuda, 'amp') and hasattr(torch.cuda.amp, 'autocast'):
-        original_autocast = torch.cuda.amp.autocast
-        
-        def safe_autocast(*args, **kwargs):
-            if 'dtype' in kwargs and kwargs['dtype'] == torch.bfloat16:
-                print("Warning: BFloat16 autocast requested. Using Float32 or Float16 instead.")
-                # Use float16 on CUDA, float32 elsewhere
-                kwargs['dtype'] = torch.float16 if torch.cuda.is_available() else torch.float32
-            return original_autocast(*args, **kwargs)
-        
-        torch.cuda.amp.autocast = safe_autocast
-    
-    # Patch tensor conversion methods to prevent BFloat16
-    try:
-        # Only attempt to patch if it's a method, not if it's a function
-        if hasattr(torch.Tensor, 'to') and callable(getattr(torch.Tensor, 'to')):
-            original_to = torch.Tensor.to
-            
-            def safe_to(self, *args, **kwargs):
-                if len(args) > 0 and args[0] == torch.bfloat16:
-                    print("Warning: Conversion to BFloat16 detected. Using Float32 instead.")
-                    args = list(args)
-                    args[0] = torch.float32
-                    args = tuple(args)
-                if 'dtype' in kwargs and kwargs['dtype'] == torch.bfloat16:
-                    print("Warning: Conversion to BFloat16 detected. Using Float32 instead.")
-                    kwargs['dtype'] = torch.float32
-                return original_to(self, *args, **kwargs)
-            
-            torch.Tensor.to = safe_to
-    except Exception as e:
-        print(f"Warning: Could not patch tensor.to method: {e}")
-        print("Will continue without patching tensor conversion.")
-    
-    # If ops module is available, try to patch low-level ops
-    try:
-        if hasattr(torch, 'ops'):
-            print("Note: PyTorch ops module found, but ops patching is disabled for safety.")
-            # Patching ops is too risky and can cause unexpected errors
-            # We'll rely on our safe_generate_embedding function instead
-    except Exception as e:
-        print(f"Note: Error when checking torch.ops: {e}")
-        # Just continue without patching ops
-
-# Apply the patch before importing model code
-patch_torch_bfloat16()
-
 from e2e_pipeline_v2.modules.embedding import EmbeddingGenerator, ModelType
 from e2e_pipeline_v2.pipeline import DetectionSegmentationPipeline
 
@@ -111,8 +37,6 @@ def parse_args():
                       help="Device to use (cuda or cpu)")
     parser.add_argument("--force_cpu", action="store_true",
                       help="Force CPU usage for all operations")
-    parser.add_argument("--force_fp32", action="store_true",
-                      help="Force FP32 precision for all operations (helps with compatibility)")
     return parser.parse_args()
 
 def apply_mask_to_image(image, mask):
@@ -171,114 +95,6 @@ def format_time(seconds):
         seconds %= 60
         return f"{int(hours)} hours, {int(minutes)} minutes and {seconds:.2f} seconds"
 
-def convert_tensor_precision(tensor, device, dtype=None):
-    """Convert a tensor to the appropriate precision based on the device.
-    
-    Args:
-        tensor: Input tensor
-        device: Device to use (cuda, mps, cpu)
-        dtype: Optional dtype to force (overrides automatic selection)
-        
-    Returns:
-        Tensor with appropriate precision
-    """
-    # If not a tensor, return as is
-    if not isinstance(tensor, torch.Tensor):
-        return tensor
-    
-    # If dtype is explicitly specified, use it
-    if dtype is not None:
-        return tensor.to(device=device, dtype=dtype)
-    
-    # Select precision based on device
-    if device == 'cuda':
-        # Use float16 for CUDA (NVIDIA GPUs)
-        try:
-            return tensor.to(device=device, dtype=torch.float16)
-        except Exception as e:
-            print(f"Warning: Could not convert to float16: {str(e)}")
-            return tensor.to(device=device, dtype=torch.float32)
-    elif device == 'mps':
-        # Use float32 for MPS (Apple Silicon)
-        return tensor.to(device=device, dtype=torch.float32)
-    else:
-        # Use float32 for CPU
-        return tensor.to(device=device, dtype=torch.float32)
-
-def safe_generate_embedding(embedding_generator, image, model_type, device, force_fp32=False):
-    """Safely generate embeddings with fallback to more compatible precision.
-    
-    Args:
-        embedding_generator: The embedding generator instance
-        image: Input image
-        model_type: Model type to use
-        device: Device to use
-        force_fp32: Whether to force FP32 precision
-        
-    Returns:
-        Generated embedding
-    """
-    # For CLIP models, we need special handling because they often use BFloat16
-    is_clip_model = model_type.lower() == "clip"
-    
-    for attempt in range(3):  # Try up to 3 times with different approaches
-        try:
-            if attempt == 0:
-                # First attempt: Use the normal approach (or FP32 if forced)
-                if force_fp32 or is_clip_model:
-                    # Force FP32 mode right away for CLIP or if requested
-                    with torch.cuda.amp.autocast(enabled=False):
-                        embedding = embedding_generator.generate_embedding(image, model_type)
-                        # Convert to FP32 if on GPU
-                        if device != 'cpu' and isinstance(embedding, torch.Tensor):
-                            embedding = embedding.to(dtype=torch.float32)
-                else:
-                    # Try with default precision for the device
-                    embedding = embedding_generator.generate_embedding(image, model_type)
-            
-            elif attempt == 1:
-                # Second attempt: Always force FP32 precision
-                print(f"Retry #{attempt}: Forcing FP32 precision...")
-                with torch.cuda.amp.autocast(enabled=False):
-                    embedding = embedding_generator.generate_embedding(image, model_type)
-                    # Ensure the embedding is in FP32
-                    if isinstance(embedding, torch.Tensor):
-                        embedding = embedding.to(device='cpu', dtype=torch.float32)
-            
-            else:
-                # Last resort: Use CPU for everything
-                print(f"Retry #{attempt}: Forcing CPU + FP32 precision...")
-                # Temporarily move to CPU
-                original_device = embedding_generator.device
-                embedding_generator.device = 'cpu'
-                
-                with torch.cuda.amp.autocast(enabled=False):
-                    embedding = embedding_generator.generate_embedding(image, model_type)
-                    # Ensure the embedding is in FP32
-                    if isinstance(embedding, torch.Tensor):
-                        embedding = embedding.to(dtype=torch.float32)
-                
-                # Restore device
-                embedding_generator.device = original_device
-            
-            return embedding
-            
-        except RuntimeError as e:
-            err_msg = str(e)
-            # Check for precision-related errors
-            if "unsupported scalar type" in err_msg or "BFloat16" in err_msg:
-                print(f"Precision error detected: {err_msg}")
-                if attempt < 2:
-                    print(f"Trying fallback approach #{attempt+1}...")
-                else:
-                    raise RuntimeError(f"Failed to generate embedding after all fallback attempts: {err_msg}")
-            else:
-                # Re-raise other types of errors
-                raise
-        except Exception as e:
-            # For non-RuntimeErrors, just re-raise
-            raise
-
 def main():
     start_time = time.time()
     args = parse_args()
@@ -303,8 +119,7 @@ def main():
         device = "cpu"
         print("Forcing CPU usage as requested")
         os.environ["CUDA_VISIBLE_DEVICES"] = ""
-        if hasattr(torch.backends, 'mps'):
-            torch.backends.mps.enabled = False
+        torch.backends.mps.enabled = False
     else:
         # Check for CUDA
         if torch.cuda.is_available():
@@ -322,34 +137,9 @@ def main():
     if args.device != "cpu":
         device = args.device
     
-    # Preemptively disable bfloat16 for CLIP models (they often use it internally)
-    print("Configuring PyTorch for maximum compatibility...")
-    # Force torch to use float32 for matmul
-    if hasattr(torch, 'set_float32_matmul_precision'):
-        torch.set_float32_matmul_precision('highest')
-    
-    # Set appropriate precision for the device
-    if device == 'cuda':
-        if args.force_fp32:
-            precision = "FP32 (forced)"
-            # Disable automatic mixed precision
-            if hasattr(torch.backends, 'cuda') and hasattr(torch.backends.cuda, 'matmul'):
-                torch.backends.cuda.matmul.allow_tf32 = False
-            if hasattr(torch.cuda, 'amp'):
-                torch.cuda.amp.autocast(enabled=False)
-        else:
-            precision = "FP16"
-            # Allow TF32 on Ampere+ GPUs for better performance
-            if hasattr(torch.backends, 'cuda') and hasattr(torch.backends.cuda, 'matmul'):
-                torch.backends.cuda.matmul.allow_tf32 = True
-    elif device == 'mps':
-        precision = "FP32"
-    else:
-        precision = "FP32"
-        
     print(f"Processing image: {args.image}")
     print(f"Embedding models: {', '.join(args.models)}")
-    print(f"Using device: {device} with {precision} precision")
+    print(f"Using device: {device}")
     
     try:
         # Initialize pipeline with modified config
@@ -455,14 +245,8 @@ def main():
             for model_type in args.models:
                 print(f"  Generating embeddings with {model_type}...")
                 try:
-                    # Generate embeddings with safe fallback
-                    crop_emb = safe_generate_embedding(
-                        embedding_generator, 
-                        crop, 
-                        model_type, 
-                        device, 
-                        force_fp32=args.force_fp32
-                    )
+                    # Generate embeddings
+                    crop_emb = embedding_generator.generate_embedding(crop, model_type)
                     
                     # Convert tensors to lists for JSON serialization
                     if isinstance(crop_emb, torch.Tensor):
@@ -478,7 +262,6 @@ def main():
                     print(f"    Sample: {crop_emb[:3]}...")
                 except Exception as e:
                     print(f"    Error with {model_type}: {str(e)}")
-                    print(f"    Skipping this model for detection {detection_id}")
             
             # Save embeddings
             embeddings_path = os.path.join(args.output_dir, f"{detection_id}_embeddings.json")
@@ -524,10 +307,6 @@ def main():
                     "pipeline_time": pipeline_time,
                     "embedding_time": embedding_time,
                     "total_time": time.time() - start_time
-                },
-                "device_info": {
-                    "device": device,
-                    "precision": precision
                 }
             }, f, indent=2)
         
@@ -542,7 +321,6 @@ def main():
         print(f"Pipeline processing: {format_time(pipeline_time)} ({pipeline_time/total_time*100:.1f}%)")
         print(f"Embedding generation: {format_time(embedding_time)} ({embedding_time/total_time*100:.1f}%)")
         print(f"Processed {image_count} images with {detection_count} detections")
-        print(f"Device: {device} with {precision} precision")
         print(f"Average time per detection: {format_time(embedding_time/max(1, detection_count))}")
         
         return 0

@@ -56,57 +56,36 @@ def patch_torch_bfloat16():
         torch.cuda.amp.autocast = safe_autocast
     
     # Patch tensor conversion methods to prevent BFloat16
-    original_to = torch.Tensor.to
-    
-    def safe_to(self, *args, **kwargs):
-        if len(args) > 0 and args[0] == torch.bfloat16:
-            print("Warning: Conversion to BFloat16 detected. Using Float32 instead.")
-            args = list(args)
-            args[0] = torch.float32
-            args = tuple(args)
-        if 'dtype' in kwargs and kwargs['dtype'] == torch.bfloat16:
-            print("Warning: Conversion to BFloat16 detected. Using Float32 instead.")
-            kwargs['dtype'] = torch.float32
-        return original_to(self, *args, **kwargs)
-    
-    torch.Tensor.to = safe_to
+    try:
+        # Only attempt to patch if it's a method, not if it's a function
+        if hasattr(torch.Tensor, 'to') and callable(getattr(torch.Tensor, 'to')):
+            original_to = torch.Tensor.to
+            
+            def safe_to(self, *args, **kwargs):
+                if len(args) > 0 and args[0] == torch.bfloat16:
+                    print("Warning: Conversion to BFloat16 detected. Using Float32 instead.")
+                    args = list(args)
+                    args[0] = torch.float32
+                    args = tuple(args)
+                if 'dtype' in kwargs and kwargs['dtype'] == torch.bfloat16:
+                    print("Warning: Conversion to BFloat16 detected. Using Float32 instead.")
+                    kwargs['dtype'] = torch.float32
+                return original_to(self, *args, **kwargs)
+            
+            torch.Tensor.to = safe_to
+    except Exception as e:
+        print(f"Warning: Could not patch tensor.to method: {e}")
+        print("Will continue without patching tensor conversion.")
     
     # If ops module is available, try to patch low-level ops
-    if hasattr(torch, 'ops'):
-        # Save a reference to the actual _op_table if it exists
-        if hasattr(torch.ops, '_op_table'):
-            op_table = torch.ops._op_table
-            # This is a dirty but effective approach to prevent BFloat16 ops
-            for op_name in dir(op_table):
-                if not op_name.startswith('__'):
-                    op = getattr(op_table, op_name)
-                    for func_name in dir(op):
-                        if not func_name.startswith('__'):
-                            try:
-                                func = getattr(op, func_name)
-                                # Skip non-callable attributes
-                                if not callable(func):
-                                    continue
-                                # Save original function
-                                setattr(op, f"_original_{func_name}", func)
-                                # Create wrapped function
-                                def make_safe_op(orig_func):
-                                    def safe_op(*args, **kwargs):
-                                        # Convert BFloat16 tensors in args to Float32
-                                        fixed_args = []
-                                        for arg in args:
-                                            if isinstance(arg, torch.Tensor) and arg.dtype == torch.bfloat16:
-                                                fixed_args.append(arg.to(dtype=torch.float32))
-                                            else:
-                                                fixed_args.append(arg)
-                                        # Call original function with fixed args
-                                        return orig_func(*fixed_args, **kwargs)
-                                    return safe_op
-                                # Replace function with safe version
-                                setattr(op, func_name, make_safe_op(func))
-                            except:
-                                # Skip any operations that can't be patched
-                                pass
+    try:
+        if hasattr(torch, 'ops'):
+            print("Note: PyTorch ops module found, but ops patching is disabled for safety.")
+            # Patching ops is too risky and can cause unexpected errors
+            # We'll rely on our safe_generate_embedding function instead
+    except Exception as e:
+        print(f"Note: Error when checking torch.ops: {e}")
+        # Just continue without patching ops
 
 # Apply the patch before importing model code
 patch_torch_bfloat16()

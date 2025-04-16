@@ -196,18 +196,41 @@ def run_inference(model, image, input_points, device, model_name="Model"):
 
 def load_model(model_path, model_cfg, device, is_state_dict=False):
     """Load the model from checkpoint or state dict"""
-    if is_state_dict:
-        # Load from state dict (fine-tuned model)
-        print(f"Loading model from state dict: {model_path}")
-        # First load the base model with the architecture
-        model = build_sam2(model_cfg, None, device=device)
-        # Then load the state dict
-        state_dict = torch.load(model_path, map_location=device)
-        model.load_state_dict(state_dict)
-    else:
-        # Load regular checkpoint
-        print(f"Loading model from checkpoint: {model_path}")
-        model = build_sam2(model_cfg, model_path, device=device)
+    try:
+        if is_state_dict:
+            # Load from state dict (fine-tuned model)
+            print(f"Loading model from state dict: {model_path}")
+            # First load the base model with the architecture
+            model = build_sam2(model_cfg, None, device=device)
+            # Then load the state dict
+            state_dict = torch.load(model_path, map_location=device)
+            model.load_state_dict(state_dict)
+        else:
+            # Load regular checkpoint
+            print(f"Loading model from checkpoint: {model_path}")
+            # For original checkpoint, use the standard build_sam2 function
+            model = build_sam2(model_cfg, model_path, device=device)
+    except Exception as e:
+        print(f"Error loading model: {e}")
+        print("Trying alternative loading method...")
+        # Try the alternative approach - load base model and then checkpoint
+        try:
+            model = build_sam2(model_cfg, None, device=device)
+            checkpoint = torch.load(model_path, map_location=device)
+            # Try different ways the checkpoint might be structured
+            if isinstance(checkpoint, dict) and "model" in checkpoint:
+                # Some SAM checkpoints store weights in a 'model' key
+                model.load_state_dict(checkpoint["model"])
+            elif isinstance(checkpoint, dict) and "state_dict" in checkpoint:
+                # Some checkpoints use 'state_dict' key
+                model.load_state_dict(checkpoint["state_dict"])
+            else:
+                # Try direct loading
+                model.load_state_dict(checkpoint)
+            print("Alternative loading method successful!")
+        except Exception as e2:
+            print(f"Alternative loading also failed: {e2}")
+            raise RuntimeError(f"Could not load model from {model_path}")
     
     return model
 
@@ -257,7 +280,20 @@ def main():
     # If comparison is enabled, load and run original model
     if args.compare and args.original_checkpoint:
         print(f"\nLoading original model from {args.original_checkpoint}")
-        original_model = load_model(args.original_checkpoint, args.model_cfg, device, is_state_dict=False)
+        # Try to determine if original checkpoint is a state dict or a complete checkpoint
+        original_is_state_dict = False  # Default assumption for original model
+        try:
+            # Check what type of file the original checkpoint is
+            checkpoint = torch.load(args.original_checkpoint, map_location=device)
+            if isinstance(checkpoint, dict) and not any(k in checkpoint for k in ["model", "state_dict"]):
+                # If it's a dict but doesn't have model or state_dict keys, it's likely a direct state dict
+                original_is_state_dict = True
+                print("Detected original checkpoint as a state dict")
+        except Exception:
+            # If we can't easily determine, stick with default
+            pass
+            
+        original_model = load_model(args.original_checkpoint, args.model_cfg, device, is_state_dict=original_is_state_dict)
         original_seg_map, original_masks, original_scores = run_inference(
             original_model, image, input_points, device, "Original Model"
         )

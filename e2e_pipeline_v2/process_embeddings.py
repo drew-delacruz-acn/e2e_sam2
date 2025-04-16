@@ -37,6 +37,8 @@ def parse_args():
                       help="Device to use (cuda or cpu)")
     parser.add_argument("--force_cpu", action="store_true",
                       help="Force CPU usage for all operations")
+    parser.add_argument("--force_fp32", action="store_true",
+                      help="Force FP32 precision for all operations (helps with compatibility)")
     return parser.parse_args()
 
 def apply_mask_to_image(image, mask):
@@ -95,6 +97,85 @@ def format_time(seconds):
         seconds %= 60
         return f"{int(hours)} hours, {int(minutes)} minutes and {seconds:.2f} seconds"
 
+def convert_tensor_precision(tensor, device, dtype=None):
+    """Convert a tensor to the appropriate precision based on the device.
+    
+    Args:
+        tensor: Input tensor
+        device: Device to use (cuda, mps, cpu)
+        dtype: Optional dtype to force (overrides automatic selection)
+        
+    Returns:
+        Tensor with appropriate precision
+    """
+    # If not a tensor, return as is
+    if not isinstance(tensor, torch.Tensor):
+        return tensor
+    
+    # If dtype is explicitly specified, use it
+    if dtype is not None:
+        return tensor.to(device=device, dtype=dtype)
+    
+    # Select precision based on device
+    if device == 'cuda':
+        # Use float16 for CUDA (NVIDIA GPUs)
+        try:
+            return tensor.to(device=device, dtype=torch.float16)
+        except Exception as e:
+            print(f"Warning: Could not convert to float16: {str(e)}")
+            return tensor.to(device=device, dtype=torch.float32)
+    elif device == 'mps':
+        # Use float32 for MPS (Apple Silicon)
+        return tensor.to(device=device, dtype=torch.float32)
+    else:
+        # Use float32 for CPU
+        return tensor.to(device=device, dtype=torch.float32)
+
+def safe_generate_embedding(embedding_generator, image, model_type, device, force_fp32=False):
+    """Safely generate embeddings with fallback to more compatible precision.
+    
+    Args:
+        embedding_generator: The embedding generator instance
+        image: Input image
+        model_type: Model type to use
+        device: Device to use
+        force_fp32: Whether to force FP32 precision
+        
+    Returns:
+        Generated embedding
+    """
+    try:
+        # Try with the device's default precision
+        if force_fp32:
+            # Force FP32 mode
+            with torch.cuda.amp.autocast(enabled=False):
+                # Use automatic mixed precision only if not forcing FP32
+                embedding = embedding_generator.generate_embedding(image, model_type)
+                # Convert to FP32 if on GPU
+                if device != 'cpu':
+                    embedding = embedding.to(dtype=torch.float32)
+        else:
+            # Try with default precision for the device
+            embedding = embedding_generator.generate_embedding(image, model_type)
+        
+        return embedding
+    except RuntimeError as e:
+        # Check if it's a precision-related error
+        if "unsupported scalar type" in str(e) or "BFloat16" in str(e):
+            print(f"Precision error detected: {str(e)}")
+            print("Falling back to FP32 precision...")
+            
+            # Try again with FP32 precision
+            with torch.cuda.amp.autocast(enabled=False):
+                embedding = embedding_generator.generate_embedding(image, model_type)
+                # Ensure the embedding is in FP32
+                if isinstance(embedding, torch.Tensor):
+                    embedding = embedding.to(dtype=torch.float32)
+            return embedding
+        else:
+            # Re-raise other types of errors
+            raise
+
 def main():
     start_time = time.time()
     args = parse_args()
@@ -119,7 +200,8 @@ def main():
         device = "cpu"
         print("Forcing CPU usage as requested")
         os.environ["CUDA_VISIBLE_DEVICES"] = ""
-        torch.backends.mps.enabled = False
+        if hasattr(torch.backends, 'mps'):
+            torch.backends.mps.enabled = False
     else:
         # Check for CUDA
         if torch.cuda.is_available():
@@ -137,9 +219,27 @@ def main():
     if args.device != "cpu":
         device = args.device
     
+    # Set appropriate precision for the device
+    if device == 'cuda':
+        if args.force_fp32:
+            precision = "FP32 (forced)"
+            # Disable automatic mixed precision
+            torch.backends.cuda.matmul.allow_tf32 = False
+            if hasattr(torch.cuda, 'amp'):
+                torch.cuda.amp.autocast(enabled=False)
+        else:
+            precision = "FP16"
+            # Allow TF32 on Ampere+ GPUs for better performance
+            if hasattr(torch.backends, 'cuda') and hasattr(torch.backends.cuda, 'matmul'):
+                torch.backends.cuda.matmul.allow_tf32 = True
+    elif device == 'mps':
+        precision = "FP32"
+    else:
+        precision = "FP32"
+        
     print(f"Processing image: {args.image}")
     print(f"Embedding models: {', '.join(args.models)}")
-    print(f"Using device: {device}")
+    print(f"Using device: {device} with {precision} precision")
     
     try:
         # Initialize pipeline with modified config
@@ -245,8 +345,14 @@ def main():
             for model_type in args.models:
                 print(f"  Generating embeddings with {model_type}...")
                 try:
-                    # Generate embeddings
-                    crop_emb = embedding_generator.generate_embedding(crop, model_type)
+                    # Generate embeddings with safe fallback
+                    crop_emb = safe_generate_embedding(
+                        embedding_generator, 
+                        crop, 
+                        model_type, 
+                        device, 
+                        force_fp32=args.force_fp32
+                    )
                     
                     # Convert tensors to lists for JSON serialization
                     if isinstance(crop_emb, torch.Tensor):
@@ -262,6 +368,7 @@ def main():
                     print(f"    Sample: {crop_emb[:3]}...")
                 except Exception as e:
                     print(f"    Error with {model_type}: {str(e)}")
+                    print(f"    Skipping this model for detection {detection_id}")
             
             # Save embeddings
             embeddings_path = os.path.join(args.output_dir, f"{detection_id}_embeddings.json")
@@ -307,6 +414,10 @@ def main():
                     "pipeline_time": pipeline_time,
                     "embedding_time": embedding_time,
                     "total_time": time.time() - start_time
+                },
+                "device_info": {
+                    "device": device,
+                    "precision": precision
                 }
             }, f, indent=2)
         
@@ -321,6 +432,7 @@ def main():
         print(f"Pipeline processing: {format_time(pipeline_time)} ({pipeline_time/total_time*100:.1f}%)")
         print(f"Embedding generation: {format_time(embedding_time)} ({embedding_time/total_time*100:.1f}%)")
         print(f"Processed {image_count} images with {detection_count} detections")
+        print(f"Device: {device} with {precision} precision")
         print(f"Average time per detection: {format_time(embedding_time/max(1, detection_count))}")
         
         return 0

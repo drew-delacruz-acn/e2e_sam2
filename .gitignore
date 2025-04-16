@@ -18,6 +18,14 @@
 !data/**/*.jpg
 !data/**/*.png
 
+# Exception: Track the results directory and its contents
+!results/
+!results/**/*.json
+!results/**/*.jpeg
+!results/**/*.jpg
+!results/**/*.png
+!results/**/*.gif
+
 # Ignore Python cache files
 __pycache__/
 *.py[cod]

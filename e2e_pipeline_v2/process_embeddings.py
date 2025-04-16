@@ -9,6 +9,7 @@ import sys
 import json
 import time
 import logging
+import traceback
 import argparse
 from pathlib import Path
 import cv2
@@ -501,7 +502,6 @@ def main():
         
     except Exception as e:
         logger.error(f"Error: {str(e)}")
-        import traceback
         logger.error(f"Traceback: {traceback.format_exc()}")
         
         # Print timing even if there was an error

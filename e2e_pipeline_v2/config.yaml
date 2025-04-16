@@ -1,0 +1,53 @@
+mode: "image"  # or "video"
+
+# Video processing configuration (if needed)
+video:
+  video_path: "data/my_video.mp4"
+  frame_sampling:
+    method: "scene"  # Options: scene, uniform, random, sequential
+    params:
+      # For scene-based sampling
+      threshold: 30.0
+      
+      # For uniform sampling
+      interval: 30
+      
+      # For random sampling
+      num_frames: 10
+      
+      # For sequential sampling
+      start_frame: 0
+      end_frame: null  # null means until the end
+      step: 1
+
+# Image processing configuration
+image:
+  image_path: "data/thor_hammer.jpeg"
+
+# Detection configuration
+detection:
+  model_type: "owlvit"  # Options: owlvit, owlvit2
+  force_cpu: false  # Force CPU usage even if GPU is available
+
+# Segmentation configuration
+segmentation:
+  queries: ["hammer"]  # Text queries for object detection
+  detection_threshold: 0.03  # Confidence threshold for detection
+  segmentation_threshold: 0.5  # Threshold for segmentation masks
+  results_dir: "results"  # Directory to save results
+  model_config: "configs/sam2.1/sam2.1_hiera_l.yaml"  # SAM2 model config
+  checkpoint: "checkpoints/sam2.1_hiera_large.pt"  # SAM2 checkpoint
+
+# Embedding generation configuration (if needed)
+embedding:
+  model_types: ["clip", "vit"]  # Options: clip, vit, resnet50
+  model_name: "ViT-B/32"  # Model name/size 
+  device: "cuda"  # Options: cuda, cpu
+  batch_size: 32  # Batch size for embedding generation
+  use_full_clip: false  # Whether to use full CLIP model (text+image) or just vision model
+
+# Serialization configuration (if needed)
+serialization:
+  output_json: "results/crop_embeddings.json"  # Path to save JSON output
+  include_metadata: true  # Whether to include metadata in output
+  save_individual_files: false  # Whether to save individual files for each embedding

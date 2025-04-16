@@ -1,41 +1,47 @@
-# Ignore JPEG and image files
-*.jpg
-*.jpeg
-*.png
-*.bmp
-*.gif
-
 # Ignore PyTorch model files
 *.pt
 *.pth
 
-# Ignore dataset files
-*.csv
-*.tsv
-*.zip
-*.tar
-*.tar.gz
-*.h5
-*.npz
-*.npy
+# Ignore video files
+*.mp4
+*.avi
+*.mov
 
-# Ignore Python cache and compiled files
+# Ignore image files
+*.jpeg
+*.jpg
+*.png
+*.gif
+
+# Exception: Track image files in data folder
+!data/**/*.jpeg
+!data/**/*.jpg
+!data/**/*.png
+
+# Ignore Python cache files
 __pycache__/
-*.pyc
-*.pyo
-*.pyd
+*.py[cod]
+*$py.class
+*.so
+.Python
+.env
 
-# Ignore environment and dependency folders
+# Ignore distribution / packaging
+dist/
+build/
+*.egg-info/
+
+# Ignore virtual environment folders
 venv/
-.env/
+env/
+ENV/
 
-# Ignore results and checkpoints
-results/
-checkpoints/
+# Ignore IDE specific files
+.idea/
+.vscode/
+*.swp
+*.swo
 
-# Ignore notebook checkpoints
-.ipynb_checkpoints/
-
-# Allow JPEGs in the data folder
-!/data/*.jpeg
-!/data/*.jpg
+# Ignore OS specific files
+.DS_Store
+Thumbs.db 

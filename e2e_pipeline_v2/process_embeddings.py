@@ -51,6 +51,8 @@ def parse_args():
                       help="Force CPU usage for all operations")
     parser.add_argument("--debug", action="store_true",
                       help="Enable detailed debug logging")
+    parser.add_argument("--quiet", action="store_true", 
+                      help="Show minimal information (only summary and errors)")
     return parser.parse_args()
 
 def apply_mask_to_image(image, mask):
@@ -185,6 +187,10 @@ def main():
     start_time = time.time()
     args = parse_args()
     
+    # Track input images count
+    image_count = 0
+    detection_count = 0
+    
     # Set up debug logging if requested
     if args.debug:
         logger.setLevel(logging.DEBUG)
@@ -195,14 +201,23 @@ def main():
         
         # Log system information only in debug mode
         log_system_info()
+    elif args.quiet:
+        # In quiet mode, only show warnings and higher in console
+        logger.setLevel(logging.WARNING)
     else:
-        # In non-debug mode, only show INFO and higher in console
+        # In normal mode, show INFO and higher in console
         logger.setLevel(logging.INFO)
-    
-    # Track input images count
-    image_count = 0
-    detection_count = 0
-    
+        
+    # Helper function to print important summary info even in quiet mode
+    def print_summary(message):
+        """Print a message regardless of logging level"""
+        if args.quiet:
+            # Print directly for important summary info in quiet mode
+            print(message)
+        else:
+            # Use logger for normal mode
+            logger.info(message)
+            
     # Check if image file exists
     if not os.path.exists(args.image):
         logger.error(f"Error: Image file '{args.image}' does not exist.")
@@ -280,25 +295,28 @@ def main():
             )
             
             # Log model details
-            logger.info("=== Embedding Model Details ===")
-            for model_name, model in embedding_generator.models.items():
-                logger.info(f"Model: {model_name}")
-                
-                # Log model device
-                for name, module in model.named_modules():
-                    if hasattr(module, 'weight') and hasattr(module.weight, 'device'):
-                        logger.info(f"  Module {name} is on device {module.weight.device}")
-                        
-                        # Log parameter info for first few layers
-                        if name.startswith('0') or name.startswith('1') or name.startswith('encoder'):
-                            if hasattr(module, 'weight'):
-                                weight = module.weight
-                                logger.info(f"  Weight - Shape: {weight.shape}, Type: {weight.dtype}")
+            if logger.level <= logging.DEBUG:
+                logger.debug("=== Embedding Model Details ===")
+                for model_name, model in embedding_generator.models.items():
+                    logger.debug(f"Model: {model_name}")
+                    
+                    # Log model device
+                    for name, module in model.named_modules():
+                        if hasattr(module, 'weight') and hasattr(module.weight, 'device'):
+                            logger.debug(f"  Module {name} is on device {module.weight.device}")
                             
-                            if hasattr(module, 'bias') and module.bias is not None:
-                                bias = module.bias
-                                logger.info(f"  Bias - Shape: {bias.shape}, Type: {bias.dtype}")
-                
+                            # Log parameter info for first few layers
+                            if name.startswith('0') or name.startswith('1') or name.startswith('encoder'):
+                                if hasattr(module, 'weight'):
+                                    weight = module.weight
+                                    logger.debug(f"  Weight - Shape: {weight.shape}, Type: {weight.dtype}")
+                                
+                                if hasattr(module, 'bias') and module.bias is not None:
+                                    bias = module.bias
+                                    logger.debug(f"  Bias - Shape: {bias.shape}, Type: {bias.dtype}")
+            else:
+                logger.info(f"Models loaded: {', '.join(str(model) for model in embedding_generator.models.keys())}")
+            
         except Exception as e:
             logger.error(f"Error initializing embedding generator: {str(e)}")
             logger.error(f"Traceback: {traceback.format_exc()}")
@@ -499,15 +517,16 @@ def main():
         logger.info(f"\nSaved summary to {summary_path}")
         logger.info(f"Total number of processed items: {len(all_embeddings)}")
         
-        # Print final timing information
+        # Print final timing information - ensure this shows even in quiet mode
         end_time = time.time()
         total_time = end_time - start_time
-        logger.info(f"\n== Performance Summary ==")
-        logger.info(f"Total execution time: {format_time(total_time)}")
-        logger.info(f"Pipeline processing: {format_time(pipeline_time)} ({pipeline_time/total_time*100:.1f}%)")
-        logger.info(f"Embedding generation: {format_time(embedding_time)} ({embedding_time/total_time*100:.1f}%)")
-        logger.info(f"Processed {image_count} images with {detection_count} detections")
-        logger.info(f"Average time per detection: {format_time(embedding_time/max(1, detection_count))}")
+        
+        print_summary("\n== Performance Summary ==")
+        print_summary(f"Total execution time: {format_time(total_time)}")
+        print_summary(f"Pipeline processing: {format_time(pipeline_time)} ({pipeline_time/total_time*100:.1f}%)")
+        print_summary(f"Embedding generation: {format_time(embedding_time)} ({embedding_time/total_time*100:.1f}%)")
+        print_summary(f"Processed {image_count} images with {detection_count} detections")
+        print_summary(f"Average time per detection: {format_time(embedding_time/max(1, detection_count))}")
         
         return 0
         

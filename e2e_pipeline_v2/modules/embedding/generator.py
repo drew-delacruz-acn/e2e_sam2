@@ -154,6 +154,10 @@ class EmbeddingGenerator:
                 embedding = model(img_tensor)
             
             # Normalize and convert to numpy
+            # Handle BFloat16 tensors that numpy can't process directly
+            if embedding.dtype == torch.bfloat16:
+                embedding = embedding.to(torch.float32)
+            
             embedding = embedding.cpu().numpy().flatten()
             embedding = embedding / np.linalg.norm(embedding)
             

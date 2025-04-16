@@ -32,7 +32,7 @@ elif device.type == "mps":
 
 
 
-data_dir=r"../../../data/davis-2017/DAVIS/" # Path to dataset (LabPics 1)
+data_dir=r"../data/davis-2017/DAVIS/" # Path to dataset (LabPics 1)
 data=[] # list of files in dataset
 for ff, name in enumerate(os.listdir(data_dir+"JPEGImages/480p/bear/")):  # go over all folder annotation
     data.append({"image":data_dir+"JPEGImages/480p/bear/"+name,"annotation":data_dir+"Annotations/480p/bear/"+name[:-4]+".png"})
@@ -137,3 +137,6 @@ for itr in range(10):
             if itr==0: mean_iou=0
             mean_iou = mean_iou * 0.99 + 0.01 * np.mean(iou.cpu().detach().numpy())
             print("step)",itr, "Accuracy(IOU)=",mean_iou)
+
+
+

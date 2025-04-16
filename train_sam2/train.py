@@ -40,6 +40,9 @@ def train():
     
     # Load model
     print(f"Loading SAM2 model from {args.checkpoint}")
+
+    print(args.model_config)
+    print(args.checkpoint)
     sam2_model = load_sam2_model(args.model_config, args.checkpoint, device)
     predictor = get_predictor(sam2_model, device)
     

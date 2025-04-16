@@ -3,9 +3,11 @@ import torch
 
 # Path configurations
 DATA_DIR = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "data/davis-2017/DAVIS/")
+
+print(DATA_DIR)
 CHECKPOINT_DIR = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "checkpoints")
 SAM2_CHECKPOINT = os.path.join(CHECKPOINT_DIR, "sam2.1_hiera_large.pt")
-MODEL_CONFIG = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "configs/sam2.1/sam2.1_hiera_l.yaml")
+MODEL_CONFIG = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "configs/sam2.1_hiera_l.yaml")
 SAVE_DIR = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "results")
 
 # Training configurations

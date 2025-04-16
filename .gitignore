@@ -14,17 +14,17 @@
 *.gif
 
 # Exception: Track image files in data folder
-!data/**/*.jpeg
-!data/**/*.jpg
-!data/**/*.png
+# !data/**/*.jpeg
+# !data/**/*.jpg
+# !data/**/*.png
 
 # Exception: Track the results directory and its contents
-!results/
-!results/**/*.json
-!results/**/*.jpeg
-!results/**/*.jpg
-!results/**/*.png
-!results/**/*.gif
+# !results/
+# !results/**/*.json
+# !results/**/*.jpeg
+# !results/**/*.jpg
+# !results/**/*.png
+# !results/**/*.gif
 
 # Ignore Python cache files
 __pycache__/

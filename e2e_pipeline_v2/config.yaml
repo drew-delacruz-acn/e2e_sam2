@@ -26,13 +26,14 @@ image:
 
 # Detection configuration
 detection:
-  model_type: "owlvit"  # Options: owlvit, owlvit2
+  model_type: "owlvit2"  # Options: owlvit, owlvit2
   force_cpu: false  # Force CPU usage even if GPU is available
 
 # Segmentation configuration
 segmentation:
-  queries: ["hammer"]  # Text queries for object detection
-  detection_threshold: 0.001  # Confidence threshold for detection
+  # queries: ["glowing cube", "blue cube", "magic cube", "energy cube", "power cube", "tesseract", "space stone", "blue artifact", "cosmic object", "floating cube", "energy object", "bright cube", "cube", "glow object", "power source"]  # Text queries for object detection
+  queries: ["stick", "weapon"]
+  detection_threshold: 0.05  # Confidence threshold for detection
   segmentation_threshold: 0.5  # Threshold for segmentation masks
   results_dir: "results"  # Directory to save results
   model_config: "configs/sam2.1/sam2.1_hiera_l.yaml"  # SAM2 model config

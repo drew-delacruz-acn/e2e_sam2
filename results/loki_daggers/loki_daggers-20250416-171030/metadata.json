@@ -1,0 +1,41 @@
+{
+  "image_path": "data/loki_daggers.png",
+  "image_size": [
+    754,
+    498
+  ],
+  "model_type": "owlvit",
+  "model_name": "owlvit-base-patch32",
+  "text_queries": [
+    "daggers"
+  ],
+  "timestamp": "20250416-171030",
+  "num_detections": 2,
+  "detection_threshold": 0.03,
+  "detections": [
+    {
+      "id": "507ab262",
+      "label": "daggers",
+      "score": 0.032034117728471756,
+      "box": [
+        547.66845703125,
+        420.03717041015625,
+        634.1565551757812,
+        497.5643005371094
+      ],
+      "crop_path": "results/loki_daggers/loki_daggers-20250416-171030/detections/owlvit-base-patch32/daggers_0.03_507ab262.png"
+    },
+    {
+      "id": "858aaeec",
+      "label": "daggers",
+      "score": 0.031113678589463234,
+      "box": [
+        62.814186096191406,
+        426.23828125,
+        169.65399169921875,
+        497.4884948730469
+      ],
+      "crop_path": "results/loki_daggers/loki_daggers-20250416-171030/detections/owlvit-base-patch32/daggers_0.03_858aaeec.png"
+    }
+  ]
+}

@@ -11,5 +11,10 @@
       "id": "thor_hammer_0_00_0.05",
       "embedding_path": "results/embeddings_full/thor_hammer_0_00_0.05_embeddings.json"
     }
-  ]
+  ],
+  "processing_time": {
+    "pipeline_time": 19.28797960281372,
+    "embedding_time": 0.34132862091064453,
+    "total_time": 26.652508974075317
+  }
 }

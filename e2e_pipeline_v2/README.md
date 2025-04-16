@@ -143,4 +143,4 @@ The pipeline generates several visualizations:
 - **No Objects Detected**: Try lowering the detection threshold or using different text queries 
 
 
-python -m e2e_pipeline_v2.process_embeddings --image data/thor_hammer.jpeg --queries "hammer" --threshold 0.03 --models clip vit resnet50 --output_dir results/embeddings_full --force_cpu
+python -m e2e_pipeline_v2.process_embeddings --image data/thor_hammer.jpeg --queries "hammer" --models clip vit resnet50 --output_dir results/embeddings_full --force_cpu

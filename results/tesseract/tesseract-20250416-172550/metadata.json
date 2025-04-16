@@ -1,0 +1,449 @@
+{
+  "image_path": "data/tesseract.png",
+  "image_size": [
+    908,
+    453
+  ],
+  "model_type": "owlvit",
+  "model_name": "owlvit-base-patch32",
+  "text_queries": [
+    "glowing stone"
+  ],
+  "timestamp": "20250416-172550",
+  "num_detections": 36,
+  "detection_threshold": 0.001,
+  "detections": [
+    {
+      "id": "bda935a6",
+      "label": "glowing stone",
+      "score": 0.004755199886858463,
+      "box": [
+        172.0234375,
+        0.884765625,
+        908.0,
+        449.4609375
+      ],
+      "crop_path": "results/tesseract/tesseract-20250416-172550/detections/owlvit-base-patch32/glowing stone_0.00_bda935a6.png"
+    },
+    {
+      "id": "0b92a5ff",
+      "label": "glowing stone",
+      "score": 0.0044683837331831455,
+      "box": [
+        150.7421875,
+        -0.884765625,
+        468.1875,
+        304.359375
+      ],
+      "crop_path": "results/tesseract/tesseract-20250416-172550/detections/owlvit-base-patch32/glowing stone_0.00_0b92a5ff.png"
+    },
+    {
+      "id": "45fab567",
+      "label": "glowing stone",
+      "score": 0.00407013762742281,
+      "box": [
+        156.0625,
+        122.09765625,
+        375.96875,
+        291.97265625
+      ],
+      "crop_path": "results/tesseract/tesseract-20250416-172550/detections/owlvit-base-patch32/glowing stone_0.00_45fab567.png"
+    },
+    {
+      "id": "3ac7861a",
+      "label": "glowing stone",
+      "score": 0.0039454069919884205,
+      "box": [
+        23.94140625,
+        104.8447265625,
+        425.625,
+        325.59375
+      ],
+      "crop_path": "results/tesseract/tesseract-20250416-172550/detections/owlvit-base-patch32/glowing stone_0.00_3ac7861a.png"
+    },
+    {
+      "id": "a661696a",
+      "label": "glowing stone",
+      "score": 0.0037072531413286924,
+      "box": [
+        172.91015625,
+        -1.3271484375,
+        439.8125,
+        141.5625
+      ],
+      "crop_path": "results/tesseract/tesseract-20250416-172550/detections/owlvit-base-patch32/glowing stone_0.00_a661696a.png"
+    },
+    {
+      "id": "bafae685",
+      "label": "glowing stone",
+      "score": 0.003273064736276865,
+      "box": [
+        225.2265625,
+        182.26171875,
+        278.4296875,
+        219.421875
+      ],
+      "crop_path": "results/tesseract/tesseract-20250416-172550/detections/owlvit-base-patch32/glowing stone_0.00_bafae685.png"
+    },
+    {
+      "id": "a378d60a",
+      "label": "glowing stone",
+      "score": 0.0027149852830916643,
+      "box": [
+        10.52978515625,
+        84.9375,
+        46.109375,
+        110.595703125
+      ],
+      "crop_path": "results/tesseract/tesseract-20250416-172550/detections/owlvit-base-patch32/glowing stone_0.00_a378d60a.png"
+    },
+    {
+      "id": "1a8ba014",
+      "label": "glowing stone",
+      "score": 0.0025509123224765062,
+      "box": [
+        886.71875,
+        325.59375,
+        908.0,
+        382.21875
+      ],
+      "crop_path": "results/tesseract/tesseract-20250416-172550/detections/owlvit-base-patch32/glowing stone_0.00_1a8ba014.png"
+    },
+    {
+      "id": "7ce74c8b",
+      "label": "glowing stone",
+      "score": 0.0024726230185478926,
+      "box": [
+        425.625,
+        6.193359375,
+        723.5625,
+        283.125
+      ],
+      "crop_path": "results/tesseract/tesseract-20250416-172550/detections/owlvit-base-patch32/glowing stone_0.00_7ce74c8b.png"
+    },
+    {
+      "id": "7af3699c",
+      "label": "glowing stone",
+      "score": 0.002251847181469202,
+      "box": [
+        -4.43359375,
+        0.0,
+        269.5625,
+        451.23046875
+      ],
+      "crop_path": "results/tesseract/tesseract-20250416-172550/detections/owlvit-base-patch32/glowing stone_0.00_7af3699c.png"
+    },
+    {
+      "id": "de863df8",
+      "label": "glowing stone",
+      "score": 0.002115703420713544,
+      "box": [
+        183.55078125,
+        249.50390625,
+        276.65625,
+        302.58984375
+      ],
+      "crop_path": "results/tesseract/tesseract-20250416-172550/detections/owlvit-base-patch32/glowing stone_0.00_de863df8.png"
+    },
+    {
+      "id": "b0bfd564",
+      "label": "glowing stone",
+      "score": 0.001987774157896638,
+      "box": [
+        186.2109375,
+        5.7509765625,
+        289.0703125,
+        116.7890625
+      ],
+      "crop_path": "results/tesseract/tesseract-20250416-172550/detections/owlvit-base-patch32/glowing stone_0.00_b0bfd564.png"
+    },
+    {
+      "id": "de676f54",
+      "label": "glowing stone",
+      "score": 0.001987774157896638,
+      "box": [
+        -1.1083984375,
+        66.7998046875,
+        69.1640625,
+        288.43359375
+      ],
+      "crop_path": "results/tesseract/tesseract-20250416-172550/detections/owlvit-base-patch32/glowing stone_0.00_de676f54.png"
+    },
+    {
+      "id": "08c0416d",
+      "label": "glowing stone",
+      "score": 0.0019267346942797303,
+      "box": [
+        0.88671875,
+        0.4423828125,
+        234.09375,
+        152.1796875
+      ],
+      "crop_path": "results/tesseract/tesseract-20250416-172550/detections/owlvit-base-patch32/glowing stone_0.00_08c0416d.png"
+    },
+    {
+      "id": "0bc0c681",
+      "label": "glowing stone",
+      "score": 0.0019267346942797303,
+      "box": [
+        232.3203125,
+        253.04296875,
+        893.8125,
+        453.0
+      ],
+      "crop_path": "results/tesseract/tesseract-20250416-172550/detections/owlvit-base-patch32/glowing stone_0.00_0bc0c681.png"
+    },
+    {
+      "id": "49a7c423",
+      "label": "glowing stone",
+      "score": 0.0018675660248845816,
+      "box": [
+        246.5078125,
+        189.33984375,
+        274.8828125,
+        288.43359375
+      ],
+      "crop_path": "results/tesseract/tesseract-20250416-172550/detections/owlvit-base-patch32/glowing stone_0.00_49a7c423.png"
+    },
+    {
+      "id": "d0d25d44",
+      "label": "glowing stone",
+      "score": 0.0017546144081279635,
+      "box": [
+        134.78125,
+        -0.22119140625,
+        211.0390625,
+        33.62109375
+      ],
+      "crop_path": "results/tesseract/tesseract-20250416-172550/detections/owlvit-base-patch32/glowing stone_0.00_d0d25d44.png"
+    },
+    {
+      "id": "9aa5d04d",
+      "label": "glowing stone",
+      "score": 0.0016484829830005765,
+      "box": [
+        163.15625,
+        127.40625,
+        365.328125,
+        203.49609375
+      ],
+      "crop_path": "results/tesseract/tesseract-20250416-172550/detections/owlvit-base-patch32/glowing stone_0.00_9aa5d04d.png"
+    },
+    {
+      "id": "c82dd20c",
+      "label": "glowing stone",
+      "score": 0.0016484829830005765,
+      "box": [
+        173.796875,
+        253.04296875,
+        347.59375,
+        345.05859375
+      ],
+      "crop_path": "results/tesseract/tesseract-20250416-172550/detections/owlvit-base-patch32/glowing stone_0.00_c82dd20c.png"
+    },
+    {
+      "id": "e6598835",
+      "label": "glowing stone",
+      "score": 0.0015487611526623368,
+      "box": [
+        0.55419921875,
+        51.53759765625,
+        55.86328125,
+        123.8671875
+      ],
+      "crop_path": "results/tesseract/tesseract-20250416-172550/detections/owlvit-base-patch32/glowing stone_0.00_e6598835.png"
+    },
+    {
+      "id": "addeafcc",
+      "label": "glowing stone",
+      "score": 0.0015487611526623368,
+      "box": [
+        893.8125,
+        330.90234375,
+        922.1875,
+        366.29296875
+      ],
+      "crop_path": "results/tesseract/tesseract-20250416-172550/detections/owlvit-base-patch32/glowing stone_0.00_addeafcc.png"
+    },
+    {
+      "id": "87e8a5cb",
+      "label": "glowing stone",
+      "score": 0.0015011823270469904,
+      "box": [
+        716.46875,
+        167.220703125,
+        908.0,
+        247.734375
+      ],
+      "crop_path": "results/tesseract/tesseract-20250416-172550/detections/owlvit-base-patch32/glowing stone_0.00_87e8a5cb.png"
+    },
+    {
+      "id": "7e48d624",
+      "label": "glowing stone",
+      "score": 0.0015011823270469904,
+      "box": [
+        18.62109375,
+        118.55859375,
+        248.28125,
+        318.515625
+      ],
+      "crop_path": "results/tesseract/tesseract-20250416-172550/detections/owlvit-base-patch32/glowing stone_0.00_7e48d624.png"
+    },
+    {
+      "id": "4c98d033",
+      "label": "glowing stone",
+      "score": 0.0014550630003213882,
+      "box": [
+        445.1328125,
+        40.2568359375,
+        666.8125,
+        173.4140625
+      ],
+      "crop_path": "results/tesseract/tesseract-20250416-172550/detections/owlvit-base-patch32/glowing stone_0.00_4c98d033.png"
+    },
+    {
+      "id": "133d2633",
+      "label": "glowing stone",
+      "score": 0.0014103584690019488,
+      "box": [
+        851.25,
+        187.5703125,
+        908.0,
+        226.5
+      ],
+      "crop_path": "results/tesseract/tesseract-20250416-172550/detections/owlvit-base-patch32/glowing stone_0.00_133d2633.png"
+    },
+    {
+      "id": "55cf4471",
+      "label": "glowing stone",
+      "score": 0.0013670255430042744,
+      "box": [
+        178.23046875,
+        164.56640625,
+        588.78125,
+        453.0
+      ],
+      "crop_path": "results/tesseract/tesseract-20250416-172550/detections/owlvit-base-patch32/glowing stone_0.00_55cf4471.png"
+    },
+    {
+      "id": "0a10bd37",
+      "label": "glowing stone",
+      "score": 0.0013670255430042744,
+      "box": [
+        173.796875,
+        263.66015625,
+        354.6875,
+        451.23046875
+      ],
+      "crop_path": "results/tesseract/tesseract-20250416-172550/detections/owlvit-base-patch32/glowing stone_0.00_0a10bd37.png"
+    },
+    {
+      "id": "3e6c2e20",
+      "label": "glowing stone",
+      "score": 0.0012065897462889552,
+      "box": [
+        521.390625,
+        160.142578125,
+        578.140625,
+        218.537109375
+      ],
+      "crop_path": "results/tesseract/tesseract-20250416-172550/detections/owlvit-base-patch32/glowing stone_0.00_3e6c2e20.png"
+    },
+    {
+      "id": "f35e7f54",
+      "label": "glowing stone",
+      "score": 0.0011695103021338582,
+      "box": [
+        751.9375,
+        224.73046875,
+        908.0,
+        451.23046875
+      ],
+      "crop_path": "results/tesseract/tesseract-20250416-172550/detections/owlvit-base-patch32/glowing stone_0.00_f35e7f54.png"
+    },
+    {
+      "id": "edd0eee5",
+      "label": "glowing stone",
+      "score": 0.0011335690505802631,
+      "box": [
+        407.890625,
+        154.833984375,
+        450.453125,
+        223.845703125
+      ],
+      "crop_path": "results/tesseract/tesseract-20250416-172550/detections/owlvit-base-patch32/glowing stone_0.00_edd0eee5.png"
+    },
+    {
+      "id": "bc8cfe61",
+      "label": "glowing stone",
+      "score": 0.001098731067031622,
+      "box": [
+        202.171875,
+        53.0859375,
+        393.703125,
+        135.369140625
+      ],
+      "crop_path": "results/tesseract/tesseract-20250416-172550/detections/owlvit-base-patch32/glowing stone_0.00_bc8cfe61.png"
+    },
+    {
+      "id": "8c5859ce",
+      "label": "glowing stone",
+      "score": 0.0010649627074599266,
+      "box": [
+        1.1083984375,
+        109.2685546875,
+        46.109375,
+        276.046875
+      ],
+      "crop_path": "results/tesseract/tesseract-20250416-172550/detections/owlvit-base-patch32/glowing stone_0.00_8c5859ce.png"
+    },
+    {
+      "id": "f6a27deb",
+      "label": "glowing stone",
+      "score": 0.0010649627074599266,
+      "box": [
+        748.390625,
+        222.9609375,
+        908.0,
+        325.59375
+      ],
+      "crop_path": "results/tesseract/tesseract-20250416-172550/detections/owlvit-base-patch32/glowing stone_0.00_f6a27deb.png"
+    },
+    {
+      "id": "0a0b9312",
+      "label": "glowing stone",
+      "score": 0.0010005044750869274,
+      "box": [
+        230.546875,
+        169.875,
+        305.03125,
+        233.578125
+      ],
+      "crop_path": "results/tesseract/tesseract-20250416-172550/detections/owlvit-base-patch32/glowing stone_0.00_0a0b9312.png"
+    },
+    {
+      "id": "a286c92a",
+      "label": "glowing stone",
+      "score": 0.0010005044750869274,
+      "box": [
+        184.4375,
+        226.5,
+        336.953125,
+        286.6640625
+      ],
+      "crop_path": "results/tesseract/tesseract-20250416-172550/detections/owlvit-base-patch32/glowing stone_0.00_a286c92a.png"
+    },
+    {
+      "id": "becf6656",
+      "label": "glowing stone",
+      "score": 0.0010005044750869274,
+      "box": [
+        535.578125,
+        268.96875,
+        641.984375,
+        329.1328125
+      ],
+      "crop_path": "results/tesseract/tesseract-20250416-172550/detections/owlvit-base-patch32/glowing stone_0.00_becf6656.png"
+    }
+  ]
+}

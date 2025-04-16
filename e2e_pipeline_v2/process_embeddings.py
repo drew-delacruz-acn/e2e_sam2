@@ -114,18 +114,35 @@ def main():
     # Create output directory
     os.makedirs(args.output_dir, exist_ok=True)
     
-    print(f"Processing image: {args.image}")
-    print(f"Embedding models: {', '.join(args.models)}")
-    print(f"Using device: {args.device}")
-    
-    # Force CPU if requested (to avoid MPS issues with float64)
+    # Determine the best available device
     if args.force_cpu:
-        print("Forcing CPU usage for all operations")
+        device = "cpu"
+        print("Forcing CPU usage as requested")
         os.environ["CUDA_VISIBLE_DEVICES"] = ""
         torch.backends.mps.enabled = False
+    else:
+        # Check for CUDA
+        if torch.cuda.is_available():
+            device = "cuda"
+            print(f"CUDA is available. Using GPU: {torch.cuda.get_device_name(0)}")
+        # Check for MPS (Apple Metal)
+        elif hasattr(torch.backends, 'mps') and torch.backends.mps.is_available():
+            device = "mps"
+            print("Using Apple Metal Performance Shaders (MPS)")
+        else:
+            device = "cpu"
+            print("No GPU detected. Using CPU")
+    
+    # Override device if explicitly specified
+    if args.device != "cpu":
+        device = args.device
+    
+    print(f"Processing image: {args.image}")
+    print(f"Embedding models: {', '.join(args.models)}")
+    print(f"Using device: {device}")
     
     try:
-        # Initialize pipeline with modified config to use CPU
+        # Initialize pipeline with modified config
         pipeline = DetectionSegmentationPipeline(args.config)
         
         # Modify detection config to force CPU if needed
@@ -156,7 +173,7 @@ def main():
         # Initialize embedding generator
         embedding_generator = EmbeddingGenerator(
             model_types=args.models,
-            device=args.device
+            device=device
         )
         
         # Process each detection

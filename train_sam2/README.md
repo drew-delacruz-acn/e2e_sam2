@@ -1,70 +1,76 @@
-# SAM2 Fine-Tuning and Inference
+# SAM2 Fine-tuning and Inference
 
-This package provides code for fine-tuning the Segment Anything 2 (SAM2) model and running inference with the fine-tuned model.
+Scripts for fine-tuning and running inference with the Segment Anything 2 (SAM2) model.
 
-## Directory Structure
+## Setup
 
-```
-train_sam2/
-├── config.py            # Configuration parameters
-├── models/              # Model-related code
-│   ├── __init__.py
-│   └── model_utils.py   # Model utilities
-├── train.py             # Training script
-├── inference.py         # Inference script
-└── utils/               # Utility functions
-    ├── __init__.py
-    ├── data_utils.py    # Data loading and processing
-    └── losses.py        # Loss functions
+1. Create a virtual environment:
+```bash
+python -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
 ```
 
-## Requirements
+2. Install dependencies:
+```bash
+pip install -r requirements.txt
+```
 
-- PyTorch
-- OpenCV
-- NumPy
-- Matplotlib
-- SAM2 model and dependencies
+3. Download the SAM2 checkpoint:
+Make sure you have the SAM2 model checkpoint files and config in appropriate locations.
 
-## Training the Model
+## Training
 
-To fine-tune SAM2 on the DAVIS dataset:
+The `train_sam.py` script fine-tunes the SAM2 model on your dataset.
 
 ```bash
-python train.py --data_dir /path/to/davis/dataset --category bear --max_iters 10000
+python train_sam.py --data_dir /path/to/dataset \
+                   --sam2_checkpoint /path/to/checkpoint \
+                   --model_cfg /path/to/config \
+                   --max_iterations 10000 \
+                   --save_interval 1000 \
+                   --output_model fine_tuned_model.torch
 ```
 
-Additional parameters:
-- `--lr`: Learning rate (default: 1e-5)
-- `--weight_decay`: Weight decay (default: 4e-5)
-- `--save_interval`: Checkpoint save interval (default: 1000)
-- `--save_dir`: Directory to save checkpoints (default: "results")
+### Training Arguments
 
-## Inference with the Model
+- `--data_dir`: Path to dataset
+- `--sam2_checkpoint`: Path to SAM2 checkpoint
+- `--model_cfg`: Path to model config
+- `--learning_rate`: Learning rate for optimizer (default: 1e-5)
+- `--weight_decay`: Weight decay for optimizer (default: 4e-5)
+- `--max_iterations`: Number of training iterations (default: 10000)
+- `--save_interval`: Save model every N iterations (default: 1000)
+- `--output_model`: Output model path (default: model.torch)
 
-To run inference with a fine-tuned model:
+## Inference
+
+The `sam2_fintune_inference.py` script runs inference with the fine-tuned SAM2 model.
 
 ```bash
-python inference.py --image /path/to/image.jpg --mask /path/to/mask.png --checkpoint /path/to/fine_tuned_model.pt
+python sam2_fintune_inference.py --image_path /path/to/image.jpg \
+                               --mask_path /path/to/mask.png \
+                               --sam2_checkpoint /path/to/fine_tuned_model.torch \
+                               --model_cfg /path/to/config \
+                               --num_points 30 \
+                               --output_path segmentation_result.png
 ```
 
-Required parameters:
-- `--image`: Path to the input image
-- `--mask`: Path to the mask indicating the region to segment
+### Inference Arguments
 
-Optional parameters:
-- `--checkpoint`: Path to the fine-tuned model (if not specified, uses the original SAM2)
-- `--points`: Number of points to sample (default: 30)
-- `--output`: Output file path (default: "segmentation_output.png")
+- `--image_path`: Path to input image
+- `--mask_path`: Path to mask defining region to segment
+- `--sam2_checkpoint`: Path to SAM2 checkpoint
+- `--model_cfg`: Path to model config
+- `--num_points`: Number of points to sample from the mask (default: 30)
+- `--output_path`: Path to save output segmentation (default: output_segmentation.png)
 
-## Example Usage
+## Dataset Format
 
-1. Fine-tune the model:
-   ```bash
-   python train.py --data_dir data/davis-2017/DAVIS/ --category bear --max_iters 5000
-   ```
+The scripts are configured to work with the DAVIS dataset format. For other datasets, you may need to adjust the data loading functions.
 
-2. Run inference:
-   ```bash
-   python inference.py --image sample_image.jpg --mask sample_mask.png --checkpoint results/model_latest.pt
-   ``` 
+## Notes
+
+- The scripts default to using GPU with mixed precision if available
+- For Apple Silicon Macs, MPS backend is used if CUDA is not available
+- The training script logs IOU accuracy during training
+- The inference script generates a visualization with colored segments 

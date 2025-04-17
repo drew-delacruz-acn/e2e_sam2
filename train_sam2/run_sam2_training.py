@@ -13,7 +13,7 @@ import sys
 def parse_args():
     """Parse command line arguments"""
     parser = argparse.ArgumentParser(description="Run SAM2 training pipeline")
-    parser.add_argument("--data_dir", type=str, default="../../../data/davis-2017/DAVIS/",
+    parser.add_argument("--data_dir", type=str, default="../data/davis-2017/DAVIS/",
                       help="Path to DAVIS dataset")
     parser.add_argument("--sequence", type=str, default="bear",
                       help="DAVIS sequence to use")
@@ -25,7 +25,7 @@ def parse_args():
                       help="Output directory for dataset splits")
     parser.add_argument("--sam2_checkpoint", type=str, default="../checkpoints/sam2.1_hiera_large.pt",
                       help="Path to SAM2 checkpoint")
-    parser.add_argument("--model_cfg", type=str, default="configs/sam2.1/sam2.1_hiera_l.yaml",
+    parser.add_argument("--model_cfg", type=str, default="../configs/sam2.1/sam2.1_hiera_l.yaml",
                       help="Path to model config")
     parser.add_argument("--learning_rate", type=float, default=1e-5,
                       help="Learning rate for optimizer")

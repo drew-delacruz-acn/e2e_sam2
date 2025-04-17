@@ -24,7 +24,7 @@ def parse_args():
                       help="Path to dataset splits")
     parser.add_argument("--sam2_checkpoint", type=str, default="../checkpoints/sam2.1_hiera_large.pt",
                       help="Path to SAM2 checkpoint")
-    parser.add_argument("--model_cfg", type=str, default="configs/sam2.1/sam2.1_hiera_l.yaml",
+    parser.add_argument("--model_cfg", type=str, default="../configs/sam2.1/sam2.1_hiera_l.yaml",
                       help="Path to model config")
     parser.add_argument("--learning_rate", type=float, default=1e-5,
                       help="Learning rate for optimizer")
@@ -38,6 +38,8 @@ def parse_args():
                       help="Validate model every N iterations")
     parser.add_argument("--output_model", type=str, default="model.torch",
                       help="Output model path")
+    
+    print('Current working directory:', os.getcwd())
     return parser.parse_args()
 
 def setup_device():

@@ -44,6 +44,10 @@ def parse_args():
                       help="Threshold for warning about increasing train-val gap")
     parser.add_argument("--output_model", type=str, default="model.torch",
                       help="Output model path")
+    parser.add_argument("--early_stopping_patience", type=int, default=5,
+                      help="Number of consecutive warnings before stopping")
+    parser.add_argument("--max_gap", type=float, default=0.3,
+                      help="Maximum allowed gap between training and validation IoU")
     
     print('Current working directory:', os.getcwd())
     return parser.parse_args()
@@ -131,10 +135,13 @@ def read_batch(data):
 
 class MetricsTracker:
     """Class to track and analyze training metrics"""
-    def __init__(self, metrics_file, gap_threshold=0.1, gap_increase_threshold=0.05):
+    def __init__(self, metrics_file, gap_threshold=0.1, gap_increase_threshold=0.05, 
+                 patience=5, max_gap=0.3):
         self.metrics_file = metrics_file
         self.gap_threshold = gap_threshold
         self.gap_increase_threshold = gap_increase_threshold
+        self.patience = patience  # Number of consecutive warnings before stopping
+        self.max_gap = max_gap   # Maximum allowed gap before forced stopping
         self.metrics = {
             'train_iou': [],
             'val_iou': [],
@@ -142,6 +149,9 @@ class MetricsTracker:
             'iterations': []
         }
         self.previous_gap = None
+        self.consecutive_warnings = 0
+        self.best_val_iou = 0
+        self.iterations_without_improvement = 0
     
     def update(self, iteration, train_iou, val_iou):
         """Update metrics and check for warnings"""
@@ -153,6 +163,15 @@ class MetricsTracker:
         self.metrics['gaps'].append(float(current_gap))
         
         warnings = []
+        should_stop = False
+        stop_reason = None
+        
+        # Check for improvement in validation IoU
+        if val_iou > self.best_val_iou:
+            self.best_val_iou = val_iou
+            self.iterations_without_improvement = 0
+        else:
+            self.iterations_without_improvement += 1
         
         # Check absolute gap
         if current_gap > self.gap_threshold:
@@ -160,6 +179,9 @@ class MetricsTracker:
                 f"Warning: Large gap between training and validation IoU "
                 f"(train: {train_iou:.4f}, val: {val_iou:.4f}, gap: {current_gap:.4f})"
             )
+            self.consecutive_warnings += 1
+        else:
+            self.consecutive_warnings = 0
         
         # Check gap increase
         if self.previous_gap is not None:
@@ -169,14 +191,28 @@ class MetricsTracker:
                     f"Warning: Gap between training and validation IoU is increasing "
                     f"(previous gap: {self.previous_gap:.4f}, current gap: {current_gap:.4f})"
                 )
-        
+                self.consecutive_warnings += 1
+            
         self.previous_gap = current_gap
+        
+        # Check stopping conditions
+        if current_gap > self.max_gap:
+            should_stop = True
+            stop_reason = f"Training stopped: Gap between training and validation IoU ({current_gap:.4f}) exceeded maximum allowed gap ({self.max_gap:.4f})"
+        
+        if self.consecutive_warnings >= self.patience:
+            should_stop = True
+            stop_reason = f"Training stopped: Received {self.consecutive_warnings} consecutive warnings"
+        
+        if self.iterations_without_improvement >= self.patience * 2:
+            should_stop = True
+            stop_reason = f"Training stopped: No improvement in validation IoU for {self.iterations_without_improvement} iterations"
         
         # Save metrics to file
         with open(self.metrics_file, 'w') as f:
             json.dump(self.metrics, f, indent=2)
         
-        return warnings
+        return warnings, should_stop, stop_reason
 
 def evaluate(predictor, device, val_data, num_samples=5):
     """Evaluate model on validation set"""
@@ -226,11 +262,13 @@ def main():
     args = parse_args()
     device = setup_device()
     
-    # Initialize metrics tracker
+    # Initialize metrics tracker with early stopping parameters
     metrics_tracker = MetricsTracker(
         args.metrics_log,
         args.gap_threshold,
-        args.gap_increase_threshold
+        args.gap_increase_threshold,
+        args.early_stopping_patience,
+        args.max_gap
     )
     
     # Load dataset splits
@@ -254,9 +292,6 @@ def main():
     
     # Set up mixed precision
     scaler = torch.cuda.amp.GradScaler()
-    
-    # Best validation score
-    best_val_iou = 0.0
     
     # Training loop
     mean_iou = 0
@@ -329,8 +364,10 @@ def main():
                     val_iou = evaluate(predictor, device, dataset['val'])
                 predictor.model.train()  # Set model back to training mode
                 
-                # Track metrics and check for warnings
-                warnings = metrics_tracker.update(itr, mean_iou, val_iou)
+                # Track metrics and check for warnings/stopping conditions
+                warnings, should_stop, stop_reason = metrics_tracker.update(itr, mean_iou, val_iou)
+                
+                # Print warnings and metrics
                 for warning in warnings:
                     print(f"\n{'-'*80}\n{warning}\n{'-'*80}")
                 
@@ -339,23 +376,24 @@ def main():
                 print(f"  Validation IoU: {val_iou:.4f}")
                 print(f"  Gap: {(mean_iou - val_iou):.4f}")
                 
-                # Save the best model
-                if val_iou > best_val_iou:
-                    best_val_iou = val_iou
-                    best_model_path = args.output_model.replace('.torch', '_best.torch')
-                    torch.save(predictor.model.state_dict(), best_model_path)
-                    print(f"  Saved best model with IoU {best_val_iou:.4f}")
-
-            # Save model periodically
-            if itr % args.save_interval == 0:
-                torch.save(predictor.model.state_dict(), args.output_model)
-                print(f"Saved model at iteration {itr}")
+                # Check if training should stop
+                if should_stop:
+                    print(f"\n{'='*80}\n{stop_reason}\n{'='*80}")
+                    # Save final model
+                    torch.save(predictor.model.state_dict(), args.output_model)
+                    print(f"Final model saved to: {args.output_model}")
+                    return  # Exit training
+                
+                # Save model periodically
+                if itr % args.save_interval == 0:
+                    torch.save(predictor.model.state_dict(), args.output_model)
+                    print(f"Saved model at iteration {itr}")
     
     # Save final model
     torch.save(predictor.model.state_dict(), args.output_model)
     print(f"\nTraining completed:")
     print(f"  Final model saved to: {args.output_model}")
-    print(f"  Best validation IoU: {best_val_iou:.4f}")
+    print(f"  Best validation IoU: {metrics_tracker.best_val_iou:.4f}")
     print(f"  Training metrics saved to: {args.metrics_log}")
 
 if __name__ == "__main__":

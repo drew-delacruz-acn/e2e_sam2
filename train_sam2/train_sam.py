@@ -18,13 +18,13 @@ os.environ["PYTORCH_ENABLE_MPS_FALLBACK"] = "1"
 def parse_args():
     """Parse command line arguments"""
     parser = argparse.ArgumentParser(description="Fine-tune SAM2 model")
-    parser.add_argument("--data_dir", type=str, default="../../../data/davis-2017/DAVIS/",
+    parser.add_argument("--data_dir", type=str, default="../data/davis-2017/DAVIS/",
                       help="Path to dataset")
     parser.add_argument("--splits_dir", type=str, default="./dataset_splits",
                       help="Path to dataset splits")
     parser.add_argument("--sam2_checkpoint", type=str, default="../checkpoints/sam2.1_hiera_large.pt",
                       help="Path to SAM2 checkpoint")
-    parser.add_argument("--model_cfg", type=str, default="configs/sam2.1/sam2.1_hiera_l.yaml",
+    parser.add_argument("--model_cfg", type=str, default="../configs/sam2.1/sam2.1_hiera_l.yaml",
                       help="Path to model config")
     parser.add_argument("--learning_rate", type=float, default=1e-5,
                       help="Learning rate for optimizer")
@@ -32,13 +32,13 @@ def parse_args():
                       help="Weight decay for optimizer")
     parser.add_argument("--max_iterations", type=int, default=100,
                       help="Number of training iterations")
-    parser.add_argument("--save_interval", type=int, default=100,
+    parser.add_argument("--save_interval", type=int, default=1000,
                       help="Save model every N iterations")
-    parser.add_argument("--val_interval", type=int, default=100,
+    parser.add_argument("--val_interval", type=int, default=10,
                       help="Validate model every N iterations")
     parser.add_argument("--metrics_log", type=str, default="training_metrics.json",
                       help="Path to save training metrics")
-    parser.add_argument("--gap_threshold", type=float, default=0.1,
+    parser.add_argument("--gap_threshold", type=float, default=1.0,
                       help="Threshold for warning about train-val IoU gap")
     parser.add_argument("--gap_increase_threshold", type=float, default=0.05,
                       help="Threshold for warning about increasing train-val gap")
@@ -265,6 +265,7 @@ def main():
             # Load data batch from training set
             image, mask, input_point, input_label = read_batch(dataset['train'])
             if mask.shape[0] == 0:
+                print("Empty batch, skipping...")
                 continue  # Ignore empty batches
             
             # Apply SAM image encoder to the image

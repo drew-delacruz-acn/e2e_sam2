@@ -16,7 +16,7 @@ from sam2.sam2_image_predictor import SAM2ImagePredictor
 def parse_args():
     """Parse command line arguments"""
     parser = argparse.ArgumentParser(description="Compare SAM2 models")
-    parser.add_argument("--data_dir", type=str, default="../../../data/davis-2017/DAVIS/",
+    parser.add_argument("--data_dir", type=str, default="../data/davis-2017/DAVIS/",
                       help="Path to dataset")
     parser.add_argument("--splits_dir", type=str, default="./dataset_splits",
                       help="Path to dataset splits")
@@ -27,7 +27,7 @@ def parse_args():
                       default="./models/sam2_finetuned_best.torch",
                       help="Path to fine-tuned model checkpoint")
     parser.add_argument("--model_cfg", type=str,
-                      default="configs/sam2.1/sam2.1_hiera_l.yaml",
+                      default="../configs/sam2.1/sam2.1_hiera_l.yaml",
                       help="Path to model config")
     parser.add_argument("--output_dir", type=str, default="./comparison_results",
                       help="Directory to save comparison results")

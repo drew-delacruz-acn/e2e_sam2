@@ -19,7 +19,7 @@ dataset_splits/
 
 # Models
 *.torch
-
+train_sam2/model.torch
 # Exception: Track image files in data folder
 # !data/**/*.jpeg
 # !data/**/*.jpg
@@ -59,4 +59,4 @@ ENV/
 
 # Ignore OS specific files
 .DS_Store
-Thumbs.db 
+Thumbs.db train_sam2/model.torch

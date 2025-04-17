@@ -18,24 +18,30 @@ os.environ["PYTORCH_ENABLE_MPS_FALLBACK"] = "1"
 def parse_args():
     """Parse command line arguments"""
     parser = argparse.ArgumentParser(description="Fine-tune SAM2 model")
-    parser.add_argument("--data_dir", type=str, default="../data/davis-2017/DAVIS/",
+    parser.add_argument("--data_dir", type=str, default="../../../data/davis-2017/DAVIS/",
                       help="Path to dataset")
     parser.add_argument("--splits_dir", type=str, default="./dataset_splits",
                       help="Path to dataset splits")
     parser.add_argument("--sam2_checkpoint", type=str, default="../checkpoints/sam2.1_hiera_large.pt",
                       help="Path to SAM2 checkpoint")
-    parser.add_argument("--model_cfg", type=str, default="../configs/sam2.1/sam2.1_hiera_l.yaml",
+    parser.add_argument("--model_cfg", type=str, default="configs/sam2.1/sam2.1_hiera_l.yaml",
                       help="Path to model config")
     parser.add_argument("--learning_rate", type=float, default=1e-5,
                       help="Learning rate for optimizer")
     parser.add_argument("--weight_decay", type=float, default=4e-5,
                       help="Weight decay for optimizer")
-    parser.add_argument("--max_iterations", type=int, default=1000,
+    parser.add_argument("--max_iterations", type=int, default=100,
                       help="Number of training iterations")
-    parser.add_argument("--save_interval", type=int, default=1000,
+    parser.add_argument("--save_interval", type=int, default=100,
                       help="Save model every N iterations")
-    parser.add_argument("--val_interval", type=int, default=10,
+    parser.add_argument("--val_interval", type=int, default=100,
                       help="Validate model every N iterations")
+    parser.add_argument("--metrics_log", type=str, default="training_metrics.json",
+                      help="Path to save training metrics")
+    parser.add_argument("--gap_threshold", type=float, default=0.1,
+                      help="Threshold for warning about train-val IoU gap")
+    parser.add_argument("--gap_increase_threshold", type=float, default=0.05,
+                      help="Threshold for warning about increasing train-val gap")
     parser.add_argument("--output_model", type=str, default="model.torch",
                       help="Output model path")
     
@@ -123,6 +129,55 @@ def read_batch(data):
     
     return img, np.array(masks), np.array(points), np.ones([len(masks), 1])
 
+class MetricsTracker:
+    """Class to track and analyze training metrics"""
+    def __init__(self, metrics_file, gap_threshold=0.1, gap_increase_threshold=0.05):
+        self.metrics_file = metrics_file
+        self.gap_threshold = gap_threshold
+        self.gap_increase_threshold = gap_increase_threshold
+        self.metrics = {
+            'train_iou': [],
+            'val_iou': [],
+            'gaps': [],
+            'iterations': []
+        }
+        self.previous_gap = None
+    
+    def update(self, iteration, train_iou, val_iou):
+        """Update metrics and check for warnings"""
+        self.metrics['iterations'].append(iteration)
+        self.metrics['train_iou'].append(float(train_iou))
+        self.metrics['val_iou'].append(float(val_iou))
+        
+        current_gap = train_iou - val_iou
+        self.metrics['gaps'].append(float(current_gap))
+        
+        warnings = []
+        
+        # Check absolute gap
+        if current_gap > self.gap_threshold:
+            warnings.append(
+                f"Warning: Large gap between training and validation IoU "
+                f"(train: {train_iou:.4f}, val: {val_iou:.4f}, gap: {current_gap:.4f})"
+            )
+        
+        # Check gap increase
+        if self.previous_gap is not None:
+            gap_increase = current_gap - self.previous_gap
+            if gap_increase > self.gap_increase_threshold:
+                warnings.append(
+                    f"Warning: Gap between training and validation IoU is increasing "
+                    f"(previous gap: {self.previous_gap:.4f}, current gap: {current_gap:.4f})"
+                )
+        
+        self.previous_gap = current_gap
+        
+        # Save metrics to file
+        with open(self.metrics_file, 'w') as f:
+            json.dump(self.metrics, f, indent=2)
+        
+        return warnings
+
 def evaluate(predictor, device, val_data, num_samples=5):
     """Evaluate model on validation set"""
     total_iou = 0.0
@@ -170,6 +225,13 @@ def main():
     """Main training function"""
     args = parse_args()
     device = setup_device()
+    
+    # Initialize metrics tracker
+    metrics_tracker = MetricsTracker(
+        args.metrics_log,
+        args.gap_threshold,
+        args.gap_increase_threshold
+    )
     
     # Load dataset splits
     dataset = load_dataset_splits(args.data_dir, args.splits_dir)
@@ -255,37 +317,46 @@ def main():
             scaler.step(optimizer)
             scaler.update()  # Mix precision
 
-            # Validation
+            # Calculate training IoU
+            if itr == 0:
+                mean_iou = 0
+            mean_iou = mean_iou * 0.99 + 0.01 * np.mean(iou.cpu().detach().numpy())
+
+            # Validation and metrics tracking
             if itr % args.val_interval == 0:
                 predictor.model.eval()  # Set model to evaluation mode
                 with torch.no_grad():
                     val_iou = evaluate(predictor, device, dataset['val'])
                 predictor.model.train()  # Set model back to training mode
                 
-                print(f"Validation IoU at iteration {itr}: {val_iou:.4f}")
+                # Track metrics and check for warnings
+                warnings = metrics_tracker.update(itr, mean_iou, val_iou)
+                for warning in warnings:
+                    print(f"\n{'-'*80}\n{warning}\n{'-'*80}")
+                
+                print(f"\nIteration {itr}:")
+                print(f"  Training IoU: {mean_iou:.4f}")
+                print(f"  Validation IoU: {val_iou:.4f}")
+                print(f"  Gap: {(mean_iou - val_iou):.4f}")
                 
                 # Save the best model
                 if val_iou > best_val_iou:
                     best_val_iou = val_iou
                     best_model_path = args.output_model.replace('.torch', '_best.torch')
                     torch.save(predictor.model.state_dict(), best_model_path)
-                    print(f"Saved best model with IoU {best_val_iou:.4f} to {best_model_path}")
+                    print(f"  Saved best model with IoU {best_val_iou:.4f}")
 
             # Save model periodically
             if itr % args.save_interval == 0:
                 torch.save(predictor.model.state_dict(), args.output_model)
                 print(f"Saved model at iteration {itr}")
-
-            # Display results
-            if itr == 0:
-                mean_iou = 0
-            mean_iou = mean_iou * 0.99 + 0.01 * np.mean(iou.cpu().detach().numpy())
-            print(f"Step {itr}, Training Accuracy(IOU)={mean_iou:.4f}")
     
     # Save final model
     torch.save(predictor.model.state_dict(), args.output_model)
-    print(f"Training completed. Final model saved to {args.output_model}")
-    print(f"Best validation IoU: {best_val_iou:.4f}")
+    print(f"\nTraining completed:")
+    print(f"  Final model saved to: {args.output_model}")
+    print(f"  Best validation IoU: {best_val_iou:.4f}")
+    print(f"  Training metrics saved to: {args.metrics_log}")
 
 if __name__ == "__main__":
     main()

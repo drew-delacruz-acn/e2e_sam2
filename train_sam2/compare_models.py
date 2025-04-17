@@ -206,7 +206,7 @@ def evaluate_model(predictor, data, device, debug=False):
                     predictor.set_image(img)
                     masks, scores, _ = predictor.predict(
                         point_coords=point,
-                        point_labels=np.ones((1, 1)),
+                        point_labels=np.ones(1),
                         multimask_output=False
                     )
 

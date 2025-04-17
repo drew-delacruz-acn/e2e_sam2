@@ -282,6 +282,7 @@ def main():
         print(f"\nLoading original model from {args.original_checkpoint}")
         # Try to determine if original checkpoint is a state dict or a complete checkpoint
         original_is_state_dict = False  # Default assumption for original model
+        
         try:
             # Check what type of file the original checkpoint is
             checkpoint = torch.load(args.original_checkpoint, map_location=device)

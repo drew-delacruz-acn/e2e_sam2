@@ -13,6 +13,12 @@
 *.png
 *.gif
 
+# Data folder
+data/
+
+# Models
+*.torch
+
 # Exception: Track image files in data folder
 # !data/**/*.jpeg
 # !data/**/*.jpg

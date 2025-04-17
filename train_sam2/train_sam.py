@@ -5,6 +5,7 @@ This script fine-tunes a SAM2 model on a specific dataset.
 """
 import os
 import argparse
+import json
 import numpy as np
 import torch
 import cv2
@@ -19,6 +20,8 @@ def parse_args():
     parser = argparse.ArgumentParser(description="Fine-tune SAM2 model")
     parser.add_argument("--data_dir", type=str, default="../data/davis-2017/DAVIS/",
                       help="Path to dataset")
+    parser.add_argument("--splits_dir", type=str, default="./dataset_splits",
+                      help="Path to dataset splits")
     parser.add_argument("--sam2_checkpoint", type=str, default="../checkpoints/sam2.1_hiera_large.pt",
                       help="Path to SAM2 checkpoint")
     parser.add_argument("--model_cfg", type=str, default="configs/sam2.1/sam2.1_hiera_l.yaml",
@@ -31,6 +34,8 @@ def parse_args():
                       help="Number of training iterations")
     parser.add_argument("--save_interval", type=int, default=1000,
                       help="Save model every N iterations")
+    parser.add_argument("--val_interval", type=int, default=10,
+                      help="Validate model every N iterations")
     parser.add_argument("--output_model", type=str, default="model.torch",
                       help="Output model path")
     return parser.parse_args()
@@ -62,16 +67,28 @@ def setup_device():
     
     return device
 
-def load_dataset(data_dir):
-    """Load dataset file paths"""
-    data = []
-    # Go over all files in the dataset
-    for name in os.listdir(os.path.join(data_dir, "JPEGImages/480p/bear/")):
-        data.append({
-            "image": os.path.join(data_dir, "JPEGImages/480p/bear/", name),
-            "annotation": os.path.join(data_dir, "Annotations/480p/bear/", name[:-4] + ".png")
-        })
-    return data
+def load_dataset_splits(data_dir, splits_dir):
+    """Load dataset splits"""
+    dataset = {}
+    
+    # Load train and validation splits
+    for split in ['train', 'val']:
+        split_file = os.path.join(splits_dir, f"{split}.json")
+        if not os.path.exists(split_file):
+            raise FileNotFoundError(f"Split file not found: {split_file}")
+        
+        with open(split_file, 'r') as f:
+            split_data = json.load(f)
+        
+        # Prepend the data_dir to each path
+        for item in split_data:
+            item['image'] = os.path.join(data_dir, item['image'])
+            item['annotation'] = os.path.join(data_dir, item['annotation'])
+        
+        dataset[split] = split_data
+        print(f"Loaded {len(split_data)} samples for {split} split")
+    
+    return dataset
 
 def read_batch(data):
     """Read random image and its annotation from the dataset"""
@@ -104,14 +121,57 @@ def read_batch(data):
     
     return img, np.array(masks), np.array(points), np.ones([len(masks), 1])
 
+def evaluate(predictor, device, val_data, num_samples=5):
+    """Evaluate model on validation set"""
+    total_iou = 0.0
+    total_masks = 0
+    
+    for _ in range(num_samples):
+        # Load data batch
+        image, gt_mask, input_point, input_label = read_batch(val_data)
+        if gt_mask.shape[0] == 0:
+            continue
+        
+        # Apply SAM image encoder to the image
+        predictor.set_image(image)
+
+        # Process each mask separately
+        for i in range(gt_mask.shape[0]):
+            # Get prediction for this mask
+            masks, scores, _ = predictor.predict(
+                point_coords=input_point[i:i+1],
+                point_labels=input_label[i:i+1],
+                multimask_output=False
+            )
+            
+            # Calculate IoU
+            pred_mask = masks[0]  # First mask prediction
+            target_mask = gt_mask[i]
+            
+            # Convert to tensors
+            pred_tensor = torch.tensor(pred_mask.astype(np.float32)).to(device)
+            target_tensor = torch.tensor(target_mask.astype(np.float32)).to(device)
+            
+            # Calculate intersection and union
+            intersection = (pred_tensor * target_tensor).sum()
+            union = pred_tensor.sum() + target_tensor.sum() - intersection
+            iou = (intersection / union).item() if union > 0 else 0.0
+            
+            total_iou += iou
+            total_masks += 1
+    
+    # Calculate average IoU
+    avg_iou = total_iou / total_masks if total_masks > 0 else 0.0
+    return avg_iou
+
 def main():
     """Main training function"""
     args = parse_args()
     device = setup_device()
     
-    # Load dataset
-    data = load_dataset(args.data_dir)
-    print(f"Loaded {len(data)} images from dataset")
+    # Load dataset splits
+    dataset = load_dataset_splits(args.data_dir, args.splits_dir)
+    print(f"Loaded dataset with {len(dataset['train'])} training and {len(dataset['val'])} validation samples")
 
     # Load model
     print(f"Current working directory: {os.getcwd()}")
@@ -131,12 +191,15 @@ def main():
     # Set up mixed precision
     scaler = torch.cuda.amp.GradScaler()
     
+    # Best validation score
+    best_val_iou = 0.0
+    
     # Training loop
     mean_iou = 0
     for itr in range(args.max_iterations):
         with torch.cuda.amp.autocast():  # Cast to mixed precision
-            # Load data batch
-            image, mask, input_point, input_label = read_batch(data)
+            # Load data batch from training set
+            image, mask, input_point, input_label = read_batch(dataset['train'])
             if mask.shape[0] == 0:
                 continue  # Ignore empty batches
             
@@ -190,6 +253,22 @@ def main():
             scaler.step(optimizer)
             scaler.update()  # Mix precision
 
+            # Validation
+            if itr % args.val_interval == 0:
+                predictor.model.eval()  # Set model to evaluation mode
+                with torch.no_grad():
+                    val_iou = evaluate(predictor, device, dataset['val'])
+                predictor.model.train()  # Set model back to training mode
+                
+                print(f"Validation IoU at iteration {itr}: {val_iou:.4f}")
+                
+                # Save the best model
+                if val_iou > best_val_iou:
+                    best_val_iou = val_iou
+                    best_model_path = args.output_model.replace('.torch', '_best.torch')
+                    torch.save(predictor.model.state_dict(), best_model_path)
+                    print(f"Saved best model with IoU {best_val_iou:.4f} to {best_model_path}")
+
             # Save model periodically
             if itr % args.save_interval == 0:
                 torch.save(predictor.model.state_dict(), args.output_model)
@@ -199,7 +278,12 @@ def main():
             if itr == 0:
                 mean_iou = 0
             mean_iou = mean_iou * 0.99 + 0.01 * np.mean(iou.cpu().detach().numpy())
-            print(f"Step {itr}, Accuracy(IOU)={mean_iou:.4f}")
+            print(f"Step {itr}, Training Accuracy(IOU)={mean_iou:.4f}")
+    
+    # Save final model
+    torch.save(predictor.model.state_dict(), args.output_model)
+    print(f"Training completed. Final model saved to {args.output_model}")
+    print(f"Best validation IoU: {best_val_iou:.4f}")
 
 if __name__ == "__main__":
     main()

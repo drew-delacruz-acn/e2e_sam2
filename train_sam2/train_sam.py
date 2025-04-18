@@ -30,7 +30,7 @@ def parse_args():
                       help="Learning rate for optimizer")
     parser.add_argument("--weight_decay", type=float, default=4e-5,
                       help="Weight decay for optimizer")
-    parser.add_argument("--max_iterations", type=int, default=1000,
+    parser.add_argument("--max_iterations", type=int, default=10000,
                       help="Number of training iterations")
     parser.add_argument("--save_interval", type=int, default=100,
                       help="Save model every N iterations")

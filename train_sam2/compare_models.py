@@ -52,7 +52,7 @@ def parse_args():
                       default="../checkpoints/sam2.1_hiera_large.pt",
                       help="Path to original pre-trained SAM2 checkpoint")
     parser.add_argument("--finetuned_checkpoint", type=str,
-                      default="./model_best.torch",
+                      default="./model.torch",
                       help="Path to fine-tuned model checkpoint")
     parser.add_argument("--model_cfg", type=str,
                       default="../configs/sam2.1/sam2.1_hiera_l.yaml",
@@ -341,7 +341,7 @@ def main():
         for item in data:
             item['image'] = os.path.join(args.data_dir, item['image'])
             item['annotation'] = os.path.join(args.data_dir, item['annotation'])
-
+            print(item)
         # Limit number of samples if specified
         if args.num_samples > 0:
             data = data[:args.num_samples]

@@ -16,17 +16,17 @@ from sam2.sam2_image_predictor import SAM2ImagePredictor
 def parse_args():
     """Parse command line arguments"""
     parser = argparse.ArgumentParser(description="Run inference with SAM2 model")
-    parser.add_argument("--image_path", type=str, default="sample_image.jpg",
+    parser.add_argument("--image_path", type=str, default="test/bear_raw.jpg",
                       help="Path to input image")
-    parser.add_argument("--mask_path", type=str, default="sample_mask.png",
+    parser.add_argument("--mask_path", type=str, default="test/bear_mask.png",
                       help="Path to mask defining region to segment")
-    parser.add_argument("--gt_mask_path", type=str, default=None,
+    parser.add_argument("--gt_mask_path", type=str, default="test/bear_mask.png",
                       help="Path to ground truth mask for accuracy evaluation (optional)")
-    parser.add_argument("--sam2_checkpoint", type=str, default="sam2_hiera_large.pt",
+    parser.add_argument("--sam2_checkpoint", type=str, default="./model_best.torch",
                       help="Path to fine-tuned SAM2 checkpoint")
-    parser.add_argument("--original_checkpoint", type=str, default=None,
+    parser.add_argument("--original_checkpoint", type=str, default="../checkpoints/sam2.1_hiera_large.pt",
                       help="Path to original SAM2 checkpoint for comparison (if not provided, no comparison is done)")
-    parser.add_argument("--model_cfg", type=str, default="sam2_hiera_l.yaml",
+    parser.add_argument("--model_cfg", type=str,  default="../configs/sam2.1/sam2.1_hiera_l.yaml",
                       help="Path to model config")
     parser.add_argument("--num_points", type=int, default=30,
                       help="Number of points to sample from the mask")
@@ -247,7 +247,7 @@ def main():
     # Sample points from mask
     input_points = get_points(mask, args.num_points)
     if len(input_points) == 0:
-        print("Error: Could not sample points from mask")
+        print("Error: Could not sample point from mask")
         return
     print(f"Sampled {len(input_points)} points from mask")
     

@@ -52,7 +52,7 @@ def parse_args():
                       default="../checkpoints/sam2.1_hiera_large.pt",
                       help="Path to original pre-trained SAM2 checkpoint")
     parser.add_argument("--finetuned_checkpoint", type=str,
-                      default="./model.torch",
+                      default="./model_best.torch",
                       help="Path to fine-tuned model checkpoint")
     parser.add_argument("--model_cfg", type=str,
                       default="../configs/sam2.1/sam2.1_hiera_l.yaml",

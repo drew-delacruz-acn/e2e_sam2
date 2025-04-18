@@ -151,9 +151,10 @@ class MetricsTracker:
         self.previous_gap = None
         self.consecutive_warnings = 0
         self.best_val_iou = 0
+        self.best_model_path = None
         self.iterations_without_improvement = 0
     
-    def update(self, iteration, train_iou, val_iou):
+    def update(self, iteration, train_iou, val_iou, model, save_path):
         """Update metrics and check for warnings"""
         self.metrics['iterations'].append(iteration)
         self.metrics['train_iou'].append(float(train_iou))
@@ -166,10 +167,26 @@ class MetricsTracker:
         should_stop = False
         stop_reason = None
         
-        # Check for improvement in validation IoU
+        # Save model when validation IoU improves
         if val_iou > self.best_val_iou:
             self.best_val_iou = val_iou
             self.iterations_without_improvement = 0
+            # Save best model with validation score in filename
+            best_model_path = f"{save_path[:-6]}_best_val_{val_iou:.4f}.torch"
+            torch.save({
+                'model': model.state_dict(),
+                'val_iou': val_iou,
+                'iteration': iteration
+            }, best_model_path)
+            # Also save as the default path for backward compatibility
+            torch.save({
+                'model': model.state_dict(),
+                'val_iou': val_iou,
+                'iteration': iteration
+            }, save_path)
+            self.best_model_path = best_model_path
+            print(f"\nNew best validation IoU: {val_iou:.4f}")
+            print(f"Saved best model to: {best_model_path}")
         else:
             self.iterations_without_improvement += 1
         
@@ -194,19 +211,6 @@ class MetricsTracker:
                 self.consecutive_warnings += 1
             
         self.previous_gap = current_gap
-        
-        # Check stopping conditions
-        # if current_gap > self.max_gap:
-        #     should_stop = True
-        #     stop_reason = f"Training stopped: Gap between training and validation IoU ({current_gap:.4f}) exceeded maximum allowed gap ({self.max_gap:.4f})"
-        
-        # if self.consecutive_warnings >= self.patience:
-        #     should_stop = True
-        #     stop_reason = f"Training stopped: Received {self.consecutive_warnings} consecutive warnings"
-        
-        # if self.iterations_without_improvement >= self.patience * 2:
-        #     should_stop = True
-        #     stop_reason = f"Training stopped: No improvement in validation IoU for {self.iterations_without_improvement} iterations"
         
         # Save metrics to file
         with open(self.metrics_file, 'w') as f:
@@ -366,7 +370,13 @@ def main():
                 predictor.model.train()  # Set model back to training mode
                 
                 # Track metrics and check for warnings/stopping conditions
-                warnings, should_stop, stop_reason = metrics_tracker.update(itr, mean_iou, val_iou)
+                warnings, should_stop, stop_reason = metrics_tracker.update(
+                    itr, 
+                    mean_iou, 
+                    val_iou,
+                    predictor.model,  # Pass the model
+                    args.output_model  # Pass the save path
+                )
                 
                 # Print warnings and metrics
                 for warning in warnings:
@@ -380,9 +390,8 @@ def main():
                 # Check if training should stop
                 if should_stop:
                     print(f"\n{'='*80}\n{stop_reason}\n{'='*80}")
-                    # Save final model
-                    torch.save(predictor.model.state_dict(), args.output_model)
-                    print(f"Final model saved to: {args.output_model}")
+                    print(f"Best validation IoU achieved: {metrics_tracker.best_val_iou:.4f}")
+                    print(f"Best model saved at: {metrics_tracker.best_model_path}")
                     return  # Exit training
                 
                 # Save model periodically

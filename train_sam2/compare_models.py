@@ -186,19 +186,69 @@ def calculate_metrics(pred_mask, gt_mask):
         logging.error(traceback.format_exc())
         raise
 
-def evaluate_model(predictor, data, device, debug=False):
-    """Evaluate model on dataset"""
+def create_visualization(image, mask, alpha=0.5):
+    """Create colored visualization of segmentation mask"""
+    vis = image.copy()
+    colored_mask = np.zeros_like(image)
+    
+    # Create a colored overlay for the mask
+    colored_mask[mask > 0.5] = [255, 0, 0]  # Red for mask
+    
+    # Blend the original image with the colored mask
+    cv2.addWeighted(colored_mask, alpha, vis, 1 - alpha, 0, vis)
+    
+    # Draw contours
+    binary_mask = (mask > 0.5).astype(np.uint8)
+    contours, _ = cv2.findContours(binary_mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+    cv2.drawContours(vis, contours, -1, (255, 255, 255), 2)
+    
+    return vis
+
+def save_comparison_visualization(img, gt_mask, pretrained_mask, finetuned_mask, save_path, sample_name):
+    """Save side-by-side visualization of results"""
+    # Create visualizations
+    gt_vis = create_visualization(img, gt_mask)
+    pretrained_vis = create_visualization(img, pretrained_mask)
+    finetuned_vis = create_visualization(img, finetuned_mask)
+    
+    # Add titles
+    font = cv2.FONT_HERSHEY_SIMPLEX
+    font_scale = 1
+    font_thickness = 2
+    color = (255, 255, 255)
+    
+    # Add padding for titles
+    padding = 40
+    gt_vis = cv2.copyMakeBorder(gt_vis, padding, 0, 0, 0, cv2.BORDER_CONSTANT, value=[0, 0, 0])
+    pretrained_vis = cv2.copyMakeBorder(pretrained_vis, padding, 0, 0, 0, cv2.BORDER_CONSTANT, value=[0, 0, 0])
+    finetuned_vis = cv2.copyMakeBorder(finetuned_vis, padding, 0, 0, 0, cv2.BORDER_CONSTANT, value=[0, 0, 0])
+    
+    # Add titles
+    cv2.putText(gt_vis, 'Ground Truth', (10, 30), font, font_scale, color, font_thickness)
+    cv2.putText(pretrained_vis, 'Pre-trained', (10, 30), font, font_scale, color, font_thickness)
+    cv2.putText(finetuned_vis, 'Fine-tuned', (10, 30), font, font_scale, color, font_thickness)
+    
+    # Combine images horizontally
+    comparison = np.hstack((gt_vis, pretrained_vis, finetuned_vis))
+    
+    # Create output directory if it doesn't exist
+    os.makedirs(os.path.dirname(save_path), exist_ok=True)
+    
+    # Save the comparison image
+    output_path = os.path.join(save_path, f'{sample_name}_comparison.png')
+    cv2.imwrite(output_path, cv2.cvtColor(comparison, cv2.COLOR_RGB2BGR))
+    logging.info(f"Saved comparison visualization to: {output_path}")
+    
+    return output_path
+
+def evaluate_model(predictor, data, device, debug=False, save_vis=False, output_dir=None, is_pretrained=True):
+    """Evaluate model on dataset and optionally save visualizations"""
     results = []
     errors = []
+    predictions = {}  # Store predictions for visualization
     
     for idx, entry in enumerate(tqdm(data, desc="Evaluating")):
         try:
-            # Verify file existence
-            if not os.path.exists(entry["image"]):
-                raise FileNotFoundError(f"Image not found: {entry['image']}")
-            if not os.path.exists(entry["annotation"]):
-                raise FileNotFoundError(f"Annotation not found: {entry['annotation']}")
-
             # Load image and annotation
             img = cv2.imread(entry["image"])
             if img is None:
@@ -208,11 +258,6 @@ def evaluate_model(predictor, data, device, debug=False):
             ann_map = cv2.imread(entry["annotation"])
             if ann_map is None:
                 raise ValueError(f"Failed to load annotation: {entry['annotation']}")
-
-            if debug:
-                logging.debug(f"Processing sample {idx}:")
-                logging.debug(f"  Image shape: {img.shape}")
-                logging.debug(f"  Annotation shape: {ann_map.shape}")
 
             # Resize image
             r = np.min([1024 / img.shape[1], 1024 / img.shape[0]])
@@ -225,27 +270,21 @@ def evaluate_model(predictor, data, device, debug=False):
             ves_map = ann_map[:,:,2]
             mat_map[mat_map==0] = ves_map[mat_map==0]*(mat_map.max()+1)
 
+            sample_results = []
+            sample_predictions = []
+            
             # Get ground truth masks and points
             inds = np.unique(mat_map)[1:]
-            if len(inds) == 0:
-                logging.warning(f"No objects found in annotation: {entry['annotation']}")
-                continue
-
-            sample_results = []
             for obj_idx, ind in enumerate(inds):
                 try:
                     gt_mask = (mat_map == ind).astype(np.uint8)
                     coords = np.argwhere(gt_mask > 0)
                     if len(coords) == 0:
-                        logging.warning(f"Empty mask found for object {obj_idx} in {entry['annotation']}")
                         continue
                     
                     # Choose random point
                     yx = coords[np.random.randint(len(coords))]
                     point = np.array([[yx[1], yx[0]]])
-
-                    if debug:
-                        logging.debug(f"  Object {obj_idx}: point={point}, mask_size={gt_mask.sum()}")
 
                     # Get prediction
                     predictor.set_image(img)
@@ -258,15 +297,27 @@ def evaluate_model(predictor, data, device, debug=False):
                     # Calculate metrics
                     metrics = calculate_metrics(masks[0], gt_mask)
                     sample_results.append(metrics)
-
-                    if debug:
-                        logging.debug(f"  Object {obj_idx} metrics: {metrics}")
+                    
+                    if save_vis:
+                        sample_predictions.append({
+                            'image': img,
+                            'gt_mask': gt_mask,
+                            'pred_mask': masks[0],
+                            'metrics': metrics
+                        })
 
                 except Exception as e:
                     error_msg = f"Error processing object {obj_idx} in {entry['annotation']}: {str(e)}"
                     logging.error(error_msg)
-                    logging.error(traceback.format_exc())
                     errors.append(error_msg)
+
+            # Store predictions for visualization
+            if save_vis and sample_predictions:
+                sample_name = os.path.splitext(os.path.basename(entry["image"]))[0]
+                predictions[sample_name] = {
+                    'predictions': sample_predictions,
+                    'is_pretrained': is_pretrained
+                }
 
             # Average metrics for this sample
             if sample_results:
@@ -275,36 +326,27 @@ def evaluate_model(predictor, data, device, debug=False):
                     for metric in sample_results[0].keys()
                 }
                 results.append(avg_metrics)
-                
-                if debug:
-                    logging.debug(f"Sample {idx} average metrics: {avg_metrics}")
 
         except Exception as e:
             error_msg = f"Error processing sample {idx}: {str(e)}"
             logging.error(error_msg)
-            logging.error(traceback.format_exc())
             errors.append(error_msg)
 
     if not results:
         raise ValueError("No valid results obtained from evaluation")
 
-    # Calculate overall averages
+    # Calculate overall metrics
     overall_metrics = {
         metric: np.mean([r[metric] for r in results])
         for metric in results[0].keys()
     }
     
-    # Calculate standard deviations
     metric_stds = {
         metric: np.std([r[metric] for r in results])
         for metric in results[0].keys()
     }
 
-    logging.info(f"Evaluation completed. Processed {len(results)} samples successfully.")
-    if errors:
-        logging.warning(f"Encountered {len(errors)} errors during evaluation.")
-
-    return overall_metrics, metric_stds, results, errors
+    return overall_metrics, metric_stds, results, errors, predictions
 
 def main():
     """Main function"""
@@ -313,6 +355,8 @@ def main():
         
         # Set up output directory and logging
         os.makedirs(args.output_dir, exist_ok=True)
+        vis_dir = os.path.join(args.output_dir, 'visualizations')
+        os.makedirs(vis_dir, exist_ok=True)
         log_file = setup_logging(args.output_dir)
         
         # Log system information
@@ -350,16 +394,33 @@ def main():
         # Evaluate pre-trained model
         logging.info("\nEvaluating pre-trained model...")
         pretrained_predictor = load_model(args.pretrained_checkpoint, args.model_cfg, device)
-        pretrained_metrics, pretrained_stds, pretrained_results, pretrained_errors = evaluate_model(
-            pretrained_predictor, data, device, args.debug
+        pretrained_metrics, pretrained_stds, pretrained_results, pretrained_errors, pretrained_predictions = evaluate_model(
+            pretrained_predictor, data, device, args.debug, save_vis=True, output_dir=vis_dir, is_pretrained=True
         )
 
         # Evaluate fine-tuned model
         logging.info("\nEvaluating fine-tuned model...")
         finetuned_predictor = load_model(args.finetuned_checkpoint, args.model_cfg, device)
-        finetuned_metrics, finetuned_stds, finetuned_results, finetuned_errors = evaluate_model(
-            finetuned_predictor, data, device, args.debug
+        finetuned_metrics, finetuned_stds, finetuned_results, finetuned_errors, finetuned_predictions = evaluate_model(
+            finetuned_predictor, data, device, args.debug, save_vis=True, output_dir=vis_dir, is_pretrained=False
         )
+
+        # Save visualizations
+        logging.info("\nGenerating visualizations...")
+        for sample_name in pretrained_predictions.keys():
+            if sample_name in finetuned_predictions:
+                for i, (pre_pred, fine_pred) in enumerate(zip(
+                    pretrained_predictions[sample_name]['predictions'],
+                    finetuned_predictions[sample_name]['predictions']
+                )):
+                    save_comparison_visualization(
+                        pre_pred['image'],
+                        pre_pred['gt_mask'],
+                        pre_pred['pred_mask'],
+                        fine_pred['pred_mask'],
+                        vis_dir,
+                        f"{sample_name}_obj{i}"
+                    )
 
         # Calculate improvements
         improvements = {

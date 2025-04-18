@@ -5,8 +5,6 @@ import numpy as np
 
 # Import from our modules
 from config import get_device, DATA_DIR, MODEL_CONFIG, SAM2_CHECKPOINT, SAVE_DIR, LEARNING_RATE, WEIGHT_DECAY, MAX_ITERATIONS, SAVE_INTERVAL
-from utils.data_utils import get_dataset_files, read_batch
-from utils.losses import compute_segmentation_loss, compute_iou, compute_score_loss, compute_total_loss
 from models.model_utils import load_sam2_model, get_predictor, setup_optimizer, save_model
 
 def parse_args():

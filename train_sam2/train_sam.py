@@ -30,9 +30,9 @@ def parse_args():
                       help="Learning rate for optimizer")
     parser.add_argument("--weight_decay", type=float, default=4e-5,
                       help="Weight decay for optimizer")
-    parser.add_argument("--max_iterations", type=int, default=100,
+    parser.add_argument("--max_iterations", type=int, default=1000,
                       help="Number of training iterations")
-    parser.add_argument("--save_interval", type=int, default=1000,
+    parser.add_argument("--save_interval", type=int, default=100,
                       help="Save model every N iterations")
     parser.add_argument("--val_interval", type=int, default=10,
                       help="Validate model every N iterations")
@@ -99,7 +99,7 @@ def load_dataset_splits(data_dir, splits_dir):
         
         dataset[split] = split_data
         print(f"Loaded {len(split_data)} samples for {split} split")
-    
+    print(dataset)
     return dataset
 
 def read_batch(data):
@@ -196,17 +196,17 @@ class MetricsTracker:
         self.previous_gap = current_gap
         
         # Check stopping conditions
-        if current_gap > self.max_gap:
-            should_stop = True
-            stop_reason = f"Training stopped: Gap between training and validation IoU ({current_gap:.4f}) exceeded maximum allowed gap ({self.max_gap:.4f})"
+        # if current_gap > self.max_gap:
+        #     should_stop = True
+        #     stop_reason = f"Training stopped: Gap between training and validation IoU ({current_gap:.4f}) exceeded maximum allowed gap ({self.max_gap:.4f})"
         
-        if self.consecutive_warnings >= self.patience:
-            should_stop = True
-            stop_reason = f"Training stopped: Received {self.consecutive_warnings} consecutive warnings"
+        # if self.consecutive_warnings >= self.patience:
+        #     should_stop = True
+        #     stop_reason = f"Training stopped: Received {self.consecutive_warnings} consecutive warnings"
         
-        if self.iterations_without_improvement >= self.patience * 2:
-            should_stop = True
-            stop_reason = f"Training stopped: No improvement in validation IoU for {self.iterations_without_improvement} iterations"
+        # if self.iterations_without_improvement >= self.patience * 2:
+        #     should_stop = True
+        #     stop_reason = f"Training stopped: No improvement in validation IoU for {self.iterations_without_improvement} iterations"
         
         # Save metrics to file
         with open(self.metrics_file, 'w') as f:

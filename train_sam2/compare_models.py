@@ -52,7 +52,7 @@ def parse_args():
                       default="../checkpoints/sam2.1_hiera_large.pt",
                       help="Path to original pre-trained SAM2 checkpoint")
     parser.add_argument("--finetuned_checkpoint", type=str,
-                      default="./models/sam2_finetuned_best.torch",
+                      default="./model.torch",
                       help="Path to fine-tuned model checkpoint")
     parser.add_argument("--model_cfg", type=str,
                       default="../configs/sam2.1/sam2.1_hiera_l.yaml",
@@ -92,7 +92,11 @@ def load_model(checkpoint_path, model_cfg, device):
             raise FileNotFoundError(f"Checkpoint not found: {checkpoint_path}")
         if not os.path.exists(model_cfg):
             raise FileNotFoundError(f"Model config not found: {model_cfg}")
-        
+        print('--------------')
+        print(f'curr dir {os.getcwd()}')
+        print(f'model cfg {model_cfg}')
+        print(f'checkkpt {checkpoint_path}')
+        print('--------------')
         model = build_sam2(model_cfg, checkpoint_path, device=device)
         predictor = SAM2ImagePredictor(model)
         logging.info("Model loaded successfully")

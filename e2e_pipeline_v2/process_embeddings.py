@@ -377,7 +377,7 @@ def main():
                 detection_results["scores"]
             )):
                 # Create a unique ID for this detection
-                detection_id = f"{image_name}_{label}_{i:02d}_{score:.2f}"
+                detection_id = f"daggers_{label}_{i:02d}_{score:.2f}"
                 logger.info(f"\nProcessing detection {i+1}/{num_detections}: {detection_id}")
                 
                 # Convert box coordinates if needed

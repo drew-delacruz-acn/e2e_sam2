@@ -1,0 +1,6 @@
+python -m e2e_pipeline_v2.scripts.process_ground_truth \
+  --input_dir gitignore_exception/ground_truth_images \
+  --output_dir gitignore_exception/ground_truth_embeddings \
+  --models clip vit resnet50 \
+  --create_mapping \
+  --device cpu

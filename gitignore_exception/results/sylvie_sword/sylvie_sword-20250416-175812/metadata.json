@@ -1,0 +1,235 @@
+{
+  "image_path": "data/sylvie_sword.png",
+  "image_size": [
+    806,
+    216
+  ],
+  "model_type": "owlvit2",
+  "model_name": "owlv2-base-patch16",
+  "text_queries": [
+    "dagger",
+    "sword",
+    "weapon"
+  ],
+  "timestamp": "20250416-175812",
+  "num_detections": 18,
+  "detection_threshold": 0.05,
+  "detections": [
+    {
+      "id": "87399ddb",
+      "label": "sword",
+      "score": 0.5969031453132629,
+      "box": [
+        132.234375,
+        10.232421875,
+        806.0,
+        214.09375
+      ],
+      "crop_path": "results/sylvie_sword/sylvie_sword-20250416-175812/detections/owlv2-base-patch16/sword_0.60_87399ddb.png"
+    },
+    {
+      "id": "95073869",
+      "label": "sword",
+      "score": 0.22815649211406708,
+      "box": [
+        170.802734375,
+        1.1806640625,
+        317.9921875,
+        171.58984375
+      ],
+      "crop_path": "results/sylvie_sword/sylvie_sword-20250416-175812/detections/owlv2-base-patch16/sword_0.23_95073869.png"
+    },
+    {
+      "id": "0094ad95",
+      "label": "dagger",
+      "score": 0.19930799305438995,
+      "box": [
+        733.5859375,
+        173.951171875,
+        758.7734375,
+        215.66796875
+      ],
+      "crop_path": "results/sylvie_sword/sylvie_sword-20250416-175812/detections/owlv2-base-patch16/dagger_0.20_0094ad95.png"
+    },
+    {
+      "id": "0b985d46",
+      "label": "sword",
+      "score": 0.14706450700759888,
+      "box": [
+        629.6875,
+        2.361328125,
+        736.734375,
+        214.09375
+      ],
+      "crop_path": "results/sylvie_sword/sylvie_sword-20250416-175812/detections/owlv2-base-patch16/sword_0.15_0b985d46.png"
+    },
+    {
+      "id": "4d463aec",
+      "label": "sword",
+      "score": 0.13206614553928375,
+      "box": [
+        613.9453125,
+        -1.9677734375,
+        658.0234375,
+        174.73828125
+      ],
+      "crop_path": "results/sylvie_sword/sylvie_sword-20250416-175812/detections/owlv2-base-patch16/sword_0.13_4d463aec.png"
+    },
+    {
+      "id": "b9bc482f",
+      "label": "sword",
+      "score": 0.09401018172502518,
+      "box": [
+        164.505859375,
+        2.361328125,
+        450.2265625,
+        204.6484375
+      ],
+      "crop_path": "results/sylvie_sword/sylvie_sword-20250416-175812/detections/owlv2-base-patch16/sword_0.09_b9bc482f.png"
+    },
+    {
+      "id": "85601056",
+      "label": "dagger",
+      "score": 0.09138210862874985,
+      "box": [
+        166.8671875,
+        155.84765625,
+        245.578125,
+        212.51953125
+      ],
+      "crop_path": "results/sylvie_sword/sylvie_sword-20250416-175812/detections/owlv2-base-patch16/dagger_0.09_85601056.png"
+    },
+    {
+      "id": "8781d80a",
+      "label": "sword",
+      "score": 0.08151976019144058,
+      "box": [
+        259.74609375,
+        -0.3935546875,
+        415.59375,
+        103.8984375
+      ],
+      "crop_path": "results/sylvie_sword/sylvie_sword-20250416-175812/detections/owlv2-base-patch16/sword_0.08_8781d80a.png"
+    },
+    {
+      "id": "ab4f0ba5",
+      "label": "sword",
+      "score": 0.08035746961832047,
+      "box": [
+        284.93359375,
+        3.935546875,
+        503.75,
+        220.390625
+      ],
+      "crop_path": "results/sylvie_sword/sylvie_sword-20250416-175812/detections/owlv2-base-patch16/sword_0.08_ab4f0ba5.png"
+    },
+    {
+      "id": "32c7cbaa",
+      "label": "sword",
+      "score": 0.07807816565036774,
+      "box": [
+        159.783203125,
+        112.556640625,
+        453.375,
+        214.09375
+      ],
+      "crop_path": "results/sylvie_sword/sylvie_sword-20250416-175812/detections/owlv2-base-patch16/sword_0.08_32c7cbaa.png"
+    },
+    {
+      "id": "be556e65",
+      "label": "sword",
+      "score": 0.07585817575454712,
+      "box": [
+        169.228515625,
+        103.111328125,
+        234.55859375,
+        170.802734375
+      ],
+      "crop_path": "results/sylvie_sword/sylvie_sword-20250416-175812/detections/owlv2-base-patch16/sword_0.08_be556e65.png"
+    },
+    {
+      "id": "66d73ba3",
+      "label": "dagger",
+      "score": 0.06278920918703079,
+      "box": [
+        733.5859375,
+        177.88671875,
+        802.8515625,
+        217.2421875
+      ],
+      "crop_path": "results/sylvie_sword/sylvie_sword-20250416-175812/detections/owlv2-base-patch16/dagger_0.06_66d73ba3.png"
+    },
+    {
+      "id": "0fc6b39c",
+      "label": "dagger",
+      "score": 0.06187598779797554,
+      "box": [
+        336.8828125,
+        0.0,
+        418.7421875,
+        62.181640625
+      ],
+      "crop_path": "results/sylvie_sword/sylvie_sword-20250416-175812/detections/owlv2-base-patch16/dagger_0.06_0fc6b39c.png"
+    },
+    {
+      "id": "cbe5810c",
+      "label": "dagger",
+      "score": 0.05921025574207306,
+      "box": [
+        639.1328125,
+        151.125,
+        664.3203125,
+        184.18359375
+      ],
+      "crop_path": "results/sylvie_sword/sylvie_sword-20250416-175812/detections/owlv2-base-patch16/dagger_0.06_cbe5810c.png"
+    },
+    {
+      "id": "06a316c4",
+      "label": "sword",
+      "score": 0.05834583938121796,
+      "box": [
+        393.5546875,
+        -0.3935546875,
+        494.3046875,
+        143.25390625
+      ],
+      "crop_path": "results/sylvie_sword/sylvie_sword-20250416-175812/detections/owlv2-base-patch16/sword_0.06_06a316c4.png"
+    },
+    {
+      "id": "0a9bdc5a",
+      "label": "dagger",
+      "score": 0.055005285888910294,
+      "box": [
+        258.171875,
+        66.5107421875,
+        299.1015625,
+        96.4208984375
+      ],
+      "crop_path": "results/sylvie_sword/sylvie_sword-20250416-175812/detections/owlv2-base-patch16/dagger_0.06_0a9bdc5a.png"
+    },
+    {
+      "id": "995e7021",
+      "label": "dagger",
+      "score": 0.055005285888910294,
+      "box": [
+        478.5625,
+        133.021484375,
+        516.34375,
+        162.931640625
+      ],
+      "crop_path": "results/sylvie_sword/sylvie_sword-20250416-175812/detections/owlv2-base-patch16/dagger_0.06_995e7021.png"
+    },
+    {
+      "id": "4c16e2cf",
+      "label": "dagger",
+      "score": 0.05184546485543251,
+      "box": [
+        418.7421875,
+        3.935546875,
+        702.1015625,
+        217.2421875
+      ],
+      "crop_path": "results/sylvie_sword/sylvie_sword-20250416-175812/detections/owlv2-base-patch16/dagger_0.05_4c16e2cf.png"
+    }
+  ]
+}

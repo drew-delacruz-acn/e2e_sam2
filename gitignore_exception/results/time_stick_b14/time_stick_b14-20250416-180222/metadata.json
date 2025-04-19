@@ -1,0 +1,210 @@
+{
+  "image_path": "data/time_stick_b14.png",
+  "image_size": [
+    1390,
+    742
+  ],
+  "model_type": "owlvit2",
+  "model_name": "owlv2-base-patch16",
+  "text_queries": [
+    "stick",
+    "weapon"
+  ],
+  "timestamp": "20250416-180222",
+  "num_detections": 16,
+  "detection_threshold": 0.05,
+  "detections": [
+    {
+      "id": "ecdb4870",
+      "label": "weapon",
+      "score": 0.5779718160629272,
+      "box": [
+        374.6484375,
+        247.05078125,
+        537.5390625,
+        594.55078125
+      ],
+      "crop_path": "results/time_stick_b14/time_stick_b14-20250416-180222/detections/owlv2-base-patch16/weapon_0.58_ecdb4870.png"
+    },
+    {
+      "id": "f3ab0405",
+      "label": "weapon",
+      "score": 0.2568320035934448,
+      "box": [
+        211.7578125,
+        594.55078125,
+        268.76953125,
+        654.27734375
+      ],
+      "crop_path": "results/time_stick_b14/time_stick_b14-20250416-180222/detections/owlv2-base-patch16/weapon_0.26_f3ab0405.png"
+    },
+    {
+      "id": "74a585b0",
+      "label": "weapon",
+      "score": 0.17328819632530212,
+      "box": [
+        608.125,
+        251.123046875,
+        847.03125,
+        738.4375
+      ],
+      "crop_path": "results/time_stick_b14/time_stick_b14-20250416-180222/detections/owlv2-base-patch16/weapon_0.17_74a585b0.png"
+    },
+    {
+      "id": "c29883c7",
+      "label": "weapon",
+      "score": 0.14033624529838562,
+      "box": [
+        733.0078125,
+        274.19921875,
+        841.6015625,
+        583.69140625
+      ],
+      "crop_path": "results/time_stick_b14/time_stick_b14-20250416-180222/detections/owlv2-base-patch16/weapon_0.14_c29883c7.png"
+    },
+    {
+      "id": "b6dae485",
+      "label": "weapon",
+      "score": 0.12421301752328873,
+      "box": [
+        9.501953125,
+        237.548828125,
+        532.109375,
+        727.578125
+      ],
+      "crop_path": "results/time_stick_b14/time_stick_b14-20250416-180222/detections/owlv2-base-patch16/weapon_0.12_b6dae485.png"
+    },
+    {
+      "id": "8ce61836",
+      "label": "weapon",
+      "score": 0.11596072465181351,
+      "box": [
+        610.83984375,
+        624.4140625,
+        675.99609375,
+        738.4375
+      ],
+      "crop_path": "results/time_stick_b14/time_stick_b14-20250416-180222/detections/owlv2-base-patch16/weapon_0.12_8ce61836.png"
+    },
+    {
+      "id": "a5841174",
+      "label": "weapon",
+      "score": 0.09268777817487717,
+      "box": [
+        198.18359375,
+        599.98046875,
+        268.76953125,
+        692.28515625
+      ],
+      "crop_path": "results/time_stick_b14/time_stick_b14-20250416-180222/detections/owlv2-base-patch16/weapon_0.09_a5841174.png"
+    },
+    {
+      "id": "09fbb53a",
+      "label": "weapon",
+      "score": 0.07477004081010818,
+      "box": [
+        475.09765625,
+        247.05078125,
+        534.82421875,
+        361.07421875
+      ],
+      "crop_path": "results/time_stick_b14/time_stick_b14-20250416-180222/detections/owlv2-base-patch16/weapon_0.07_09fbb53a.png"
+    },
+    {
+      "id": "e3c60474",
+      "label": "weapon",
+      "score": 0.07369627058506012,
+      "box": [
+        809.0234375,
+        211.7578125,
+        982.7734375,
+        743.8671875
+      ],
+      "crop_path": "results/time_stick_b14/time_stick_b14-20250416-180222/detections/owlv2-base-patch16/weapon_0.07_e3c60474.png"
+    },
+    {
+      "id": "db3382c7",
+      "label": "weapon",
+      "score": 0.06853749603033066,
+      "box": [
+        5.4296875,
+        308.134765625,
+        263.33984375,
+        722.1484375
+      ],
+      "crop_path": "results/time_stick_b14/time_stick_b14-20250416-180222/detections/owlv2-base-patch16/weapon_0.07_db3382c7.png"
+    },
+    {
+      "id": "4b286e9d",
+      "label": "weapon",
+      "score": 0.06754669547080994,
+      "box": [
+        3.3935546875,
+        583.69140625,
+        260.625,
+        716.71875
+      ],
+      "crop_path": "results/time_stick_b14/time_stick_b14-20250416-180222/detections/owlv2-base-patch16/weapon_0.07_4b286e9d.png"
+    },
+    {
+      "id": "94d3cb99",
+      "label": "weapon",
+      "score": 0.06560483574867249,
+      "box": [
+        369.21875,
+        491.38671875,
+        445.234375,
+        589.12109375
+      ],
+      "crop_path": "results/time_stick_b14/time_stick_b14-20250416-180222/detections/owlv2-base-patch16/weapon_0.07_94d3cb99.png"
+    },
+    {
+      "id": "97db7c23",
+      "label": "weapon",
+      "score": 0.05921025574207306,
+      "box": [
+        1265.1171875,
+        618.984375,
+        1384.5703125,
+        738.4375
+      ],
+      "crop_path": "results/time_stick_b14/time_stick_b14-20250416-180222/detections/owlv2-base-patch16/weapon_0.06_97db7c23.png"
+    },
+    {
+      "id": "0cf05550",
+      "label": "weapon",
+      "score": 0.05834583938121796,
+      "box": [
+        439.8046875,
+        247.05078125,
+        532.109375,
+        428.9453125
+      ],
+      "crop_path": "results/time_stick_b14/time_stick_b14-20250416-180222/detections/owlv2-base-patch16/weapon_0.06_0cf05550.png"
+    },
+    {
+      "id": "150cb88a",
+      "label": "weapon",
+      "score": 0.05749328061938286,
+      "box": [
+        743.8671875,
+        461.5234375,
+        819.8828125,
+        575.546875
+      ],
+      "crop_path": "results/time_stick_b14/time_stick_b14-20250416-180222/detections/owlv2-base-patch16/weapon_0.06_150cb88a.png"
+    },
+    {
+      "id": "8916b34d",
+      "label": "weapon",
+      "score": 0.05184546485543251,
+      "box": [
+        252.48046875,
+        361.07421875,
+        496.81640625,
+        469.66796875
+      ],
+      "crop_path": "results/time_stick_b14/time_stick_b14-20250416-180222/detections/owlv2-base-patch16/weapon_0.05_8916b34d.png"
+    }
+  ]
+}

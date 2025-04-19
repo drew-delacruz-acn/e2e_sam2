@@ -1,0 +1,125 @@
+{
+  "image_path": "data/thor_hammer.jpeg",
+  "image_size": [
+    318,
+    159
+  ],
+  "model_type": "owlvit2",
+  "model_name": "owlv2-base-patch16",
+  "text_queries": [
+    "hands"
+  ],
+  "timestamp": "20250418-194950",
+  "num_detections": 9,
+  "detection_threshold": 0.04,
+  "detections": [
+    {
+      "id": "477ae197",
+      "label": "hands",
+      "score": 0.09534945338964462,
+      "box": [
+        96.890625,
+        44.09765625,
+        116.765625,
+        53.4140625
+      ],
+      "crop_path": "results/thor_hammer/thor_hammer-20250418-194950/detections/owlv2-base-patch16/hands_0.10_477ae197.png"
+    },
+    {
+      "id": "eb361d88",
+      "label": "hands",
+      "score": 0.0792103186249733,
+      "box": [
+        192.5390625,
+        64.59375,
+        222.3515625,
+        77.63671875
+      ],
+      "crop_path": "results/thor_hammer/thor_hammer-20250418-194950/detections/owlv2-base-patch16/hands_0.08_eb361d88.png"
+    },
+    {
+      "id": "1fa47510",
+      "label": "hands",
+      "score": 0.07696083933115005,
+      "box": [
+        86.953125,
+        54.345703125,
+        100.6171875,
+        59.935546875
+      ],
+      "crop_path": "results/thor_hammer/thor_hammer-20250418-194950/detections/owlv2-base-patch16/hands_0.08_1fa47510.png"
+    },
+    {
+      "id": "233a8d07",
+      "label": "hands",
+      "score": 0.06097517907619476,
+      "box": [
+        71.42578125,
+        52.79296875,
+        99.99609375,
+        59.625
+      ],
+      "crop_path": "results/thor_hammer/thor_hammer-20250418-194950/detections/owlv2-base-patch16/hands_0.06_233a8d07.png"
+    },
+    {
+      "id": "51a1d390",
+      "label": "hands",
+      "score": 0.05582314357161522,
+      "box": [
+        260.859375,
+        58.693359375,
+        295.640625,
+        66.767578125
+      ],
+      "crop_path": "results/thor_hammer/thor_hammer-20250418-194950/detections/owlv2-base-patch16/hands_0.06_51a1d390.png"
+    },
+    {
+      "id": "6c822f98",
+      "label": "hands",
+      "score": 0.054198723286390305,
+      "box": [
+        305.578125,
+        32.296875,
+        318.0,
+        40.681640625
+      ],
+      "crop_path": "results/thor_hammer/thor_hammer-20250418-194950/detections/owlv2-base-patch16/hands_0.05_6c822f98.png"
+    },
+    {
+      "id": "b15e9f45",
+      "label": "hands",
+      "score": 0.04885777831077576,
+      "box": [
+        63.3515625,
+        52.171875,
+        99.375,
+        60.24609375
+      ],
+      "crop_path": "results/thor_hammer/thor_hammer-20250418-194950/detections/owlv2-base-patch16/hands_0.05_b15e9f45.png"
+    },
+    {
+      "id": "7d98b686",
+      "label": "hands",
+      "score": 0.04672495648264885,
+      "box": [
+        269.5546875,
+        51.861328125,
+        314.2734375,
+        63.041015625
+      ],
+      "crop_path": "results/thor_hammer/thor_hammer-20250418-194950/detections/owlv2-base-patch16/hands_0.05_7d98b686.png"
+    },
+    {
+      "id": "3b5e7a92",
+      "label": "hands",
+      "score": 0.0427221953868866,
+      "box": [
+        90.6796875,
+        54.966796875,
+        110.5546875,
+        59.314453125
+      ],
+      "crop_path": "results/thor_hammer/thor_hammer-20250418-194950/detections/owlv2-base-patch16/hands_0.04_3b5e7a92.png"
+    }
+  ]
+}

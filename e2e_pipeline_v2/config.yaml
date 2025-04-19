@@ -31,9 +31,9 @@ detection:
 
 # Segmentation configuration
 segmentation:
-  # queries: ["glowing cube", "blue cube", "magic cube", "energy cube", "power cube", "tesseract", "space stone", "blue artifact", "cosmic object", "floating cube", "energy object", "bright cube", "cube", "glow object", "power source"]  # Text queries for object detection
-  queries: ["stick", "weapon"]
-  detection_threshold: 0.05  # Confidence threshold for detection
+  queries: ["glowing cube", "blue cube", "magic cube", "energy cube", "power cube", "tesseract", "space stone", "blue artifact", "cosmic object", "floating cube", "energy object", "bright cube", "cube", "glow object", "power source"]  # Text queries for object detection
+  # queries: ["hammer"]
+  detection_threshold: 0.4  # Confidence threshold for detection
   segmentation_threshold: 0.5  # Threshold for segmentation masks
   results_dir: "results"  # Directory to save results
   model_config: "configs/sam2.1/sam2.1_hiera_l.yaml"  # SAM2 model config

@@ -1,0 +1,28 @@
+{
+  "image_path": "data/loki_daggers.png",
+  "model_types": [
+    "clip",
+    "vit",
+    "resnet50"
+  ],
+  "num_embeddings": 3,
+  "embeddings": [
+    {
+      "id": "loki_daggers_0_00_0.16",
+      "embedding_path": "results/embeddings_full/loki_daggers_0_00_0.16_embeddings.json"
+    },
+    {
+      "id": "loki_daggers_0_01_0.14",
+      "embedding_path": "results/embeddings_full/loki_daggers_0_01_0.14_embeddings.json"
+    },
+    {
+      "id": "loki_daggers_0_02_0.11",
+      "embedding_path": "results/embeddings_full/loki_daggers_0_02_0.11_embeddings.json"
+    }
+  ],
+  "processing_time": {
+    "pipeline_time": 2.544116735458374,
+    "embedding_time": 0.1944408416748047,
+    "total_time": 10.939351797103882
+  }
+}

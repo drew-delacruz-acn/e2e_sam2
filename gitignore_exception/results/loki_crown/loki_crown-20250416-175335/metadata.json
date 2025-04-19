@@ -1,0 +1,42 @@
+{
+  "image_path": "data/loki_crown.png",
+  "image_size": [
+    615,
+    378
+  ],
+  "model_type": "owlvit2",
+  "model_name": "owlv2-base-patch16",
+  "text_queries": [
+    "crown",
+    "headpiece"
+  ],
+  "timestamp": "20250416-175335",
+  "num_detections": 2,
+  "detection_threshold": 0.1,
+  "detections": [
+    {
+      "id": "05791550",
+      "label": "headpiece",
+      "score": 0.32338011264801025,
+      "box": [
+        257.05078125,
+        23.72314453125,
+        357.94921875,
+        90.087890625
+      ],
+      "crop_path": "results/loki_crown/loki_crown-20250416-175335/detections/owlv2-base-patch16/headpiece_0.32_05791550.png"
+    },
+    {
+      "id": "a2553619",
+      "label": "headpiece",
+      "score": 0.13296423852443695,
+      "box": [
+        269.0625,
+        56.455078125,
+        360.3515625,
+        92.490234375
+      ],
+      "crop_path": "results/loki_crown/loki_crown-20250416-175335/detections/owlv2-base-patch16/headpiece_0.13_a2553619.png"
+    }
+  ]
+}

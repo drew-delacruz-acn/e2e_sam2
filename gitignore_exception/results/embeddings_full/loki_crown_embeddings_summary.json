@@ -1,0 +1,24 @@
+{
+  "image_path": "data/loki_crown.png",
+  "model_types": [
+    "clip",
+    "vit",
+    "resnet50"
+  ],
+  "num_embeddings": 2,
+  "embeddings": [
+    {
+      "id": "loki_crown_1_00_0.32",
+      "embedding_path": "results/embeddings_full/loki_crown_1_00_0.32_embeddings.json"
+    },
+    {
+      "id": "loki_crown_1_01_0.13",
+      "embedding_path": "results/embeddings_full/loki_crown_1_01_0.13_embeddings.json"
+    }
+  ],
+  "processing_time": {
+    "pipeline_time": 2.1836047172546387,
+    "embedding_time": 0.14634037017822266,
+    "total_time": 10.42175030708313
+  }
+}

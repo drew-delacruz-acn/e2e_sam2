@@ -1,0 +1,245 @@
+{
+  "image_path": "data/thor_hammer.jpeg",
+  "image_size": [
+    318,
+    159
+  ],
+  "model_type": "owlvit2",
+  "model_name": "owlv2-base-patch16",
+  "text_queries": [
+    "mallet"
+  ],
+  "timestamp": "20250418-194907",
+  "num_detections": 19,
+  "detection_threshold": 0.04,
+  "detections": [
+    {
+      "id": "084660a1",
+      "label": "mallet",
+      "score": 0.17895588278770447,
+      "box": [
+        72.046875,
+        24.3779296875,
+        126.703125,
+        73.2890625
+      ],
+      "crop_path": "results/thor_hammer/thor_hammer-20250418-194907/detections/owlv2-base-patch16/mallet_0.18_084660a1.png"
+    },
+    {
+      "id": "ed1e5b97",
+      "label": "mallet",
+      "score": 0.16667540371418,
+      "box": [
+        1.3974609375,
+        63.3515625,
+        68.3203125,
+        75.15234375
+      ],
+      "crop_path": "results/thor_hammer/thor_hammer-20250418-194907/detections/owlv2-base-patch16/mallet_0.17_ed1e5b97.png"
+    },
+    {
+      "id": "5f54c0d4",
+      "label": "mallet",
+      "score": 0.154057577252388,
+      "box": [
+        71.736328125,
+        52.79296875,
+        130.4296875,
+        60.24609375
+      ],
+      "crop_path": "results/thor_hammer/thor_hammer-20250418-194907/detections/owlv2-base-patch16/mallet_0.15_5f54c0d4.png"
+    },
+    {
+      "id": "fd4625a7",
+      "label": "mallet",
+      "score": 0.1127954050898552,
+      "box": [
+        305.578125,
+        32.296875,
+        318.0,
+        40.681640625
+      ],
+      "crop_path": "results/thor_hammer/thor_hammer-20250418-194907/detections/owlv2-base-patch16/mallet_0.11_fd4625a7.png"
+    },
+    {
+      "id": "6ffeacb4",
+      "label": "mallet",
+      "score": 0.1037486344575882,
+      "box": [
+        1.552734375,
+        65.21484375,
+        63.662109375,
+        75.15234375
+      ],
+      "crop_path": "results/thor_hammer/thor_hammer-20250418-194907/detections/owlv2-base-patch16/mallet_0.10_6ffeacb4.png"
+    },
+    {
+      "id": "cc0b7cc8",
+      "label": "mallet",
+      "score": 0.09401018172502518,
+      "box": [
+        79.5,
+        53.4140625,
+        132.9140625,
+        60.24609375
+      ],
+      "crop_path": "results/thor_hammer/thor_hammer-20250418-194907/detections/owlv2-base-patch16/mallet_0.09_cc0b7cc8.png"
+    },
+    {
+      "id": "fb56c1c3",
+      "label": "mallet",
+      "score": 0.09401018172502518,
+      "box": [
+        86.33203125,
+        54.03515625,
+        132.29296875,
+        59.625
+      ],
+      "crop_path": "results/thor_hammer/thor_hammer-20250418-194907/detections/owlv2-base-patch16/mallet_0.09_fb56c1c3.png"
+    },
+    {
+      "id": "09d9773e",
+      "label": "mallet",
+      "score": 0.08509904146194458,
+      "box": [
+        70.8046875,
+        24.3779296875,
+        113.0390625,
+        40.37109375
+      ],
+      "crop_path": "results/thor_hammer/thor_hammer-20250418-194907/detections/owlv2-base-patch16/mallet_0.09_09d9773e.png"
+    },
+    {
+      "id": "7b85844c",
+      "label": "mallet",
+      "score": 0.08269733935594559,
+      "box": [
+        93.1640625,
+        35.712890625,
+        125.4609375,
+        72.357421875
+      ],
+      "crop_path": "results/thor_hammer/thor_hammer-20250418-194907/detections/owlv2-base-patch16/mallet_0.08_7b85844c.png"
+    },
+    {
+      "id": "249197ea",
+      "label": "mallet",
+      "score": 0.08269733935594559,
+      "box": [
+        71.42578125,
+        52.79296875,
+        99.99609375,
+        59.625
+      ],
+      "crop_path": "results/thor_hammer/thor_hammer-20250418-194907/detections/owlv2-base-patch16/mallet_0.08_249197ea.png"
+    },
+    {
+      "id": "ec0d1448",
+      "label": "mallet",
+      "score": 0.06853749603033066,
+      "box": [
+        69.5625,
+        23.912109375,
+        126.703125,
+        72.978515625
+      ],
+      "crop_path": "results/thor_hammer/thor_hammer-20250418-194907/detections/owlv2-base-patch16/mallet_0.07_ec0d1448.png"
+    },
+    {
+      "id": "80fb1f0b",
+      "label": "mallet",
+      "score": 0.05921025574207306,
+      "box": [
+        -0.310546875,
+        55.27734375,
+        93.1640625,
+        75.7734375
+      ],
+      "crop_path": "results/thor_hammer/thor_hammer-20250418-194907/detections/owlv2-base-patch16/mallet_0.06_80fb1f0b.png"
+    },
+    {
+      "id": "6720f02c",
+      "label": "mallet",
+      "score": 0.052618950605392456,
+      "box": [
+        63.3515625,
+        52.171875,
+        99.375,
+        60.24609375
+      ],
+      "crop_path": "results/thor_hammer/thor_hammer-20250418-194907/detections/owlv2-base-patch16/mallet_0.05_6720f02c.png"
+    },
+    {
+      "id": "a2cb6d6d",
+      "label": "mallet",
+      "score": 0.04742587357759476,
+      "box": [
+        90.6796875,
+        54.966796875,
+        110.5546875,
+        59.314453125
+      ],
+      "crop_path": "results/thor_hammer/thor_hammer-20250418-194907/detections/owlv2-base-patch16/mallet_0.05_a2cb6d6d.png"
+    },
+    {
+      "id": "a80035f2",
+      "label": "mallet",
+      "score": 0.04672495648264885,
+      "box": [
+        305.578125,
+        32.296875,
+        318.0,
+        50.30859375
+      ],
+      "crop_path": "results/thor_hammer/thor_hammer-20250418-194907/detections/owlv2-base-patch16/mallet_0.05_a80035f2.png"
+    },
+    {
+      "id": "09fa7ce7",
+      "label": "mallet",
+      "score": 0.04603390023112297,
+      "box": [
+        70.18359375,
+        52.482421875,
+        104.96484375,
+        59.935546875
+      ],
+      "crop_path": "results/thor_hammer/thor_hammer-20250418-194907/detections/owlv2-base-patch16/mallet_0.05_09fa7ce7.png"
+    },
+    {
+      "id": "197bfbe1",
+      "label": "mallet",
+      "score": 0.04336579889059067,
+      "box": [
+        162.7265625,
+        61.177734375,
+        172.6640625,
+        66.767578125
+      ],
+      "crop_path": "results/thor_hammer/thor_hammer-20250418-194907/detections/owlv2-base-patch16/mallet_0.04_197bfbe1.png"
+    },
+    {
+      "id": "52ee84ff",
+      "label": "mallet",
+      "score": 0.042087726294994354,
+      "box": [
+        45.650390625,
+        19.0986328125,
+        69.873046875,
+        32.7626953125
+      ],
+      "crop_path": "results/thor_hammer/thor_hammer-20250418-194907/detections/owlv2-base-patch16/mallet_0.04_52ee84ff.png"
+    },
+    {
+      "id": "005e1bda",
+      "label": "mallet",
+      "score": 0.04023794084787369,
+      "box": [
+        0.310546875,
+        64.283203125,
+        66.45703125,
+        75.462890625
+      ],
+      "crop_path": "results/thor_hammer/thor_hammer-20250418-194907/detections/owlv2-base-patch16/mallet_0.04_005e1bda.png"
+    }
+  ]
+}

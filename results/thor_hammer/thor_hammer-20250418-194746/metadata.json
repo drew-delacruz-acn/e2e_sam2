@@ -1,0 +1,545 @@
+{
+  "image_path": "data/thor_hammer.jpeg",
+  "image_size": [
+    318,
+    159
+  ],
+  "model_type": "owlvit2",
+  "model_name": "owlv2-base-patch16",
+  "text_queries": [
+    "hammer"
+  ],
+  "timestamp": "20250418-194746",
+  "num_detections": 44,
+  "detection_threshold": 0.04,
+  "detections": [
+    {
+      "id": "b783b51e",
+      "label": "hammer",
+      "score": 0.42536652088165283,
+      "box": [
+        72.046875,
+        24.3779296875,
+        126.703125,
+        73.2890625
+      ],
+      "crop_path": "results/thor_hammer/thor_hammer-20250418-194746/detections/owlv2-base-patch16/hammer_0.43_b783b51e.png"
+    },
+    {
+      "id": "ebaefece",
+      "label": "hammer",
+      "score": 0.3747906982898712,
+      "box": [
+        71.736328125,
+        52.79296875,
+        130.4296875,
+        60.24609375
+      ],
+      "crop_path": "results/thor_hammer/thor_hammer-20250418-194746/detections/owlv2-base-patch16/hammer_0.37_ebaefece.png"
+    },
+    {
+      "id": "1c00a9d0",
+      "label": "hammer",
+      "score": 0.32766830921173096,
+      "box": [
+        1.3974609375,
+        63.3515625,
+        68.3203125,
+        75.15234375
+      ],
+      "crop_path": "results/thor_hammer/thor_hammer-20250418-194746/detections/owlv2-base-patch16/hammer_0.33_1c00a9d0.png"
+    },
+    {
+      "id": "ac899442",
+      "label": "hammer",
+      "score": 0.23370636999607086,
+      "box": [
+        86.33203125,
+        54.03515625,
+        132.29296875,
+        59.625
+      ],
+      "crop_path": "results/thor_hammer/thor_hammer-20250418-194746/detections/owlv2-base-patch16/hammer_0.23_ac899442.png"
+    },
+    {
+      "id": "3375389b",
+      "label": "hammer",
+      "score": 0.22270013391971588,
+      "box": [
+        305.578125,
+        32.296875,
+        318.0,
+        40.681640625
+      ],
+      "crop_path": "results/thor_hammer/thor_hammer-20250418-194746/detections/owlv2-base-patch16/hammer_0.22_3375389b.png"
+    },
+    {
+      "id": "5c87da17",
+      "label": "hammer",
+      "score": 0.2186693549156189,
+      "box": [
+        79.5,
+        53.4140625,
+        132.9140625,
+        60.24609375
+      ],
+      "crop_path": "results/thor_hammer/thor_hammer-20250418-194746/detections/owlv2-base-patch16/hammer_0.22_5c87da17.png"
+    },
+    {
+      "id": "c328a858",
+      "label": "hammer",
+      "score": 0.20817892253398895,
+      "box": [
+        71.42578125,
+        52.79296875,
+        99.99609375,
+        59.625
+      ],
+      "crop_path": "results/thor_hammer/thor_hammer-20250418-194746/detections/owlv2-base-patch16/hammer_0.21_c328a858.png"
+    },
+    {
+      "id": "c6869783",
+      "label": "hammer",
+      "score": 0.17895588278770447,
+      "box": [
+        1.552734375,
+        65.21484375,
+        63.662109375,
+        75.15234375
+      ],
+      "crop_path": "results/thor_hammer/thor_hammer-20250418-194746/detections/owlv2-base-patch16/hammer_0.18_c6869783.png"
+    },
+    {
+      "id": "52039162",
+      "label": "hammer",
+      "score": 0.17217184603214264,
+      "box": [
+        63.3515625,
+        52.171875,
+        99.375,
+        60.24609375
+      ],
+      "crop_path": "results/thor_hammer/thor_hammer-20250418-194746/detections/owlv2-base-patch16/hammer_0.17_52039162.png"
+    },
+    {
+      "id": "43c847e8",
+      "label": "hammer",
+      "score": 0.13386748731136322,
+      "box": [
+        93.1640625,
+        35.712890625,
+        125.4609375,
+        72.357421875
+      ],
+      "crop_path": "results/thor_hammer/thor_hammer-20250418-194746/detections/owlv2-base-patch16/hammer_0.13_43c847e8.png"
+    },
+    {
+      "id": "32686eca",
+      "label": "hammer",
+      "score": 0.12940272688865662,
+      "box": [
+        70.18359375,
+        52.482421875,
+        104.96484375,
+        59.935546875
+      ],
+      "crop_path": "results/thor_hammer/thor_hammer-20250418-194746/detections/owlv2-base-patch16/hammer_0.13_32686eca.png"
+    },
+    {
+      "id": "84c5c340",
+      "label": "hammer",
+      "score": 0.1233656257390976,
+      "box": [
+        -0.310546875,
+        55.27734375,
+        93.1640625,
+        75.7734375
+      ],
+      "crop_path": "results/thor_hammer/thor_hammer-20250418-194746/detections/owlv2-base-patch16/hammer_0.12_84c5c340.png"
+    },
+    {
+      "id": "be10f0b8",
+      "label": "hammer",
+      "score": 0.12085322290658951,
+      "box": [
+        90.6796875,
+        54.966796875,
+        110.5546875,
+        59.314453125
+      ],
+      "crop_path": "results/thor_hammer/thor_hammer-20250418-194746/detections/owlv2-base-patch16/hammer_0.12_be10f0b8.png"
+    },
+    {
+      "id": "5a9e13b9",
+      "label": "hammer",
+      "score": 0.11124119907617569,
+      "box": [
+        305.578125,
+        32.296875,
+        318.0,
+        50.30859375
+      ],
+      "crop_path": "results/thor_hammer/thor_hammer-20250418-194746/detections/owlv2-base-patch16/hammer_0.11_5a9e13b9.png"
+    },
+    {
+      "id": "a0870964",
+      "label": "hammer",
+      "score": 0.10818895697593689,
+      "box": [
+        260.859375,
+        58.693359375,
+        295.640625,
+        66.767578125
+      ],
+      "crop_path": "results/thor_hammer/thor_hammer-20250418-194746/detections/owlv2-base-patch16/hammer_0.11_a0870964.png"
+    },
+    {
+      "id": "c9a84597",
+      "label": "hammer",
+      "score": 0.09807931631803513,
+      "box": [
+        69.5625,
+        23.912109375,
+        126.703125,
+        72.978515625
+      ],
+      "crop_path": "results/thor_hammer/thor_hammer-20250418-194746/detections/owlv2-base-patch16/hammer_0.10_c9a84597.png"
+    },
+    {
+      "id": "1aa8413c",
+      "label": "hammer",
+      "score": 0.09670579433441162,
+      "box": [
+        70.8046875,
+        24.3779296875,
+        113.0390625,
+        40.37109375
+      ],
+      "crop_path": "results/thor_hammer/thor_hammer-20250418-194746/detections/owlv2-base-patch16/hammer_0.10_1aa8413c.png"
+    },
+    {
+      "id": "cde9bdf0",
+      "label": "hammer",
+      "score": 0.08882029354572296,
+      "box": [
+        103.1015625,
+        65.525390625,
+        146.578125,
+        76.705078125
+      ],
+      "crop_path": "results/thor_hammer/thor_hammer-20250418-194746/detections/owlv2-base-patch16/hammer_0.09_cde9bdf0.png"
+    },
+    {
+      "id": "f605a578",
+      "label": "hammer",
+      "score": 0.08151976019144058,
+      "box": [
+        21.73828125,
+        50.9296875,
+        124.21875,
+        64.59375
+      ],
+      "crop_path": "results/thor_hammer/thor_hammer-20250418-194746/detections/owlv2-base-patch16/hammer_0.08_f605a578.png"
+    },
+    {
+      "id": "8aa68f36",
+      "label": "hammer",
+      "score": 0.07585817575454712,
+      "box": [
+        269.5546875,
+        51.861328125,
+        314.2734375,
+        63.041015625
+      ],
+      "crop_path": "results/thor_hammer/thor_hammer-20250418-194746/detections/owlv2-base-patch16/hammer_0.08_8aa68f36.png"
+    },
+    {
+      "id": "729cee63",
+      "label": "hammer",
+      "score": 0.07585817575454712,
+      "box": [
+        0.310546875,
+        64.283203125,
+        66.45703125,
+        75.462890625
+      ],
+      "crop_path": "results/thor_hammer/thor_hammer-20250418-194746/detections/owlv2-base-patch16/hammer_0.08_729cee63.png"
+    },
+    {
+      "id": "6fb7aeb8",
+      "label": "hammer",
+      "score": 0.07477004081010818,
+      "box": [
+        263.34375,
+        60.556640625,
+        303.09375,
+        68.009765625
+      ],
+      "crop_path": "results/thor_hammer/thor_hammer-20250418-194746/detections/owlv2-base-patch16/hammer_0.07_6fb7aeb8.png"
+    },
+    {
+      "id": "ce2de62a",
+      "label": "hammer",
+      "score": 0.07477004081010818,
+      "box": [
+        127.9453125,
+        66.45703125,
+        146.578125,
+        76.39453125
+      ],
+      "crop_path": "results/thor_hammer/thor_hammer-20250418-194746/detections/owlv2-base-patch16/hammer_0.07_ce2de62a.png"
+    },
+    {
+      "id": "04cc3dc6",
+      "label": "hammer",
+      "score": 0.06465348601341248,
+      "box": [
+        45.650390625,
+        19.0986328125,
+        69.873046875,
+        32.7626953125
+      ],
+      "crop_path": "results/thor_hammer/thor_hammer-20250418-194746/detections/owlv2-base-patch16/hammer_0.06_04cc3dc6.png"
+    },
+    {
+      "id": "80699cd5",
+      "label": "hammer",
+      "score": 0.06465348601341248,
+      "box": [
+        67.69921875,
+        52.171875,
+        138.50390625,
+        74.53125
+      ],
+      "crop_path": "results/thor_hammer/thor_hammer-20250418-194746/detections/owlv2-base-patch16/hammer_0.06_80699cd5.png"
+    },
+    {
+      "id": "d68b1cd0",
+      "label": "hammer",
+      "score": 0.06097517907619476,
+      "box": [
+        277.0078125,
+        61.177734375,
+        299.3671875,
+        66.767578125
+      ],
+      "crop_path": "results/thor_hammer/thor_hammer-20250418-194746/detections/owlv2-base-patch16/hammer_0.06_d68b1cd0.png"
+    },
+    {
+      "id": "ef562529",
+      "label": "hammer",
+      "score": 0.05921025574207306,
+      "box": [
+        70.8046875,
+        69.5625,
+        87.57421875,
+        75.7734375
+      ],
+      "crop_path": "results/thor_hammer/thor_hammer-20250418-194746/detections/owlv2-base-patch16/hammer_0.06_ef562529.png"
+    },
+    {
+      "id": "5647bbfb",
+      "label": "hammer",
+      "score": 0.05834583938121796,
+      "box": [
+        0.737548828125,
+        30.8994140625,
+        19.564453125,
+        36.7998046875
+      ],
+      "crop_path": "results/thor_hammer/thor_hammer-20250418-194746/detections/owlv2-base-patch16/hammer_0.06_5647bbfb.png"
+    },
+    {
+      "id": "fc10c692",
+      "label": "hammer",
+      "score": 0.05834583938121796,
+      "box": [
+        1.2421875,
+        38.5078125,
+        125.4609375,
+        67.078125
+      ],
+      "crop_path": "results/thor_hammer/thor_hammer-20250418-194746/detections/owlv2-base-patch16/hammer_0.06_fc10c692.png"
+    },
+    {
+      "id": "b2098e97",
+      "label": "hammer",
+      "score": 0.054198723286390305,
+      "box": [
+        102.48046875,
+        69.5625,
+        126.08203125,
+        75.7734375
+      ],
+      "crop_path": "results/thor_hammer/thor_hammer-20250418-194746/detections/owlv2-base-patch16/hammer_0.05_b2098e97.png"
+    },
+    {
+      "id": "064439e6",
+      "label": "hammer",
+      "score": 0.05184546485543251,
+      "box": [
+        -0.038818359375,
+        49.06640625,
+        13.8193359375,
+        64.59375
+      ],
+      "crop_path": "results/thor_hammer/thor_hammer-20250418-194746/detections/owlv2-base-patch16/hammer_0.05_064439e6.png"
+    },
+    {
+      "id": "7a82939e",
+      "label": "hammer",
+      "score": 0.05033063143491745,
+      "box": [
+        305.578125,
+        32.1416015625,
+        313.03125,
+        37.4208984375
+      ],
+      "crop_path": "results/thor_hammer/thor_hammer-20250418-194746/detections/owlv2-base-patch16/hammer_0.05_7a82939e.png"
+    },
+    {
+      "id": "2543485d",
+      "label": "hammer",
+      "score": 0.04958902671933174,
+      "box": [
+        239.7421875,
+        45.9609375,
+        301.8515625,
+        66.45703125
+      ],
+      "crop_path": "results/thor_hammer/thor_hammer-20250418-194746/detections/owlv2-base-patch16/hammer_0.05_2543485d.png"
+    },
+    {
+      "id": "5d9f0cbe",
+      "label": "hammer",
+      "score": 0.04742587357759476,
+      "box": [
+        103.1015625,
+        54.345703125,
+        132.9140625,
+        58.693359375
+      ],
+      "crop_path": "results/thor_hammer/thor_hammer-20250418-194746/detections/owlv2-base-patch16/hammer_0.05_5d9f0cbe.png"
+    },
+    {
+      "id": "40c302cb",
+      "label": "hammer",
+      "score": 0.04603390023112297,
+      "box": [
+        0.1358642578125,
+        32.7626953125,
+        6.2109375,
+        36.4892578125
+      ],
+      "crop_path": "results/thor_hammer/thor_hammer-20250418-194746/detections/owlv2-base-patch16/hammer_0.05_40c302cb.png"
+    },
+    {
+      "id": "59bf2ee4",
+      "label": "hammer",
+      "score": 0.04603390023112297,
+      "box": [
+        6.2109375,
+        52.171875,
+        113.0390625,
+        69.5625
+      ],
+      "crop_path": "results/thor_hammer/thor_hammer-20250418-194746/detections/owlv2-base-patch16/hammer_0.05_59bf2ee4.png"
+    },
+    {
+      "id": "ac4ff52d",
+      "label": "hammer",
+      "score": 0.044680867344141006,
+      "box": [
+        66.45703125,
+        52.482421875,
+        123.59765625,
+        61.177734375
+      ],
+      "crop_path": "results/thor_hammer/thor_hammer-20250418-194746/detections/owlv2-base-patch16/hammer_0.04_ac4ff52d.png"
+    },
+    {
+      "id": "18b231b0",
+      "label": "hammer",
+      "score": 0.04401864856481552,
+      "box": [
+        259.6171875,
+        59.625,
+        286.9453125,
+        66.45703125
+      ],
+      "crop_path": "results/thor_hammer/thor_hammer-20250418-194746/detections/owlv2-base-patch16/hammer_0.04_18b231b0.png"
+    },
+    {
+      "id": "47ae7b49",
+      "label": "hammer",
+      "score": 0.04401864856481552,
+      "box": [
+        278.25,
+        59.314453125,
+        318.0,
+        79.189453125
+      ],
+      "crop_path": "results/thor_hammer/thor_hammer-20250418-194746/detections/owlv2-base-patch16/hammer_0.04_47ae7b49.png"
+    },
+    {
+      "id": "96d7feda",
+      "label": "hammer",
+      "score": 0.0427221953868866,
+      "box": [
+        1.16455078125,
+        24.22265625,
+        26.70703125,
+        65.8359375
+      ],
+      "crop_path": "results/thor_hammer/thor_hammer-20250418-194746/detections/owlv2-base-patch16/hammer_0.04_96d7feda.png"
+    },
+    {
+      "id": "8449f999",
+      "label": "hammer",
+      "score": 0.042087726294994354,
+      "box": [
+        38.0419921875,
+        29.3466796875,
+        53.4140625,
+        34.9365234375
+      ],
+      "crop_path": "results/thor_hammer/thor_hammer-20250418-194746/detections/owlv2-base-patch16/hammer_0.04_8449f999.png"
+    },
+    {
+      "id": "70632678",
+      "label": "hammer",
+      "score": 0.042087726294994354,
+      "box": [
+        41.61328125,
+        39.439453125,
+        65.8359375,
+        74.220703125
+      ],
+      "crop_path": "results/thor_hammer/thor_hammer-20250418-194746/detections/owlv2-base-patch16/hammer_0.04_70632678.png"
+    },
+    {
+      "id": "2001ae2a",
+      "label": "hammer",
+      "score": 0.042087726294994354,
+      "box": [
+        280.734375,
+        66.45703125,
+        308.0625,
+        78.87890625
+      ],
+      "crop_path": "results/thor_hammer/thor_hammer-20250418-194746/detections/owlv2-base-patch16/hammer_0.04_2001ae2a.png"
+    },
+    {
+      "id": "a42ce206",
+      "label": "hammer",
+      "score": 0.04146226868033409,
+      "box": [
+        1.94091796875,
+        31.8310546875,
+        24.533203125,
+        40.9921875
+      ],
+      "crop_path": "results/thor_hammer/thor_hammer-20250418-194746/detections/owlv2-base-patch16/hammer_0.04_a42ce206.png"
+    }
+  ]
+}

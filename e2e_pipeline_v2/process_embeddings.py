@@ -53,8 +53,6 @@ def parse_args():
                       help="Enable detailed debug logging")
     parser.add_argument("--quiet", action="store_true", 
                       help="Show minimal information (only summary and errors)")
-    parser.add_argument("--direct_object", action="store_true",
-                      help="Process image as a single object, skipping detection pipeline")
     return parser.parse_args()
 
 def apply_mask_to_image(image, mask):
@@ -259,6 +257,35 @@ def main():
     logger.info(f"Using device: {device}")
     
     try:
+        # Initialize pipeline with modified config
+        logger.info("Initializing detection and segmentation pipeline...")
+        pipeline = DetectionSegmentationPipeline(args.config)
+        
+        # Modify detection config to force CPU if needed
+        if args.force_cpu and hasattr(pipeline.detector, 'config'):
+            pipeline.detector.config['force_cpu'] = True
+        
+        pipeline_start = time.time()
+        logger.info("Running detection and segmentation pipeline...")
+        
+        # Run detection and segmentation
+        results = pipeline.run(
+            image_path=args.image,
+            text_queries=args.queries,
+            visualize=True,
+            save_results=True,
+            generate_embeddings=False  # We'll handle embedding generation ourselves
+        )
+        
+        pipeline_end = time.time()
+        pipeline_time = pipeline_end - pipeline_start
+        logger.info(f"Pipeline completed in {format_time(pipeline_time)}")
+        
+        # Check if detection and segmentation were successful
+        if not results or "success" in results and not results["success"]:
+            logger.error(f"Error: Detection or segmentation failed: {results.get('error', 'Unknown error')}")
+            return 1
+        
         # Initialize embedding generator
         logger.info(f"Initializing embedding generator with models: {args.models}")
         try:
@@ -266,215 +293,251 @@ def main():
                 model_types=args.models,
                 device=device
             )
+            
+            # Log model details
+            if logger.level <= logging.DEBUG:
+                logger.debug("=== Embedding Model Details ===")
+                for model_name, model in embedding_generator.models.items():
+                    logger.debug(f"Model: {model_name}")
+                    
+                    # Log model device
+                    for name, module in model.named_modules():
+                        if hasattr(module, 'weight') and hasattr(module.weight, 'device'):
+                            logger.debug(f"  Module {name} is on device {module.weight.device}")
+                            
+                            # Log parameter info for first few layers
+                            if name.startswith('0') or name.startswith('1') or name.startswith('encoder'):
+                                if hasattr(module, 'weight'):
+                                    weight = module.weight
+                                    logger.debug(f"  Weight - Shape: {weight.shape}, Type: {weight.dtype}")
+                                
+                                if hasattr(module, 'bias') and module.bias is not None:
+                                    bias = module.bias
+                                    logger.debug(f"  Bias - Shape: {bias.shape}, Type: {bias.dtype}")
+            else:
+                logger.info(f"Models loaded: {', '.join(str(model) for model in embedding_generator.models.keys())}")
+            
         except Exception as e:
             logger.error(f"Error initializing embedding generator: {str(e)}")
             logger.error(f"Traceback: {traceback.format_exc()}")
             return 1
-
-        if args.direct_object:
-            # Direct object mode - skip detection pipeline
-            logger.info(f"Processing image as direct object: {args.image}")
+        
+        # Process each detection
+        all_embeddings = []
+        
+        # Load original image
+        logger.info(f"Loading original image: {args.image}")
+        original_image = cv2.imread(args.image)
+        original_image = cv2.cvtColor(original_image, cv2.COLOR_BGR2RGB)
+        logger.info(f"Original image shape: {original_image.shape}, dtype: {original_image.dtype}")
+        
+        # Get metadata about the image
+        image_name = os.path.splitext(os.path.basename(args.image))[0]
+        
+        # Get detection results from the pipeline
+        detection_results = results["detection"]
+        
+        # Log detection results structure
+        logger.debug(f"Detection results keys: {detection_results.keys()}")
+        
+        # Check if we have any detections
+        if not detection_results or not detection_results.get("boxes", []):
+            logger.warning("No objects detected in the image.")
+            end_time = time.time()
+            logger.info(f"\nProcessing completed in {format_time(end_time - start_time)}")
+            logger.info(f"Processed {image_count} images with {detection_count} detections")
+            return 0
+        
+        # Track how many detections we have
+        num_detections = len(detection_results["boxes"])
+        detection_count += num_detections
+        logger.info(f"Found {num_detections} detections in the image")
+        
+        embedding_start = time.time()
+        logger.info("Generating embeddings for detections...")
+        
+        # Process detections
+        for i, (box, label, score) in enumerate(zip(
+            detection_results["boxes"],
+            detection_results["labels"],
+            detection_results["scores"]
+        )):
+            # Create a unique ID for this detection
+            detection_id = f"{image_name}_{label}_{i:02d}_{score:.2f}"
+            logger.info(f"\nProcessing detection {i+1}/{num_detections}: {detection_id}")
             
-            # Load image directly
-            original_image = cv2.imread(args.image)
-            original_image = cv2.cvtColor(original_image, cv2.COLOR_BGR2RGB)
-            logger.info(f"Original image shape: {original_image.shape}, dtype: {original_image.dtype}")
+            # Convert box coordinates if needed
+            original_box_type = type(box)
+            logger.debug(f"Original box type: {original_box_type}")
             
-            # Get metadata about the image
-            image_name = os.path.splitext(os.path.basename(args.image))[0]
+            if isinstance(box, torch.Tensor):
+                logger.debug(f"Box tensor - Type: {box.dtype}, Shape: {box.shape}, Device: {box.device}")
+                box = box.cpu().numpy().astype(int)
+            elif isinstance(box, list):
+                logger.debug(f"Box list - Length: {len(box)}, Values: {box}")
+                box = np.array(box).astype(int)
             
-            # Generate embeddings directly
+            logger.debug(f"Converted box: {box}, Type: {type(box)}")
+            
+            # Ensure the box is within image boundaries
+            h, w = original_image.shape[:2]
+            x1, y1, x2, y2 = max(0, box[0]), max(0, box[1]), min(w, box[2]), min(h, box[3])
+            logger.debug(f"Box coordinates after boundary check: [{x1}, {y1}, {x2}, {y2}]")
+            
+            # Get the crop
+            logger.debug(f"Extracting crop from coordinates: y={y1}:{y2}, x={x1}:{x2}")
+            crop = original_image[y1:y2, x1:x2]
+            logger.debug(f"Crop shape: {crop.shape}, dtype: {crop.dtype}")
+            
+            # Skip if crop is empty
+            if crop.size == 0:
+                logger.warning(f"Warning: Empty crop for detection {detection_id}, skipping")
+                continue
+            
+            # Save the crop
+            crop_path = os.path.join(args.output_dir, f"{detection_id}_crop.png")
+            save_image(crop, crop_path)
+            logger.debug(f"Saved crop to: {crop_path}")
+            
+            # Generate embeddings for the crop
             embedding_results = {}
-            embedding_start = time.time()
             
-            logger.info("Generating embeddings for direct object...")
+            logger.info(f"Generating embeddings for detection {detection_id}...")
             
+            # Generate all embeddings for all models and save to file
             for model_type in args.models:
                 logger.info(f"  Generating embeddings with {model_type}...")
                 try:
+                    # Convert crop to tensor for debugging
+                    if args.debug:
+                        logger.debug(f"Converting crop to tensor for debugging")
+                        with torch.no_grad():
+                            # Convert numpy array to tensor
+                            crop_tensor = torch.from_numpy(crop.transpose(2, 0, 1)).float()
+                            logger.debug(f"Crop tensor - Shape: {crop_tensor.shape}, Type: {crop_tensor.dtype}")
+                            
+                            # Move to device
+                            crop_tensor = crop_tensor.to(device)
+                            logger.debug(f"Crop tensor moved to device: {crop_tensor.device}")
+                    
                     # Generate embeddings
-                    emb = embedding_generator.generate_embedding(original_image, model_type)
+                    logger.debug(f"Calling generate_embedding for {model_type}")
+                    crop_emb = embedding_generator.generate_embedding(crop, model_type)
+                    
+                    # Log embedding tensor info
+                    if isinstance(crop_emb, torch.Tensor):
+                        log_tensor_info(crop_emb, f"{model_type}_embedding")
                     
                     # Convert tensors to lists for JSON serialization
-                    if isinstance(emb, torch.Tensor):
-                        emb = emb.cpu().numpy().tolist()
+                    logger.debug(f"Converting embedding to list for JSON serialization")
+                    if isinstance(crop_emb, torch.Tensor):
+                        logger.debug(f"  Embedding is a tensor on device {crop_emb.device} with dtype {crop_emb.dtype}")
+                        try:
+                            # First try simple conversion
+                            crop_emb = crop_emb.cpu().numpy().tolist()
+                        except Exception as e1:
+                            logger.warning(f"  Error in simple tensor conversion: {str(e1)}")
+                            try:
+                                # Try detached conversion
+                                crop_emb = crop_emb.detach().cpu().numpy().tolist()
+                            except Exception as e2:
+                                logger.warning(f"  Error in detached tensor conversion: {str(e2)}")
+                                try:
+                                    # Try float32 conversion for bfloat16 tensors
+                                    logger.debug("  Attempting float32 conversion for potential bfloat16 tensor")
+                                    crop_emb = crop_emb.float().cpu().numpy().tolist()
+                                except Exception as e3:
+                                    logger.error(f"  All tensor conversion methods failed: {str(e3)}")
+                                    # Use a Python list conversion as last resort
+                                    crop_emb = [float(x) for x in crop_emb.flatten().tolist()]
+                    elif hasattr(crop_emb, 'tolist'):
+                        crop_emb = crop_emb.tolist()
                     
                     # Add to results
                     embedding_results[model_type] = {
-                        "crop": emb
+                        "crop": crop_emb
                     }
-                    logger.info(f"    Generated {model_type} embedding of length {len(emb)}")
-                    
+                    logger.info(f"    Generated {model_type} embedding of length {len(crop_emb)}")
+                    logger.debug(f"    Sample: {crop_emb[:3]}...")
                 except Exception as e:
                     logger.error(f"    Error with {model_type}: {str(e)}")
                     logger.error(f"    Traceback: {traceback.format_exc()}")
             
             # Save embeddings
-            embeddings_path = os.path.join(args.output_dir, f"{image_name}_embeddings.json")
+            embeddings_path = os.path.join(args.output_dir, f"{detection_id}_embeddings.json")
+            
+            # Ensure all values are JSON serializable
+            logger.debug("Preparing detection info for JSON serialization")
+            detection_info = {
+                "box": box.tolist() if isinstance(box, np.ndarray) else [int(b) if isinstance(b, (np.integer, torch.Tensor)) else b for b in box],
+                "label": label if not isinstance(label, (np.ndarray, torch.Tensor)) else label.item() if hasattr(label, 'item') else str(label),
+                "score": float(score) if isinstance(score, (np.number, torch.Tensor)) else score
+            }
+            
             try:
                 with open(embeddings_path, 'w') as f:
                     json.dump({
                         "image_path": args.image,
+                        "detection": detection_info,
+                        "files": {
+                            "crop": crop_path
+                        },
                         "embeddings": embedding_results
                     }, f, indent=2)
                 logger.info(f"  Saved embeddings to {embeddings_path}")
             except Exception as e:
                 logger.error(f"Error saving embeddings to JSON: {str(e)}")
                 logger.error(f"Traceback: {traceback.format_exc()}")
-
-        else:
-            # Initialize pipeline with modified config
-            logger.info("Initializing detection and segmentation pipeline...")
-            pipeline = DetectionSegmentationPipeline(args.config)
             
-            pipeline_start = time.time()
-            logger.info("Running detection and segmentation pipeline...")
-            
-            # Run detection and segmentation
-            results = pipeline.run(
-                image_path=args.image,
-                text_queries=args.queries,
-                visualize=True,
-                save_results=True,
-                generate_embeddings=False  # We'll handle embedding generation ourselves
-            )
-            
-            pipeline_end = time.time()
-            pipeline_time = pipeline_end - pipeline_start
-            logger.info(f"Pipeline completed in {format_time(pipeline_time)}")
-            
-            # Check if detection and segmentation were successful
-            if not results or "success" in results and not results["success"]:
-                logger.error(f"Error: Detection or segmentation failed: {results.get('error', 'Unknown error')}")
-                return 1
-            
-            # Get detection results from the pipeline
-            detection_results = results["detection"]
-            
-            # Log detection results structure
-            logger.debug(f"Detection results keys: {detection_results.keys()}")
-            
-            # Check if we have any detections
-            if not detection_results or not detection_results.get("boxes", []):
-                logger.warning("No objects detected in the image.")
-                end_time = time.time()
-                logger.info(f"\nProcessing completed in {format_time(end_time - start_time)}")
-                logger.info(f"Processed {image_count} images with {detection_count} detections")
-                return 0
-            
-            # Track how many detections we have
-            num_detections = len(detection_results["boxes"])
-            detection_count += num_detections
-            logger.info(f"Found {num_detections} detections in the image")
-            
-            embedding_start = time.time()
-            logger.info("Generating embeddings for detections...")
-            
-            # Process detections
-            for i, (box, label, score) in enumerate(zip(
-                detection_results["boxes"],
-                detection_results["labels"],
-                detection_results["scores"]
-            )):
-                # Create a unique ID for this detection
-                detection_id = f"daggers_{label}_{i:02d}_{score:.2f}"
-                logger.info(f"\nProcessing detection {i+1}/{num_detections}: {detection_id}")
-                
-                # Convert box coordinates if needed
-                original_box_type = type(box)
-                logger.debug(f"Original box type: {original_box_type}")
-                
-                if isinstance(box, torch.Tensor):
-                    logger.debug(f"Box tensor - Type: {box.dtype}, Shape: {box.shape}, Device: {box.device}")
-                    box = box.cpu().numpy().astype(int)
-                elif isinstance(box, list):
-                    logger.debug(f"Box list - Length: {len(box)}, Values: {box}")
-                    box = np.array(box).astype(int)
-                
-                logger.debug(f"Converted box: {box}, Type: {type(box)}")
-                
-                # Ensure the box is within image boundaries
-                h, w = original_image.shape[:2]
-                x1, y1, x2, y2 = max(0, box[0]), max(0, box[1]), min(w, box[2]), min(h, box[3])
-                logger.debug(f"Box coordinates after boundary check: [{x1}, {y1}, {x2}, {y2}]")
-                
-                # Get the crop
-                logger.debug(f"Extracting crop from coordinates: y={y1}:{y2}, x={x1}:{x2}")
-                crop = original_image[y1:y2, x1:x2]
-                logger.debug(f"Crop shape: {crop.shape}, dtype: {crop.dtype}")
-                
-                # Skip if crop is empty
-                if crop.size == 0:
-                    logger.warning(f"Warning: Empty crop for detection {detection_id}, skipping")
-                    continue
-                
-                # Save the crop
-                crop_path = os.path.join(args.output_dir, f"{detection_id}_crop.png")
-                save_image(crop, crop_path)
-                logger.debug(f"Saved crop to: {crop_path}")
-                
-                # Generate embeddings for the crop
-                embedding_results = {}
-                
-                logger.info(f"Generating embeddings for detection {detection_id}...")
-                
-                # Generate all embeddings for all models and save to file
-                for model_type in args.models:
-                    logger.info(f"  Generating embeddings with {model_type}...")
-                    try:
-                        # Generate embeddings
-                        emb = embedding_generator.generate_embedding(crop, model_type)
-                        
-                        # Convert tensors to lists for JSON serialization
-                        if isinstance(emb, torch.Tensor):
-                            emb = emb.cpu().numpy().tolist()
-                        
-                        # Add to results
-                        embedding_results[model_type] = {
-                            "crop": emb
-                        }
-                        logger.info(f"    Generated {model_type} embedding of length {len(emb)}")
-                        
-                    except Exception as e:
-                        logger.error(f"    Error with {model_type}: {str(e)}")
-                        logger.error(f"    Traceback: {traceback.format_exc()}")
-                
-                # Save embeddings
-                embeddings_path = os.path.join(args.output_dir, f"{detection_id}_embeddings.json")
-                try:
-                    with open(embeddings_path, 'w') as f:
-                        json.dump({
-                            "image_path": args.image,
-                            "detection": {
-                                "box": box.tolist() if isinstance(box, np.ndarray) else [int(b) if isinstance(b, (np.integer, torch.Tensor)) else b for b in box],
-                                "label": label if not isinstance(label, (np.ndarray, torch.Tensor)) else label.item() if hasattr(label, 'item') else str(label),
-                                "score": float(score) if isinstance(score, (np.number, torch.Tensor)) else score
-                            },
-                            "files": {
-                                "crop": crop_path
-                            },
-                            "embeddings": embedding_results
-                        }, f, indent=2)
-                    logger.info(f"  Saved embeddings to {embeddings_path}")
-                except Exception as e:
-                    logger.error(f"Error saving embeddings to JSON: {str(e)}")
-                    logger.error(f"Traceback: {traceback.format_exc()}")
-
-        # Print final timing information
+            # Add to all embeddings
+            all_embeddings.append({
+                "id": detection_id,
+                "embedding_path": embeddings_path
+            })
+        
+        embedding_end = time.time()
+        embedding_time = embedding_end - embedding_start
+        logger.info(f"Embedding generation completed in {format_time(embedding_time)}")
+        
+        # Save summary of all embeddings
+        summary_path = os.path.join(args.output_dir, f"{image_name}_embeddings_summary.json")
+        with open(summary_path, 'w') as f:
+            json.dump({
+                "image_path": args.image,
+                "model_types": args.models,
+                "num_embeddings": len(all_embeddings),
+                "embeddings": all_embeddings,
+                "processing_time": {
+                    "pipeline_time": pipeline_time,
+                    "embedding_time": embedding_time,
+                    "total_time": time.time() - start_time
+                }
+            }, f, indent=2)
+        
+        logger.info(f"\nSaved summary to {summary_path}")
+        logger.info(f"Total number of processed items: {len(all_embeddings)}")
+        
+        # Print final timing information - ensure this shows even in quiet mode
         end_time = time.time()
         total_time = end_time - start_time
         
         print_summary("\n== Performance Summary ==")
         print_summary(f"Total execution time: {format_time(total_time)}")
-        if not args.direct_object:
-            print_summary(f"Pipeline processing: {format_time(pipeline_time)} ({pipeline_time/total_time*100:.1f}%)")
+        print_summary(f"Pipeline processing: {format_time(pipeline_time)} ({pipeline_time/total_time*100:.1f}%)")
+        print_summary(f"Embedding generation: {format_time(embedding_time)} ({embedding_time/total_time*100:.1f}%)")
         print_summary(f"Processed {image_count} images with {detection_count} detections")
+        print_summary(f"Average time per detection: {format_time(embedding_time/max(1, detection_count))}")
         
         return 0
         
     except Exception as e:
         logger.error(f"Error: {str(e)}")
         logger.error(f"Traceback: {traceback.format_exc()}")
+        
+        # Print timing even if there was an error
+        end_time = time.time()
+        logger.error(f"\nExecution failed after {format_time(end_time - start_time)}")
+        logger.error(f"Processed {image_count} images with {detection_count} detections")
         return 1
 
 if __name__ == "__main__":

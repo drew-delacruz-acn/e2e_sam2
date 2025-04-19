@@ -1,0 +1,415 @@
+{
+  "image_path": "data/sylvie_holding_loki_dagger.png",
+  "image_size": [
+    1632,
+    754
+  ],
+  "model_type": "owlvit2",
+  "model_name": "owlv2-base-patch16",
+  "text_queries": [
+    "dagger",
+    "sword",
+    "weapon"
+  ],
+  "timestamp": "20250416-175646",
+  "num_detections": 33,
+  "detection_threshold": 0.01,
+  "detections": [
+    {
+      "id": "6f144c1d",
+      "label": "weapon",
+      "score": 0.07807816565036774,
+      "box": [
+        867.0,
+        401.625,
+        994.5,
+        446.25
+      ],
+      "crop_path": "results/sylvie_holding_loki_dagger/sylvie_holding_loki_dagger-20250416-175646/detections/owlv2-base-patch16/weapon_0.08_6f144c1d.png"
+    },
+    {
+      "id": "f0e77e3f",
+      "label": "sword",
+      "score": 0.037892427295446396,
+      "box": [
+        867.0,
+        401.625,
+        994.5,
+        503.625
+      ],
+      "crop_path": "results/sylvie_holding_loki_dagger/sylvie_holding_loki_dagger-20250416-175646/detections/owlv2-base-patch16/sword_0.04_f0e77e3f.png"
+    },
+    {
+      "id": "71698dfd",
+      "label": "weapon",
+      "score": 0.03514484688639641,
+      "box": [
+        860.625,
+        423.9375,
+        911.625,
+        455.8125
+      ],
+      "crop_path": "results/sylvie_holding_loki_dagger/sylvie_holding_loki_dagger-20250416-175646/detections/owlv2-base-patch16/weapon_0.04_71698dfd.png"
+    },
+    {
+      "id": "60ad4ec5",
+      "label": "dagger",
+      "score": 0.034100424498319626,
+      "box": [
+        1377.0,
+        28.2890625,
+        1466.25,
+        165.75
+      ],
+      "crop_path": "results/sylvie_holding_loki_dagger/sylvie_holding_loki_dagger-20250416-175646/detections/owlv2-base-patch16/dagger_0.03_60ad4ec5.png"
+    },
+    {
+      "id": "35ec02a2",
+      "label": "weapon",
+      "score": 0.03358950838446617,
+      "box": [
+        809.625,
+        223.125,
+        847.875,
+        251.8125
+      ],
+      "crop_path": "results/sylvie_holding_loki_dagger/sylvie_holding_loki_dagger-20250416-175646/detections/owlv2-base-patch16/weapon_0.03_35ec02a2.png"
+    },
+    {
+      "id": "cc3a7e60",
+      "label": "dagger",
+      "score": 0.027585282921791077,
+      "box": [
+        1510.875,
+        180.890625,
+        1523.625,
+        213.5625
+      ],
+      "crop_path": "results/sylvie_holding_loki_dagger/sylvie_holding_loki_dagger-20250416-175646/detections/owlv2-base-patch16/dagger_0.03_cc3a7e60.png"
+    },
+    {
+      "id": "4cfa7919",
+      "label": "weapon",
+      "score": 0.027585282921791077,
+      "box": [
+        800.0625,
+        224.71875,
+        867.0,
+        275.71875
+      ],
+      "crop_path": "results/sylvie_holding_loki_dagger/sylvie_holding_loki_dagger-20250416-175646/detections/owlv2-base-patch16/weapon_0.03_4cfa7919.png"
+    },
+    {
+      "id": "84421b83",
+      "label": "sword",
+      "score": 0.024423090741038322,
+      "box": [
+        688.5,
+        215.15625,
+        892.5,
+        682.125
+      ],
+      "crop_path": "results/sylvie_holding_loki_dagger/sylvie_holding_loki_dagger-20250416-175646/detections/owlv2-base-patch16/sword_0.02_84421b83.png"
+    },
+    {
+      "id": "6cba76dc",
+      "label": "sword",
+      "score": 0.01798621006309986,
+      "box": [
+        313.96875,
+        388.875,
+        358.59375,
+        618.375
+      ],
+      "crop_path": "results/sylvie_holding_loki_dagger/sylvie_holding_loki_dagger-20250416-175646/detections/owlv2-base-patch16/sword_0.02_6cba76dc.png"
+    },
+    {
+      "id": "be389193",
+      "label": "dagger",
+      "score": 0.01798621006309986,
+      "box": [
+        1549.125,
+        376.125,
+        1625.625,
+        529.125
+      ],
+      "crop_path": "results/sylvie_holding_loki_dagger/sylvie_holding_loki_dagger-20250416-175646/detections/owlv2-base-patch16/dagger_0.02_be389193.png"
+    },
+    {
+      "id": "1d99a662",
+      "label": "dagger",
+      "score": 0.017442485317587852,
+      "box": [
+        918.0,
+        387.28125,
+        930.75,
+        411.1875
+      ],
+      "crop_path": "results/sylvie_holding_loki_dagger/sylvie_holding_loki_dagger-20250416-175646/detections/owlv2-base-patch16/dagger_0.02_1d99a662.png"
+    },
+    {
+      "id": "d941c882",
+      "label": "sword",
+      "score": 0.016914913430809975,
+      "box": [
+        886.125,
+        155.390625,
+        911.625,
+        516.375
+      ],
+      "crop_path": "results/sylvie_holding_loki_dagger/sylvie_holding_loki_dagger-20250416-175646/detections/owlv2-base-patch16/sword_0.02_d941c882.png"
+    },
+    {
+      "id": "9cd31565",
+      "label": "sword",
+      "score": 0.01640303246676922,
+      "box": [
+        812.8125,
+        137.0625,
+        835.125,
+        226.3125
+      ],
+      "crop_path": "results/sylvie_holding_loki_dagger/sylvie_holding_loki_dagger-20250416-175646/detections/owlv2-base-patch16/sword_0.02_9cd31565.png"
+    },
+    {
+      "id": "dc915000",
+      "label": "dagger",
+      "score": 0.01590639166533947,
+      "box": [
+        1389.75,
+        168.9375,
+        1440.75,
+        242.25
+      ],
+      "crop_path": "results/sylvie_holding_loki_dagger/sylvie_holding_loki_dagger-20250416-175646/detections/owlv2-base-patch16/dagger_0.02_dc915000.png"
+    },
+    {
+      "id": "57479d0a",
+      "label": "sword",
+      "score": 0.015424552373588085,
+      "box": [
+        892.5,
+        167.34375,
+        905.25,
+        313.96875
+      ],
+      "crop_path": "results/sylvie_holding_loki_dagger/sylvie_holding_loki_dagger-20250416-175646/detections/owlv2-base-patch16/sword_0.02_57479d0a.png"
+    },
+    {
+      "id": "d1c160e0",
+      "label": "dagger",
+      "score": 0.015424552373588085,
+      "box": [
+        1555.5,
+        105.984375,
+        1606.5,
+        372.9375
+      ],
+      "crop_path": "results/sylvie_holding_loki_dagger/sylvie_holding_loki_dagger-20250416-175646/detections/owlv2-base-patch16/dagger_0.02_d1c160e0.png"
+    },
+    {
+      "id": "35dc30d7",
+      "label": "sword",
+      "score": 0.014503579586744308,
+      "box": [
+        1364.25,
+        -4.78125,
+        1619.25,
+        535.5
+      ],
+      "crop_path": "results/sylvie_holding_loki_dagger/sylvie_holding_loki_dagger-20250416-175646/detections/owlv2-base-patch16/sword_0.01_35dc30d7.png"
+    },
+    {
+      "id": "7a1a527a",
+      "label": "sword",
+      "score": 0.014503579586744308,
+      "box": [
+        835.125,
+        159.375,
+        860.625,
+        248.625
+      ],
+      "crop_path": "results/sylvie_holding_loki_dagger/sylvie_holding_loki_dagger-20250416-175646/detections/owlv2-base-patch16/sword_0.01_7a1a527a.png"
+    },
+    {
+      "id": "5fe11d35",
+      "label": "sword",
+      "score": 0.014503579586744308,
+      "box": [
+        58.5703125,
+        459.0,
+        207.1875,
+        745.875
+      ],
+      "crop_path": "results/sylvie_holding_loki_dagger/sylvie_holding_loki_dagger-20250416-175646/detections/owlv2-base-patch16/sword_0.01_5fe11d35.png"
+    },
+    {
+      "id": "604ed0ad",
+      "label": "weapon",
+      "score": 0.014063628390431404,
+      "box": [
+        873.375,
+        420.75,
+        898.875,
+        433.5
+      ],
+      "crop_path": "results/sylvie_holding_loki_dagger/sylvie_holding_loki_dagger-20250416-175646/detections/owlv2-base-patch16/weapon_0.01_604ed0ad.png"
+    },
+    {
+      "id": "136595bb",
+      "label": "sword",
+      "score": 0.013222821988165379,
+      "box": [
+        835.125,
+        49.8046875,
+        860.625,
+        248.625
+      ],
+      "crop_path": "results/sylvie_holding_loki_dagger/sylvie_holding_loki_dagger-20250416-175646/detections/owlv2-base-patch16/sword_0.01_136595bb.png"
+    },
+    {
+      "id": "cc4f5b7d",
+      "label": "weapon",
+      "score": 0.012821214273571968,
+      "box": [
+        -9.5625,
+        1.59375,
+        1593.75,
+        758.625
+      ],
+      "crop_path": "results/sylvie_holding_loki_dagger/sylvie_holding_loki_dagger-20250416-175646/detections/owlv2-base-patch16/weapon_0.01_cc4f5b7d.png"
+    },
+    {
+      "id": "664821a1",
+      "label": "sword",
+      "score": 0.012821214273571968,
+      "box": [
+        879.75,
+        371.34375,
+        892.5,
+        420.75
+      ],
+      "crop_path": "results/sylvie_holding_loki_dagger/sylvie_holding_loki_dagger-20250416-175646/detections/owlv2-base-patch16/sword_0.01_664821a1.png"
+    },
+    {
+      "id": "7e2af0ab",
+      "label": "sword",
+      "score": 0.012431650422513485,
+      "box": [
+        573.75,
+        27.09375,
+        656.625,
+        612.0
+      ],
+      "crop_path": "results/sylvie_holding_loki_dagger/sylvie_holding_loki_dagger-20250416-175646/detections/owlv2-base-patch16/sword_0.01_7e2af0ab.png"
+    },
+    {
+      "id": "dc2a0ce9",
+      "label": "sword",
+      "score": 0.0120537793263793,
+      "box": [
+        1000.875,
+        22.3125,
+        1077.375,
+        612.0
+      ],
+      "crop_path": "results/sylvie_holding_loki_dagger/sylvie_holding_loki_dagger-20250416-175646/detections/owlv2-base-patch16/sword_0.01_dc2a0ce9.png"
+    },
+    {
+      "id": "c4c6f707",
+      "label": "sword",
+      "score": 0.0120537793263793,
+      "box": [
+        1026.375,
+        109.96875,
+        1090.125,
+        612.0
+      ],
+      "crop_path": "results/sylvie_holding_loki_dagger/sylvie_holding_loki_dagger-20250416-175646/detections/owlv2-base-patch16/sword_0.01_c4c6f707.png"
+    },
+    {
+      "id": "2bfa4bd8",
+      "label": "weapon",
+      "score": 0.0120537793263793,
+      "box": [
+        86.859375,
+        459.0,
+        147.421875,
+        478.125
+      ],
+      "crop_path": "results/sylvie_holding_loki_dagger/sylvie_holding_loki_dagger-20250416-175646/detections/owlv2-base-patch16/weapon_0.01_2bfa4bd8.png"
+    },
+    {
+      "id": "8e621cfe",
+      "label": "dagger",
+      "score": 0.0120537793263793,
+      "box": [
+        516.375,
+        698.0625,
+        541.875,
+        736.3125
+      ],
+      "crop_path": "results/sylvie_holding_loki_dagger/sylvie_holding_loki_dagger-20250416-175646/detections/owlv2-base-patch16/dagger_0.01_8e621cfe.png"
+    },
+    {
+      "id": "2c3b64c0",
+      "label": "sword",
+      "score": 0.011331753805279732,
+      "box": [
+        643.875,
+        122.71875,
+        1013.625,
+        624.75
+      ],
+      "crop_path": "results/sylvie_holding_loki_dagger/sylvie_holding_loki_dagger-20250416-175646/detections/owlv2-base-patch16/sword_0.01_2c3b64c0.png"
+    },
+    {
+      "id": "44dc59f5",
+      "label": "sword",
+      "score": 0.011331753805279732,
+      "box": [
+        898.875,
+        170.53125,
+        911.625,
+        304.40625
+      ],
+      "crop_path": "results/sylvie_holding_loki_dagger/sylvie_holding_loki_dagger-20250416-175646/detections/owlv2-base-patch16/sword_0.01_44dc59f5.png"
+    },
+    {
+      "id": "53183bf6",
+      "label": "sword",
+      "score": 0.010986941866576672,
+      "box": [
+        800.0625,
+        95.625,
+        860.625,
+        262.96875
+      ],
+      "crop_path": "results/sylvie_holding_loki_dagger/sylvie_holding_loki_dagger-20250416-175646/detections/owlv2-base-patch16/sword_0.01_53183bf6.png"
+    },
+    {
+      "id": "af67070f",
+      "label": "sword",
+      "score": 0.01065251138061285,
+      "box": [
+        538.6875,
+        23.90625,
+        570.5625,
+        605.625
+      ],
+      "crop_path": "results/sylvie_holding_loki_dagger/sylvie_holding_loki_dagger-20250416-175646/detections/owlv2-base-patch16/sword_0.01_af67070f.png"
+    },
+    {
+      "id": "31842799",
+      "label": "sword",
+      "score": 0.010328153148293495,
+      "box": [
+        806.4375,
+        290.0625,
+        988.125,
+        710.8125
+      ],
+      "crop_path": "results/sylvie_holding_loki_dagger/sylvie_holding_loki_dagger-20250416-175646/detections/owlv2-base-patch16/sword_0.01_31842799.png"
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "image_path": "data/sylvie_holding_loki_dagger.png",
+  "model_types": [
+    "clip",
+    "vit",
+    "resnet50"
+  ],
+  "num_embeddings": 1,
+  "embeddings": [
+    {
+      "id": "sylvie_holding_loki_dagger_2_00_0.08",
+      "embedding_path": "results/embeddings_full/sylvie_holding_loki_dagger_2_00_0.08_embeddings.json"
+    }
+  ],
+  "processing_time": {
+    "pipeline_time": 2.524648904800415,
+    "embedding_time": 0.08532452583312988,
+    "total_time": 11.063748121261597
+  }
+}

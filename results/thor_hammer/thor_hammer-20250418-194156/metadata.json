@@ -1,0 +1,29 @@
+{
+  "image_path": "data/thor_hammer.jpeg",
+  "image_size": [
+    318,
+    159
+  ],
+  "model_type": "owlvit2",
+  "model_name": "owlv2-base-patch16",
+  "text_queries": [
+    "hammer"
+  ],
+  "timestamp": "20250418-194156",
+  "num_detections": 1,
+  "detection_threshold": 0.4,
+  "detections": [
+    {
+      "id": "d265b366",
+      "label": "hammer",
+      "score": 0.42536652088165283,
+      "box": [
+        72.046875,
+        24.3779296875,
+        126.703125,
+        73.2890625
+      ],
+      "crop_path": "results/thor_hammer/thor_hammer-20250418-194156/detections/owlv2-base-patch16/hammer_0.43_d265b366.png"
+    }
+  ]
+}

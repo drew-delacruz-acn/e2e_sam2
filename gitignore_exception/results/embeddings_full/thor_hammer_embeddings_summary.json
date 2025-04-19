@@ -1,0 +1,56 @@
+{
+  "image_path": "data/thor_hammer.jpeg",
+  "model_types": [
+    "clip",
+    "vit",
+    "resnet50"
+  ],
+  "num_embeddings": 10,
+  "embeddings": [
+    {
+      "id": "thor_hammer_0_00_0.43",
+      "embedding_path": "results/embeddings_full/thor_hammer_0_00_0.43_embeddings.json"
+    },
+    {
+      "id": "thor_hammer_0_01_0.37",
+      "embedding_path": "results/embeddings_full/thor_hammer_0_01_0.37_embeddings.json"
+    },
+    {
+      "id": "thor_hammer_0_02_0.33",
+      "embedding_path": "results/embeddings_full/thor_hammer_0_02_0.33_embeddings.json"
+    },
+    {
+      "id": "thor_hammer_0_03_0.22",
+      "embedding_path": "results/embeddings_full/thor_hammer_0_03_0.22_embeddings.json"
+    },
+    {
+      "id": "thor_hammer_0_04_0.21",
+      "embedding_path": "results/embeddings_full/thor_hammer_0_04_0.21_embeddings.json"
+    },
+    {
+      "id": "thor_hammer_0_05_0.13",
+      "embedding_path": "results/embeddings_full/thor_hammer_0_05_0.13_embeddings.json"
+    },
+    {
+      "id": "thor_hammer_0_06_0.12",
+      "embedding_path": "results/embeddings_full/thor_hammer_0_06_0.12_embeddings.json"
+    },
+    {
+      "id": "thor_hammer_0_07_0.12",
+      "embedding_path": "results/embeddings_full/thor_hammer_0_07_0.12_embeddings.json"
+    },
+    {
+      "id": "thor_hammer_0_08_0.11",
+      "embedding_path": "results/embeddings_full/thor_hammer_0_08_0.11_embeddings.json"
+    },
+    {
+      "id": "thor_hammer_0_09_0.11",
+      "embedding_path": "results/embeddings_full/thor_hammer_0_09_0.11_embeddings.json"
+    }
+  ],
+  "processing_time": {
+    "pipeline_time": 2.3970019817352295,
+    "embedding_time": 0.621636152267456,
+    "total_time": 12.399977684020996
+  }
+}

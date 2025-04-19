@@ -163,7 +163,8 @@ class ObjectDetector:
             keep = True
             for j in filtered_indices:
                 iou = calculate_iou(boxes_list[i], boxes_list[j])
-                if iou > iou_threshold:
+                print(iou)
+                if iou > 1:
                     keep = False
                     break
             if keep:

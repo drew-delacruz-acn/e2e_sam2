@@ -1,0 +1,31 @@
+{
+  "image_path": "data/sylvie_holding_loki_dagger.png",
+  "image_size": [
+    1632,
+    754
+  ],
+  "model_type": "owlvit2",
+  "model_name": "owlv2-base-patch16",
+  "text_queries": [
+    "dagger",
+    "sword",
+    "weapon"
+  ],
+  "timestamp": "20250416-175724",
+  "num_detections": 1,
+  "detection_threshold": 0.05,
+  "detections": [
+    {
+      "id": "d3bc75f8",
+      "label": "weapon",
+      "score": 0.07807816565036774,
+      "box": [
+        867.0,
+        401.625,
+        994.5,
+        446.25
+      ],
+      "crop_path": "results/sylvie_holding_loki_dagger/sylvie_holding_loki_dagger-20250416-175724/detections/owlv2-base-patch16/weapon_0.08_d3bc75f8.png"
+    }
+  ]
+}

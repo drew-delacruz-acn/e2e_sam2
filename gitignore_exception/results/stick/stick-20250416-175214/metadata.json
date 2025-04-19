@@ -1,0 +1,29 @@
+{
+  "image_path": "data/stick.png",
+  "image_size": [
+    497,
+    531
+  ],
+  "model_type": "owlvit2",
+  "model_name": "owlv2-base-patch16",
+  "text_queries": [
+    "stick"
+  ],
+  "timestamp": "20250416-175214",
+  "num_detections": 1,
+  "detection_threshold": 0.1,
+  "detections": [
+    {
+      "id": "dc7fb3b3",
+      "label": "stick",
+      "score": 0.1225232183933258,
+      "box": [
+        26.96484375,
+        248.90625,
+        452.1796875,
+        360.9140625
+      ],
+      "crop_path": "results/stick/stick-20250416-175214/detections/owlv2-base-patch16/stick_0.12_dc7fb3b3.png"
+    }
+  ]
+}

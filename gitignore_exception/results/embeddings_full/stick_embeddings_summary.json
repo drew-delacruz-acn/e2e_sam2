@@ -1,0 +1,20 @@
+{
+  "image_path": "data/stick.png",
+  "model_types": [
+    "clip",
+    "vit",
+    "resnet50"
+  ],
+  "num_embeddings": 1,
+  "embeddings": [
+    {
+      "id": "stick_0_00_0.12",
+      "embedding_path": "results/embeddings_full/stick_0_00_0.12_embeddings.json"
+    }
+  ],
+  "processing_time": {
+    "pipeline_time": 2.2129831314086914,
+    "embedding_time": 0.09085464477539062,
+    "total_time": 11.247960090637207
+  }
+}

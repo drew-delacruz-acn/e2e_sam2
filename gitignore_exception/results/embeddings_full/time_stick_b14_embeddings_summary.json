@@ -1,0 +1,80 @@
+{
+  "image_path": "data/time_stick_b14.png",
+  "model_types": [
+    "clip",
+    "vit",
+    "resnet50"
+  ],
+  "num_embeddings": 16,
+  "embeddings": [
+    {
+      "id": "time_stick_b14_1_00_0.58",
+      "embedding_path": "results/embeddings_full/time_stick_b14_1_00_0.58_embeddings.json"
+    },
+    {
+      "id": "time_stick_b14_1_01_0.26",
+      "embedding_path": "results/embeddings_full/time_stick_b14_1_01_0.26_embeddings.json"
+    },
+    {
+      "id": "time_stick_b14_1_02_0.17",
+      "embedding_path": "results/embeddings_full/time_stick_b14_1_02_0.17_embeddings.json"
+    },
+    {
+      "id": "time_stick_b14_1_03_0.14",
+      "embedding_path": "results/embeddings_full/time_stick_b14_1_03_0.14_embeddings.json"
+    },
+    {
+      "id": "time_stick_b14_1_04_0.12",
+      "embedding_path": "results/embeddings_full/time_stick_b14_1_04_0.12_embeddings.json"
+    },
+    {
+      "id": "time_stick_b14_1_05_0.12",
+      "embedding_path": "results/embeddings_full/time_stick_b14_1_05_0.12_embeddings.json"
+    },
+    {
+      "id": "time_stick_b14_1_06_0.09",
+      "embedding_path": "results/embeddings_full/time_stick_b14_1_06_0.09_embeddings.json"
+    },
+    {
+      "id": "time_stick_b14_1_07_0.07",
+      "embedding_path": "results/embeddings_full/time_stick_b14_1_07_0.07_embeddings.json"
+    },
+    {
+      "id": "time_stick_b14_1_08_0.07",
+      "embedding_path": "results/embeddings_full/time_stick_b14_1_08_0.07_embeddings.json"
+    },
+    {
+      "id": "time_stick_b14_1_09_0.07",
+      "embedding_path": "results/embeddings_full/time_stick_b14_1_09_0.07_embeddings.json"
+    },
+    {
+      "id": "time_stick_b14_1_10_0.07",
+      "embedding_path": "results/embeddings_full/time_stick_b14_1_10_0.07_embeddings.json"
+    },
+    {
+      "id": "time_stick_b14_1_11_0.07",
+      "embedding_path": "results/embeddings_full/time_stick_b14_1_11_0.07_embeddings.json"
+    },
+    {
+      "id": "time_stick_b14_1_12_0.06",
+      "embedding_path": "results/embeddings_full/time_stick_b14_1_12_0.06_embeddings.json"
+    },
+    {
+      "id": "time_stick_b14_1_13_0.06",
+      "embedding_path": "results/embeddings_full/time_stick_b14_1_13_0.06_embeddings.json"
+    },
+    {
+      "id": "time_stick_b14_1_14_0.06",
+      "embedding_path": "results/embeddings_full/time_stick_b14_1_14_0.06_embeddings.json"
+    },
+    {
+      "id": "time_stick_b14_1_15_0.05",
+      "embedding_path": "results/embeddings_full/time_stick_b14_1_15_0.05_embeddings.json"
+    }
+  ],
+  "processing_time": {
+    "pipeline_time": 6.450318813323975,
+    "embedding_time": 1.0756304264068604,
+    "total_time": 16.43959140777588
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "image_path": "data/tesseract.png",
+  "model_types": [
+    "clip",
+    "vit",
+    "resnet50"
+  ],
+  "num_embeddings": 6,
+  "embeddings": [
+    {
+      "id": "tesseract_5_00_0.40",
+      "embedding_path": "results/embeddings_full/tesseract_5_00_0.40_embeddings.json"
+    },
+    {
+      "id": "tesseract_13_01_0.17",
+      "embedding_path": "results/embeddings_full/tesseract_13_01_0.17_embeddings.json"
+    },
+    {
+      "id": "tesseract_10_02_0.14",
+      "embedding_path": "results/embeddings_full/tesseract_10_02_0.14_embeddings.json"
+    },
+    {
+      "id": "tesseract_13_03_0.13",
+      "embedding_path": "results/embeddings_full/tesseract_13_03_0.13_embeddings.json"
+    },
+    {
+      "id": "tesseract_5_04_0.12",
+      "embedding_path": "results/embeddings_full/tesseract_5_04_0.12_embeddings.json"
+    },
+    {
+      "id": "tesseract_10_05_0.11",
+      "embedding_path": "results/embeddings_full/tesseract_10_05_0.11_embeddings.json"
+    }
+  ],
+  "processing_time": {
+    "pipeline_time": 2.8063950538635254,
+    "embedding_time": 0.40023016929626465,
+    "total_time": 13.75774621963501
+  }
+}

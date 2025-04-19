@@ -1,0 +1,88 @@
+{
+  "image_path": "data/sylvie_sword.png",
+  "model_types": [
+    "clip",
+    "vit",
+    "resnet50"
+  ],
+  "num_embeddings": 18,
+  "embeddings": [
+    {
+      "id": "sylvie_sword_1_00_0.60",
+      "embedding_path": "results/embeddings_full/sylvie_sword_1_00_0.60_embeddings.json"
+    },
+    {
+      "id": "sylvie_sword_1_01_0.23",
+      "embedding_path": "results/embeddings_full/sylvie_sword_1_01_0.23_embeddings.json"
+    },
+    {
+      "id": "sylvie_sword_0_02_0.20",
+      "embedding_path": "results/embeddings_full/sylvie_sword_0_02_0.20_embeddings.json"
+    },
+    {
+      "id": "sylvie_sword_1_03_0.15",
+      "embedding_path": "results/embeddings_full/sylvie_sword_1_03_0.15_embeddings.json"
+    },
+    {
+      "id": "sylvie_sword_1_04_0.13",
+      "embedding_path": "results/embeddings_full/sylvie_sword_1_04_0.13_embeddings.json"
+    },
+    {
+      "id": "sylvie_sword_1_05_0.09",
+      "embedding_path": "results/embeddings_full/sylvie_sword_1_05_0.09_embeddings.json"
+    },
+    {
+      "id": "sylvie_sword_0_06_0.09",
+      "embedding_path": "results/embeddings_full/sylvie_sword_0_06_0.09_embeddings.json"
+    },
+    {
+      "id": "sylvie_sword_1_07_0.08",
+      "embedding_path": "results/embeddings_full/sylvie_sword_1_07_0.08_embeddings.json"
+    },
+    {
+      "id": "sylvie_sword_1_08_0.08",
+      "embedding_path": "results/embeddings_full/sylvie_sword_1_08_0.08_embeddings.json"
+    },
+    {
+      "id": "sylvie_sword_1_09_0.08",
+      "embedding_path": "results/embeddings_full/sylvie_sword_1_09_0.08_embeddings.json"
+    },
+    {
+      "id": "sylvie_sword_1_10_0.08",
+      "embedding_path": "results/embeddings_full/sylvie_sword_1_10_0.08_embeddings.json"
+    },
+    {
+      "id": "sylvie_sword_0_11_0.06",
+      "embedding_path": "results/embeddings_full/sylvie_sword_0_11_0.06_embeddings.json"
+    },
+    {
+      "id": "sylvie_sword_0_12_0.06",
+      "embedding_path": "results/embeddings_full/sylvie_sword_0_12_0.06_embeddings.json"
+    },
+    {
+      "id": "sylvie_sword_0_13_0.06",
+      "embedding_path": "results/embeddings_full/sylvie_sword_0_13_0.06_embeddings.json"
+    },
+    {
+      "id": "sylvie_sword_1_14_0.06",
+      "embedding_path": "results/embeddings_full/sylvie_sword_1_14_0.06_embeddings.json"
+    },
+    {
+      "id": "sylvie_sword_0_15_0.06",
+      "embedding_path": "results/embeddings_full/sylvie_sword_0_15_0.06_embeddings.json"
+    },
+    {
+      "id": "sylvie_sword_0_16_0.06",
+      "embedding_path": "results/embeddings_full/sylvie_sword_0_16_0.06_embeddings.json"
+    },
+    {
+      "id": "sylvie_sword_0_17_0.05",
+      "embedding_path": "results/embeddings_full/sylvie_sword_0_17_0.05_embeddings.json"
+    }
+  ],
+  "processing_time": {
+    "pipeline_time": 3.5561416149139404,
+    "embedding_time": 1.1711487770080566,
+    "total_time": 12.953299045562744
+  }
+}

@@ -1,0 +1,103 @@
+{
+  "image_path": "data/tesseract.png",
+  "image_size": [
+    908,
+    453
+  ],
+  "model_type": "owlvit2",
+  "model_name": "owlv2-base-patch16",
+  "text_queries": [
+    "glowing cube",
+    "blue cube",
+    "magic cube",
+    "energy cube",
+    "power cube",
+    "tesseract",
+    "space stone",
+    "blue artifact",
+    "cosmic object",
+    "floating cube",
+    "energy object",
+    "bright cube",
+    "cube",
+    "glow object",
+    "power source"
+  ],
+  "timestamp": "20250418-195838",
+  "num_detections": 6,
+  "detection_threshold": 0.1,
+  "detections": [
+    {
+      "id": "b59307f6",
+      "label": "tesseract",
+      "score": 0.39606815576553345,
+      "box": [
+        156.0625,
+        62.818359375,
+        365.328125,
+        145.1015625
+      ],
+      "crop_path": "results/tesseract/tesseract-20250418-195838/detections/owlv2-base-patch16/tesseract_0.40_b59307f6.png"
+    },
+    {
+      "id": "3083c8fa",
+      "label": "glow object",
+      "score": 0.1710611879825592,
+      "box": [
+        237.640625,
+        91.130859375,
+        273.109375,
+        109.7109375
+      ],
+      "crop_path": "results/tesseract/tesseract-20250418-195838/detections/owlv2-base-patch16/glow object_0.17_3083c8fa.png"
+    },
+    {
+      "id": "8345fd0f",
+      "label": "energy object",
+      "score": 0.14414885640144348,
+      "box": [
+        228.7734375,
+        87.591796875,
+        285.5234375,
+        140.677734375
+      ],
+      "crop_path": "results/tesseract/tesseract-20250418-195838/detections/owlv2-base-patch16/energy object_0.14_8345fd0f.png"
+    },
+    {
+      "id": "107d16fa",
+      "label": "glow object",
+      "score": 0.12852513790130615,
+      "box": [
+        886.71875,
+        157.48828125,
+        908.0,
+        187.5703125
+      ],
+      "crop_path": "results/tesseract/tesseract-20250418-195838/detections/owlv2-base-patch16/glow object_0.13_107d16fa.png"
+    },
+    {
+      "id": "3d8bd851",
+      "label": "tesseract",
+      "score": 0.1225232183933258,
+      "box": [
+        161.3828125,
+        63.703125,
+        367.1015625,
+        146.87109375
+      ],
+      "crop_path": "results/tesseract/tesseract-20250418-195838/detections/owlv2-base-patch16/tesseract_0.12_3d8bd851.png"
+    },
+    {
+      "id": "7a3b2d88",
+      "label": "energy object",
+      "score": 0.10669060051441193,
+      "box": [
+        5.3203125,
+        -1.3271484375,
+        893.8125,
+        226.5
+      ],
+      "crop_path": "results/tesseract/tesseract-20250418-195838/detections/owlv2-base-patch16/energy object_0.11_7a3b2d88.png"
+    }
+  ]
+}

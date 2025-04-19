@@ -26,12 +26,11 @@ train_sam2/model.torch
 # !data/**/*.png
 
 # Exception: Track the results directory and its contents
-# !results/
-# !results/**/*.json
-# !results/**/*.jpeg
-# !results/**/*.jpg
-# !results/**/*.png
-# !results/**/*.gif
+ !gitignore_exception/**/ *jpgss
+ !gitignore_exception/**/ *jpeg
+ !gitignore_exception/**/ *png
+ !gitignore_exception/**/ *gif
+ !gitignore_exception/**/ *json
 
 # Ignore Python cache files
 __pycache__/

@@ -4,3 +4,11 @@ python -m e2e_pipeline_v2.scripts.process_ground_truth \
   --models clip vit resnet50 \
   --create_mapping \
   --device cpu
+
+
+
+python e2e_pipeline_v2/scripts/compare_embeddings.py \
+  --ground_truth_dir /Users/andrewdelacruz/e2e_sam2/gitignore_exception/ground_truth \
+  --results_dir /Users/andrewdelacruz/e2e_sam2/gitignore_exception/results \
+  --object loki_crown \
+  --output loki_crown_comparison.json

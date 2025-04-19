@@ -26,7 +26,7 @@ image:
 
 # Detection configuration
 detection:
-  model_type: "owlvit2"  # Options: owlvit, owlvit2
+  model_type: "owlvit"  # Options: owlvit, owlvit2
   force_cpu: false  # Force CPU usage even if GPU is available
 
 # Segmentation configuration

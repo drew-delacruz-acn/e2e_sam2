@@ -13,8 +13,8 @@
     }
   ],
   "processing_time": {
-    "pipeline_time": 1.7965786457061768,
-    "embedding_time": 0.07250237464904785,
-    "total_time": 9.702362060546875
+    "pipeline_time": 1.8063514232635498,
+    "embedding_time": 0.0742197036743164,
+    "total_time": 9.22137999534607
   }
 }

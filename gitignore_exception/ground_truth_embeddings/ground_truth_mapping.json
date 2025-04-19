@@ -1,0 +1,54 @@
+{
+  "object_classes": {
+    "loki_crown": {
+      "class": "loki",
+      "similarity_threshold": 0.75
+    },
+    "sylive_sword": {
+      "class": "sylive",
+      "similarity_threshold": 0.75
+    },
+    "time_stick": {
+      "class": "time",
+      "similarity_threshold": 0.75
+    },
+    "TheTesseract": {
+      "class": "TheTesseract",
+      "similarity_threshold": 0.75
+    },
+    "mjolnir_gt": {
+      "class": "mjolnir",
+      "similarity_threshold": 0.75
+    },
+    "mjolnir_gt_2": {
+      "class": "mjolnir",
+      "similarity_threshold": 0.75
+    }
+  },
+  "processed_objects": {
+    "loki_crown": {
+      "image_path": "gitignore_exception/ground_truth_images/loki_crown.jpg",
+      "embedding_path": "gitignore_exception/ground_truth_embeddings/loki_crown_embeddings.json"
+    },
+    "sylive_sword": {
+      "image_path": "gitignore_exception/ground_truth_images/sylive_sword.jpg",
+      "embedding_path": "gitignore_exception/ground_truth_embeddings/sylive_sword_embeddings.json"
+    },
+    "time_stick": {
+      "image_path": "gitignore_exception/ground_truth_images/time_stick.png",
+      "embedding_path": "gitignore_exception/ground_truth_embeddings/time_stick_embeddings.json"
+    },
+    "TheTesseract": {
+      "image_path": "gitignore_exception/ground_truth_images/TheTesseract.jpg",
+      "embedding_path": "gitignore_exception/ground_truth_embeddings/TheTesseract_embeddings.json"
+    },
+    "mjolnir_gt": {
+      "image_path": "gitignore_exception/ground_truth_images/mjolnir_gt.jpeg",
+      "embedding_path": "gitignore_exception/ground_truth_embeddings/mjolnir_gt_embeddings.json"
+    },
+    "mjolnir_gt_2": {
+      "image_path": "gitignore_exception/ground_truth_images/mjolnir_gt_2.jpeg",
+      "embedding_path": "gitignore_exception/ground_truth_embeddings/mjolnir_gt_2_embeddings.json"
+    }
+  }
+}

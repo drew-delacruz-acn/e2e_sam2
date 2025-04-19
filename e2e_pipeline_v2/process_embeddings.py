@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 Script to process detection and segmentation results through the embedding module.
-Generates embeddings for crops and masked images.
+Compares detected objects with ground truth embeddings.
 """
 
 import os
@@ -14,530 +14,251 @@ import argparse
 from pathlib import Path
 import cv2
 import numpy as np
-from PIL import Image
 import torch
-import matplotlib.pyplot as plt
+import yaml
+from typing import Dict, List, Any
 
-from e2e_pipeline_v2.modules.embedding import EmbeddingGenerator, ModelType
+from e2e_pipeline_v2.modules.embedding import EmbeddingGenerator
+from e2e_pipeline_v2.modules.metrics import compute_cosine_similarity, calculate_metrics, save_metrics_report
+from e2e_pipeline_v2.modules.visualization import create_results_visualization
 from e2e_pipeline_v2.pipeline import DetectionSegmentationPipeline
 
 # Configure logging
 logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
-    handlers=[
-        logging.StreamHandler(sys.stdout)
-    ]
+    handlers=[logging.StreamHandler(sys.stdout)]
 )
 logger = logging.getLogger('embedding_process')
 
 def parse_args():
     """Parse command line arguments."""
-    parser = argparse.ArgumentParser(description="Process detection and segmentation results through embedding module")
-    parser.add_argument("--config", type=str, default="e2e_pipeline_v2/config.yaml",
-                      help="Path to the configuration file")
+    parser = argparse.ArgumentParser(description="Process images and compare with ground truth embeddings")
+    
     parser.add_argument("--image", type=str, required=True,
                       help="Path to the input image")
-    parser.add_argument("--queries", type=str, nargs="+", default=None,
-                      help="Text queries for detection (overrides config)")
+    parser.add_argument("--gt_embeddings", type=str, required=True,
+                      help="Path to ground truth embeddings directory")
+    parser.add_argument("--gt_mapping", type=str, required=True,
+                      help="Path to ground truth mapping file")
+    parser.add_argument("--config", type=str, default="e2e_pipeline_v2/config/config.yaml",
+                      help="Path to the configuration file")
     parser.add_argument("--models", type=str, nargs="+", default=["clip", "vit", "resnet50"],
                       choices=["clip", "vit", "resnet50"],
                       help="Embedding models to use")
-    parser.add_argument("--output_dir", type=str, default="/Users/andrewdelacruz/e2e_sam2/results",
+    parser.add_argument("--output_dir", type=str, required=True,
                       help="Directory to save results")
     parser.add_argument("--device", type=str, default="cpu",
                       help="Device to use (cuda or cpu)")
-    parser.add_argument("--force_cpu", action="store_true",
-                      help="Force CPU usage for all operations")
+    parser.add_argument("--similarity_threshold", type=float, default=0.75,
+                      help="Threshold for similarity matching")
     parser.add_argument("--debug", action="store_true",
                       help="Enable detailed debug logging")
-    parser.add_argument("--quiet", action="store_true", 
-                      help="Show minimal information (only summary and errors)")
+    
     return parser.parse_args()
 
-def apply_mask_to_image(image, mask):
-    """Apply mask to image, keeping original pixels inside mask and setting others to zero.
-    
-    Args:
-        image: RGB image as numpy array (H, W, 3)
-        mask: Binary mask as numpy array (H, W)
-        
-    Returns:
-        Masked image with original pixels where mask is True, zero elsewhere
-    """
-    # Ensure mask is boolean
-    if mask.dtype != bool:
-        mask = mask.astype(bool)
-    
-    # Create copy of image
-    masked_image = np.zeros_like(image)
-    
-    # Apply mask
-    masked_image[mask] = image[mask]
-    
-    return masked_image
+def load_config(config_path: str) -> Dict:
+    """Load configuration from YAML file."""
+    with open(config_path, 'r') as f:
+        return yaml.safe_load(f)
 
-def save_image(image, path):
-    """Save image to disk.
+def load_ground_truth_embeddings(gt_dir: str) -> Dict:
+    """Load all ground truth embeddings from directory."""
+    gt_embeddings = {}
     
-    Args:
-        image: RGB image as numpy array
-        path: Path to save the image
-    """
-    # Ensure parent directory exists
-    os.makedirs(os.path.dirname(path), exist_ok=True)
-    
-    # Save image
-    if isinstance(image, np.ndarray):
-        # Convert from RGB to BGR for OpenCV
-        cv2.imwrite(path, cv2.cvtColor(image, cv2.COLOR_RGB2BGR))
-    elif isinstance(image, Image.Image):
-        image.save(path)
-    else:
-        raise ValueError(f"Unsupported image type: {type(image)}")
+    for file in os.listdir(gt_dir):
+        if not file.endswith('_embeddings.json'):
+            continue
+            
+        with open(os.path.join(gt_dir, file), 'r') as f:
+            data = json.load(f)
+            gt_embeddings[data['object_name']] = data['embeddings']
+            
+    return gt_embeddings
 
-def format_time(seconds):
-    """Format time in seconds to a human-readable string."""
-    if seconds < 60:
-        return f"{seconds:.2f} seconds"
-    elif seconds < 3600:
-        minutes = seconds // 60
-        seconds %= 60
-        return f"{int(minutes)} minutes and {seconds:.2f} seconds"
-    else:
-        hours = seconds // 3600
-        seconds %= 3600
-        minutes = seconds // 60
-        seconds %= 60
-        return f"{int(hours)} hours, {int(minutes)} minutes and {seconds:.2f} seconds"
+def load_ground_truth_mapping(mapping_path: str) -> Dict:
+    """Load ground truth mapping file."""
+    with open(mapping_path, 'r') as f:
+        return json.load(f)
 
-def log_tensor_info(tensor, name="tensor"):
-    """Log detailed information about a tensor."""
-    if logger.level > logging.DEBUG:
-        return  # Skip detailed tensor logging if not in debug mode
+def get_detection_crop(image: np.ndarray, box: List[int]) -> np.ndarray:
+    """Extract crop from image using detection box."""
+    x1, y1, x2, y2 = [int(coord) for coord in box]
+    return image[y1:y2, x1:x2]
+
+def compare_with_ground_truth(
+    detection_embedding: np.ndarray,
+    gt_embeddings: Dict,
+    model_type: str,
+    threshold: float
+) -> List[Dict]:
+    """Compare detection embedding with all ground truth embeddings."""
+    matches = []
     
-    if not isinstance(tensor, torch.Tensor):
-        logger.debug(f"{name} is not a tensor but {type(tensor)}")
-        return
-    
-    try:
-        logger.debug(f"{name} - Type: {tensor.dtype}, Shape: {tensor.shape}, Device: {tensor.device}")
-        logger.debug(f"{name} - Min: {tensor.min().item()}, Max: {tensor.max().item()}, Mean: {tensor.mean().item()}")
-        logger.debug(f"{name} - Contains NaN: {torch.isnan(tensor).any().item()}, Contains Inf: {torch.isinf(tensor).any().item()}")
-    except Exception as e:
-        logger.warning(f"Could not log complete tensor info for {name}: {str(e)}")
+    for obj_name, obj_embeddings in gt_embeddings.items():
+        if model_type not in obj_embeddings:
+            continue
+            
+        similarity = compute_cosine_similarity(
+            detection_embedding,
+            obj_embeddings[model_type]
+        )
         
-def log_system_info():
-    """Log detailed system and PyTorch information."""
-    logger.info("=== System Information ===")
-    logger.info(f"PyTorch Version: {torch.__version__}")
-    logger.info(f"CUDA Available: {torch.cuda.is_available()}")
+        if similarity >= threshold:
+            matches.append({
+                "object_name": obj_name,
+                "similarity": similarity
+            })
     
-    if torch.cuda.is_available():
-        logger.info(f"CUDA Version: {torch.version.cuda}")
-        logger.info(f"GPU Device: {torch.cuda.get_device_name(0)}")
-        logger.info(f"GPU Memory: {torch.cuda.get_device_properties(0).total_memory / 1e9:.2f} GB")
+    return sorted(matches, key=lambda x: x['similarity'], reverse=True)
+
+def process_image(
+    image_path: str,
+    pipeline: DetectionSegmentationPipeline,
+    embedding_generator: EmbeddingGenerator,
+    gt_embeddings: Dict,
+    models: List[str],
+    threshold: float
+) -> Dict:
+    """Process single image and compare with ground truth."""
+    # Run detection pipeline
+    results = pipeline.run(
+        image_path=image_path,
+        visualize=True,
+        save_results=True,
+        generate_embeddings=False
+    )
     
-    if hasattr(torch.backends, 'mps') and torch.backends.mps.is_available():
-        logger.info("MPS (Metal Performance Shaders) is available")
+    if not results or "detection" not in results:
+        raise ValueError("Detection failed or no objects found")
     
-    logger.info(f"NumPy Version: {np.__version__}")
-    logger.info(f"OpenCV Version: {cv2.__version__}")
+    # Process each detection
+    processed_results = {}
+    image = cv2.imread(image_path)
+    image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
     
-    # Only do detailed dtype testing in debug mode
-    if logger.level <= logging.DEBUG:
-        # Log available dtypes in PyTorch
-        logger.debug("=== PyTorch Data Types ===")
-        dtypes = [
-            torch.float, torch.float16, torch.float32, torch.float64,
-            torch.int, torch.int8, torch.int16, torch.int32, torch.int64,
-            torch.uint8, torch.bool
-        ]
+    for i, (box, score) in enumerate(zip(
+        results["detection"]["boxes"],
+        results["detection"]["scores"]
+    )):
+        detection_id = f"detection_{i}"
         
-        # Check for bfloat16 support
-        if hasattr(torch, 'bfloat16'):
-            dtypes.append(torch.bfloat16)
-            logger.debug("BFloat16 is available in this PyTorch version")
-        else:
-            logger.debug("BFloat16 is NOT available in this PyTorch version")
+        # Get crop
+        crop = get_detection_crop(image, box)
         
-        for dtype in dtypes:
+        # Generate embeddings and compare
+        detection_results = {
+            "box": box.tolist() if isinstance(box, np.ndarray) else box,
+            "score": float(score),
+            "matches": {}
+        }
+        
+        for model_type in models:
             try:
-                x = torch.tensor([1.0], dtype=dtype)
-                logger.debug(f"Dtype {dtype} - test successful on CPU")
+                # Generate embedding
+                embedding = embedding_generator.generate_embedding(crop, model_type)
                 
-                if torch.cuda.is_available():
-                    try:
-                        x_cuda = x.cuda()
-                        logger.debug(f"Dtype {dtype} - test successful on CUDA")
-                    except Exception as e:
-                        logger.warning(f"Dtype {dtype} - CUDA test failed: {str(e)}")
+                # Compare with ground truth
+                matches = compare_with_ground_truth(
+                    embedding,
+                    gt_embeddings,
+                    model_type,
+                    threshold
+                )
                 
-                if hasattr(torch.backends, 'mps') and torch.backends.mps.is_available():
-                    try:
-                        x_mps = x.to('mps')
-                        logger.debug(f"Dtype {dtype} - test successful on MPS")
-                    except Exception as e:
-                        logger.warning(f"Dtype {dtype} - MPS test failed: {str(e)}")
+                detection_results["matches"][model_type] = matches
+                
+                # Update best match if found
+                if matches:
+                    best_match = matches[0]
+                    if (
+                        "best_score" not in detection_results
+                        or best_match["similarity"] > detection_results["best_score"]
+                    ):
+                        detection_results["best_match"] = best_match["object_name"]
+                        detection_results["best_score"] = best_match["similarity"]
                         
             except Exception as e:
-                logger.warning(f"Dtype {dtype} - test failed: {str(e)}")
+                logger.error(f"Error processing {model_type} for detection {i}: {str(e)}")
+                continue
+        
+        processed_results[detection_id] = detection_results
+    
+    return processed_results
 
 def main():
     start_time = time.time()
     args = parse_args()
     
-    # Track input images count
-    image_count = 0
-    detection_count = 0
-    
-    # Set up debug logging if requested
     if args.debug:
         logger.setLevel(logging.DEBUG)
-        # Add file handler for debug logs
-        debug_file_handler = logging.FileHandler('embedding_debug.log')
-        debug_file_handler.setFormatter(logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s'))
-        logger.addHandler(debug_file_handler)
-        
-        # Log system information only in debug mode
-        log_system_info()
-    elif args.quiet:
-        # In quiet mode, only show warnings and higher in console
-        logger.setLevel(logging.WARNING)
-    else:
-        # In normal mode, show INFO and higher in console
-        logger.setLevel(logging.INFO)
-        
-    # Helper function to print important summary info even in quiet mode
-    def print_summary(message):
-        """Print a message regardless of logging level"""
-        if args.quiet:
-            # Print directly for important summary info in quiet mode
-            print(message)
-        else:
-            # Use logger for normal mode
-            logger.info(message)
-            
-    # Check if image file exists
-    if not os.path.exists(args.image):
-        logger.error(f"Error: Image file '{args.image}' does not exist.")
-        return 1
     
-    # Increment image count
-    image_count += 1
+    # Load configuration and ground truth data
+    config = load_config(args.config)
+    gt_embeddings = load_ground_truth_embeddings(args.gt_embeddings)
+    gt_mapping = load_ground_truth_mapping(args.gt_mapping)
     
-    # Create output directory
-    os.makedirs(args.output_dir, exist_ok=True)
-    
-    # Determine the best available device
-    if args.force_cpu:
-        device = "cpu"
-        logger.info("Forcing CPU usage as requested")
-        os.environ["CUDA_VISIBLE_DEVICES"] = ""
-        torch.backends.mps.enabled = False
-    else:
-        # Check for CUDA
-        if torch.cuda.is_available():
-            device = "cuda"
-            logger.info(f"CUDA is available. Using GPU: {torch.cuda.get_device_name(0)}")
-        # Check for MPS (Apple Metal)
-        elif hasattr(torch.backends, 'mps') and torch.backends.mps.is_available():
-            device = "mps"
-            logger.info("Using Apple Metal Performance Shaders (MPS)")
-        else:
-            device = "cpu"
-            logger.info("No GPU detected. Using CPU")
-    
-    # Override device if explicitly specified
-    if args.device != "cpu":
-        device = args.device
-        
-    logger.info(f"Processing image: {args.image}")
-    logger.info(f"Embedding models: {', '.join(args.models)}")
-    logger.info(f"Using device: {device}")
+    # Initialize components
+    pipeline = DetectionSegmentationPipeline(args.config)
+    embedding_generator = EmbeddingGenerator(
+        model_types=args.models,
+        device=args.device
+    )
     
     try:
-        # Initialize pipeline with modified config
-        logger.info("Initializing detection and segmentation pipeline...")
-        pipeline = DetectionSegmentationPipeline(args.config)
-        
-        # Modify detection config to force CPU if needed
-        if args.force_cpu and hasattr(pipeline.detector, 'config'):
-            pipeline.detector.config['force_cpu'] = True
-        
-        pipeline_start = time.time()
-        logger.info("Running detection and segmentation pipeline...")
-        
-        # Run detection and segmentation
-        results = pipeline.run(
-            image_path=args.image,
-            text_queries=args.queries,
-            visualize=True,
-            save_results=True,
-            generate_embeddings=False  # We'll handle embedding generation ourselves
+        # Process image
+        logger.info(f"Processing image: {args.image}")
+        results = process_image(
+            args.image,
+            pipeline,
+            embedding_generator,
+            gt_embeddings,
+            args.models,
+            args.similarity_threshold
         )
         
-        pipeline_end = time.time()
-        pipeline_time = pipeline_end - pipeline_start
-        logger.info(f"Pipeline completed in {format_time(pipeline_time)}")
+        # Calculate metrics
+        metrics = calculate_metrics(
+            results,
+            gt_mapping["object_classes"],
+            args.similarity_threshold
+        )
         
-        # Check if detection and segmentation were successful
-        if not results or "success" in results and not results["success"]:
-            logger.error(f"Error: Detection or segmentation failed: {results.get('error', 'Unknown error')}")
-            return 1
-        
-        # Initialize embedding generator
-        logger.info(f"Initializing embedding generator with models: {args.models}")
-        try:
-            embedding_generator = EmbeddingGenerator(
-                model_types=args.models,
-                device=device
-            )
-            
-            # Log model details
-            if logger.level <= logging.DEBUG:
-                logger.debug("=== Embedding Model Details ===")
-                for model_name, model in embedding_generator.models.items():
-                    logger.debug(f"Model: {model_name}")
-                    
-                    # Log model device
-                    for name, module in model.named_modules():
-                        if hasattr(module, 'weight') and hasattr(module.weight, 'device'):
-                            logger.debug(f"  Module {name} is on device {module.weight.device}")
-                            
-                            # Log parameter info for first few layers
-                            if name.startswith('0') or name.startswith('1') or name.startswith('encoder'):
-                                if hasattr(module, 'weight'):
-                                    weight = module.weight
-                                    logger.debug(f"  Weight - Shape: {weight.shape}, Type: {weight.dtype}")
-                                
-                                if hasattr(module, 'bias') and module.bias is not None:
-                                    bias = module.bias
-                                    logger.debug(f"  Bias - Shape: {bias.shape}, Type: {bias.dtype}")
-            else:
-                logger.info(f"Models loaded: {', '.join(str(model) for model in embedding_generator.models.keys())}")
-            
-        except Exception as e:
-            logger.error(f"Error initializing embedding generator: {str(e)}")
-            logger.error(f"Traceback: {traceback.format_exc()}")
-            return 1
-        
-        # Process each detection
-        all_embeddings = []
-        
-        # Load original image
-        logger.info(f"Loading original image: {args.image}")
-        original_image = cv2.imread(args.image)
-        original_image = cv2.cvtColor(original_image, cv2.COLOR_BGR2RGB)
-        logger.info(f"Original image shape: {original_image.shape}, dtype: {original_image.dtype}")
-        
-        # Get metadata about the image
+        # Create output directory structure
         image_name = os.path.splitext(os.path.basename(args.image))[0]
+        output_dir = os.path.join(args.output_dir, image_name)
+        os.makedirs(output_dir, exist_ok=True)
         
-        # Get detection results from the pipeline
-        detection_results = results["detection"]
+        # Save results
+        results_path = os.path.join(output_dir, "detection_results.json")
+        with open(results_path, 'w') as f:
+            json.dump(results, f, indent=2)
         
-        # Log detection results structure
-        logger.debug(f"Detection results keys: {detection_results.keys()}")
+        # Save metrics
+        metrics_path = os.path.join(output_dir, "metrics.json")
+        save_metrics_report(metrics, metrics_path)
         
-        # Check if we have any detections
-        if not detection_results or not detection_results.get("boxes", []):
-            logger.warning("No objects detected in the image.")
-            end_time = time.time()
-            logger.info(f"\nProcessing completed in {format_time(end_time - start_time)}")
-            logger.info(f"Processed {image_count} images with {detection_count} detections")
-            return 0
+        # Create visualizations
+        create_results_visualization(
+            args.image,
+            [det for det in results.values()],
+            metrics,
+            os.path.join(output_dir, "visualizations")
+        )
         
-        # Track how many detections we have
-        num_detections = len(detection_results["boxes"])
-        detection_count += num_detections
-        logger.info(f"Found {num_detections} detections in the image")
-        
-        embedding_start = time.time()
-        logger.info("Generating embeddings for detections...")
-        
-        # Process detections
-        for i, (box, label, score) in enumerate(zip(
-            detection_results["boxes"],
-            detection_results["labels"],
-            detection_results["scores"]
-        )):
-            # Create a unique ID for this detection
-            detection_id = f"{image_name}_{label}_{i:02d}_{score:.2f}"
-            logger.info(f"\nProcessing detection {i+1}/{num_detections}: {detection_id}")
-            
-            # Convert box coordinates if needed
-            original_box_type = type(box)
-            logger.debug(f"Original box type: {original_box_type}")
-            
-            if isinstance(box, torch.Tensor):
-                logger.debug(f"Box tensor - Type: {box.dtype}, Shape: {box.shape}, Device: {box.device}")
-                box = box.cpu().numpy().astype(int)
-            elif isinstance(box, list):
-                logger.debug(f"Box list - Length: {len(box)}, Values: {box}")
-                box = np.array(box).astype(int)
-            
-            logger.debug(f"Converted box: {box}, Type: {type(box)}")
-            
-            # Ensure the box is within image boundaries
-            h, w = original_image.shape[:2]
-            x1, y1, x2, y2 = max(0, box[0]), max(0, box[1]), min(w, box[2]), min(h, box[3])
-            logger.debug(f"Box coordinates after boundary check: [{x1}, {y1}, {x2}, {y2}]")
-            
-            # Get the crop
-            logger.debug(f"Extracting crop from coordinates: y={y1}:{y2}, x={x1}:{x2}")
-            crop = original_image[y1:y2, x1:x2]
-            logger.debug(f"Crop shape: {crop.shape}, dtype: {crop.dtype}")
-            
-            # Skip if crop is empty
-            if crop.size == 0:
-                logger.warning(f"Warning: Empty crop for detection {detection_id}, skipping")
-                continue
-            
-            # Save the crop
-            crop_path = os.path.join(args.output_dir, f"{detection_id}_crop.png")
-            save_image(crop, crop_path)
-            logger.debug(f"Saved crop to: {crop_path}")
-            
-            # Generate embeddings for the crop
-            embedding_results = {}
-            
-            logger.info(f"Generating embeddings for detection {detection_id}...")
-            
-            # Generate all embeddings for all models and save to file
-            for model_type in args.models:
-                logger.info(f"  Generating embeddings with {model_type}...")
-                try:
-                    # Convert crop to tensor for debugging
-                    if args.debug:
-                        logger.debug(f"Converting crop to tensor for debugging")
-                        with torch.no_grad():
-                            # Convert numpy array to tensor
-                            crop_tensor = torch.from_numpy(crop.transpose(2, 0, 1)).float()
-                            logger.debug(f"Crop tensor - Shape: {crop_tensor.shape}, Type: {crop_tensor.dtype}")
-                            
-                            # Move to device
-                            crop_tensor = crop_tensor.to(device)
-                            logger.debug(f"Crop tensor moved to device: {crop_tensor.device}")
-                    
-                    # Generate embeddings
-                    logger.debug(f"Calling generate_embedding for {model_type}")
-                    crop_emb = embedding_generator.generate_embedding(crop, model_type)
-                    
-                    # Log embedding tensor info
-                    if isinstance(crop_emb, torch.Tensor):
-                        log_tensor_info(crop_emb, f"{model_type}_embedding")
-                    
-                    # Convert tensors to lists for JSON serialization
-                    logger.debug(f"Converting embedding to list for JSON serialization")
-                    if isinstance(crop_emb, torch.Tensor):
-                        logger.debug(f"  Embedding is a tensor on device {crop_emb.device} with dtype {crop_emb.dtype}")
-                        try:
-                            # First try simple conversion
-                            crop_emb = crop_emb.cpu().numpy().tolist()
-                        except Exception as e1:
-                            logger.warning(f"  Error in simple tensor conversion: {str(e1)}")
-                            try:
-                                # Try detached conversion
-                                crop_emb = crop_emb.detach().cpu().numpy().tolist()
-                            except Exception as e2:
-                                logger.warning(f"  Error in detached tensor conversion: {str(e2)}")
-                                try:
-                                    # Try float32 conversion for bfloat16 tensors
-                                    logger.debug("  Attempting float32 conversion for potential bfloat16 tensor")
-                                    crop_emb = crop_emb.float().cpu().numpy().tolist()
-                                except Exception as e3:
-                                    logger.error(f"  All tensor conversion methods failed: {str(e3)}")
-                                    # Use a Python list conversion as last resort
-                                    crop_emb = [float(x) for x in crop_emb.flatten().tolist()]
-                    elif hasattr(crop_emb, 'tolist'):
-                        crop_emb = crop_emb.tolist()
-                    
-                    # Add to results
-                    embedding_results[model_type] = {
-                        "crop": crop_emb
-                    }
-                    logger.info(f"    Generated {model_type} embedding of length {len(crop_emb)}")
-                    logger.debug(f"    Sample: {crop_emb[:3]}...")
-                except Exception as e:
-                    logger.error(f"    Error with {model_type}: {str(e)}")
-                    logger.error(f"    Traceback: {traceback.format_exc()}")
-            
-            # Save embeddings
-            embeddings_path = os.path.join(args.output_dir, f"{detection_id}_embeddings.json")
-            
-            # Ensure all values are JSON serializable
-            logger.debug("Preparing detection info for JSON serialization")
-            detection_info = {
-                "box": box.tolist() if isinstance(box, np.ndarray) else [int(b) if isinstance(b, (np.integer, torch.Tensor)) else b for b in box],
-                "label": label if not isinstance(label, (np.ndarray, torch.Tensor)) else label.item() if hasattr(label, 'item') else str(label),
-                "score": float(score) if isinstance(score, (np.number, torch.Tensor)) else score
-            }
-            
-            try:
-                with open(embeddings_path, 'w') as f:
-                    json.dump({
-                        "image_path": args.image,
-                        "detection": detection_info,
-                        "files": {
-                            "crop": crop_path
-                        },
-                        "embeddings": embedding_results
-                    }, f, indent=2)
-                logger.info(f"  Saved embeddings to {embeddings_path}")
-            except Exception as e:
-                logger.error(f"Error saving embeddings to JSON: {str(e)}")
-                logger.error(f"Traceback: {traceback.format_exc()}")
-            
-            # Add to all embeddings
-            all_embeddings.append({
-                "id": detection_id,
-                "embedding_path": embeddings_path
-            })
-        
-        embedding_end = time.time()
-        embedding_time = embedding_end - embedding_start
-        logger.info(f"Embedding generation completed in {format_time(embedding_time)}")
-        
-        # Save summary of all embeddings
-        summary_path = os.path.join(args.output_dir, f"{image_name}_embeddings_summary.json")
-        with open(summary_path, 'w') as f:
-            json.dump({
-                "image_path": args.image,
-                "model_types": args.models,
-                "num_embeddings": len(all_embeddings),
-                "embeddings": all_embeddings,
-                "processing_time": {
-                    "pipeline_time": pipeline_time,
-                    "embedding_time": embedding_time,
-                    "total_time": time.time() - start_time
-                }
-            }, f, indent=2)
-        
-        logger.info(f"\nSaved summary to {summary_path}")
-        logger.info(f"Total number of processed items: {len(all_embeddings)}")
-        
-        # Print final timing information - ensure this shows even in quiet mode
+        # Print summary
         end_time = time.time()
-        total_time = end_time - start_time
-        
-        print_summary("\n== Performance Summary ==")
-        print_summary(f"Total execution time: {format_time(total_time)}")
-        print_summary(f"Pipeline processing: {format_time(pipeline_time)} ({pipeline_time/total_time*100:.1f}%)")
-        print_summary(f"Embedding generation: {format_time(embedding_time)} ({embedding_time/total_time*100:.1f}%)")
-        print_summary(f"Processed {image_count} images with {detection_count} detections")
-        print_summary(f"Average time per detection: {format_time(embedding_time/max(1, detection_count))}")
+        logger.info("\n=== Processing Summary ===")
+        logger.info(f"Total time: {end_time - start_time:.2f} seconds")
+        logger.info(f"Processed detections: {len(results)}")
+        logger.info(f"Overall F1 Score: {metrics['f1_score']:.3f}")
+        logger.info(f"Results saved to: {output_dir}")
         
         return 0
         
     except Exception as e:
         logger.error(f"Error: {str(e)}")
         logger.error(f"Traceback: {traceback.format_exc()}")
-        
-        # Print timing even if there was an error
-        end_time = time.time()
-        logger.error(f"\nExecution failed after {format_time(end_time - start_time)}")
-        logger.error(f"Processed {image_count} images with {detection_count} detections")
         return 1
 
 if __name__ == "__main__":

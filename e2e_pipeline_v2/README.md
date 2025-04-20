@@ -187,6 +187,13 @@ python e2e_pipeline_v2/scripts/compare_embeddings.py \
   --output loki_crown_comparison.json
 ```
 
+```bash
+python e2e_pipeline_v2/scripts/compare_embeddings.py \
+ -- ground_truth_dir ground_truth \
+ -- results_dir results \
+  --output embedding_comparison_results.json
+```
+
 ### Testing Methodology
 
 The pipeline uses a multi-model approach for robust object comparison:

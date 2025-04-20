@@ -142,5 +142,112 @@ The pipeline generates several visualizations:
 - **Memory Issues**: Try using a smaller SAM2 model (tiny or small) by changing the config
 - **No Objects Detected**: Try lowering the detection threshold or using different text queries 
 
+## Ground Truth and Embedding Comparison
+
+### Ground Truth Generation
+
+To generate ground truth embeddings and mapping for your reference objects:
+
+1. Place your ground truth images in a directory (e.g., `ground_truth/ground_truth_images/`)
+2. Run the ground truth processing script:
+
+```bash
+python e2e_pipeline_v2/scripts/process_ground_truth.py \
+  --input_dir ground_truth/ground_truth_images \
+  --output_dir ground_truth/ground_truth_embeddings \
+  --create_mapping \
+  --models vit resnet50
+```
+
+This will:
+- Generate embeddings for each ground truth image using ViT and ResNet50 models
+- Create a mapping file (`ground_truth_mapping.json`) that defines:
+  - Object classes (derived from image filenames)
+  - Similarity thresholds (default: 0.75)
+  - Paths to images and their embeddings
+
+### Embedding Comparison
+
+To compare detected objects against ground truth:
+
+```bash
+python e2e_pipeline_v2/scripts/compare_embeddings.py \
+  --ground_truth_dir ground_truth \
+  --results_dir results \
+  --object object_name \
+  --output comparison_results.json
+```
+
+For example, to compare all detections of Loki's crown:
+```bash
+python e2e_pipeline_v2/scripts/compare_embeddings.py \
+  --ground_truth_dir ground_truth \
+  --results_dir results \
+  --object loki_crown \
+  --output loki_crown_comparison.json
+```
+
+### Testing Methodology
+
+The pipeline uses a multi-model approach for robust object comparison:
+
+1. **Ground Truth Setup**:
+   - Collect high-quality reference images of target objects
+   - Name images descriptively (e.g., `loki_crown.jpg`, `time_stick.png`)
+   - Generate embeddings using multiple models (ViT and ResNet50)
+   - Create class mappings for consistent object categorization
+
+2. **Embedding Generation**:
+   - ViT (Vision Transformer):
+     - Uses CLS token for image representation
+     - Good at capturing global features and relationships
+   - ResNet50:
+     - Uses deep convolutional features
+     - Strong at capturing local patterns and textures
+
+3. **Similarity Computation**:
+   - Calculates cosine similarity between detected objects and ground truth
+   - Computes similarities for both models
+   - Takes average similarity across models
+   - Compares against threshold (default: 0.75)
+
+4. **Results Analysis**:
+   - Per-object similarity scores
+   - Model-specific similarities
+   - Average similarity across models
+   - Threshold-based matching decisions
+   - Detailed comparison reports in JSON format
+
+5. **Best Practices**:
+   - Use consistent lighting and angles for ground truth images
+   - Include multiple variants of objects if appearance varies
+   - Adjust similarity thresholds based on application needs
+   - Consider model-specific weights if one performs better
+
+### Output Format
+
+The comparison results JSON includes:
+```json
+{
+  "object_name": {
+    "detection_id": "unique_id",
+    "label": "detected_label",
+    "score": detection_confidence,
+    "similarities": {
+      "vit": vit_similarity_score,
+      "resnet50": resnet_similarity_score
+    },
+    "average_similarity": average_score,
+    "exceeds_threshold": boolean,
+    "crop_path": "path/to/detection/crop"
+  }
+}
+```
+
+This comprehensive testing approach ensures reliable object matching by:
+- Using multiple model perspectives
+- Considering both global and local features
+- Providing detailed similarity metrics
+- Supporting threshold-based decision making
 
 python -m e2e_pipeline_v2.process_embeddings --image data/thor_hammer.jpeg --queries "hammer" --models clip vit resnet50 --output_dir results/embeddings_full --force_cpu

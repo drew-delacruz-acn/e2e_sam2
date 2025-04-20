@@ -2,6 +2,7 @@
 """
 Script to compare existing embeddings against ground truth embeddings.
 Skips detection and segmentation, directly compares embeddings.
+Uses ViT and ResNet50 models for embedding generation.
 """
 
 import os
@@ -14,9 +15,13 @@ import numpy as np
 import torch
 import torch.nn.functional as F
 from PIL import Image
-import clip
 from tqdm import tqdm
+from transformers import ViTFeatureExtractor, ViTModel
+import torchvision.models as models
+import torchvision.transforms as transforms
 
+# Add parent directory to path to import local modules
+sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(__file__))))
 from e2e_pipeline_v2.modules.metrics import compute_cosine_similarity, calculate_metrics, save_metrics_report
 from e2e_pipeline_v2.modules.visualization import create_results_visualization
 
@@ -34,8 +39,25 @@ class EmbeddingComparator:
         self.results_dir = Path(results_dir)
         self.device = "cuda" if torch.cuda.is_available() else "cpu"
         
-        # Load CLIP model
-        self.model, self.preprocess = clip.load("ViT-B/32", device=self.device)
+        # Load ViT model
+        self.vit_processor = ViTFeatureExtractor.from_pretrained('google/vit-base-patch16-224')
+        self.vit_model = ViTModel.from_pretrained('google/vit-base-patch16-224').to(self.device)
+        self.vit_model.eval()
+        
+        # Load ResNet50 model
+        weights = models.ResNet50_Weights.DEFAULT
+        self.resnet_model = models.resnet50(weights=weights)
+        self.resnet_model = torch.nn.Sequential(*list(self.resnet_model.children())[:-1])
+        self.resnet_model.to(self.device)
+        self.resnet_model.eval()
+        
+        # ResNet preprocessing
+        self.resnet_preprocess = transforms.Compose([
+            transforms.Resize(256),
+            transforms.CenterCrop(224),
+            transforms.ToTensor(),
+            transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
+        ])
         
         # Load ground truth mapping
         self.gt_mapping = self._load_ground_truth_mapping()
@@ -56,23 +78,44 @@ class EmbeddingComparator:
                 embeddings[obj_name] = json.load(f)
         return embeddings
 
-    def generate_embedding(self, image_path: str) -> torch.Tensor:
-        """Generate CLIP embedding for a single image."""
+    def generate_embeddings(self, image_path: str) -> dict:
+        """Generate ViT and ResNet50 embeddings for a single image."""
         try:
             image = Image.open(image_path).convert('RGB')
-            image_input = self.preprocess(image).unsqueeze(0).to(self.device)
+            embeddings = {}
+            
+            # Generate ViT embedding
             with torch.no_grad():
-                image_features = self.model.encode_image(image_input)
-                # Normalize the features
-                image_features = F.normalize(image_features, dim=-1)
-            return image_features.cpu()
+                inputs = self.vit_processor(images=image, return_tensors="pt")
+                inputs = {k: v.to(self.device) for k, v in inputs.items()}
+                outputs = self.vit_model(**inputs)
+                vit_embedding = outputs.last_hidden_state[:, 0, :]  # Use CLS token
+                vit_embedding = F.normalize(vit_embedding, dim=-1)
+                embeddings['vit'] = vit_embedding.squeeze().cpu()
+            
+            # Generate ResNet50 embedding
+            with torch.no_grad():
+                img_tensor = self.resnet_preprocess(image).unsqueeze(0).to(self.device)
+                resnet_embedding = self.resnet_model(img_tensor)
+                resnet_embedding = F.normalize(resnet_embedding.squeeze(), dim=0)
+                embeddings['resnet50'] = resnet_embedding.cpu()
+            
+            return embeddings
         except Exception as e:
-            logger.error(f"Error generating embedding for {image_path}: {e}")
+            logger.error(f"Error generating embeddings for {image_path}: {e}")
             return None
 
     def compute_similarity(self, embedding1: torch.Tensor, embedding2: torch.Tensor) -> float:
         """Compute cosine similarity between two embeddings."""
-        return F.cosine_similarity(embedding1, embedding2).item()
+        # Ensure embeddings are 1D
+        if embedding1.dim() > 1:
+            embedding1 = embedding1.squeeze()
+        if embedding2.dim() > 1:
+            embedding2 = embedding2.squeeze()
+        
+        # Compute cosine similarity
+        similarity = F.cosine_similarity(embedding1.unsqueeze(0), embedding2.unsqueeze(0), dim=1)
+        return similarity.item()
 
     def process_object_folder(self, object_name: str) -> list:
         """Process all detections for a single object."""
@@ -89,7 +132,11 @@ class EmbeddingComparator:
             logger.warning(f"No ground truth found for {object_name}")
             return results
 
-        gt_embedding = torch.tensor(self.gt_embeddings[gt_name]["embeddings"]["clip"])
+        # Get ground truth embeddings for both models
+        gt_embeddings = {
+            'vit': torch.tensor(self.gt_embeddings[gt_name]["embeddings"]["vit"]).squeeze(),
+            'resnet50': torch.tensor(self.gt_embeddings[gt_name]["embeddings"]["resnet50"]).squeeze()
+        }
         threshold = self.gt_mapping["object_classes"][gt_name]["similarity_threshold"]
 
         # Process each timestamp directory
@@ -110,21 +157,31 @@ class EmbeddingComparator:
                 if not crop_path.exists():
                     continue
 
-                # Generate embedding for detection
-                detection_embedding = self.generate_embedding(str(crop_path))
-                if detection_embedding is None:
+                # Generate embeddings for detection
+                detection_embeddings = self.generate_embeddings(str(crop_path))
+                if detection_embeddings is None:
                     continue
 
-                # Compute similarity
-                similarity = self.compute_similarity(detection_embedding, gt_embedding.unsqueeze(0))
+                # Compute similarities for both models
+                similarities = {
+                    model_name: self.compute_similarity(
+                        detection_embeddings[model_name],
+                        gt_embeddings[model_name]
+                    )
+                    for model_name in ['vit', 'resnet50']
+                }
+
+                # Average similarity across models
+                avg_similarity = sum(similarities.values()) / len(similarities)
 
                 results.append({
                     "object_name": object_name,
                     "detection_id": detection["id"],
                     "label": detection["label"],
                     "score": detection["score"],
-                    "similarity": similarity,
-                    "exceeds_threshold": similarity >= threshold,
+                    "similarities": similarities,
+                    "average_similarity": avg_similarity,
+                    "exceeds_threshold": avg_similarity >= threshold,
                     "crop_path": str(crop_path)
                 })
 

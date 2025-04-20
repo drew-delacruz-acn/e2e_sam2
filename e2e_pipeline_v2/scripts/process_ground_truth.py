@@ -16,7 +16,9 @@ import numpy as np
 import torch
 import yaml
 
-from e2e_pipeline_v2.modules.embedding import EmbeddingGenerator
+# Add parent directory to path to import local modules
+sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(__file__))))
+from e2e_pipeline_v2.modules.embedding.generator import EmbeddingGenerator
 
 # Configure logging
 logging.basicConfig(

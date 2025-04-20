@@ -1,0 +1,17 @@
+{
+  "stick": [
+    {
+      "object_name": "stick",
+      "detection_id": "dc7fb3b3",
+      "label": "stick",
+      "score": 0.1225232183933258,
+      "similarities": {
+        "vit": 0.42226603627204895,
+        "resnet50": 0.23646900057792664
+      },
+      "average_similarity": 0.3293675184249878,
+      "exceeds_threshold": false,
+      "crop_path": "/Users/andrewdelacruz/e2e_sam2/gitignore_exception/results/stick/stick-20250416-175214/detections/owlv2-base-patch16/stick_0.12_dc7fb3b3.png"
+    }
+  ]
+}

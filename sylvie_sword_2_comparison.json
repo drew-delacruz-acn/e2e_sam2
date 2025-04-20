@@ -1,0 +1,446 @@
+{
+  "sylvie_holding_loki_dagger": [
+    {
+      "object_name": "sylvie_holding_loki_dagger",
+      "detection_id": "d3bc75f8",
+      "label": "weapon",
+      "score": 0.07807816565036774,
+      "similarities": {
+        "vit": 0.02960202842950821,
+        "resnet50": 0.03739790618419647
+      },
+      "average_similarity": 0.03349996730685234,
+      "exceeds_threshold": false,
+      "crop_path": "/Users/andrewdelacruz/e2e_sam2/gitignore_exception/results/sylvie_holding_loki_dagger/sylvie_holding_loki_dagger-20250416-175724/detections/owlv2-base-patch16/weapon_0.08_d3bc75f8.png"
+    },
+    {
+      "object_name": "sylvie_holding_loki_dagger",
+      "detection_id": "6f144c1d",
+      "label": "weapon",
+      "score": 0.07807816565036774,
+      "similarities": {
+        "vit": 0.02960202842950821,
+        "resnet50": 0.03739790618419647
+      },
+      "average_similarity": 0.03349996730685234,
+      "exceeds_threshold": false,
+      "crop_path": "/Users/andrewdelacruz/e2e_sam2/gitignore_exception/results/sylvie_holding_loki_dagger/sylvie_holding_loki_dagger-20250416-175646/detections/owlv2-base-patch16/weapon_0.08_6f144c1d.png"
+    },
+    {
+      "object_name": "sylvie_holding_loki_dagger",
+      "detection_id": "f0e77e3f",
+      "label": "sword",
+      "score": 0.037892427295446396,
+      "similarities": {
+        "vit": 0.06637157499790192,
+        "resnet50": 0.05578610673546791
+      },
+      "average_similarity": 0.061078840866684914,
+      "exceeds_threshold": false,
+      "crop_path": "/Users/andrewdelacruz/e2e_sam2/gitignore_exception/results/sylvie_holding_loki_dagger/sylvie_holding_loki_dagger-20250416-175646/detections/owlv2-base-patch16/sword_0.04_f0e77e3f.png"
+    },
+    {
+      "object_name": "sylvie_holding_loki_dagger",
+      "detection_id": "71698dfd",
+      "label": "weapon",
+      "score": 0.03514484688639641,
+      "similarities": {
+        "vit": 0.0685359314084053,
+        "resnet50": 0.07225863635540009
+      },
+      "average_similarity": 0.0703972838819027,
+      "exceeds_threshold": false,
+      "crop_path": "/Users/andrewdelacruz/e2e_sam2/gitignore_exception/results/sylvie_holding_loki_dagger/sylvie_holding_loki_dagger-20250416-175646/detections/owlv2-base-patch16/weapon_0.04_71698dfd.png"
+    },
+    {
+      "object_name": "sylvie_holding_loki_dagger",
+      "detection_id": "60ad4ec5",
+      "label": "dagger",
+      "score": 0.034100424498319626,
+      "similarities": {
+        "vit": 0.06746088713407516,
+        "resnet50": 0.06332568824291229
+      },
+      "average_similarity": 0.06539328768849373,
+      "exceeds_threshold": false,
+      "crop_path": "/Users/andrewdelacruz/e2e_sam2/gitignore_exception/results/sylvie_holding_loki_dagger/sylvie_holding_loki_dagger-20250416-175646/detections/owlv2-base-patch16/dagger_0.03_60ad4ec5.png"
+    },
+    {
+      "object_name": "sylvie_holding_loki_dagger",
+      "detection_id": "35ec02a2",
+      "label": "weapon",
+      "score": 0.03358950838446617,
+      "similarities": {
+        "vit": 0.04182370752096176,
+        "resnet50": 0.05513947457075119
+      },
+      "average_similarity": 0.048481591045856476,
+      "exceeds_threshold": false,
+      "crop_path": "/Users/andrewdelacruz/e2e_sam2/gitignore_exception/results/sylvie_holding_loki_dagger/sylvie_holding_loki_dagger-20250416-175646/detections/owlv2-base-patch16/weapon_0.03_35ec02a2.png"
+    },
+    {
+      "object_name": "sylvie_holding_loki_dagger",
+      "detection_id": "cc3a7e60",
+      "label": "dagger",
+      "score": 0.027585282921791077,
+      "similarities": {
+        "vit": 0.06253856420516968,
+        "resnet50": 0.04782681539654732
+      },
+      "average_similarity": 0.0551826898008585,
+      "exceeds_threshold": false,
+      "crop_path": "/Users/andrewdelacruz/e2e_sam2/gitignore_exception/results/sylvie_holding_loki_dagger/sylvie_holding_loki_dagger-20250416-175646/detections/owlv2-base-patch16/dagger_0.03_cc3a7e60.png"
+    },
+    {
+      "object_name": "sylvie_holding_loki_dagger",
+      "detection_id": "4cfa7919",
+      "label": "weapon",
+      "score": 0.027585282921791077,
+      "similarities": {
+        "vit": 0.06142804026603699,
+        "resnet50": 0.044018737971782684
+      },
+      "average_similarity": 0.052723389118909836,
+      "exceeds_threshold": false,
+      "crop_path": "/Users/andrewdelacruz/e2e_sam2/gitignore_exception/results/sylvie_holding_loki_dagger/sylvie_holding_loki_dagger-20250416-175646/detections/owlv2-base-patch16/weapon_0.03_4cfa7919.png"
+    },
+    {
+      "object_name": "sylvie_holding_loki_dagger",
+      "detection_id": "84421b83",
+      "label": "sword",
+      "score": 0.024423090741038322,
+      "similarities": {
+        "vit": 0.10580652207136154,
+        "resnet50": 0.18663296103477478
+      },
+      "average_similarity": 0.14621974155306816,
+      "exceeds_threshold": false,
+      "crop_path": "/Users/andrewdelacruz/e2e_sam2/gitignore_exception/results/sylvie_holding_loki_dagger/sylvie_holding_loki_dagger-20250416-175646/detections/owlv2-base-patch16/sword_0.02_84421b83.png"
+    },
+    {
+      "object_name": "sylvie_holding_loki_dagger",
+      "detection_id": "6cba76dc",
+      "label": "sword",
+      "score": 0.01798621006309986,
+      "similarities": {
+        "vit": 0.012377636507153511,
+        "resnet50": 0.10630793869495392
+      },
+      "average_similarity": 0.059342787601053715,
+      "exceeds_threshold": false,
+      "crop_path": "/Users/andrewdelacruz/e2e_sam2/gitignore_exception/results/sylvie_holding_loki_dagger/sylvie_holding_loki_dagger-20250416-175646/detections/owlv2-base-patch16/sword_0.02_6cba76dc.png"
+    },
+    {
+      "object_name": "sylvie_holding_loki_dagger",
+      "detection_id": "be389193",
+      "label": "dagger",
+      "score": 0.01798621006309986,
+      "similarities": {
+        "vit": 0.08513055741786957,
+        "resnet50": 0.07883654534816742
+      },
+      "average_similarity": 0.0819835513830185,
+      "exceeds_threshold": false,
+      "crop_path": "/Users/andrewdelacruz/e2e_sam2/gitignore_exception/results/sylvie_holding_loki_dagger/sylvie_holding_loki_dagger-20250416-175646/detections/owlv2-base-patch16/dagger_0.02_be389193.png"
+    },
+    {
+      "object_name": "sylvie_holding_loki_dagger",
+      "detection_id": "1d99a662",
+      "label": "dagger",
+      "score": 0.017442485317587852,
+      "similarities": {
+        "vit": 0.06511817127466202,
+        "resnet50": 0.05666836351156235
+      },
+      "average_similarity": 0.06089326739311218,
+      "exceeds_threshold": false,
+      "crop_path": "/Users/andrewdelacruz/e2e_sam2/gitignore_exception/results/sylvie_holding_loki_dagger/sylvie_holding_loki_dagger-20250416-175646/detections/owlv2-base-patch16/dagger_0.02_1d99a662.png"
+    },
+    {
+      "object_name": "sylvie_holding_loki_dagger",
+      "detection_id": "d941c882",
+      "label": "sword",
+      "score": 0.016914913430809975,
+      "similarities": {
+        "vit": 0.0854407548904419,
+        "resnet50": 0.0801064670085907
+      },
+      "average_similarity": 0.0827736109495163,
+      "exceeds_threshold": false,
+      "crop_path": "/Users/andrewdelacruz/e2e_sam2/gitignore_exception/results/sylvie_holding_loki_dagger/sylvie_holding_loki_dagger-20250416-175646/detections/owlv2-base-patch16/sword_0.02_d941c882.png"
+    },
+    {
+      "object_name": "sylvie_holding_loki_dagger",
+      "detection_id": "9cd31565",
+      "label": "sword",
+      "score": 0.01640303246676922,
+      "similarities": {
+        "vit": 0.03219154477119446,
+        "resnet50": 0.054457321763038635
+      },
+      "average_similarity": 0.04332443326711655,
+      "exceeds_threshold": false,
+      "crop_path": "/Users/andrewdelacruz/e2e_sam2/gitignore_exception/results/sylvie_holding_loki_dagger/sylvie_holding_loki_dagger-20250416-175646/detections/owlv2-base-patch16/sword_0.02_9cd31565.png"
+    },
+    {
+      "object_name": "sylvie_holding_loki_dagger",
+      "detection_id": "dc915000",
+      "label": "dagger",
+      "score": 0.01590639166533947,
+      "similarities": {
+        "vit": 0.09187699109315872,
+        "resnet50": 0.0329962819814682
+      },
+      "average_similarity": 0.06243663653731346,
+      "exceeds_threshold": false,
+      "crop_path": "/Users/andrewdelacruz/e2e_sam2/gitignore_exception/results/sylvie_holding_loki_dagger/sylvie_holding_loki_dagger-20250416-175646/detections/owlv2-base-patch16/dagger_0.02_dc915000.png"
+    },
+    {
+      "object_name": "sylvie_holding_loki_dagger",
+      "detection_id": "57479d0a",
+      "label": "sword",
+      "score": 0.015424552373588085,
+      "similarities": {
+        "vit": 0.05875420942902565,
+        "resnet50": 0.10024751722812653
+      },
+      "average_similarity": 0.07950086332857609,
+      "exceeds_threshold": false,
+      "crop_path": "/Users/andrewdelacruz/e2e_sam2/gitignore_exception/results/sylvie_holding_loki_dagger/sylvie_holding_loki_dagger-20250416-175646/detections/owlv2-base-patch16/sword_0.02_57479d0a.png"
+    },
+    {
+      "object_name": "sylvie_holding_loki_dagger",
+      "detection_id": "d1c160e0",
+      "label": "dagger",
+      "score": 0.015424552373588085,
+      "similarities": {
+        "vit": 0.046586960554122925,
+        "resnet50": 0.03497782349586487
+      },
+      "average_similarity": 0.040782392024993896,
+      "exceeds_threshold": false,
+      "crop_path": "/Users/andrewdelacruz/e2e_sam2/gitignore_exception/results/sylvie_holding_loki_dagger/sylvie_holding_loki_dagger-20250416-175646/detections/owlv2-base-patch16/dagger_0.02_d1c160e0.png"
+    },
+    {
+      "object_name": "sylvie_holding_loki_dagger",
+      "detection_id": "35dc30d7",
+      "label": "sword",
+      "score": 0.014503579586744308,
+      "similarities": {
+        "vit": 0.046399276703596115,
+        "resnet50": 0.0763590857386589
+      },
+      "average_similarity": 0.06137918122112751,
+      "exceeds_threshold": false,
+      "crop_path": "/Users/andrewdelacruz/e2e_sam2/gitignore_exception/results/sylvie_holding_loki_dagger/sylvie_holding_loki_dagger-20250416-175646/detections/owlv2-base-patch16/sword_0.01_35dc30d7.png"
+    },
+    {
+      "object_name": "sylvie_holding_loki_dagger",
+      "detection_id": "7a1a527a",
+      "label": "sword",
+      "score": 0.014503579586744308,
+      "similarities": {
+        "vit": 0.06966830044984818,
+        "resnet50": 0.08791220933198929
+      },
+      "average_similarity": 0.07879025489091873,
+      "exceeds_threshold": false,
+      "crop_path": "/Users/andrewdelacruz/e2e_sam2/gitignore_exception/results/sylvie_holding_loki_dagger/sylvie_holding_loki_dagger-20250416-175646/detections/owlv2-base-patch16/sword_0.01_7a1a527a.png"
+    },
+    {
+      "object_name": "sylvie_holding_loki_dagger",
+      "detection_id": "5fe11d35",
+      "label": "sword",
+      "score": 0.014503579586744308,
+      "similarities": {
+        "vit": 0.06685224175453186,
+        "resnet50": 0.060341112315654755
+      },
+      "average_similarity": 0.06359667703509331,
+      "exceeds_threshold": false,
+      "crop_path": "/Users/andrewdelacruz/e2e_sam2/gitignore_exception/results/sylvie_holding_loki_dagger/sylvie_holding_loki_dagger-20250416-175646/detections/owlv2-base-patch16/sword_0.01_5fe11d35.png"
+    },
+    {
+      "object_name": "sylvie_holding_loki_dagger",
+      "detection_id": "604ed0ad",
+      "label": "weapon",
+      "score": 0.014063628390431404,
+      "similarities": {
+        "vit": 0.05452374368906021,
+        "resnet50": 0.12221009284257889
+      },
+      "average_similarity": 0.08836691826581955,
+      "exceeds_threshold": false,
+      "crop_path": "/Users/andrewdelacruz/e2e_sam2/gitignore_exception/results/sylvie_holding_loki_dagger/sylvie_holding_loki_dagger-20250416-175646/detections/owlv2-base-patch16/weapon_0.01_604ed0ad.png"
+    },
+    {
+      "object_name": "sylvie_holding_loki_dagger",
+      "detection_id": "136595bb",
+      "label": "sword",
+      "score": 0.013222821988165379,
+      "similarities": {
+        "vit": 0.05902925878763199,
+        "resnet50": 0.047311536967754364
+      },
+      "average_similarity": 0.053170397877693176,
+      "exceeds_threshold": false,
+      "crop_path": "/Users/andrewdelacruz/e2e_sam2/gitignore_exception/results/sylvie_holding_loki_dagger/sylvie_holding_loki_dagger-20250416-175646/detections/owlv2-base-patch16/sword_0.01_136595bb.png"
+    },
+    {
+      "object_name": "sylvie_holding_loki_dagger",
+      "detection_id": "cc4f5b7d",
+      "label": "weapon",
+      "score": 0.012821214273571968,
+      "similarities": {
+        "vit": 0.02864280715584755,
+        "resnet50": 0.09647927433252335
+      },
+      "average_similarity": 0.06256104074418545,
+      "exceeds_threshold": false,
+      "crop_path": "/Users/andrewdelacruz/e2e_sam2/gitignore_exception/results/sylvie_holding_loki_dagger/sylvie_holding_loki_dagger-20250416-175646/detections/owlv2-base-patch16/weapon_0.01_cc4f5b7d.png"
+    },
+    {
+      "object_name": "sylvie_holding_loki_dagger",
+      "detection_id": "664821a1",
+      "label": "sword",
+      "score": 0.012821214273571968,
+      "similarities": {
+        "vit": 0.04970284923911095,
+        "resnet50": 0.060126837342977524
+      },
+      "average_similarity": 0.054914843291044235,
+      "exceeds_threshold": false,
+      "crop_path": "/Users/andrewdelacruz/e2e_sam2/gitignore_exception/results/sylvie_holding_loki_dagger/sylvie_holding_loki_dagger-20250416-175646/detections/owlv2-base-patch16/sword_0.01_664821a1.png"
+    },
+    {
+      "object_name": "sylvie_holding_loki_dagger",
+      "detection_id": "7e2af0ab",
+      "label": "sword",
+      "score": 0.012431650422513485,
+      "similarities": {
+        "vit": 0.13012827932834625,
+        "resnet50": 0.03627721592783928
+      },
+      "average_similarity": 0.08320274762809277,
+      "exceeds_threshold": false,
+      "crop_path": "/Users/andrewdelacruz/e2e_sam2/gitignore_exception/results/sylvie_holding_loki_dagger/sylvie_holding_loki_dagger-20250416-175646/detections/owlv2-base-patch16/sword_0.01_7e2af0ab.png"
+    },
+    {
+      "object_name": "sylvie_holding_loki_dagger",
+      "detection_id": "dc2a0ce9",
+      "label": "sword",
+      "score": 0.0120537793263793,
+      "similarities": {
+        "vit": -0.0011921487748622894,
+        "resnet50": 0.047132231295108795
+      },
+      "average_similarity": 0.022970041260123253,
+      "exceeds_threshold": false,
+      "crop_path": "/Users/andrewdelacruz/e2e_sam2/gitignore_exception/results/sylvie_holding_loki_dagger/sylvie_holding_loki_dagger-20250416-175646/detections/owlv2-base-patch16/sword_0.01_dc2a0ce9.png"
+    },
+    {
+      "object_name": "sylvie_holding_loki_dagger",
+      "detection_id": "c4c6f707",
+      "label": "sword",
+      "score": 0.0120537793263793,
+      "similarities": {
+        "vit": 0.004136338829994202,
+        "resnet50": 0.049781545996665955
+      },
+      "average_similarity": 0.026958942413330078,
+      "exceeds_threshold": false,
+      "crop_path": "/Users/andrewdelacruz/e2e_sam2/gitignore_exception/results/sylvie_holding_loki_dagger/sylvie_holding_loki_dagger-20250416-175646/detections/owlv2-base-patch16/sword_0.01_c4c6f707.png"
+    },
+    {
+      "object_name": "sylvie_holding_loki_dagger",
+      "detection_id": "2bfa4bd8",
+      "label": "weapon",
+      "score": 0.0120537793263793,
+      "similarities": {
+        "vit": 0.05833932384848595,
+        "resnet50": 0.1513817012310028
+      },
+      "average_similarity": 0.10486051253974438,
+      "exceeds_threshold": false,
+      "crop_path": "/Users/andrewdelacruz/e2e_sam2/gitignore_exception/results/sylvie_holding_loki_dagger/sylvie_holding_loki_dagger-20250416-175646/detections/owlv2-base-patch16/weapon_0.01_2bfa4bd8.png"
+    },
+    {
+      "object_name": "sylvie_holding_loki_dagger",
+      "detection_id": "8e621cfe",
+      "label": "dagger",
+      "score": 0.0120537793263793,
+      "similarities": {
+        "vit": 0.013349544256925583,
+        "resnet50": 0.05233804136514664
+      },
+      "average_similarity": 0.03284379281103611,
+      "exceeds_threshold": false,
+      "crop_path": "/Users/andrewdelacruz/e2e_sam2/gitignore_exception/results/sylvie_holding_loki_dagger/sylvie_holding_loki_dagger-20250416-175646/detections/owlv2-base-patch16/dagger_0.01_8e621cfe.png"
+    },
+    {
+      "object_name": "sylvie_holding_loki_dagger",
+      "detection_id": "2c3b64c0",
+      "label": "sword",
+      "score": 0.011331753805279732,
+      "similarities": {
+        "vit": 0.11948946118354797,
+        "resnet50": 0.13369785249233246
+      },
+      "average_similarity": 0.12659365683794022,
+      "exceeds_threshold": false,
+      "crop_path": "/Users/andrewdelacruz/e2e_sam2/gitignore_exception/results/sylvie_holding_loki_dagger/sylvie_holding_loki_dagger-20250416-175646/detections/owlv2-base-patch16/sword_0.01_2c3b64c0.png"
+    },
+    {
+      "object_name": "sylvie_holding_loki_dagger",
+      "detection_id": "44dc59f5",
+      "label": "sword",
+      "score": 0.011331753805279732,
+      "similarities": {
+        "vit": 0.0721745640039444,
+        "resnet50": 0.05406250059604645
+      },
+      "average_similarity": 0.06311853229999542,
+      "exceeds_threshold": false,
+      "crop_path": "/Users/andrewdelacruz/e2e_sam2/gitignore_exception/results/sylvie_holding_loki_dagger/sylvie_holding_loki_dagger-20250416-175646/detections/owlv2-base-patch16/sword_0.01_44dc59f5.png"
+    },
+    {
+      "object_name": "sylvie_holding_loki_dagger",
+      "detection_id": "53183bf6",
+      "label": "sword",
+      "score": 0.010986941866576672,
+      "similarities": {
+        "vit": 0.048179272562265396,
+        "resnet50": 0.07070863246917725
+      },
+      "average_similarity": 0.05944395251572132,
+      "exceeds_threshold": false,
+      "crop_path": "/Users/andrewdelacruz/e2e_sam2/gitignore_exception/results/sylvie_holding_loki_dagger/sylvie_holding_loki_dagger-20250416-175646/detections/owlv2-base-patch16/sword_0.01_53183bf6.png"
+    },
+    {
+      "object_name": "sylvie_holding_loki_dagger",
+      "detection_id": "af67070f",
+      "label": "sword",
+      "score": 0.01065251138061285,
+      "similarities": {
+        "vit": 0.034529875963926315,
+        "resnet50": 0.1313573271036148
+      },
+      "average_similarity": 0.08294360153377056,
+      "exceeds_threshold": false,
+      "crop_path": "/Users/andrewdelacruz/e2e_sam2/gitignore_exception/results/sylvie_holding_loki_dagger/sylvie_holding_loki_dagger-20250416-175646/detections/owlv2-base-patch16/sword_0.01_af67070f.png"
+    },
+    {
+      "object_name": "sylvie_holding_loki_dagger",
+      "detection_id": "31842799",
+      "label": "sword",
+      "score": 0.010328153148293495,
+      "similarities": {
+        "vit": 0.15233707427978516,
+        "resnet50": 0.07845403254032135
+      },
+      "average_similarity": 0.11539555341005325,
+      "exceeds_threshold": false,
+      "crop_path": "/Users/andrewdelacruz/e2e_sam2/gitignore_exception/results/sylvie_holding_loki_dagger/sylvie_holding_loki_dagger-20250416-175646/detections/owlv2-base-patch16/sword_0.01_31842799.png"
+    }
+  ]
+}

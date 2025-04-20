@@ -1,0 +1,43 @@
+{
+  "loki_daggers": [
+    {
+      "object_name": "loki_daggers",
+      "detection_id": "dff6571f",
+      "label": "daggers",
+      "score": 0.16132023930549622,
+      "similarities": {
+        "vit": 0.4983128607273102,
+        "resnet50": 0.41026854515075684
+      },
+      "average_similarity": 0.4542907029390335,
+      "exceeds_threshold": false,
+      "crop_path": "/Users/andrewdelacruz/e2e_sam2/gitignore_exception/results/loki_daggers/loki_daggers-20250416-174836/detections/owlv2-base-patch16/daggers_0.16_dff6571f.png"
+    },
+    {
+      "object_name": "loki_daggers",
+      "detection_id": "51f17659",
+      "label": "daggers",
+      "score": 0.14318770170211792,
+      "similarities": {
+        "vit": 0.3366798162460327,
+        "resnet50": 0.3546869158744812
+      },
+      "average_similarity": 0.34568336606025696,
+      "exceeds_threshold": false,
+      "crop_path": "/Users/andrewdelacruz/e2e_sam2/gitignore_exception/results/loki_daggers/loki_daggers-20250416-174836/detections/owlv2-base-patch16/daggers_0.14_51f17659.png"
+    },
+    {
+      "object_name": "loki_daggers",
+      "detection_id": "f889954e",
+      "label": "daggers",
+      "score": 0.11436853557825089,
+      "similarities": {
+        "vit": 0.3288501501083374,
+        "resnet50": 0.07769661396741867
+      },
+      "average_similarity": 0.20327338203787804,
+      "exceeds_threshold": false,
+      "crop_path": "/Users/andrewdelacruz/e2e_sam2/gitignore_exception/results/loki_daggers/loki_daggers-20250416-174836/detections/owlv2-base-patch16/daggers_0.11_f889954e.png"
+    }
+  ]
+}

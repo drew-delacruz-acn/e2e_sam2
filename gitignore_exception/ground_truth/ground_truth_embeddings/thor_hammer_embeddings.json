@@ -1,6 +1,6 @@
 {
-  "object_name": "mjolnir_gt",
-  "image_path": "gitignore_exception/ground_truth/ground_truth_images/mjolnir_gt.jpeg",
+  "object_name": "thor_hammer",
+  "image_path": "gitignore_exception/ground_truth/ground_truth_images/thor_hammer.jpeg",
   "embeddings": {
     "vit": [
       -0.042976319789886475,

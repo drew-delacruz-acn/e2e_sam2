@@ -1,6 +1,6 @@
 {
-  "object_name": "sylive_sword",
-  "image_path": "gitignore_exception/ground_truth/ground_truth_images/sylive_sword.jpg",
+  "object_name": "sylvie_sword",
+  "image_path": "gitignore_exception/ground_truth/ground_truth_images/sylvie_sword.jpg",
   "embeddings": {
     "vit": [
       -0.011066225357353687,

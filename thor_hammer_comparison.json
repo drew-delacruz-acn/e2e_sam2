@@ -1,0 +1,134 @@
+{
+  "thor_hammer": [
+    {
+      "object_name": "thor_hammer",
+      "detection_id": "c3d00aa1",
+      "label": "hammer",
+      "score": 0.42536652088165283,
+      "similarities": {
+        "vit": 0.312253475189209,
+        "resnet50": 0.1886637806892395
+      },
+      "average_similarity": 0.25045862793922424,
+      "exceeds_threshold": false,
+      "crop_path": "/Users/andrewdelacruz/e2e_sam2/gitignore_exception/results/thor_hammer/thor_hammer-20250416-174929/detections/owlv2-base-patch16/hammer_0.43_c3d00aa1.png"
+    },
+    {
+      "object_name": "thor_hammer",
+      "detection_id": "4bed479a",
+      "label": "hammer",
+      "score": 0.3747906982898712,
+      "similarities": {
+        "vit": 0.06515282392501831,
+        "resnet50": 0.10624797642230988
+      },
+      "average_similarity": 0.08570040017366409,
+      "exceeds_threshold": false,
+      "crop_path": "/Users/andrewdelacruz/e2e_sam2/gitignore_exception/results/thor_hammer/thor_hammer-20250416-174929/detections/owlv2-base-patch16/hammer_0.37_4bed479a.png"
+    },
+    {
+      "object_name": "thor_hammer",
+      "detection_id": "4e6e17ab",
+      "label": "hammer",
+      "score": 0.32766830921173096,
+      "similarities": {
+        "vit": 0.06124028563499451,
+        "resnet50": 0.17712242901325226
+      },
+      "average_similarity": 0.11918135732412338,
+      "exceeds_threshold": false,
+      "crop_path": "/Users/andrewdelacruz/e2e_sam2/gitignore_exception/results/thor_hammer/thor_hammer-20250416-174929/detections/owlv2-base-patch16/hammer_0.33_4e6e17ab.png"
+    },
+    {
+      "object_name": "thor_hammer",
+      "detection_id": "f201918b",
+      "label": "hammer",
+      "score": 0.22270013391971588,
+      "similarities": {
+        "vit": 0.03693299740552902,
+        "resnet50": 0.1219128668308258
+      },
+      "average_similarity": 0.07942293211817741,
+      "exceeds_threshold": false,
+      "crop_path": "/Users/andrewdelacruz/e2e_sam2/gitignore_exception/results/thor_hammer/thor_hammer-20250416-174929/detections/owlv2-base-patch16/hammer_0.22_f201918b.png"
+    },
+    {
+      "object_name": "thor_hammer",
+      "detection_id": "f472e308",
+      "label": "hammer",
+      "score": 0.20817892253398895,
+      "similarities": {
+        "vit": 0.02540706843137741,
+        "resnet50": 0.13103614747524261
+      },
+      "average_similarity": 0.07822160795331001,
+      "exceeds_threshold": false,
+      "crop_path": "/Users/andrewdelacruz/e2e_sam2/gitignore_exception/results/thor_hammer/thor_hammer-20250416-174929/detections/owlv2-base-patch16/hammer_0.21_f472e308.png"
+    },
+    {
+      "object_name": "thor_hammer",
+      "detection_id": "35fdabe3",
+      "label": "hammer",
+      "score": 0.13386748731136322,
+      "similarities": {
+        "vit": 0.14142301678657532,
+        "resnet50": 0.16766098141670227
+      },
+      "average_similarity": 0.1545419991016388,
+      "exceeds_threshold": false,
+      "crop_path": "/Users/andrewdelacruz/e2e_sam2/gitignore_exception/results/thor_hammer/thor_hammer-20250416-174929/detections/owlv2-base-patch16/hammer_0.13_35fdabe3.png"
+    },
+    {
+      "object_name": "thor_hammer",
+      "detection_id": "2fea0ce1",
+      "label": "hammer",
+      "score": 0.1233656257390976,
+      "similarities": {
+        "vit": 0.013547152280807495,
+        "resnet50": 0.14952273666858673
+      },
+      "average_similarity": 0.08153494447469711,
+      "exceeds_threshold": false,
+      "crop_path": "/Users/andrewdelacruz/e2e_sam2/gitignore_exception/results/thor_hammer/thor_hammer-20250416-174929/detections/owlv2-base-patch16/hammer_0.12_2fea0ce1.png"
+    },
+    {
+      "object_name": "thor_hammer",
+      "detection_id": "aecc76ee",
+      "label": "hammer",
+      "score": 0.12085322290658951,
+      "similarities": {
+        "vit": 0.06551983952522278,
+        "resnet50": 0.2104296088218689
+      },
+      "average_similarity": 0.13797472417354584,
+      "exceeds_threshold": false,
+      "crop_path": "/Users/andrewdelacruz/e2e_sam2/gitignore_exception/results/thor_hammer/thor_hammer-20250416-174929/detections/owlv2-base-patch16/hammer_0.12_aecc76ee.png"
+    },
+    {
+      "object_name": "thor_hammer",
+      "detection_id": "3478ed8f",
+      "label": "hammer",
+      "score": 0.11124119907617569,
+      "similarities": {
+        "vit": 0.04754335433244705,
+        "resnet50": 0.1849348247051239
+      },
+      "average_similarity": 0.11623908951878548,
+      "exceeds_threshold": false,
+      "crop_path": "/Users/andrewdelacruz/e2e_sam2/gitignore_exception/results/thor_hammer/thor_hammer-20250416-174929/detections/owlv2-base-patch16/hammer_0.11_3478ed8f.png"
+    },
+    {
+      "object_name": "thor_hammer",
+      "detection_id": "7c3caf5d",
+      "label": "hammer",
+      "score": 0.10818895697593689,
+      "similarities": {
+        "vit": 0.04841066151857376,
+        "resnet50": 0.18727560341358185
+      },
+      "average_similarity": 0.1178431324660778,
+      "exceeds_threshold": false,
+      "crop_path": "/Users/andrewdelacruz/e2e_sam2/gitignore_exception/results/thor_hammer/thor_hammer-20250416-174929/detections/owlv2-base-patch16/hammer_0.11_7c3caf5d.png"
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "loki_crown": [
+    {
+      "object_name": "loki_crown",
+      "detection_id": "05791550",
+      "label": "headpiece",
+      "score": 0.32338011264801025,
+      "similarities": {
+        "vit": 0.2897554039955139,
+        "resnet50": 0.3211299777030945
+      },
+      "average_similarity": 0.3054426908493042,
+      "exceeds_threshold": false,
+      "crop_path": "/Users/andrewdelacruz/e2e_sam2/gitignore_exception/results/loki_crown/loki_crown-20250416-175335/detections/owlv2-base-patch16/headpiece_0.32_05791550.png"
+    },
+    {
+      "object_name": "loki_crown",
+      "detection_id": "a2553619",
+      "label": "headpiece",
+      "score": 0.13296423852443695,
+      "similarities": {
+        "vit": 0.15382513403892517,
+        "resnet50": 0.20443984866142273
+      },
+      "average_similarity": 0.17913249135017395,
+      "exceeds_threshold": false,
+      "crop_path": "/Users/andrewdelacruz/e2e_sam2/gitignore_exception/results/loki_crown/loki_crown-20250416-175335/detections/owlv2-base-patch16/headpiece_0.13_a2553619.png"
+    }
+  ]
+}

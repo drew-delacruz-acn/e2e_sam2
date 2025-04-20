@@ -1,0 +1,303 @@
+{
+  "tesseract": [
+    {
+      "object_name": "tesseract",
+      "detection_id": "c21c0953",
+      "label": "tesseract",
+      "score": 0.39606815576553345,
+      "similarities": {
+        "vit": 0.2370212823152542,
+        "resnet50": 0.20301561057567596
+      },
+      "average_similarity": 0.2200184464454651,
+      "exceeds_threshold": false,
+      "crop_path": "/Users/andrewdelacruz/e2e_sam2/gitignore_exception/results/tesseract/tesseract-20250416-174730/detections/owlv2-base-patch16/tesseract_0.40_c21c0953.png"
+    },
+    {
+      "object_name": "tesseract",
+      "detection_id": "3d97f4ae",
+      "label": "glow object",
+      "score": 0.1710611879825592,
+      "similarities": {
+        "vit": 0.1115017682313919,
+        "resnet50": 0.1355196237564087
+      },
+      "average_similarity": 0.1235106959939003,
+      "exceeds_threshold": false,
+      "crop_path": "/Users/andrewdelacruz/e2e_sam2/gitignore_exception/results/tesseract/tesseract-20250416-174730/detections/owlv2-base-patch16/glow object_0.17_3d97f4ae.png"
+    },
+    {
+      "object_name": "tesseract",
+      "detection_id": "0a051779",
+      "label": "energy object",
+      "score": 0.14414885640144348,
+      "similarities": {
+        "vit": 0.15651822090148926,
+        "resnet50": 0.16456134617328644
+      },
+      "average_similarity": 0.16053978353738785,
+      "exceeds_threshold": false,
+      "crop_path": "/Users/andrewdelacruz/e2e_sam2/gitignore_exception/results/tesseract/tesseract-20250416-174730/detections/owlv2-base-patch16/energy object_0.14_0a051779.png"
+    },
+    {
+      "object_name": "tesseract",
+      "detection_id": "70c5e589",
+      "label": "glow object",
+      "score": 0.12852513790130615,
+      "similarities": {
+        "vit": 0.07563966512680054,
+        "resnet50": 0.11892476677894592
+      },
+      "average_similarity": 0.09728221595287323,
+      "exceeds_threshold": false,
+      "crop_path": "/Users/andrewdelacruz/e2e_sam2/gitignore_exception/results/tesseract/tesseract-20250416-174730/detections/owlv2-base-patch16/glow object_0.13_70c5e589.png"
+    },
+    {
+      "object_name": "tesseract",
+      "detection_id": "67137145",
+      "label": "energy object",
+      "score": 0.10669060051441193,
+      "similarities": {
+        "vit": 0.19948209822177887,
+        "resnet50": 0.2619481682777405
+      },
+      "average_similarity": 0.23071513324975967,
+      "exceeds_threshold": false,
+      "crop_path": "/Users/andrewdelacruz/e2e_sam2/gitignore_exception/results/tesseract/tesseract-20250416-174730/detections/owlv2-base-patch16/energy object_0.11_67137145.png"
+    },
+    {
+      "object_name": "tesseract",
+      "detection_id": "071bee82",
+      "label": "tesseract",
+      "score": 0.39606815576553345,
+      "similarities": {
+        "vit": 0.2370212823152542,
+        "resnet50": 0.20301561057567596
+      },
+      "average_similarity": 0.2200184464454651,
+      "exceeds_threshold": false,
+      "crop_path": "/Users/andrewdelacruz/e2e_sam2/gitignore_exception/results/tesseract/tesseract-20250416-174628/detections/owlv2-base-patch16/tesseract_0.40_071bee82.png"
+    },
+    {
+      "object_name": "tesseract",
+      "detection_id": "38b39e2f",
+      "label": "glow object",
+      "score": 0.1710611879825592,
+      "similarities": {
+        "vit": 0.1115017682313919,
+        "resnet50": 0.1355196237564087
+      },
+      "average_similarity": 0.1235106959939003,
+      "exceeds_threshold": false,
+      "crop_path": "/Users/andrewdelacruz/e2e_sam2/gitignore_exception/results/tesseract/tesseract-20250416-174628/detections/owlv2-base-patch16/glow object_0.17_38b39e2f.png"
+    },
+    {
+      "object_name": "tesseract",
+      "detection_id": "fa94ed99",
+      "label": "energy object",
+      "score": 0.14414885640144348,
+      "similarities": {
+        "vit": 0.15651822090148926,
+        "resnet50": 0.16456134617328644
+      },
+      "average_similarity": 0.16053978353738785,
+      "exceeds_threshold": false,
+      "crop_path": "/Users/andrewdelacruz/e2e_sam2/gitignore_exception/results/tesseract/tesseract-20250416-174628/detections/owlv2-base-patch16/energy object_0.14_fa94ed99.png"
+    },
+    {
+      "object_name": "tesseract",
+      "detection_id": "fb558db4",
+      "label": "glow object",
+      "score": 0.12852513790130615,
+      "similarities": {
+        "vit": 0.07563966512680054,
+        "resnet50": 0.11892476677894592
+      },
+      "average_similarity": 0.09728221595287323,
+      "exceeds_threshold": false,
+      "crop_path": "/Users/andrewdelacruz/e2e_sam2/gitignore_exception/results/tesseract/tesseract-20250416-174628/detections/owlv2-base-patch16/glow object_0.13_fb558db4.png"
+    },
+    {
+      "object_name": "tesseract",
+      "detection_id": "d84b1696",
+      "label": "energy object",
+      "score": 0.10669060051441193,
+      "similarities": {
+        "vit": 0.19948209822177887,
+        "resnet50": 0.2619481682777405
+      },
+      "average_similarity": 0.23071513324975967,
+      "exceeds_threshold": false,
+      "crop_path": "/Users/andrewdelacruz/e2e_sam2/gitignore_exception/results/tesseract/tesseract-20250416-174628/detections/owlv2-base-patch16/energy object_0.11_d84b1696.png"
+    },
+    {
+      "object_name": "tesseract",
+      "detection_id": "7331a044",
+      "label": "glow object",
+      "score": 0.0792103186249733,
+      "similarities": {
+        "vit": 0.14422129094600677,
+        "resnet50": 0.12181755155324936
+      },
+      "average_similarity": 0.13301942124962807,
+      "exceeds_threshold": false,
+      "crop_path": "/Users/andrewdelacruz/e2e_sam2/gitignore_exception/results/tesseract/tesseract-20250416-174628/detections/owlv2-base-patch16/glow object_0.08_7331a044.png"
+    },
+    {
+      "object_name": "tesseract",
+      "detection_id": "e62af01a",
+      "label": "tesseract",
+      "score": 0.07055959850549698,
+      "similarities": {
+        "vit": 0.03724072128534317,
+        "resnet50": 0.1596546173095703
+      },
+      "average_similarity": 0.09844766929745674,
+      "exceeds_threshold": false,
+      "crop_path": "/Users/andrewdelacruz/e2e_sam2/gitignore_exception/results/tesseract/tesseract-20250416-174628/detections/owlv2-base-patch16/tesseract_0.07_e62af01a.png"
+    },
+    {
+      "object_name": "tesseract",
+      "detection_id": "fbaa4259",
+      "label": "tesseract",
+      "score": 0.06853749603033066,
+      "similarities": {
+        "vit": 0.1827131062746048,
+        "resnet50": 0.10567984730005264
+      },
+      "average_similarity": 0.14419647678732872,
+      "exceeds_threshold": false,
+      "crop_path": "/Users/andrewdelacruz/e2e_sam2/gitignore_exception/results/tesseract/tesseract-20250416-174628/detections/owlv2-base-patch16/tesseract_0.07_fbaa4259.png"
+    },
+    {
+      "object_name": "tesseract",
+      "detection_id": "3bbcf30c",
+      "label": "energy object",
+      "score": 0.06465348601341248,
+      "similarities": {
+        "vit": 0.2428683191537857,
+        "resnet50": 0.3203885555267334
+      },
+      "average_similarity": 0.28162843734025955,
+      "exceeds_threshold": false,
+      "crop_path": "/Users/andrewdelacruz/e2e_sam2/gitignore_exception/results/tesseract/tesseract-20250416-174628/detections/owlv2-base-patch16/energy object_0.06_3bbcf30c.png"
+    },
+    {
+      "object_name": "tesseract",
+      "detection_id": "a2feb5f0",
+      "label": "glow object",
+      "score": 0.05749328061938286,
+      "similarities": {
+        "vit": 0.07943025231361389,
+        "resnet50": 0.19462421536445618
+      },
+      "average_similarity": 0.13702723383903503,
+      "exceeds_threshold": false,
+      "crop_path": "/Users/andrewdelacruz/e2e_sam2/gitignore_exception/results/tesseract/tesseract-20250416-174628/detections/owlv2-base-patch16/glow object_0.06_a2feb5f0.png"
+    },
+    {
+      "object_name": "tesseract",
+      "detection_id": "d1fbd3cf",
+      "label": "energy object",
+      "score": 0.054198723286390305,
+      "similarities": {
+        "vit": 0.2258959859609604,
+        "resnet50": 0.19055131077766418
+      },
+      "average_similarity": 0.2082236483693123,
+      "exceeds_threshold": false,
+      "crop_path": "/Users/andrewdelacruz/e2e_sam2/gitignore_exception/results/tesseract/tesseract-20250416-174628/detections/owlv2-base-patch16/energy object_0.05_d1fbd3cf.png"
+    },
+    {
+      "object_name": "tesseract",
+      "detection_id": "099a949b",
+      "label": "energy object",
+      "score": 0.05033063143491745,
+      "similarities": {
+        "vit": 0.010858070105314255,
+        "resnet50": 0.09691629558801651
+      },
+      "average_similarity": 0.05388718284666538,
+      "exceeds_threshold": false,
+      "crop_path": "/Users/andrewdelacruz/e2e_sam2/gitignore_exception/results/tesseract/tesseract-20250416-174628/detections/owlv2-base-patch16/energy object_0.05_099a949b.png"
+    },
+    {
+      "object_name": "tesseract",
+      "detection_id": "a712e1d0",
+      "label": "tesseract",
+      "score": 0.042087726294994354,
+      "similarities": {
+        "vit": 0.17660585045814514,
+        "resnet50": 0.28573092818260193
+      },
+      "average_similarity": 0.23116838932037354,
+      "exceeds_threshold": false,
+      "crop_path": "/Users/andrewdelacruz/e2e_sam2/gitignore_exception/results/tesseract/tesseract-20250416-174628/detections/owlv2-base-patch16/tesseract_0.04_a712e1d0.png"
+    },
+    {
+      "object_name": "tesseract",
+      "detection_id": "d7f4e191",
+      "label": "cosmic object",
+      "score": 0.03963883966207504,
+      "similarities": {
+        "vit": 0.0020374367013573647,
+        "resnet50": 0.1069757342338562
+      },
+      "average_similarity": 0.05450658546760678,
+      "exceeds_threshold": false,
+      "crop_path": "/Users/andrewdelacruz/e2e_sam2/gitignore_exception/results/tesseract/tesseract-20250416-174628/detections/owlv2-base-patch16/cosmic object_0.04_d7f4e191.png"
+    },
+    {
+      "object_name": "tesseract",
+      "detection_id": "65701889",
+      "label": "energy object",
+      "score": 0.039048291742801666,
+      "similarities": {
+        "vit": 0.10257813334465027,
+        "resnet50": 0.12366526573896408
+      },
+      "average_similarity": 0.11312169954180717,
+      "exceeds_threshold": false,
+      "crop_path": "/Users/andrewdelacruz/e2e_sam2/gitignore_exception/results/tesseract/tesseract-20250416-174628/detections/owlv2-base-patch16/energy object_0.04_65701889.png"
+    },
+    {
+      "object_name": "tesseract",
+      "detection_id": "3a86eb17",
+      "label": "glow object",
+      "score": 0.0384661927819252,
+      "similarities": {
+        "vit": 0.028521206229925156,
+        "resnet50": 0.10962004214525223
+      },
+      "average_similarity": 0.06907062418758869,
+      "exceeds_threshold": false,
+      "crop_path": "/Users/andrewdelacruz/e2e_sam2/gitignore_exception/results/tesseract/tesseract-20250416-174628/detections/owlv2-base-patch16/glow object_0.04_3a86eb17.png"
+    },
+    {
+      "object_name": "tesseract",
+      "detection_id": "eaee913c",
+      "label": "energy object",
+      "score": 0.03622005507349968,
+      "similarities": {
+        "vit": 0.04027838259935379,
+        "resnet50": 0.08447864651679993
+      },
+      "average_similarity": 0.06237851455807686,
+      "exceeds_threshold": false,
+      "crop_path": "/Users/andrewdelacruz/e2e_sam2/gitignore_exception/results/tesseract/tesseract-20250416-174628/detections/owlv2-base-patch16/energy object_0.04_eaee913c.png"
+    },
+    {
+      "object_name": "tesseract",
+      "detection_id": "ad7b6314",
+      "label": "energy object",
+      "score": 0.03210070729255676,
+      "similarities": {
+        "vit": 0.1333335041999817,
+        "resnet50": 0.12720246613025665
+      },
+      "average_similarity": 0.13026798516511917,
+      "exceeds_threshold": false,
+      "crop_path": "/Users/andrewdelacruz/e2e_sam2/gitignore_exception/results/tesseract/tesseract-20250416-174628/detections/owlv2-base-patch16/energy object_0.03_ad7b6314.png"
+    }
+  ]
+}

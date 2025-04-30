@@ -139,3 +139,204 @@ Traceback (most recent call last):
     return (boxes[:, 2] - boxes[:, 0]) * (boxes[:, 3] - boxes[:, 1])
             ~~~~~^^^^^^
 IndexError: too many indices for tensor of dimension 1
+2025-04-30 18:36:24,673 - segment_embeddings - INFO - Starting segment_gemini_outputs.py
+2025-04-30 18:36:24,674 - segment_embeddings - INFO - Arguments: image=data/mjolnir_gt.jpeg, output=segmentation_results, max_segments=None, models=both
+2025-04-30 18:36:24,674 - segment_embeddings - INFO - Created output directories in segmentation_results
+2025-04-30 18:36:24,674 - segment_embeddings - INFO - Building SAM2 model...
+2025-04-30 18:36:24,674 - segment_embeddings - INFO - Starting path: /home/ubuntu/code/drew/e2e_sam2
+2025-04-30 18:36:24,811 - segment_embeddings - INFO - Using CUDA GPU for computation
+2025-04-30 18:36:24,812 - segment_embeddings - INFO - Selected device: cuda
+2025-04-30 18:36:27,337 - segment_embeddings - INFO - SAM2 model built successfully in 2.66 seconds
+2025-04-30 18:36:27,338 - segment_embeddings - INFO - Using CUDA GPU for computation
+2025-04-30 18:36:27,338 - segment_embeddings - INFO - Selected device: cuda
+2025-04-30 18:36:27,338 - segment_embeddings - INFO - Creating automatic mask generator for cuda...
+2025-04-30 18:36:27,338 - segment_embeddings - INFO - Using CUDA-specific settings for mask generator
+2025-04-30 18:36:27,476 - segment_embeddings - INFO - Initializing embedding generator with models: ['vit', 'resnet50']
+2025-04-30 18:36:28,507 - segment_embeddings - INFO - Loading image from data/mjolnir_gt.jpeg
+2025-04-30 18:36:28,508 - segment_embeddings - INFO - Image loaded successfully: (316, 160, 3)
+2025-04-30 18:36:28,508 - segment_embeddings - INFO - Generating masks...
+2025-04-30 18:36:28,508 - segment_embeddings - INFO - Generating masks on cuda device...
+2025-04-30 18:36:28,508 - root - INFO - For numpy array image, we assume (HxWxC) format
+2025-04-30 18:36:28,587 - root - INFO - Computing image embeddings for the provided image...
+2025-04-30 18:36:29,249 - root - INFO - Image embeddings computed.
+2025-04-30 18:36:32,847 - root - INFO - For numpy array image, we assume (HxWxC) format
+2025-04-30 18:36:32,877 - root - INFO - Computing image embeddings for the provided image...
+2025-04-30 18:36:32,899 - root - INFO - Image embeddings computed.
+2025-04-30 18:36:34,315 - root - INFO - For numpy array image, we assume (HxWxC) format
+2025-04-30 18:36:34,323 - root - INFO - Computing image embeddings for the provided image...
+2025-04-30 18:36:34,345 - root - INFO - Image embeddings computed.
+2025-04-30 18:36:35,749 - root - INFO - For numpy array image, we assume (HxWxC) format
+2025-04-30 18:36:35,757 - root - INFO - Computing image embeddings for the provided image...
+2025-04-30 18:36:35,779 - root - INFO - Image embeddings computed.
+2025-04-30 18:36:37,188 - root - INFO - For numpy array image, we assume (HxWxC) format
+2025-04-30 18:36:37,197 - root - INFO - Computing image embeddings for the provided image...
+2025-04-30 18:36:37,218 - root - INFO - Image embeddings computed.
+2025-04-30 18:36:38,622 - segment_embeddings - WARNING - Dimension error in mask generation: too many indices for tensor of dimension 1
+2025-04-30 18:36:38,622 - segment_embeddings - INFO - Trying fallback approach...
+2025-04-30 18:36:38,623 - segment_embeddings - ERROR - Failed to generate masks: Fallback approach failed: Image format not supported
+2025-04-30 18:39:29,020 - segment_embeddings - INFO - Starting segment_gemini_outputs.py
+2025-04-30 18:39:29,021 - segment_embeddings - INFO - Arguments: image=data/mjolnir_gt.jpeg, output=segmentation_results, max_segments=None, models=both
+2025-04-30 18:39:29,021 - segment_embeddings - INFO - Created output directories in segmentation_results
+2025-04-30 18:39:29,021 - segment_embeddings - INFO - Building SAM2 model...
+2025-04-30 18:39:29,021 - segment_embeddings - INFO - Starting path: /home/ubuntu/code/drew/e2e_sam2
+2025-04-30 18:39:29,158 - segment_embeddings - INFO - Using CUDA GPU for computation
+2025-04-30 18:39:29,182 - segment_embeddings - INFO - CUDA Device ID: 0
+2025-04-30 18:39:29,182 - segment_embeddings - INFO - CUDA Device Name: Tesla T4
+2025-04-30 18:39:29,182 - segment_embeddings - INFO - CUDA Memory Allocated: 0.00 MB
+2025-04-30 18:39:29,182 - segment_embeddings - INFO - CUDA Memory Reserved: 0.00 MB
+2025-04-30 18:39:29,182 - segment_embeddings - INFO - Selected device: cuda
+2025-04-30 18:39:29,183 - segment_embeddings - DEBUG - Loading SAM2 model configuration from config file
+2025-04-30 18:39:29,183 - segment_embeddings - ERROR - Checkpoint file not found: checkpoints/sam2.1_hiera_large.pt
+2025-04-30 18:39:29,183 - segment_embeddings - ERROR - Failed to initialize SAM2 model: Checkpoint file not found: checkpoints/sam2.1_hiera_large.pt
+2025-04-30 18:39:29,183 - segment_embeddings - ERROR - Traceback (most recent call last):
+  File "/home/ubuntu/code/drew/e2e_sam2/e2e_pipeline_v2/experiments/segment_gemini_outputs.py", line 105, in initialize_sam2
+    raise FileNotFoundError(f"Checkpoint file not found: {checkpoint_path}")
+FileNotFoundError: Checkpoint file not found: checkpoints/sam2.1_hiera_large.pt
+
+2025-04-30 18:39:29,183 - segment_embeddings - ERROR - Error: Checkpoint file not found: checkpoints/sam2.1_hiera_large.pt
+Traceback (most recent call last):
+  File "/home/ubuntu/code/drew/e2e_sam2/e2e_pipeline_v2/experiments/segment_gemini_outputs.py", line 613, in <module>
+    results = modified_process_image()
+              ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/code/drew/e2e_sam2/e2e_pipeline_v2/experiments/segment_gemini_outputs.py", line 445, in modified_process_image
+    sam2 = initialize_sam2()
+           ^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/code/drew/e2e_sam2/e2e_pipeline_v2/experiments/segment_gemini_outputs.py", line 105, in initialize_sam2
+    raise FileNotFoundError(f"Checkpoint file not found: {checkpoint_path}")
+FileNotFoundError: Checkpoint file not found: checkpoints/sam2.1_hiera_large.pt
+2025-04-30 18:40:54,837 - segment_embeddings - INFO - Starting segment_gemini_outputs.py
+2025-04-30 18:40:54,838 - segment_embeddings - INFO - Arguments: image=data/mjolnir_gt.jpeg, output=segmentation_results, max_segments=None, models=both
+2025-04-30 18:40:54,838 - segment_embeddings - INFO - Created output directories in segmentation_results
+2025-04-30 18:40:54,838 - segment_embeddings - INFO - Building SAM2 model...
+2025-04-30 18:40:54,838 - segment_embeddings - INFO - Starting path: /home/ubuntu/code/drew/e2e_sam2
+2025-04-30 18:40:54,967 - segment_embeddings - INFO - Using CUDA GPU for computation
+2025-04-30 18:40:54,990 - segment_embeddings - INFO - CUDA Device ID: 0
+2025-04-30 18:40:54,990 - segment_embeddings - INFO - CUDA Device Name: Tesla T4
+2025-04-30 18:40:54,991 - segment_embeddings - INFO - CUDA Memory Allocated: 0.00 MB
+2025-04-30 18:40:54,991 - segment_embeddings - INFO - CUDA Memory Reserved: 0.00 MB
+2025-04-30 18:40:54,991 - segment_embeddings - INFO - Selected device: cuda
+2025-04-30 18:40:54,991 - segment_embeddings - DEBUG - Loading SAM2 model configuration from config file
+2025-04-30 18:40:54,991 - segment_embeddings - DEBUG - Building SAM2 model with config: configs/sam2.1/sam2.1_hiera_l.yaml, checkpoint: checkpoints/sam2.1_hiera_large.pt, device: cuda
+2025-04-30 18:40:57,480 - segment_embeddings - DEBUG - SAM2 model built successfully
+2025-04-30 18:40:57,480 - segment_embeddings - INFO - Using CUDA GPU for computation
+2025-04-30 18:40:57,480 - segment_embeddings - INFO - CUDA Device ID: 0
+2025-04-30 18:40:57,480 - segment_embeddings - INFO - CUDA Device Name: Tesla T4
+2025-04-30 18:40:57,480 - segment_embeddings - INFO - CUDA Memory Allocated: 1000.91 MB
+2025-04-30 18:40:57,480 - segment_embeddings - INFO - CUDA Memory Reserved: 1052.00 MB
+2025-04-30 18:40:57,480 - segment_embeddings - INFO - Selected device: cuda
+2025-04-30 18:40:57,481 - segment_embeddings - DEBUG - CUDA Memory Allocated: 1000.91 MB
+2025-04-30 18:40:57,481 - segment_embeddings - DEBUG - CUDA Memory Reserved: 1052.00 MB
+2025-04-30 18:40:57,614 - segment_embeddings - DEBUG - After GC - CUDA Memory Allocated: 1000.91 MB
+2025-04-30 18:40:57,614 - segment_embeddings - INFO - SAM2 model built successfully in 2.78 seconds
+2025-04-30 18:40:57,614 - segment_embeddings - DEBUG - SAM2 model type: <class 'sam2.modeling.sam2_base.SAM2Base'>
+2025-04-30 18:40:57,614 - segment_embeddings - INFO - Using CUDA GPU for computation
+2025-04-30 18:40:57,614 - segment_embeddings - INFO - CUDA Device ID: 0
+2025-04-30 18:40:57,614 - segment_embeddings - INFO - CUDA Device Name: Tesla T4
+2025-04-30 18:40:57,614 - segment_embeddings - INFO - CUDA Memory Allocated: 1000.91 MB
+2025-04-30 18:40:57,615 - segment_embeddings - INFO - CUDA Memory Reserved: 1052.00 MB
+2025-04-30 18:40:57,615 - segment_embeddings - INFO - Selected device: cuda
+2025-04-30 18:40:57,615 - segment_embeddings - INFO - Creating automatic mask generator for cuda...
+2025-04-30 18:40:57,615 - segment_embeddings - INFO - Using CUDA-specific settings for mask generator
+2025-04-30 18:40:57,615 - segment_embeddings - DEBUG - Parameters: points_per_side=32, pred_iou_thresh=0.86, stability_score_thresh=0.92
+2025-04-30 18:40:57,754 - segment_embeddings - DEBUG - Mask generator created successfully: <class 'sam2.automatic_mask_generator.SAM2AutomaticMaskGenerator'>
+2025-04-30 18:40:57,754 - segment_embeddings - INFO - Initializing embedding generator with models: ['vit', 'resnet50']
+2025-04-30 18:40:57,755 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): huggingface.co:443
+2025-04-30 18:40:57,879 - urllib3.connectionpool - DEBUG - https://huggingface.co:443 "HEAD /google/vit-base-patch16-224/resolve/main/preprocessor_config.json HTTP/1.1" 200 0
+2025-04-30 18:40:58,100 - urllib3.connectionpool - DEBUG - https://huggingface.co:443 "HEAD /google/vit-base-patch16-224/resolve/main/config.json HTTP/1.1" 200 0
+2025-04-30 18:40:58,181 - urllib3.connectionpool - DEBUG - https://huggingface.co:443 "HEAD /google/vit-base-patch16-224/resolve/main/config.json HTTP/1.1" 200 0
+2025-04-30 18:40:58,851 - segment_embeddings - INFO - Loading image from data/mjolnir_gt.jpeg
+2025-04-30 18:40:58,852 - segment_embeddings - DEBUG - Image file size: 5.97 KB
+2025-04-30 18:40:58,852 - segment_embeddings - INFO - Image loaded successfully: (316, 160, 3), dtype: uint8
+2025-04-30 18:40:58,852 - segment_embeddings - DEBUG - Converting image from BGR to RGB
+2025-04-30 18:40:58,852 - segment_embeddings - DEBUG - Image pixel range - Min: 0, Max: 255, Mean: 215.79
+2025-04-30 18:40:58,852 - segment_embeddings - INFO - Generating masks...
+2025-04-30 18:40:58,852 - segment_embeddings - INFO - Generating masks on cuda device...
+2025-04-30 18:40:58,852 - segment_embeddings - DEBUG - Image type: <class 'numpy.ndarray'>, Shape: (316, 160, 3), dtype: uint8
+2025-04-30 18:40:58,853 - segment_embeddings - DEBUG - Image is numpy array, Min: 0, Max: 255, Mean: 215.79
+2025-04-30 18:40:58,853 - segment_embeddings - DEBUG - Attempting standard mask generation approach
+2025-04-30 18:40:58,853 - root - INFO - For numpy array image, we assume (HxWxC) format
+2025-04-30 18:40:58,932 - root - INFO - Computing image embeddings for the provided image...
+2025-04-30 18:40:59,680 - root - INFO - Image embeddings computed.
+2025-04-30 18:41:03,319 - root - INFO - For numpy array image, we assume (HxWxC) format
+2025-04-30 18:41:03,344 - root - INFO - Computing image embeddings for the provided image...
+2025-04-30 18:41:03,366 - root - INFO - Image embeddings computed.
+2025-04-30 18:41:04,778 - root - INFO - For numpy array image, we assume (HxWxC) format
+2025-04-30 18:41:04,784 - root - INFO - Computing image embeddings for the provided image...
+2025-04-30 18:41:04,806 - root - INFO - Image embeddings computed.
+2025-04-30 18:41:06,213 - root - INFO - For numpy array image, we assume (HxWxC) format
+2025-04-30 18:41:06,219 - root - INFO - Computing image embeddings for the provided image...
+2025-04-30 18:41:06,241 - root - INFO - Image embeddings computed.
+2025-04-30 18:41:07,654 - root - INFO - For numpy array image, we assume (HxWxC) format
+2025-04-30 18:41:07,660 - root - INFO - Computing image embeddings for the provided image...
+2025-04-30 18:41:07,681 - root - INFO - Image embeddings computed.
+2025-04-30 18:41:09,087 - segment_embeddings - WARNING - IndexError in mask generation: too many indices for tensor of dimension 1
+2025-04-30 18:41:09,088 - segment_embeddings - DEBUG - Error details: Traceback (most recent call last):
+  File "/home/ubuntu/code/drew/e2e_sam2/e2e_pipeline_v2/experiments/segment_gemini_outputs.py", line 191, in safe_generate_masks
+    masks = mask_generator.generate(image)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/code/drew/e2e_sam2/venv/lib/python3.12/site-packages/torch/utils/_contextlib.py", line 116, in decorate_context
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/code/drew/sam2/sam2/automatic_mask_generator.py", line 196, in generate
+    mask_data = self._generate_masks(image)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/code/drew/sam2/sam2/automatic_mask_generator.py", line 239, in _generate_masks
+    scores = 1 / box_area(data["crop_boxes"])
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/code/drew/e2e_sam2/venv/lib/python3.12/site-packages/torchvision/ops/boxes.py", line 251, in box_area
+    return (boxes[:, 2] - boxes[:, 0]) * (boxes[:, 3] - boxes[:, 1])
+            ~~~~~^^^^^^
+IndexError: too many indices for tensor of dimension 1
+
+2025-04-30 18:41:09,088 - segment_embeddings - WARNING - Dimension error in mask generation: too many indices for tensor of dimension 1
+2025-04-30 18:41:09,088 - segment_embeddings - INFO - Trying fallback approach...
+2025-04-30 18:41:09,088 - segment_embeddings - DEBUG - Converting numpy array to tensor. Original shape: (316, 160, 3)
+2025-04-30 18:41:09,088 - segment_embeddings - DEBUG - Image is in HWC format, converting to BCHW
+2025-04-30 18:41:09,088 - segment_embeddings - DEBUG - Created tensor with shape: torch.Size([1, 3, 316, 160]), dtype: torch.uint8
+2025-04-30 18:41:09,088 - segment_embeddings - DEBUG - Moved tensor to cuda
+2025-04-30 18:41:09,088 - segment_embeddings - DEBUG - Tensor device: cuda:0, requires_grad: False
+2025-04-30 18:41:09,088 - segment_embeddings - DEBUG - Attempting mask generation with tensor
+2025-04-30 18:41:09,089 - segment_embeddings - ERROR - Fallback approach failed: Image format not supported
+2025-04-30 18:41:09,089 - segment_embeddings - DEBUG - Fallback error details: Traceback (most recent call last):
+  File "/home/ubuntu/code/drew/e2e_sam2/e2e_pipeline_v2/experiments/segment_gemini_outputs.py", line 191, in safe_generate_masks
+    masks = mask_generator.generate(image)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/code/drew/e2e_sam2/venv/lib/python3.12/site-packages/torch/utils/_contextlib.py", line 116, in decorate_context
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/code/drew/sam2/sam2/automatic_mask_generator.py", line 196, in generate
+    mask_data = self._generate_masks(image)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/code/drew/sam2/sam2/automatic_mask_generator.py", line 239, in _generate_masks
+    scores = 1 / box_area(data["crop_boxes"])
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/code/drew/e2e_sam2/venv/lib/python3.12/site-packages/torchvision/ops/boxes.py", line 251, in box_area
+    return (boxes[:, 2] - boxes[:, 0]) * (boxes[:, 3] - boxes[:, 1])
+            ~~~~~^^^^^^
+IndexError: too many indices for tensor of dimension 1
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/ubuntu/code/drew/e2e_sam2/e2e_pipeline_v2/experiments/segment_gemini_outputs.py", line 228, in safe_generate_masks
+    masks = mask_generator.generate(image_tensor)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/code/drew/e2e_sam2/venv/lib/python3.12/site-packages/torch/utils/_contextlib.py", line 116, in decorate_context
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/code/drew/sam2/sam2/automatic_mask_generator.py", line 196, in generate
+    mask_data = self._generate_masks(image)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/code/drew/sam2/sam2/automatic_mask_generator.py", line 233, in _generate_masks
+    crop_data = self._process_crop(image, crop_box, layer_idx, orig_size)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/code/drew/sam2/sam2/automatic_mask_generator.py", line 262, in _process_crop
+    self.predictor.set_image(cropped_im)
+  File "/home/ubuntu/code/drew/e2e_sam2/venv/lib/python3.12/site-packages/torch/utils/_contextlib.py", line 116, in decorate_context
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/code/drew/sam2/sam2/sam2_image_predictor.py", line 108, in set_image
+    raise NotImplementedError("Image format not supported")
+NotImplementedError: Image format not supported
+
+2025-04-30 18:41:09,090 - segment_embeddings - ERROR - Failed to generate masks: Fallback approach failed: Image format not supported

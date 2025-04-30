@@ -82,18 +82,72 @@ def create_image_predictor(model):
     return SAM2ImagePredictor(model)
 
 
-def create_mask_generator(model):
-    """Create and configure the automatic mask generator"""
-    logger.info("Creating automatic mask generator...")
-    return SAM2AutomaticMaskGenerator(
-        model=model,
-        points_per_side=32,  # Number of points to sample along each side of the image
-        pred_iou_thresh=0.86,  # Threshold for predicted IoU to keep a mask
-        stability_score_thresh=0.92,  # Threshold for mask stability score
-        crop_n_layers=1,  # Number of image layers to use for mask prediction
-        crop_n_points_downscale_factor=2,  # Downscale factor for points in crops
-        min_mask_region_area=100  # Minimum area (in pixels) for a mask to be kept
-    )
+def create_mask_generator(model, device):
+    """Create and configure the automatic mask generator with device-specific settings"""
+    logger.info(f"Creating automatic mask generator for {device}...")
+    
+    # Device-specific configurations
+    if device.type == 'cuda':
+        logger.info("Using CUDA-specific settings for mask generator")
+        return SAM2AutomaticMaskGenerator(
+            model=model,
+            points_per_side=32,
+            pred_iou_thresh=0.86,
+            stability_score_thresh=0.92,
+            crop_n_layers=1,
+            crop_n_points_downscale_factor=2,
+            min_mask_region_area=100,
+            output_mode="binary_mask"  # Explicitly set output mode
+        )
+    else:
+        # For MPS and CPU
+        logger.info(f"Using {device.type}-specific settings for mask generator")
+        return SAM2AutomaticMaskGenerator(
+            model=model,
+            points_per_side=32,
+            pred_iou_thresh=0.86,
+            stability_score_thresh=0.92,
+            crop_n_layers=1,
+            crop_n_points_downscale_factor=2,
+            min_mask_region_area=100
+        )
+
+
+def safe_generate_masks(mask_generator, image, device):
+    """Safely generate masks with appropriate error handling and device-specific logic"""
+    logger.info(f"Generating masks on {device} device...")
+    
+    try:
+        # Try the standard approach first
+        masks = mask_generator.generate(image)
+        return masks, None
+    except IndexError as e:
+        if "too many indices for tensor" in str(e):
+            logger.warning(f"Dimension error in mask generation: {e}")
+            logger.info("Trying fallback approach...")
+            
+            # Try a fallback approach for CUDA
+            try:
+                # Convert image to tensor with correct dimensions if needed
+                if isinstance(image, np.ndarray):
+                    # Ensure image is in correct format (channels last)
+                    if image.shape[2] == 3:  # HWC format
+                        image_tensor = torch.from_numpy(image).permute(2, 0, 1).unsqueeze(0)
+                    else:  # CHW format
+                        image_tensor = torch.from_numpy(image).unsqueeze(0)
+                    
+                    image_tensor = image_tensor.to(device)
+                    masks = mask_generator.generate(image_tensor)
+                    return masks, None
+                else:
+                    return None, f"Unsupported image type for fallback: {type(image)}"
+            
+            except Exception as fallback_error:
+                return None, f"Fallback approach failed: {fallback_error}"
+        
+        return None, f"Error generating masks: {e}"
+    except Exception as e:
+        return None, f"Unexpected error in mask generation: {e}"
 
 
 def load_image(image_path):
@@ -246,23 +300,34 @@ if __name__ == "__main__":
             
             # Initialize components
             sam2 = initialize_sam2()
-            mask_generator = create_mask_generator(sam2)
+            device = get_device()
+            mask_generator = create_mask_generator(sam2, device)
             
             # Initialize embedding generator
             logger.info(f"Initializing embedding generator with models: {[m.value for m in model_types]}")
             embedding_generator = EmbeddingGenerator(
                 model_types=model_types,
-                device=get_device().type
+                device=device.type
             )
             
             # Load image
             image = load_image(args.image)
             
-            # Generate masks automatically
+            # Generate masks safely
             logger.info("Generating masks...")
             start_time = time.time()
-            masks = mask_generator.generate(image)
+            masks, error = safe_generate_masks(mask_generator, image, device)
             elapsed_time = time.time() - start_time
+            
+            if error:
+                logger.error(f"Failed to generate masks: {error}")
+                sys.exit(1)
+            
+            if not masks:
+                logger.error("No masks were generated")
+                sys.exit(1)
+            
+            logger.info(f"Successfully generated {len(masks)} masks in {elapsed_time:.2f} seconds")
             
             # Save all masks immediately for debugging
             logger.info("Saving all detected masks for debugging...")

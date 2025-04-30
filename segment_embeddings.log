@@ -1,0 +1,89 @@
+2025-04-30 11:13:47,857 - segment_embeddings - INFO - Starting segment_gemini_outputs.py
+2025-04-30 11:13:47,857 - segment_embeddings - INFO - Arguments: image=data/mjolnir_gt.jpeg, output=segmentation_results
+2025-04-30 11:13:47,858 - segment_embeddings - INFO - Created output directories in segmentation_results
+2025-04-30 11:13:47,858 - segment_embeddings - INFO - Building SAM2 model...
+2025-04-30 11:13:47,858 - segment_embeddings - INFO - Starting path: /Users/andrewdelacruz/e2e_sam2
+2025-04-30 11:13:47,901 - segment_embeddings - INFO - Using MPS (Apple Silicon). Note that SAM2 might give different outputs on MPS.
+2025-04-30 11:13:47,901 - segment_embeddings - INFO - Selected device: mps
+2025-04-30 11:13:49,391 - segment_embeddings - INFO - SAM2 model built successfully in 1.53 seconds
+2025-04-30 11:13:49,391 - segment_embeddings - INFO - Creating automatic mask generator...
+2025-04-30 11:13:49,524 - segment_embeddings - INFO - Initializing embedding generator...
+2025-04-30 11:13:49,524 - segment_embeddings - INFO - Using MPS (Apple Silicon). Note that SAM2 might give different outputs on MPS.
+2025-04-30 11:13:49,524 - segment_embeddings - INFO - Selected device: mps
+2025-04-30 11:13:51,208 - segment_embeddings - INFO - Loading image from data/mjolnir_gt.jpeg
+2025-04-30 11:13:51,213 - segment_embeddings - INFO - Image loaded successfully: (316, 160, 3)
+2025-04-30 11:13:51,215 - segment_embeddings - INFO - Generating masks...
+2025-04-30 11:13:51,215 - root - INFO - For numpy array image, we assume (HxWxC) format
+2025-04-30 11:13:51,276 - root - INFO - Computing image embeddings for the provided image...
+2025-04-30 11:13:57,787 - root - INFO - Image embeddings computed.
+2025-04-30 11:15:31,535 - segment_embeddings - INFO - Starting segment_gemini_outputs.py
+2025-04-30 11:15:31,536 - segment_embeddings - INFO - Arguments: image=data/mjolnir_gt.jpeg, output=segmentation_results
+2025-04-30 11:15:31,536 - segment_embeddings - INFO - Created output directories in segmentation_results
+2025-04-30 11:15:31,536 - segment_embeddings - INFO - Building SAM2 model...
+2025-04-30 11:15:31,536 - segment_embeddings - INFO - Starting path: /Users/andrewdelacruz/e2e_sam2
+2025-04-30 11:15:31,559 - segment_embeddings - INFO - Using MPS (Apple Silicon). Note that SAM2 might give different outputs on MPS.
+2025-04-30 11:15:31,559 - segment_embeddings - INFO - Selected device: mps
+2025-04-30 11:15:32,960 - segment_embeddings - INFO - SAM2 model built successfully in 1.42 seconds
+2025-04-30 11:15:32,961 - segment_embeddings - INFO - Creating automatic mask generator...
+2025-04-30 11:15:33,071 - segment_embeddings - INFO - Initializing embedding generator...
+2025-04-30 11:15:33,072 - segment_embeddings - INFO - Using MPS (Apple Silicon). Note that SAM2 might give different outputs on MPS.
+2025-04-30 11:15:33,072 - segment_embeddings - INFO - Selected device: mps
+2025-04-30 11:15:34,830 - segment_embeddings - INFO - Loading image from data/mjolnir_gt.jpeg
+2025-04-30 11:15:34,837 - segment_embeddings - INFO - Image loaded successfully: (316, 160, 3)
+2025-04-30 11:15:34,838 - segment_embeddings - INFO - Generating masks...
+2025-04-30 11:15:34,839 - root - INFO - For numpy array image, we assume (HxWxC) format
+2025-04-30 11:15:34,900 - root - INFO - Computing image embeddings for the provided image...
+2025-04-30 11:15:41,803 - root - INFO - Image embeddings computed.
+2025-04-30 11:19:43,160 - segment_embeddings - INFO - Starting segment_gemini_outputs.py
+2025-04-30 11:19:43,161 - segment_embeddings - INFO - Arguments: image=data/mjolnir_gt.jpeg, output=segmentation_results, max_segments=None, models=both
+2025-04-30 11:19:43,161 - segment_embeddings - INFO - Created output directories in segmentation_results
+2025-04-30 11:19:43,161 - segment_embeddings - INFO - Building SAM2 model...
+2025-04-30 11:19:43,161 - segment_embeddings - INFO - Starting path: /Users/andrewdelacruz/e2e_sam2
+2025-04-30 11:19:43,185 - segment_embeddings - INFO - Using MPS (Apple Silicon). Note that SAM2 might give different outputs on MPS.
+2025-04-30 11:19:43,185 - segment_embeddings - INFO - Selected device: mps
+2025-04-30 11:19:44,614 - segment_embeddings - INFO - SAM2 model built successfully in 1.45 seconds
+2025-04-30 11:19:44,614 - segment_embeddings - INFO - Creating automatic mask generator...
+2025-04-30 11:19:44,756 - segment_embeddings - INFO - Initializing embedding generator with models: ['vit', 'resnet50']
+2025-04-30 11:19:44,756 - segment_embeddings - INFO - Using MPS (Apple Silicon). Note that SAM2 might give different outputs on MPS.
+2025-04-30 11:19:44,756 - segment_embeddings - INFO - Selected device: mps
+2025-04-30 11:19:46,391 - segment_embeddings - INFO - Loading image from data/mjolnir_gt.jpeg
+2025-04-30 11:19:46,401 - segment_embeddings - INFO - Image loaded successfully: (316, 160, 3)
+2025-04-30 11:19:46,403 - segment_embeddings - INFO - Generating masks...
+2025-04-30 11:19:46,403 - root - INFO - For numpy array image, we assume (HxWxC) format
+2025-04-30 11:19:46,465 - root - INFO - Computing image embeddings for the provided image...
+2025-04-30 11:19:51,426 - root - INFO - Image embeddings computed.
+2025-04-30 11:23:42,436 - segment_embeddings - INFO - Starting segment_gemini_outputs.py
+2025-04-30 11:23:42,437 - segment_embeddings - INFO - Arguments: image=data/mjolnir_gt.jpeg, output=segmentation_results, max_segments=None, models=both
+2025-04-30 11:23:42,437 - segment_embeddings - INFO - Created output directories in segmentation_results
+2025-04-30 11:23:42,437 - segment_embeddings - INFO - Building SAM2 model...
+2025-04-30 11:23:42,437 - segment_embeddings - INFO - Starting path: /Users/andrewdelacruz/e2e_sam2
+2025-04-30 11:23:42,460 - segment_embeddings - INFO - Using MPS (Apple Silicon). Note that SAM2 might give different outputs on MPS.
+2025-04-30 11:23:42,460 - segment_embeddings - INFO - Selected device: mps
+2025-04-30 11:23:43,922 - segment_embeddings - INFO - SAM2 model built successfully in 1.48 seconds
+2025-04-30 11:23:43,922 - segment_embeddings - INFO - Creating automatic mask generator...
+2025-04-30 11:23:44,034 - segment_embeddings - INFO - Initializing embedding generator with models: ['vit', 'resnet50']
+2025-04-30 11:23:44,035 - segment_embeddings - INFO - Using MPS (Apple Silicon). Note that SAM2 might give different outputs on MPS.
+2025-04-30 11:23:44,035 - segment_embeddings - INFO - Selected device: mps
+2025-04-30 11:23:45,810 - segment_embeddings - INFO - Loading image from data/mjolnir_gt.jpeg
+2025-04-30 11:23:45,816 - segment_embeddings - INFO - Image loaded successfully: (316, 160, 3)
+2025-04-30 11:23:45,818 - segment_embeddings - INFO - Generating masks...
+2025-04-30 11:23:45,818 - root - INFO - For numpy array image, we assume (HxWxC) format
+2025-04-30 11:23:45,882 - root - INFO - Computing image embeddings for the provided image...
+2025-04-30 11:23:52,783 - root - INFO - Image embeddings computed.
+2025-04-30 11:25:32,061 - segment_embeddings - INFO - Starting segment_gemini_outputs.py
+2025-04-30 11:25:32,061 - segment_embeddings - INFO - Arguments: image=data/mjolnir_gt.jpeg, output=segmentation_results, max_segments=None, models=both
+2025-04-30 11:25:32,061 - segment_embeddings - INFO - Created output directories in segmentation_results
+2025-04-30 11:25:32,061 - segment_embeddings - INFO - Building SAM2 model...
+2025-04-30 11:25:32,062 - segment_embeddings - INFO - Starting path: /Users/andrewdelacruz/e2e_sam2
+2025-04-30 11:25:32,139 - segment_embeddings - INFO - Using MPS (Apple Silicon). Note that SAM2 might give different outputs on MPS.
+2025-04-30 11:25:32,139 - segment_embeddings - INFO - Selected device: mps
+2025-04-30 11:25:35,608 - segment_embeddings - INFO - SAM2 model built successfully in 3.54 seconds
+2025-04-30 11:25:35,615 - segment_embeddings - INFO - Creating automatic mask generator...
+2025-04-30 11:25:36,092 - segment_embeddings - INFO - Initializing embedding generator with models: ['vit', 'resnet50']
+2025-04-30 11:25:36,097 - segment_embeddings - INFO - Using MPS (Apple Silicon). Note that SAM2 might give different outputs on MPS.
+2025-04-30 11:25:36,097 - segment_embeddings - INFO - Selected device: mps
+2025-04-30 11:25:44,753 - segment_embeddings - INFO - Loading image from data/mjolnir_gt.jpeg
+2025-04-30 11:25:44,860 - segment_embeddings - INFO - Image loaded successfully: (316, 160, 3)
+2025-04-30 11:25:44,893 - segment_embeddings - INFO - Generating masks...
+2025-04-30 11:25:44,905 - root - INFO - For numpy array image, we assume (HxWxC) format
+2025-04-30 11:25:45,145 - root - INFO - Computing image embeddings for the provided image...

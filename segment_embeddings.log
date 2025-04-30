@@ -139,3 +139,37 @@ Traceback (most recent call last):
     return (boxes[:, 2] - boxes[:, 0]) * (boxes[:, 3] - boxes[:, 1])
             ~~~~~^^^^^^
 IndexError: too many indices for tensor of dimension 1
+2025-04-30 11:44:30,753 - segment_embeddings - INFO - Starting segment_gemini_outputs.py
+2025-04-30 11:44:30,754 - segment_embeddings - INFO - Arguments: image=data/mjolnir_gt.jpeg, output=segmentation_results, max_segments=2, models=both
+2025-04-30 11:44:30,754 - segment_embeddings - INFO - Created output directories in segmentation_results
+2025-04-30 11:44:30,754 - segment_embeddings - INFO - Building SAM2 model...
+2025-04-30 11:44:30,754 - segment_embeddings - INFO - Starting path: /Users/andrewdelacruz/e2e_sam2
+2025-04-30 11:44:30,782 - segment_embeddings - INFO - Using MPS (Apple Silicon). Note that SAM2 might give different outputs on MPS.
+2025-04-30 11:44:30,782 - segment_embeddings - INFO - Selected device: mps
+2025-04-30 11:44:30,782 - segment_embeddings - DEBUG - Loading SAM2 model configuration from config file
+2025-04-30 11:44:30,782 - segment_embeddings - DEBUG - Building SAM2 model with config: configs/sam2.1/sam2.1_hiera_l.yaml, checkpoint: checkpoints/sam2.1_hiera_large.pt, device: mps
+2025-04-30 11:44:32,261 - segment_embeddings - DEBUG - SAM2 model built successfully
+2025-04-30 11:44:32,261 - segment_embeddings - INFO - Using MPS (Apple Silicon). Note that SAM2 might give different outputs on MPS.
+2025-04-30 11:44:32,261 - segment_embeddings - INFO - Selected device: mps
+2025-04-30 11:44:32,377 - segment_embeddings - INFO - SAM2 model built successfully in 1.62 seconds
+2025-04-30 11:44:32,377 - segment_embeddings - DEBUG - SAM2 model type: <class 'sam2.modeling.sam2_base.SAM2Base'>
+2025-04-30 11:44:32,377 - segment_embeddings - INFO - Using MPS (Apple Silicon). Note that SAM2 might give different outputs on MPS.
+2025-04-30 11:44:32,377 - segment_embeddings - INFO - Selected device: mps
+2025-04-30 11:44:32,377 - segment_embeddings - INFO - Creating automatic mask generator for mps...
+2025-04-30 11:44:32,377 - segment_embeddings - INFO - Using mps-specific settings for mask generator
+2025-04-30 11:44:32,377 - segment_embeddings - DEBUG - Parameters: points_per_side=32, pred_iou_thresh=0.86, stability_score_thresh=0.92
+2025-04-30 11:44:32,537 - segment_embeddings - DEBUG - Mask generator created successfully: <class 'sam2.automatic_mask_generator.SAM2AutomaticMaskGenerator'>
+2025-04-30 11:44:32,537 - segment_embeddings - INFO - Skipping embedding generator initialization as requested
+2025-04-30 11:44:32,537 - segment_embeddings - INFO - Loading image from data/mjolnir_gt.jpeg
+2025-04-30 11:44:32,566 - segment_embeddings - DEBUG - Image file size: 5.97 KB
+2025-04-30 11:44:32,566 - segment_embeddings - INFO - Image loaded successfully: (316, 160, 3), dtype: uint8
+2025-04-30 11:44:32,566 - segment_embeddings - DEBUG - Converting image from BGR to RGB
+2025-04-30 11:44:32,570 - segment_embeddings - DEBUG - Image pixel range - Min: 0, Max: 255, Mean: 215.79
+2025-04-30 11:44:32,570 - segment_embeddings - INFO - Generating masks...
+2025-04-30 11:44:32,570 - segment_embeddings - INFO - Generating masks on mps device...
+2025-04-30 11:44:32,570 - segment_embeddings - DEBUG - Image type: <class 'numpy.ndarray'>, Shape: (316, 160, 3), dtype: uint8
+2025-04-30 11:44:32,570 - segment_embeddings - DEBUG - Image is numpy array, Min: 0, Max: 255, Mean: 215.79
+2025-04-30 11:44:32,570 - segment_embeddings - DEBUG - Attempting standard mask generation approach
+2025-04-30 11:44:32,570 - root - INFO - For numpy array image, we assume (HxWxC) format
+2025-04-30 11:44:32,626 - root - INFO - Computing image embeddings for the provided image...
+2025-04-30 11:44:36,534 - root - INFO - Image embeddings computed.

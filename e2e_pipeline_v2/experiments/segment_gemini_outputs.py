@@ -446,12 +446,16 @@ if __name__ == "__main__":
             device = get_device()
             mask_generator = create_mask_generator(sam2, device)
             
+            # Comment out embedding generator initialization
+            """
             # Initialize embedding generator
             logger.info(f"Initializing embedding generator with models: {[m.value for m in model_types]}")
             embedding_generator = EmbeddingGenerator(
                 model_types=model_types,
                 device=device.type
             )
+            """
+            logger.info("Skipping embedding generator initialization as requested")
             
             # Load image
             image = load_image(args.image)
@@ -527,13 +531,11 @@ if __name__ == "__main__":
             if args.max_segments is not None and len(masks) > args.max_segments:
                 logger.info(f"Limiting processing to {args.max_segments} of {len(masks)} masks")
                 masks = masks[:args.max_segments]
-            else:
-                logger.info(f"Generated {len(masks)} masks in {elapsed_time:.2f} seconds")
             
-            # Process each mask and generate embeddings
+            # Process each mask but skip embeddings
             segments_info = []
             
-            logger.info("Processing segments and generating embeddings...")
+            logger.info("Processing segments (skipping embedding generation)...")
             for i, mask_data in enumerate(masks):
                 logger.info(f"Processing segment {i+1}/{len(masks)} ({(i+1)/len(masks)*100:.1f}%)")
                 
@@ -557,6 +559,8 @@ if __name__ == "__main__":
                 cv2.imwrite(str(segment_path), cv2.cvtColor(segment, cv2.COLOR_RGB2BGR))
                 logger.info(f"Saved segment to {segment_path}")
                 
+                # Skip embedding generation
+                """
                 # Generate embeddings
                 logger.info(f"Generating embeddings for segment {i}...")
                 
@@ -586,9 +590,23 @@ if __name__ == "__main__":
                     segments_info.append(embedding_data)
                 except Exception as e:
                     logger.error(f"Error generating embeddings for segment {i}: {str(e)}")
+                """
+                
+                # Add simplified segment info without embeddings
+                segments_info.append({
+                    "segment_id": i,
+                    "segment_path": str(segment_path),
+                    "mask_path": str(mask_path),
+                    "mask_data": {
+                        "area": float(mask_data["area"]),
+                        "bbox": mask_data["bbox"],
+                        "predicted_iou": float(mask_data["predicted_iou"]),
+                        "stability_score": float(mask_data["stability_score"])
+                    }
+                })
             
             # Save all segments info
-            results_path = output_dir / "segments_embeddings.json"
+            results_path = output_dir / "segments_info.json"
             with open(results_path, "w") as f:
                 json.dump({
                     "image_path": args.image,
@@ -596,7 +614,7 @@ if __name__ == "__main__":
                     "segments": segments_info
                 }, f, indent=2)
             
-            logger.info(f"Saved results data to {results_path}")
+            logger.info(f"Saved segment information to {results_path}")
             
             # Visualize results
             visualize_results(image, masks, segments_info, output_dir)

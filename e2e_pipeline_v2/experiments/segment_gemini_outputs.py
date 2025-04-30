@@ -231,7 +231,7 @@ def create_mask_generator(model, device):
                 points_per_side=32,
                 pred_iou_thresh=0.86,
                 stability_score_thresh=0.92,
-                crop_n_layers=1,
+                crop_n_layers=0,  # Disable cropping to prevent IndexError
                 crop_n_points_downscale_factor=2,
                 min_mask_region_area=100,
                 output_mode="binary_mask"  # Explicitly set output mode
@@ -242,12 +242,13 @@ def create_mask_generator(model, device):
             logger.debug("Parameters: points_per_side=32, pred_iou_thresh=0.86, stability_score_thresh=0.92")
             generator = SAM2AutomaticMaskGenerator(
                 model=model,
-                # points_per_side=32,
-                # pred_iou_thresh=0.86,
-                # stability_score_thresh=0.92,
-                # crop_n_layers=1,
-                # crop_n_points_downscale_factor=2,
-                # min_mask_region_area=100
+                points_per_side=32,
+                pred_iou_thresh=0.86,
+                stability_score_thresh=0.92,
+                crop_n_layers=0,  # Disable cropping to avoid IndexError
+                crop_n_points_downscale_factor=2,
+                min_mask_region_area=100,
+                output_mode="binary_mask"
             )
         
         logger.debug(f"Mask generator created successfully: {type(generator)}")

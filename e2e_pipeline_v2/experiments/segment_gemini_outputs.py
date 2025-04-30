@@ -1,3 +1,28 @@
+"""
+SAM2 Image Segmentation Pipeline
+
+This script performs automatic image segmentation using SAM2 (Segment Anything Model 2),
+extracts individual segments, and optionally generates embeddings for each segment.
+
+Workflow:
+1. Load input image
+2. Initialize SAM2 model
+3. Generate segmentation masks automatically
+4. Extract individual segments
+5. Save masks and segments
+6. Generate visualizations
+7. Optionally generate embeddings (currently disabled)
+
+Usage:
+    python segment_gemini_outputs.py --image <path_to_image> --output <output_directory>
+
+Arguments:
+    --image         Path to input image
+    --output        Output directory (default: segmentation_results)
+    --max-segments  Maximum number of segments to process
+    --models        Embedding models to use: vit, resnet50, or both
+"""
+
 # Standard library imports
 import os
 import json
@@ -25,10 +50,17 @@ from sam2.automatic_mask_generator import SAM2AutomaticMaskGenerator
 # Local imports
 from e2e_pipeline_v2.modules.embedding import EmbeddingGenerator, ModelType
 
+###########################################
+# LOGGING CONFIGURATION
+###########################################
 
-# Configure logging
 def setup_logging():
-    """Set up logging configuration"""
+    """
+    Set up logging configuration for tracking script execution.
+    
+    Returns:
+        logger: Configured logging object for use throughout the script
+    """
     logging.basicConfig(
         level=logging.INFO,
         format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
@@ -45,9 +77,17 @@ def setup_logging():
 # Initialize logger
 logger = setup_logging()
 
+###########################################
+# DEVICE AND MEMORY MANAGEMENT
+###########################################
 
 def get_device():
-    """Determine the appropriate device for computation"""
+    """
+    Determine the appropriate device for computation (CUDA GPU, MPS, or CPU).
+    
+    Returns:
+        device: PyTorch device object for running computations
+    """
     if torch.cuda.is_available():
         device = torch.device("cuda")
         logger.info("Using CUDA GPU for computation")
@@ -69,7 +109,12 @@ def get_device():
 
 
 def log_memory():
-    """Log memory usage for debugging"""
+    """
+    Log current memory usage for debugging memory issues.
+    
+    This function checks memory usage on the selected device and
+    performs garbage collection to free unused memory.
+    """
     device = get_device()
     if device.type == 'cuda':
         cuda_id = torch.cuda.current_device()
@@ -82,9 +127,24 @@ def log_memory():
         torch.cuda.empty_cache()
         logger.debug(f"After GC - CUDA Memory Allocated: {torch.cuda.memory_allocated(cuda_id) / 1024**2:.2f} MB")
 
+###########################################
+# SAM2 MODEL INITIALIZATION
+###########################################
 
 def initialize_sam2():
-    """Initialize SAM2 model and related components"""
+    """
+    Initialize the SAM2 (Segment Anything Model 2) model.
+    
+    This function loads the SAM2 model configuration and weights from the
+    specified paths and builds the model on the appropriate device.
+    
+    Returns:
+        sam2: Initialized SAM2 model
+        
+    Raises:
+        FileNotFoundError: If config or checkpoint files are not found
+        Exception: If model initialization fails
+    """
     logger.info("Building SAM2 model...")
     logger.info(f'Starting path: {os.getcwd()}')
     
@@ -108,7 +168,8 @@ def initialize_sam2():
         sam2 = build_sam2(
             config_file=config_file,
             checkpoint_path=checkpoint_path,
-            device=device
+            device=device,
+            apply_post_processing=False
         )
         
         logger.debug("SAM2 model built successfully")
@@ -128,13 +189,36 @@ def initialize_sam2():
 
 
 def create_image_predictor(model):
-    """Create and configure the image predictor"""
+    """
+    Create the SAM2 image predictor for interactive prompting.
+    
+    Args:
+        model: Initialized SAM2 model
+        
+    Returns:
+        predictor: SAM2ImagePredictor object
+    """
     logger.info("Creating SAM2 image predictor...")
     return SAM2ImagePredictor(model)
 
 
 def create_mask_generator(model, device):
-    """Create and configure the automatic mask generator with device-specific settings"""
+    """
+    Create the automatic mask generator with device-specific settings.
+    
+    This function configures a SAM2AutomaticMaskGenerator with appropriate
+    parameters based on the computing device.
+    
+    Args:
+        model: Initialized SAM2 model
+        device: PyTorch device (cuda, mps, or cpu)
+        
+    Returns:
+        generator: Configured SAM2AutomaticMaskGenerator
+        
+    Raises:
+        Exception: If mask generator creation fails
+    """
     logger.info(f"Creating automatic mask generator for {device}...")
     
     try:
@@ -158,12 +242,12 @@ def create_mask_generator(model, device):
             logger.debug("Parameters: points_per_side=32, pred_iou_thresh=0.86, stability_score_thresh=0.92")
             generator = SAM2AutomaticMaskGenerator(
                 model=model,
-                points_per_side=32,
-                pred_iou_thresh=0.86,
-                stability_score_thresh=0.92,
-                crop_n_layers=1,
-                crop_n_points_downscale_factor=2,
-                min_mask_region_area=100
+                # points_per_side=32,
+                # pred_iou_thresh=0.86,
+                # stability_score_thresh=0.92,
+                # crop_n_layers=1,
+                # crop_n_points_downscale_factor=2,
+                # min_mask_region_area=100
             )
         
         logger.debug(f"Mask generator created successfully: {type(generator)}")
@@ -173,9 +257,27 @@ def create_mask_generator(model, device):
         logger.error(traceback.format_exc())
         raise
 
+###########################################
+# MASK GENERATION
+###########################################
 
 def safe_generate_masks(mask_generator, image, device):
-    """Safely generate masks with appropriate error handling and device-specific logic"""
+    """
+    Safely generate segmentation masks with error handling.
+    
+    This function attempts to generate masks with the standard approach first,
+    and falls back to alternative methods if errors occur.
+    
+    Args:
+        mask_generator: SAM2AutomaticMaskGenerator object
+        image: Input image (numpy array or tensor)
+        device: PyTorch device
+        
+    Returns:
+        tuple: (masks, error)
+            - masks: List of generated masks if successful, None otherwise
+            - error: Error message if failed, None otherwise
+    """
     logger.info(f"Generating masks on {device} device...")
     logger.debug(f"Image type: {type(image)}, Shape: {image.shape}, dtype: {image.dtype}")
     
@@ -244,9 +346,25 @@ def safe_generate_masks(mask_generator, image, device):
         logger.debug(f"Error details: {traceback.format_exc()}")
         return None, f"Unexpected error in mask generation: {e}"
 
+###########################################
+# IMAGE LOADING AND PROCESSING
+###########################################
 
 def load_image(image_path):
-    """Load and prepare an image for processing"""
+    """
+    Load and prepare an image for processing.
+    
+    Args:
+        image_path: Path to the input image file
+        
+    Returns:
+        image: Loaded image as RGB numpy array
+        
+    Raises:
+        FileNotFoundError: If image file is not found
+        ValueError: If image cannot be loaded
+        Exception: For other errors
+    """
     logger.info(f"Loading image from {image_path}")
     
     if not os.path.exists(image_path):
@@ -281,7 +399,19 @@ def load_image(image_path):
 
 
 def extract_segment(image, mask):
-    """Extract a segment from the image based on the mask"""
+    """
+    Extract a segment from the image based on the binary mask.
+    
+    This function applies the mask to extract a segment and crops it to
+    the bounding box of the mask.
+    
+    Args:
+        image: Input image as numpy array
+        mask: Binary mask as boolean array
+        
+    Returns:
+        cropped_segment: Extracted and cropped segment, or None if mask is empty
+    """
     logger.debug(f"Extracting segment from mask. Image shape: {image.shape}, Mask shape: {mask.shape}")
     
     # Create a copy of the image
@@ -319,9 +449,24 @@ def extract_segment(image, mask):
     
     return cropped_segment
 
+###########################################
+# OUTPUT AND VISUALIZATION
+###########################################
 
 def save_mask_image(mask, output_path):
-    """Save a binary mask as an image"""
+    """
+    Save a binary mask as an image file.
+    
+    Args:
+        mask: Binary mask (boolean or uint8)
+        output_path: Path to save the mask image
+        
+    Returns:
+        output_path: Path where the mask was saved
+        
+    Raises:
+        Exception: If saving fails
+    """
     # Convert boolean mask to 8-bit
     logger.debug(f"Saving mask to {output_path}, Mask shape: {mask.shape}, dtype: {mask.dtype}")
     
@@ -344,7 +489,18 @@ def save_mask_image(mask, output_path):
 
 
 def visualize_results(image, masks, embeddings, output_dir):
-    """Visualize the segmentation and embeddings"""
+    """
+    Generate visualization of the segmentation results.
+    
+    This function creates a side-by-side comparison of the original image
+    and the segmentation masks.
+    
+    Args:
+        image: Original input image
+        masks: List of generated masks
+        embeddings: List of segment information
+        output_dir: Directory to save the visualization
+    """
     logger.info("Generating visualization...")
     plt.figure(figsize=(12, 8))
     
@@ -395,9 +551,17 @@ def visualize_results(image, masks, embeddings, output_dir):
     
     logger.info(f"Visualization saved to {vis_path}")
 
+###########################################
+# ARGUMENT PARSING
+###########################################
 
 def parse_args():
-    """Parse command line arguments"""
+    """
+    Parse command line arguments.
+    
+    Returns:
+        args: Parsed command line arguments
+    """
     parser = argparse.ArgumentParser(description="Segment images and generate embeddings")
     parser.add_argument("--image", type=str, required=True, 
                         help="Path to the input image")
@@ -409,6 +573,190 @@ def parse_args():
                         help="Which embedding models to use (default: both)")
     return parser.parse_args()
 
+###########################################
+# MAIN PROCESSING FUNCTION
+###########################################
+
+def process_image(args):
+    """
+    Main function to process an image with SAM2.
+    
+    This function orchestrates the entire pipeline:
+    1. Sets up output directories
+    2. Initializes SAM2 and related components
+    3. Loads and processes the image
+    4. Generates masks
+    5. Extracts and saves segments
+    6. Creates visualizations
+    
+    Args:
+        args: Command line arguments
+        
+    Returns:
+        dict: Summary of processing results
+    """
+    # Create output directories
+    output_dir = Path(args.output)
+    output_dir.mkdir(exist_ok=True, parents=True)
+    
+    # Create specific folders for each type of output
+    masks_dir = output_dir / "masks"
+    segments_dir = output_dir / "segments"
+    
+    masks_dir.mkdir(exist_ok=True)
+    segments_dir.mkdir(exist_ok=True)
+    
+    logger.info(f"Created output directories in {output_dir}")
+    
+    # Initialize components
+    sam2 = initialize_sam2()
+    device = get_device()
+    mask_generator = create_mask_generator(sam2, device)
+    
+    # Comment out embedding generator initialization as per requirements
+    logger.info("Skipping embedding generator initialization as requested")
+    
+    # Load image
+    image = load_image(args.image)
+    
+    # Generate masks safely
+    logger.info("Generating masks...")
+    start_time = time.time()
+    masks, error = safe_generate_masks(mask_generator, image, device)
+    elapsed_time = time.time() - start_time
+    
+    if error:
+        logger.error(f"Failed to generate masks: {error}")
+        sys.exit(1)
+    
+    if not masks:
+        logger.error("No masks were generated")
+        sys.exit(1)
+    
+    logger.info(f"Successfully generated {len(masks)} masks in {elapsed_time:.2f} seconds")
+    
+    # Save all masks immediately for debugging
+    logger.info("Saving all detected masks for debugging...")
+    all_masks_dir = output_dir / "all_masks"
+    all_masks_dir.mkdir(exist_ok=True)
+    
+    # Create a combined mask visualization
+    plt.figure(figsize=(12, 8))
+    plt.imshow(image)
+    plt.title(f"All Detected Masks ({len(masks)})")
+    
+    colors = plt.cm.tab10(np.linspace(0, 1, len(masks)))
+    for i, mask_data in enumerate(masks):
+        # Save individual mask
+        mask = mask_data["segmentation"]
+        mask_path = all_masks_dir / f"mask_{i}.png"
+        save_mask_image(mask, mask_path)
+        
+        # Add to visualization
+        binary_mask = mask
+        contours, _ = cv2.findContours(
+            binary_mask.astype(np.uint8), 
+            cv2.RETR_EXTERNAL, 
+            cv2.CHAIN_APPROX_SIMPLE
+        )
+        
+        # Draw contours for each mask
+        color = colors[i][:3]  # RGB
+        for contour in contours:
+            plt.fill(
+                contour[:, 0, 0], 
+                contour[:, 0, 1], 
+                color=color,
+                alpha=0.3
+            )
+            plt.plot(
+                contour[:, 0, 0], 
+                contour[:, 0, 1], 
+                color=color,
+                linewidth=2
+            )
+    
+    # Save the combined visualization
+    plt.axis('off')
+    plt.tight_layout()
+    all_masks_vis_path = all_masks_dir / "all_masks_visualization.png"
+    plt.savefig(all_masks_vis_path)
+    plt.close()
+    
+    logger.info(f"Saved all {len(masks)} masks to {all_masks_dir}")
+    logger.info(f"Saved visualization of all masks to {all_masks_vis_path}")
+    
+    # Limit number of masks if specified
+    if args.max_segments is not None and len(masks) > args.max_segments:
+        logger.info(f"Limiting processing to {args.max_segments} of {len(masks)} masks")
+        masks = masks[:args.max_segments]
+    
+    # Process each mask but skip embeddings
+    segments_info = []
+    
+    logger.info("Processing segments (skipping embedding generation)...")
+    for i, mask_data in enumerate(masks):
+        logger.info(f"Processing segment {i+1}/{len(masks)} ({(i+1)/len(masks)*100:.1f}%)")
+        
+        # Extract mask and segment
+        mask = mask_data["segmentation"]
+        
+        # Save the binary mask
+        mask_path = masks_dir / f"mask_{i}.png"
+        save_mask_image(mask, mask_path)
+        logger.info(f"Saved mask to {mask_path}")
+        
+        # Extract the segment
+        segment = extract_segment(image, mask)
+        
+        if segment is None:
+            logger.warning(f"Skipping empty segment {i}")
+            continue
+        
+        # Save segment
+        segment_path = segments_dir / f"segment_{i}.png"
+        cv2.imwrite(str(segment_path), cv2.cvtColor(segment, cv2.COLOR_RGB2BGR))
+        logger.info(f"Saved segment to {segment_path}")
+        
+        # Add simplified segment info without embeddings
+        segments_info.append({
+            "segment_id": i,
+            "segment_path": str(segment_path),
+            "mask_path": str(mask_path),
+            "mask_data": {
+                "area": float(mask_data["area"]),
+                "bbox": mask_data["bbox"],
+                "predicted_iou": float(mask_data["predicted_iou"]),
+                "stability_score": float(mask_data["stability_score"])
+            }
+        })
+    
+    # Save all segments info
+    results_path = output_dir / "segments_info.json"
+    with open(results_path, "w") as f:
+        json.dump({
+            "image_path": args.image,
+            "num_segments": len(segments_info),
+            "segments": segments_info
+        }, f, indent=2)
+    
+    logger.info(f"Saved segment information to {results_path}")
+    
+    # Visualize results
+    visualize_results(image, masks, segments_info, output_dir)
+    
+    logger.info(f"Processing complete. Results saved to {output_dir}")
+    
+    # Return summary
+    return {
+        "num_masks": len(masks),
+        "num_processed_segments": len(segments_info),
+        "output_directory": str(output_dir)
+    }
+
+###########################################
+# MAIN EXECUTION
+###########################################
 
 if __name__ == "__main__":
     logger.info("Starting segment_gemini_outputs.py")
@@ -426,209 +774,8 @@ if __name__ == "__main__":
         
         start_time = time.time()
         
-        # Modify process_image to accept max_segments and model_types
-        def modified_process_image():
-            # Create output directories
-            output_dir = Path(args.output)
-            output_dir.mkdir(exist_ok=True, parents=True)
-            
-            # Create specific folders for each type of output
-            masks_dir = output_dir / "masks"
-            segments_dir = output_dir / "segments"
-            
-            masks_dir.mkdir(exist_ok=True)
-            segments_dir.mkdir(exist_ok=True)
-            
-            logger.info(f"Created output directories in {output_dir}")
-            
-            # Initialize components
-            sam2 = initialize_sam2()
-            device = get_device()
-            mask_generator = create_mask_generator(sam2, device)
-            
-            # Comment out embedding generator initialization
-            """
-            # Initialize embedding generator
-            logger.info(f"Initializing embedding generator with models: {[m.value for m in model_types]}")
-            embedding_generator = EmbeddingGenerator(
-                model_types=model_types,
-                device=device.type
-            )
-            """
-            logger.info("Skipping embedding generator initialization as requested")
-            
-            # Load image
-            image = load_image(args.image)
-            
-            # Generate masks safely
-            logger.info("Generating masks...")
-            start_time = time.time()
-            masks, error = safe_generate_masks(mask_generator, image, device)
-            elapsed_time = time.time() - start_time
-            
-            if error:
-                logger.error(f"Failed to generate masks: {error}")
-                sys.exit(1)
-            
-            if not masks:
-                logger.error("No masks were generated")
-                sys.exit(1)
-            
-            logger.info(f"Successfully generated {len(masks)} masks in {elapsed_time:.2f} seconds")
-            
-            # Save all masks immediately for debugging
-            logger.info("Saving all detected masks for debugging...")
-            all_masks_dir = output_dir / "all_masks"
-            all_masks_dir.mkdir(exist_ok=True)
-            
-            # Create a combined mask visualization
-            plt.figure(figsize=(12, 8))
-            plt.imshow(image)
-            plt.title(f"All Detected Masks ({len(masks)})")
-            
-            colors = plt.cm.tab10(np.linspace(0, 1, len(masks)))
-            for i, mask_data in enumerate(masks):
-                # Save individual mask
-                mask = mask_data["segmentation"]
-                mask_path = all_masks_dir / f"mask_{i}.png"
-                save_mask_image(mask, mask_path)
-                
-                # Add to visualization
-                binary_mask = mask
-                contours, _ = cv2.findContours(
-                    binary_mask.astype(np.uint8), 
-                    cv2.RETR_EXTERNAL, 
-                    cv2.CHAIN_APPROX_SIMPLE
-                )
-                
-                # Draw contours for each mask
-                color = colors[i][:3]  # RGB
-                for contour in contours:
-                    plt.fill(
-                        contour[:, 0, 0], 
-                        contour[:, 0, 1], 
-                        color=color,
-                        alpha=0.3
-                    )
-                    plt.plot(
-                        contour[:, 0, 0], 
-                        contour[:, 0, 1], 
-                        color=color,
-                        linewidth=2
-                    )
-            
-            # Save the combined visualization
-            plt.axis('off')
-            plt.tight_layout()
-            all_masks_vis_path = all_masks_dir / "all_masks_visualization.png"
-            plt.savefig(all_masks_vis_path)
-            plt.close()
-            
-            logger.info(f"Saved all {len(masks)} masks to {all_masks_dir}")
-            logger.info(f"Saved visualization of all masks to {all_masks_vis_path}")
-            
-            # Limit number of masks if specified
-            if args.max_segments is not None and len(masks) > args.max_segments:
-                logger.info(f"Limiting processing to {args.max_segments} of {len(masks)} masks")
-                masks = masks[:args.max_segments]
-            
-            # Process each mask but skip embeddings
-            segments_info = []
-            
-            logger.info("Processing segments (skipping embedding generation)...")
-            for i, mask_data in enumerate(masks):
-                logger.info(f"Processing segment {i+1}/{len(masks)} ({(i+1)/len(masks)*100:.1f}%)")
-                
-                # Extract mask and segment
-                mask = mask_data["segmentation"]
-                
-                # Save the binary mask
-                mask_path = masks_dir / f"mask_{i}.png"
-                save_mask_image(mask, mask_path)
-                logger.info(f"Saved mask to {mask_path}")
-                
-                # Extract the segment
-                segment = extract_segment(image, mask)
-                
-                if segment is None:
-                    logger.warning(f"Skipping empty segment {i}")
-                    continue
-                
-                # Save segment
-                segment_path = segments_dir / f"segment_{i}.png"
-                cv2.imwrite(str(segment_path), cv2.cvtColor(segment, cv2.COLOR_RGB2BGR))
-                logger.info(f"Saved segment to {segment_path}")
-                
-                # Skip embedding generation
-                """
-                # Generate embeddings
-                logger.info(f"Generating embeddings for segment {i}...")
-                
-                # Initialize dictionary for embeddings
-                embedding_data = {
-                    "segment_id": i,
-                    "segment_path": str(segment_path),
-                    "mask_path": str(mask_path),
-                    "embeddings": {},
-                    "mask_data": {
-                        "area": float(mask_data["area"]),
-                        "bbox": mask_data["bbox"],
-                        "predicted_iou": float(mask_data["predicted_iou"]),
-                        "stability_score": float(mask_data["stability_score"])
-                    }
-                }
-                
-                # Generate embeddings for selected models
-                try:
-                    for model_type in model_types:
-                        model_name = model_type.value
-                        logger.info(f"Generating {model_name} embedding...")
-                        embedding = embedding_generator.generate_embedding(segment, model_type)
-                        logger.info(f"Generated {model_name} embedding: {embedding.shape}")
-                        embedding_data["embeddings"][model_name] = embedding.tolist()
-                    
-                    segments_info.append(embedding_data)
-                except Exception as e:
-                    logger.error(f"Error generating embeddings for segment {i}: {str(e)}")
-                """
-                
-                # Add simplified segment info without embeddings
-                segments_info.append({
-                    "segment_id": i,
-                    "segment_path": str(segment_path),
-                    "mask_path": str(mask_path),
-                    "mask_data": {
-                        "area": float(mask_data["area"]),
-                        "bbox": mask_data["bbox"],
-                        "predicted_iou": float(mask_data["predicted_iou"]),
-                        "stability_score": float(mask_data["stability_score"])
-                    }
-                })
-            
-            # Save all segments info
-            results_path = output_dir / "segments_info.json"
-            with open(results_path, "w") as f:
-                json.dump({
-                    "image_path": args.image,
-                    "num_segments": len(segments_info),
-                    "segments": segments_info
-                }, f, indent=2)
-            
-            logger.info(f"Saved segment information to {results_path}")
-            
-            # Visualize results
-            visualize_results(image, masks, segments_info, output_dir)
-            
-            logger.info(f"Processing complete. Results saved to {output_dir}")
-            
-            # Return summary
-            return {
-                "num_masks": len(masks),
-                "num_processed_segments": len(segments_info),
-                "output_directory": str(output_dir)
-            }
-        
-        results = modified_process_image()
+        # Process the image
+        results = process_image(args)
         elapsed_time = time.time() - start_time
         
         logger.info(f"Processed {results['num_masks']} masks, {results['num_processed_segments']} segments")

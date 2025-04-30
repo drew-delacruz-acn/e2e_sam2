@@ -3,9 +3,11 @@ import os
 import json
 import argparse
 import logging
+import traceback
 from pathlib import Path
 import sys
 import time
+import gc  # For garbage collection
 
 # Add root directory to path to import local modules
 sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
@@ -35,6 +37,8 @@ def setup_logging():
             logging.FileHandler("segment_embeddings.log")
         ]
     )
+    # Set debug level for root logger to get more detailed information
+    logging.getLogger().setLevel(logging.DEBUG)
     return logging.getLogger("segment_embeddings")
 
 
@@ -47,6 +51,12 @@ def get_device():
     if torch.cuda.is_available():
         device = torch.device("cuda")
         logger.info("Using CUDA GPU for computation")
+        # Log CUDA device details
+        cuda_id = torch.cuda.current_device()
+        logger.info(f"CUDA Device ID: {cuda_id}")
+        logger.info(f"CUDA Device Name: {torch.cuda.get_device_name(cuda_id)}")
+        logger.info(f"CUDA Memory Allocated: {torch.cuda.memory_allocated(cuda_id) / 1024**2:.2f} MB")
+        logger.info(f"CUDA Memory Reserved: {torch.cuda.memory_reserved(cuda_id) / 1024**2:.2f} MB")
     elif torch.backends.mps.is_available():
         device = torch.device("mps")
         logger.info("Using MPS (Apple Silicon). Note that SAM2 might give different outputs on MPS.")
@@ -58,6 +68,21 @@ def get_device():
     return device
 
 
+def log_memory():
+    """Log memory usage for debugging"""
+    device = get_device()
+    if device.type == 'cuda':
+        cuda_id = torch.cuda.current_device()
+        logger.debug(f"CUDA Memory Allocated: {torch.cuda.memory_allocated(cuda_id) / 1024**2:.2f} MB")
+        logger.debug(f"CUDA Memory Reserved: {torch.cuda.memory_reserved(cuda_id) / 1024**2:.2f} MB")
+    
+    # Force garbage collection to clean up memory
+    gc.collect()
+    if device.type == 'cuda':
+        torch.cuda.empty_cache()
+        logger.debug(f"After GC - CUDA Memory Allocated: {torch.cuda.memory_allocated(cuda_id) / 1024**2:.2f} MB")
+
+
 def initialize_sam2():
     """Initialize SAM2 model and related components"""
     logger.info("Building SAM2 model...")
@@ -65,15 +90,41 @@ def initialize_sam2():
     
     start_time = time.time()
     device = get_device()
-    sam2 = build_sam2(
-        config_file="configs/sam2.1/sam2.1_hiera_l.yaml",
-        checkpoint_path="checkpoints/sam2.1_hiera_large.pt",
-        device=device
-    )
     
-    elapsed_time = time.time() - start_time
-    logger.info(f"SAM2 model built successfully in {elapsed_time:.2f} seconds")
-    return sam2
+    try:
+        logger.debug("Loading SAM2 model configuration from config file")
+        config_file = "configs/sam2.1/sam2.1_hiera_l.yaml"
+        checkpoint_path = "checkpoints/sam2.1_hiera_large.pt"
+        
+        if not os.path.exists(config_file):
+            logger.error(f"Config file not found: {config_file}")
+            raise FileNotFoundError(f"Config file not found: {config_file}")
+        
+        if not os.path.exists(checkpoint_path):
+            logger.error(f"Checkpoint file not found: {checkpoint_path}")
+            raise FileNotFoundError(f"Checkpoint file not found: {checkpoint_path}")
+        
+        logger.debug(f"Building SAM2 model with config: {config_file}, checkpoint: {checkpoint_path}, device: {device}")
+        sam2 = build_sam2(
+            config_file=config_file,
+            checkpoint_path=checkpoint_path,
+            device=device
+        )
+        
+        logger.debug("SAM2 model built successfully")
+        log_memory()
+        
+        elapsed_time = time.time() - start_time
+        logger.info(f"SAM2 model built successfully in {elapsed_time:.2f} seconds")
+        
+        # Verify the model was loaded correctly
+        logger.debug(f"SAM2 model type: {type(sam2)}")
+        
+        return sam2
+    except Exception as e:
+        logger.error(f"Failed to initialize SAM2 model: {e}")
+        logger.error(traceback.format_exc())
+        raise
 
 
 def create_image_predictor(model):
@@ -86,42 +137,64 @@ def create_mask_generator(model, device):
     """Create and configure the automatic mask generator with device-specific settings"""
     logger.info(f"Creating automatic mask generator for {device}...")
     
-    # Device-specific configurations
-    if device.type == 'cuda':
-        logger.info("Using CUDA-specific settings for mask generator")
-        return SAM2AutomaticMaskGenerator(
-            model=model,
-            points_per_side=32,
-            pred_iou_thresh=0.86,
-            stability_score_thresh=0.92,
-            crop_n_layers=1,
-            crop_n_points_downscale_factor=2,
-            min_mask_region_area=100,
-            output_mode="binary_mask"  # Explicitly set output mode
-        )
-    else:
-        # For MPS and CPU
-        logger.info(f"Using {device.type}-specific settings for mask generator")
-        return SAM2AutomaticMaskGenerator(
-            model=model,
-            points_per_side=32,
-            pred_iou_thresh=0.86,
-            stability_score_thresh=0.92,
-            crop_n_layers=1,
-            crop_n_points_downscale_factor=2,
-            min_mask_region_area=100
-        )
+    try:
+        # Device-specific configurations
+        if device.type == 'cuda':
+            logger.info("Using CUDA-specific settings for mask generator")
+            logger.debug("Parameters: points_per_side=32, pred_iou_thresh=0.86, stability_score_thresh=0.92")
+            generator = SAM2AutomaticMaskGenerator(
+                model=model,
+                points_per_side=32,
+                pred_iou_thresh=0.86,
+                stability_score_thresh=0.92,
+                crop_n_layers=1,
+                crop_n_points_downscale_factor=2,
+                min_mask_region_area=100,
+                output_mode="binary_mask"  # Explicitly set output mode
+            )
+        else:
+            # For MPS and CPU
+            logger.info(f"Using {device.type}-specific settings for mask generator")
+            logger.debug("Parameters: points_per_side=32, pred_iou_thresh=0.86, stability_score_thresh=0.92")
+            generator = SAM2AutomaticMaskGenerator(
+                model=model,
+                points_per_side=32,
+                pred_iou_thresh=0.86,
+                stability_score_thresh=0.92,
+                crop_n_layers=1,
+                crop_n_points_downscale_factor=2,
+                min_mask_region_area=100
+            )
+        
+        logger.debug(f"Mask generator created successfully: {type(generator)}")
+        return generator
+    except Exception as e:
+        logger.error(f"Failed to create mask generator: {e}")
+        logger.error(traceback.format_exc())
+        raise
 
 
 def safe_generate_masks(mask_generator, image, device):
     """Safely generate masks with appropriate error handling and device-specific logic"""
     logger.info(f"Generating masks on {device} device...")
+    logger.debug(f"Image type: {type(image)}, Shape: {image.shape}, dtype: {image.dtype}")
+    
+    # Log image details
+    if isinstance(image, np.ndarray):
+        logger.debug(f"Image is numpy array, Min: {np.min(image)}, Max: {np.max(image)}, Mean: {np.mean(image):.2f}")
+    elif isinstance(image, torch.Tensor):
+        logger.debug(f"Image is torch tensor, Min: {torch.min(image).item()}, Max: {torch.max(image).item()}, Mean: {torch.mean(image).item():.2f}")
     
     try:
         # Try the standard approach first
+        logger.debug("Attempting standard mask generation approach")
         masks = mask_generator.generate(image)
+        logger.debug(f"Standard approach successful, generated {len(masks)} masks")
         return masks, None
     except IndexError as e:
+        logger.warning(f"IndexError in mask generation: {e}")
+        logger.debug(f"Error details: {traceback.format_exc()}")
+        
         if "too many indices for tensor" in str(e):
             logger.warning(f"Dimension error in mask generation: {e}")
             logger.info("Trying fallback approach...")
@@ -130,23 +203,45 @@ def safe_generate_masks(mask_generator, image, device):
             try:
                 # Convert image to tensor with correct dimensions if needed
                 if isinstance(image, np.ndarray):
+                    logger.debug(f"Converting numpy array to tensor. Original shape: {image.shape}")
+                    
                     # Ensure image is in correct format (channels last)
                     if image.shape[2] == 3:  # HWC format
+                        logger.debug("Image is in HWC format, converting to BCHW")
                         image_tensor = torch.from_numpy(image).permute(2, 0, 1).unsqueeze(0)
                     else:  # CHW format
+                        logger.debug("Image is in CHW format, adding batch dimension")
                         image_tensor = torch.from_numpy(image).unsqueeze(0)
                     
+                    # Log tensor details
+                    logger.debug(f"Created tensor with shape: {image_tensor.shape}, dtype: {image_tensor.dtype}")
+                    
+                    # Move to device
                     image_tensor = image_tensor.to(device)
+                    logger.debug(f"Moved tensor to {device}")
+                    
+                    # Log tensor details after moving to device
+                    logger.debug(f"Tensor device: {image_tensor.device}, requires_grad: {image_tensor.requires_grad}")
+                    
+                    # Try generating masks with tensor
+                    logger.debug("Attempting mask generation with tensor")
                     masks = mask_generator.generate(image_tensor)
+                    logger.debug(f"Fallback approach successful, generated {len(masks)} masks")
                     return masks, None
                 else:
-                    return None, f"Unsupported image type for fallback: {type(image)}"
+                    error_msg = f"Unsupported image type for fallback: {type(image)}"
+                    logger.error(error_msg)
+                    return None, error_msg
             
             except Exception as fallback_error:
+                logger.error(f"Fallback approach failed: {fallback_error}")
+                logger.debug(f"Fallback error details: {traceback.format_exc()}")
                 return None, f"Fallback approach failed: {fallback_error}"
         
         return None, f"Error generating masks: {e}"
     except Exception as e:
+        logger.error(f"Unexpected error in mask generation: {e}")
+        logger.debug(f"Error details: {traceback.format_exc()}")
         return None, f"Unexpected error in mask generation: {e}"
 
 
@@ -158,20 +253,37 @@ def load_image(image_path):
         error_msg = f"Image file not found: {image_path}"
         logger.error(error_msg)
         raise FileNotFoundError(error_msg)
+    
+    try:
+        image = cv2.imread(image_path)
+        if image is None:
+            error_msg = f"Could not load image from {image_path}"
+            logger.error(error_msg)
+            raise ValueError(error_msg)
         
-    image = cv2.imread(image_path)
-    if image is None:
-        error_msg = f"Could not load image from {image_path}"
-        logger.error(error_msg)
-        raise ValueError(error_msg)
+        # Log image details
+        file_size = os.path.getsize(image_path) / 1024  # KB
+        logger.debug(f"Image file size: {file_size:.2f} KB")
+        logger.info(f"Image loaded successfully: {image.shape}, dtype: {image.dtype}")
         
-    logger.info(f"Image loaded successfully: {image.shape}")
-    image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
-    return image
+        # Convert BGR to RGB
+        logger.debug("Converting image from BGR to RGB")
+        image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+        
+        # Log pixel value range
+        logger.debug(f"Image pixel range - Min: {np.min(image)}, Max: {np.max(image)}, Mean: {np.mean(image):.2f}")
+        
+        return image
+    except Exception as e:
+        logger.error(f"Error loading image: {e}")
+        logger.error(traceback.format_exc())
+        raise
 
 
 def extract_segment(image, mask):
     """Extract a segment from the image based on the mask"""
+    logger.debug(f"Extracting segment from mask. Image shape: {image.shape}, Mask shape: {mask.shape}")
+    
     # Create a copy of the image
     segment = np.zeros_like(image)
     # Apply mask to extract the segment
@@ -183,21 +295,52 @@ def extract_segment(image, mask):
         logger.warning("Empty mask detected, skipping segment extraction")
         return None
     
+    # Log mask coverage statistics
+    mask_pixels = np.sum(mask)
+    total_pixels = mask.shape[0] * mask.shape[1]
+    coverage_percent = (mask_pixels / total_pixels) * 100
+    logger.debug(f"Mask covers {mask_pixels} pixels ({coverage_percent:.2f}% of image)")
+    
     y_min, y_max = indices[0].min(), indices[0].max()
     x_min, x_max = indices[1].min(), indices[1].max()
+    
+    # Log bounding box coordinates
+    logger.debug(f"Bounding box: x=[{x_min}, {x_max}], y=[{y_min}, {y_max}]")
     
     # Crop the segment
     cropped_segment = segment[y_min:y_max+1, x_min:x_max+1]
     logger.debug(f"Segment extracted with dimensions: {cropped_segment.shape}")
+    
+    # Log segment statistics
+    non_zero_pixels = np.count_nonzero(np.sum(cropped_segment, axis=2))
+    total_crop_pixels = cropped_segment.shape[0] * cropped_segment.shape[1]
+    fill_percent = (non_zero_pixels / total_crop_pixels) * 100
+    logger.debug(f"Segment contains {non_zero_pixels} non-zero pixels ({fill_percent:.2f}% of crop)")
+    
     return cropped_segment
 
 
 def save_mask_image(mask, output_path):
     """Save a binary mask as an image"""
     # Convert boolean mask to 8-bit
+    logger.debug(f"Saving mask to {output_path}, Mask shape: {mask.shape}, dtype: {mask.dtype}")
+    
+    # Log mask statistics
+    if mask.dtype == bool:
+        true_count = np.sum(mask)
+        total_pixels = mask.size
+        logger.debug(f"Mask has {true_count} True values ({true_count/total_pixels*100:.2f}% of pixels)")
+    
     mask_img = mask.astype(np.uint8) * 255
-    cv2.imwrite(str(output_path), mask_img)
-    return output_path
+    
+    try:
+        cv2.imwrite(str(output_path), mask_img)
+        logger.debug(f"Successfully saved mask to {output_path}")
+        return output_path
+    except Exception as e:
+        logger.error(f"Error saving mask image: {e}")
+        logger.error(traceback.format_exc())
+        raise
 
 
 def visualize_results(image, masks, embeddings, output_dir):

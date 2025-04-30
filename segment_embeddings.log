@@ -604,207 +604,497 @@ Traceback (most recent call last):
 NotImplementedError: Image format not supported
 
 2025-04-30 18:49:12,898 - segment_embeddings - ERROR - Failed to generate masks: Fallback approach failed: Image format not supported
-2025-04-30 19:08:13,472 - segment_embeddings - INFO - Starting segment_gemini_outputs.py
-2025-04-30 19:08:13,473 - segment_embeddings - INFO - Arguments: image=data/mjolnir_gt.jpeg, output=segmentation_results, max_segments=2, models=both
-2025-04-30 19:08:13,473 - segment_embeddings - INFO - Created output directories in segmentation_results
-2025-04-30 19:08:13,473 - segment_embeddings - INFO - Building SAM2 model...
-2025-04-30 19:08:13,473 - segment_embeddings - INFO - Starting path: /home/ubuntu/code/drew/e2e_sam2
-2025-04-30 19:08:13,611 - segment_embeddings - INFO - Using CUDA GPU for computation
-2025-04-30 19:08:13,634 - segment_embeddings - INFO - CUDA Device ID: 0
-2025-04-30 19:08:13,635 - segment_embeddings - INFO - CUDA Device Name: Tesla T4
-2025-04-30 19:08:13,635 - segment_embeddings - INFO - CUDA Memory Allocated: 0.00 MB
-2025-04-30 19:08:13,635 - segment_embeddings - INFO - CUDA Memory Reserved: 0.00 MB
-2025-04-30 19:08:13,635 - segment_embeddings - INFO - Selected device: cuda
-2025-04-30 19:08:13,635 - segment_embeddings - DEBUG - Loading SAM2 model configuration from config file
-2025-04-30 19:08:13,636 - segment_embeddings - DEBUG - Building SAM2 model with config: configs/sam2.1/sam2.1_hiera_l.yaml, checkpoint: checkpoints/sam2.1_hiera_large.pt, device: cuda
-2025-04-30 19:08:16,162 - segment_embeddings - DEBUG - SAM2 model built successfully
-2025-04-30 19:08:16,162 - segment_embeddings - INFO - Using CUDA GPU for computation
-2025-04-30 19:08:16,162 - segment_embeddings - INFO - CUDA Device ID: 0
-2025-04-30 19:08:16,162 - segment_embeddings - INFO - CUDA Device Name: Tesla T4
-2025-04-30 19:08:16,162 - segment_embeddings - INFO - CUDA Memory Allocated: 1000.91 MB
-2025-04-30 19:08:16,163 - segment_embeddings - INFO - CUDA Memory Reserved: 1052.00 MB
-2025-04-30 19:08:16,163 - segment_embeddings - INFO - Selected device: cuda
-2025-04-30 19:08:16,163 - segment_embeddings - DEBUG - CUDA Memory Allocated: 1000.91 MB
-2025-04-30 19:08:16,163 - segment_embeddings - DEBUG - CUDA Memory Reserved: 1052.00 MB
-2025-04-30 19:08:16,313 - segment_embeddings - DEBUG - After GC - CUDA Memory Allocated: 1000.91 MB
-2025-04-30 19:08:16,313 - segment_embeddings - INFO - SAM2 model built successfully in 2.84 seconds
-2025-04-30 19:08:16,313 - segment_embeddings - DEBUG - SAM2 model type: <class 'sam2.modeling.sam2_base.SAM2Base'>
-2025-04-30 19:08:16,313 - segment_embeddings - INFO - Using CUDA GPU for computation
-2025-04-30 19:08:16,313 - segment_embeddings - INFO - CUDA Device ID: 0
-2025-04-30 19:08:16,314 - segment_embeddings - INFO - CUDA Device Name: Tesla T4
-2025-04-30 19:08:16,314 - segment_embeddings - INFO - CUDA Memory Allocated: 1000.91 MB
-2025-04-30 19:08:16,314 - segment_embeddings - INFO - CUDA Memory Reserved: 1052.00 MB
-2025-04-30 19:08:16,314 - segment_embeddings - INFO - Selected device: cuda
-2025-04-30 19:08:16,314 - segment_embeddings - INFO - Creating automatic mask generator for cuda...
-2025-04-30 19:08:16,314 - segment_embeddings - INFO - Using CUDA-specific settings for mask generator
-2025-04-30 19:08:16,314 - segment_embeddings - DEBUG - Parameters: points_per_side=32, pred_iou_thresh=0.86, stability_score_thresh=0.92
-2025-04-30 19:08:16,458 - segment_embeddings - DEBUG - Mask generator created successfully: <class 'sam2.automatic_mask_generator.SAM2AutomaticMaskGenerator'>
-2025-04-30 19:08:16,458 - segment_embeddings - INFO - Skipping embedding generator initialization as requested
-2025-04-30 19:08:16,458 - segment_embeddings - INFO - Loading image from data/mjolnir_gt.jpeg
-2025-04-30 19:08:16,459 - segment_embeddings - DEBUG - Image file size: 5.97 KB
-2025-04-30 19:08:16,459 - segment_embeddings - INFO - Image loaded successfully: (316, 160, 3), dtype: uint8
-2025-04-30 19:08:16,459 - segment_embeddings - DEBUG - Converting image from BGR to RGB
-2025-04-30 19:08:16,459 - segment_embeddings - DEBUG - Image pixel range - Min: 0, Max: 255, Mean: 215.79
-2025-04-30 19:08:16,459 - segment_embeddings - INFO - Generating masks...
-2025-04-30 19:08:16,460 - segment_embeddings - INFO - Generating masks on cuda device...
-2025-04-30 19:08:16,460 - segment_embeddings - DEBUG - Image type: <class 'numpy.ndarray'>, Shape: (316, 160, 3), dtype: uint8
-2025-04-30 19:08:16,460 - segment_embeddings - DEBUG - Image is numpy array, Min: 0, Max: 255, Mean: 215.79
-2025-04-30 19:08:16,460 - segment_embeddings - DEBUG - Attempting standard mask generation approach
-2025-04-30 19:08:16,460 - root - INFO - For numpy array image, we assume (HxWxC) format
-2025-04-30 19:08:16,541 - root - INFO - Computing image embeddings for the provided image...
-2025-04-30 19:08:17,230 - root - INFO - Image embeddings computed.
-2025-04-30 19:08:20,880 - segment_embeddings - DEBUG - Standard approach successful, generated 0 masks
-2025-04-30 19:08:20,880 - segment_embeddings - ERROR - No masks were generated
-2025-04-30 19:09:25,761 - segment_embeddings - INFO - Starting segment_gemini_outputs.py
-2025-04-30 19:09:25,763 - segment_embeddings - INFO - Arguments: image=data/mjolnir_gt.jpeg, output=segmentation_results, max_segments=3, models=both
-2025-04-30 19:09:25,764 - segment_embeddings - INFO - Created output directories in segmentation_results
-2025-04-30 19:09:25,764 - segment_embeddings - INFO - Building SAM2 model...
-2025-04-30 19:09:25,764 - segment_embeddings - INFO - Starting path: /home/ubuntu/code/drew/e2e_sam2
-2025-04-30 19:09:25,901 - segment_embeddings - INFO - Using CUDA GPU for computation
-2025-04-30 19:09:25,925 - segment_embeddings - INFO - CUDA Device ID: 0
-2025-04-30 19:09:25,925 - segment_embeddings - INFO - CUDA Device Name: Tesla T4
-2025-04-30 19:09:25,926 - segment_embeddings - INFO - CUDA Memory Allocated: 0.00 MB
-2025-04-30 19:09:25,926 - segment_embeddings - INFO - CUDA Memory Reserved: 0.00 MB
-2025-04-30 19:09:25,926 - segment_embeddings - INFO - Selected device: cuda
-2025-04-30 19:09:25,926 - segment_embeddings - DEBUG - Loading SAM2 model configuration from config file
-2025-04-30 19:09:25,926 - segment_embeddings - DEBUG - Building SAM2 model with config: configs/sam2.1/sam2.1_hiera_l.yaml, checkpoint: checkpoints/sam2.1_hiera_large.pt, device: cuda
-2025-04-30 19:09:28,440 - segment_embeddings - DEBUG - SAM2 model built successfully
-2025-04-30 19:09:28,440 - segment_embeddings - INFO - Using CUDA GPU for computation
-2025-04-30 19:09:28,441 - segment_embeddings - INFO - CUDA Device ID: 0
-2025-04-30 19:09:28,441 - segment_embeddings - INFO - CUDA Device Name: Tesla T4
-2025-04-30 19:09:28,441 - segment_embeddings - INFO - CUDA Memory Allocated: 1000.91 MB
-2025-04-30 19:09:28,441 - segment_embeddings - INFO - CUDA Memory Reserved: 1052.00 MB
-2025-04-30 19:09:28,441 - segment_embeddings - INFO - Selected device: cuda
-2025-04-30 19:09:28,441 - segment_embeddings - DEBUG - CUDA Memory Allocated: 1000.91 MB
-2025-04-30 19:09:28,441 - segment_embeddings - DEBUG - CUDA Memory Reserved: 1052.00 MB
-2025-04-30 19:09:28,584 - segment_embeddings - DEBUG - After GC - CUDA Memory Allocated: 1000.91 MB
-2025-04-30 19:09:28,584 - segment_embeddings - INFO - SAM2 model built successfully in 2.82 seconds
-2025-04-30 19:09:28,584 - segment_embeddings - DEBUG - SAM2 model type: <class 'sam2.modeling.sam2_base.SAM2Base'>
-2025-04-30 19:09:28,584 - segment_embeddings - INFO - Using CUDA GPU for computation
-2025-04-30 19:09:28,584 - segment_embeddings - INFO - CUDA Device ID: 0
-2025-04-30 19:09:28,584 - segment_embeddings - INFO - CUDA Device Name: Tesla T4
-2025-04-30 19:09:28,584 - segment_embeddings - INFO - CUDA Memory Allocated: 1000.91 MB
-2025-04-30 19:09:28,585 - segment_embeddings - INFO - CUDA Memory Reserved: 1052.00 MB
-2025-04-30 19:09:28,585 - segment_embeddings - INFO - Selected device: cuda
-2025-04-30 19:09:28,585 - segment_embeddings - INFO - Creating automatic mask generator for cuda...
-2025-04-30 19:09:28,585 - segment_embeddings - INFO - Using CUDA-specific settings for mask generator
-2025-04-30 19:09:28,585 - segment_embeddings - DEBUG - Parameters: points_per_side=32, pred_iou_thresh=0.86, stability_score_thresh=0.92
-2025-04-30 19:09:28,724 - segment_embeddings - DEBUG - Mask generator created successfully: <class 'sam2.automatic_mask_generator.SAM2AutomaticMaskGenerator'>
-2025-04-30 19:09:28,724 - segment_embeddings - INFO - Skipping embedding generator initialization as requested
-2025-04-30 19:09:28,724 - segment_embeddings - INFO - Loading image from data/mjolnir_gt.jpeg
-2025-04-30 19:09:28,725 - segment_embeddings - DEBUG - Image file size: 5.97 KB
-2025-04-30 19:09:28,725 - segment_embeddings - INFO - Image loaded successfully: (316, 160, 3), dtype: uint8
-2025-04-30 19:09:28,725 - segment_embeddings - DEBUG - Converting image from BGR to RGB
-2025-04-30 19:09:28,726 - segment_embeddings - DEBUG - Image pixel range - Min: 0, Max: 255, Mean: 215.79
-2025-04-30 19:09:28,726 - segment_embeddings - INFO - Generating masks...
-2025-04-30 19:09:28,726 - segment_embeddings - INFO - Generating masks on cuda device...
-2025-04-30 19:09:28,726 - segment_embeddings - DEBUG - Image type: <class 'numpy.ndarray'>, Shape: (316, 160, 3), dtype: uint8
-2025-04-30 19:09:28,726 - segment_embeddings - DEBUG - Image is numpy array, Min: 0, Max: 255, Mean: 215.79
-2025-04-30 19:09:28,726 - segment_embeddings - DEBUG - Attempting standard mask generation approach
-2025-04-30 19:09:28,726 - root - INFO - For numpy array image, we assume (HxWxC) format
-2025-04-30 19:09:28,806 - root - INFO - Computing image embeddings for the provided image...
-2025-04-30 19:09:29,491 - root - INFO - Image embeddings computed.
-2025-04-30 19:09:33,135 - segment_embeddings - DEBUG - Standard approach successful, generated 0 masks
-2025-04-30 19:09:33,135 - segment_embeddings - ERROR - No masks were generated
-2025-04-30 19:30:10,155 - segment_embeddings - INFO - Starting segment_gemini_outputs.py
-2025-04-30 19:30:10,156 - segment_embeddings - INFO - Arguments: image=data/mjolnir_gt.jpeg, output=segmentation_results, max_segments=3, models=both
-2025-04-30 19:30:10,156 - segment_embeddings - INFO - Created output directories in segmentation_results
-2025-04-30 19:30:10,156 - segment_embeddings - INFO - Building SAM2 model...
-2025-04-30 19:30:10,156 - segment_embeddings - INFO - Starting path: /home/ubuntu/code/drew/e2e_sam2
-2025-04-30 19:30:10,296 - segment_embeddings - INFO - Using CUDA GPU for computation
-2025-04-30 19:30:10,320 - segment_embeddings - INFO - CUDA Device ID: 0
-2025-04-30 19:30:10,320 - segment_embeddings - INFO - CUDA Device Name: Tesla T4
-2025-04-30 19:30:10,320 - segment_embeddings - INFO - CUDA Memory Allocated: 0.00 MB
-2025-04-30 19:30:10,320 - segment_embeddings - INFO - CUDA Memory Reserved: 0.00 MB
-2025-04-30 19:30:10,320 - segment_embeddings - INFO - Selected device: cuda
-2025-04-30 19:30:10,320 - segment_embeddings - DEBUG - Loading SAM2 model configuration from config file
-2025-04-30 19:30:10,321 - segment_embeddings - DEBUG - Building SAM2 model with config: configs/sam2.1/sam2.1_hiera_l.yaml, checkpoint: checkpoints/sam2.1_hiera_large.pt, device: cuda
-2025-04-30 19:30:12,839 - segment_embeddings - DEBUG - SAM2 model built successfully
-2025-04-30 19:30:12,839 - segment_embeddings - INFO - Using CUDA GPU for computation
-2025-04-30 19:30:12,839 - segment_embeddings - INFO - CUDA Device ID: 0
-2025-04-30 19:30:12,839 - segment_embeddings - INFO - CUDA Device Name: Tesla T4
-2025-04-30 19:30:12,839 - segment_embeddings - INFO - CUDA Memory Allocated: 1000.91 MB
-2025-04-30 19:30:12,840 - segment_embeddings - INFO - CUDA Memory Reserved: 1052.00 MB
-2025-04-30 19:30:12,840 - segment_embeddings - INFO - Selected device: cuda
-2025-04-30 19:30:12,840 - segment_embeddings - DEBUG - CUDA Memory Allocated: 1000.91 MB
-2025-04-30 19:30:12,840 - segment_embeddings - DEBUG - CUDA Memory Reserved: 1052.00 MB
-2025-04-30 19:30:12,982 - segment_embeddings - DEBUG - After GC - CUDA Memory Allocated: 1000.91 MB
-2025-04-30 19:30:12,982 - segment_embeddings - INFO - SAM2 model built successfully in 2.83 seconds
-2025-04-30 19:30:12,982 - segment_embeddings - DEBUG - SAM2 model type: <class 'sam2.modeling.sam2_base.SAM2Base'>
-2025-04-30 19:30:12,982 - segment_embeddings - INFO - Using CUDA GPU for computation
-2025-04-30 19:30:12,982 - segment_embeddings - INFO - CUDA Device ID: 0
-2025-04-30 19:30:12,982 - segment_embeddings - INFO - CUDA Device Name: Tesla T4
-2025-04-30 19:30:12,983 - segment_embeddings - INFO - CUDA Memory Allocated: 1000.91 MB
-2025-04-30 19:30:12,983 - segment_embeddings - INFO - CUDA Memory Reserved: 1052.00 MB
-2025-04-30 19:30:12,983 - segment_embeddings - INFO - Selected device: cuda
-2025-04-30 19:30:12,983 - segment_embeddings - INFO - Creating automatic mask generator for cuda...
-2025-04-30 19:30:12,983 - segment_embeddings - INFO - Using CUDA-specific settings for mask generator
-2025-04-30 19:30:12,983 - segment_embeddings - DEBUG - Parameters: points_per_side=32, pred_iou_thresh=0.86, stability_score_thresh=0.92
-2025-04-30 19:30:13,121 - segment_embeddings - DEBUG - Mask generator created successfully: <class 'sam2.automatic_mask_generator.SAM2AutomaticMaskGenerator'>
-2025-04-30 19:30:13,122 - segment_embeddings - INFO - Skipping embedding generator initialization as requested
-2025-04-30 19:30:13,122 - segment_embeddings - INFO - Loading image from data/mjolnir_gt.jpeg
-2025-04-30 19:30:13,122 - segment_embeddings - DEBUG - Image file size: 5.97 KB
-2025-04-30 19:30:13,122 - segment_embeddings - INFO - Image loaded successfully: (316, 160, 3), dtype: uint8
-2025-04-30 19:30:13,122 - segment_embeddings - DEBUG - Converting image from BGR to RGB
-2025-04-30 19:30:13,123 - segment_embeddings - DEBUG - Image pixel range - Min: 0, Max: 255, Mean: 215.79
-2025-04-30 19:30:13,123 - segment_embeddings - INFO - Generating masks...
-2025-04-30 19:30:13,123 - segment_embeddings - INFO - Generating masks on cuda device...
-2025-04-30 19:30:13,123 - segment_embeddings - DEBUG - Image type: <class 'numpy.ndarray'>, Shape: (316, 160, 3), dtype: uint8
-2025-04-30 19:30:13,123 - segment_embeddings - DEBUG - Image is numpy array, Min: 0, Max: 255, Mean: 215.79
-2025-04-30 19:30:13,123 - segment_embeddings - DEBUG - Attempting standard mask generation approach
-2025-04-30 19:30:13,124 - root - INFO - For numpy array image, we assume (HxWxC) format
-2025-04-30 19:30:13,203 - root - INFO - Computing image embeddings for the provided image...
-2025-04-30 19:30:13,907 - root - INFO - Image embeddings computed.
-2025-04-30 19:30:17,544 - segment_embeddings - DEBUG - Standard approach successful, generated 0 masks
-2025-04-30 19:30:17,544 - segment_embeddings - ERROR - No masks were generated
-2025-04-30 19:31:19,561 - segment_embeddings - INFO - Starting segment_gemini_outputs.py
-2025-04-30 19:31:19,562 - segment_embeddings - INFO - Arguments: image=data/cars.jpg, output=segmentation_results, max_segments=3, models=both
-2025-04-30 19:31:19,562 - segment_embeddings - INFO - Created output directories in segmentation_results
-2025-04-30 19:31:19,562 - segment_embeddings - INFO - Building SAM2 model...
-2025-04-30 19:31:19,562 - segment_embeddings - INFO - Starting path: /home/ubuntu/code/drew/e2e_sam2
-2025-04-30 19:31:19,699 - segment_embeddings - INFO - Using CUDA GPU for computation
-2025-04-30 19:31:19,723 - segment_embeddings - INFO - CUDA Device ID: 0
-2025-04-30 19:31:19,723 - segment_embeddings - INFO - CUDA Device Name: Tesla T4
-2025-04-30 19:31:19,723 - segment_embeddings - INFO - CUDA Memory Allocated: 0.00 MB
-2025-04-30 19:31:19,723 - segment_embeddings - INFO - CUDA Memory Reserved: 0.00 MB
-2025-04-30 19:31:19,724 - segment_embeddings - INFO - Selected device: cuda
-2025-04-30 19:31:19,724 - segment_embeddings - DEBUG - Loading SAM2 model configuration from config file
-2025-04-30 19:31:19,724 - segment_embeddings - DEBUG - Building SAM2 model with config: configs/sam2.1/sam2.1_hiera_l.yaml, checkpoint: checkpoints/sam2.1_hiera_large.pt, device: cuda
-2025-04-30 19:31:22,232 - segment_embeddings - DEBUG - SAM2 model built successfully
-2025-04-30 19:31:22,232 - segment_embeddings - INFO - Using CUDA GPU for computation
-2025-04-30 19:31:22,232 - segment_embeddings - INFO - CUDA Device ID: 0
-2025-04-30 19:31:22,232 - segment_embeddings - INFO - CUDA Device Name: Tesla T4
-2025-04-30 19:31:22,233 - segment_embeddings - INFO - CUDA Memory Allocated: 1000.91 MB
-2025-04-30 19:31:22,233 - segment_embeddings - INFO - CUDA Memory Reserved: 1052.00 MB
-2025-04-30 19:31:22,233 - segment_embeddings - INFO - Selected device: cuda
-2025-04-30 19:31:22,233 - segment_embeddings - DEBUG - CUDA Memory Allocated: 1000.91 MB
-2025-04-30 19:31:22,233 - segment_embeddings - DEBUG - CUDA Memory Reserved: 1052.00 MB
-2025-04-30 19:31:22,385 - segment_embeddings - DEBUG - After GC - CUDA Memory Allocated: 1000.91 MB
-2025-04-30 19:31:22,385 - segment_embeddings - INFO - SAM2 model built successfully in 2.82 seconds
-2025-04-30 19:31:22,386 - segment_embeddings - DEBUG - SAM2 model type: <class 'sam2.modeling.sam2_base.SAM2Base'>
-2025-04-30 19:31:22,386 - segment_embeddings - INFO - Using CUDA GPU for computation
-2025-04-30 19:31:22,386 - segment_embeddings - INFO - CUDA Device ID: 0
-2025-04-30 19:31:22,386 - segment_embeddings - INFO - CUDA Device Name: Tesla T4
-2025-04-30 19:31:22,386 - segment_embeddings - INFO - CUDA Memory Allocated: 1000.91 MB
-2025-04-30 19:31:22,386 - segment_embeddings - INFO - CUDA Memory Reserved: 1052.00 MB
-2025-04-30 19:31:22,386 - segment_embeddings - INFO - Selected device: cuda
-2025-04-30 19:31:22,386 - segment_embeddings - INFO - Creating automatic mask generator for cuda...
-2025-04-30 19:31:22,386 - segment_embeddings - INFO - Using CUDA-specific settings for mask generator
-2025-04-30 19:31:22,386 - segment_embeddings - DEBUG - Parameters: points_per_side=32, pred_iou_thresh=0.86, stability_score_thresh=0.92
-2025-04-30 19:31:22,531 - segment_embeddings - DEBUG - Mask generator created successfully: <class 'sam2.automatic_mask_generator.SAM2AutomaticMaskGenerator'>
-2025-04-30 19:31:22,531 - segment_embeddings - INFO - Skipping embedding generator initialization as requested
-2025-04-30 19:31:22,531 - segment_embeddings - INFO - Loading image from data/cars.jpg
-2025-04-30 19:31:22,560 - segment_embeddings - DEBUG - Image file size: 1033.39 KB
-2025-04-30 19:31:22,561 - segment_embeddings - INFO - Image loaded successfully: (1500, 2250, 3), dtype: uint8
-2025-04-30 19:31:22,561 - segment_embeddings - DEBUG - Converting image from BGR to RGB
-2025-04-30 19:31:22,571 - segment_embeddings - DEBUG - Image pixel range - Min: 0, Max: 255, Mean: 66.98
-2025-04-30 19:31:22,571 - segment_embeddings - INFO - Generating masks...
-2025-04-30 19:31:22,571 - segment_embeddings - INFO - Generating masks on cuda device...
-2025-04-30 19:31:22,571 - segment_embeddings - DEBUG - Image type: <class 'numpy.ndarray'>, Shape: (1500, 2250, 3), dtype: uint8
-2025-04-30 19:31:22,579 - segment_embeddings - DEBUG - Image is numpy array, Min: 0, Max: 255, Mean: 66.98
-2025-04-30 19:31:22,579 - segment_embeddings - DEBUG - Attempting standard mask generation approach
-2025-04-30 19:31:22,579 - root - INFO - For numpy array image, we assume (HxWxC) format
-2025-04-30 19:31:22,687 - root - INFO - Computing image embeddings for the provided image...
-2025-04-30 19:31:23,414 - root - INFO - Image embeddings computed.
-2025-04-30 19:31:27,238 - segment_embeddings - DEBUG - Standard approach successful, generated 0 masks
-2025-04-30 19:31:27,238 - segment_embeddings - ERROR - No masks were generated
+2025-04-30 12:50:39,304 - segment_embeddings - INFO - Using MPS (Apple Silicon). Note that SAM2 might give different outputs on MPS.
+2025-04-30 12:50:39,304 - segment_embeddings - INFO - Selected device: mps
+2025-04-30 12:50:39,305 - segment_embeddings - INFO - Device: mps
+2025-04-30 12:50:39,305 - segment_embeddings - INFO - Building SAM2 model...
+2025-04-30 12:50:39,305 - segment_embeddings - INFO - Starting path: /Users/andrewdelacruz/e2e_sam2
+2025-04-30 12:50:39,305 - segment_embeddings - INFO - Using MPS (Apple Silicon). Note that SAM2 might give different outputs on MPS.
+2025-04-30 12:50:39,305 - segment_embeddings - INFO - Selected device: mps
+2025-04-30 12:50:39,305 - segment_embeddings - DEBUG - Loading SAM2 model configuration from config file
+2025-04-30 12:50:39,305 - segment_embeddings - DEBUG - Building SAM2 model with config: configs/sam2.1/sam2.1_hiera_l.yaml, checkpoint: checkpoints/sam2.1_hiera_large.pt, device: mps
+2025-04-30 12:50:40,882 - segment_embeddings - DEBUG - SAM2 model built successfully
+2025-04-30 12:50:40,887 - segment_embeddings - INFO - Using MPS (Apple Silicon). Note that SAM2 might give different outputs on MPS.
+2025-04-30 12:50:40,887 - segment_embeddings - INFO - Selected device: mps
+2025-04-30 12:50:41,001 - segment_embeddings - INFO - SAM2 model built successfully in 1.70 seconds
+2025-04-30 12:50:41,001 - segment_embeddings - DEBUG - SAM2 model type: <class 'sam2.modeling.sam2_base.SAM2Base'>
+2025-04-30 12:50:41,001 - segment_embeddings - INFO - Creating automatic mask generator for mps...
+2025-04-30 12:50:41,001 - segment_embeddings - INFO - Using mps-specific settings for mask generator
+2025-04-30 12:50:41,001 - segment_embeddings - DEBUG - Parameters: points_per_side=32, pred_iou_thresh=0.86, stability_score_thresh=0.92
+2025-04-30 12:50:41,137 - segment_embeddings - DEBUG - Mask generator created successfully: <class 'sam2.automatic_mask_generator.SAM2AutomaticMaskGenerator'>
+2025-04-30 12:51:20,147 - segment_embeddings - INFO - Using MPS (Apple Silicon). Note that SAM2 might give different outputs on MPS.
+2025-04-30 12:51:20,147 - segment_embeddings - INFO - Selected device: mps
+2025-04-30 12:51:20,147 - segment_embeddings - INFO - Device: mps
+2025-04-30 12:51:20,147 - segment_embeddings - INFO - Building SAM2 model...
+2025-04-30 12:51:20,147 - segment_embeddings - INFO - Starting path: /Users/andrewdelacruz/e2e_sam2
+2025-04-30 12:51:20,148 - segment_embeddings - INFO - Using MPS (Apple Silicon). Note that SAM2 might give different outputs on MPS.
+2025-04-30 12:51:20,148 - segment_embeddings - INFO - Selected device: mps
+2025-04-30 12:51:20,148 - segment_embeddings - DEBUG - Loading SAM2 model configuration from config file
+2025-04-30 12:51:20,148 - segment_embeddings - DEBUG - Building SAM2 model with config: configs/sam2.1/sam2.1_hiera_l.yaml, checkpoint: checkpoints/sam2.1_hiera_large.pt, device: mps
+2025-04-30 12:51:21,612 - segment_embeddings - DEBUG - SAM2 model built successfully
+2025-04-30 12:51:21,613 - segment_embeddings - INFO - Using MPS (Apple Silicon). Note that SAM2 might give different outputs on MPS.
+2025-04-30 12:51:21,613 - segment_embeddings - INFO - Selected device: mps
+2025-04-30 12:51:21,700 - segment_embeddings - INFO - SAM2 model built successfully in 1.55 seconds
+2025-04-30 12:51:21,700 - segment_embeddings - DEBUG - SAM2 model type: <class 'sam2.modeling.sam2_base.SAM2Base'>
+2025-04-30 12:51:21,700 - segment_embeddings - INFO - Creating automatic mask generator for mps...
+2025-04-30 12:51:21,700 - segment_embeddings - INFO - Using mps-specific settings for mask generator
+2025-04-30 12:51:21,700 - segment_embeddings - DEBUG - Parameters: points_per_side=32, pred_iou_thresh=0.86, stability_score_thresh=0.92
+2025-04-30 12:51:21,802 - segment_embeddings - DEBUG - Mask generator created successfully: <class 'sam2.automatic_mask_generator.SAM2AutomaticMaskGenerator'>
+2025-04-30 12:51:45,885 - segment_embeddings - INFO - Using MPS (Apple Silicon). Note that SAM2 might give different outputs on MPS.
+2025-04-30 12:51:45,885 - segment_embeddings - INFO - Selected device: mps
+2025-04-30 12:51:45,885 - segment_embeddings - INFO - Device: mps
+2025-04-30 12:51:45,886 - segment_embeddings - INFO - Building SAM2 model...
+2025-04-30 12:51:45,886 - segment_embeddings - INFO - Starting path: /Users/andrewdelacruz/e2e_sam2
+2025-04-30 12:51:45,886 - segment_embeddings - INFO - Using MPS (Apple Silicon). Note that SAM2 might give different outputs on MPS.
+2025-04-30 12:51:45,886 - segment_embeddings - INFO - Selected device: mps
+2025-04-30 12:51:45,886 - segment_embeddings - DEBUG - Loading SAM2 model configuration from config file
+2025-04-30 12:51:45,886 - segment_embeddings - DEBUG - Building SAM2 model with config: configs/sam2.1/sam2.1_hiera_l.yaml, checkpoint: checkpoints/sam2.1_hiera_large.pt, device: mps
+2025-04-30 12:51:47,320 - segment_embeddings - DEBUG - SAM2 model built successfully
+2025-04-30 12:51:47,321 - segment_embeddings - INFO - Using MPS (Apple Silicon). Note that SAM2 might give different outputs on MPS.
+2025-04-30 12:51:47,321 - segment_embeddings - INFO - Selected device: mps
+2025-04-30 12:51:47,396 - segment_embeddings - INFO - SAM2 model built successfully in 1.51 seconds
+2025-04-30 12:51:47,396 - segment_embeddings - DEBUG - SAM2 model type: <class 'sam2.modeling.sam2_base.SAM2Base'>
+2025-04-30 12:51:47,396 - segment_embeddings - INFO - Creating automatic mask generator for mps...
+2025-04-30 12:51:47,396 - segment_embeddings - INFO - Using mps-specific settings for mask generator
+2025-04-30 12:51:47,396 - segment_embeddings - DEBUG - Parameters: points_per_side=32, pred_iou_thresh=0.86, stability_score_thresh=0.92
+2025-04-30 12:51:47,495 - segment_embeddings - DEBUG - Mask generator created successfully: <class 'sam2.automatic_mask_generator.SAM2AutomaticMaskGenerator'>
+2025-04-30 12:52:25,824 - segment_embeddings - INFO - Using MPS (Apple Silicon). Note that SAM2 might give different outputs on MPS.
+2025-04-30 12:52:25,824 - segment_embeddings - INFO - Selected device: mps
+2025-04-30 12:52:25,824 - segment_embeddings - INFO - Device: mps
+2025-04-30 12:52:25,824 - segment_embeddings - INFO - Building SAM2 model...
+2025-04-30 12:52:25,824 - segment_embeddings - INFO - Starting path: /Users/andrewdelacruz/e2e_sam2
+2025-04-30 12:52:25,824 - segment_embeddings - INFO - Using MPS (Apple Silicon). Note that SAM2 might give different outputs on MPS.
+2025-04-30 12:52:25,824 - segment_embeddings - INFO - Selected device: mps
+2025-04-30 12:52:25,824 - segment_embeddings - DEBUG - Loading SAM2 model configuration from config file
+2025-04-30 12:52:25,824 - segment_embeddings - DEBUG - Building SAM2 model with config: configs/sam2.1/sam2.1_hiera_l.yaml, checkpoint: checkpoints/sam2.1_hiera_large.pt, device: mps
+2025-04-30 12:52:27,322 - segment_embeddings - DEBUG - SAM2 model built successfully
+2025-04-30 12:52:27,322 - segment_embeddings - INFO - Using MPS (Apple Silicon). Note that SAM2 might give different outputs on MPS.
+2025-04-30 12:52:27,322 - segment_embeddings - INFO - Selected device: mps
+2025-04-30 12:52:27,403 - segment_embeddings - INFO - SAM2 model built successfully in 1.58 seconds
+2025-04-30 12:52:27,403 - segment_embeddings - DEBUG - SAM2 model type: <class 'sam2.modeling.sam2_base.SAM2Base'>
+2025-04-30 12:52:27,403 - segment_embeddings - INFO - Creating automatic mask generator for mps...
+2025-04-30 12:52:27,403 - segment_embeddings - INFO - Using mps-specific settings for mask generator
+2025-04-30 12:52:27,403 - segment_embeddings - DEBUG - Parameters: points_per_side=32, pred_iou_thresh=0.86, stability_score_thresh=0.92
+2025-04-30 12:52:27,530 - segment_embeddings - DEBUG - Mask generator created successfully: <class 'sam2.automatic_mask_generator.SAM2AutomaticMaskGenerator'>
+2025-04-30 12:52:54,821 - segment_embeddings - INFO - Using MPS (Apple Silicon). Note that SAM2 might give different outputs on MPS.
+2025-04-30 12:52:54,822 - segment_embeddings - INFO - Selected device: mps
+2025-04-30 12:52:54,822 - segment_embeddings - INFO - Device: mps
+2025-04-30 12:52:54,822 - segment_embeddings - INFO - Building SAM2 model...
+2025-04-30 12:52:54,822 - segment_embeddings - INFO - Starting path: /Users/andrewdelacruz/e2e_sam2
+2025-04-30 12:52:54,822 - segment_embeddings - INFO - Using MPS (Apple Silicon). Note that SAM2 might give different outputs on MPS.
+2025-04-30 12:52:54,822 - segment_embeddings - INFO - Selected device: mps
+2025-04-30 12:52:54,822 - segment_embeddings - DEBUG - Loading SAM2 model configuration from config file
+2025-04-30 12:52:54,822 - segment_embeddings - DEBUG - Building SAM2 model with config: configs/sam2.1/sam2.1_hiera_l.yaml, checkpoint: checkpoints/sam2.1_hiera_large.pt, device: mps
+2025-04-30 12:52:56,193 - segment_embeddings - DEBUG - SAM2 model built successfully
+2025-04-30 12:52:56,193 - segment_embeddings - INFO - Using MPS (Apple Silicon). Note that SAM2 might give different outputs on MPS.
+2025-04-30 12:52:56,194 - segment_embeddings - INFO - Selected device: mps
+2025-04-30 12:52:56,284 - segment_embeddings - INFO - SAM2 model built successfully in 1.46 seconds
+2025-04-30 12:52:56,284 - segment_embeddings - DEBUG - SAM2 model type: <class 'sam2.modeling.sam2_base.SAM2Base'>
+2025-04-30 12:52:56,284 - segment_embeddings - INFO - Creating automatic mask generator for mps...
+2025-04-30 12:52:56,284 - segment_embeddings - INFO - Using mps-specific settings for mask generator
+2025-04-30 12:52:56,284 - segment_embeddings - DEBUG - Parameters: points_per_side=32, pred_iou_thresh=0.86, stability_score_thresh=0.92
+2025-04-30 12:52:56,423 - segment_embeddings - DEBUG - Mask generator created successfully: <class 'sam2.automatic_mask_generator.SAM2AutomaticMaskGenerator'>
+2025-04-30 12:53:02,178 - segment_embeddings - INFO - Using MPS (Apple Silicon). Note that SAM2 might give different outputs on MPS.
+2025-04-30 12:53:02,178 - segment_embeddings - INFO - Selected device: mps
+2025-04-30 12:53:02,178 - segment_embeddings - INFO - Device: mps
+2025-04-30 12:53:02,178 - segment_embeddings - INFO - Building SAM2 model...
+2025-04-30 12:53:02,178 - segment_embeddings - INFO - Starting path: /Users/andrewdelacruz/e2e_sam2
+2025-04-30 12:53:02,178 - segment_embeddings - INFO - Using MPS (Apple Silicon). Note that SAM2 might give different outputs on MPS.
+2025-04-30 12:53:02,178 - segment_embeddings - INFO - Selected device: mps
+2025-04-30 12:53:02,178 - segment_embeddings - DEBUG - Loading SAM2 model configuration from config file
+2025-04-30 12:53:02,178 - segment_embeddings - DEBUG - Building SAM2 model with config: configs/sam2.1/sam2.1_hiera_l.yaml, checkpoint: checkpoints/sam2.1_hiera_large.pt, device: mps
+2025-04-30 12:53:03,654 - segment_embeddings - DEBUG - SAM2 model built successfully
+2025-04-30 12:53:03,654 - segment_embeddings - INFO - Using MPS (Apple Silicon). Note that SAM2 might give different outputs on MPS.
+2025-04-30 12:53:03,654 - segment_embeddings - INFO - Selected device: mps
+2025-04-30 12:53:03,774 - segment_embeddings - INFO - SAM2 model built successfully in 1.60 seconds
+2025-04-30 12:53:03,774 - segment_embeddings - DEBUG - SAM2 model type: <class 'sam2.modeling.sam2_base.SAM2Base'>
+2025-04-30 12:53:03,774 - segment_embeddings - INFO - Creating automatic mask generator for mps...
+2025-04-30 12:53:03,774 - segment_embeddings - INFO - Using mps-specific settings for mask generator
+2025-04-30 12:53:03,774 - segment_embeddings - DEBUG - Parameters: points_per_side=32, pred_iou_thresh=0.86, stability_score_thresh=0.92
+2025-04-30 12:53:03,881 - segment_embeddings - DEBUG - Mask generator created successfully: <class 'sam2.automatic_mask_generator.SAM2AutomaticMaskGenerator'>
+2025-04-30 12:53:14,132 - segment_embeddings - INFO - Using MPS (Apple Silicon). Note that SAM2 might give different outputs on MPS.
+2025-04-30 12:53:14,132 - segment_embeddings - INFO - Selected device: mps
+2025-04-30 12:53:14,132 - segment_embeddings - INFO - Device: mps
+2025-04-30 12:53:14,132 - segment_embeddings - INFO - Building SAM2 model...
+2025-04-30 12:53:14,132 - segment_embeddings - INFO - Starting path: /Users/andrewdelacruz/e2e_sam2
+2025-04-30 12:53:14,132 - segment_embeddings - INFO - Using MPS (Apple Silicon). Note that SAM2 might give different outputs on MPS.
+2025-04-30 12:53:14,132 - segment_embeddings - INFO - Selected device: mps
+2025-04-30 12:53:14,132 - segment_embeddings - DEBUG - Loading SAM2 model configuration from config file
+2025-04-30 12:53:14,132 - segment_embeddings - DEBUG - Building SAM2 model with config: configs/sam2.1/sam2.1_hiera_l.yaml, checkpoint: checkpoints/sam2.1_hiera_large.pt, device: mps
+2025-04-30 12:53:15,569 - segment_embeddings - DEBUG - SAM2 model built successfully
+2025-04-30 12:53:15,570 - segment_embeddings - INFO - Using MPS (Apple Silicon). Note that SAM2 might give different outputs on MPS.
+2025-04-30 12:53:15,570 - segment_embeddings - INFO - Selected device: mps
+2025-04-30 12:53:15,641 - segment_embeddings - INFO - SAM2 model built successfully in 1.51 seconds
+2025-04-30 12:53:15,641 - segment_embeddings - DEBUG - SAM2 model type: <class 'sam2.modeling.sam2_base.SAM2Base'>
+2025-04-30 12:53:15,641 - segment_embeddings - INFO - Creating automatic mask generator for mps...
+2025-04-30 12:53:15,641 - segment_embeddings - INFO - Using mps-specific settings for mask generator
+2025-04-30 12:53:15,641 - segment_embeddings - DEBUG - Parameters: points_per_side=32, pred_iou_thresh=0.86, stability_score_thresh=0.92
+2025-04-30 12:53:15,733 - segment_embeddings - DEBUG - Mask generator created successfully: <class 'sam2.automatic_mask_generator.SAM2AutomaticMaskGenerator'>
+2025-04-30 12:53:28,158 - segment_embeddings - INFO - Using MPS (Apple Silicon). Note that SAM2 might give different outputs on MPS.
+2025-04-30 12:53:28,158 - segment_embeddings - INFO - Selected device: mps
+2025-04-30 12:53:28,158 - segment_embeddings - INFO - Device: mps
+2025-04-30 12:53:28,158 - segment_embeddings - INFO - Building SAM2 model...
+2025-04-30 12:53:28,158 - segment_embeddings - INFO - Starting path: /Users/andrewdelacruz/e2e_sam2
+2025-04-30 12:53:28,158 - segment_embeddings - INFO - Using MPS (Apple Silicon). Note that SAM2 might give different outputs on MPS.
+2025-04-30 12:53:28,158 - segment_embeddings - INFO - Selected device: mps
+2025-04-30 12:53:28,158 - segment_embeddings - DEBUG - Loading SAM2 model configuration from config file
+2025-04-30 12:53:28,159 - segment_embeddings - DEBUG - Building SAM2 model with config: configs/sam2.1/sam2.1_hiera_l.yaml, checkpoint: checkpoints/sam2.1_hiera_large.pt, device: mps
+2025-04-30 12:53:29,530 - segment_embeddings - DEBUG - SAM2 model built successfully
+2025-04-30 12:53:29,556 - segment_embeddings - INFO - Using MPS (Apple Silicon). Note that SAM2 might give different outputs on MPS.
+2025-04-30 12:53:29,556 - segment_embeddings - INFO - Selected device: mps
+2025-04-30 12:53:29,637 - segment_embeddings - INFO - SAM2 model built successfully in 1.48 seconds
+2025-04-30 12:53:29,637 - segment_embeddings - DEBUG - SAM2 model type: <class 'sam2.modeling.sam2_base.SAM2Base'>
+2025-04-30 12:53:29,637 - segment_embeddings - INFO - Creating automatic mask generator for mps...
+2025-04-30 12:53:29,637 - segment_embeddings - INFO - Using mps-specific settings for mask generator
+2025-04-30 12:53:29,637 - segment_embeddings - DEBUG - Parameters: points_per_side=32, pred_iou_thresh=0.86, stability_score_thresh=0.92
+2025-04-30 12:53:29,757 - segment_embeddings - DEBUG - Mask generator created successfully: <class 'sam2.automatic_mask_generator.SAM2AutomaticMaskGenerator'>
+2025-04-30 12:53:30,158 - PIL.PngImagePlugin - DEBUG - STREAM b'IHDR' 16 13
+2025-04-30 12:53:30,158 - PIL.PngImagePlugin - DEBUG - STREAM b'sRGB' 41 1
+2025-04-30 12:53:30,158 - PIL.PngImagePlugin - DEBUG - STREAM b'gAMA' 54 4
+2025-04-30 12:53:30,159 - PIL.PngImagePlugin - DEBUG - STREAM b'pHYs' 70 9
+2025-04-30 12:53:30,159 - PIL.PngImagePlugin - DEBUG - STREAM b'IDAT' 91 65445
+2025-04-30 12:54:13,726 - segment_embeddings - INFO - Using MPS (Apple Silicon). Note that SAM2 might give different outputs on MPS.
+2025-04-30 12:54:13,727 - segment_embeddings - INFO - Selected device: mps
+2025-04-30 12:54:13,727 - segment_embeddings - INFO - Device: mps
+2025-04-30 12:54:13,727 - segment_embeddings - INFO - Building SAM2 model...
+2025-04-30 12:54:13,727 - segment_embeddings - INFO - Starting path: /Users/andrewdelacruz/e2e_sam2
+2025-04-30 12:54:13,727 - segment_embeddings - INFO - Using MPS (Apple Silicon). Note that SAM2 might give different outputs on MPS.
+2025-04-30 12:54:13,727 - segment_embeddings - INFO - Selected device: mps
+2025-04-30 12:54:13,727 - segment_embeddings - DEBUG - Loading SAM2 model configuration from config file
+2025-04-30 12:54:13,727 - segment_embeddings - DEBUG - Building SAM2 model with config: configs/sam2.1/sam2.1_hiera_l.yaml, checkpoint: checkpoints/sam2.1_hiera_large.pt, device: mps
+2025-04-30 12:54:15,263 - segment_embeddings - DEBUG - SAM2 model built successfully
+2025-04-30 12:54:15,263 - segment_embeddings - INFO - Using MPS (Apple Silicon). Note that SAM2 might give different outputs on MPS.
+2025-04-30 12:54:15,263 - segment_embeddings - INFO - Selected device: mps
+2025-04-30 12:54:15,350 - segment_embeddings - INFO - SAM2 model built successfully in 1.62 seconds
+2025-04-30 12:54:15,350 - segment_embeddings - DEBUG - SAM2 model type: <class 'sam2.modeling.sam2_base.SAM2Base'>
+2025-04-30 12:54:15,350 - segment_embeddings - INFO - Creating automatic mask generator for mps...
+2025-04-30 12:54:15,350 - segment_embeddings - INFO - Using mps-specific settings for mask generator
+2025-04-30 12:54:15,350 - segment_embeddings - DEBUG - Parameters: points_per_side=32, pred_iou_thresh=0.86, stability_score_thresh=0.92
+2025-04-30 12:54:15,450 - segment_embeddings - DEBUG - Mask generator created successfully: <class 'sam2.automatic_mask_generator.SAM2AutomaticMaskGenerator'>
+2025-04-30 12:54:15,455 - PIL.PngImagePlugin - DEBUG - STREAM b'IHDR' 16 13
+2025-04-30 12:54:15,455 - PIL.PngImagePlugin - DEBUG - STREAM b'sRGB' 41 1
+2025-04-30 12:54:15,455 - PIL.PngImagePlugin - DEBUG - STREAM b'gAMA' 54 4
+2025-04-30 12:54:15,455 - PIL.PngImagePlugin - DEBUG - STREAM b'pHYs' 70 9
+2025-04-30 12:54:15,455 - PIL.PngImagePlugin - DEBUG - STREAM b'IDAT' 91 65445
+2025-04-30 12:54:15,464 - root - INFO - For numpy array image, we assume (HxWxC) format
+2025-04-30 12:54:15,518 - root - INFO - Computing image embeddings for the provided image...
+2025-04-30 12:54:20,538 - root - INFO - Image embeddings computed.
+2025-04-30 19:57:14,948 - segment_embeddings - INFO - Using CUDA GPU for computation
+2025-04-30 19:57:14,967 - segment_embeddings - INFO - CUDA Device ID: 0
+2025-04-30 19:57:14,967 - segment_embeddings - INFO - CUDA Device Name: Tesla T4
+2025-04-30 19:57:14,968 - segment_embeddings - INFO - CUDA Memory Allocated: 0.00 MB
+2025-04-30 19:57:14,968 - segment_embeddings - INFO - CUDA Memory Reserved: 0.00 MB
+2025-04-30 19:57:14,968 - segment_embeddings - INFO - Selected device: cuda
+2025-04-30 19:57:14,968 - segment_embeddings - INFO - Device: cuda
+2025-04-30 19:57:14,968 - segment_embeddings - INFO - Building SAM2 model...
+2025-04-30 19:57:14,968 - segment_embeddings - INFO - Starting path: /home/ubuntu/code/drew/e2e_sam2
+2025-04-30 19:57:14,968 - segment_embeddings - INFO - Using CUDA GPU for computation
+2025-04-30 19:57:14,968 - segment_embeddings - INFO - CUDA Device ID: 0
+2025-04-30 19:57:14,968 - segment_embeddings - INFO - CUDA Device Name: Tesla T4
+2025-04-30 19:57:14,968 - segment_embeddings - INFO - CUDA Memory Allocated: 0.00 MB
+2025-04-30 19:57:14,968 - segment_embeddings - INFO - CUDA Memory Reserved: 0.00 MB
+2025-04-30 19:57:14,969 - segment_embeddings - INFO - Selected device: cuda
+2025-04-30 19:57:14,969 - segment_embeddings - DEBUG - Loading SAM2 model configuration from config file
+2025-04-30 19:57:14,969 - segment_embeddings - DEBUG - Building SAM2 model with config: configs/sam2.1/sam2.1_hiera_l.yaml, checkpoint: checkpoints/sam2.1_hiera_large.pt, device: cuda
+2025-04-30 19:57:17,562 - segment_embeddings - DEBUG - SAM2 model built successfully
+2025-04-30 19:57:17,562 - segment_embeddings - INFO - Using CUDA GPU for computation
+2025-04-30 19:57:17,562 - segment_embeddings - INFO - CUDA Device ID: 0
+2025-04-30 19:57:17,562 - segment_embeddings - INFO - CUDA Device Name: Tesla T4
+2025-04-30 19:57:17,562 - segment_embeddings - INFO - CUDA Memory Allocated: 1000.91 MB
+2025-04-30 19:57:17,562 - segment_embeddings - INFO - CUDA Memory Reserved: 1052.00 MB
+2025-04-30 19:57:17,563 - segment_embeddings - INFO - Selected device: cuda
+2025-04-30 19:57:17,563 - segment_embeddings - DEBUG - CUDA Memory Allocated: 1000.91 MB
+2025-04-30 19:57:17,563 - segment_embeddings - DEBUG - CUDA Memory Reserved: 1052.00 MB
+2025-04-30 19:57:17,669 - segment_embeddings - DEBUG - After GC - CUDA Memory Allocated: 1000.91 MB
+2025-04-30 19:57:17,669 - segment_embeddings - INFO - SAM2 model built successfully in 2.70 seconds
+2025-04-30 19:57:17,669 - segment_embeddings - DEBUG - SAM2 model type: <class 'sam2.modeling.sam2_base.SAM2Base'>
+2025-04-30 19:57:17,669 - segment_embeddings - INFO - Creating automatic mask generator for cuda...
+2025-04-30 19:57:17,670 - segment_embeddings - INFO - Using CUDA-specific settings for mask generator
+2025-04-30 19:57:17,670 - segment_embeddings - DEBUG - Parameters: points_per_side=32, pred_iou_thresh=0.86, stability_score_thresh=0.92
+2025-04-30 19:57:17,807 - segment_embeddings - DEBUG - Mask generator created successfully: <class 'sam2.automatic_mask_generator.SAM2AutomaticMaskGenerator'>
+2025-04-30 19:57:17,810 - PIL.PngImagePlugin - DEBUG - STREAM b'IHDR' 16 13
+2025-04-30 19:57:17,811 - PIL.PngImagePlugin - DEBUG - STREAM b'sRGB' 41 1
+2025-04-30 19:57:17,811 - PIL.PngImagePlugin - DEBUG - STREAM b'gAMA' 54 4
+2025-04-30 19:57:17,811 - PIL.PngImagePlugin - DEBUG - STREAM b'pHYs' 70 9
+2025-04-30 19:57:17,811 - PIL.PngImagePlugin - DEBUG - STREAM b'IDAT' 91 65445
+2025-04-30 19:57:17,822 - root - INFO - For numpy array image, we assume (HxWxC) format
+2025-04-30 19:57:17,903 - root - INFO - Computing image embeddings for the provided image...
+2025-04-30 19:57:18,573 - root - INFO - Image embeddings computed.
+2025-04-30 19:57:56,963 - segment_embeddings - INFO - Using CUDA GPU for computation
+2025-04-30 19:57:56,983 - segment_embeddings - INFO - CUDA Device ID: 0
+2025-04-30 19:57:56,983 - segment_embeddings - INFO - CUDA Device Name: Tesla T4
+2025-04-30 19:57:56,983 - segment_embeddings - INFO - CUDA Memory Allocated: 0.00 MB
+2025-04-30 19:57:56,983 - segment_embeddings - INFO - CUDA Memory Reserved: 0.00 MB
+2025-04-30 19:57:56,983 - segment_embeddings - INFO - Selected device: cuda
+2025-04-30 19:57:56,983 - segment_embeddings - INFO - Device: cuda
+2025-04-30 19:57:56,984 - segment_embeddings - INFO - Building SAM2 model...
+2025-04-30 19:57:56,984 - segment_embeddings - INFO - Starting path: /home/ubuntu/code/drew/e2e_sam2
+2025-04-30 19:57:56,984 - segment_embeddings - INFO - Using CUDA GPU for computation
+2025-04-30 19:57:56,984 - segment_embeddings - INFO - CUDA Device ID: 0
+2025-04-30 19:57:56,984 - segment_embeddings - INFO - CUDA Device Name: Tesla T4
+2025-04-30 19:57:56,984 - segment_embeddings - INFO - CUDA Memory Allocated: 0.00 MB
+2025-04-30 19:57:56,984 - segment_embeddings - INFO - CUDA Memory Reserved: 0.00 MB
+2025-04-30 19:57:56,984 - segment_embeddings - INFO - Selected device: cuda
+2025-04-30 19:57:56,984 - segment_embeddings - DEBUG - Loading SAM2 model configuration from config file
+2025-04-30 19:57:56,984 - segment_embeddings - DEBUG - Building SAM2 model with config: configs/sam2.1/sam2.1_hiera_l.yaml, checkpoint: checkpoints/sam2.1_hiera_large.pt, device: cuda
+2025-04-30 19:57:59,582 - segment_embeddings - DEBUG - SAM2 model built successfully
+2025-04-30 19:57:59,582 - segment_embeddings - INFO - Using CUDA GPU for computation
+2025-04-30 19:57:59,583 - segment_embeddings - INFO - CUDA Device ID: 0
+2025-04-30 19:57:59,583 - segment_embeddings - INFO - CUDA Device Name: Tesla T4
+2025-04-30 19:57:59,583 - segment_embeddings - INFO - CUDA Memory Allocated: 1000.91 MB
+2025-04-30 19:57:59,583 - segment_embeddings - INFO - CUDA Memory Reserved: 1052.00 MB
+2025-04-30 19:57:59,583 - segment_embeddings - INFO - Selected device: cuda
+2025-04-30 19:57:59,583 - segment_embeddings - DEBUG - CUDA Memory Allocated: 1000.91 MB
+2025-04-30 19:57:59,584 - segment_embeddings - DEBUG - CUDA Memory Reserved: 1052.00 MB
+2025-04-30 19:57:59,688 - segment_embeddings - DEBUG - After GC - CUDA Memory Allocated: 1000.91 MB
+2025-04-30 19:57:59,689 - segment_embeddings - INFO - SAM2 model built successfully in 2.70 seconds
+2025-04-30 19:57:59,689 - segment_embeddings - DEBUG - SAM2 model type: <class 'sam2.modeling.sam2_base.SAM2Base'>
+2025-04-30 19:57:59,689 - segment_embeddings - INFO - Creating automatic mask generator for cuda...
+2025-04-30 19:57:59,689 - segment_embeddings - INFO - Using CUDA-specific settings for mask generator
+2025-04-30 19:57:59,689 - segment_embeddings - DEBUG - Parameters: points_per_side=32, pred_iou_thresh=0.86, stability_score_thresh=0.92
+2025-04-30 19:57:59,827 - segment_embeddings - DEBUG - Mask generator created successfully: <class 'sam2.automatic_mask_generator.SAM2AutomaticMaskGenerator'>
+2025-04-30 19:57:59,874 - root - INFO - For numpy array image, we assume (HxWxC) format
+2025-04-30 19:57:59,979 - root - INFO - Computing image embeddings for the provided image...
+2025-04-30 19:58:00,663 - root - INFO - Image embeddings computed.
+2025-04-30 19:59:24,245 - segment_embeddings - INFO - Using CUDA GPU for computation
+2025-04-30 19:59:24,264 - segment_embeddings - INFO - CUDA Device ID: 0
+2025-04-30 19:59:24,264 - segment_embeddings - INFO - CUDA Device Name: Tesla T4
+2025-04-30 19:59:24,265 - segment_embeddings - INFO - CUDA Memory Allocated: 0.00 MB
+2025-04-30 19:59:24,265 - segment_embeddings - INFO - CUDA Memory Reserved: 0.00 MB
+2025-04-30 19:59:24,471 - segment_embeddings - INFO - Selected device: cuda
+2025-04-30 19:59:24,471 - segment_embeddings - INFO - Device: cuda
+2025-04-30 19:59:24,471 - segment_embeddings - INFO - Building SAM2 model...
+2025-04-30 19:59:24,471 - segment_embeddings - INFO - Starting path: /home/ubuntu/code/drew/e2e_sam2
+2025-04-30 19:59:24,471 - segment_embeddings - INFO - Using CUDA GPU for computation
+2025-04-30 19:59:24,471 - segment_embeddings - INFO - CUDA Device ID: 0
+2025-04-30 19:59:24,471 - segment_embeddings - INFO - CUDA Device Name: Tesla T4
+2025-04-30 19:59:24,471 - segment_embeddings - INFO - CUDA Memory Allocated: 0.00 MB
+2025-04-30 19:59:24,472 - segment_embeddings - INFO - CUDA Memory Reserved: 2.00 MB
+2025-04-30 19:59:24,472 - segment_embeddings - INFO - Selected device: cuda
+2025-04-30 19:59:24,472 - segment_embeddings - DEBUG - Loading SAM2 model configuration from config file
+2025-04-30 19:59:24,472 - segment_embeddings - DEBUG - Building SAM2 model with config: configs/sam2.1/sam2.1_hiera_l.yaml, checkpoint: checkpoints/sam2.1_hiera_large.pt, device: cuda
+2025-04-30 19:59:26,862 - segment_embeddings - DEBUG - SAM2 model built successfully
+2025-04-30 19:59:26,862 - segment_embeddings - INFO - Using CUDA GPU for computation
+2025-04-30 19:59:26,862 - segment_embeddings - INFO - CUDA Device ID: 0
+2025-04-30 19:59:26,862 - segment_embeddings - INFO - CUDA Device Name: Tesla T4
+2025-04-30 19:59:26,862 - segment_embeddings - INFO - CUDA Memory Allocated: 1000.91 MB
+2025-04-30 19:59:26,863 - segment_embeddings - INFO - CUDA Memory Reserved: 1052.00 MB
+2025-04-30 19:59:26,863 - segment_embeddings - INFO - Selected device: cuda
+2025-04-30 19:59:26,863 - segment_embeddings - DEBUG - CUDA Memory Allocated: 1000.91 MB
+2025-04-30 19:59:26,863 - segment_embeddings - DEBUG - CUDA Memory Reserved: 1052.00 MB
+2025-04-30 19:59:26,967 - segment_embeddings - DEBUG - After GC - CUDA Memory Allocated: 1000.91 MB
+2025-04-30 19:59:26,967 - segment_embeddings - INFO - SAM2 model built successfully in 2.50 seconds
+2025-04-30 19:59:26,967 - segment_embeddings - DEBUG - SAM2 model type: <class 'sam2.modeling.sam2_base.SAM2Base'>
+2025-04-30 19:59:26,967 - segment_embeddings - INFO - Creating automatic mask generator for cuda...
+2025-04-30 19:59:26,967 - segment_embeddings - INFO - Using CUDA-specific settings for mask generator
+2025-04-30 19:59:26,967 - segment_embeddings - DEBUG - Parameters: points_per_side=32, pred_iou_thresh=0.86, stability_score_thresh=0.92
+2025-04-30 19:59:27,105 - segment_embeddings - DEBUG - Mask generator created successfully: <class 'sam2.automatic_mask_generator.SAM2AutomaticMaskGenerator'>
+2025-04-30 19:59:27,157 - root - INFO - For numpy array image, we assume (HxWxC) format
+2025-04-30 19:59:27,259 - root - INFO - Computing image embeddings for the provided image...
+2025-04-30 19:59:28,153 - root - INFO - Image embeddings computed.
+2025-04-30 20:02:55,249 - segment_embeddings - INFO - Using CUDA GPU for computation
+2025-04-30 20:02:55,268 - segment_embeddings - INFO - CUDA Device ID: 0
+2025-04-30 20:02:55,269 - segment_embeddings - INFO - CUDA Device Name: Tesla T4
+2025-04-30 20:02:55,269 - segment_embeddings - INFO - CUDA Memory Allocated: 0.00 MB
+2025-04-30 20:02:55,269 - segment_embeddings - INFO - CUDA Memory Reserved: 0.00 MB
+2025-04-30 20:02:55,475 - segment_embeddings - INFO - Selected device: cuda
+2025-04-30 20:02:55,475 - segment_embeddings - INFO - Device: cuda
+2025-04-30 20:02:55,475 - segment_embeddings - INFO - Building SAM2 model...
+2025-04-30 20:02:55,475 - segment_embeddings - INFO - Starting path: /home/ubuntu/code/drew/e2e_sam2
+2025-04-30 20:02:55,475 - segment_embeddings - INFO - Using CUDA GPU for computation
+2025-04-30 20:02:55,475 - segment_embeddings - INFO - CUDA Device ID: 0
+2025-04-30 20:02:55,475 - segment_embeddings - INFO - CUDA Device Name: Tesla T4
+2025-04-30 20:02:55,475 - segment_embeddings - INFO - CUDA Memory Allocated: 0.00 MB
+2025-04-30 20:02:55,475 - segment_embeddings - INFO - CUDA Memory Reserved: 2.00 MB
+2025-04-30 20:02:55,476 - segment_embeddings - INFO - Selected device: cuda
+2025-04-30 20:02:55,476 - segment_embeddings - DEBUG - Loading SAM2 model configuration from config file
+2025-04-30 20:02:55,476 - segment_embeddings - DEBUG - Building SAM2 model with config: configs/sam2.1/sam2.1_hiera_l.yaml, checkpoint: checkpoints/sam2.1_hiera_large.pt, device: cuda
+2025-04-30 20:02:57,870 - segment_embeddings - DEBUG - SAM2 model built successfully
+2025-04-30 20:02:57,870 - segment_embeddings - INFO - Using CUDA GPU for computation
+2025-04-30 20:02:57,870 - segment_embeddings - INFO - CUDA Device ID: 0
+2025-04-30 20:02:57,870 - segment_embeddings - INFO - CUDA Device Name: Tesla T4
+2025-04-30 20:02:57,870 - segment_embeddings - INFO - CUDA Memory Allocated: 1000.91 MB
+2025-04-30 20:02:57,871 - segment_embeddings - INFO - CUDA Memory Reserved: 1052.00 MB
+2025-04-30 20:02:57,871 - segment_embeddings - INFO - Selected device: cuda
+2025-04-30 20:02:57,871 - segment_embeddings - DEBUG - CUDA Memory Allocated: 1000.91 MB
+2025-04-30 20:02:57,871 - segment_embeddings - DEBUG - CUDA Memory Reserved: 1052.00 MB
+2025-04-30 20:02:57,977 - segment_embeddings - DEBUG - After GC - CUDA Memory Allocated: 1000.91 MB
+2025-04-30 20:02:57,977 - segment_embeddings - INFO - SAM2 model built successfully in 2.50 seconds
+2025-04-30 20:02:57,977 - segment_embeddings - DEBUG - SAM2 model type: <class 'sam2.modeling.sam2_base.SAM2Base'>
+2025-04-30 20:02:57,977 - segment_embeddings - INFO - Creating automatic mask generator for cuda...
+2025-04-30 20:02:57,977 - segment_embeddings - INFO - Using CUDA-specific settings for mask generator
+2025-04-30 20:02:57,977 - segment_embeddings - DEBUG - Parameters: points_per_side=32, pred_iou_thresh=0.86, stability_score_thresh=0.92
+2025-04-30 20:02:58,115 - segment_embeddings - DEBUG - Mask generator created successfully: <class 'sam2.automatic_mask_generator.SAM2AutomaticMaskGenerator'>
+2025-04-30 20:02:58,167 - root - INFO - For numpy array image, we assume (HxWxC) format
+2025-04-30 20:02:58,269 - root - INFO - Computing image embeddings for the provided image...
+2025-04-30 20:02:59,132 - root - INFO - Image embeddings computed.
+2025-04-30 20:05:06,664 - segment_embeddings - INFO - Using CUDA GPU for computation
+2025-04-30 20:05:06,683 - segment_embeddings - INFO - CUDA Device ID: 0
+2025-04-30 20:05:06,683 - segment_embeddings - INFO - CUDA Device Name: Tesla T4
+2025-04-30 20:05:06,683 - segment_embeddings - INFO - CUDA Memory Allocated: 0.00 MB
+2025-04-30 20:05:06,684 - segment_embeddings - INFO - CUDA Memory Reserved: 0.00 MB
+2025-04-30 20:05:06,890 - segment_embeddings - INFO - Selected device: cuda
+2025-04-30 20:05:06,890 - segment_embeddings - INFO - Device: cuda
+2025-04-30 20:05:06,890 - segment_embeddings - INFO - Building SAM2 model...
+2025-04-30 20:05:06,890 - segment_embeddings - INFO - Starting path: /home/ubuntu/code/drew/e2e_sam2
+2025-04-30 20:05:06,890 - segment_embeddings - INFO - Using CUDA GPU for computation
+2025-04-30 20:05:06,890 - segment_embeddings - INFO - CUDA Device ID: 0
+2025-04-30 20:05:06,890 - segment_embeddings - INFO - CUDA Device Name: Tesla T4
+2025-04-30 20:05:06,890 - segment_embeddings - INFO - CUDA Memory Allocated: 0.00 MB
+2025-04-30 20:05:06,890 - segment_embeddings - INFO - CUDA Memory Reserved: 2.00 MB
+2025-04-30 20:05:06,891 - segment_embeddings - INFO - Selected device: cuda
+2025-04-30 20:05:06,891 - segment_embeddings - DEBUG - Loading SAM2 model configuration from config file
+2025-04-30 20:05:06,891 - segment_embeddings - DEBUG - Building SAM2 model with config: configs/sam2.1/sam2.1_hiera_l.yaml, checkpoint: checkpoints/sam2.1_hiera_large.pt, device: cuda
+2025-04-30 20:05:09,288 - segment_embeddings - DEBUG - SAM2 model built successfully
+2025-04-30 20:05:09,289 - segment_embeddings - INFO - Using CUDA GPU for computation
+2025-04-30 20:05:09,289 - segment_embeddings - INFO - CUDA Device ID: 0
+2025-04-30 20:05:09,289 - segment_embeddings - INFO - CUDA Device Name: Tesla T4
+2025-04-30 20:05:09,289 - segment_embeddings - INFO - CUDA Memory Allocated: 1000.91 MB
+2025-04-30 20:05:09,289 - segment_embeddings - INFO - CUDA Memory Reserved: 1052.00 MB
+2025-04-30 20:05:09,290 - segment_embeddings - INFO - Selected device: cuda
+2025-04-30 20:05:09,290 - segment_embeddings - DEBUG - CUDA Memory Allocated: 1000.91 MB
+2025-04-30 20:05:09,290 - segment_embeddings - DEBUG - CUDA Memory Reserved: 1052.00 MB
+2025-04-30 20:05:09,395 - segment_embeddings - DEBUG - After GC - CUDA Memory Allocated: 1000.91 MB
+2025-04-30 20:05:09,395 - segment_embeddings - INFO - SAM2 model built successfully in 2.51 seconds
+2025-04-30 20:05:09,395 - segment_embeddings - DEBUG - SAM2 model type: <class 'sam2.modeling.sam2_base.SAM2Base'>
+2025-04-30 20:05:09,395 - segment_embeddings - INFO - Creating automatic mask generator for cuda...
+2025-04-30 20:05:09,395 - segment_embeddings - INFO - Using CUDA-specific settings for mask generator
+2025-04-30 20:05:09,395 - segment_embeddings - DEBUG - Parameters: points_per_side=32, pred_iou_thresh=0.86, stability_score_thresh=0.92
+2025-04-30 20:05:09,533 - segment_embeddings - DEBUG - Mask generator created successfully: <class 'sam2.automatic_mask_generator.SAM2AutomaticMaskGenerator'>
+2025-04-30 20:05:09,587 - matplotlib.pyplot - DEBUG - Loaded backend agg version v2.2.
+2025-04-30 20:05:09,590 - matplotlib.font_manager - DEBUG - findfont: Matching sans\-serif:style=normal:variant=normal:weight=normal:stretch=normal:size=10.0.
+2025-04-30 20:05:09,591 - matplotlib.font_manager - DEBUG - findfont: score(FontEntry(fname='/home/ubuntu/code/drew/e2e_sam2/venv/lib/python3.12/site-packages/matplotlib/mpl-data/fonts/ttf/DejaVuSerif-Italic.ttf', name='DejaVu Serif', style='italic', variant='normal', weight=400, stretch='normal', size='scalable')) = 11.05
+2025-04-30 20:05:09,591 - matplotlib.font_manager - DEBUG - findfont: score(FontEntry(fname='/home/ubuntu/code/drew/e2e_sam2/venv/lib/python3.12/site-packages/matplotlib/mpl-data/fonts/ttf/DejaVuSansMono-BoldOblique.ttf', name='DejaVu Sans Mono', style='oblique', variant='normal', weight=700, stretch='normal', size='scalable')) = 11.335
+2025-04-30 20:05:09,591 - matplotlib.font_manager - DEBUG - findfont: score(FontEntry(fname='/home/ubuntu/code/drew/e2e_sam2/venv/lib/python3.12/site-packages/matplotlib/mpl-data/fonts/ttf/STIXGeneralItalic.ttf', name='STIXGeneral', style='italic', variant='normal', weight=400, stretch='normal', size='scalable')) = 11.05
+2025-04-30 20:05:09,591 - matplotlib.font_manager - DEBUG - findfont: score(FontEntry(fname='/home/ubuntu/code/drew/e2e_sam2/venv/lib/python3.12/site-packages/matplotlib/mpl-data/fonts/ttf/STIXSizFourSymBol.ttf', name='STIXSizeFourSym', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+2025-04-30 20:05:09,591 - matplotlib.font_manager - DEBUG - findfont: score(FontEntry(fname='/home/ubuntu/code/drew/e2e_sam2/venv/lib/python3.12/site-packages/matplotlib/mpl-data/fonts/ttf/STIXSizOneSymReg.ttf', name='STIXSizeOneSym', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2025-04-30 20:05:09,591 - matplotlib.font_manager - DEBUG - findfont: score(FontEntry(fname='/home/ubuntu/code/drew/e2e_sam2/venv/lib/python3.12/site-packages/matplotlib/mpl-data/fonts/ttf/cmsy10.ttf', name='cmsy10', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2025-04-30 20:05:09,592 - matplotlib.font_manager - DEBUG - findfont: score(FontEntry(fname='/home/ubuntu/code/drew/e2e_sam2/venv/lib/python3.12/site-packages/matplotlib/mpl-data/fonts/ttf/STIXNonUni.ttf', name='STIXNonUnicode', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2025-04-30 20:05:09,592 - matplotlib.font_manager - DEBUG - findfont: score(FontEntry(fname='/home/ubuntu/code/drew/e2e_sam2/venv/lib/python3.12/site-packages/matplotlib/mpl-data/fonts/ttf/STIXNonUniBol.ttf', name='STIXNonUnicode', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+2025-04-30 20:05:09,592 - matplotlib.font_manager - DEBUG - findfont: score(FontEntry(fname='/home/ubuntu/code/drew/e2e_sam2/venv/lib/python3.12/site-packages/matplotlib/mpl-data/fonts/ttf/DejaVuSerif.ttf', name='DejaVu Serif', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2025-04-30 20:05:09,592 - matplotlib.font_manager - DEBUG - findfont: score(FontEntry(fname='/home/ubuntu/code/drew/e2e_sam2/venv/lib/python3.12/site-packages/matplotlib/mpl-data/fonts/ttf/STIXNonUniIta.ttf', name='STIXNonUnicode', style='italic', variant='normal', weight=400, stretch='normal', size='scalable')) = 11.05
+2025-04-30 20:05:09,592 - matplotlib.font_manager - DEBUG - findfont: score(FontEntry(fname='/home/ubuntu/code/drew/e2e_sam2/venv/lib/python3.12/site-packages/matplotlib/mpl-data/fonts/ttf/cmss10.ttf', name='cmss10', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2025-04-30 20:05:09,592 - matplotlib.font_manager - DEBUG - findfont: score(FontEntry(fname='/home/ubuntu/code/drew/e2e_sam2/venv/lib/python3.12/site-packages/matplotlib/mpl-data/fonts/ttf/DejaVuSerif-Bold.ttf', name='DejaVu Serif', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+2025-04-30 20:05:09,592 - matplotlib.font_manager - DEBUG - findfont: score(FontEntry(fname='/home/ubuntu/code/drew/e2e_sam2/venv/lib/python3.12/site-packages/matplotlib/mpl-data/fonts/ttf/STIXSizOneSymBol.ttf', name='STIXSizeOneSym', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+2025-04-30 20:05:09,592 - matplotlib.font_manager - DEBUG - findfont: score(FontEntry(fname='/home/ubuntu/code/drew/e2e_sam2/venv/lib/python3.12/site-packages/matplotlib/mpl-data/fonts/ttf/STIXGeneralBol.ttf', name='STIXGeneral', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+2025-04-30 20:05:09,592 - matplotlib.font_manager - DEBUG - findfont: score(FontEntry(fname='/home/ubuntu/code/drew/e2e_sam2/venv/lib/python3.12/site-packages/matplotlib/mpl-data/fonts/ttf/STIXGeneral.ttf', name='STIXGeneral', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2025-04-30 20:05:09,592 - matplotlib.font_manager - DEBUG - findfont: score(FontEntry(fname='/home/ubuntu/code/drew/e2e_sam2/venv/lib/python3.12/site-packages/matplotlib/mpl-data/fonts/ttf/STIXSizTwoSymReg.ttf', name='STIXSizeTwoSym', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2025-04-30 20:05:09,593 - matplotlib.font_manager - DEBUG - findfont: score(FontEntry(fname='/home/ubuntu/code/drew/e2e_sam2/venv/lib/python3.12/site-packages/matplotlib/mpl-data/fonts/ttf/DejaVuSerif-BoldItalic.ttf', name='DejaVu Serif', style='italic', variant='normal', weight=700, stretch='normal', size='scalable')) = 11.335
+2025-04-30 20:05:09,593 - matplotlib.font_manager - DEBUG - findfont: score(FontEntry(fname='/home/ubuntu/code/drew/e2e_sam2/venv/lib/python3.12/site-packages/matplotlib/mpl-data/fonts/ttf/STIXSizThreeSymBol.ttf', name='STIXSizeThreeSym', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+2025-04-30 20:05:09,593 - matplotlib.font_manager - DEBUG - findfont: score(FontEntry(fname='/home/ubuntu/code/drew/e2e_sam2/venv/lib/python3.12/site-packages/matplotlib/mpl-data/fonts/ttf/DejaVuSansMono-Oblique.ttf', name='DejaVu Sans Mono', style='oblique', variant='normal', weight=400, stretch='normal', size='scalable')) = 11.05
+2025-04-30 20:05:09,593 - matplotlib.font_manager - DEBUG - findfont: score(FontEntry(fname='/home/ubuntu/code/drew/e2e_sam2/venv/lib/python3.12/site-packages/matplotlib/mpl-data/fonts/ttf/DejaVuSans-Oblique.ttf', name='DejaVu Sans', style='oblique', variant='normal', weight=400, stretch='normal', size='scalable')) = 1.05
+2025-04-30 20:05:09,593 - matplotlib.font_manager - DEBUG - findfont: score(FontEntry(fname='/home/ubuntu/code/drew/e2e_sam2/venv/lib/python3.12/site-packages/matplotlib/mpl-data/fonts/ttf/cmmi10.ttf', name='cmmi10', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2025-04-30 20:05:09,593 - matplotlib.font_manager - DEBUG - findfont: score(FontEntry(fname='/home/ubuntu/code/drew/e2e_sam2/venv/lib/python3.12/site-packages/matplotlib/mpl-data/fonts/ttf/STIXSizFiveSymReg.ttf', name='STIXSizeFiveSym', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2025-04-30 20:05:09,593 - matplotlib.font_manager - DEBUG - findfont: score(FontEntry(fname='/home/ubuntu/code/drew/e2e_sam2/venv/lib/python3.12/site-packages/matplotlib/mpl-data/fonts/ttf/cmr10.ttf', name='cmr10', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2025-04-30 20:05:09,593 - matplotlib.font_manager - DEBUG - findfont: score(FontEntry(fname='/home/ubuntu/code/drew/e2e_sam2/venv/lib/python3.12/site-packages/matplotlib/mpl-data/fonts/ttf/DejaVuSansMono.ttf', name='DejaVu Sans Mono', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2025-04-30 20:05:09,593 - matplotlib.font_manager - DEBUG - findfont: score(FontEntry(fname='/home/ubuntu/code/drew/e2e_sam2/venv/lib/python3.12/site-packages/matplotlib/mpl-data/fonts/ttf/DejaVuSerifDisplay.ttf', name='DejaVu Serif Display', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2025-04-30 20:05:09,593 - matplotlib.font_manager - DEBUG - findfont: score(FontEntry(fname='/home/ubuntu/code/drew/e2e_sam2/venv/lib/python3.12/site-packages/matplotlib/mpl-data/fonts/ttf/DejaVuSansMono-Bold.ttf', name='DejaVu Sans Mono', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+2025-04-30 20:05:09,594 - matplotlib.font_manager - DEBUG - findfont: score(FontEntry(fname='/home/ubuntu/code/drew/e2e_sam2/venv/lib/python3.12/site-packages/matplotlib/mpl-data/fonts/ttf/DejaVuSans-Bold.ttf', name='DejaVu Sans', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 0.33499999999999996
+2025-04-30 20:05:09,594 - matplotlib.font_manager - DEBUG - findfont: score(FontEntry(fname='/home/ubuntu/code/drew/e2e_sam2/venv/lib/python3.12/site-packages/matplotlib/mpl-data/fonts/ttf/cmtt10.ttf', name='cmtt10', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2025-04-30 20:05:09,594 - matplotlib.font_manager - DEBUG - findfont: score(FontEntry(fname='/home/ubuntu/code/drew/e2e_sam2/venv/lib/python3.12/site-packages/matplotlib/mpl-data/fonts/ttf/STIXSizThreeSymReg.ttf', name='STIXSizeThreeSym', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2025-04-30 20:05:09,594 - matplotlib.font_manager - DEBUG - findfont: score(FontEntry(fname='/home/ubuntu/code/drew/e2e_sam2/venv/lib/python3.12/site-packages/matplotlib/mpl-data/fonts/ttf/DejaVuSansDisplay.ttf', name='DejaVu Sans Display', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2025-04-30 20:05:09,594 - matplotlib.font_manager - DEBUG - findfont: score(FontEntry(fname='/home/ubuntu/code/drew/e2e_sam2/venv/lib/python3.12/site-packages/matplotlib/mpl-data/fonts/ttf/STIXSizTwoSymBol.ttf', name='STIXSizeTwoSym', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+2025-04-30 20:05:09,594 - matplotlib.font_manager - DEBUG - findfont: score(FontEntry(fname='/home/ubuntu/code/drew/e2e_sam2/venv/lib/python3.12/site-packages/matplotlib/mpl-data/fonts/ttf/STIXGeneralBolIta.ttf', name='STIXGeneral', style='italic', variant='normal', weight=700, stretch='normal', size='scalable')) = 11.335
+2025-04-30 20:05:09,594 - matplotlib.font_manager - DEBUG - findfont: score(FontEntry(fname='/home/ubuntu/code/drew/e2e_sam2/venv/lib/python3.12/site-packages/matplotlib/mpl-data/fonts/ttf/STIXNonUniBolIta.ttf', name='STIXNonUnicode', style='italic', variant='normal', weight=700, stretch='normal', size='scalable')) = 11.335
+2025-04-30 20:05:09,594 - matplotlib.font_manager - DEBUG - findfont: score(FontEntry(fname='/home/ubuntu/code/drew/e2e_sam2/venv/lib/python3.12/site-packages/matplotlib/mpl-data/fonts/ttf/cmex10.ttf', name='cmex10', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2025-04-30 20:05:09,594 - matplotlib.font_manager - DEBUG - findfont: score(FontEntry(fname='/home/ubuntu/code/drew/e2e_sam2/venv/lib/python3.12/site-packages/matplotlib/mpl-data/fonts/ttf/cmb10.ttf', name='cmb10', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2025-04-30 20:05:09,594 - matplotlib.font_manager - DEBUG - findfont: score(FontEntry(fname='/home/ubuntu/code/drew/e2e_sam2/venv/lib/python3.12/site-packages/matplotlib/mpl-data/fonts/ttf/DejaVuSans-BoldOblique.ttf', name='DejaVu Sans', style='oblique', variant='normal', weight=700, stretch='normal', size='scalable')) = 1.335
+2025-04-30 20:05:09,594 - matplotlib.font_manager - DEBUG - findfont: score(FontEntry(fname='/home/ubuntu/code/drew/e2e_sam2/venv/lib/python3.12/site-packages/matplotlib/mpl-data/fonts/ttf/DejaVuSans.ttf', name='DejaVu Sans', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 0.05
+2025-04-30 20:05:09,595 - matplotlib.font_manager - DEBUG - findfont: score(FontEntry(fname='/home/ubuntu/code/drew/e2e_sam2/venv/lib/python3.12/site-packages/matplotlib/mpl-data/fonts/ttf/STIXSizFourSymReg.ttf', name='STIXSizeFourSym', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2025-04-30 20:05:09,595 - matplotlib.font_manager - DEBUG - findfont: score(FontEntry(fname='/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf', name='DejaVu Sans', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 0.33499999999999996
+2025-04-30 20:05:09,595 - matplotlib.font_manager - DEBUG - findfont: score(FontEntry(fname='/usr/share/fonts/truetype/dejavu/DejaVuSerif.ttf', name='DejaVu Serif', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2025-04-30 20:05:09,595 - matplotlib.font_manager - DEBUG - findfont: score(FontEntry(fname='/usr/share/fonts/truetype/dejavu/DejaVuSansMono.ttf', name='DejaVu Sans Mono', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2025-04-30 20:05:09,595 - matplotlib.font_manager - DEBUG - findfont: score(FontEntry(fname='/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf', name='DejaVu Sans', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 0.05
+2025-04-30 20:05:09,595 - matplotlib.font_manager - DEBUG - findfont: score(FontEntry(fname='/usr/share/fonts/truetype/dejavu/DejaVuSerif-Bold.ttf', name='DejaVu Serif', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+2025-04-30 20:05:09,595 - matplotlib.font_manager - DEBUG - findfont: score(FontEntry(fname='/usr/share/fonts/truetype/dejavu/DejaVuSansMono-Oblique.ttf', name='DejaVu Sans Mono', style='oblique', variant='normal', weight=400, stretch='normal', size='scalable')) = 11.05
+2025-04-30 20:05:09,595 - matplotlib.font_manager - DEBUG - findfont: score(FontEntry(fname='/usr/share/fonts/truetype/dejavu/DejaVuSansMono-BoldOblique.ttf', name='DejaVu Sans Mono', style='oblique', variant='normal', weight=700, stretch='normal', size='scalable')) = 11.335
+2025-04-30 20:05:09,595 - matplotlib.font_manager - DEBUG - findfont: score(FontEntry(fname='/usr/share/fonts/truetype/dejavu/DejaVuSansMono-Bold.ttf', name='DejaVu Sans Mono', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+2025-04-30 20:05:09,595 - matplotlib.font_manager - DEBUG - findfont: Matching sans\-serif:style=normal:variant=normal:weight=normal:stretch=normal:size=10.0 to DejaVu Sans ('/home/ubuntu/code/drew/e2e_sam2/venv/lib/python3.12/site-packages/matplotlib/mpl-data/fonts/ttf/DejaVuSans.ttf') with score of 0.050000.
+2025-04-30 20:05:09,857 - root - INFO - For numpy array image, we assume (HxWxC) format
+2025-04-30 20:05:09,962 - root - INFO - Computing image embeddings for the provided image...
+2025-04-30 20:05:10,821 - root - INFO - Image embeddings computed.
+2025-04-30 20:05:47,299 - segment_embeddings - INFO - Using CUDA GPU for computation
+2025-04-30 20:05:47,318 - segment_embeddings - INFO - CUDA Device ID: 0
+2025-04-30 20:05:47,318 - segment_embeddings - INFO - CUDA Device Name: Tesla T4
+2025-04-30 20:05:47,319 - segment_embeddings - INFO - CUDA Memory Allocated: 0.00 MB
+2025-04-30 20:05:47,319 - segment_embeddings - INFO - CUDA Memory Reserved: 0.00 MB
+2025-04-30 20:05:47,529 - segment_embeddings - INFO - Selected device: cuda
+2025-04-30 20:05:47,529 - segment_embeddings - INFO - Device: cuda
+2025-04-30 20:05:47,529 - segment_embeddings - INFO - Building SAM2 model...
+2025-04-30 20:05:47,529 - segment_embeddings - INFO - Starting path: /home/ubuntu/code/drew/e2e_sam2
+2025-04-30 20:05:47,529 - segment_embeddings - INFO - Using CUDA GPU for computation
+2025-04-30 20:05:47,529 - segment_embeddings - INFO - CUDA Device ID: 0
+2025-04-30 20:05:47,529 - segment_embeddings - INFO - CUDA Device Name: Tesla T4
+2025-04-30 20:05:47,530 - segment_embeddings - INFO - CUDA Memory Allocated: 0.00 MB
+2025-04-30 20:05:47,530 - segment_embeddings - INFO - CUDA Memory Reserved: 2.00 MB
+2025-04-30 20:05:47,530 - segment_embeddings - INFO - Selected device: cuda
+2025-04-30 20:05:47,530 - segment_embeddings - DEBUG - Loading SAM2 model configuration from config file
+2025-04-30 20:05:47,530 - segment_embeddings - DEBUG - Building SAM2 model with config: configs/sam2.1/sam2.1_hiera_l.yaml, checkpoint: checkpoints/sam2.1_hiera_large.pt, device: cuda
+2025-04-30 20:05:49,934 - segment_embeddings - DEBUG - SAM2 model built successfully
+2025-04-30 20:05:49,934 - segment_embeddings - INFO - Using CUDA GPU for computation
+2025-04-30 20:05:49,934 - segment_embeddings - INFO - CUDA Device ID: 0
+2025-04-30 20:05:49,934 - segment_embeddings - INFO - CUDA Device Name: Tesla T4
+2025-04-30 20:05:49,935 - segment_embeddings - INFO - CUDA Memory Allocated: 1000.91 MB
+2025-04-30 20:05:49,935 - segment_embeddings - INFO - CUDA Memory Reserved: 1052.00 MB
+2025-04-30 20:05:49,935 - segment_embeddings - INFO - Selected device: cuda
+2025-04-30 20:05:49,935 - segment_embeddings - DEBUG - CUDA Memory Allocated: 1000.91 MB
+2025-04-30 20:05:49,935 - segment_embeddings - DEBUG - CUDA Memory Reserved: 1052.00 MB
+2025-04-30 20:05:50,045 - segment_embeddings - DEBUG - After GC - CUDA Memory Allocated: 1000.91 MB
+2025-04-30 20:05:50,046 - segment_embeddings - INFO - SAM2 model built successfully in 2.52 seconds
+2025-04-30 20:05:50,046 - segment_embeddings - DEBUG - SAM2 model type: <class 'sam2.modeling.sam2_base.SAM2Base'>
+2025-04-30 20:05:50,046 - segment_embeddings - INFO - Creating automatic mask generator for cuda...
+2025-04-30 20:05:50,046 - segment_embeddings - INFO - Using CUDA-specific settings for mask generator
+2025-04-30 20:05:50,046 - segment_embeddings - DEBUG - Parameters: points_per_side=32, pred_iou_thresh=0.86, stability_score_thresh=0.92
+2025-04-30 20:05:50,185 - segment_embeddings - DEBUG - Mask generator created successfully: <class 'sam2.automatic_mask_generator.SAM2AutomaticMaskGenerator'>
+2025-04-30 20:05:50,239 - matplotlib.pyplot - DEBUG - Loaded backend agg version v2.2.
+2025-04-30 20:05:50,243 - matplotlib.font_manager - DEBUG - findfont: Matching sans\-serif:style=normal:variant=normal:weight=normal:stretch=normal:size=10.0.
+2025-04-30 20:05:50,243 - matplotlib.font_manager - DEBUG - findfont: score(FontEntry(fname='/home/ubuntu/code/drew/e2e_sam2/venv/lib/python3.12/site-packages/matplotlib/mpl-data/fonts/ttf/DejaVuSerif-Italic.ttf', name='DejaVu Serif', style='italic', variant='normal', weight=400, stretch='normal', size='scalable')) = 11.05
+2025-04-30 20:05:50,243 - matplotlib.font_manager - DEBUG - findfont: score(FontEntry(fname='/home/ubuntu/code/drew/e2e_sam2/venv/lib/python3.12/site-packages/matplotlib/mpl-data/fonts/ttf/DejaVuSansMono-BoldOblique.ttf', name='DejaVu Sans Mono', style='oblique', variant='normal', weight=700, stretch='normal', size='scalable')) = 11.335
+2025-04-30 20:05:50,243 - matplotlib.font_manager - DEBUG - findfont: score(FontEntry(fname='/home/ubuntu/code/drew/e2e_sam2/venv/lib/python3.12/site-packages/matplotlib/mpl-data/fonts/ttf/STIXGeneralItalic.ttf', name='STIXGeneral', style='italic', variant='normal', weight=400, stretch='normal', size='scalable')) = 11.05
+2025-04-30 20:05:50,243 - matplotlib.font_manager - DEBUG - findfont: score(FontEntry(fname='/home/ubuntu/code/drew/e2e_sam2/venv/lib/python3.12/site-packages/matplotlib/mpl-data/fonts/ttf/STIXSizFourSymBol.ttf', name='STIXSizeFourSym', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+2025-04-30 20:05:50,243 - matplotlib.font_manager - DEBUG - findfont: score(FontEntry(fname='/home/ubuntu/code/drew/e2e_sam2/venv/lib/python3.12/site-packages/matplotlib/mpl-data/fonts/ttf/STIXSizOneSymReg.ttf', name='STIXSizeOneSym', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2025-04-30 20:05:50,243 - matplotlib.font_manager - DEBUG - findfont: score(FontEntry(fname='/home/ubuntu/code/drew/e2e_sam2/venv/lib/python3.12/site-packages/matplotlib/mpl-data/fonts/ttf/cmsy10.ttf', name='cmsy10', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2025-04-30 20:05:50,243 - matplotlib.font_manager - DEBUG - findfont: score(FontEntry(fname='/home/ubuntu/code/drew/e2e_sam2/venv/lib/python3.12/site-packages/matplotlib/mpl-data/fonts/ttf/STIXNonUni.ttf', name='STIXNonUnicode', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2025-04-30 20:05:50,243 - matplotlib.font_manager - DEBUG - findfont: score(FontEntry(fname='/home/ubuntu/code/drew/e2e_sam2/venv/lib/python3.12/site-packages/matplotlib/mpl-data/fonts/ttf/STIXNonUniBol.ttf', name='STIXNonUnicode', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+2025-04-30 20:05:50,244 - matplotlib.font_manager - DEBUG - findfont: score(FontEntry(fname='/home/ubuntu/code/drew/e2e_sam2/venv/lib/python3.12/site-packages/matplotlib/mpl-data/fonts/ttf/DejaVuSerif.ttf', name='DejaVu Serif', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2025-04-30 20:05:50,244 - matplotlib.font_manager - DEBUG - findfont: score(FontEntry(fname='/home/ubuntu/code/drew/e2e_sam2/venv/lib/python3.12/site-packages/matplotlib/mpl-data/fonts/ttf/STIXNonUniIta.ttf', name='STIXNonUnicode', style='italic', variant='normal', weight=400, stretch='normal', size='scalable')) = 11.05
+2025-04-30 20:05:50,244 - matplotlib.font_manager - DEBUG - findfont: score(FontEntry(fname='/home/ubuntu/code/drew/e2e_sam2/venv/lib/python3.12/site-packages/matplotlib/mpl-data/fonts/ttf/cmss10.ttf', name='cmss10', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2025-04-30 20:05:50,244 - matplotlib.font_manager - DEBUG - findfont: score(FontEntry(fname='/home/ubuntu/code/drew/e2e_sam2/venv/lib/python3.12/site-packages/matplotlib/mpl-data/fonts/ttf/DejaVuSerif-Bold.ttf', name='DejaVu Serif', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+2025-04-30 20:05:50,244 - matplotlib.font_manager - DEBUG - findfont: score(FontEntry(fname='/home/ubuntu/code/drew/e2e_sam2/venv/lib/python3.12/site-packages/matplotlib/mpl-data/fonts/ttf/STIXSizOneSymBol.ttf', name='STIXSizeOneSym', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+2025-04-30 20:05:50,244 - matplotlib.font_manager - DEBUG - findfont: score(FontEntry(fname='/home/ubuntu/code/drew/e2e_sam2/venv/lib/python3.12/site-packages/matplotlib/mpl-data/fonts/ttf/STIXGeneralBol.ttf', name='STIXGeneral', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+2025-04-30 20:05:50,244 - matplotlib.font_manager - DEBUG - findfont: score(FontEntry(fname='/home/ubuntu/code/drew/e2e_sam2/venv/lib/python3.12/site-packages/matplotlib/mpl-data/fonts/ttf/STIXGeneral.ttf', name='STIXGeneral', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2025-04-30 20:05:50,244 - matplotlib.font_manager - DEBUG - findfont: score(FontEntry(fname='/home/ubuntu/code/drew/e2e_sam2/venv/lib/python3.12/site-packages/matplotlib/mpl-data/fonts/ttf/STIXSizTwoSymReg.ttf', name='STIXSizeTwoSym', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2025-04-30 20:05:50,244 - matplotlib.font_manager - DEBUG - findfont: score(FontEntry(fname='/home/ubuntu/code/drew/e2e_sam2/venv/lib/python3.12/site-packages/matplotlib/mpl-data/fonts/ttf/DejaVuSerif-BoldItalic.ttf', name='DejaVu Serif', style='italic', variant='normal', weight=700, stretch='normal', size='scalable')) = 11.335
+2025-04-30 20:05:50,244 - matplotlib.font_manager - DEBUG - findfont: score(FontEntry(fname='/home/ubuntu/code/drew/e2e_sam2/venv/lib/python3.12/site-packages/matplotlib/mpl-data/fonts/ttf/STIXSizThreeSymBol.ttf', name='STIXSizeThreeSym', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+2025-04-30 20:05:50,244 - matplotlib.font_manager - DEBUG - findfont: score(FontEntry(fname='/home/ubuntu/code/drew/e2e_sam2/venv/lib/python3.12/site-packages/matplotlib/mpl-data/fonts/ttf/DejaVuSansMono-Oblique.ttf', name='DejaVu Sans Mono', style='oblique', variant='normal', weight=400, stretch='normal', size='scalable')) = 11.05
+2025-04-30 20:05:50,244 - matplotlib.font_manager - DEBUG - findfont: score(FontEntry(fname='/home/ubuntu/code/drew/e2e_sam2/venv/lib/python3.12/site-packages/matplotlib/mpl-data/fonts/ttf/DejaVuSans-Oblique.ttf', name='DejaVu Sans', style='oblique', variant='normal', weight=400, stretch='normal', size='scalable')) = 1.05
+2025-04-30 20:05:50,244 - matplotlib.font_manager - DEBUG - findfont: score(FontEntry(fname='/home/ubuntu/code/drew/e2e_sam2/venv/lib/python3.12/site-packages/matplotlib/mpl-data/fonts/ttf/cmmi10.ttf', name='cmmi10', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2025-04-30 20:05:50,244 - matplotlib.font_manager - DEBUG - findfont: score(FontEntry(fname='/home/ubuntu/code/drew/e2e_sam2/venv/lib/python3.12/site-packages/matplotlib/mpl-data/fonts/ttf/STIXSizFiveSymReg.ttf', name='STIXSizeFiveSym', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2025-04-30 20:05:50,244 - matplotlib.font_manager - DEBUG - findfont: score(FontEntry(fname='/home/ubuntu/code/drew/e2e_sam2/venv/lib/python3.12/site-packages/matplotlib/mpl-data/fonts/ttf/cmr10.ttf', name='cmr10', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2025-04-30 20:05:50,244 - matplotlib.font_manager - DEBUG - findfont: score(FontEntry(fname='/home/ubuntu/code/drew/e2e_sam2/venv/lib/python3.12/site-packages/matplotlib/mpl-data/fonts/ttf/DejaVuSansMono.ttf', name='DejaVu Sans Mono', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2025-04-30 20:05:50,245 - matplotlib.font_manager - DEBUG - findfont: score(FontEntry(fname='/home/ubuntu/code/drew/e2e_sam2/venv/lib/python3.12/site-packages/matplotlib/mpl-data/fonts/ttf/DejaVuSerifDisplay.ttf', name='DejaVu Serif Display', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2025-04-30 20:05:50,245 - matplotlib.font_manager - DEBUG - findfont: score(FontEntry(fname='/home/ubuntu/code/drew/e2e_sam2/venv/lib/python3.12/site-packages/matplotlib/mpl-data/fonts/ttf/DejaVuSansMono-Bold.ttf', name='DejaVu Sans Mono', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+2025-04-30 20:05:50,245 - matplotlib.font_manager - DEBUG - findfont: score(FontEntry(fname='/home/ubuntu/code/drew/e2e_sam2/venv/lib/python3.12/site-packages/matplotlib/mpl-data/fonts/ttf/DejaVuSans-Bold.ttf', name='DejaVu Sans', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 0.33499999999999996
+2025-04-30 20:05:50,245 - matplotlib.font_manager - DEBUG - findfont: score(FontEntry(fname='/home/ubuntu/code/drew/e2e_sam2/venv/lib/python3.12/site-packages/matplotlib/mpl-data/fonts/ttf/cmtt10.ttf', name='cmtt10', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2025-04-30 20:05:50,245 - matplotlib.font_manager - DEBUG - findfont: score(FontEntry(fname='/home/ubuntu/code/drew/e2e_sam2/venv/lib/python3.12/site-packages/matplotlib/mpl-data/fonts/ttf/STIXSizThreeSymReg.ttf', name='STIXSizeThreeSym', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2025-04-30 20:05:50,245 - matplotlib.font_manager - DEBUG - findfont: score(FontEntry(fname='/home/ubuntu/code/drew/e2e_sam2/venv/lib/python3.12/site-packages/matplotlib/mpl-data/fonts/ttf/DejaVuSansDisplay.ttf', name='DejaVu Sans Display', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2025-04-30 20:05:50,245 - matplotlib.font_manager - DEBUG - findfont: score(FontEntry(fname='/home/ubuntu/code/drew/e2e_sam2/venv/lib/python3.12/site-packages/matplotlib/mpl-data/fonts/ttf/STIXSizTwoSymBol.ttf', name='STIXSizeTwoSym', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+2025-04-30 20:05:50,245 - matplotlib.font_manager - DEBUG - findfont: score(FontEntry(fname='/home/ubuntu/code/drew/e2e_sam2/venv/lib/python3.12/site-packages/matplotlib/mpl-data/fonts/ttf/STIXGeneralBolIta.ttf', name='STIXGeneral', style='italic', variant='normal', weight=700, stretch='normal', size='scalable')) = 11.335
+2025-04-30 20:05:50,245 - matplotlib.font_manager - DEBUG - findfont: score(FontEntry(fname='/home/ubuntu/code/drew/e2e_sam2/venv/lib/python3.12/site-packages/matplotlib/mpl-data/fonts/ttf/STIXNonUniBolIta.ttf', name='STIXNonUnicode', style='italic', variant='normal', weight=700, stretch='normal', size='scalable')) = 11.335
+2025-04-30 20:05:50,245 - matplotlib.font_manager - DEBUG - findfont: score(FontEntry(fname='/home/ubuntu/code/drew/e2e_sam2/venv/lib/python3.12/site-packages/matplotlib/mpl-data/fonts/ttf/cmex10.ttf', name='cmex10', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2025-04-30 20:05:50,245 - matplotlib.font_manager - DEBUG - findfont: score(FontEntry(fname='/home/ubuntu/code/drew/e2e_sam2/venv/lib/python3.12/site-packages/matplotlib/mpl-data/fonts/ttf/cmb10.ttf', name='cmb10', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2025-04-30 20:05:50,245 - matplotlib.font_manager - DEBUG - findfont: score(FontEntry(fname='/home/ubuntu/code/drew/e2e_sam2/venv/lib/python3.12/site-packages/matplotlib/mpl-data/fonts/ttf/DejaVuSans-BoldOblique.ttf', name='DejaVu Sans', style='oblique', variant='normal', weight=700, stretch='normal', size='scalable')) = 1.335
+2025-04-30 20:05:50,245 - matplotlib.font_manager - DEBUG - findfont: score(FontEntry(fname='/home/ubuntu/code/drew/e2e_sam2/venv/lib/python3.12/site-packages/matplotlib/mpl-data/fonts/ttf/DejaVuSans.ttf', name='DejaVu Sans', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 0.05
+2025-04-30 20:05:50,245 - matplotlib.font_manager - DEBUG - findfont: score(FontEntry(fname='/home/ubuntu/code/drew/e2e_sam2/venv/lib/python3.12/site-packages/matplotlib/mpl-data/fonts/ttf/STIXSizFourSymReg.ttf', name='STIXSizeFourSym', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2025-04-30 20:05:50,246 - matplotlib.font_manager - DEBUG - findfont: score(FontEntry(fname='/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf', name='DejaVu Sans', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 0.33499999999999996
+2025-04-30 20:05:50,246 - matplotlib.font_manager - DEBUG - findfont: score(FontEntry(fname='/usr/share/fonts/truetype/dejavu/DejaVuSerif.ttf', name='DejaVu Serif', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2025-04-30 20:05:50,246 - matplotlib.font_manager - DEBUG - findfont: score(FontEntry(fname='/usr/share/fonts/truetype/dejavu/DejaVuSansMono.ttf', name='DejaVu Sans Mono', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2025-04-30 20:05:50,246 - matplotlib.font_manager - DEBUG - findfont: score(FontEntry(fname='/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf', name='DejaVu Sans', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 0.05
+2025-04-30 20:05:50,246 - matplotlib.font_manager - DEBUG - findfont: score(FontEntry(fname='/usr/share/fonts/truetype/dejavu/DejaVuSerif-Bold.ttf', name='DejaVu Serif', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+2025-04-30 20:05:50,246 - matplotlib.font_manager - DEBUG - findfont: score(FontEntry(fname='/usr/share/fonts/truetype/dejavu/DejaVuSansMono-Oblique.ttf', name='DejaVu Sans Mono', style='oblique', variant='normal', weight=400, stretch='normal', size='scalable')) = 11.05
+2025-04-30 20:05:50,246 - matplotlib.font_manager - DEBUG - findfont: score(FontEntry(fname='/usr/share/fonts/truetype/dejavu/DejaVuSansMono-BoldOblique.ttf', name='DejaVu Sans Mono', style='oblique', variant='normal', weight=700, stretch='normal', size='scalable')) = 11.335
+2025-04-30 20:05:50,246 - matplotlib.font_manager - DEBUG - findfont: score(FontEntry(fname='/usr/share/fonts/truetype/dejavu/DejaVuSansMono-Bold.ttf', name='DejaVu Sans Mono', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+2025-04-30 20:05:50,246 - matplotlib.font_manager - DEBUG - findfont: Matching sans\-serif:style=normal:variant=normal:weight=normal:stretch=normal:size=10.0 to DejaVu Sans ('/home/ubuntu/code/drew/e2e_sam2/venv/lib/python3.12/site-packages/matplotlib/mpl-data/fonts/ttf/DejaVuSans.ttf') with score of 0.050000.
+2025-04-30 20:05:50,512 - root - INFO - For numpy array image, we assume (HxWxC) format
+2025-04-30 20:05:50,617 - root - INFO - Computing image embeddings for the provided image...
+2025-04-30 20:05:51,476 - root - INFO - Image embeddings computed.

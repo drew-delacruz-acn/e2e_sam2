@@ -604,3 +604,207 @@ Traceback (most recent call last):
 NotImplementedError: Image format not supported
 
 2025-04-30 18:49:12,898 - segment_embeddings - ERROR - Failed to generate masks: Fallback approach failed: Image format not supported
+2025-04-30 19:08:13,472 - segment_embeddings - INFO - Starting segment_gemini_outputs.py
+2025-04-30 19:08:13,473 - segment_embeddings - INFO - Arguments: image=data/mjolnir_gt.jpeg, output=segmentation_results, max_segments=2, models=both
+2025-04-30 19:08:13,473 - segment_embeddings - INFO - Created output directories in segmentation_results
+2025-04-30 19:08:13,473 - segment_embeddings - INFO - Building SAM2 model...
+2025-04-30 19:08:13,473 - segment_embeddings - INFO - Starting path: /home/ubuntu/code/drew/e2e_sam2
+2025-04-30 19:08:13,611 - segment_embeddings - INFO - Using CUDA GPU for computation
+2025-04-30 19:08:13,634 - segment_embeddings - INFO - CUDA Device ID: 0
+2025-04-30 19:08:13,635 - segment_embeddings - INFO - CUDA Device Name: Tesla T4
+2025-04-30 19:08:13,635 - segment_embeddings - INFO - CUDA Memory Allocated: 0.00 MB
+2025-04-30 19:08:13,635 - segment_embeddings - INFO - CUDA Memory Reserved: 0.00 MB
+2025-04-30 19:08:13,635 - segment_embeddings - INFO - Selected device: cuda
+2025-04-30 19:08:13,635 - segment_embeddings - DEBUG - Loading SAM2 model configuration from config file
+2025-04-30 19:08:13,636 - segment_embeddings - DEBUG - Building SAM2 model with config: configs/sam2.1/sam2.1_hiera_l.yaml, checkpoint: checkpoints/sam2.1_hiera_large.pt, device: cuda
+2025-04-30 19:08:16,162 - segment_embeddings - DEBUG - SAM2 model built successfully
+2025-04-30 19:08:16,162 - segment_embeddings - INFO - Using CUDA GPU for computation
+2025-04-30 19:08:16,162 - segment_embeddings - INFO - CUDA Device ID: 0
+2025-04-30 19:08:16,162 - segment_embeddings - INFO - CUDA Device Name: Tesla T4
+2025-04-30 19:08:16,162 - segment_embeddings - INFO - CUDA Memory Allocated: 1000.91 MB
+2025-04-30 19:08:16,163 - segment_embeddings - INFO - CUDA Memory Reserved: 1052.00 MB
+2025-04-30 19:08:16,163 - segment_embeddings - INFO - Selected device: cuda
+2025-04-30 19:08:16,163 - segment_embeddings - DEBUG - CUDA Memory Allocated: 1000.91 MB
+2025-04-30 19:08:16,163 - segment_embeddings - DEBUG - CUDA Memory Reserved: 1052.00 MB
+2025-04-30 19:08:16,313 - segment_embeddings - DEBUG - After GC - CUDA Memory Allocated: 1000.91 MB
+2025-04-30 19:08:16,313 - segment_embeddings - INFO - SAM2 model built successfully in 2.84 seconds
+2025-04-30 19:08:16,313 - segment_embeddings - DEBUG - SAM2 model type: <class 'sam2.modeling.sam2_base.SAM2Base'>
+2025-04-30 19:08:16,313 - segment_embeddings - INFO - Using CUDA GPU for computation
+2025-04-30 19:08:16,313 - segment_embeddings - INFO - CUDA Device ID: 0
+2025-04-30 19:08:16,314 - segment_embeddings - INFO - CUDA Device Name: Tesla T4
+2025-04-30 19:08:16,314 - segment_embeddings - INFO - CUDA Memory Allocated: 1000.91 MB
+2025-04-30 19:08:16,314 - segment_embeddings - INFO - CUDA Memory Reserved: 1052.00 MB
+2025-04-30 19:08:16,314 - segment_embeddings - INFO - Selected device: cuda
+2025-04-30 19:08:16,314 - segment_embeddings - INFO - Creating automatic mask generator for cuda...
+2025-04-30 19:08:16,314 - segment_embeddings - INFO - Using CUDA-specific settings for mask generator
+2025-04-30 19:08:16,314 - segment_embeddings - DEBUG - Parameters: points_per_side=32, pred_iou_thresh=0.86, stability_score_thresh=0.92
+2025-04-30 19:08:16,458 - segment_embeddings - DEBUG - Mask generator created successfully: <class 'sam2.automatic_mask_generator.SAM2AutomaticMaskGenerator'>
+2025-04-30 19:08:16,458 - segment_embeddings - INFO - Skipping embedding generator initialization as requested
+2025-04-30 19:08:16,458 - segment_embeddings - INFO - Loading image from data/mjolnir_gt.jpeg
+2025-04-30 19:08:16,459 - segment_embeddings - DEBUG - Image file size: 5.97 KB
+2025-04-30 19:08:16,459 - segment_embeddings - INFO - Image loaded successfully: (316, 160, 3), dtype: uint8
+2025-04-30 19:08:16,459 - segment_embeddings - DEBUG - Converting image from BGR to RGB
+2025-04-30 19:08:16,459 - segment_embeddings - DEBUG - Image pixel range - Min: 0, Max: 255, Mean: 215.79
+2025-04-30 19:08:16,459 - segment_embeddings - INFO - Generating masks...
+2025-04-30 19:08:16,460 - segment_embeddings - INFO - Generating masks on cuda device...
+2025-04-30 19:08:16,460 - segment_embeddings - DEBUG - Image type: <class 'numpy.ndarray'>, Shape: (316, 160, 3), dtype: uint8
+2025-04-30 19:08:16,460 - segment_embeddings - DEBUG - Image is numpy array, Min: 0, Max: 255, Mean: 215.79
+2025-04-30 19:08:16,460 - segment_embeddings - DEBUG - Attempting standard mask generation approach
+2025-04-30 19:08:16,460 - root - INFO - For numpy array image, we assume (HxWxC) format
+2025-04-30 19:08:16,541 - root - INFO - Computing image embeddings for the provided image...
+2025-04-30 19:08:17,230 - root - INFO - Image embeddings computed.
+2025-04-30 19:08:20,880 - segment_embeddings - DEBUG - Standard approach successful, generated 0 masks
+2025-04-30 19:08:20,880 - segment_embeddings - ERROR - No masks were generated
+2025-04-30 19:09:25,761 - segment_embeddings - INFO - Starting segment_gemini_outputs.py
+2025-04-30 19:09:25,763 - segment_embeddings - INFO - Arguments: image=data/mjolnir_gt.jpeg, output=segmentation_results, max_segments=3, models=both
+2025-04-30 19:09:25,764 - segment_embeddings - INFO - Created output directories in segmentation_results
+2025-04-30 19:09:25,764 - segment_embeddings - INFO - Building SAM2 model...
+2025-04-30 19:09:25,764 - segment_embeddings - INFO - Starting path: /home/ubuntu/code/drew/e2e_sam2
+2025-04-30 19:09:25,901 - segment_embeddings - INFO - Using CUDA GPU for computation
+2025-04-30 19:09:25,925 - segment_embeddings - INFO - CUDA Device ID: 0
+2025-04-30 19:09:25,925 - segment_embeddings - INFO - CUDA Device Name: Tesla T4
+2025-04-30 19:09:25,926 - segment_embeddings - INFO - CUDA Memory Allocated: 0.00 MB
+2025-04-30 19:09:25,926 - segment_embeddings - INFO - CUDA Memory Reserved: 0.00 MB
+2025-04-30 19:09:25,926 - segment_embeddings - INFO - Selected device: cuda
+2025-04-30 19:09:25,926 - segment_embeddings - DEBUG - Loading SAM2 model configuration from config file
+2025-04-30 19:09:25,926 - segment_embeddings - DEBUG - Building SAM2 model with config: configs/sam2.1/sam2.1_hiera_l.yaml, checkpoint: checkpoints/sam2.1_hiera_large.pt, device: cuda
+2025-04-30 19:09:28,440 - segment_embeddings - DEBUG - SAM2 model built successfully
+2025-04-30 19:09:28,440 - segment_embeddings - INFO - Using CUDA GPU for computation
+2025-04-30 19:09:28,441 - segment_embeddings - INFO - CUDA Device ID: 0
+2025-04-30 19:09:28,441 - segment_embeddings - INFO - CUDA Device Name: Tesla T4
+2025-04-30 19:09:28,441 - segment_embeddings - INFO - CUDA Memory Allocated: 1000.91 MB
+2025-04-30 19:09:28,441 - segment_embeddings - INFO - CUDA Memory Reserved: 1052.00 MB
+2025-04-30 19:09:28,441 - segment_embeddings - INFO - Selected device: cuda
+2025-04-30 19:09:28,441 - segment_embeddings - DEBUG - CUDA Memory Allocated: 1000.91 MB
+2025-04-30 19:09:28,441 - segment_embeddings - DEBUG - CUDA Memory Reserved: 1052.00 MB
+2025-04-30 19:09:28,584 - segment_embeddings - DEBUG - After GC - CUDA Memory Allocated: 1000.91 MB
+2025-04-30 19:09:28,584 - segment_embeddings - INFO - SAM2 model built successfully in 2.82 seconds
+2025-04-30 19:09:28,584 - segment_embeddings - DEBUG - SAM2 model type: <class 'sam2.modeling.sam2_base.SAM2Base'>
+2025-04-30 19:09:28,584 - segment_embeddings - INFO - Using CUDA GPU for computation
+2025-04-30 19:09:28,584 - segment_embeddings - INFO - CUDA Device ID: 0
+2025-04-30 19:09:28,584 - segment_embeddings - INFO - CUDA Device Name: Tesla T4
+2025-04-30 19:09:28,584 - segment_embeddings - INFO - CUDA Memory Allocated: 1000.91 MB
+2025-04-30 19:09:28,585 - segment_embeddings - INFO - CUDA Memory Reserved: 1052.00 MB
+2025-04-30 19:09:28,585 - segment_embeddings - INFO - Selected device: cuda
+2025-04-30 19:09:28,585 - segment_embeddings - INFO - Creating automatic mask generator for cuda...
+2025-04-30 19:09:28,585 - segment_embeddings - INFO - Using CUDA-specific settings for mask generator
+2025-04-30 19:09:28,585 - segment_embeddings - DEBUG - Parameters: points_per_side=32, pred_iou_thresh=0.86, stability_score_thresh=0.92
+2025-04-30 19:09:28,724 - segment_embeddings - DEBUG - Mask generator created successfully: <class 'sam2.automatic_mask_generator.SAM2AutomaticMaskGenerator'>
+2025-04-30 19:09:28,724 - segment_embeddings - INFO - Skipping embedding generator initialization as requested
+2025-04-30 19:09:28,724 - segment_embeddings - INFO - Loading image from data/mjolnir_gt.jpeg
+2025-04-30 19:09:28,725 - segment_embeddings - DEBUG - Image file size: 5.97 KB
+2025-04-30 19:09:28,725 - segment_embeddings - INFO - Image loaded successfully: (316, 160, 3), dtype: uint8
+2025-04-30 19:09:28,725 - segment_embeddings - DEBUG - Converting image from BGR to RGB
+2025-04-30 19:09:28,726 - segment_embeddings - DEBUG - Image pixel range - Min: 0, Max: 255, Mean: 215.79
+2025-04-30 19:09:28,726 - segment_embeddings - INFO - Generating masks...
+2025-04-30 19:09:28,726 - segment_embeddings - INFO - Generating masks on cuda device...
+2025-04-30 19:09:28,726 - segment_embeddings - DEBUG - Image type: <class 'numpy.ndarray'>, Shape: (316, 160, 3), dtype: uint8
+2025-04-30 19:09:28,726 - segment_embeddings - DEBUG - Image is numpy array, Min: 0, Max: 255, Mean: 215.79
+2025-04-30 19:09:28,726 - segment_embeddings - DEBUG - Attempting standard mask generation approach
+2025-04-30 19:09:28,726 - root - INFO - For numpy array image, we assume (HxWxC) format
+2025-04-30 19:09:28,806 - root - INFO - Computing image embeddings for the provided image...
+2025-04-30 19:09:29,491 - root - INFO - Image embeddings computed.
+2025-04-30 19:09:33,135 - segment_embeddings - DEBUG - Standard approach successful, generated 0 masks
+2025-04-30 19:09:33,135 - segment_embeddings - ERROR - No masks were generated
+2025-04-30 19:30:10,155 - segment_embeddings - INFO - Starting segment_gemini_outputs.py
+2025-04-30 19:30:10,156 - segment_embeddings - INFO - Arguments: image=data/mjolnir_gt.jpeg, output=segmentation_results, max_segments=3, models=both
+2025-04-30 19:30:10,156 - segment_embeddings - INFO - Created output directories in segmentation_results
+2025-04-30 19:30:10,156 - segment_embeddings - INFO - Building SAM2 model...
+2025-04-30 19:30:10,156 - segment_embeddings - INFO - Starting path: /home/ubuntu/code/drew/e2e_sam2
+2025-04-30 19:30:10,296 - segment_embeddings - INFO - Using CUDA GPU for computation
+2025-04-30 19:30:10,320 - segment_embeddings - INFO - CUDA Device ID: 0
+2025-04-30 19:30:10,320 - segment_embeddings - INFO - CUDA Device Name: Tesla T4
+2025-04-30 19:30:10,320 - segment_embeddings - INFO - CUDA Memory Allocated: 0.00 MB
+2025-04-30 19:30:10,320 - segment_embeddings - INFO - CUDA Memory Reserved: 0.00 MB
+2025-04-30 19:30:10,320 - segment_embeddings - INFO - Selected device: cuda
+2025-04-30 19:30:10,320 - segment_embeddings - DEBUG - Loading SAM2 model configuration from config file
+2025-04-30 19:30:10,321 - segment_embeddings - DEBUG - Building SAM2 model with config: configs/sam2.1/sam2.1_hiera_l.yaml, checkpoint: checkpoints/sam2.1_hiera_large.pt, device: cuda
+2025-04-30 19:30:12,839 - segment_embeddings - DEBUG - SAM2 model built successfully
+2025-04-30 19:30:12,839 - segment_embeddings - INFO - Using CUDA GPU for computation
+2025-04-30 19:30:12,839 - segment_embeddings - INFO - CUDA Device ID: 0
+2025-04-30 19:30:12,839 - segment_embeddings - INFO - CUDA Device Name: Tesla T4
+2025-04-30 19:30:12,839 - segment_embeddings - INFO - CUDA Memory Allocated: 1000.91 MB
+2025-04-30 19:30:12,840 - segment_embeddings - INFO - CUDA Memory Reserved: 1052.00 MB
+2025-04-30 19:30:12,840 - segment_embeddings - INFO - Selected device: cuda
+2025-04-30 19:30:12,840 - segment_embeddings - DEBUG - CUDA Memory Allocated: 1000.91 MB
+2025-04-30 19:30:12,840 - segment_embeddings - DEBUG - CUDA Memory Reserved: 1052.00 MB
+2025-04-30 19:30:12,982 - segment_embeddings - DEBUG - After GC - CUDA Memory Allocated: 1000.91 MB
+2025-04-30 19:30:12,982 - segment_embeddings - INFO - SAM2 model built successfully in 2.83 seconds
+2025-04-30 19:30:12,982 - segment_embeddings - DEBUG - SAM2 model type: <class 'sam2.modeling.sam2_base.SAM2Base'>
+2025-04-30 19:30:12,982 - segment_embeddings - INFO - Using CUDA GPU for computation
+2025-04-30 19:30:12,982 - segment_embeddings - INFO - CUDA Device ID: 0
+2025-04-30 19:30:12,982 - segment_embeddings - INFO - CUDA Device Name: Tesla T4
+2025-04-30 19:30:12,983 - segment_embeddings - INFO - CUDA Memory Allocated: 1000.91 MB
+2025-04-30 19:30:12,983 - segment_embeddings - INFO - CUDA Memory Reserved: 1052.00 MB
+2025-04-30 19:30:12,983 - segment_embeddings - INFO - Selected device: cuda
+2025-04-30 19:30:12,983 - segment_embeddings - INFO - Creating automatic mask generator for cuda...
+2025-04-30 19:30:12,983 - segment_embeddings - INFO - Using CUDA-specific settings for mask generator
+2025-04-30 19:30:12,983 - segment_embeddings - DEBUG - Parameters: points_per_side=32, pred_iou_thresh=0.86, stability_score_thresh=0.92
+2025-04-30 19:30:13,121 - segment_embeddings - DEBUG - Mask generator created successfully: <class 'sam2.automatic_mask_generator.SAM2AutomaticMaskGenerator'>
+2025-04-30 19:30:13,122 - segment_embeddings - INFO - Skipping embedding generator initialization as requested
+2025-04-30 19:30:13,122 - segment_embeddings - INFO - Loading image from data/mjolnir_gt.jpeg
+2025-04-30 19:30:13,122 - segment_embeddings - DEBUG - Image file size: 5.97 KB
+2025-04-30 19:30:13,122 - segment_embeddings - INFO - Image loaded successfully: (316, 160, 3), dtype: uint8
+2025-04-30 19:30:13,122 - segment_embeddings - DEBUG - Converting image from BGR to RGB
+2025-04-30 19:30:13,123 - segment_embeddings - DEBUG - Image pixel range - Min: 0, Max: 255, Mean: 215.79
+2025-04-30 19:30:13,123 - segment_embeddings - INFO - Generating masks...
+2025-04-30 19:30:13,123 - segment_embeddings - INFO - Generating masks on cuda device...
+2025-04-30 19:30:13,123 - segment_embeddings - DEBUG - Image type: <class 'numpy.ndarray'>, Shape: (316, 160, 3), dtype: uint8
+2025-04-30 19:30:13,123 - segment_embeddings - DEBUG - Image is numpy array, Min: 0, Max: 255, Mean: 215.79
+2025-04-30 19:30:13,123 - segment_embeddings - DEBUG - Attempting standard mask generation approach
+2025-04-30 19:30:13,124 - root - INFO - For numpy array image, we assume (HxWxC) format
+2025-04-30 19:30:13,203 - root - INFO - Computing image embeddings for the provided image...
+2025-04-30 19:30:13,907 - root - INFO - Image embeddings computed.
+2025-04-30 19:30:17,544 - segment_embeddings - DEBUG - Standard approach successful, generated 0 masks
+2025-04-30 19:30:17,544 - segment_embeddings - ERROR - No masks were generated
+2025-04-30 19:31:19,561 - segment_embeddings - INFO - Starting segment_gemini_outputs.py
+2025-04-30 19:31:19,562 - segment_embeddings - INFO - Arguments: image=data/cars.jpg, output=segmentation_results, max_segments=3, models=both
+2025-04-30 19:31:19,562 - segment_embeddings - INFO - Created output directories in segmentation_results
+2025-04-30 19:31:19,562 - segment_embeddings - INFO - Building SAM2 model...
+2025-04-30 19:31:19,562 - segment_embeddings - INFO - Starting path: /home/ubuntu/code/drew/e2e_sam2
+2025-04-30 19:31:19,699 - segment_embeddings - INFO - Using CUDA GPU for computation
+2025-04-30 19:31:19,723 - segment_embeddings - INFO - CUDA Device ID: 0
+2025-04-30 19:31:19,723 - segment_embeddings - INFO - CUDA Device Name: Tesla T4
+2025-04-30 19:31:19,723 - segment_embeddings - INFO - CUDA Memory Allocated: 0.00 MB
+2025-04-30 19:31:19,723 - segment_embeddings - INFO - CUDA Memory Reserved: 0.00 MB
+2025-04-30 19:31:19,724 - segment_embeddings - INFO - Selected device: cuda
+2025-04-30 19:31:19,724 - segment_embeddings - DEBUG - Loading SAM2 model configuration from config file
+2025-04-30 19:31:19,724 - segment_embeddings - DEBUG - Building SAM2 model with config: configs/sam2.1/sam2.1_hiera_l.yaml, checkpoint: checkpoints/sam2.1_hiera_large.pt, device: cuda
+2025-04-30 19:31:22,232 - segment_embeddings - DEBUG - SAM2 model built successfully
+2025-04-30 19:31:22,232 - segment_embeddings - INFO - Using CUDA GPU for computation
+2025-04-30 19:31:22,232 - segment_embeddings - INFO - CUDA Device ID: 0
+2025-04-30 19:31:22,232 - segment_embeddings - INFO - CUDA Device Name: Tesla T4
+2025-04-30 19:31:22,233 - segment_embeddings - INFO - CUDA Memory Allocated: 1000.91 MB
+2025-04-30 19:31:22,233 - segment_embeddings - INFO - CUDA Memory Reserved: 1052.00 MB
+2025-04-30 19:31:22,233 - segment_embeddings - INFO - Selected device: cuda
+2025-04-30 19:31:22,233 - segment_embeddings - DEBUG - CUDA Memory Allocated: 1000.91 MB
+2025-04-30 19:31:22,233 - segment_embeddings - DEBUG - CUDA Memory Reserved: 1052.00 MB
+2025-04-30 19:31:22,385 - segment_embeddings - DEBUG - After GC - CUDA Memory Allocated: 1000.91 MB
+2025-04-30 19:31:22,385 - segment_embeddings - INFO - SAM2 model built successfully in 2.82 seconds
+2025-04-30 19:31:22,386 - segment_embeddings - DEBUG - SAM2 model type: <class 'sam2.modeling.sam2_base.SAM2Base'>
+2025-04-30 19:31:22,386 - segment_embeddings - INFO - Using CUDA GPU for computation
+2025-04-30 19:31:22,386 - segment_embeddings - INFO - CUDA Device ID: 0
+2025-04-30 19:31:22,386 - segment_embeddings - INFO - CUDA Device Name: Tesla T4
+2025-04-30 19:31:22,386 - segment_embeddings - INFO - CUDA Memory Allocated: 1000.91 MB
+2025-04-30 19:31:22,386 - segment_embeddings - INFO - CUDA Memory Reserved: 1052.00 MB
+2025-04-30 19:31:22,386 - segment_embeddings - INFO - Selected device: cuda
+2025-04-30 19:31:22,386 - segment_embeddings - INFO - Creating automatic mask generator for cuda...
+2025-04-30 19:31:22,386 - segment_embeddings - INFO - Using CUDA-specific settings for mask generator
+2025-04-30 19:31:22,386 - segment_embeddings - DEBUG - Parameters: points_per_side=32, pred_iou_thresh=0.86, stability_score_thresh=0.92
+2025-04-30 19:31:22,531 - segment_embeddings - DEBUG - Mask generator created successfully: <class 'sam2.automatic_mask_generator.SAM2AutomaticMaskGenerator'>
+2025-04-30 19:31:22,531 - segment_embeddings - INFO - Skipping embedding generator initialization as requested
+2025-04-30 19:31:22,531 - segment_embeddings - INFO - Loading image from data/cars.jpg
+2025-04-30 19:31:22,560 - segment_embeddings - DEBUG - Image file size: 1033.39 KB
+2025-04-30 19:31:22,561 - segment_embeddings - INFO - Image loaded successfully: (1500, 2250, 3), dtype: uint8
+2025-04-30 19:31:22,561 - segment_embeddings - DEBUG - Converting image from BGR to RGB
+2025-04-30 19:31:22,571 - segment_embeddings - DEBUG - Image pixel range - Min: 0, Max: 255, Mean: 66.98
+2025-04-30 19:31:22,571 - segment_embeddings - INFO - Generating masks...
+2025-04-30 19:31:22,571 - segment_embeddings - INFO - Generating masks on cuda device...
+2025-04-30 19:31:22,571 - segment_embeddings - DEBUG - Image type: <class 'numpy.ndarray'>, Shape: (1500, 2250, 3), dtype: uint8
+2025-04-30 19:31:22,579 - segment_embeddings - DEBUG - Image is numpy array, Min: 0, Max: 255, Mean: 66.98
+2025-04-30 19:31:22,579 - segment_embeddings - DEBUG - Attempting standard mask generation approach
+2025-04-30 19:31:22,579 - root - INFO - For numpy array image, we assume (HxWxC) format
+2025-04-30 19:31:22,687 - root - INFO - Computing image embeddings for the provided image...
+2025-04-30 19:31:23,414 - root - INFO - Image embeddings computed.
+2025-04-30 19:31:27,238 - segment_embeddings - DEBUG - Standard approach successful, generated 0 masks
+2025-04-30 19:31:27,238 - segment_embeddings - ERROR - No masks were generated

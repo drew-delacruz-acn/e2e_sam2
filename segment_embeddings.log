@@ -87,3 +87,55 @@
 2025-04-30 11:25:44,893 - segment_embeddings - INFO - Generating masks...
 2025-04-30 11:25:44,905 - root - INFO - For numpy array image, we assume (HxWxC) format
 2025-04-30 11:25:45,145 - root - INFO - Computing image embeddings for the provided image...
+2025-04-30 18:33:06,417 - segment_embeddings - INFO - Starting segment_gemini_outputs.py
+2025-04-30 18:33:06,418 - segment_embeddings - INFO - Arguments: image=data/mjolnir_gt.jpeg, output=segmentation_results, max_segments=None, models=both
+2025-04-30 18:33:06,419 - segment_embeddings - INFO - Created output directories in segmentation_results
+2025-04-30 18:33:06,419 - segment_embeddings - INFO - Building SAM2 model...
+2025-04-30 18:33:06,419 - segment_embeddings - INFO - Starting path: /home/ubuntu/code/drew/e2e_sam2
+2025-04-30 18:33:06,591 - segment_embeddings - INFO - Using CUDA GPU for computation
+2025-04-30 18:33:06,592 - segment_embeddings - INFO - Selected device: cuda
+2025-04-30 18:33:09,168 - segment_embeddings - INFO - SAM2 model built successfully in 2.75 seconds
+2025-04-30 18:33:09,168 - segment_embeddings - INFO - Creating automatic mask generator...
+2025-04-30 18:33:09,306 - segment_embeddings - INFO - Initializing embedding generator with models: ['vit', 'resnet50']
+2025-04-30 18:33:09,306 - segment_embeddings - INFO - Using CUDA GPU for computation
+2025-04-30 18:33:09,306 - segment_embeddings - INFO - Selected device: cuda
+2025-04-30 18:33:09,851 - huggingface_hub.file_download - WARNING - Xet Storage is enabled for this repo, but the 'hf_xet' package is not installed. Falling back to regular HTTP download. For better performance, install the package with: `pip install huggingface_hub[hf_xet]` or `pip install hf_xet`
+2025-04-30 18:33:12,119 - segment_embeddings - INFO - Loading image from data/mjolnir_gt.jpeg
+2025-04-30 18:33:12,119 - segment_embeddings - INFO - Image loaded successfully: (316, 160, 3)
+2025-04-30 18:33:12,120 - segment_embeddings - INFO - Generating masks...
+2025-04-30 18:33:12,120 - root - INFO - For numpy array image, we assume (HxWxC) format
+2025-04-30 18:33:12,198 - root - INFO - Computing image embeddings for the provided image...
+2025-04-30 18:33:12,959 - root - INFO - Image embeddings computed.
+2025-04-30 18:33:16,592 - root - INFO - For numpy array image, we assume (HxWxC) format
+2025-04-30 18:33:16,617 - root - INFO - Computing image embeddings for the provided image...
+2025-04-30 18:33:16,639 - root - INFO - Image embeddings computed.
+2025-04-30 18:33:18,049 - root - INFO - For numpy array image, we assume (HxWxC) format
+2025-04-30 18:33:18,055 - root - INFO - Computing image embeddings for the provided image...
+2025-04-30 18:33:18,077 - root - INFO - Image embeddings computed.
+2025-04-30 18:33:19,484 - root - INFO - For numpy array image, we assume (HxWxC) format
+2025-04-30 18:33:19,490 - root - INFO - Computing image embeddings for the provided image...
+2025-04-30 18:33:19,512 - root - INFO - Image embeddings computed.
+2025-04-30 18:33:20,919 - root - INFO - For numpy array image, we assume (HxWxC) format
+2025-04-30 18:33:20,925 - root - INFO - Computing image embeddings for the provided image...
+2025-04-30 18:33:20,947 - root - INFO - Image embeddings computed.
+2025-04-30 18:33:22,358 - segment_embeddings - ERROR - Error: too many indices for tensor of dimension 1
+Traceback (most recent call last):
+  File "/home/ubuntu/code/drew/e2e_sam2/e2e_pipeline_v2/experiments/segment_gemini_outputs.py", line 405, in <module>
+    results = modified_process_image()
+              ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/code/drew/e2e_sam2/e2e_pipeline_v2/experiments/segment_gemini_outputs.py", line 264, in modified_process_image
+    masks = mask_generator.generate(image)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/code/drew/e2e_sam2/venv/lib/python3.12/site-packages/torch/utils/_contextlib.py", line 116, in decorate_context
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/code/drew/sam2/sam2/automatic_mask_generator.py", line 196, in generate
+    mask_data = self._generate_masks(image)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/code/drew/sam2/sam2/automatic_mask_generator.py", line 239, in _generate_masks
+    scores = 1 / box_area(data["crop_boxes"])
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/code/drew/e2e_sam2/venv/lib/python3.12/site-packages/torchvision/ops/boxes.py", line 251, in box_area
+    return (boxes[:, 2] - boxes[:, 0]) * (boxes[:, 3] - boxes[:, 1])
+            ~~~~~^^^^^^
+IndexError: too many indices for tensor of dimension 1

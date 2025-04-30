@@ -604,3 +604,178 @@ Traceback (most recent call last):
 NotImplementedError: Image format not supported
 
 2025-04-30 18:49:12,898 - segment_embeddings - ERROR - Failed to generate masks: Fallback approach failed: Image format not supported
+2025-04-30 12:50:39,304 - segment_embeddings - INFO - Using MPS (Apple Silicon). Note that SAM2 might give different outputs on MPS.
+2025-04-30 12:50:39,304 - segment_embeddings - INFO - Selected device: mps
+2025-04-30 12:50:39,305 - segment_embeddings - INFO - Device: mps
+2025-04-30 12:50:39,305 - segment_embeddings - INFO - Building SAM2 model...
+2025-04-30 12:50:39,305 - segment_embeddings - INFO - Starting path: /Users/andrewdelacruz/e2e_sam2
+2025-04-30 12:50:39,305 - segment_embeddings - INFO - Using MPS (Apple Silicon). Note that SAM2 might give different outputs on MPS.
+2025-04-30 12:50:39,305 - segment_embeddings - INFO - Selected device: mps
+2025-04-30 12:50:39,305 - segment_embeddings - DEBUG - Loading SAM2 model configuration from config file
+2025-04-30 12:50:39,305 - segment_embeddings - DEBUG - Building SAM2 model with config: configs/sam2.1/sam2.1_hiera_l.yaml, checkpoint: checkpoints/sam2.1_hiera_large.pt, device: mps
+2025-04-30 12:50:40,882 - segment_embeddings - DEBUG - SAM2 model built successfully
+2025-04-30 12:50:40,887 - segment_embeddings - INFO - Using MPS (Apple Silicon). Note that SAM2 might give different outputs on MPS.
+2025-04-30 12:50:40,887 - segment_embeddings - INFO - Selected device: mps
+2025-04-30 12:50:41,001 - segment_embeddings - INFO - SAM2 model built successfully in 1.70 seconds
+2025-04-30 12:50:41,001 - segment_embeddings - DEBUG - SAM2 model type: <class 'sam2.modeling.sam2_base.SAM2Base'>
+2025-04-30 12:50:41,001 - segment_embeddings - INFO - Creating automatic mask generator for mps...
+2025-04-30 12:50:41,001 - segment_embeddings - INFO - Using mps-specific settings for mask generator
+2025-04-30 12:50:41,001 - segment_embeddings - DEBUG - Parameters: points_per_side=32, pred_iou_thresh=0.86, stability_score_thresh=0.92
+2025-04-30 12:50:41,137 - segment_embeddings - DEBUG - Mask generator created successfully: <class 'sam2.automatic_mask_generator.SAM2AutomaticMaskGenerator'>
+2025-04-30 12:51:20,147 - segment_embeddings - INFO - Using MPS (Apple Silicon). Note that SAM2 might give different outputs on MPS.
+2025-04-30 12:51:20,147 - segment_embeddings - INFO - Selected device: mps
+2025-04-30 12:51:20,147 - segment_embeddings - INFO - Device: mps
+2025-04-30 12:51:20,147 - segment_embeddings - INFO - Building SAM2 model...
+2025-04-30 12:51:20,147 - segment_embeddings - INFO - Starting path: /Users/andrewdelacruz/e2e_sam2
+2025-04-30 12:51:20,148 - segment_embeddings - INFO - Using MPS (Apple Silicon). Note that SAM2 might give different outputs on MPS.
+2025-04-30 12:51:20,148 - segment_embeddings - INFO - Selected device: mps
+2025-04-30 12:51:20,148 - segment_embeddings - DEBUG - Loading SAM2 model configuration from config file
+2025-04-30 12:51:20,148 - segment_embeddings - DEBUG - Building SAM2 model with config: configs/sam2.1/sam2.1_hiera_l.yaml, checkpoint: checkpoints/sam2.1_hiera_large.pt, device: mps
+2025-04-30 12:51:21,612 - segment_embeddings - DEBUG - SAM2 model built successfully
+2025-04-30 12:51:21,613 - segment_embeddings - INFO - Using MPS (Apple Silicon). Note that SAM2 might give different outputs on MPS.
+2025-04-30 12:51:21,613 - segment_embeddings - INFO - Selected device: mps
+2025-04-30 12:51:21,700 - segment_embeddings - INFO - SAM2 model built successfully in 1.55 seconds
+2025-04-30 12:51:21,700 - segment_embeddings - DEBUG - SAM2 model type: <class 'sam2.modeling.sam2_base.SAM2Base'>
+2025-04-30 12:51:21,700 - segment_embeddings - INFO - Creating automatic mask generator for mps...
+2025-04-30 12:51:21,700 - segment_embeddings - INFO - Using mps-specific settings for mask generator
+2025-04-30 12:51:21,700 - segment_embeddings - DEBUG - Parameters: points_per_side=32, pred_iou_thresh=0.86, stability_score_thresh=0.92
+2025-04-30 12:51:21,802 - segment_embeddings - DEBUG - Mask generator created successfully: <class 'sam2.automatic_mask_generator.SAM2AutomaticMaskGenerator'>
+2025-04-30 12:51:45,885 - segment_embeddings - INFO - Using MPS (Apple Silicon). Note that SAM2 might give different outputs on MPS.
+2025-04-30 12:51:45,885 - segment_embeddings - INFO - Selected device: mps
+2025-04-30 12:51:45,885 - segment_embeddings - INFO - Device: mps
+2025-04-30 12:51:45,886 - segment_embeddings - INFO - Building SAM2 model...
+2025-04-30 12:51:45,886 - segment_embeddings - INFO - Starting path: /Users/andrewdelacruz/e2e_sam2
+2025-04-30 12:51:45,886 - segment_embeddings - INFO - Using MPS (Apple Silicon). Note that SAM2 might give different outputs on MPS.
+2025-04-30 12:51:45,886 - segment_embeddings - INFO - Selected device: mps
+2025-04-30 12:51:45,886 - segment_embeddings - DEBUG - Loading SAM2 model configuration from config file
+2025-04-30 12:51:45,886 - segment_embeddings - DEBUG - Building SAM2 model with config: configs/sam2.1/sam2.1_hiera_l.yaml, checkpoint: checkpoints/sam2.1_hiera_large.pt, device: mps
+2025-04-30 12:51:47,320 - segment_embeddings - DEBUG - SAM2 model built successfully
+2025-04-30 12:51:47,321 - segment_embeddings - INFO - Using MPS (Apple Silicon). Note that SAM2 might give different outputs on MPS.
+2025-04-30 12:51:47,321 - segment_embeddings - INFO - Selected device: mps
+2025-04-30 12:51:47,396 - segment_embeddings - INFO - SAM2 model built successfully in 1.51 seconds
+2025-04-30 12:51:47,396 - segment_embeddings - DEBUG - SAM2 model type: <class 'sam2.modeling.sam2_base.SAM2Base'>
+2025-04-30 12:51:47,396 - segment_embeddings - INFO - Creating automatic mask generator for mps...
+2025-04-30 12:51:47,396 - segment_embeddings - INFO - Using mps-specific settings for mask generator
+2025-04-30 12:51:47,396 - segment_embeddings - DEBUG - Parameters: points_per_side=32, pred_iou_thresh=0.86, stability_score_thresh=0.92
+2025-04-30 12:51:47,495 - segment_embeddings - DEBUG - Mask generator created successfully: <class 'sam2.automatic_mask_generator.SAM2AutomaticMaskGenerator'>
+2025-04-30 12:52:25,824 - segment_embeddings - INFO - Using MPS (Apple Silicon). Note that SAM2 might give different outputs on MPS.
+2025-04-30 12:52:25,824 - segment_embeddings - INFO - Selected device: mps
+2025-04-30 12:52:25,824 - segment_embeddings - INFO - Device: mps
+2025-04-30 12:52:25,824 - segment_embeddings - INFO - Building SAM2 model...
+2025-04-30 12:52:25,824 - segment_embeddings - INFO - Starting path: /Users/andrewdelacruz/e2e_sam2
+2025-04-30 12:52:25,824 - segment_embeddings - INFO - Using MPS (Apple Silicon). Note that SAM2 might give different outputs on MPS.
+2025-04-30 12:52:25,824 - segment_embeddings - INFO - Selected device: mps
+2025-04-30 12:52:25,824 - segment_embeddings - DEBUG - Loading SAM2 model configuration from config file
+2025-04-30 12:52:25,824 - segment_embeddings - DEBUG - Building SAM2 model with config: configs/sam2.1/sam2.1_hiera_l.yaml, checkpoint: checkpoints/sam2.1_hiera_large.pt, device: mps
+2025-04-30 12:52:27,322 - segment_embeddings - DEBUG - SAM2 model built successfully
+2025-04-30 12:52:27,322 - segment_embeddings - INFO - Using MPS (Apple Silicon). Note that SAM2 might give different outputs on MPS.
+2025-04-30 12:52:27,322 - segment_embeddings - INFO - Selected device: mps
+2025-04-30 12:52:27,403 - segment_embeddings - INFO - SAM2 model built successfully in 1.58 seconds
+2025-04-30 12:52:27,403 - segment_embeddings - DEBUG - SAM2 model type: <class 'sam2.modeling.sam2_base.SAM2Base'>
+2025-04-30 12:52:27,403 - segment_embeddings - INFO - Creating automatic mask generator for mps...
+2025-04-30 12:52:27,403 - segment_embeddings - INFO - Using mps-specific settings for mask generator
+2025-04-30 12:52:27,403 - segment_embeddings - DEBUG - Parameters: points_per_side=32, pred_iou_thresh=0.86, stability_score_thresh=0.92
+2025-04-30 12:52:27,530 - segment_embeddings - DEBUG - Mask generator created successfully: <class 'sam2.automatic_mask_generator.SAM2AutomaticMaskGenerator'>
+2025-04-30 12:52:54,821 - segment_embeddings - INFO - Using MPS (Apple Silicon). Note that SAM2 might give different outputs on MPS.
+2025-04-30 12:52:54,822 - segment_embeddings - INFO - Selected device: mps
+2025-04-30 12:52:54,822 - segment_embeddings - INFO - Device: mps
+2025-04-30 12:52:54,822 - segment_embeddings - INFO - Building SAM2 model...
+2025-04-30 12:52:54,822 - segment_embeddings - INFO - Starting path: /Users/andrewdelacruz/e2e_sam2
+2025-04-30 12:52:54,822 - segment_embeddings - INFO - Using MPS (Apple Silicon). Note that SAM2 might give different outputs on MPS.
+2025-04-30 12:52:54,822 - segment_embeddings - INFO - Selected device: mps
+2025-04-30 12:52:54,822 - segment_embeddings - DEBUG - Loading SAM2 model configuration from config file
+2025-04-30 12:52:54,822 - segment_embeddings - DEBUG - Building SAM2 model with config: configs/sam2.1/sam2.1_hiera_l.yaml, checkpoint: checkpoints/sam2.1_hiera_large.pt, device: mps
+2025-04-30 12:52:56,193 - segment_embeddings - DEBUG - SAM2 model built successfully
+2025-04-30 12:52:56,193 - segment_embeddings - INFO - Using MPS (Apple Silicon). Note that SAM2 might give different outputs on MPS.
+2025-04-30 12:52:56,194 - segment_embeddings - INFO - Selected device: mps
+2025-04-30 12:52:56,284 - segment_embeddings - INFO - SAM2 model built successfully in 1.46 seconds
+2025-04-30 12:52:56,284 - segment_embeddings - DEBUG - SAM2 model type: <class 'sam2.modeling.sam2_base.SAM2Base'>
+2025-04-30 12:52:56,284 - segment_embeddings - INFO - Creating automatic mask generator for mps...
+2025-04-30 12:52:56,284 - segment_embeddings - INFO - Using mps-specific settings for mask generator
+2025-04-30 12:52:56,284 - segment_embeddings - DEBUG - Parameters: points_per_side=32, pred_iou_thresh=0.86, stability_score_thresh=0.92
+2025-04-30 12:52:56,423 - segment_embeddings - DEBUG - Mask generator created successfully: <class 'sam2.automatic_mask_generator.SAM2AutomaticMaskGenerator'>
+2025-04-30 12:53:02,178 - segment_embeddings - INFO - Using MPS (Apple Silicon). Note that SAM2 might give different outputs on MPS.
+2025-04-30 12:53:02,178 - segment_embeddings - INFO - Selected device: mps
+2025-04-30 12:53:02,178 - segment_embeddings - INFO - Device: mps
+2025-04-30 12:53:02,178 - segment_embeddings - INFO - Building SAM2 model...
+2025-04-30 12:53:02,178 - segment_embeddings - INFO - Starting path: /Users/andrewdelacruz/e2e_sam2
+2025-04-30 12:53:02,178 - segment_embeddings - INFO - Using MPS (Apple Silicon). Note that SAM2 might give different outputs on MPS.
+2025-04-30 12:53:02,178 - segment_embeddings - INFO - Selected device: mps
+2025-04-30 12:53:02,178 - segment_embeddings - DEBUG - Loading SAM2 model configuration from config file
+2025-04-30 12:53:02,178 - segment_embeddings - DEBUG - Building SAM2 model with config: configs/sam2.1/sam2.1_hiera_l.yaml, checkpoint: checkpoints/sam2.1_hiera_large.pt, device: mps
+2025-04-30 12:53:03,654 - segment_embeddings - DEBUG - SAM2 model built successfully
+2025-04-30 12:53:03,654 - segment_embeddings - INFO - Using MPS (Apple Silicon). Note that SAM2 might give different outputs on MPS.
+2025-04-30 12:53:03,654 - segment_embeddings - INFO - Selected device: mps
+2025-04-30 12:53:03,774 - segment_embeddings - INFO - SAM2 model built successfully in 1.60 seconds
+2025-04-30 12:53:03,774 - segment_embeddings - DEBUG - SAM2 model type: <class 'sam2.modeling.sam2_base.SAM2Base'>
+2025-04-30 12:53:03,774 - segment_embeddings - INFO - Creating automatic mask generator for mps...
+2025-04-30 12:53:03,774 - segment_embeddings - INFO - Using mps-specific settings for mask generator
+2025-04-30 12:53:03,774 - segment_embeddings - DEBUG - Parameters: points_per_side=32, pred_iou_thresh=0.86, stability_score_thresh=0.92
+2025-04-30 12:53:03,881 - segment_embeddings - DEBUG - Mask generator created successfully: <class 'sam2.automatic_mask_generator.SAM2AutomaticMaskGenerator'>
+2025-04-30 12:53:14,132 - segment_embeddings - INFO - Using MPS (Apple Silicon). Note that SAM2 might give different outputs on MPS.
+2025-04-30 12:53:14,132 - segment_embeddings - INFO - Selected device: mps
+2025-04-30 12:53:14,132 - segment_embeddings - INFO - Device: mps
+2025-04-30 12:53:14,132 - segment_embeddings - INFO - Building SAM2 model...
+2025-04-30 12:53:14,132 - segment_embeddings - INFO - Starting path: /Users/andrewdelacruz/e2e_sam2
+2025-04-30 12:53:14,132 - segment_embeddings - INFO - Using MPS (Apple Silicon). Note that SAM2 might give different outputs on MPS.
+2025-04-30 12:53:14,132 - segment_embeddings - INFO - Selected device: mps
+2025-04-30 12:53:14,132 - segment_embeddings - DEBUG - Loading SAM2 model configuration from config file
+2025-04-30 12:53:14,132 - segment_embeddings - DEBUG - Building SAM2 model with config: configs/sam2.1/sam2.1_hiera_l.yaml, checkpoint: checkpoints/sam2.1_hiera_large.pt, device: mps
+2025-04-30 12:53:15,569 - segment_embeddings - DEBUG - SAM2 model built successfully
+2025-04-30 12:53:15,570 - segment_embeddings - INFO - Using MPS (Apple Silicon). Note that SAM2 might give different outputs on MPS.
+2025-04-30 12:53:15,570 - segment_embeddings - INFO - Selected device: mps
+2025-04-30 12:53:15,641 - segment_embeddings - INFO - SAM2 model built successfully in 1.51 seconds
+2025-04-30 12:53:15,641 - segment_embeddings - DEBUG - SAM2 model type: <class 'sam2.modeling.sam2_base.SAM2Base'>
+2025-04-30 12:53:15,641 - segment_embeddings - INFO - Creating automatic mask generator for mps...
+2025-04-30 12:53:15,641 - segment_embeddings - INFO - Using mps-specific settings for mask generator
+2025-04-30 12:53:15,641 - segment_embeddings - DEBUG - Parameters: points_per_side=32, pred_iou_thresh=0.86, stability_score_thresh=0.92
+2025-04-30 12:53:15,733 - segment_embeddings - DEBUG - Mask generator created successfully: <class 'sam2.automatic_mask_generator.SAM2AutomaticMaskGenerator'>
+2025-04-30 12:53:28,158 - segment_embeddings - INFO - Using MPS (Apple Silicon). Note that SAM2 might give different outputs on MPS.
+2025-04-30 12:53:28,158 - segment_embeddings - INFO - Selected device: mps
+2025-04-30 12:53:28,158 - segment_embeddings - INFO - Device: mps
+2025-04-30 12:53:28,158 - segment_embeddings - INFO - Building SAM2 model...
+2025-04-30 12:53:28,158 - segment_embeddings - INFO - Starting path: /Users/andrewdelacruz/e2e_sam2
+2025-04-30 12:53:28,158 - segment_embeddings - INFO - Using MPS (Apple Silicon). Note that SAM2 might give different outputs on MPS.
+2025-04-30 12:53:28,158 - segment_embeddings - INFO - Selected device: mps
+2025-04-30 12:53:28,158 - segment_embeddings - DEBUG - Loading SAM2 model configuration from config file
+2025-04-30 12:53:28,159 - segment_embeddings - DEBUG - Building SAM2 model with config: configs/sam2.1/sam2.1_hiera_l.yaml, checkpoint: checkpoints/sam2.1_hiera_large.pt, device: mps
+2025-04-30 12:53:29,530 - segment_embeddings - DEBUG - SAM2 model built successfully
+2025-04-30 12:53:29,556 - segment_embeddings - INFO - Using MPS (Apple Silicon). Note that SAM2 might give different outputs on MPS.
+2025-04-30 12:53:29,556 - segment_embeddings - INFO - Selected device: mps
+2025-04-30 12:53:29,637 - segment_embeddings - INFO - SAM2 model built successfully in 1.48 seconds
+2025-04-30 12:53:29,637 - segment_embeddings - DEBUG - SAM2 model type: <class 'sam2.modeling.sam2_base.SAM2Base'>
+2025-04-30 12:53:29,637 - segment_embeddings - INFO - Creating automatic mask generator for mps...
+2025-04-30 12:53:29,637 - segment_embeddings - INFO - Using mps-specific settings for mask generator
+2025-04-30 12:53:29,637 - segment_embeddings - DEBUG - Parameters: points_per_side=32, pred_iou_thresh=0.86, stability_score_thresh=0.92
+2025-04-30 12:53:29,757 - segment_embeddings - DEBUG - Mask generator created successfully: <class 'sam2.automatic_mask_generator.SAM2AutomaticMaskGenerator'>
+2025-04-30 12:53:30,158 - PIL.PngImagePlugin - DEBUG - STREAM b'IHDR' 16 13
+2025-04-30 12:53:30,158 - PIL.PngImagePlugin - DEBUG - STREAM b'sRGB' 41 1
+2025-04-30 12:53:30,158 - PIL.PngImagePlugin - DEBUG - STREAM b'gAMA' 54 4
+2025-04-30 12:53:30,159 - PIL.PngImagePlugin - DEBUG - STREAM b'pHYs' 70 9
+2025-04-30 12:53:30,159 - PIL.PngImagePlugin - DEBUG - STREAM b'IDAT' 91 65445
+2025-04-30 12:54:13,726 - segment_embeddings - INFO - Using MPS (Apple Silicon). Note that SAM2 might give different outputs on MPS.
+2025-04-30 12:54:13,727 - segment_embeddings - INFO - Selected device: mps
+2025-04-30 12:54:13,727 - segment_embeddings - INFO - Device: mps
+2025-04-30 12:54:13,727 - segment_embeddings - INFO - Building SAM2 model...
+2025-04-30 12:54:13,727 - segment_embeddings - INFO - Starting path: /Users/andrewdelacruz/e2e_sam2
+2025-04-30 12:54:13,727 - segment_embeddings - INFO - Using MPS (Apple Silicon). Note that SAM2 might give different outputs on MPS.
+2025-04-30 12:54:13,727 - segment_embeddings - INFO - Selected device: mps
+2025-04-30 12:54:13,727 - segment_embeddings - DEBUG - Loading SAM2 model configuration from config file
+2025-04-30 12:54:13,727 - segment_embeddings - DEBUG - Building SAM2 model with config: configs/sam2.1/sam2.1_hiera_l.yaml, checkpoint: checkpoints/sam2.1_hiera_large.pt, device: mps
+2025-04-30 12:54:15,263 - segment_embeddings - DEBUG - SAM2 model built successfully
+2025-04-30 12:54:15,263 - segment_embeddings - INFO - Using MPS (Apple Silicon). Note that SAM2 might give different outputs on MPS.
+2025-04-30 12:54:15,263 - segment_embeddings - INFO - Selected device: mps
+2025-04-30 12:54:15,350 - segment_embeddings - INFO - SAM2 model built successfully in 1.62 seconds
+2025-04-30 12:54:15,350 - segment_embeddings - DEBUG - SAM2 model type: <class 'sam2.modeling.sam2_base.SAM2Base'>
+2025-04-30 12:54:15,350 - segment_embeddings - INFO - Creating automatic mask generator for mps...
+2025-04-30 12:54:15,350 - segment_embeddings - INFO - Using mps-specific settings for mask generator
+2025-04-30 12:54:15,350 - segment_embeddings - DEBUG - Parameters: points_per_side=32, pred_iou_thresh=0.86, stability_score_thresh=0.92
+2025-04-30 12:54:15,450 - segment_embeddings - DEBUG - Mask generator created successfully: <class 'sam2.automatic_mask_generator.SAM2AutomaticMaskGenerator'>
+2025-04-30 12:54:15,455 - PIL.PngImagePlugin - DEBUG - STREAM b'IHDR' 16 13
+2025-04-30 12:54:15,455 - PIL.PngImagePlugin - DEBUG - STREAM b'sRGB' 41 1
+2025-04-30 12:54:15,455 - PIL.PngImagePlugin - DEBUG - STREAM b'gAMA' 54 4
+2025-04-30 12:54:15,455 - PIL.PngImagePlugin - DEBUG - STREAM b'pHYs' 70 9
+2025-04-30 12:54:15,455 - PIL.PngImagePlugin - DEBUG - STREAM b'IDAT' 91 65445
+2025-04-30 12:54:15,464 - root - INFO - For numpy array image, we assume (HxWxC) format
+2025-04-30 12:54:15,518 - root - INFO - Computing image embeddings for the provided image...
+2025-04-30 12:54:20,538 - root - INFO - Image embeddings computed.

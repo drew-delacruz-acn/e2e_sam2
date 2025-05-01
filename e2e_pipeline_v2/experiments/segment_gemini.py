@@ -199,18 +199,27 @@ def generate_embeddings_for_segments(
             "segments": {}
         }
         
+        # Create a directory for padded images
+        padded_dir = os.path.join(output_dir, "padded_segments")
+        os.makedirs(padded_dir, exist_ok=True)
+        
         # Process each segment
         for segment_path in segment_paths:
             # Get segment ID from filename
             segment_basename = os.path.basename(segment_path)
             segment_id = os.path.splitext(segment_basename)[0]  # Remove extension
             
+            # Apply padding to create a properly sized image for embedding
+            padded_path = os.path.join(padded_dir, f"padded_{segment_basename}")
+            apply_image_tranforms(segment_path, padded_path)
+            
             # Generate embeddings for each model
             segment_embeddings = {}
             for model_type in embedding_generator.model_types:
                 try:
+                    # Use the padded image for embedding generation
                     embedding = embedding_generator.generate_embedding(
-                        image=segment_path, 
+                        image=padded_path, 
                         model_type=model_type.value
                     )
                     segment_embeddings[model_type.value] = embedding.tolist()
@@ -219,7 +228,8 @@ def generate_embeddings_for_segments(
             
             # Add to embeddings data
             embeddings_data["segments"][segment_id] = {
-                "path": segment_path,
+                "path": segment_path,  # Keep the original path in the metadata
+                "padded_path": padded_path,  # Add the padded path for reference
                 "embeddings": segment_embeddings
             }
         
@@ -230,6 +240,7 @@ def generate_embeddings_for_segments(
         with open(output_path, 'w') as f:
             json.dump(embeddings_data, f, indent=2)
         
+        logger.info(f"Padded images saved to {padded_dir} for inspection")
         return output_path
     
     except Exception as e:
@@ -354,8 +365,9 @@ def main():
     return 0
 
 if __name__ == "__main__":
-
-    #python segment_gemini.py --input_dir /home/ubuntu/code/drew/test_data/objects/Scenes\ 001-020__101B-1-_20230726152900590/ --output_dir results
+    # Example commands:
+    # Process directory: python segment_gemini.py --input_dir /path/to/directory --output_dir results
+    # Process single image: python segment_gemini.py --image /path/to/image.jpg --output_dir results
     sys.exit(main())
 
 

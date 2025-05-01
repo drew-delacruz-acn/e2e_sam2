@@ -21,6 +21,7 @@ import matplotlib.patches as patches
 import torch
 from sam2.build_sam import build_sam2
 from sam2.automatic_mask_generator import SAM2AutomaticMaskGenerator
+from sam2.sam2_image_predictor import SAM2ImagePredictor
 from tqdm import tqdm
 
 from e2e_pipeline_v2.modules.embedding import EmbeddingGenerator, ModelType
@@ -52,6 +53,14 @@ def parse_args():
                       help="Minimum area (in pixels) for segments to consider")
     parser.add_argument("--extensions", type=str, nargs="+", default=[".jpg", ".jpeg", ".png"],
                       help="Image file extensions to process")
+    
+    # Create mutually exclusive group for segmentation modes
+    mode_group = parser.add_mutually_exclusive_group()
+    mode_group.add_argument("--use_full_image_predictor", action="store_true",
+                      help="Use SAM2 image predictor with full image bounds")
+    mode_group.add_argument("--use_bbox_json", type=str, metavar="JSON_PATH",
+                      help="Use SAM2 image predictor with bounding boxes from JSON file")
+    
     return parser.parse_args()
 
 def get_device():
@@ -370,6 +379,203 @@ def generate_embeddings_for_segments(
         logger.error(f"Error generating embeddings: {str(e)}")
         return None
 
+def load_bboxes_from_json(json_path):
+    """
+    Load bounding boxes from a JSON file.
+    
+    Expected format:
+    {
+        "image_name1": [x1, y1, x2, y2],
+        "image_name2": [x1, y1, x2, y2],
+        ...
+    }
+    
+    Or for multiple boxes per image:
+    {
+        "image_name1": [[x1, y1, x2, y2], [x1, y1, x2, y2], ...],
+        "image_name2": [[x1, y1, x2, y2], [x1, y1, x2, y2], ...],
+        ...
+    }
+    
+    Args:
+        json_path: Path to JSON file
+        
+    Returns:
+        Dictionary mapping image names to bounding boxes
+    """
+    try:
+        with open(json_path, 'r') as f:
+            bbox_data = json.load(f)
+        
+        logger.info(f"Loaded bounding box data for {len(bbox_data)} images from {json_path}")
+        return bbox_data
+    except Exception as e:
+        logger.error(f"Error loading bounding box JSON from {json_path}: {str(e)}")
+        return {}
+
+def process_image_with_predictor(
+    image_path, 
+    predictor, 
+    output_dir, 
+    bboxes=None,
+    min_area=1000
+):
+    """
+    Process an image with SAM2 image predictor using bounding box(es),
+    save segments, and return segment paths.
+    
+    Args:
+        image_path: Path to the input image
+        predictor: SAM2 image predictor
+        output_dir: Directory to save segments
+        bboxes: List of bounding box coordinates [x1, y1, x2, y2] or None for full image
+        min_area: Minimum area for segments to be considered
+        
+    Returns:
+        Tuple of (list of segment paths, path to debug visualization, image_dir)
+    """
+    try:
+        # Get base filename without extension
+        image_basename = os.path.basename(image_path)
+        image_name = os.path.splitext(image_basename)[0]
+        
+        # Create organized directory structure
+        image_dir = os.path.join(output_dir, image_name)
+        segments_dir = os.path.join(image_dir, "segments")
+        
+        # Create directories
+        os.makedirs(image_dir, exist_ok=True)
+        os.makedirs(segments_dir, exist_ok=True)
+        
+        # Load and process the image
+        image = Image.open(image_path)
+        image_np = np.array(image.convert("RGB"))
+        
+        # Set the image for the predictor
+        predictor.set_image(image_np)
+        
+        # Handle bounding box options
+        boxes_to_process = []
+        
+        # If no specific boxes, use full image bounds
+        if bboxes is None:
+            height, width = image_np.shape[:2]
+            boxes_to_process = [[0, 0, width, height]]
+            logger.info(f"Using full image bounds ({width}x{height}) for {image_basename}")
+        else:
+            # Convert to list of lists if it's a single box
+            if isinstance(bboxes[0], int):
+                boxes_to_process = [bboxes]
+            else:
+                boxes_to_process = bboxes
+            logger.info(f"Using {len(boxes_to_process)} bounding boxes from JSON for {image_basename}")
+        
+        # Process each bounding box
+        all_masks = []
+        all_scores = []
+        segment_paths = []
+        
+        for box_idx, bbox in enumerate(boxes_to_process):
+            # Convert box to torch tensor and correct format
+            box_torch = torch.tensor(bbox, device=predictor.device)[None, :]
+            
+            # Get prediction
+            with torch.inference_mode():
+                masks, scores, logits = predictor.predict(
+                    point_coords=None,
+                    point_labels=None,
+                    boxes=box_torch,
+                    multimask_output=True
+                )
+            
+            # Create a format similar to automatic mask generator for visualization
+            for i, mask in enumerate(masks):
+                # Calculate area
+                area = np.sum(mask)
+                if area < min_area:
+                    continue
+                    
+                all_masks.append({
+                    'segmentation': mask,
+                    'area': area,
+                    'bbox': bbox,
+                    'predicted_iou': scores[i],
+                    'source_box_idx': box_idx
+                })
+                all_scores.append(scores[i])
+        
+        logger.info(f"Generated {len(all_masks)} valid masks for {image_basename}")
+        
+        # Sort masks by score for better visualization
+        sorted_indices = np.argsort(all_scores)[::-1]  # Descending order
+        filtered_masks = [all_masks[i] for i in sorted_indices]
+        
+        # Process and save each segment
+        for i, mask_data in enumerate(filtered_masks):
+            # Get the binary mask
+            binary_mask = mask_data['segmentation']
+            binary_mask = binary_mask.astype(bool)
+            
+            # Create a copy of the original image
+            segment_image = np.zeros_like(image_np)
+            
+            # Copy the original pixels where the mask is True
+            segment_image[binary_mask] = image_np[binary_mask]
+            
+            # Create output path with the requested naming format
+            box_idx = mask_data.get('source_box_idx', 0)
+            output_path = os.path.join(segments_dir, f"{image_name}_box{box_idx}_seg{i}.png")
+            
+            # Save with proper color conversion
+            cv2.imwrite(output_path, cv2.cvtColor(segment_image, cv2.COLOR_RGB2BGR))
+            
+            # Add to segment paths
+            segment_paths.append(output_path)
+        
+        # Create and save a visualization with all segments overlaid on the original image
+        debug_vis_path = os.path.join(image_dir, f"{image_name}_segmentation_overlay.png")
+        create_segmentation_visualization(image_np, filtered_masks, debug_vis_path)
+        
+        # Also create a visualization of the bounding boxes
+        bbox_vis_path = os.path.join(image_dir, f"{image_name}_bboxes.png")
+        visualize_bounding_boxes(image_np, boxes_to_process, bbox_vis_path)
+        
+        return segment_paths, debug_vis_path, image_dir
+    
+    except Exception as e:
+        logger.error(f"Error processing {image_path} with predictor: {str(e)}")
+        traceback.print_exc()
+        return [], None, None
+
+def visualize_bounding_boxes(image, bboxes, output_path):
+    """
+    Create a visualization of the bounding boxes on the image.
+    
+    Args:
+        image: Original image as numpy array
+        bboxes: List of bounding box coordinates [x1, y1, x2, y2]
+        output_path: Path to save the visualization
+    """
+    # Create a copy of the image for visualization
+    vis_image = image.copy()
+    
+    # Draw each bounding box
+    for i, bbox in enumerate(bboxes):
+        x1, y1, x2, y2 = bbox
+        
+        # Generate a random color
+        color = (np.random.randint(0, 255), np.random.randint(0, 255), np.random.randint(0, 255))
+        
+        # Draw rectangle
+        cv2.rectangle(vis_image, (x1, y1), (x2, y2), color, 2)
+        
+        # Add label
+        cv2.putText(vis_image, f"Box {i}", (x1, y1-10), cv2.FONT_HERSHEY_SIMPLEX, 0.9, color, 2)
+    
+    # Save the visualization
+    cv2.imwrite(output_path, cv2.cvtColor(vis_image, cv2.COLOR_RGB2BGR))
+    logger.info(f"Bounding box visualization saved to {output_path}")
+
 def main():
     args = parse_args()
     
@@ -386,13 +592,54 @@ def main():
     
     logger.info("Loading SAM2 model...")
     sam2 = build_sam2(model_cfg, sam2_checkpoint, device=device, apply_postprocessing=False)
-    mask_generator = SAM2AutomaticMaskGenerator(
-        model=sam2,
-        points_per_side=64,
-        points_per_batch=128,
-        pred_iou_thresh=0.7,
-        min_mask_region_area=10.0,
-    )
+    
+    # Determine which segmentation mode to use
+    bbox_data = {}
+    
+    if args.use_bbox_json:
+        # Mode 3: Use image predictor with bounding boxes from JSON
+        logger.info(f"Using SAM2 image predictor with bounding boxes from {args.use_bbox_json}")
+        segmentation_mode = "bbox_predictor"
+        predictor = SAM2ImagePredictor(sam2)
+        bbox_data = load_bboxes_from_json(args.use_bbox_json)
+        
+        process_func = lambda img_path, out_dir, min_area: process_image_with_predictor(
+            img_path, 
+            predictor, 
+            out_dir, 
+            bboxes=bbox_data.get(Path(img_path).stem, None),
+            min_area=min_area
+        )
+        
+    elif args.use_full_image_predictor:
+        # Mode 2: Use image predictor with full image bounds
+        logger.info("Using SAM2 image predictor with full image bounds")
+        segmentation_mode = "full_image_predictor"
+        predictor = SAM2ImagePredictor(sam2)
+        
+        process_func = lambda img_path, out_dir, min_area: process_image_with_predictor(
+            img_path, 
+            predictor, 
+            out_dir, 
+            bboxes=None,  # None means use full image bounds
+            min_area=min_area
+        )
+        
+    else:
+        # Mode 1: Use automatic mask generator (default)
+        logger.info("Using SAM2 automatic mask generator")
+        segmentation_mode = "automatic_mask_generator"
+        mask_generator = SAM2AutomaticMaskGenerator(
+            model=sam2,
+            points_per_side=64,
+            points_per_batch=128,
+            pred_iou_thresh=0.7,
+            min_mask_region_area=10.0,
+        )
+        
+        process_func = lambda img_path, out_dir, min_area: process_image_and_generate_segments(
+            img_path, mask_generator, out_dir, min_area
+        )
     
     # Initialize embedding generator
     embedding_generator = EmbeddingGenerator(
@@ -403,7 +650,8 @@ def main():
     # Prepare summary
     summary = {
         "output_directory": str(output_dir),
-        "processed_images": []
+        "processed_images": [],
+        "segmentation_mode": segmentation_mode
     }
     
     # Determine processing mode - single image or directory
@@ -421,10 +669,9 @@ def main():
         # Process the single image
         try:
             # Generate segments
-            segment_paths, debug_vis_path, image_dir = process_image_and_generate_segments(
-                image_path=str(image_file),
-                mask_generator=mask_generator,
-                output_dir=output_dir,
+            segment_paths, debug_vis_path, image_dir = process_func(
+                img_path=str(image_file),
+                out_dir=output_dir,
                 min_area=args.min_area
             )
             
@@ -482,10 +729,9 @@ def main():
                 logger.info(f"Processing {image_file}")
                 
                 # Generate segments
-                segment_paths, debug_vis_path, image_dir = process_image_and_generate_segments(
-                    image_path=str(image_file),
-                    mask_generator=mask_generator,
-                    output_dir=output_dir,
+                segment_paths, debug_vis_path, image_dir = process_func(
+                    img_path=str(image_file),
+                    out_dir=output_dir,
                     min_area=args.min_area
                 )
                 

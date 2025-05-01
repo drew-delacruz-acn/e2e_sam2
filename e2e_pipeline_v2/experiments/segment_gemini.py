@@ -226,7 +226,7 @@ def process_image_and_generate_segments(
     image_path, 
     mask_generator, 
     output_dir, 
-    min_area=100
+    min_area=10000
 ):
     """
     Process an image with SAM2, save segments, and return segment paths.
@@ -292,9 +292,6 @@ def process_image_and_generate_segments(
         # Create and save a visualization with all segments overlaid on the original image
         debug_vis_path = os.path.join(image_dir, f"{image_name}_segmentation_overlay.png")
         create_segmentation_visualization(image_np, filtered_masks, debug_vis_path)
-        
-        # Create individual mask visualizations
-        mask_vis_dir = save_individual_mask_visualizations(image_np, filtered_masks, image_dir)
         
         return segment_paths, debug_vis_path, image_dir
     
@@ -481,14 +478,25 @@ def process_image_with_predictor(
         segment_paths = []
         
         for box_idx, bbox in enumerate(boxes_to_process):
+            # Calculate midpoint of the bounding box
+            x1, y1, x2, y2 = bbox
+            midpoint_x = (x1 + x2) / 2
+            midpoint_y = (y1 + y2) / 2
+            
+            # Create point coordinates tensor (shape [1, 2])
+            point_coords = torch.tensor([[midpoint_x, midpoint_y]], device=predictor.device)
+            
+            # Create point labels tensor (1 = foreground point)
+            point_labels = torch.tensor([1], device=predictor.device)
+            
             # Convert box to torch tensor and correct format
             box_torch = torch.tensor(bbox, device=predictor.device)[None, :]
             
-            # Get prediction
+            # Get prediction with both box and point
             with torch.inference_mode():
                 masks, scores, logits = predictor.predict(
-                    point_coords=None,
-                    point_labels=None,
+                    point_coords=point_coords,
+                    point_labels=point_labels,
                     box=box_torch,
                     multimask_output=False
                 )
@@ -540,9 +548,6 @@ def process_image_with_predictor(
         # Create and save a visualization with all segments overlaid on the original image
         debug_vis_path = os.path.join(image_dir, f"{image_name}_segmentation_overlay.png")
         create_segmentation_visualization(image_np, filtered_masks, debug_vis_path)
-        
-        # Create individual mask visualizations
-        mask_vis_dir = save_individual_mask_visualizations(image_np, filtered_masks, image_dir)
         
         # Also create a visualization of the bounding boxes
         bbox_vis_path = os.path.join(image_dir, f"{image_name}_bboxes.png")
@@ -775,7 +780,6 @@ def main():
                 "segments_count": len(segment_paths),
                 "segments": segment_paths,
                 "segmentation_overlay": debug_vis_path,
-                "mask_visualizations_dir": os.path.join(image_dir, "mask_visualizations"),
                 "embeddings_file": embeddings_path
             })
             
@@ -836,7 +840,6 @@ def main():
                     "segments_count": len(segment_paths),
                     "segments": segment_paths,
                     "segmentation_overlay": debug_vis_path,
-                    "mask_visualizations_dir": os.path.join(image_dir, "mask_visualizations"),
                     "embeddings_file": embeddings_path
                 })
                 

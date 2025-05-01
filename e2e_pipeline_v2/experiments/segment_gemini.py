@@ -139,6 +139,76 @@ def show_anns(anns, borders=True):
 
     ax.imshow(img)
 
+def create_segmentation_visualization(image, masks, output_path):
+    """
+    Create a visualization of all segments overlaid on the original image.
+    
+    Args:
+        image: Original image as numpy array
+        masks: List of mask dictionaries from SAM2
+        output_path: Path to save the visualization
+    """
+    # Create a copy of the original image
+    vis_image = image.copy()
+    
+    # Create an overlay image for the segments
+    overlay = np.zeros_like(vis_image, dtype=np.uint8)
+    
+    # Generate random colors for each mask
+    colors = []
+    np.random.seed(42)  # For consistent colors
+    for _ in range(len(masks)):
+        # Generate bright, distinct colors
+        color = np.random.randint(100, 255, size=3).tolist()
+        colors.append(color)
+    
+    # Draw each mask with a different color
+    for i, mask_data in enumerate(masks):
+        binary_mask = mask_data['segmentation']
+        color = colors[i]
+        
+        # Color the mask area
+        colored_mask = np.zeros_like(vis_image, dtype=np.uint8)
+        colored_mask[binary_mask] = color
+        
+        # Add to the overlay with transparency
+        overlay = cv2.addWeighted(overlay, 1, colored_mask, 0.5, 0)
+        
+        # Draw the contour
+        contours, _ = cv2.findContours(binary_mask.astype(np.uint8), 
+                                     cv2.RETR_EXTERNAL, 
+                                     cv2.CHAIN_APPROX_SIMPLE)
+        cv2.drawContours(vis_image, contours, -1, color, 2)
+    
+    # Combine the original image and the overlay
+    result = cv2.addWeighted(vis_image, 0.7, overlay, 0.3, 0)
+    
+    # Add a legend showing segment numbers
+    font = cv2.FONT_HERSHEY_SIMPLEX
+    font_scale = 0.5
+    font_thickness = 1
+    padding = 10
+    
+    # Find centroids of each mask and add segment number
+    for i, mask_data in enumerate(masks):
+        binary_mask = mask_data['segmentation']
+        
+        # Find the centroid
+        moments = cv2.moments(binary_mask.astype(np.uint8))
+        if moments["m00"] != 0:
+            cX = int(moments["m10"] / moments["m00"])
+            cY = int(moments["m01"] / moments["m00"])
+            
+            # Draw segment number at centroid
+            cv2.putText(result, str(i), (cX, cY), font, font_scale, 
+                      (255, 255, 255), font_thickness + 1, cv2.LINE_AA)  # Shadow
+            cv2.putText(result, str(i), (cX, cY), font, font_scale, 
+                      colors[i], font_thickness, cv2.LINE_AA)
+    
+    # Save the visualization
+    cv2.imwrite(output_path, cv2.cvtColor(result, cv2.COLOR_RGB2BGR))
+    logger.info(f"Segmentation visualization saved to {output_path}")
+
 def process_image_and_generate_segments(
     image_path, 
     mask_generator, 

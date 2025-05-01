@@ -116,3 +116,129 @@ for i, mask_data in enumerate(masks):
      # For debugging: save the mask itself to check if it's correct
     mask_image = binary_mask.astype(np.uint8) * 255
     cv2.imwrite(f"{output_dir}/binary_mask_{i}.png", mask_image)
+
+
+def generate_embeddings_for_folder(
+    input_folder, 
+    output_folder, 
+    models=["vit", "resnet50"], 
+    device=None,
+    extensions=['.jpg', '.jpeg', '.png']
+):
+    """
+    Generate embeddings for all images in a folder.
+    
+    Args:
+        input_folder (str): Path to folder containing images
+        output_folder (str): Path to save embeddings
+        models (list): List of models to use ("vit", "resnet50", or "clip")
+        device (str): Device to use (cuda, cpu, or None for auto-detect)
+        extensions (list): List of image file extensions to process
+    
+    Returns:
+        dict: Summary of processed files and their embeddings
+    """
+    from pathlib import Path
+    import os
+    import json
+    import torch
+    import numpy as np
+    from tqdm import tqdm
+    
+    from e2e_pipeline_v2.modules.embedding import EmbeddingGenerator, ModelType
+    
+    # Create Path objects
+    input_dir = Path(input_folder)
+    output_dir = Path(output_folder)
+    
+    # Check if input directory exists
+    if not input_dir.exists() or not input_dir.is_dir():
+        raise ValueError(f"Input directory '{input_dir}' does not exist or is not a directory.")
+    
+    # Create output directory
+    output_dir.mkdir(parents=True, exist_ok=True)
+    
+    # Find all image files
+    image_files = []
+    for ext in extensions:
+        image_files.extend(list(input_dir.glob(f"*{ext}")))
+        image_files.extend(list(input_dir.glob(f"*{ext.upper()}")))
+    
+    if not image_files:
+        print(f"No images found in {input_dir} with extensions: {', '.join(extensions)}")
+        return {}
+    
+    print(f"Found {len(image_files)} images to process")
+    
+    # Auto-detect device if not specified
+    if device is None:
+        if torch.cuda.is_available():
+            device = "cuda"
+        elif hasattr(torch.backends, 'mps') and torch.backends.mps.is_available():
+            device = "mps"
+        else:
+            device = "cpu"
+    print(f"Using device: {device}")
+    
+    # Initialize embedding generator
+    embedding_generator = EmbeddingGenerator(
+        model_types=models,
+        device=device
+    )
+    
+    # Process each image
+    summary = {
+        "input_directory": str(input_dir),
+        "output_directory": str(output_dir),
+        "models": models,
+        "processed_files": []
+    }
+    
+    for image_file in tqdm(image_files, desc="Generating embeddings"):
+        try:
+            # Generate output filename
+            output_path = output_dir / f"{image_file.stem}_embeddings.json"
+            
+            # Generate embeddings for each model
+            results = {}
+            for model_type in models:
+                embedding = embedding_generator.generate_embedding(
+                    image=str(image_file),
+                    model_type=model_type
+                )
+                
+                # Convert to list for JSON serialization
+                results[model_type] = embedding.tolist()
+            
+            # Save embeddings
+            with open(output_path, 'w') as f:
+                json.dump({
+                    "image_path": str(image_file),
+                    "embeddings": results
+                }, f, indent=2)
+            
+            # Add to summary
+            summary["processed_files"].append({
+                "image": str(image_file),
+                "embedding_file": str(output_path)
+            })
+            
+        except Exception as e:
+            print(f"Error processing {image_file}: {str(e)}")
+    
+    # Save summary
+    summary_path = output_dir / "embedding_summary.json"
+    with open(summary_path, 'w') as f:
+        json.dump(summary, f, indent=2)
+    
+    print(f"Processed {len(summary['processed_files'])} images")
+    print(f"Summary saved to: {summary_path}")
+    
+    return summary
+
+generate_embeddings_for_folder(
+    input_folder="",
+    output_folder="embeddings",
+    models=["vit", "resnet50"],
+    device=device
+)

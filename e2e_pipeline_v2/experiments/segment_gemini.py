@@ -484,8 +484,8 @@ def process_image_with_predictor(
                 masks, scores, logits = predictor.predict(
                     point_coords=None,
                     point_labels=None,
-                    boxes=box_torch,
-                    multimask_output=True
+                    box=box_torch,
+                    multimask_output=False
                 )
             
             # Create a format similar to automatic mask generator for visualization

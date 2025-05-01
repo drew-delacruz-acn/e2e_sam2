@@ -1,3 +1,4 @@
+.env
 # Ignore PyTorch model files
 *.pt
 *.pth

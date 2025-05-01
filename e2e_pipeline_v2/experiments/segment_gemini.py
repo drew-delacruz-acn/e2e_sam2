@@ -357,3 +357,29 @@ if __name__ == "__main__":
 
     #python segment_gemini.py --input_dir /home/ubuntu/code/drew/test_data/objects/Scenes\ 001-020__101B-1-_20230726152900590/ --output_dir results
     sys.exit(main())
+
+
+from PIL import ImageOps
+def apply_image_tranforms(image_path, output_path):
+    # STEP 1 - APPLY PADDING
+    image = Image.open(image_path).convert("RGB")
+    target_width = target_height = 224
+    width, height = image.size
+    if width == target_width and height == target_height:
+        resized_padded_image = image
+    else:
+        if width >= height:
+            scale = target_width / width
+        else:
+            scale = target_height / height
+
+        new_width = int(round(width * scale))
+        new_height = int(round(height * scale))
+        image = image.resize((new_width, new_height), Image.LANCZOS)
+        pad_left = max((target_width - new_width) // 2, 0)
+        pad_right = target_width - new_width - pad_left
+        pad_top = max((target_height - new_height) // 2, 0)
+        pad_bottom = target_height - new_height - pad_top
+        resized_padded_image = ImageOps.expand(image, (pad_left, pad_top, pad_right, pad_bottom), fill='grey')
+        resized_padded_image.save(output_path)
+        return resized_padded_image

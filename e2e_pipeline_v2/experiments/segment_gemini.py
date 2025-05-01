@@ -585,19 +585,36 @@ def visualize_bounding_boxes(image, bboxes, output_path):
     logger.info(f"Bounding box visualization saved to {output_path}")
 
 def show_mask(mask, ax, random_color=False, borders = True):
+    # If random_color is True, generate a random color with 60% opacity
     if random_color:
         color = np.concatenate([np.random.random(3), np.array([0.6])], axis=0)
+    # Otherwise use a predefined blue color with 60% opacity
     else:
         color = np.array([30/255, 144/255, 255/255, 0.6])
+    
+    # Get height and width from the last two dimensions of the mask
     h, w = mask.shape[-2:]
+    
+    # Convert mask to 8-bit unsigned integer type
     mask = mask.astype(np.uint8)
+    
+    # Create colored mask by multiplying binary mask with color
+    # Reshape operations ensure proper broadcasting
     mask_image =  mask.reshape(h, w, 1) * color.reshape(1, 1, -1)
+    
+    # If borders are requested
     if borders:
         import cv2
+        # Find external contours in the binary mask
         contours, _ = cv2.findContours(mask,cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE) 
-        # Try to smooth contours
+        
+        # Smooth each contour using Douglas-Peucker algorithm
         contours = [cv2.approxPolyDP(contour, epsilon=0.01, closed=True) for contour in contours]
+        
+        # Draw the smoothed contours on the mask image with white color and 50% opacity
         mask_image = cv2.drawContours(mask_image, contours, -1, (1, 1, 1, 0.5), thickness=2) 
+    
+    # Display the mask image on the provided matplotlib axis
     ax.imshow(mask_image)
 
 def save_individual_mask_visualizations(image, masks, output_dir):

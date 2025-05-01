@@ -180,6 +180,9 @@ def create_segmentation_visualization(image, masks, output_path):
         
         # Color the mask area
         colored_mask = np.zeros_like(vis_image, dtype=np.uint8)
+        print('-----------------')
+        print(np.unique(binary_mask))
+        print('-----------------')
         colored_mask[binary_mask] = color
         
         # Add to the overlay with transparency

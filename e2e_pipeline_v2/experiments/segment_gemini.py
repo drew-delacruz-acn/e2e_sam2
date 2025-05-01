@@ -582,7 +582,19 @@ def visualize_bounding_boxes(image, bboxes, output_path):
         # Draw rectangle
         cv2.rectangle(vis_image, (x1, y1), (x2, y2), color, 2)
         
-        # Add label
+        # Calculate and draw midpoint
+        midpoint_x = int((x1 + x2) / 2)
+        midpoint_y = int((y1 + y2) / 2)
+        
+        # Draw a circle at the midpoint (point coordinate)
+        cv2.circle(vis_image, (midpoint_x, midpoint_y), 5, (0, 255, 0), -1)  # Green filled circle
+        cv2.circle(vis_image, (midpoint_x, midpoint_y), 5, (0, 0, 0), 1)     # Black outline
+        
+        # Add label for midpoint
+        cv2.putText(vis_image, "Point", (midpoint_x + 10, midpoint_y), 
+                   cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0, 255, 0), 2)
+        
+        # Add label for box
         cv2.putText(vis_image, f"Box {i}", (x1, y1-10), cv2.FONT_HERSHEY_SIMPLEX, 0.9, color, 2)
     
     # Save the visualization

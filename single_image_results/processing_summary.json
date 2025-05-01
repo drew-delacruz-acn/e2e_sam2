@@ -1,0 +1,18 @@
+{
+  "output_directory": "single_image_results",
+  "processed_images": [
+    {
+      "image": "/home/ubuntu/code/drew/test_data/objects/Scenes 001-020__106D-5-_20230815151758589/3_clapperboard_1.png",
+      "image_dir": "single_image_results/3_clapperboard_1",
+      "segments_count": 1,
+      "segments": [
+        "single_image_results/3_clapperboard_1/segments/3_clapperboard_1_box0_seg0.png"
+      ],
+      "segmentation_overlay": "single_image_results/3_clapperboard_1/3_clapperboard_1_segmentation_overlay.png",
+      "embeddings_file": "single_image_results/3_clapperboard_1/embeddings/3_clapperboard_1_embeddings.json"
+    }
+  ],
+  "segmentation_mode": "full_image_predictor",
+  "mode": "single_image",
+  "input_image": "/home/ubuntu/code/drew/test_data/objects/Scenes 001-020__106D-5-_20230815151758589/3_clapperboard_1.png"
+}

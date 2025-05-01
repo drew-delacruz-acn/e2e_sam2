@@ -293,6 +293,9 @@ def process_image_and_generate_segments(
         debug_vis_path = os.path.join(image_dir, f"{image_name}_segmentation_overlay.png")
         create_segmentation_visualization(image_np, filtered_masks, debug_vis_path)
         
+        # Create individual mask visualizations
+        mask_vis_dir = save_individual_mask_visualizations(image_np, filtered_masks, image_dir)
+        
         return segment_paths, debug_vis_path, image_dir
     
     except Exception as e:
@@ -538,6 +541,9 @@ def process_image_with_predictor(
         debug_vis_path = os.path.join(image_dir, f"{image_name}_segmentation_overlay.png")
         create_segmentation_visualization(image_np, filtered_masks, debug_vis_path)
         
+        # Create individual mask visualizations
+        mask_vis_dir = save_individual_mask_visualizations(image_np, filtered_masks, image_dir)
+        
         # Also create a visualization of the bounding boxes
         bbox_vis_path = os.path.join(image_dir, f"{image_name}_bboxes.png")
         visualize_bounding_boxes(image_np, boxes_to_process, bbox_vis_path)
@@ -577,6 +583,62 @@ def visualize_bounding_boxes(image, bboxes, output_path):
     # Save the visualization
     cv2.imwrite(output_path, cv2.cvtColor(vis_image, cv2.COLOR_RGB2BGR))
     logger.info(f"Bounding box visualization saved to {output_path}")
+
+def show_mask(mask, ax, random_color=False, borders = True):
+    if random_color:
+        color = np.concatenate([np.random.random(3), np.array([0.6])], axis=0)
+    else:
+        color = np.array([30/255, 144/255, 255/255, 0.6])
+    h, w = mask.shape[-2:]
+    mask = mask.astype(np.uint8)
+    mask_image =  mask.reshape(h, w, 1) * color.reshape(1, 1, -1)
+    if borders:
+        import cv2
+        contours, _ = cv2.findContours(mask,cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE) 
+        # Try to smooth contours
+        contours = [cv2.approxPolyDP(contour, epsilon=0.01, closed=True) for contour in contours]
+        mask_image = cv2.drawContours(mask_image, contours, -1, (1, 1, 1, 0.5), thickness=2) 
+    ax.imshow(mask_image)
+
+def save_individual_mask_visualizations(image, masks, output_dir):
+    """
+    Save individual visualizations for each mask using show_mask function.
+    
+    Args:
+        image: Original image as numpy array
+        masks: List of mask dictionaries from SAM2
+        output_dir: Directory to save the visualizations
+        
+    Returns:
+        Path to the directory containing mask visualizations
+    """
+    # Ensure output directory exists
+    mask_vis_dir = os.path.join(output_dir, "mask_visualizations")
+    os.makedirs(mask_vis_dir, exist_ok=True)
+    
+    # Process each mask
+    for i, mask_data in enumerate(masks):
+        binary_mask = mask_data['segmentation']
+        
+        # Create figure and axes
+        fig, ax = plt.subplots(figsize=(10, 10))
+        
+        # Display original image
+        ax.imshow(image)
+        
+        # Show mask using the show_mask function
+        show_mask(binary_mask, ax, random_color=True, borders=True)
+        
+        # Clean up the visualization
+        ax.axis('off')
+        
+        # Save the figure
+        output_path = os.path.join(mask_vis_dir, f"mask_{i}.png")
+        plt.savefig(output_path, bbox_inches='tight', pad_inches=0, dpi=150)
+        plt.close(fig)  # Close the figure to free memory
+        
+    logger.info(f"Individual mask visualizations saved to {mask_vis_dir}")
+    return mask_vis_dir
 
 def main():
     args = parse_args()
@@ -696,6 +758,7 @@ def main():
                 "segments_count": len(segment_paths),
                 "segments": segment_paths,
                 "segmentation_overlay": debug_vis_path,
+                "mask_visualizations_dir": os.path.join(image_dir, "mask_visualizations"),
                 "embeddings_file": embeddings_path
             })
             
@@ -756,6 +819,7 @@ def main():
                     "segments_count": len(segment_paths),
                     "segments": segment_paths,
                     "segmentation_overlay": debug_vis_path,
+                    "mask_visualizations_dir": os.path.join(image_dir, "mask_visualizations"),
                     "embeddings_file": embeddings_path
                 })
                 

@@ -1,4 +1,3 @@
-
 # Standard library imports
 import os
 import json
@@ -51,8 +50,8 @@ elif device.type == "mps":
     )
 
 
-sam2_checkpoint = "checkpoints/sam2.1_hiera_large.pt"
-model_cfg = "configs/sam2.1/sam2.1_hiera_l.yaml"
+sam2_checkpoint = "checkpoints/sam2.1_hiera_small.pt"
+model_cfg = "configs/sam2.1/sam2.1_hiera_s.yaml"
 
 sam2 = build_sam2(model_cfg, sam2_checkpoint, device=device, apply_postprocessing=False)
 
@@ -92,10 +91,28 @@ masks = mask_generator.generate(image)
 
 print(masks)
 
-plt.figure(figsize=(20, 20))
-plt.imshow(image)
-show_anns(masks)
-plt.axis('off')
-plt.savefig('data/cars_mask_results.png', bbox_inches='tight', dpi=300) 
+
+# Create output directory if it doesn't exist
+output_dir = "mask_outputs"
+os.makedirs(output_dir, exist_ok=True)
 
 
+# Loop through each mask
+for i, mask_data in enumerate(masks):
+    # Get the binary mask
+    binary_mask = mask_data['segmentation']
+    
+    # Make sure the mask is in the correct format
+    binary_mask = binary_mask.astype(bool)
+    
+    # Create a copy of the original image
+    segment_original = np.zeros_like(image)
+    
+    # Copy the original pixels where the mask is True
+    segment_original[~binary_mask] = image[~binary_mask]
+    
+    # Save with proper color conversion
+    cv2.imwrite(f"{output_dir}/segment_{i}_color.png", cv2.cvtColor(segment_original, cv2.COLOR_RGB2BGR))
+     # For debugging: save the mask itself to check if it's correct
+    mask_image = binary_mask.astype(np.uint8) * 255
+    cv2.imwrite(f"{output_dir}/binary_mask_{i}.png", mask_image)

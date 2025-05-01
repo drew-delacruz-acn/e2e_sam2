@@ -1,0 +1,194 @@
+{
+  "input_directory": "mask_outputs",
+  "output_directory": "mask_outputs/embeddings",
+  "models": [
+    "vit",
+    "resnet50"
+  ],
+  "processed_files": [
+    {
+      "image": "mask_outputs/segment_18_color.png",
+      "embedding_file": "mask_outputs/embeddings/segment_18_color_embeddings.json"
+    },
+    {
+      "image": "mask_outputs/segment_45_color.png",
+      "embedding_file": "mask_outputs/embeddings/segment_45_color_embeddings.json"
+    },
+    {
+      "image": "mask_outputs/segment_14_color.png",
+      "embedding_file": "mask_outputs/embeddings/segment_14_color_embeddings.json"
+    },
+    {
+      "image": "mask_outputs/segment_19_color.png",
+      "embedding_file": "mask_outputs/embeddings/segment_19_color_embeddings.json"
+    },
+    {
+      "image": "mask_outputs/segment_4_color.png",
+      "embedding_file": "mask_outputs/embeddings/segment_4_color_embeddings.json"
+    },
+    {
+      "image": "mask_outputs/segment_34_color.png",
+      "embedding_file": "mask_outputs/embeddings/segment_34_color_embeddings.json"
+    },
+    {
+      "image": "mask_outputs/segment_7_color.png",
+      "embedding_file": "mask_outputs/embeddings/segment_7_color_embeddings.json"
+    },
+    {
+      "image": "mask_outputs/segment_17_color.png",
+      "embedding_file": "mask_outputs/embeddings/segment_17_color_embeddings.json"
+    },
+    {
+      "image": "mask_outputs/segment_22_color.png",
+      "embedding_file": "mask_outputs/embeddings/segment_22_color_embeddings.json"
+    },
+    {
+      "image": "mask_outputs/segment_6_color.png",
+      "embedding_file": "mask_outputs/embeddings/segment_6_color_embeddings.json"
+    },
+    {
+      "image": "mask_outputs/segment_26_color.png",
+      "embedding_file": "mask_outputs/embeddings/segment_26_color_embeddings.json"
+    },
+    {
+      "image": "mask_outputs/segment_15_color.png",
+      "embedding_file": "mask_outputs/embeddings/segment_15_color_embeddings.json"
+    },
+    {
+      "image": "mask_outputs/segment_13_color.png",
+      "embedding_file": "mask_outputs/embeddings/segment_13_color_embeddings.json"
+    },
+    {
+      "image": "mask_outputs/segment_10_color.png",
+      "embedding_file": "mask_outputs/embeddings/segment_10_color_embeddings.json"
+    },
+    {
+      "image": "mask_outputs/segment_37_color.png",
+      "embedding_file": "mask_outputs/embeddings/segment_37_color_embeddings.json"
+    },
+    {
+      "image": "mask_outputs/segment_23_color.png",
+      "embedding_file": "mask_outputs/embeddings/segment_23_color_embeddings.json"
+    },
+    {
+      "image": "mask_outputs/segment_32_color.png",
+      "embedding_file": "mask_outputs/embeddings/segment_32_color_embeddings.json"
+    },
+    {
+      "image": "mask_outputs/segment_42_color.png",
+      "embedding_file": "mask_outputs/embeddings/segment_42_color_embeddings.json"
+    },
+    {
+      "image": "mask_outputs/segment_40_color.png",
+      "embedding_file": "mask_outputs/embeddings/segment_40_color_embeddings.json"
+    },
+    {
+      "image": "mask_outputs/segment_12_color.png",
+      "embedding_file": "mask_outputs/embeddings/segment_12_color_embeddings.json"
+    },
+    {
+      "image": "mask_outputs/segment_0_color.png",
+      "embedding_file": "mask_outputs/embeddings/segment_0_color_embeddings.json"
+    },
+    {
+      "image": "mask_outputs/segment_11_color.png",
+      "embedding_file": "mask_outputs/embeddings/segment_11_color_embeddings.json"
+    },
+    {
+      "image": "mask_outputs/segment_25_color.png",
+      "embedding_file": "mask_outputs/embeddings/segment_25_color_embeddings.json"
+    },
+    {
+      "image": "mask_outputs/segment_39_color.png",
+      "embedding_file": "mask_outputs/embeddings/segment_39_color_embeddings.json"
+    },
+    {
+      "image": "mask_outputs/segment_24_color.png",
+      "embedding_file": "mask_outputs/embeddings/segment_24_color_embeddings.json"
+    },
+    {
+      "image": "mask_outputs/segment_21_color.png",
+      "embedding_file": "mask_outputs/embeddings/segment_21_color_embeddings.json"
+    },
+    {
+      "image": "mask_outputs/segment_8_color.png",
+      "embedding_file": "mask_outputs/embeddings/segment_8_color_embeddings.json"
+    },
+    {
+      "image": "mask_outputs/segment_30_color.png",
+      "embedding_file": "mask_outputs/embeddings/segment_30_color_embeddings.json"
+    },
+    {
+      "image": "mask_outputs/segment_43_color.png",
+      "embedding_file": "mask_outputs/embeddings/segment_43_color_embeddings.json"
+    },
+    {
+      "image": "mask_outputs/segment_33_color.png",
+      "embedding_file": "mask_outputs/embeddings/segment_33_color_embeddings.json"
+    },
+    {
+      "image": "mask_outputs/segment_5_color.png",
+      "embedding_file": "mask_outputs/embeddings/segment_5_color_embeddings.json"
+    },
+    {
+      "image": "mask_outputs/segment_31_color.png",
+      "embedding_file": "mask_outputs/embeddings/segment_31_color_embeddings.json"
+    },
+    {
+      "image": "mask_outputs/segment_41_color.png",
+      "embedding_file": "mask_outputs/embeddings/segment_41_color_embeddings.json"
+    },
+    {
+      "image": "mask_outputs/segment_35_color.png",
+      "embedding_file": "mask_outputs/embeddings/segment_35_color_embeddings.json"
+    },
+    {
+      "image": "mask_outputs/segment_27_color.png",
+      "embedding_file": "mask_outputs/embeddings/segment_27_color_embeddings.json"
+    },
+    {
+      "image": "mask_outputs/segment_2_color.png",
+      "embedding_file": "mask_outputs/embeddings/segment_2_color_embeddings.json"
+    },
+    {
+      "image": "mask_outputs/segment_16_color.png",
+      "embedding_file": "mask_outputs/embeddings/segment_16_color_embeddings.json"
+    },
+    {
+      "image": "mask_outputs/segment_20_color.png",
+      "embedding_file": "mask_outputs/embeddings/segment_20_color_embeddings.json"
+    },
+    {
+      "image": "mask_outputs/segment_36_color.png",
+      "embedding_file": "mask_outputs/embeddings/segment_36_color_embeddings.json"
+    },
+    {
+      "image": "mask_outputs/segment_1_color.png",
+      "embedding_file": "mask_outputs/embeddings/segment_1_color_embeddings.json"
+    },
+    {
+      "image": "mask_outputs/segment_28_color.png",
+      "embedding_file": "mask_outputs/embeddings/segment_28_color_embeddings.json"
+    },
+    {
+      "image": "mask_outputs/segment_3_color.png",
+      "embedding_file": "mask_outputs/embeddings/segment_3_color_embeddings.json"
+    },
+    {
+      "image": "mask_outputs/segment_44_color.png",
+      "embedding_file": "mask_outputs/embeddings/segment_44_color_embeddings.json"
+    },
+    {
+      "image": "mask_outputs/segment_29_color.png",
+      "embedding_file": "mask_outputs/embeddings/segment_29_color_embeddings.json"
+    },
+    {
+      "image": "mask_outputs/segment_9_color.png",
+      "embedding_file": "mask_outputs/embeddings/segment_9_color_embeddings.json"
+    },
+    {
+      "image": "mask_outputs/segment_38_color.png",
+      "embedding_file": "mask_outputs/embeddings/segment_38_color_embeddings.json"
+    }
+  ]
+}

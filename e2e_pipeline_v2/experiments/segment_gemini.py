@@ -83,13 +83,14 @@ def show_anns(anns, borders=True):
     ax.imshow(img)
 
 
-image = Image.open('data/mjolnir_gt.jpeg')
+image = Image.open('../test_data/objects/Scenes 001-020__101B-1-_20230726152900590/0_ornate circular mirror_0.png')
 image = np.array(image.convert("RGB"))
 
 
+# /home/ubuntu/code/drew/test_data/objects/Scenes 001-020__101B-1-_20230726152900590/0_ornate circular mirror_0.png
+
 masks = mask_generator.generate(image)
 
-print(masks)
 
 
 # Create output directory if it doesn't exist
@@ -114,9 +115,6 @@ for i, mask_data in enumerate(masks):
     # Save with proper color conversion
     cv2.imwrite(f"{output_dir}/segment_{i}_color.png", cv2.cvtColor(segment_original, cv2.COLOR_RGB2BGR))
      # For debugging: save the mask itself to check if it's correct
-    mask_image = binary_mask.astype(np.uint8) * 255
-    cv2.imwrite(f"{output_dir}/binary_mask_{i}.png", mask_image)
-
 
 def generate_embeddings_for_folder(
     input_folder, 
@@ -237,8 +235,8 @@ def generate_embeddings_for_folder(
     return summary
 
 generate_embeddings_for_folder(
-    input_folder="",
-    output_folder="embeddings",
+    input_folder="mask_outputs",
+    output_folder="mask_outputs/embeddings",
     models=["vit", "resnet50"],
     device=device
 )

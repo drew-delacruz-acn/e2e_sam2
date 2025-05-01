@@ -155,7 +155,7 @@ def process_image_and_generate_segments(
         min_area: Minimum area for segments to be considered
         
     Returns:
-        List of paths to saved segment images
+        Tuple of (list of segment paths, path to debug visualization)
     """
     try:
         # Create output directory
@@ -167,10 +167,10 @@ def process_image_and_generate_segments(
         
         # Load and process the image
         image = Image.open(image_path)
-        image = np.array(image.convert("RGB"))
+        image_np = np.array(image.convert("RGB"))
 
         # Generate masks
-        masks = mask_generator.generate(image)
+        masks = mask_generator.generate(image_np)
 
         # Filter masks by area
         filtered_masks = [mask for mask in masks if mask['area'] > min_area]
@@ -187,10 +187,10 @@ def process_image_and_generate_segments(
             binary_mask = binary_mask.astype(bool)
             
             # Create a copy of the original image
-            segment_image = np.zeros_like(image)
+            segment_image = np.zeros_like(image_np)
             
             # Copy the original pixels where the mask is True
-            segment_image[binary_mask] = image[binary_mask]
+            segment_image[binary_mask] = image_np[binary_mask]
             
             # Create output path with the requested naming format
             output_path = os.path.join(output_dir, f"{image_name}_{i}.png")
@@ -200,16 +200,16 @@ def process_image_and_generate_segments(
             
             # Add to segment paths
             segment_paths.append(output_path)
-            
-            # Also save the binary mask for reference
-            # mask_path = os.path.join(output_dir, f"{image_name}_{i}_mask.png")
-            # cv2.imwrite(mask_path, binary_mask.astype(np.uint8) * 255)
         
-        return segment_paths
+        # Create and save a visualization with all segments overlaid on the original image
+        debug_vis_path = os.path.join(output_dir, f"{image_name}_segmentation_overlay.png")
+        create_segmentation_visualization(image_np, filtered_masks, debug_vis_path)
+        
+        return segment_paths, debug_vis_path
     
     except Exception as e:
         logger.error(f"Error processing {image_path}: {str(e)}")
-        return []
+        return [], None
 
 def generate_embeddings_for_segments(
     segment_paths, 
@@ -347,7 +347,7 @@ def main():
         # Process the single image
         try:
             # Generate segments
-            segment_paths = process_image_and_generate_segments(
+            segment_paths, debug_vis_path = process_image_and_generate_segments(
                 image_path=str(image_file),
                 mask_generator=mask_generator,
                 output_dir=segments_dir,
@@ -371,6 +371,7 @@ def main():
                 "image": str(image_file),
                 "segments_count": len(segment_paths),
                 "segments": segment_paths,
+                "segmentation_overlay": debug_vis_path,
                 "embeddings_file": embeddings_path
             })
             
@@ -406,7 +407,7 @@ def main():
                 logger.info(f"Processing {image_file}")
                 
                 # Generate segments
-                segment_paths = process_image_and_generate_segments(
+                segment_paths, debug_vis_path = process_image_and_generate_segments(
                     image_path=str(image_file),
                     mask_generator=mask_generator,
                     output_dir=segments_dir,
@@ -430,6 +431,7 @@ def main():
                     "image": str(image_file),
                     "segments_count": len(segment_paths),
                     "segments": segment_paths,
+                    "segmentation_overlay": debug_vis_path,
                     "embeddings_file": embeddings_path
                 })
                 

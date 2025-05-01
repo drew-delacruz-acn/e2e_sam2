@@ -183,8 +183,7 @@ def create_segmentation_visualization(image, masks, output_path):
         print('-----------------')
         print(np.unique(binary_mask))
         print('-----------------')
-        colored_mask[binary_mask] = color
-        
+        colored_mask[binary_mask.astype(bool)] = color
         # Add to the overlay with transparency
         overlay = cv2.addWeighted(overlay, 1, colored_mask, 0.5, 0)
         

@@ -61,6 +61,12 @@ def parse_args():
     mode_group.add_argument("--use_bbox_json", type=str, metavar="JSON_PATH",
                       help="Use SAM2 image predictor with bounding boxes from JSON file")
     
+    # Option to use foreground points
+    parser.add_argument("--use_points", action="store_true", default=True,
+                      help="Use foreground points at bbox midpoints (default: True)")
+    parser.add_argument("--no_points", action="store_false", dest="use_points",
+                      help="Don't use foreground points with bbox")
+    
     return parser.parse_args()
 
 def get_device():
@@ -420,7 +426,8 @@ def process_image_with_predictor(
     predictor, 
     output_dir, 
     bboxes=None,
-    min_area=1000
+    min_area=1000,
+    use_points=True
 ):
     """
     Process an image with SAM2 image predictor using bounding box(es),
@@ -432,6 +439,7 @@ def process_image_with_predictor(
         output_dir: Directory to save segments
         bboxes: List of bounding box coordinates [x1, y1, x2, y2] or None for full image
         min_area: Minimum area for segments to be considered
+        use_points: Whether to use foreground points at bbox midpoints
         
     Returns:
         Tuple of (list of segment paths, path to debug visualization, image_dir)
@@ -480,19 +488,29 @@ def process_image_with_predictor(
         for box_idx, bbox in enumerate(boxes_to_process):
             # Calculate midpoint of the bounding box
             x1, y1, x2, y2 = bbox
-            midpoint_x = (x1 + x2) / 2
-            midpoint_y = (y1 + y2) / 2
-            
-            # Create point coordinates tensor (shape [1, 2])
-            point_coords = torch.tensor([[midpoint_x, midpoint_y]], device=predictor.device)
-            
-            # Create point labels tensor (1 = foreground point)
-            point_labels = torch.tensor([1], device=predictor.device)
             
             # Convert box to torch tensor and correct format
             box_torch = torch.tensor(bbox, device=predictor.device)[None, :]
             
-            # Get prediction with both box and point
+            # Prepare point inputs if using points
+            point_coords = None
+            point_labels = None
+            
+            if use_points:
+                midpoint_x = (x1 + x2) / 2
+                midpoint_y = (y1 + y2) / 2
+                
+                # Create point coordinates tensor (shape [1, 2])
+                point_coords = torch.tensor([[midpoint_x, midpoint_y]], device=predictor.device)
+                
+                # Create point labels tensor (1 = foreground point)
+                point_labels = torch.tensor([1], device=predictor.device)
+                
+                logger.info(f"Using foreground point at ({midpoint_x:.1f}, {midpoint_y:.1f}) for box {box_idx}")
+            else:
+                logger.info(f"Using only bounding box without points for box {box_idx}")
+            
+            # Get prediction with box and optional point
             with torch.inference_mode():
                 masks, scores, logits = predictor.predict(
                     point_coords=point_coords,
@@ -513,7 +531,8 @@ def process_image_with_predictor(
                     'area': area,
                     'bbox': bbox,
                     'predicted_iou': scores[i],
-                    'source_box_idx': box_idx
+                    'source_box_idx': box_idx,
+                    'used_point': use_points
                 })
                 all_scores.append(scores[i])
         
@@ -537,7 +556,8 @@ def process_image_with_predictor(
             
             # Create output path with the requested naming format
             box_idx = mask_data.get('source_box_idx', 0)
-            output_path = os.path.join(segments_dir, f"{image_name}_box{box_idx}_seg{i}.png")
+            point_suffix = "_point" if mask_data.get('used_point', False) else "_nopoint"
+            output_path = os.path.join(segments_dir, f"{image_name}_box{box_idx}{point_suffix}_seg{i}.png")
             
             # Save with proper color conversion
             cv2.imwrite(output_path, cv2.cvtColor(segment_image, cv2.COLOR_RGB2BGR))
@@ -551,7 +571,7 @@ def process_image_with_predictor(
         
         # Also create a visualization of the bounding boxes
         bbox_vis_path = os.path.join(image_dir, f"{image_name}_bboxes.png")
-        visualize_bounding_boxes(image_np, boxes_to_process, bbox_vis_path)
+        visualize_bounding_boxes(image_np, boxes_to_process, bbox_vis_path, use_points=use_points)
         
         return segment_paths, debug_vis_path, image_dir
     
@@ -560,7 +580,7 @@ def process_image_with_predictor(
         traceback.print_exc()
         return [], None, None
 
-def visualize_bounding_boxes(image, bboxes, output_path):
+def visualize_bounding_boxes(image, bboxes, output_path, use_points=True):
     """
     Create a visualization of the bounding boxes on the image.
     
@@ -568,6 +588,7 @@ def visualize_bounding_boxes(image, bboxes, output_path):
         image: Original image as numpy array
         bboxes: List of bounding box coordinates [x1, y1, x2, y2]
         output_path: Path to save the visualization
+        use_points: Whether to visualize the midpoint used as foreground point
     """
     # Create a copy of the image for visualization
     vis_image = image.copy()
@@ -582,17 +603,19 @@ def visualize_bounding_boxes(image, bboxes, output_path):
         # Draw rectangle
         cv2.rectangle(vis_image, (x1, y1), (x2, y2), color, 2)
         
-        # Calculate and draw midpoint
+        # Calculate midpoint 
         midpoint_x = int((x1 + x2) / 2)
         midpoint_y = int((y1 + y2) / 2)
         
-        # Draw a circle at the midpoint (point coordinate)
-        cv2.circle(vis_image, (midpoint_x, midpoint_y), 5, (0, 255, 0), -1)  # Green filled circle
-        cv2.circle(vis_image, (midpoint_x, midpoint_y), 5, (0, 0, 0), 1)     # Black outline
-        
-        # Add label for midpoint
-        cv2.putText(vis_image, "Point", (midpoint_x + 10, midpoint_y), 
-                   cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0, 255, 0), 2)
+        # Draw midpoint if using points
+        if use_points:
+            # Draw a circle at the midpoint (point coordinate)
+            cv2.circle(vis_image, (midpoint_x, midpoint_y), 5, (0, 255, 0), -1)  # Green filled circle
+            cv2.circle(vis_image, (midpoint_x, midpoint_y), 5, (0, 0, 0), 1)     # Black outline
+            
+            # Add label for midpoint
+            cv2.putText(vis_image, "Point", (midpoint_x + 10, midpoint_y), 
+                       cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0, 255, 0), 2)
         
         # Add label for box
         cv2.putText(vis_image, f"Box {i}", (x1, y1-10), cv2.FONT_HERSHEY_SIMPLEX, 0.9, color, 2)
@@ -706,7 +729,8 @@ def main():
             predictor, 
             out_dir, 
             bboxes=bbox_data.get(Path(img_path).stem, None),
-            min_area=min_area
+            min_area=min_area,
+            use_points=args.use_points
         )
         
     elif args.use_full_image_predictor:
@@ -720,7 +744,8 @@ def main():
             predictor, 
             out_dir, 
             bboxes=None,  # None means use full image bounds
-            min_area=min_area
+            min_area=min_area,
+            use_points=args.use_points
         )
         
     else:
@@ -749,7 +774,8 @@ def main():
     summary = {
         "output_directory": str(output_dir),
         "processed_images": [],
-        "segmentation_mode": segmentation_mode
+        "segmentation_mode": segmentation_mode,
+        "used_points": args.use_points if segmentation_mode != "automatic_mask_generator" else None
     }
     
     # Determine processing mode - single image or directory

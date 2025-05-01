@@ -115,6 +115,8 @@ def apply_image_tranforms(image_path, output_path):
         
         resized_padded_image = ImageOps.expand(image, (pad_left, pad_top, pad_right, pad_bottom), fill='grey')
     
+    # Ensure the output directory exists
+    os.makedirs(os.path.dirname(output_path), exist_ok=True)
     resized_padded_image.save(output_path)
     return resized_padded_image
 
@@ -225,15 +227,20 @@ def process_image_and_generate_segments(
         min_area: Minimum area for segments to be considered
         
     Returns:
-        Tuple of (list of segment paths, path to debug visualization)
+        Tuple of (list of segment paths, path to debug visualization, image_dir)
     """
     try:
-        # Create output directory
-        os.makedirs(output_dir, exist_ok=True)
-        
         # Get base filename without extension
         image_basename = os.path.basename(image_path)
         image_name = os.path.splitext(image_basename)[0]
+        
+        # Create organized directory structure
+        image_dir = os.path.join(output_dir, image_name)
+        segments_dir = os.path.join(image_dir, "segments")
+        
+        # Create directories
+        os.makedirs(image_dir, exist_ok=True)
+        os.makedirs(segments_dir, exist_ok=True)
         
         # Load and process the image
         image = Image.open(image_path)
@@ -263,7 +270,7 @@ def process_image_and_generate_segments(
             segment_image[binary_mask] = image_np[binary_mask]
             
             # Create output path with the requested naming format
-            output_path = os.path.join(output_dir, f"{image_name}_{i}.png")
+            output_path = os.path.join(segments_dir, f"{image_name}_{i}.png")
             
             # Save with proper color conversion
             cv2.imwrite(output_path, cv2.cvtColor(segment_image, cv2.COLOR_RGB2BGR))
@@ -272,19 +279,19 @@ def process_image_and_generate_segments(
             segment_paths.append(output_path)
         
         # Create and save a visualization with all segments overlaid on the original image
-        debug_vis_path = os.path.join(output_dir, f"{image_name}_segmentation_overlay.png")
+        debug_vis_path = os.path.join(image_dir, f"{image_name}_segmentation_overlay.png")
         create_segmentation_visualization(image_np, filtered_masks, debug_vis_path)
         
-        return segment_paths, debug_vis_path
+        return segment_paths, debug_vis_path, image_dir
     
     except Exception as e:
         logger.error(f"Error processing {image_path}: {str(e)}")
-        return [], None
+        return [], None, None
 
 def generate_embeddings_for_segments(
     segment_paths, 
     embedding_generator, 
-    output_dir, 
+    image_dir, 
     original_image
 ):
     """
@@ -293,29 +300,30 @@ def generate_embeddings_for_segments(
     Args:
         segment_paths: List of paths to segment images
         embedding_generator: EmbeddingGenerator instance
-        output_dir: Directory to save embeddings
+        image_dir: Root directory for this image's outputs
         original_image: Path to the original image
         
     Returns:
         Path to the generated JSON file
     """
     try:
-        # Create output directory
-        os.makedirs(output_dir, exist_ok=True)
-        
         # Get the original image basename
         original_basename = os.path.basename(original_image)
         original_name = os.path.splitext(original_basename)[0]
+        
+        # Create organized directory structure
+        padded_dir = os.path.join(image_dir, "padded_segments")
+        embeddings_dir = os.path.join(image_dir, "embeddings")
+        
+        # Create directories
+        os.makedirs(padded_dir, exist_ok=True)
+        os.makedirs(embeddings_dir, exist_ok=True)
         
         # Create embeddings dict
         embeddings_data = {
             "original_image": str(original_image),
             "segments": {}
         }
-        
-        # Create a directory for padded images
-        padded_dir = os.path.join(output_dir, "padded_segments")
-        os.makedirs(padded_dir, exist_ok=True)
         
         # Process each segment
         for segment_path in segment_paths:
@@ -348,12 +356,13 @@ def generate_embeddings_for_segments(
             }
         
         # Create output path
-        output_path = os.path.join(output_dir, f"{original_name}_embeddings.json")
+        output_path = os.path.join(embeddings_dir, f"{original_name}_embeddings.json")
         
         # Save embeddings
         with open(output_path, 'w') as f:
             json.dump(embeddings_data, f, indent=2)
         
+        logger.info(f"Embeddings saved to {output_path}")
         logger.info(f"Padded images saved to {padded_dir} for inspection")
         return output_path
     
@@ -367,14 +376,9 @@ def main():
     # Setup device
     device = get_device()
     
-    # Create output Path objects
+    # Create output Path object
     output_dir = Path(args.output_dir)
-    segments_dir = output_dir / "segments"
-    embeddings_dir = output_dir / "embeddings"
-    
-    # Create output directories
-    os.makedirs(segments_dir, exist_ok=True)
-    os.makedirs(embeddings_dir, exist_ok=True)
+    os.makedirs(output_dir, exist_ok=True)
     
     # Initialize SAM2
     sam2_checkpoint = "checkpoints/sam2.1_hiera_large.pt"
@@ -417,14 +421,14 @@ def main():
         # Process the single image
         try:
             # Generate segments
-            segment_paths, debug_vis_path = process_image_and_generate_segments(
+            segment_paths, debug_vis_path, image_dir = process_image_and_generate_segments(
                 image_path=str(image_file),
                 mask_generator=mask_generator,
-                output_dir=segments_dir,
+                output_dir=output_dir,
                 min_area=args.min_area
             )
             
-            if not segment_paths:
+            if not segment_paths or not image_dir:
                 logger.warning(f"No valid segments found for {image_file}")
                 return 1
             
@@ -432,13 +436,14 @@ def main():
             embeddings_path = generate_embeddings_for_segments(
                 segment_paths=segment_paths,
                 embedding_generator=embedding_generator,
-                output_dir=embeddings_dir,
+                image_dir=image_dir,
                 original_image=str(image_file)
             )
             
             # Add to summary
             summary["processed_images"].append({
                 "image": str(image_file),
+                "image_dir": image_dir,
                 "segments_count": len(segment_paths),
                 "segments": segment_paths,
                 "segmentation_overlay": debug_vis_path,
@@ -477,14 +482,14 @@ def main():
                 logger.info(f"Processing {image_file}")
                 
                 # Generate segments
-                segment_paths, debug_vis_path = process_image_and_generate_segments(
+                segment_paths, debug_vis_path, image_dir = process_image_and_generate_segments(
                     image_path=str(image_file),
                     mask_generator=mask_generator,
-                    output_dir=segments_dir,
+                    output_dir=output_dir,
                     min_area=args.min_area
                 )
                 
-                if not segment_paths:
+                if not segment_paths or not image_dir:
                     logger.warning(f"No valid segments found for {image_file}")
                     continue
                 
@@ -492,13 +497,14 @@ def main():
                 embeddings_path = generate_embeddings_for_segments(
                     segment_paths=segment_paths,
                     embedding_generator=embedding_generator,
-                    output_dir=embeddings_dir,
+                    image_dir=image_dir,
                     original_image=str(image_file)
                 )
                 
                 # Add to summary
                 summary["processed_images"].append({
                     "image": str(image_file),
+                    "image_dir": image_dir,
                     "segments_count": len(segment_paths),
                     "segments": segment_paths,
                     "segmentation_overlay": debug_vis_path,

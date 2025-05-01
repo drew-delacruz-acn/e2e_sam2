@@ -8,7 +8,7 @@ from pathlib import Path
 import sys
 import time
 import gc  # For garbage collection
-from PIL import Image
+from PIL import Image, ImageOps
 
 # Add root directory to path to import local modules
 sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
@@ -35,8 +35,14 @@ logger = logging.getLogger('segment_and_embed')
 def parse_args():
     """Parse command line arguments."""
     parser = argparse.ArgumentParser(description="Segment images and generate embeddings")
-    parser.add_argument("--input_dir", type=str, required=True,
+    
+    # Create mutually exclusive group for input modes
+    input_group = parser.add_mutually_exclusive_group(required=True)
+    input_group.add_argument("--input_dir", type=str,
                       help="Directory containing images to segment and embed")
+    input_group.add_argument("--image", type=str, 
+                      help="Path to a single image to segment and embed")
+    
     parser.add_argument("--output_dir", type=str, default="output_results",
                       help="Directory to save results")
     parser.add_argument("--models", type=str, nargs="+", default=["vit", "resnet50"],
@@ -58,7 +64,7 @@ def get_device():
         device = torch.device("cpu")
     
     logger.info(f"Using device: {device}")
-    
+
     if device.type == "cuda":
         # use bfloat16 for the entire notebook
         torch.autocast("cuda", dtype=torch.bfloat16).__enter__()
@@ -73,6 +79,44 @@ def get_device():
         )
         
     return device
+
+def apply_image_tranforms(image_path, output_path):
+    """
+    Resize and pad image to 224x224 while maintaining aspect ratio.
+    
+    Args:
+        image_path: Path to the input image
+        output_path: Path to save the padded image
+        
+    Returns:
+        The padded PIL Image
+    """
+    # STEP 1 - APPLY PADDING
+    image = Image.open(image_path).convert("RGB")
+    target_width = target_height = 224
+    width, height = image.size
+    
+    if width == target_width and height == target_height:
+        resized_padded_image = image
+    else:
+        if width >= height:
+            scale = target_width / width
+        else:
+            scale = target_height / height
+
+        new_width = int(round(width * scale))
+        new_height = int(round(height * scale))
+        image = image.resize((new_width, new_height), Image.LANCZOS)
+        
+        pad_left = max((target_width - new_width) // 2, 0)
+        pad_right = target_width - new_width - pad_left
+        pad_top = max((target_height - new_height) // 2, 0)
+        pad_bottom = target_height - new_height - pad_top
+        
+        resized_padded_image = ImageOps.expand(image, (pad_left, pad_top, pad_right, pad_bottom), fill='grey')
+    
+    resized_padded_image.save(output_path)
+    return resized_padded_image
 
 def show_anns(anns, borders=True):
     if len(anns) == 0:
@@ -124,18 +168,18 @@ def process_image_and_generate_segments(
         # Load and process the image
         image = Image.open(image_path)
         image = np.array(image.convert("RGB"))
-        
+
         # Generate masks
         masks = mask_generator.generate(image)
-        
+
         # Filter masks by area
         filtered_masks = [mask for mask in masks if mask['area'] > min_area]
-        
+
         logger.info(f"Generated {len(filtered_masks)} masks for {image_basename}")
-        
+
         # List to store segment paths
         segment_paths = []
-        
+
         # Process and save each segment
         for i, mask_data in enumerate(filtered_masks):
             # Get the binary mask
@@ -253,32 +297,14 @@ def main():
     # Setup device
     device = get_device()
     
-    # Create input/output Path objects
-    input_dir = Path(args.input_dir)
+    # Create output Path objects
     output_dir = Path(args.output_dir)
     segments_dir = output_dir / "segments"
     embeddings_dir = output_dir / "embeddings"
     
-    # Check if input directory exists
-    if not input_dir.exists() or not input_dir.is_dir():
-        logger.error(f"Input directory '{input_dir}' does not exist or is not a directory.")
-        return 1
-    
     # Create output directories
     os.makedirs(segments_dir, exist_ok=True)
     os.makedirs(embeddings_dir, exist_ok=True)
-    
-    # Find all image files
-    image_files = []
-    for ext in args.extensions:
-        image_files.extend(list(input_dir.glob(f"*{ext}")))
-        image_files.extend(list(input_dir.glob(f"*{ext.upper()}")))
-    
-    if not image_files:
-        logger.error(f"No images found in {input_dir} with extensions: {', '.join(args.extensions)}")
-        return 1
-    
-    logger.info(f"Found {len(image_files)} images to process")
     
     # Initialize SAM2
     sam2_checkpoint = "checkpoints/sam2.1_hiera_large.pt"
@@ -286,39 +312,41 @@ def main():
     
     logger.info("Loading SAM2 model...")
     sam2 = build_sam2(model_cfg, sam2_checkpoint, device=device, apply_postprocessing=False)
-    # mask_generator = SAM2AutomaticMaskGenerator(sam2)
     mask_generator = SAM2AutomaticMaskGenerator(
-    model=sam2,
-    points_per_side=64,
-    points_per_batch=128,
-    pred_iou_thresh=0.7,
-    # stability_score_thresh=0.92,
-    # stability_score_offset=0.7,
-    # crop_n_layers=1,
-    # box_nms_thresh=0.7,
-    # crop_n_points_downscale_factor=2,
-    min_mask_region_area=10.0,
-    # use_m2m=True,   
-
-)
+        model=sam2,
+        points_per_side=64,
+        points_per_batch=128,
+        pred_iou_thresh=0.7,
+        min_mask_region_area=10.0,
+    )
+    
     # Initialize embedding generator
     embedding_generator = EmbeddingGenerator(
         model_types=args.models,
         device=device
     )
     
-    # Process each image
+    # Prepare summary
     summary = {
-        "input_directory": str(input_dir),
         "output_directory": str(output_dir),
         "processed_images": []
     }
     
-    for image_file in tqdm(image_files, desc="Processing images"):
-        try:
-            logger.info(f"Processing {image_file}")
+    # Determine processing mode - single image or directory
+    if args.image:
+        # Single image mode
+        image_file = Path(args.image)
+        if not image_file.exists():
+            logger.error(f"Image file '{image_file}' does not exist.")
+            return 1
             
-            # Step 1: Generate segments
+        logger.info(f"Processing single image: {image_file}")
+        summary["mode"] = "single_image"
+        summary["input_image"] = str(image_file)
+        
+        # Process the single image
+        try:
+            # Generate segments
             segment_paths = process_image_and_generate_segments(
                 image_path=str(image_file),
                 mask_generator=mask_generator,
@@ -328,9 +356,9 @@ def main():
             
             if not segment_paths:
                 logger.warning(f"No valid segments found for {image_file}")
-                continue
+                return 1
             
-            # Step 2: Generate embeddings for all segments
+            # Generate embeddings for all segments
             embeddings_path = generate_embeddings_for_segments(
                 segment_paths=segment_paths,
                 embedding_generator=embedding_generator,
@@ -346,13 +374,72 @@ def main():
                 "embeddings_file": embeddings_path
             })
             
-            # Clean up to avoid memory leaks
-            gc.collect()
-            if device.type == "cuda":
-                torch.cuda.empty_cache()
-                
         except Exception as e:
             logger.error(f"Error processing {image_file}: {str(e)}")
+            return 1
+            
+    else:
+        # Directory mode
+        input_dir = Path(args.input_dir)
+        if not input_dir.exists() or not input_dir.is_dir():
+            logger.error(f"Input directory '{input_dir}' does not exist or is not a directory.")
+            return 1
+        
+        summary["mode"] = "directory"
+        summary["input_directory"] = str(input_dir)
+        
+        # Find all image files
+        image_files = []
+        for ext in args.extensions:
+            image_files.extend(list(input_dir.glob(f"*{ext}")))
+            image_files.extend(list(input_dir.glob(f"*{ext.upper()}")))
+        
+        if not image_files:
+            logger.error(f"No images found in {input_dir} with extensions: {', '.join(args.extensions)}")
+            return 1
+        
+        logger.info(f"Found {len(image_files)} images to process")
+        
+        # Process each image in the directory
+        for image_file in tqdm(image_files, desc="Processing images"):
+            try:
+                logger.info(f"Processing {image_file}")
+                
+                # Generate segments
+                segment_paths = process_image_and_generate_segments(
+                    image_path=str(image_file),
+                    mask_generator=mask_generator,
+                    output_dir=segments_dir,
+                    min_area=args.min_area
+                )
+                
+                if not segment_paths:
+                    logger.warning(f"No valid segments found for {image_file}")
+                    continue
+                
+                # Generate embeddings for all segments
+                embeddings_path = generate_embeddings_for_segments(
+                    segment_paths=segment_paths,
+                    embedding_generator=embedding_generator,
+                    output_dir=embeddings_dir,
+                    original_image=str(image_file)
+                )
+                
+                # Add to summary
+                summary["processed_images"].append({
+                    "image": str(image_file),
+                    "segments_count": len(segment_paths),
+                    "segments": segment_paths,
+                    "embeddings_file": embeddings_path
+                })
+                
+                # Clean up to avoid memory leaks
+                gc.collect()
+                if device.type == "cuda":
+                    torch.cuda.empty_cache()
+                    
+            except Exception as e:
+                logger.error(f"Error processing {image_file}: {str(e)}")
     
     # Save summary
     summary_path = output_dir / "processing_summary.json"
@@ -369,29 +456,3 @@ if __name__ == "__main__":
     # Process directory: python segment_gemini.py --input_dir /path/to/directory --output_dir results
     # Process single image: python segment_gemini.py --image /path/to/image.jpg --output_dir results
     sys.exit(main())
-
-
-from PIL import ImageOps
-def apply_image_tranforms(image_path, output_path):
-    # STEP 1 - APPLY PADDING
-    image = Image.open(image_path).convert("RGB")
-    target_width = target_height = 224
-    width, height = image.size
-    if width == target_width and height == target_height:
-        resized_padded_image = image
-    else:
-        if width >= height:
-            scale = target_width / width
-        else:
-            scale = target_height / height
-
-        new_width = int(round(width * scale))
-        new_height = int(round(height * scale))
-        image = image.resize((new_width, new_height), Image.LANCZOS)
-        pad_left = max((target_width - new_width) // 2, 0)
-        pad_right = target_width - new_width - pad_left
-        pad_top = max((target_height - new_height) // 2, 0)
-        pad_bottom = target_height - new_height - pad_top
-        resized_padded_image = ImageOps.expand(image, (pad_left, pad_top, pad_right, pad_bottom), fill='grey')
-        resized_padded_image.save(output_path)
-        return resized_padded_image

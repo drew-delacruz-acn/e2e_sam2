@@ -16,7 +16,7 @@
 # Data folder
 data/
 dataset_splits/
-
+results_test/
 # Models
 *.torch
 train_sam2/model.torch

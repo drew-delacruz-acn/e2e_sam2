@@ -158,8 +158,8 @@ def process_image_and_generate_segments(
             segment_paths.append(output_path)
             
             # Also save the binary mask for reference
-            mask_path = os.path.join(output_dir, f"{image_name}_{i}_mask.png")
-            cv2.imwrite(mask_path, binary_mask.astype(np.uint8) * 255)
+            # mask_path = os.path.join(output_dir, f"{image_name}_{i}_mask.png")
+            # cv2.imwrite(mask_path, binary_mask.astype(np.uint8) * 255)
         
         return segment_paths
     
@@ -270,13 +270,26 @@ def main():
     logger.info(f"Found {len(image_files)} images to process")
     
     # Initialize SAM2
-    sam2_checkpoint = "checkpoints/sam2.1_hiera_small.pt"
-    model_cfg = "configs/sam2.1/sam2.1_hiera_s.yaml"
+    sam2_checkpoint = "checkpoints/sam2.1_hiera_large.pt"
+    model_cfg = "configs/sam2.1/sam2.1_hiera_l.yaml"
     
     logger.info("Loading SAM2 model...")
     sam2 = build_sam2(model_cfg, sam2_checkpoint, device=device, apply_postprocessing=False)
-    mask_generator = SAM2AutomaticMaskGenerator(sam2)
-    
+    # mask_generator = SAM2AutomaticMaskGenerator(sam2)
+    mask_generator = SAM2AutomaticMaskGenerator(
+    model=sam2,
+    points_per_side=64,
+    points_per_batch=128,
+    pred_iou_thresh=0.7,
+    # stability_score_thresh=0.92,
+    # stability_score_offset=0.7,
+    # crop_n_layers=1,
+    # box_nms_thresh=0.7,
+    # crop_n_points_downscale_factor=2,
+    min_mask_region_area=10.0,
+    # use_m2m=True,   
+
+)
     # Initialize embedding generator
     embedding_generator = EmbeddingGenerator(
         model_types=args.models,

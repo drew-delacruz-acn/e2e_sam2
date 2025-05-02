@@ -228,6 +228,6 @@ def search_similar_segments_in_neo4j(embeddings_dir, model_type="resnet50"):
     
     return all_results
 
-results = search_similar_segments_in_neo4j("center_padded_image_results", "resnet50")
+results = search_similar_segments_in_neo4j("white_vidname_padded_image_results", "resnet50")
 # print("Results:", results)
 print("Done.")

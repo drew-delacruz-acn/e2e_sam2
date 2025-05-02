@@ -1,0 +1,2917 @@
+{
+  "video_name": "Scenes 001-020__101B-1-_20230726152900590",
+  "images": {
+    "19": {
+      "19_dark blue wall panel_1_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/19/segments/19_dark blue wall panel_1_nopoint.png",
+        "matches": [
+          {
+            "predicted_object": "Laevateinn",
+            "object_version": 3,
+            "similarity_score": 0.7795759439468384
+          }
+        ]
+      },
+      "19_white fluffy object_5_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/19/segments/19_white fluffy object_5_nopoint.png",
+        "matches": []
+      },
+      "19_reflected weapon_3_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/19/segments/19_reflected weapon_3_nopoint.png",
+        "matches": []
+      },
+      "19_large ornate mirror_0_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/19/segments/19_large ornate mirror_0_nopoint.png",
+        "matches": []
+      },
+      "19_shoulder armor_2_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/19/segments/19_shoulder armor_2_nopoint.png",
+        "matches": []
+      }
+    },
+    "46": {
+      "46_ornate mirror_0_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/46/segments/46_ornate mirror_0_nopoint.png",
+        "matches": []
+      },
+      "46_fluffy object_4_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/46/segments/46_fluffy object_4_nopoint.png",
+        "matches": [
+          {
+            "predicted_object": "Time Collar",
+            "object_version": 2,
+            "similarity_score": 0.70630943775177
+          }
+        ]
+      },
+      "46_black jacket_1_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/46/segments/46_black jacket_1_nopoint.png",
+        "matches": [
+          {
+            "predicted_object": "Boastful Loki's hammer",
+            "object_version": 1,
+            "similarity_score": 0.700597882270813
+          }
+        ]
+      },
+      "46_wall panels_3_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/46/segments/46_wall panels_3_nopoint.png",
+        "matches": [
+          {
+            "predicted_object": "Laevateinn",
+            "object_version": 3,
+            "similarity_score": 0.7109552621841431
+          }
+        ]
+      },
+      "46_shoulder armor_2_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/46/segments/46_shoulder armor_2_nopoint.png",
+        "matches": []
+      }
+    },
+    "63": {
+      "63_wall paneling_3_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/63/segments/63_wall paneling_3_nopoint.png",
+        "matches": [
+          {
+            "predicted_object": "Laevateinn",
+            "object_version": 3,
+            "similarity_score": 0.7064483165740967
+          }
+        ]
+      },
+      "63_white decorations_1_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/63/segments/63_white decorations_1_nopoint.png",
+        "matches": [
+          {
+            "predicted_object": "Asgardian device",
+            "object_version": 1,
+            "similarity_score": 0.706555962562561
+          }
+        ]
+      },
+      "63_jacket_2_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/63/segments/63_jacket_2_nopoint.png",
+        "matches": []
+      }
+    },
+    "1": {
+      "1_digital display_7_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/1/segments/1_digital display_7_nopoint.png",
+        "matches": []
+      },
+      "1_stuffed animal_4_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/1/segments/1_stuffed animal_4_nopoint.png",
+        "matches": []
+      },
+      "1_ornate mirror_0_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/1/segments/1_ornate mirror_0_nopoint.png",
+        "matches": []
+      },
+      "1_blue light_6_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/1/segments/1_blue light_6_nopoint.png",
+        "matches": []
+      },
+      "1_vest_1_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/1/segments/1_vest_1_nopoint.png",
+        "matches": []
+      },
+      "1_stuffed animal_5_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/1/segments/1_stuffed animal_5_nopoint.png",
+        "matches": [
+          {
+            "predicted_object": "Time Collar",
+            "object_version": 1,
+            "similarity_score": 0.7011703252792358
+          }
+        ]
+      },
+      "1_shoulder armor_2_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/1/segments/1_shoulder armor_2_nopoint.png",
+        "matches": []
+      },
+      "1_dagger held by person in mirror_3_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/1/segments/1_dagger held by person in mirror_3_nopoint.png",
+        "matches": [
+          {
+            "predicted_object": "Reset Charge",
+            "object_version": 1,
+            "similarity_score": 0.7287548184394836
+          }
+        ]
+      }
+    },
+    "83": {
+      "83_dark wall panels_6_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/83/segments/83_dark wall panels_6_nopoint.png",
+        "matches": []
+      },
+      "83_dark wall panels_5_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/83/segments/83_dark wall panels_5_nopoint.png",
+        "matches": [
+          {
+            "predicted_object": "Laevateinn",
+            "object_version": 3,
+            "similarity_score": 0.7078098058700562
+          }
+        ]
+      },
+      "83_armor in reflection_1_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/83/segments/83_armor in reflection_1_nopoint.png",
+        "matches": []
+      },
+      "83_ornate mirror_0_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/83/segments/83_ornate mirror_0_nopoint.png",
+        "matches": []
+      },
+      "83_shoulder armor_4_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/83/segments/83_shoulder armor_4_nopoint.png",
+        "matches": []
+      },
+      "83_black vest_3_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/83/segments/83_black vest_3_nopoint.png",
+        "matches": []
+      },
+      "83_dagger in reflection_2_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/83/segments/83_dagger in reflection_2_nopoint.png",
+        "matches": []
+      }
+    },
+    "52": {
+      "52_wall panel_5_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/52/segments/52_wall panel_5_nopoint.png",
+        "matches": []
+      },
+      "52_furry object_2_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/52/segments/52_furry object_2_nopoint.png",
+        "matches": []
+      },
+      "52_desk surface_6_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/52/segments/52_desk surface_6_nopoint.png",
+        "matches": []
+      },
+      "52_black vest_3_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/52/segments/52_black vest_3_nopoint.png",
+        "matches": []
+      },
+      "52_shoulder armor_4_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/52/segments/52_shoulder armor_4_nopoint.png",
+        "matches": []
+      },
+      "52_ornate round mirror_0_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/52/segments/52_ornate round mirror_0_nopoint.png",
+        "matches": []
+      }
+    },
+    "84": {
+      "84_dark wall panels_3_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/84/segments/84_dark wall panels_3_nopoint.png",
+        "matches": [
+          {
+            "predicted_object": "Laevateinn",
+            "object_version": 3,
+            "similarity_score": 0.7100091576576233
+          }
+        ]
+      },
+      "84_black clothing in reflection_5_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/84/segments/84_black clothing in reflection_5_nopoint.png",
+        "matches": [
+          {
+            "predicted_object": "Loki's Scepter",
+            "object_version": 3,
+            "similarity_score": 0.7282835245132446
+          }
+        ]
+      },
+      "84_fluffy white object_7_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/84/segments/84_fluffy white object_7_nopoint.png",
+        "matches": []
+      },
+      "84_shoulder armor_2_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/84/segments/84_shoulder armor_2_nopoint.png",
+        "matches": []
+      },
+      "84_ornate gold mirror_0_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/84/segments/84_ornate gold mirror_0_nopoint.png",
+        "matches": []
+      },
+      "84_black clothing_4_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/84/segments/84_black clothing_4_nopoint.png",
+        "matches": [
+          {
+            "predicted_object": "Laevateinn",
+            "object_version": 3,
+            "similarity_score": 0.7221521735191345
+          }
+        ]
+      }
+    },
+    "45": {
+      "45_Dark Wood Wall Paneling_2_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/45/segments/45_Dark Wood Wall Paneling_2_nopoint.png",
+        "matches": []
+      },
+      "45_Black Leather Jacket_4_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/45/segments/45_Black Leather Jacket_4_nopoint.png",
+        "matches": [
+          {
+            "predicted_object": "Loki's armor (THE AVENGERS)",
+            "object_version": 3,
+            "similarity_score": 0.7316164374351501
+          }
+        ]
+      },
+      "45_Light Wood Wall Paneling_0_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/45/segments/45_Light Wood Wall Paneling_0_nopoint.png",
+        "matches": []
+      },
+      "45_White Fuzzy Object_3_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/45/segments/45_White Fuzzy Object_3_nopoint.png",
+        "matches": []
+      },
+      "45_Ornate Mirror_1_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/45/segments/45_Ornate Mirror_1_nopoint.png",
+        "matches": []
+      },
+      "45_Right Shoulder Armor_5_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/45/segments/45_Right Shoulder Armor_5_nopoint.png",
+        "matches": []
+      }
+    },
+    "60": {
+      "60_wall panels_2_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/60/segments/60_wall panels_2_nopoint.png",
+        "matches": []
+      },
+      "60_wall panels_1_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/60/segments/60_wall panels_1_nopoint.png",
+        "matches": []
+      },
+      "60_dark surface_4_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/60/segments/60_dark surface_4_nopoint.png",
+        "matches": []
+      },
+      "60_dagger_5_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/60/segments/60_dagger_5_nopoint.png",
+        "matches": []
+      },
+      "60_fluffy object_6_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/60/segments/60_fluffy object_6_nopoint.png",
+        "matches": []
+      },
+      "60_ornate mirror_0_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/60/segments/60_ornate mirror_0_nopoint.png",
+        "matches": []
+      },
+      "60_armor_3_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/60/segments/60_armor_3_nopoint.png",
+        "matches": []
+      }
+    },
+    "25": {
+      "25_wall_0_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/25/segments/25_wall_0_nopoint.png",
+        "matches": []
+      },
+      "25_dark clothing with gold accents_2_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/25/segments/25_dark clothing with gold accents_2_nopoint.png",
+        "matches": []
+      },
+      "25_ornate circular mirror_1_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/25/segments/25_ornate circular mirror_1_nopoint.png",
+        "matches": []
+      }
+    },
+    "96": {
+      "96_wall paneling_3_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/96/segments/96_wall paneling_3_nopoint.png",
+        "matches": []
+      },
+      "96_shoulder armor_4_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/96/segments/96_shoulder armor_4_nopoint.png",
+        "matches": []
+      },
+      "96_lamp base_1_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/96/segments/96_lamp base_1_nopoint.png",
+        "matches": []
+      },
+      "96_held object in mirror_5_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/96/segments/96_held object in mirror_5_nopoint.png",
+        "matches": []
+      },
+      "96_wall paneling_2_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/96/segments/96_wall paneling_2_nopoint.png",
+        "matches": []
+      },
+      "96_large round mirror_0_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/96/segments/96_large round mirror_0_nopoint.png",
+        "matches": []
+      }
+    },
+    "75": {
+      "75_ornate mirror_0_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/75/segments/75_ornate mirror_0_nopoint.png",
+        "matches": []
+      },
+      "75_dark blue object_2_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/75/segments/75_dark blue object_2_nopoint.png",
+        "matches": [
+          {
+            "predicted_object": "Laevateinn",
+            "object_version": 3,
+            "similarity_score": 0.739295482635498
+          }
+        ]
+      },
+      "75_black vest_3_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/75/segments/75_black vest_3_nopoint.png",
+        "matches": [
+          {
+            "predicted_object": "Loki's armor (THE AVENGERS)",
+            "object_version": 3,
+            "similarity_score": 0.7233030796051025
+          }
+        ]
+      },
+      "75_wall paneling_1_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/75/segments/75_wall paneling_1_nopoint.png",
+        "matches": []
+      }
+    },
+    "90": {
+      "90_lamp shade_3_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/90/segments/90_lamp shade_3_nopoint.png",
+        "matches": [
+          {
+            "predicted_object": "Tesseract",
+            "object_version": 1,
+            "similarity_score": 0.7242381572723389
+          }
+        ]
+      },
+      "90_wall paneling_4_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/90/segments/90_wall paneling_4_nopoint.png",
+        "matches": [
+          {
+            "predicted_object": "Boastful Loki's hammer",
+            "object_version": 1,
+            "similarity_score": 0.7016286253929138
+          }
+        ]
+      },
+      "90_lamp shade_1_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/90/segments/90_lamp shade_1_nopoint.png",
+        "matches": []
+      },
+      "90_shoulder armor_6_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/90/segments/90_shoulder armor_6_nopoint.png",
+        "matches": []
+      },
+      "90_ornate mirror_0_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/90/segments/90_ornate mirror_0_nopoint.png",
+        "matches": []
+      },
+      "90_clothing_5_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/90/segments/90_clothing_5_nopoint.png",
+        "matches": []
+      },
+      "90_lamp base_2_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/90/segments/90_lamp base_2_nopoint.png",
+        "matches": []
+      },
+      "90_dagger_7_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/90/segments/90_dagger_7_nopoint.png",
+        "matches": []
+      }
+    },
+    "98": {
+      "98_Clothing_1_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/98/segments/98_Clothing_1_nopoint.png",
+        "matches": [
+          {
+            "predicted_object": "Loki's armor (THE AVENGERS)",
+            "object_version": 3,
+            "similarity_score": 0.7315768599510193
+          }
+        ]
+      },
+      "98_Mirror_0_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/98/segments/98_Mirror_0_nopoint.png",
+        "matches": []
+      }
+    },
+    "101": {
+      "101_Decorative Mirror_0_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/101/segments/101_Decorative Mirror_0_nopoint.png",
+        "matches": []
+      },
+      "101_Clothing_1_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/101/segments/101_Clothing_1_nopoint.png",
+        "matches": [
+          {
+            "predicted_object": "Loki's armor (THE AVENGERS)",
+            "object_version": 3,
+            "similarity_score": 0.7503799200057983
+          }
+        ]
+      }
+    },
+    "56": {
+      "56_wall paneling_7_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/56/segments/56_wall paneling_7_nopoint.png",
+        "matches": []
+      },
+      "56_wall paneling_6_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/56/segments/56_wall paneling_6_nopoint.png",
+        "matches": [
+          {
+            "predicted_object": "Reset Charge",
+            "object_version": 2,
+            "similarity_score": 0.7099018096923828
+          }
+        ]
+      },
+      "56_fuzzy object_5_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/56/segments/56_fuzzy object_5_nopoint.png",
+        "matches": [
+          {
+            "predicted_object": "Time Collar",
+            "object_version": 2,
+            "similarity_score": 0.7044954299926758
+          }
+        ]
+      },
+      "56_dagger reflected in mirror_1_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/56/segments/56_dagger reflected in mirror_1_nopoint.png",
+        "matches": []
+      },
+      "56_ornate gold mirror_0_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/56/segments/56_ornate gold mirror_0_nopoint.png",
+        "matches": []
+      },
+      "56_shoulder armor_3_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/56/segments/56_shoulder armor_3_nopoint.png",
+        "matches": []
+      },
+      "56_black armor_4_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/56/segments/56_black armor_4_nopoint.png",
+        "matches": []
+      }
+    },
+    "29": {
+      "29_wall_1_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/29/segments/29_wall_1_nopoint.png",
+        "matches": [
+          {
+            "predicted_object": "Loki's armor (THE AVENGERS)",
+            "object_version": 1,
+            "similarity_score": 0.7166539430618286
+          }
+        ]
+      },
+      "29_clothing_2_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/29/segments/29_clothing_2_nopoint.png",
+        "matches": [
+          {
+            "predicted_object": "Asgardian device",
+            "object_version": 1,
+            "similarity_score": 0.7160941362380981
+          }
+        ]
+      },
+      "29_circular metal object_0_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/29/segments/29_circular metal object_0_nopoint.png",
+        "matches": []
+      }
+    },
+    "62": {
+      "62_Stuffed owl_1_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/62/segments/62_Stuffed owl_1_nopoint.png",
+        "matches": []
+      },
+      "62_Wall paneling_2_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/62/segments/62_Wall paneling_2_nopoint.png",
+        "matches": []
+      },
+      "62_Large decorative mirror_0_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/62/segments/62_Large decorative mirror_0_nopoint.png",
+        "matches": []
+      }
+    },
+    "70": {
+      "70_Blue and gold circular object_0_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/70/segments/70_Blue and gold circular object_0_nopoint.png",
+        "matches": []
+      }
+    },
+    "74": {
+      "74_blue circular shield_0_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/74/segments/74_blue circular shield_0_nopoint.png",
+        "matches": []
+      }
+    },
+    "100": {
+      "100_Circular mirror_0_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/100/segments/100_Circular mirror_0_nopoint.png",
+        "matches": []
+      },
+      "100_Clothing_1_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/100/segments/100_Clothing_1_nopoint.png",
+        "matches": [
+          {
+            "predicted_object": "Loki's armor (THE AVENGERS)",
+            "object_version": 3,
+            "similarity_score": 0.7946698069572449
+          }
+        ]
+      }
+    },
+    "72": {
+      "72_Blue and brown circular object_0_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/72/segments/72_Blue and brown circular object_0_nopoint.png",
+        "matches": []
+      }
+    },
+    "4": {
+      "4_Clapperboard_1_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/4/segments/4_Clapperboard_1_nopoint.png",
+        "matches": []
+      },
+      "4_Decorative Wheel_0_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/4/segments/4_Decorative Wheel_0_nopoint.png",
+        "matches": []
+      }
+    },
+    "2": {
+      "2_text overlay_12_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/2/segments/2_text overlay_12_nopoint.png",
+        "matches": [
+          {
+            "predicted_object": "Reset Charge",
+            "object_version": 2,
+            "similarity_score": 0.7195439338684082
+          }
+        ]
+      },
+      "2_text overlay_7_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/2/segments/2_text overlay_7_nopoint.png",
+        "matches": [
+          {
+            "predicted_object": "Laevateinn",
+            "object_version": 3,
+            "similarity_score": 0.7179802656173706
+          }
+        ]
+      },
+      "2_text overlay_10_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/2/segments/2_text overlay_10_nopoint.png",
+        "matches": []
+      },
+      "2_ornate wall mirror_0_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/2/segments/2_ornate wall mirror_0_nopoint.png",
+        "matches": []
+      },
+      "2_rectangular screen_3_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/2/segments/2_rectangular screen_3_nopoint.png",
+        "matches": []
+      }
+    },
+    "53": {
+      "53_blue-lit object in mirror reflection_4_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/53/segments/53_blue-lit object in mirror reflection_4_nopoint.png",
+        "matches": []
+      },
+      "53_fluffy object_1_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/53/segments/53_fluffy object_1_nopoint.png",
+        "matches": []
+      },
+      "53_dark panel_2_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/53/segments/53_dark panel_2_nopoint.png",
+        "matches": []
+      },
+      "53_shoulder armor_3_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/53/segments/53_shoulder armor_3_nopoint.png",
+        "matches": []
+      },
+      "53_ornate gold mirror_0_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/53/segments/53_ornate gold mirror_0_nopoint.png",
+        "matches": []
+      }
+    },
+    "17": {
+      "17_wall panels_5_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/17/segments/17_wall panels_5_nopoint.png",
+        "matches": [
+          {
+            "predicted_object": "Laevateinn",
+            "object_version": 3,
+            "similarity_score": 0.7029825448989868
+          }
+        ]
+      },
+      "17_ornate gold mirror_0_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/17/segments/17_ornate gold mirror_0_nopoint.png",
+        "matches": []
+      },
+      "17_weapon (in mirror reflection)_1_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/17/segments/17_weapon (in mirror reflection)_1_nopoint.png",
+        "matches": []
+      },
+      "17_shoulder armor_2_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/17/segments/17_shoulder armor_2_nopoint.png",
+        "matches": []
+      },
+      "17_desk_3_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/17/segments/17_desk_3_nopoint.png",
+        "matches": [
+          {
+            "predicted_object": "Laevateinn",
+            "object_version": 3,
+            "similarity_score": 0.7098909020423889
+          }
+        ]
+      }
+    },
+    "33": {
+      "33_Dark rectangular object_2_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/33/segments/33_Dark rectangular object_2_nopoint.png",
+        "matches": []
+      },
+      "33_Wooden wall paneling_0_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/33/segments/33_Wooden wall paneling_0_nopoint.png",
+        "matches": [
+          {
+            "predicted_object": "Laevateinn",
+            "object_version": 3,
+            "similarity_score": 0.7056268453598022
+          }
+        ]
+      },
+      "33_Blue and gold circular object_1_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/33/segments/33_Blue and gold circular object_1_nopoint.png",
+        "matches": []
+      }
+    },
+    "7": {
+      "7_jacket with red lettering_2_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/7/segments/7_jacket with red lettering_2_nopoint.png",
+        "matches": [
+          {
+            "predicted_object": "Asgardian device",
+            "object_version": 1,
+            "similarity_score": 0.7060238718986511
+          }
+        ]
+      },
+      "7_circular object with holes_1_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/7/segments/7_circular object with holes_1_nopoint.png",
+        "matches": []
+      },
+      "7_wooden wall paneling_0_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/7/segments/7_wooden wall paneling_0_nopoint.png",
+        "matches": [
+          {
+            "predicted_object": "Laevateinn",
+            "object_version": 3,
+            "similarity_score": 0.7059005498886108
+          }
+        ]
+      },
+      "7_dark sleeve_3_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/7/segments/7_dark sleeve_3_nopoint.png",
+        "matches": []
+      }
+    },
+    "81": {
+      "81_shoulder armor in mirror_4_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/81/segments/81_shoulder armor in mirror_4_nopoint.png",
+        "matches": [
+          {
+            "predicted_object": "Time Collar",
+            "object_version": 2,
+            "similarity_score": 0.7024191617965698
+          }
+        ]
+      },
+      "81_fluffy object_3_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/81/segments/81_fluffy object_3_nopoint.png",
+        "matches": []
+      },
+      "81_dagger in mirror_5_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/81/segments/81_dagger in mirror_5_nopoint.png",
+        "matches": []
+      },
+      "81_gold shoulder armor_2_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/81/segments/81_gold shoulder armor_2_nopoint.png",
+        "matches": [
+          {
+            "predicted_object": "Reset Charge",
+            "object_version": 1,
+            "similarity_score": 0.7010666728019714
+          }
+        ]
+      },
+      "81_ornate mirror_0_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/81/segments/81_ornate mirror_0_nopoint.png",
+        "matches": []
+      },
+      "81_black vest_1_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/81/segments/81_black vest_1_nopoint.png",
+        "matches": []
+      }
+    },
+    "47": {
+      "47_clothing_3_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/47/segments/47_clothing_3_nopoint.png",
+        "matches": []
+      },
+      "47_ornate mirror_0_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/47/segments/47_ornate mirror_0_nopoint.png",
+        "matches": []
+      },
+      "47_shoulder armor_2_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/47/segments/47_shoulder armor_2_nopoint.png",
+        "matches": []
+      },
+      "47_weapon_1_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/47/segments/47_weapon_1_nopoint.png",
+        "matches": []
+      }
+    },
+    "103": {
+      "103_Black armor_1_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/103/segments/103_Black armor_1_nopoint.png",
+        "matches": [
+          {
+            "predicted_object": "Asgardian device",
+            "object_version": 1,
+            "similarity_score": 0.7000195384025574
+          }
+        ]
+      },
+      "103_Circular blue-holed object_0_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/103/segments/103_Circular blue-holed object_0_nopoint.png",
+        "matches": []
+      }
+    },
+    "108": {
+      "108_Blue and tan circular object_0_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/108/segments/108_Blue and tan circular object_0_nopoint.png",
+        "matches": []
+      },
+      "108_Wall_2_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/108/segments/108_Wall_2_nopoint.png",
+        "matches": [
+          {
+            "predicted_object": "Laevateinn",
+            "object_version": 3,
+            "similarity_score": 0.7335511445999146
+          }
+        ]
+      },
+      "108_Dark furniture_1_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/108/segments/108_Dark furniture_1_nopoint.png",
+        "matches": []
+      }
+    },
+    "39": {
+      "39_shoulder armor_3_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/39/segments/39_shoulder armor_3_nopoint.png",
+        "matches": []
+      },
+      "39_wall paneling left_2_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/39/segments/39_wall paneling left_2_nopoint.png",
+        "matches": []
+      },
+      "39_ornate mirror_0_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/39/segments/39_ornate mirror_0_nopoint.png",
+        "matches": []
+      },
+      "39_glowing device reflection_4_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/39/segments/39_glowing device reflection_4_nopoint.png",
+        "matches": []
+      }
+    },
+    "35": {
+      "35_blue and gold decorative object_0_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/35/segments/35_blue and gold decorative object_0_nopoint.png",
+        "matches": []
+      },
+      "35_wall paneling_1_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/35/segments/35_wall paneling_1_nopoint.png",
+        "matches": [
+          {
+            "predicted_object": "Laevateinn",
+            "object_version": 3,
+            "similarity_score": 0.7400569319725037
+          }
+        ]
+      },
+      "35_dark furniture_2_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/35/segments/35_dark furniture_2_nopoint.png",
+        "matches": []
+      }
+    },
+    "38": {
+      "38_wall paneling_4_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/38/segments/38_wall paneling_4_nopoint.png",
+        "matches": [
+          {
+            "predicted_object": "Loki's armor (THE AVENGERS)",
+            "object_version": 1,
+            "similarity_score": 0.7026775479316711
+          }
+        ]
+      },
+      "38_glowing blue object_3_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/38/segments/38_glowing blue object_3_nopoint.png",
+        "matches": []
+      },
+      "38_armor_2_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/38/segments/38_armor_2_nopoint.png",
+        "matches": []
+      },
+      "38_blue chair_1_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/38/segments/38_blue chair_1_nopoint.png",
+        "matches": [
+          {
+            "predicted_object": "Laevateinn",
+            "object_version": 3,
+            "similarity_score": 0.734481930732727
+          }
+        ]
+      },
+      "38_ornate gold mirror_0_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/38/segments/38_ornate gold mirror_0_nopoint.png",
+        "matches": []
+      }
+    },
+    "113": {
+      "113_circular blue and brown object_0_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/113/segments/113_circular blue and brown object_0_nopoint.png",
+        "matches": []
+      },
+      "113_dark rectangular object_1_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/113/segments/113_dark rectangular object_1_nopoint.png",
+        "matches": []
+      },
+      "113_wall_2_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/113/segments/113_wall_2_nopoint.png",
+        "matches": [
+          {
+            "predicted_object": "Laevateinn",
+            "object_version": 3,
+            "similarity_score": 0.7084089517593384
+          }
+        ]
+      }
+    },
+    "24": {
+      "24_wall paneling_0_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/24/segments/24_wall paneling_0_nopoint.png",
+        "matches": [
+          {
+            "predicted_object": "Laevateinn",
+            "object_version": 3,
+            "similarity_score": 0.7437167763710022
+          }
+        ]
+      },
+      "24_large ornate mirror_1_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/24/segments/24_large ornate mirror_1_nopoint.png",
+        "matches": []
+      },
+      "24_small gold object_4_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/24/segments/24_small gold object_4_nopoint.png",
+        "matches": []
+      },
+      "24_shoulder armor_3_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/24/segments/24_shoulder armor_3_nopoint.png",
+        "matches": []
+      },
+      "24_smaller mirror_2_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/24/segments/24_smaller mirror_2_nopoint.png",
+        "matches": []
+      }
+    },
+    "111": {
+      "111_Dark Rectangular Object_2_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/111/segments/111_Dark Rectangular Object_2_nopoint.png",
+        "matches": []
+      },
+      "111_Wall_1_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/111/segments/111_Wall_1_nopoint.png",
+        "matches": [
+          {
+            "predicted_object": "Laevateinn",
+            "object_version": 3,
+            "similarity_score": 0.7140472531318665
+          }
+        ]
+      },
+      "111_Blue and Brown Circular Object_0_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/111/segments/111_Blue and Brown Circular Object_0_nopoint.png",
+        "matches": []
+      }
+    },
+    "8": {
+      "8_Dagger_3_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/8/segments/8_Dagger_3_nopoint.png",
+        "matches": []
+      },
+      "8_Shoulder Armor_4_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/8/segments/8_Shoulder Armor_4_nopoint.png",
+        "matches": []
+      },
+      "8_Black Rectangular Object_2_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/8/segments/8_Black Rectangular Object_2_nopoint.png",
+        "matches": [
+          {
+            "predicted_object": "Laevateinn",
+            "object_version": 3,
+            "similarity_score": 0.7564676403999329
+          }
+        ]
+      },
+      "8_Ornate Mirror Frame_0_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/8/segments/8_Ornate Mirror Frame_0_nopoint.png",
+        "matches": []
+      },
+      "8_Central Mirror_1_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/8/segments/8_Central Mirror_1_nopoint.png",
+        "matches": []
+      }
+    },
+    "49": {
+      "49_shoulder armor_3_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/49/segments/49_shoulder armor_3_nopoint.png",
+        "matches": []
+      },
+      "49_wall panel_1_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/49/segments/49_wall panel_1_nopoint.png",
+        "matches": [
+          {
+            "predicted_object": "Laevateinn",
+            "object_version": 3,
+            "similarity_score": 0.7177190780639648
+          }
+        ]
+      },
+      "49_fluffy object_5_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/49/segments/49_fluffy object_5_nopoint.png",
+        "matches": []
+      },
+      "49_ornate round mirror_0_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/49/segments/49_ornate round mirror_0_nopoint.png",
+        "matches": []
+      },
+      "49_wall panel_2_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/49/segments/49_wall panel_2_nopoint.png",
+        "matches": [
+          {
+            "predicted_object": "Laevateinn",
+            "object_version": 3,
+            "similarity_score": 0.7090796828269958
+          }
+        ]
+      },
+      "49_weapon reflected in mirror_4_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/49/segments/49_weapon reflected in mirror_4_nopoint.png",
+        "matches": []
+      }
+    },
+    "69": {
+      "69_Blue and gold patterned object_0_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/69/segments/69_Blue and gold patterned object_0_nopoint.png",
+        "matches": []
+      }
+    },
+    "68": {
+      "68_Blue and gold decorative object_0_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/68/segments/68_Blue and gold decorative object_0_nopoint.png",
+        "matches": []
+      },
+      "68_Blurry object_1_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/68/segments/68_Blurry object_1_nopoint.png",
+        "matches": [
+          {
+            "predicted_object": "Laevateinn",
+            "object_version": 3,
+            "similarity_score": 0.7244511842727661
+          }
+        ]
+      }
+    },
+    "16": {
+      "16_armor_1_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/16/segments/16_armor_1_nopoint.png",
+        "matches": [
+          {
+            "predicted_object": "Loki's armor (THE AVENGERS)",
+            "object_version": 2,
+            "similarity_score": 0.7352803349494934
+          }
+        ]
+      },
+      "16_wall panel_5_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/16/segments/16_wall panel_5_nopoint.png",
+        "matches": [
+          {
+            "predicted_object": "Laevateinn",
+            "object_version": 3,
+            "similarity_score": 0.7379276752471924
+          }
+        ]
+      },
+      "16_small white objects on table_3_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/16/segments/16_small white objects on table_3_nopoint.png",
+        "matches": []
+      },
+      "16_wall panel_4_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/16/segments/16_wall panel_4_nopoint.png",
+        "matches": []
+      },
+      "16_ornate mirror_0_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/16/segments/16_ornate mirror_0_nopoint.png",
+        "matches": []
+      },
+      "16_armor_2_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/16/segments/16_armor_2_nopoint.png",
+        "matches": []
+      }
+    },
+    "21": {
+      "21_wall panels_0_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/21/segments/21_wall panels_0_nopoint.png",
+        "matches": [
+          {
+            "predicted_object": "Laevateinn",
+            "object_version": 3,
+            "similarity_score": 0.7215577960014343
+          }
+        ]
+      },
+      "21_lamp base_3_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/21/segments/21_lamp base_3_nopoint.png",
+        "matches": [
+          {
+            "predicted_object": "Time Collar",
+            "object_version": 1,
+            "similarity_score": 0.7252377867698669
+          }
+        ]
+      },
+      "21_fluffy object_4_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/21/segments/21_fluffy object_4_nopoint.png",
+        "matches": []
+      },
+      "21_ornate mirror_1_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/21/segments/21_ornate mirror_1_nopoint.png",
+        "matches": []
+      },
+      "21_shoulder armor_2_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/21/segments/21_shoulder armor_2_nopoint.png",
+        "matches": []
+      }
+    },
+    "57": {
+      "57_dark rectangular object_2_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/57/segments/57_dark rectangular object_2_nopoint.png",
+        "matches": []
+      },
+      "57_wall paneling_1_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/57/segments/57_wall paneling_1_nopoint.png",
+        "matches": []
+      },
+      "57_weapon_5_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/57/segments/57_weapon_5_nopoint.png",
+        "matches": []
+      },
+      "57_fluffy object_6_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/57/segments/57_fluffy object_6_nopoint.png",
+        "matches": []
+      },
+      "57_large round mirror_0_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/57/segments/57_large round mirror_0_nopoint.png",
+        "matches": []
+      },
+      "57_shoulder armor_4_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/57/segments/57_shoulder armor_4_nopoint.png",
+        "matches": []
+      },
+      "57_black vest_3_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/57/segments/57_black vest_3_nopoint.png",
+        "matches": []
+      }
+    },
+    "5": {
+      "5_clapperboard_1_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/5/segments/5_clapperboard_1_nopoint.png",
+        "matches": [
+          {
+            "predicted_object": "Reset Charge",
+            "object_version": 2,
+            "similarity_score": 0.7292190194129944
+          }
+        ]
+      },
+      "5_large circular object with blue holes_0_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/5/segments/5_large circular object with blue holes_0_nopoint.png",
+        "matches": []
+      },
+      "5_wooden wall_2_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/5/segments/5_wooden wall_2_nopoint.png",
+        "matches": [
+          {
+            "predicted_object": "Laevateinn",
+            "object_version": 3,
+            "similarity_score": 0.7305604219436646
+          }
+        ]
+      }
+    },
+    "34": {
+      "34_Blue furniture_2_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/34/segments/34_Blue furniture_2_nopoint.png",
+        "matches": []
+      },
+      "34_Round blue and gold object_0_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/34/segments/34_Round blue and gold object_0_nopoint.png",
+        "matches": []
+      },
+      "34_Wall_1_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/34/segments/34_Wall_1_nopoint.png",
+        "matches": [
+          {
+            "predicted_object": "Laevateinn",
+            "object_version": 3,
+            "similarity_score": 0.7452794313430786
+          }
+        ]
+      }
+    },
+    "30": {
+      "30_Jacket_1_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/30/segments/30_Jacket_1_nopoint.png",
+        "matches": [
+          {
+            "predicted_object": "Aligator Loki Plushie",
+            "object_version": 1,
+            "similarity_score": 0.7009880542755127
+          }
+        ]
+      },
+      "30_Circular metallic object_0_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/30/segments/30_Circular metallic object_0_nopoint.png",
+        "matches": []
+      }
+    },
+    "91": {
+      "91_Dark Table_3_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/91/segments/91_Dark Table_3_nopoint.png",
+        "matches": [
+          {
+            "predicted_object": "Time Collar",
+            "object_version": 1,
+            "similarity_score": 0.7350326776504517
+          }
+        ]
+      },
+      "91_Dark Panel_4_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/91/segments/91_Dark Panel_4_nopoint.png",
+        "matches": [
+          {
+            "predicted_object": "Laevateinn",
+            "object_version": 3,
+            "similarity_score": 0.7496185302734375
+          }
+        ]
+      },
+      "91_Dagger_7_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/91/segments/91_Dagger_7_nopoint.png",
+        "matches": []
+      },
+      "91_Ribbed Wall Panel_1_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/91/segments/91_Ribbed Wall Panel_1_nopoint.png",
+        "matches": [
+          {
+            "predicted_object": "Laevateinn",
+            "object_version": 3,
+            "similarity_score": 0.7369667291641235
+          }
+        ]
+      },
+      "91_Black Vest_8_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/91/segments/91_Black Vest_8_nopoint.png",
+        "matches": []
+      },
+      "91_Ornate Mirror_0_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/91/segments/91_Ornate Mirror_0_nopoint.png",
+        "matches": []
+      },
+      "91_Furry Object_6_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/91/segments/91_Furry Object_6_nopoint.png",
+        "matches": []
+      },
+      "91_Shoulder Armor_5_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/91/segments/91_Shoulder Armor_5_nopoint.png",
+        "matches": []
+      }
+    },
+    "65": {
+      "65_Circular decorative wall object_0_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/65/segments/65_Circular decorative wall object_0_nopoint.png",
+        "matches": []
+      },
+      "65_Black jacket_2_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/65/segments/65_Black jacket_2_nopoint.png",
+        "matches": [
+          {
+            "predicted_object": "Loki's armor (THE AVENGERS)",
+            "object_version": 3,
+            "similarity_score": 0.7558983564376831
+          }
+        ]
+      },
+      "65_Wall paneling_1_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/65/segments/65_Wall paneling_1_nopoint.png",
+        "matches": []
+      }
+    },
+    "106": {
+      "106_Circular blue and brown object_0_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/106/segments/106_Circular blue and brown object_0_nopoint.png",
+        "matches": [
+          {
+            "predicted_object": "Time Collar",
+            "object_version": 1,
+            "similarity_score": 0.701403021812439
+          }
+        ]
+      },
+      "106_Dark rectangular object_1_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/106/segments/106_Dark rectangular object_1_nopoint.png",
+        "matches": []
+      },
+      "106_Wall_2_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/106/segments/106_Wall_2_nopoint.png",
+        "matches": []
+      }
+    },
+    "51": {
+      "51_lamp_2_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/51/segments/51_lamp_2_nopoint.png",
+        "matches": []
+      },
+      "51_wall paneling_4_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/51/segments/51_wall paneling_4_nopoint.png",
+        "matches": []
+      },
+      "51_text overlay_8_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/51/segments/51_text overlay_8_nopoint.png",
+        "matches": []
+      },
+      "51_weapon reflection in mirror_5_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/51/segments/51_weapon reflection in mirror_5_nopoint.png",
+        "matches": []
+      },
+      "51_weapon held by person_1_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/51/segments/51_weapon held by person_1_nopoint.png",
+        "matches": []
+      },
+      "51_shoulder armor reflection in mirror_6_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/51/segments/51_shoulder armor reflection in mirror_6_nopoint.png",
+        "matches": []
+      },
+      "51_shoulder armor_3_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/51/segments/51_shoulder armor_3_nopoint.png",
+        "matches": []
+      },
+      "51_ornate mirror_0_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/51/segments/51_ornate mirror_0_nopoint.png",
+        "matches": []
+      }
+    },
+    "23": {
+      "23_wall paneling_4_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/23/segments/23_wall paneling_4_nopoint.png",
+        "matches": [
+          {
+            "predicted_object": "Laevateinn",
+            "object_version": 3,
+            "similarity_score": 0.7306474447250366
+          }
+        ]
+      },
+      "23_table lamp base_3_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/23/segments/23_table lamp base_3_nopoint.png",
+        "matches": []
+      },
+      "23_ornate circular mirror_0_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/23/segments/23_ornate circular mirror_0_nopoint.png",
+        "matches": []
+      },
+      "23_shoulder armor_2_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/23/segments/23_shoulder armor_2_nopoint.png",
+        "matches": []
+      },
+      "23_metallic object with blue light_1_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/23/segments/23_metallic object with blue light_1_nopoint.png",
+        "matches": []
+      },
+      "23_dark clothing_5_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/23/segments/23_dark clothing_5_nopoint.png",
+        "matches": []
+      }
+    },
+    "6": {
+      "6_clapperboard_1_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/6/segments/6_clapperboard_1_nopoint.png",
+        "matches": [
+          {
+            "predicted_object": "Reset Charge",
+            "object_version": 2,
+            "similarity_score": 0.728447437286377
+          }
+        ]
+      },
+      "6_decorative wheel_0_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/6/segments/6_decorative wheel_0_nopoint.png",
+        "matches": []
+      }
+    },
+    "102": {
+      "102_Wall_1_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/102/segments/102_Wall_1_nopoint.png",
+        "matches": [
+          {
+            "predicted_object": "Time Collar",
+            "object_version": 1,
+            "similarity_score": 0.7043346166610718
+          }
+        ]
+      },
+      "102_Armor_2_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/102/segments/102_Armor_2_nopoint.png",
+        "matches": [
+          {
+            "predicted_object": "Aligator Loki Plushie",
+            "object_version": 3,
+            "similarity_score": 0.729668140411377
+          }
+        ]
+      },
+      "102_Circular metallic object_0_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/102/segments/102_Circular metallic object_0_nopoint.png",
+        "matches": []
+      }
+    },
+    "27": {
+      "27_Black and green jacket_1_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/27/segments/27_Black and green jacket_1_nopoint.png",
+        "matches": [
+          {
+            "predicted_object": "Loki's armor (THE AVENGERS)",
+            "object_version": 3,
+            "similarity_score": 0.8189345002174377
+          }
+        ]
+      },
+      "27_Circular decorative object_0_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/27/segments/27_Circular decorative object_0_nopoint.png",
+        "matches": []
+      }
+    },
+    "31": {
+      "31_Circular Wall Art_0_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/31/segments/31_Circular Wall Art_0_nopoint.png",
+        "matches": []
+      },
+      "31_Dark Furniture_1_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/31/segments/31_Dark Furniture_1_nopoint.png",
+        "matches": []
+      },
+      "31_Wall_2_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/31/segments/31_Wall_2_nopoint.png",
+        "matches": [
+          {
+            "predicted_object": "Laevateinn",
+            "object_version": 3,
+            "similarity_score": 0.7256023287773132
+          }
+        ]
+      }
+    },
+    "109": {
+      "109_blue and gold circular object_0_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/109/segments/109_blue and gold circular object_0_nopoint.png",
+        "matches": []
+      },
+      "109_dark furniture_1_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/109/segments/109_dark furniture_1_nopoint.png",
+        "matches": []
+      },
+      "109_wall_2_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/109/segments/109_wall_2_nopoint.png",
+        "matches": [
+          {
+            "predicted_object": "Laevateinn",
+            "object_version": 3,
+            "similarity_score": 0.7730182409286499
+          }
+        ]
+      }
+    },
+    "71": {
+      "71_Blue and gold patterned object_0_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/71/segments/71_Blue and gold patterned object_0_nopoint.png",
+        "matches": []
+      }
+    },
+    "32": {
+      "32_circular object with blue holes_0_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/32/segments/32_circular object with blue holes_0_nopoint.png",
+        "matches": []
+      },
+      "32_dark furniture_1_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/32/segments/32_dark furniture_1_nopoint.png",
+        "matches": [
+          {
+            "predicted_object": "Time Collar",
+            "object_version": 1,
+            "similarity_score": 0.7008816003799438
+          }
+        ]
+      }
+    },
+    "89": {
+      "89_blue fabric_2_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/89/segments/89_blue fabric_2_nopoint.png",
+        "matches": [
+          {
+            "predicted_object": "Laevateinn",
+            "object_version": 3,
+            "similarity_score": 0.7724193334579468
+          }
+        ]
+      },
+      "89_small gold object_3_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/89/segments/89_small gold object_3_nopoint.png",
+        "matches": [
+          {
+            "predicted_object": "Time Collar",
+            "object_version": 1,
+            "similarity_score": 0.7279398441314697
+          }
+        ]
+      },
+      "89_shoulder armor_5_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/89/segments/89_shoulder armor_5_nopoint.png",
+        "matches": []
+      },
+      "89_vest_4_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/89/segments/89_vest_4_nopoint.png",
+        "matches": []
+      },
+      "89_wall paneling_0_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/89/segments/89_wall paneling_0_nopoint.png",
+        "matches": []
+      },
+      "89_ornate mirror_1_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/89/segments/89_ornate mirror_1_nopoint.png",
+        "matches": []
+      },
+      "89_armor piece in reflection_6_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/89/segments/89_armor piece in reflection_6_nopoint.png",
+        "matches": []
+      }
+    },
+    "0": {
+      "0_wall paneling_1_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/0/segments/0_wall paneling_1_nopoint.png",
+        "matches": [
+          {
+            "predicted_object": "Laevateinn",
+            "object_version": 3,
+            "similarity_score": 0.705419659614563
+          }
+        ]
+      },
+      "0_stuffed animal_4_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/0/segments/0_stuffed animal_4_nopoint.png",
+        "matches": []
+      },
+      "0_ornate circular mirror_0_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/0/segments/0_ornate circular mirror_0_nopoint.png",
+        "matches": []
+      },
+      "0_weapon with blue light_2_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/0/segments/0_weapon with blue light_2_nopoint.png",
+        "matches": [
+          {
+            "predicted_object": "Reset Charge",
+            "object_version": 1,
+            "similarity_score": 0.725791335105896
+          }
+        ]
+      }
+    },
+    "37": {
+      "37_Wall_0_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/37/segments/37_Wall_0_nopoint.png",
+        "matches": [
+          {
+            "predicted_object": "Time Collar",
+            "object_version": 1,
+            "similarity_score": 0.7038979530334473
+          }
+        ]
+      },
+      "37_Chair_2_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/37/segments/37_Chair_2_nopoint.png",
+        "matches": [
+          {
+            "predicted_object": "Aligator Loki Plushie",
+            "object_version": 3,
+            "similarity_score": 0.702606201171875
+          }
+        ]
+      },
+      "37_Furniture_1_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/37/segments/37_Furniture_1_nopoint.png",
+        "matches": []
+      }
+    },
+    "3": {
+      "3_clapperboard_1_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/3/segments/3_clapperboard_1_nopoint.png",
+        "matches": [
+          {
+            "predicted_object": "Reset Charge",
+            "object_version": 1,
+            "similarity_score": 0.7188489437103271
+          }
+        ]
+      },
+      "3_circular mirror_0_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/3/segments/3_circular mirror_0_nopoint.png",
+        "matches": []
+      }
+    },
+    "36": {
+      "36_Blue and gold decorative wall object_0_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/36/segments/36_Blue and gold decorative wall object_0_nopoint.png",
+        "matches": []
+      },
+      "36_Dark furniture_1_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/36/segments/36_Dark furniture_1_nopoint.png",
+        "matches": []
+      },
+      "36_Dark object (right)_3_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/36/segments/36_Dark object (right)_3_nopoint.png",
+        "matches": [
+          {
+            "predicted_object": "Reset Charge",
+            "object_version": 1,
+            "similarity_score": 0.7048957347869873
+          }
+        ]
+      }
+    },
+    "26": {
+      "26_clothing_2_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/26/segments/26_clothing_2_nopoint.png",
+        "matches": [
+          {
+            "predicted_object": "Loki's armor (THE AVENGERS)",
+            "object_version": 3,
+            "similarity_score": 0.7511404156684875
+          }
+        ]
+      },
+      "26_flowers_3_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/26/segments/26_flowers_3_nopoint.png",
+        "matches": []
+      },
+      "26_wall paneling_1_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/26/segments/26_wall paneling_1_nopoint.png",
+        "matches": []
+      },
+      "26_circular mirror_0_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/26/segments/26_circular mirror_0_nopoint.png",
+        "matches": []
+      }
+    },
+    "76": {
+      "76_table lamp_4_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/76/segments/76_table lamp_4_nopoint.png",
+        "matches": [
+          {
+            "predicted_object": "Time Collar",
+            "object_version": 1,
+            "similarity_score": 0.7070518732070923
+          }
+        ]
+      },
+      "76_side table_3_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/76/segments/76_side table_3_nopoint.png",
+        "matches": [
+          {
+            "predicted_object": "Time Collar",
+            "object_version": 1,
+            "similarity_score": 0.7333053350448608
+          }
+        ]
+      },
+      "76_weapon_2_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/76/segments/76_weapon_2_nopoint.png",
+        "matches": []
+      },
+      "76_armor_1_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/76/segments/76_armor_1_nopoint.png",
+        "matches": [
+          {
+            "predicted_object": "Laevateinn",
+            "object_version": 3,
+            "similarity_score": 0.707276463508606
+          }
+        ]
+      },
+      "76_circular mirror_0_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/76/segments/76_circular mirror_0_nopoint.png",
+        "matches": []
+      }
+    },
+    "43": {
+      "43_Reflected Costume_5_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/43/segments/43_Reflected Costume_5_nopoint.png",
+        "matches": [
+          {
+            "predicted_object": "Loki's Scepter",
+            "object_version": 3,
+            "similarity_score": 0.7034249305725098
+          }
+        ]
+      },
+      "43_Left Wall Panel_1_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/43/segments/43_Left Wall Panel_1_nopoint.png",
+        "matches": [
+          {
+            "predicted_object": "Laevateinn",
+            "object_version": 3,
+            "similarity_score": 0.7266112565994263
+          }
+        ]
+      },
+      "43_Right Wall Panel_2_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/43/segments/43_Right Wall Panel_2_nopoint.png",
+        "matches": []
+      },
+      "43_Lamp_4_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/43/segments/43_Lamp_4_nopoint.png",
+        "matches": [
+          {
+            "predicted_object": "Asgardian device",
+            "object_version": 3,
+            "similarity_score": 0.7333635687828064
+          }
+        ]
+      },
+      "43_Reflected Blue Glowing Object_6_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/43/segments/43_Reflected Blue Glowing Object_6_nopoint.png",
+        "matches": []
+      },
+      "43_Ornate Mirror_0_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/43/segments/43_Ornate Mirror_0_nopoint.png",
+        "matches": []
+      }
+    },
+    "28": {
+      "28_Circular decorative object_0_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/28/segments/28_Circular decorative object_0_nopoint.png",
+        "matches": []
+      },
+      "28_Jacket_1_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/28/segments/28_Jacket_1_nopoint.png",
+        "matches": [
+          {
+            "predicted_object": "Loki's armor (THE AVENGERS)",
+            "object_version": 3,
+            "similarity_score": 0.7733346223831177
+          }
+        ]
+      }
+    },
+    "40": {
+      "40_dagger in reflection_3_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/40/segments/40_dagger in reflection_3_nopoint.png",
+        "matches": []
+      },
+      "40_armor_1_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/40/segments/40_armor_1_nopoint.png",
+        "matches": []
+      },
+      "40_armor in reflection_2_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/40/segments/40_armor in reflection_2_nopoint.png",
+        "matches": []
+      },
+      "40_ornate mirror_0_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/40/segments/40_ornate mirror_0_nopoint.png",
+        "matches": []
+      }
+    },
+    "105": {
+      "105_Blue circular object_0_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/105/segments/105_Blue circular object_0_nopoint.png",
+        "matches": []
+      },
+      "105_Dark furniture_2_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/105/segments/105_Dark furniture_2_nopoint.png",
+        "matches": []
+      },
+      "105_Wall_1_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/105/segments/105_Wall_1_nopoint.png",
+        "matches": [
+          {
+            "predicted_object": "Laevateinn",
+            "object_version": 3,
+            "similarity_score": 0.7327356934547424
+          }
+        ]
+      }
+    },
+    "77": {
+      "77_wall paneling_2_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/77/segments/77_wall paneling_2_nopoint.png",
+        "matches": []
+      },
+      "77_shoulder armor_3_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/77/segments/77_shoulder armor_3_nopoint.png",
+        "matches": []
+      },
+      "77_dark surface_1_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/77/segments/77_dark surface_1_nopoint.png",
+        "matches": [
+          {
+            "predicted_object": "Laevateinn",
+            "object_version": 3,
+            "similarity_score": 0.7270029783248901
+          }
+        ]
+      },
+      "77_ornate mirror_0_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/77/segments/77_ornate mirror_0_nopoint.png",
+        "matches": []
+      },
+      "77_glowing object in reflection_5_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/77/segments/77_glowing object in reflection_5_nopoint.png",
+        "matches": [
+          {
+            "predicted_object": "Asgardian device",
+            "object_version": 1,
+            "similarity_score": 0.7065901756286621
+          }
+        ]
+      }
+    },
+    "54": {
+      "54_wall paneling_3_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/54/segments/54_wall paneling_3_nopoint.png",
+        "matches": []
+      },
+      "54_crystal cluster_4_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/54/segments/54_crystal cluster_4_nopoint.png",
+        "matches": []
+      },
+      "54_ornate gold mirror_0_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/54/segments/54_ornate gold mirror_0_nopoint.png",
+        "matches": []
+      },
+      "54_reflected object with blue glow_6_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/54/segments/54_reflected object with blue glow_6_nopoint.png",
+        "matches": []
+      },
+      "54_reflected shoulder armor_5_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/54/segments/54_reflected shoulder armor_5_nopoint.png",
+        "matches": []
+      },
+      "54_rectangular screen_2_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/54/segments/54_rectangular screen_2_nopoint.png",
+        "matches": [
+          {
+            "predicted_object": "Asgardian device",
+            "object_version": 3,
+            "similarity_score": 0.7277367115020752
+          }
+        ]
+      },
+      "54_shoulder armor_1_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/54/segments/54_shoulder armor_1_nopoint.png",
+        "matches": []
+      }
+    },
+    "42": {
+      "42_dark object_1_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/42/segments/42_dark object_1_nopoint.png",
+        "matches": []
+      },
+      "42_weapon_2_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/42/segments/42_weapon_2_nopoint.png",
+        "matches": []
+      },
+      "42_fluffy object_3_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/42/segments/42_fluffy object_3_nopoint.png",
+        "matches": []
+      },
+      "42_ornate mirror_0_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/42/segments/42_ornate mirror_0_nopoint.png",
+        "matches": []
+      },
+      "42_shoulder armor_4_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/42/segments/42_shoulder armor_4_nopoint.png",
+        "matches": []
+      }
+    },
+    "67": {
+      "67_circular object with blue holes_0_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/67/segments/67_circular object with blue holes_0_nopoint.png",
+        "matches": []
+      },
+      "67_clothing_1_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/67/segments/67_clothing_1_nopoint.png",
+        "matches": []
+      }
+    },
+    "95": {
+      "95_black and gold armor in reflection_4_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/95/segments/95_black and gold armor in reflection_4_nopoint.png",
+        "matches": [
+          {
+            "predicted_object": "Boastful Loki's hammer",
+            "object_version": 1,
+            "similarity_score": 0.7142306566238403
+          }
+        ]
+      },
+      "95_white decorative object_3_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/95/segments/95_white decorative object_3_nopoint.png",
+        "matches": []
+      },
+      "95_gold object_2_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/95/segments/95_gold object_2_nopoint.png",
+        "matches": [
+          {
+            "predicted_object": "Laevateinn",
+            "object_version": 3,
+            "similarity_score": 0.7271547913551331
+          }
+        ]
+      },
+      "95_ornate gold mirror_0_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/95/segments/95_ornate gold mirror_0_nopoint.png",
+        "matches": []
+      },
+      "95_black and gold armor_1_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/95/segments/95_black and gold armor_1_nopoint.png",
+        "matches": []
+      },
+      "95_weapon in reflection_5_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/95/segments/95_weapon in reflection_5_nopoint.png",
+        "matches": []
+      }
+    },
+    "99": {
+      "99_armor_2_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/99/segments/99_armor_2_nopoint.png",
+        "matches": [
+          {
+            "predicted_object": "Loki's armor (THE AVENGERS)",
+            "object_version": 3,
+            "similarity_score": 0.7564771771430969
+          }
+        ]
+      },
+      "99_black square_1_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/99/segments/99_black square_1_nopoint.png",
+        "matches": [
+          {
+            "predicted_object": "Time Collar",
+            "object_version": 1,
+            "similarity_score": 0.7015939950942993
+          }
+        ]
+      },
+      "99_circular wall decoration_0_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/99/segments/99_circular wall decoration_0_nopoint.png",
+        "matches": []
+      }
+    },
+    "15": {
+      "15_wall paneling_1_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/15/segments/15_wall paneling_1_nopoint.png",
+        "matches": []
+      },
+      "15_metal shoulder piece_3_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/15/segments/15_metal shoulder piece_3_nopoint.png",
+        "matches": []
+      },
+      "15_fluffy object_4_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/15/segments/15_fluffy object_4_nopoint.png",
+        "matches": []
+      },
+      "15_glowing object in reflection_7_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/15/segments/15_glowing object in reflection_7_nopoint.png",
+        "matches": []
+      },
+      "15_ornate circular mirror_0_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/15/segments/15_ornate circular mirror_0_nopoint.png",
+        "matches": []
+      },
+      "15_black jacket_2_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/15/segments/15_black jacket_2_nopoint.png",
+        "matches": []
+      },
+      "15_armor in reflection_6_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/15/segments/15_armor in reflection_6_nopoint.png",
+        "matches": [
+          {
+            "predicted_object": "Boastful Loki's hammer",
+            "object_version": 1,
+            "similarity_score": 0.7105759382247925
+          }
+        ]
+      }
+    },
+    "92": {
+      "92_gold object_2_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/92/segments/92_gold object_2_nopoint.png",
+        "matches": [
+          {
+            "predicted_object": "Laevateinn",
+            "object_version": 3,
+            "similarity_score": 0.7244945764541626
+          }
+        ]
+      },
+      "92_shoulder armor_4_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/92/segments/92_shoulder armor_4_nopoint.png",
+        "matches": []
+      },
+      "92_dark rectangular object_1_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/92/segments/92_dark rectangular object_1_nopoint.png",
+        "matches": [
+          {
+            "predicted_object": "Laevateinn",
+            "object_version": 3,
+            "similarity_score": 0.7407420873641968
+          }
+        ]
+      },
+      "92_ornate mirror_0_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/92/segments/92_ornate mirror_0_nopoint.png",
+        "matches": []
+      },
+      "92_fluffy white object_3_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/92/segments/92_fluffy white object_3_nopoint.png",
+        "matches": []
+      }
+    },
+    "13": {
+      "13_shoulder armor_3_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/13/segments/13_shoulder armor_3_nopoint.png",
+        "matches": []
+      },
+      "13_black vest_2_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/13/segments/13_black vest_2_nopoint.png",
+        "matches": []
+      },
+      "13_ornate mirror_0_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/13/segments/13_ornate mirror_0_nopoint.png",
+        "matches": []
+      },
+      "13_golden knob_1_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/13/segments/13_golden knob_1_nopoint.png",
+        "matches": [
+          {
+            "predicted_object": "Reset Charge",
+            "object_version": 1,
+            "similarity_score": 0.7008860111236572
+          }
+        ]
+      },
+      "13_weapon_4_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/13/segments/13_weapon_4_nopoint.png",
+        "matches": []
+      }
+    },
+    "58": {
+      "58_wall paneling_4_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/58/segments/58_wall paneling_4_nopoint.png",
+        "matches": []
+      },
+      "58_shoulder armor_2_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/58/segments/58_shoulder armor_2_nopoint.png",
+        "matches": []
+      },
+      "58_ornate mirror_0_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/58/segments/58_ornate mirror_0_nopoint.png",
+        "matches": []
+      },
+      "58_furry object_3_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/58/segments/58_furry object_3_nopoint.png",
+        "matches": []
+      }
+    },
+    "85": {
+      "85_Wall_0_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/85/segments/85_Wall_0_nopoint.png",
+        "matches": [
+          {
+            "predicted_object": "Time Collar",
+            "object_version": 1,
+            "similarity_score": 0.7037911415100098
+          }
+        ]
+      },
+      "85_Black Vest_6_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/85/segments/85_Black Vest_6_nopoint.png",
+        "matches": [
+          {
+            "predicted_object": "Loki's armor (THE AVENGERS)",
+            "object_version": 3,
+            "similarity_score": 0.7234441041946411
+          }
+        ]
+      },
+      "85_Right Lamp Shade_5_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/85/segments/85_Right Lamp Shade_5_nopoint.png",
+        "matches": [
+          {
+            "predicted_object": "Laevateinn",
+            "object_version": 3,
+            "similarity_score": 0.712565004825592
+          }
+        ]
+      },
+      "85_Left Lamp Base_3_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/85/segments/85_Left Lamp Base_3_nopoint.png",
+        "matches": [
+          {
+            "predicted_object": "Laevateinn",
+            "object_version": 3,
+            "similarity_score": 0.7215993404388428
+          }
+        ]
+      },
+      "85_Ornate Mirror_1_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/85/segments/85_Ornate Mirror_1_nopoint.png",
+        "matches": []
+      },
+      "85_Left Lamp Shade_2_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/85/segments/85_Left Lamp Shade_2_nopoint.png",
+        "matches": []
+      },
+      "85_Shoulder Armor_7_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/85/segments/85_Shoulder Armor_7_nopoint.png",
+        "matches": []
+      },
+      "85_Left Table_4_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/85/segments/85_Left Table_4_nopoint.png",
+        "matches": []
+      }
+    },
+    "64": {
+      "64_Wall paneling_2_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/64/segments/64_Wall paneling_2_nopoint.png",
+        "matches": [
+          {
+            "predicted_object": "Laevateinn",
+            "object_version": 3,
+            "similarity_score": 0.7019203901290894
+          }
+        ]
+      },
+      "64_Jacket_1_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/64/segments/64_Jacket_1_nopoint.png",
+        "matches": [
+          {
+            "predicted_object": "Loki's armor (THE AVENGERS)",
+            "object_version": 3,
+            "similarity_score": 0.7165464162826538
+          }
+        ]
+      },
+      "64_Circular mirror_0_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/64/segments/64_Circular mirror_0_nopoint.png",
+        "matches": []
+      }
+    },
+    "82": {
+      "82_Wall paneling (right)_1_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/82/segments/82_Wall paneling (right)_1_nopoint.png",
+        "matches": [
+          {
+            "predicted_object": "Laevateinn",
+            "object_version": 3,
+            "similarity_score": 0.7068861722946167
+          }
+        ]
+      },
+      "82_Lamp base_9_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/82/segments/82_Lamp base_9_nopoint.png",
+        "matches": [
+          {
+            "predicted_object": "Time Collar",
+            "object_version": 1,
+            "similarity_score": 0.7254222631454468
+          }
+        ]
+      },
+      "82_Shoulder armor_3_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/82/segments/82_Shoulder armor_3_nopoint.png",
+        "matches": []
+      },
+      "82_Wall paneling (left)_4_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/82/segments/82_Wall paneling (left)_4_nopoint.png",
+        "matches": [
+          {
+            "predicted_object": "Laevateinn",
+            "object_version": 3,
+            "similarity_score": 0.7011677622795105
+          }
+        ]
+      },
+      "82_Shoulder armor (reflection)_6_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/82/segments/82_Shoulder armor (reflection)_6_nopoint.png",
+        "matches": []
+      },
+      "82_White fluffy object_8_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/82/segments/82_White fluffy object_8_nopoint.png",
+        "matches": []
+      },
+      "82_Ornate mirror_0_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/82/segments/82_Ornate mirror_0_nopoint.png",
+        "matches": []
+      },
+      "82_Clothing_2_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/82/segments/82_Clothing_2_nopoint.png",
+        "matches": []
+      },
+      "82_Clothing (reflection)_5_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/82/segments/82_Clothing (reflection)_5_nopoint.png",
+        "matches": []
+      }
+    },
+    "88": {
+      "88_wall panel_3_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/88/segments/88_wall panel_3_nopoint.png",
+        "matches": []
+      },
+      "88_shoulder armor_2_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/88/segments/88_shoulder armor_2_nopoint.png",
+        "matches": []
+      },
+      "88_weapon_1_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/88/segments/88_weapon_1_nopoint.png",
+        "matches": []
+      },
+      "88_ornate mirror_0_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/88/segments/88_ornate mirror_0_nopoint.png",
+        "matches": []
+      }
+    },
+    "14": {
+      "14_wall panels_5_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/14/segments/14_wall panels_5_nopoint.png",
+        "matches": [
+          {
+            "predicted_object": "Laevateinn",
+            "object_version": 3,
+            "similarity_score": 0.7107005715370178
+          }
+        ]
+      },
+      "14_dagger with glowing blue element_2_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/14/segments/14_dagger with glowing blue element_2_nopoint.png",
+        "matches": []
+      },
+      "14_shoulder armor_1_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/14/segments/14_shoulder armor_1_nopoint.png",
+        "matches": []
+      },
+      "14_ornate circular mirror_0_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/14/segments/14_ornate circular mirror_0_nopoint.png",
+        "matches": []
+      },
+      "14_dark table_3_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/14/segments/14_dark table_3_nopoint.png",
+        "matches": [
+          {
+            "predicted_object": "Laevateinn",
+            "object_version": 3,
+            "similarity_score": 0.7094264030456543
+          }
+        ]
+      }
+    },
+    "104": {
+      "104_Blue patterned object_0_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/104/segments/104_Blue patterned object_0_nopoint.png",
+        "matches": []
+      }
+    },
+    "93": {
+      "93_table_3_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/93/segments/93_table_3_nopoint.png",
+        "matches": []
+      },
+      "93_armor in reflection_6_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/93/segments/93_armor in reflection_6_nopoint.png",
+        "matches": [
+          {
+            "predicted_object": "Loki's Scepter",
+            "object_version": 3,
+            "similarity_score": 0.7355172634124756
+          }
+        ]
+      },
+      "93_decorative object_5_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/93/segments/93_decorative object_5_nopoint.png",
+        "matches": [
+          {
+            "predicted_object": "Time Collar",
+            "object_version": 1,
+            "similarity_score": 0.7220585942268372
+          }
+        ]
+      },
+      "93_armor_2_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/93/segments/93_armor_2_nopoint.png",
+        "matches": []
+      },
+      "93_dagger_1_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/93/segments/93_dagger_1_nopoint.png",
+        "matches": []
+      },
+      "93_ornate mirror_0_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/93/segments/93_ornate mirror_0_nopoint.png",
+        "matches": []
+      },
+      "93_lamp_4_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/93/segments/93_lamp_4_nopoint.png",
+        "matches": []
+      },
+      "93_wall panel_7_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/93/segments/93_wall panel_7_nopoint.png",
+        "matches": []
+      }
+    },
+    "55": {
+      "55_wall panel_4_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/55/segments/55_wall panel_4_nopoint.png",
+        "matches": []
+      },
+      "55_dagger_1_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/55/segments/55_dagger_1_nopoint.png",
+        "matches": []
+      },
+      "55_black armor_3_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/55/segments/55_black armor_3_nopoint.png",
+        "matches": [
+          {
+            "predicted_object": "Loki's armor (THE AVENGERS)",
+            "object_version": 3,
+            "similarity_score": 0.7077750563621521
+          }
+        ]
+      },
+      "55_shoulder armor_2_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/55/segments/55_shoulder armor_2_nopoint.png",
+        "matches": []
+      },
+      "55_text_7_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/55/segments/55_text_7_nopoint.png",
+        "matches": []
+      },
+      "55_lamp_5_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/55/segments/55_lamp_5_nopoint.png",
+        "matches": [
+          {
+            "predicted_object": "Asgardian device",
+            "object_version": 3,
+            "similarity_score": 0.7222570180892944
+          }
+        ]
+      },
+      "55_ornate mirror_0_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/55/segments/55_ornate mirror_0_nopoint.png",
+        "matches": []
+      }
+    },
+    "59": {
+      "59_wall paneling_0_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/59/segments/59_wall paneling_0_nopoint.png",
+        "matches": [
+          {
+            "predicted_object": "Time Collar",
+            "object_version": 1,
+            "similarity_score": 0.7448999881744385
+          }
+        ]
+      },
+      "59_wall paneling_2_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/59/segments/59_wall paneling_2_nopoint.png",
+        "matches": []
+      },
+      "59_armor_4_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/59/segments/59_armor_4_nopoint.png",
+        "matches": [
+          {
+            "predicted_object": "Loki's armor (THE AVENGERS)",
+            "object_version": 3,
+            "similarity_score": 0.7295089960098267
+          }
+        ]
+      },
+      "59_dark rectangular object_3_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/59/segments/59_dark rectangular object_3_nopoint.png",
+        "matches": []
+      },
+      "59_fluffy object_6_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/59/segments/59_fluffy object_6_nopoint.png",
+        "matches": []
+      },
+      "59_large circular mirror_1_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/59/segments/59_large circular mirror_1_nopoint.png",
+        "matches": []
+      },
+      "59_weapon_5_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/59/segments/59_weapon_5_nopoint.png",
+        "matches": []
+      }
+    },
+    "112": {
+      "112_Blue circular object_1_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/112/segments/112_Blue circular object_1_nopoint.png",
+        "matches": []
+      },
+      "112_Dark furniture_2_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/112/segments/112_Dark furniture_2_nopoint.png",
+        "matches": []
+      },
+      "112_Wall_0_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/112/segments/112_Wall_0_nopoint.png",
+        "matches": [
+          {
+            "predicted_object": "Laevateinn",
+            "object_version": 3,
+            "similarity_score": 0.766800045967102
+          }
+        ]
+      }
+    },
+    "110": {
+      "110_blue and brown circular object_0_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/110/segments/110_blue and brown circular object_0_nopoint.png",
+        "matches": []
+      },
+      "110_dark object_1_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/110/segments/110_dark object_1_nopoint.png",
+        "matches": []
+      },
+      "110_wall_2_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/110/segments/110_wall_2_nopoint.png",
+        "matches": [
+          {
+            "predicted_object": "Laevateinn",
+            "object_version": 3,
+            "similarity_score": 0.7814983129501343
+          }
+        ]
+      }
+    },
+    "66": {
+      "66_wall paneling_2_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/66/segments/66_wall paneling_2_nopoint.png",
+        "matches": [
+          {
+            "predicted_object": "Laevateinn",
+            "object_version": 3,
+            "similarity_score": 0.7252219319343567
+          }
+        ]
+      },
+      "66_clothing_1_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/66/segments/66_clothing_1_nopoint.png",
+        "matches": [
+          {
+            "predicted_object": "Asgardian device",
+            "object_version": 1,
+            "similarity_score": 0.7069432735443115
+          }
+        ]
+      },
+      "66_circular object_0_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/66/segments/66_circular object_0_nopoint.png",
+        "matches": []
+      }
+    },
+    "11": {
+      "11_clothing (reflected)_1_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/11/segments/11_clothing (reflected)_1_nopoint.png",
+        "matches": []
+      },
+      "11_dagger_3_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/11/segments/11_dagger_3_nopoint.png",
+        "matches": [
+          {
+            "predicted_object": "Boastful Loki's hammer",
+            "object_version": 1,
+            "similarity_score": 0.7030150294303894
+          }
+        ]
+      },
+      "11_ornate gold mirror_0_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/11/segments/11_ornate gold mirror_0_nopoint.png",
+        "matches": []
+      },
+      "11_clothing_2_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/11/segments/11_clothing_2_nopoint.png",
+        "matches": []
+      }
+    },
+    "87": {
+      "87_wall paneling right_6_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/87/segments/87_wall paneling right_6_nopoint.png",
+        "matches": [
+          {
+            "predicted_object": "Laevateinn",
+            "object_version": 3,
+            "similarity_score": 0.7106465101242065
+          }
+        ]
+      },
+      "87_wall paneling left_5_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/87/segments/87_wall paneling left_5_nopoint.png",
+        "matches": []
+      },
+      "87_large circular mirror_0_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/87/segments/87_large circular mirror_0_nopoint.png",
+        "matches": []
+      },
+      "87_weapon reflection in mirror_1_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/87/segments/87_weapon reflection in mirror_1_nopoint.png",
+        "matches": []
+      },
+      "87_table_4_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/87/segments/87_table_4_nopoint.png",
+        "matches": []
+      },
+      "87_shoulder armor_2_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/87/segments/87_shoulder armor_2_nopoint.png",
+        "matches": []
+      }
+    },
+    "20": {
+      "20_lamp_4_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/20/segments/20_lamp_4_nopoint.png",
+        "matches": [
+          {
+            "predicted_object": "Laevateinn",
+            "object_version": 3,
+            "similarity_score": 0.782464325428009
+          }
+        ]
+      },
+      "20_wall paneling_1_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/20/segments/20_wall paneling_1_nopoint.png",
+        "matches": [
+          {
+            "predicted_object": "Laevateinn",
+            "object_version": 3,
+            "similarity_score": 0.7226660251617432
+          }
+        ]
+      },
+      "20_clothing_3_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/20/segments/20_clothing_3_nopoint.png",
+        "matches": []
+      },
+      "20_wall paneling_0_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/20/segments/20_wall paneling_0_nopoint.png",
+        "matches": []
+      },
+      "20_dagger_6_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/20/segments/20_dagger_6_nopoint.png",
+        "matches": []
+      },
+      "20_shoulder armor_5_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/20/segments/20_shoulder armor_5_nopoint.png",
+        "matches": []
+      },
+      "20_ornate mirror_2_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/20/segments/20_ornate mirror_2_nopoint.png",
+        "matches": []
+      }
+    },
+    "80": {
+      "80_wooden wall paneling_1_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/80/segments/80_wooden wall paneling_1_nopoint.png",
+        "matches": []
+      },
+      "80_blue circular object with holes_0_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/80/segments/80_blue circular object with holes_0_nopoint.png",
+        "matches": [
+          {
+            "predicted_object": "Laevateinn",
+            "object_version": 3,
+            "similarity_score": 0.7165356874465942
+          }
+        ]
+      }
+    },
+    "22": {
+      "22_Wall Panels_4_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/22/segments/22_Wall Panels_4_nopoint.png",
+        "matches": [
+          {
+            "predicted_object": "Laevateinn",
+            "object_version": 3,
+            "similarity_score": 0.7269987463951111
+          }
+        ]
+      },
+      "22_Ornate Mirror_0_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/22/segments/22_Ornate Mirror_0_nopoint.png",
+        "matches": []
+      },
+      "22_Leather Outfit (reflection)_5_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/22/segments/22_Leather Outfit (reflection)_5_nopoint.png",
+        "matches": [
+          {
+            "predicted_object": "Loki's Scepter",
+            "object_version": 3,
+            "similarity_score": 0.7389016151428223
+          }
+        ]
+      },
+      "22_Leather Outfit (back view)_2_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/22/segments/22_Leather Outfit (back view)_2_nopoint.png",
+        "matches": []
+      },
+      "22_Dagger (in reflection)_1_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/22/segments/22_Dagger (in reflection)_1_nopoint.png",
+        "matches": []
+      },
+      "22_Lamp_6_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/22/segments/22_Lamp_6_nopoint.png",
+        "matches": [
+          {
+            "predicted_object": "Time Collar",
+            "object_version": 1,
+            "similarity_score": 0.7139171361923218
+          }
+        ]
+      },
+      "22_Shoulder Armor (back view)_3_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/22/segments/22_Shoulder Armor (back view)_3_nopoint.png",
+        "matches": []
+      }
+    },
+    "9": {
+      "9_wall_1_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/9/segments/9_wall_1_nopoint.png",
+        "matches": [
+          {
+            "predicted_object": "Laevateinn",
+            "object_version": 3,
+            "similarity_score": 0.7477884888648987
+          }
+        ]
+      },
+      "9_armor in reflection_3_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/9/segments/9_armor in reflection_3_nopoint.png",
+        "matches": [
+          {
+            "predicted_object": "Loki's armor (THE AVENGERS)",
+            "object_version": 2,
+            "similarity_score": 0.7128862142562866
+          }
+        ]
+      },
+      "9_armor_2_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/9/segments/9_armor_2_nopoint.png",
+        "matches": []
+      },
+      "9_object held in reflection_4_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/9/segments/9_object held in reflection_4_nopoint.png",
+        "matches": [
+          {
+            "predicted_object": "Laevateinn",
+            "object_version": 1,
+            "similarity_score": 0.7063277959823608
+          }
+        ]
+      },
+      "9_circular mirror_0_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/9/segments/9_circular mirror_0_nopoint.png",
+        "matches": []
+      },
+      "9_small objects below mirror_5_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/9/segments/9_small objects below mirror_5_nopoint.png",
+        "matches": []
+      }
+    },
+    "73": {
+      "73_Blue and brown circular object_0_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/73/segments/73_Blue and brown circular object_0_nopoint.png",
+        "matches": []
+      }
+    },
+    "18": {
+      "18_wall panels_4_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/18/segments/18_wall panels_4_nopoint.png",
+        "matches": [
+          {
+            "predicted_object": "Laevateinn",
+            "object_version": 3,
+            "similarity_score": 0.7288278341293335
+          }
+        ]
+      },
+      "18_chair back_8_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/18/segments/18_chair back_8_nopoint.png",
+        "matches": [
+          {
+            "predicted_object": "Time Collar",
+            "object_version": 1,
+            "similarity_score": 0.7571667432785034
+          }
+        ]
+      },
+      "18_blue chair_5_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/18/segments/18_blue chair_5_nopoint.png",
+        "matches": [
+          {
+            "predicted_object": "Laevateinn",
+            "object_version": 3,
+            "similarity_score": 0.710567831993103
+          }
+        ]
+      },
+      "18_white fabric object_3_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/18/segments/18_white fabric object_3_nopoint.png",
+        "matches": [
+          {
+            "predicted_object": "Time Collar",
+            "object_version": 1,
+            "similarity_score": 0.7255803346633911
+          }
+        ]
+      },
+      "18_shoulder armor_2_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/18/segments/18_shoulder armor_2_nopoint.png",
+        "matches": [
+          {
+            "predicted_object": "Asgardian device",
+            "object_version": 3,
+            "similarity_score": 0.7071266770362854
+          }
+        ]
+      },
+      "18_table_7_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/18/segments/18_table_7_nopoint.png",
+        "matches": [
+          {
+            "predicted_object": "Laevateinn",
+            "object_version": 3,
+            "similarity_score": 0.7400078177452087
+          }
+        ]
+      },
+      "18_weapon_1_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/18/segments/18_weapon_1_nopoint.png",
+        "matches": []
+      },
+      "18_ornate gold mirror_0_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/18/segments/18_ornate gold mirror_0_nopoint.png",
+        "matches": []
+      }
+    },
+    "107": {
+      "107_Circular blue and beige object_0_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/107/segments/107_Circular blue and beige object_0_nopoint.png",
+        "matches": []
+      }
+    },
+    "50": {
+      "50_weapon_2_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/50/segments/50_weapon_2_nopoint.png",
+        "matches": []
+      },
+      "50_ornate mirror_0_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/50/segments/50_ornate mirror_0_nopoint.png",
+        "matches": []
+      },
+      "50_black clothing_1_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/50/segments/50_black clothing_1_nopoint.png",
+        "matches": [
+          {
+            "predicted_object": "Laevateinn",
+            "object_version": 3,
+            "similarity_score": 0.7101271152496338
+          }
+        ]
+      }
+    },
+    "48": {
+      "48_dark panel wall_4_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/48/segments/48_dark panel wall_4_nopoint.png",
+        "matches": []
+      },
+      "48_wood panel wall_1_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/48/segments/48_wood panel wall_1_nopoint.png",
+        "matches": [
+          {
+            "predicted_object": "Laevateinn",
+            "object_version": 3,
+            "similarity_score": 0.7259113192558289
+          }
+        ]
+      },
+      "48_weapon in reflection_2_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/48/segments/48_weapon in reflection_2_nopoint.png",
+        "matches": []
+      },
+      "48_ornate circular mirror_0_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/48/segments/48_ornate circular mirror_0_nopoint.png",
+        "matches": []
+      },
+      "48_shoulder armor_3_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/48/segments/48_shoulder armor_3_nopoint.png",
+        "matches": []
+      }
+    },
+    "61": {
+      "61_white decorative object_3_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/61/segments/61_white decorative object_3_nopoint.png",
+        "matches": []
+      },
+      "61_white decorative object_4_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/61/segments/61_white decorative object_4_nopoint.png",
+        "matches": []
+      },
+      "61_weapon in reflection_2_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/61/segments/61_weapon in reflection_2_nopoint.png",
+        "matches": []
+      },
+      "61_ornate mirror_0_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/61/segments/61_ornate mirror_0_nopoint.png",
+        "matches": []
+      },
+      "61_shoulder armor_1_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/61/segments/61_shoulder armor_1_nopoint.png",
+        "matches": []
+      }
+    },
+    "10": {
+      "10_chest armor (reflection)_3_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/10/segments/10_chest armor (reflection)_3_nopoint.png",
+        "matches": [
+          {
+            "predicted_object": "Loki's armor (THE AVENGERS)",
+            "object_version": 2,
+            "similarity_score": 0.7361615896224976
+          }
+        ]
+      },
+      "10_desk_6_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/10/segments/10_desk_6_nopoint.png",
+        "matches": [
+          {
+            "predicted_object": "Laevateinn",
+            "object_version": 3,
+            "similarity_score": 0.7480145692825317
+          }
+        ]
+      },
+      "10_dagger_1_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/10/segments/10_dagger_1_nopoint.png",
+        "matches": []
+      },
+      "10_large ornate mirror_0_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/10/segments/10_large ornate mirror_0_nopoint.png",
+        "matches": []
+      },
+      "10_wall paneling (left)_4_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/10/segments/10_wall paneling (left)_4_nopoint.png",
+        "matches": []
+      },
+      "10_shoulder armor_2_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/10/segments/10_shoulder armor_2_nopoint.png",
+        "matches": []
+      },
+      "10_wall paneling (right)_5_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/10/segments/10_wall paneling (right)_5_nopoint.png",
+        "matches": []
+      },
+      "10_gold object on desk_7_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/10/segments/10_gold object on desk_7_nopoint.png",
+        "matches": []
+      }
+    },
+    "94": {
+      "94_wall panel_6_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/94/segments/94_wall panel_6_nopoint.png",
+        "matches": []
+      },
+      "94_gold lamp_4_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/94/segments/94_gold lamp_4_nopoint.png",
+        "matches": []
+      },
+      "94_table_5_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/94/segments/94_table_5_nopoint.png",
+        "matches": [
+          {
+            "predicted_object": "Time Collar",
+            "object_version": 1,
+            "similarity_score": 0.7439937591552734
+          }
+        ]
+      },
+      "94_wall panel_7_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/94/segments/94_wall panel_7_nopoint.png",
+        "matches": [
+          {
+            "predicted_object": "Reset Charge",
+            "object_version": 1,
+            "similarity_score": 0.7146912217140198
+          }
+        ]
+      },
+      "94_ornate round mirror_0_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/94/segments/94_ornate round mirror_0_nopoint.png",
+        "matches": []
+      },
+      "94_black jacket with shoulder armor_2_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/94/segments/94_black jacket with shoulder armor_2_nopoint.png",
+        "matches": [
+          {
+            "predicted_object": "Loki's armor (THE AVENGERS)",
+            "object_version": 3,
+            "similarity_score": 0.7190238237380981
+          }
+        ]
+      },
+      "94_dagger_1_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/94/segments/94_dagger_1_nopoint.png",
+        "matches": []
+      },
+      "94_white furry object_3_nopoint": {
+        "segment_path": "white_vidname_padded_image_results/94/segments/94_white furry object_3_nopoint.png",
+        "matches": []
+      }
+    }
+  }
+}

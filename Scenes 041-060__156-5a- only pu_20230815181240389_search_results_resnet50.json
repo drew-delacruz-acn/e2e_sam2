@@ -1,0 +1,2182 @@
+[
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Time Collar",
+    "object_version": 3,
+    "similarity_score": 0.7021224498748779,
+    "model": "resnet50",
+    "frame": "310",
+    "segment_id": "310_Neck device_0_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/310/segments/310_Neck device_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Time Collar",
+    "object_version": 3,
+    "similarity_score": 0.7070143222808838,
+    "model": "resnet50",
+    "frame": "312",
+    "segment_id": "312_Neck device_0_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/312/segments/312_Neck device_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Time Collar",
+    "object_version": 3,
+    "similarity_score": 0.7105821371078491,
+    "model": "resnet50",
+    "frame": "370",
+    "segment_id": "370_Neck device_0_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/370/segments/370_Neck device_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Time Collar",
+    "object_version": 2,
+    "similarity_score": 0.7129569053649902,
+    "model": "resnet50",
+    "frame": "133",
+    "segment_id": "133_Neck device_0_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/133/segments/133_Neck device_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Time Collar",
+    "object_version": 2,
+    "similarity_score": 0.706998884677887,
+    "model": "resnet50",
+    "frame": "546",
+    "segment_id": "546_Neck device_1_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/546/segments/546_Neck device_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Time Collar",
+    "object_version": 2,
+    "similarity_score": 0.7129878997802734,
+    "model": "resnet50",
+    "frame": "546",
+    "segment_id": "546_Neck device_0_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/546/segments/546_Neck device_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Loki's armor (THE AVENGERS)",
+    "object_version": 3,
+    "similarity_score": 0.7932072877883911,
+    "model": "resnet50",
+    "frame": "543",
+    "segment_id": "543_TVA jacket_4_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/543/segments/543_TVA jacket_4_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Time Collar",
+    "object_version": 2,
+    "similarity_score": 0.709187924861908,
+    "model": "resnet50",
+    "frame": "543",
+    "segment_id": "543_Neck device_2_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/543/segments/543_Neck device_2_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Time Collar",
+    "object_version": 2,
+    "similarity_score": 0.7023210525512695,
+    "model": "resnet50",
+    "frame": "52",
+    "segment_id": "52_Neck device_0_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/52/segments/52_Neck device_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Time Collar",
+    "object_version": 3,
+    "similarity_score": 0.720342218875885,
+    "model": "resnet50",
+    "frame": "366",
+    "segment_id": "366_Neck device_0_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/366/segments/366_Neck device_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Asgardian device",
+    "object_version": 3,
+    "similarity_score": 0.7043641805648804,
+    "model": "resnet50",
+    "frame": "239",
+    "segment_id": "239_Holopad device_0_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/239/segments/239_Holopad device_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Time Collar",
+    "object_version": 3,
+    "similarity_score": 0.7242678999900818,
+    "model": "resnet50",
+    "frame": "354",
+    "segment_id": "354_Neck device_0_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/354/segments/354_Neck device_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Loki's armor (THE AVENGERS)",
+    "object_version": 3,
+    "similarity_score": 0.7798885703086853,
+    "model": "resnet50",
+    "frame": "302",
+    "segment_id": "302_TVA jacket_4_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/302/segments/302_TVA jacket_4_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Time Collar",
+    "object_version": 2,
+    "similarity_score": 0.71220862865448,
+    "model": "resnet50",
+    "frame": "302",
+    "segment_id": "302_Neck device_2_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/302/segments/302_Neck device_2_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Time Collar",
+    "object_version": 2,
+    "similarity_score": 0.7098299264907837,
+    "model": "resnet50",
+    "frame": "302",
+    "segment_id": "302_Neck device_3_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/302/segments/302_Neck device_3_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Time Collar",
+    "object_version": 2,
+    "similarity_score": 0.7003084421157837,
+    "model": "resnet50",
+    "frame": "45",
+    "segment_id": "45_Neck device_0_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/45/segments/45_Neck device_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Time Collar",
+    "object_version": 3,
+    "similarity_score": 0.7009893655776978,
+    "model": "resnet50",
+    "frame": "374",
+    "segment_id": "374_Neck device_0_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/374/segments/374_Neck device_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Time Collar",
+    "object_version": 3,
+    "similarity_score": 0.7018754482269287,
+    "model": "resnet50",
+    "frame": "204",
+    "segment_id": "204_Neck device_0_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/204/segments/204_Neck device_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Asgardian device",
+    "object_version": 3,
+    "similarity_score": 0.7270063757896423,
+    "model": "resnet50",
+    "frame": "288",
+    "segment_id": "288_Holopad device_3_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/288/segments/288_Holopad device_3_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Aligator Loki Plushie",
+    "object_version": 1,
+    "similarity_score": 0.754341185092926,
+    "model": "resnet50",
+    "frame": "329",
+    "segment_id": "329_TVA jacket_1_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/329/segments/329_TVA jacket_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Time Collar",
+    "object_version": 3,
+    "similarity_score": 0.702795684337616,
+    "model": "resnet50",
+    "frame": "343",
+    "segment_id": "343_Neck device_0_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/343/segments/343_Neck device_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Time Collar",
+    "object_version": 3,
+    "similarity_score": 0.728141188621521,
+    "model": "resnet50",
+    "frame": "349",
+    "segment_id": "349_Neck device_0_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/349/segments/349_Neck device_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Time Collar",
+    "object_version": 2,
+    "similarity_score": 0.7045131325721741,
+    "model": "resnet50",
+    "frame": "197",
+    "segment_id": "197_Neck device_0_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/197/segments/197_Neck device_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Time Collar",
+    "object_version": 2,
+    "similarity_score": 0.7244313955307007,
+    "model": "resnet50",
+    "frame": "291",
+    "segment_id": "291_Neck device_0_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/291/segments/291_Neck device_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Time Collar",
+    "object_version": 2,
+    "similarity_score": 0.7096807956695557,
+    "model": "resnet50",
+    "frame": "96",
+    "segment_id": "96_TVA jacket_2_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/96/segments/96_TVA jacket_2_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Time Collar",
+    "object_version": 3,
+    "similarity_score": 0.7190679907798767,
+    "model": "resnet50",
+    "frame": "359",
+    "segment_id": "359_Neck device_1_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/359/segments/359_Neck device_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Loki's armor (THE AVENGERS)",
+    "object_version": 3,
+    "similarity_score": 0.7477738261222839,
+    "model": "resnet50",
+    "frame": "149",
+    "segment_id": "149_TVA jacket_1_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/149/segments/149_TVA jacket_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Loki's armor (THE AVENGERS)",
+    "object_version": 3,
+    "similarity_score": 0.7302398681640625,
+    "model": "resnet50",
+    "frame": "149",
+    "segment_id": "149_TVA jacket_2_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/149/segments/149_TVA jacket_2_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Time Collar",
+    "object_version": 1,
+    "similarity_score": 0.7075583934783936,
+    "model": "resnet50",
+    "frame": "98",
+    "segment_id": "98_Neck device_0_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/98/segments/98_Neck device_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Time Collar",
+    "object_version": 3,
+    "similarity_score": 0.7284030914306641,
+    "model": "resnet50",
+    "frame": "358",
+    "segment_id": "358_Neck device_2_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/358/segments/358_Neck device_2_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Time Collar",
+    "object_version": 3,
+    "similarity_score": 0.7204026579856873,
+    "model": "resnet50",
+    "frame": "358",
+    "segment_id": "358_Neck device_1_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/358/segments/358_Neck device_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Time Collar",
+    "object_version": 2,
+    "similarity_score": 0.7075714468955994,
+    "model": "resnet50",
+    "frame": "317",
+    "segment_id": "317_Neck device_0_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/317/segments/317_Neck device_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Time Collar",
+    "object_version": 2,
+    "similarity_score": 0.7022736072540283,
+    "model": "resnet50",
+    "frame": "127",
+    "segment_id": "127_Neck device_0_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/127/segments/127_Neck device_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Aligator Loki Plushie",
+    "object_version": 1,
+    "similarity_score": 0.7594945430755615,
+    "model": "resnet50",
+    "frame": "228",
+    "segment_id": "228_TVA jacket_1_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/228/segments/228_TVA jacket_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Loki's Scepter",
+    "object_version": 2,
+    "similarity_score": 0.7220377922058105,
+    "model": "resnet50",
+    "frame": "228",
+    "segment_id": "228_Neck device_0_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/228/segments/228_Neck device_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Time Collar",
+    "object_version": 3,
+    "similarity_score": 0.7027669548988342,
+    "model": "resnet50",
+    "frame": "56",
+    "segment_id": "56_Neck device_0_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/56/segments/56_Neck device_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Time Collar",
+    "object_version": 2,
+    "similarity_score": 0.7144303321838379,
+    "model": "resnet50",
+    "frame": "309",
+    "segment_id": "309_Neck device_0_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/309/segments/309_Neck device_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Time Collar",
+    "object_version": 2,
+    "similarity_score": 0.7094254493713379,
+    "model": "resnet50",
+    "frame": "523",
+    "segment_id": "523_Holopad device_0_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/523/segments/523_Holopad device_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Time Collar",
+    "object_version": 3,
+    "similarity_score": 0.7156702876091003,
+    "model": "resnet50",
+    "frame": "207",
+    "segment_id": "207_Neck device_0_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/207/segments/207_Neck device_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Loki's armor (THE AVENGERS)",
+    "object_version": 3,
+    "similarity_score": 0.7111071348190308,
+    "model": "resnet50",
+    "frame": "376",
+    "segment_id": "376_TVA jacket_2_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/376/segments/376_TVA jacket_2_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Aligator Loki Plushie",
+    "object_version": 1,
+    "similarity_score": 0.756250262260437,
+    "model": "resnet50",
+    "frame": "376",
+    "segment_id": "376_TVA jacket_1_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/376/segments/376_TVA jacket_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Loki's armor (THE AVENGERS)",
+    "object_version": 3,
+    "similarity_score": 0.8107281923294067,
+    "model": "resnet50",
+    "frame": "304",
+    "segment_id": "304_TVA jacket_5_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/304/segments/304_TVA jacket_5_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Time Collar",
+    "object_version": 2,
+    "similarity_score": 0.7081080675125122,
+    "model": "resnet50",
+    "frame": "304",
+    "segment_id": "304_Neck device_4_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/304/segments/304_Neck device_4_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Time Collar",
+    "object_version": 2,
+    "similarity_score": 0.7149403095245361,
+    "model": "resnet50",
+    "frame": "304",
+    "segment_id": "304_Neck device_2_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/304/segments/304_Neck device_2_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Time Collar",
+    "object_version": 2,
+    "similarity_score": 0.7122178077697754,
+    "model": "resnet50",
+    "frame": "347",
+    "segment_id": "347_Neck device_0_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/347/segments/347_Neck device_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Asgardian device",
+    "object_version": 3,
+    "similarity_score": 0.7025060057640076,
+    "model": "resnet50",
+    "frame": "120",
+    "segment_id": "120_Holopad device_2_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/120/segments/120_Holopad device_2_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Time Collar",
+    "object_version": 2,
+    "similarity_score": 0.7092402577400208,
+    "model": "resnet50",
+    "frame": "120",
+    "segment_id": "120_Neck device_1_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/120/segments/120_Neck device_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Time Collar",
+    "object_version": 2,
+    "similarity_score": 0.7183014154434204,
+    "model": "resnet50",
+    "frame": "120",
+    "segment_id": "120_Neck device_0_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/120/segments/120_Neck device_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Loki's armor (THE AVENGERS)",
+    "object_version": 3,
+    "similarity_score": 0.7776916027069092,
+    "model": "resnet50",
+    "frame": "144",
+    "segment_id": "144_TVA jacket_4_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/144/segments/144_TVA jacket_4_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Time Collar",
+    "object_version": 2,
+    "similarity_score": 0.7099385261535645,
+    "model": "resnet50",
+    "frame": "144",
+    "segment_id": "144_Neck device_3_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/144/segments/144_Neck device_3_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Time Collar",
+    "object_version": 2,
+    "similarity_score": 0.7140352725982666,
+    "model": "resnet50",
+    "frame": "144",
+    "segment_id": "144_Neck device_2_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/144/segments/144_Neck device_2_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Time Collar",
+    "object_version": 3,
+    "similarity_score": 0.7254619598388672,
+    "model": "resnet50",
+    "frame": "314",
+    "segment_id": "314_Neck device_0_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/314/segments/314_Neck device_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Time Collar",
+    "object_version": 2,
+    "similarity_score": 0.7068236470222473,
+    "model": "resnet50",
+    "frame": "292",
+    "segment_id": "292_Neck device_0_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/292/segments/292_Neck device_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Loki's armor (THE AVENGERS)",
+    "object_version": 3,
+    "similarity_score": 0.7443877458572388,
+    "model": "resnet50",
+    "frame": "148",
+    "segment_id": "148_TVA jacket_1_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/148/segments/148_TVA jacket_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Aligator Loki Plushie",
+    "object_version": 1,
+    "similarity_score": 0.7521648406982422,
+    "model": "resnet50",
+    "frame": "148",
+    "segment_id": "148_TVA jacket_0_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/148/segments/148_TVA jacket_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Aligator Loki Plushie",
+    "object_version": 1,
+    "similarity_score": 0.7208331823348999,
+    "model": "resnet50",
+    "frame": "151",
+    "segment_id": "151_TVA jacket_1_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/151/segments/151_TVA jacket_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Loki's armor (THE AVENGERS)",
+    "object_version": 3,
+    "similarity_score": 0.7302454710006714,
+    "model": "resnet50",
+    "frame": "151",
+    "segment_id": "151_TVA jacket_0_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/151/segments/151_TVA jacket_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Aligator Loki Plushie",
+    "object_version": 1,
+    "similarity_score": 0.7647225856781006,
+    "model": "resnet50",
+    "frame": "226",
+    "segment_id": "226_TVA jacket_1_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/226/segments/226_TVA jacket_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Loki's armor (THE AVENGERS)",
+    "object_version": 3,
+    "similarity_score": 0.7051395177841187,
+    "model": "resnet50",
+    "frame": "226",
+    "segment_id": "226_TVA jacket_2_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/226/segments/226_TVA jacket_2_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Time Collar",
+    "object_version": 2,
+    "similarity_score": 0.7007635831832886,
+    "model": "resnet50",
+    "frame": "210",
+    "segment_id": "210_Neck device_0_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/210/segments/210_Neck device_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Time Collar",
+    "object_version": 2,
+    "similarity_score": 0.7108870148658752,
+    "model": "resnet50",
+    "frame": "141",
+    "segment_id": "141_Neck device_0_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/141/segments/141_Neck device_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Time Collar",
+    "object_version": 3,
+    "similarity_score": 0.7111254930496216,
+    "model": "resnet50",
+    "frame": "373",
+    "segment_id": "373_Neck device_0_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/373/segments/373_Neck device_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Time Collar",
+    "object_version": 2,
+    "similarity_score": 0.7003355622291565,
+    "model": "resnet50",
+    "frame": "201",
+    "segment_id": "201_Neck device_0_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/201/segments/201_Neck device_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Aligator Loki Plushie",
+    "object_version": 1,
+    "similarity_score": 0.7297957539558411,
+    "model": "resnet50",
+    "frame": "150",
+    "segment_id": "150_TVA jacket_1_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/150/segments/150_TVA jacket_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Loki's armor (THE AVENGERS)",
+    "object_version": 3,
+    "similarity_score": 0.7282332181930542,
+    "model": "resnet50",
+    "frame": "150",
+    "segment_id": "150_TVA jacket_0_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/150/segments/150_TVA jacket_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Time Collar",
+    "object_version": 3,
+    "similarity_score": 0.7092736959457397,
+    "model": "resnet50",
+    "frame": "313",
+    "segment_id": "313_Neck device_0_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/313/segments/313_Neck device_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Time Collar",
+    "object_version": 2,
+    "similarity_score": 0.7023571729660034,
+    "model": "resnet50",
+    "frame": "301",
+    "segment_id": "301_Neck device_0_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/301/segments/301_Neck device_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Time Collar",
+    "object_version": 3,
+    "similarity_score": 0.7097561359405518,
+    "model": "resnet50",
+    "frame": "315",
+    "segment_id": "315_Neck device_0_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/315/segments/315_Neck device_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Time Collar",
+    "object_version": 2,
+    "similarity_score": 0.7040949463844299,
+    "model": "resnet50",
+    "frame": "134",
+    "segment_id": "134_Neck device_0_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/134/segments/134_Neck device_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Time Collar",
+    "object_version": 3,
+    "similarity_score": 0.7026037573814392,
+    "model": "resnet50",
+    "frame": "339",
+    "segment_id": "339_Neck device_3_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/339/segments/339_Neck device_3_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Time Collar",
+    "object_version": 2,
+    "similarity_score": 0.7106928825378418,
+    "model": "resnet50",
+    "frame": "306",
+    "segment_id": "306_Neck device_3_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/306/segments/306_Neck device_3_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Time Collar",
+    "object_version": 2,
+    "similarity_score": 0.7114514112472534,
+    "model": "resnet50",
+    "frame": "194",
+    "segment_id": "194_Neck device_0_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/194/segments/194_Neck device_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Loki's armor (THE AVENGERS)",
+    "object_version": 3,
+    "similarity_score": 0.7123920917510986,
+    "model": "resnet50",
+    "frame": "378",
+    "segment_id": "378_TVA jacket_3_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/378/segments/378_TVA jacket_3_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Aligator Loki Plushie",
+    "object_version": 1,
+    "similarity_score": 0.748431384563446,
+    "model": "resnet50",
+    "frame": "378",
+    "segment_id": "378_TVA jacket_2_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/378/segments/378_TVA jacket_2_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Time Collar",
+    "object_version": 3,
+    "similarity_score": 0.7147375345230103,
+    "model": "resnet50",
+    "frame": "362",
+    "segment_id": "362_Neck device_0_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/362/segments/362_Neck device_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Time Collar",
+    "object_version": 3,
+    "similarity_score": 0.7207638025283813,
+    "model": "resnet50",
+    "frame": "203",
+    "segment_id": "203_Neck device_0_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/203/segments/203_Neck device_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Time Collar",
+    "object_version": 1,
+    "similarity_score": 0.7025284767150879,
+    "model": "resnet50",
+    "frame": "522",
+    "segment_id": "522_Holopad device_0_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/522/segments/522_Holopad device_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Time Collar",
+    "object_version": 2,
+    "similarity_score": 0.7082169651985168,
+    "model": "resnet50",
+    "frame": "139",
+    "segment_id": "139_Neck device_0_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/139/segments/139_Neck device_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Time Collar",
+    "object_version": 3,
+    "similarity_score": 0.7231396436691284,
+    "model": "resnet50",
+    "frame": "318",
+    "segment_id": "318_Neck device_0_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/318/segments/318_Neck device_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Time Collar",
+    "object_version": 2,
+    "similarity_score": 0.7158785462379456,
+    "model": "resnet50",
+    "frame": "198",
+    "segment_id": "198_Neck device_0_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/198/segments/198_Neck device_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Time Collar",
+    "object_version": 2,
+    "similarity_score": 0.7090373039245605,
+    "model": "resnet50",
+    "frame": "328",
+    "segment_id": "328_Neck device_0_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/328/segments/328_Neck device_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Time Collar",
+    "object_version": 3,
+    "similarity_score": 0.7385216951370239,
+    "model": "resnet50",
+    "frame": "357",
+    "segment_id": "357_Neck device_3_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/357/segments/357_Neck device_3_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Time Collar",
+    "object_version": 3,
+    "similarity_score": 0.7220626473426819,
+    "model": "resnet50",
+    "frame": "357",
+    "segment_id": "357_Neck device_2_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/357/segments/357_Neck device_2_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Time Collar",
+    "object_version": 3,
+    "similarity_score": 0.7259494066238403,
+    "model": "resnet50",
+    "frame": "361",
+    "segment_id": "361_Neck device_0_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/361/segments/361_Neck device_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Aligator Loki Plushie",
+    "object_version": 1,
+    "similarity_score": 0.7389607429504395,
+    "model": "resnet50",
+    "frame": "68",
+    "segment_id": "68_TVA jacket_1_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/68/segments/68_TVA jacket_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Time Collar",
+    "object_version": 2,
+    "similarity_score": 0.7012559175491333,
+    "model": "resnet50",
+    "frame": "137",
+    "segment_id": "137_Neck device_0_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/137/segments/137_Neck device_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Time Collar",
+    "object_version": 2,
+    "similarity_score": 0.7014559507369995,
+    "model": "resnet50",
+    "frame": "196",
+    "segment_id": "196_Neck device_0_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/196/segments/196_Neck device_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Time Collar",
+    "object_version": 3,
+    "similarity_score": 0.7127612829208374,
+    "model": "resnet50",
+    "frame": "348",
+    "segment_id": "348_Neck device_0_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/348/segments/348_Neck device_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Time Collar",
+    "object_version": 3,
+    "similarity_score": 0.7128202319145203,
+    "model": "resnet50",
+    "frame": "365",
+    "segment_id": "365_Neck device_0_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/365/segments/365_Neck device_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Time Collar",
+    "object_version": 2,
+    "similarity_score": 0.703031063079834,
+    "model": "resnet50",
+    "frame": "57",
+    "segment_id": "57_Neck device_1_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/57/segments/57_Neck device_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Time Collar",
+    "object_version": 2,
+    "similarity_score": 0.7074081897735596,
+    "model": "resnet50",
+    "frame": "209",
+    "segment_id": "209_Neck device_0_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/209/segments/209_Neck device_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Loki's armor (THE AVENGERS)",
+    "object_version": 3,
+    "similarity_score": 0.7702234983444214,
+    "model": "resnet50",
+    "frame": "193",
+    "segment_id": "193_TVA jacket_4_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/193/segments/193_TVA jacket_4_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Time Collar",
+    "object_version": 2,
+    "similarity_score": 0.7078684568405151,
+    "model": "resnet50",
+    "frame": "193",
+    "segment_id": "193_Neck device_2_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/193/segments/193_Neck device_2_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Time Collar",
+    "object_version": 2,
+    "similarity_score": 0.7007107734680176,
+    "model": "resnet50",
+    "frame": "193",
+    "segment_id": "193_Neck device_1_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/193/segments/193_Neck device_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Time Collar",
+    "object_version": 2,
+    "similarity_score": 0.7025583386421204,
+    "model": "resnet50",
+    "frame": "193",
+    "segment_id": "193_Neck device_3_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/193/segments/193_Neck device_3_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Loki's armor (THE AVENGERS)",
+    "object_version": 3,
+    "similarity_score": 0.8050976991653442,
+    "model": "resnet50",
+    "frame": "540",
+    "segment_id": "540_TVA jacket_4_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/540/segments/540_TVA jacket_4_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Loki's armor (THE AVENGERS)",
+    "object_version": 3,
+    "similarity_score": 0.7013271450996399,
+    "model": "resnet50",
+    "frame": "540",
+    "segment_id": "540_TVA jacket_5_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/540/segments/540_TVA jacket_5_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Time Collar",
+    "object_version": 3,
+    "similarity_score": 0.7127103209495544,
+    "model": "resnet50",
+    "frame": "540",
+    "segment_id": "540_Neck device_2_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/540/segments/540_Neck device_2_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Time Collar",
+    "object_version": 2,
+    "similarity_score": 0.7080144882202148,
+    "model": "resnet50",
+    "frame": "146",
+    "segment_id": "146_Neck device_0_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/146/segments/146_Neck device_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Time Collar",
+    "object_version": 3,
+    "similarity_score": 0.7146517634391785,
+    "model": "resnet50",
+    "frame": "212",
+    "segment_id": "212_Neck device_0_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/212/segments/212_Neck device_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Time Collar",
+    "object_version": 3,
+    "similarity_score": 0.7220462560653687,
+    "model": "resnet50",
+    "frame": "363",
+    "segment_id": "363_Neck device_0_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/363/segments/363_Neck device_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Time Collar",
+    "object_version": 3,
+    "similarity_score": 0.7111515998840332,
+    "model": "resnet50",
+    "frame": "368",
+    "segment_id": "368_Neck device_0_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/368/segments/368_Neck device_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Loki's armor (THE AVENGERS)",
+    "object_version": 3,
+    "similarity_score": 0.7241835594177246,
+    "model": "resnet50",
+    "frame": "65",
+    "segment_id": "65_TVA jacket_2_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/65/segments/65_TVA jacket_2_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Loki's armor (THE AVENGERS)",
+    "object_version": 3,
+    "similarity_score": 0.7577129602432251,
+    "model": "resnet50",
+    "frame": "65",
+    "segment_id": "65_TVA jacket_1_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/65/segments/65_TVA jacket_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Loki's armor (THE AVENGERS)",
+    "object_version": 3,
+    "similarity_score": 0.7002348899841309,
+    "model": "resnet50",
+    "frame": "227",
+    "segment_id": "227_TVA jacket_2_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/227/segments/227_TVA jacket_2_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Aligator Loki Plushie",
+    "object_version": 1,
+    "similarity_score": 0.7631052732467651,
+    "model": "resnet50",
+    "frame": "227",
+    "segment_id": "227_TVA jacket_1_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/227/segments/227_TVA jacket_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Loki's armor (THE AVENGERS)",
+    "object_version": 3,
+    "similarity_score": 0.7127216458320618,
+    "model": "resnet50",
+    "frame": "334",
+    "segment_id": "334_TVA jacket_1_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/334/segments/334_TVA jacket_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Loki's TVA jacket",
+    "object_version": 2,
+    "similarity_score": 0.7457232475280762,
+    "model": "resnet50",
+    "frame": "334",
+    "segment_id": "334_TVA jacket_0_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/334/segments/334_TVA jacket_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Loki's armor (THE AVENGERS)",
+    "object_version": 3,
+    "similarity_score": 0.7137776613235474,
+    "model": "resnet50",
+    "frame": "377",
+    "segment_id": "377_TVA jacket_1_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/377/segments/377_TVA jacket_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Aligator Loki Plushie",
+    "object_version": 1,
+    "similarity_score": 0.7479289770126343,
+    "model": "resnet50",
+    "frame": "377",
+    "segment_id": "377_TVA jacket_2_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/377/segments/377_TVA jacket_2_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Aligator Loki Plushie",
+    "object_version": 1,
+    "similarity_score": 0.7587103843688965,
+    "model": "resnet50",
+    "frame": "380",
+    "segment_id": "380_TVA jacket_0_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/380/segments/380_TVA jacket_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Time Collar",
+    "object_version": 3,
+    "similarity_score": 0.7173118591308594,
+    "model": "resnet50",
+    "frame": "547",
+    "segment_id": "547_Neck device_1_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/547/segments/547_Neck device_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Time Collar",
+    "object_version": 3,
+    "similarity_score": 0.7050637602806091,
+    "model": "resnet50",
+    "frame": "547",
+    "segment_id": "547_Neck device_2_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/547/segments/547_Neck device_2_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Time Collar",
+    "object_version": 2,
+    "similarity_score": 0.7073888778686523,
+    "model": "resnet50",
+    "frame": "140",
+    "segment_id": "140_Neck device_0_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/140/segments/140_Neck device_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Aligator Loki Plushie",
+    "object_version": 1,
+    "similarity_score": 0.7495096921920776,
+    "model": "resnet50",
+    "frame": "229",
+    "segment_id": "229_TVA jacket_1_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/229/segments/229_TVA jacket_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Time Collar",
+    "object_version": 3,
+    "similarity_score": 0.7265278100967407,
+    "model": "resnet50",
+    "frame": "311",
+    "segment_id": "311_Neck device_0_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/311/segments/311_Neck device_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Time Collar",
+    "object_version": 2,
+    "similarity_score": 0.7086098194122314,
+    "model": "resnet50",
+    "frame": "305",
+    "segment_id": "305_Neck device_0_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/305/segments/305_Neck device_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Loki's armor (THE AVENGERS)",
+    "object_version": 3,
+    "similarity_score": 0.7931402325630188,
+    "model": "resnet50",
+    "frame": "541",
+    "segment_id": "541_TVA jacket_4_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/541/segments/541_TVA jacket_4_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Time Collar",
+    "object_version": 3,
+    "similarity_score": 0.7237683534622192,
+    "model": "resnet50",
+    "frame": "367",
+    "segment_id": "367_Neck device_0_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/367/segments/367_Neck device_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Loki's armor (THE AVENGERS)",
+    "object_version": 3,
+    "similarity_score": 0.7879552841186523,
+    "model": "resnet50",
+    "frame": "136",
+    "segment_id": "136_TVA jacket_4_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/136/segments/136_TVA jacket_4_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Time Collar",
+    "object_version": 3,
+    "similarity_score": 0.7031809091567993,
+    "model": "resnet50",
+    "frame": "54",
+    "segment_id": "54_Neck device_0_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/54/segments/54_Neck device_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Time Collar",
+    "object_version": 2,
+    "similarity_score": 0.701769232749939,
+    "model": "resnet50",
+    "frame": "42",
+    "segment_id": "42_Neck device_0_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/42/segments/42_Neck device_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Time Collar",
+    "object_version": 3,
+    "similarity_score": 0.7098586559295654,
+    "model": "resnet50",
+    "frame": "214",
+    "segment_id": "214_Neck device_0_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/214/segments/214_Neck device_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Aligator Loki Plushie",
+    "object_version": 1,
+    "similarity_score": 0.7209762334823608,
+    "model": "resnet50",
+    "frame": "67",
+    "segment_id": "67_TVA jacket_0_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/67/segments/67_TVA jacket_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Time Collar",
+    "object_version": 2,
+    "similarity_score": 0.7079052925109863,
+    "model": "resnet50",
+    "frame": "192",
+    "segment_id": "192_Neck device_0_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/192/segments/192_Neck device_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Time Collar",
+    "object_version": 2,
+    "similarity_score": 0.7022653818130493,
+    "model": "resnet50",
+    "frame": "130",
+    "segment_id": "130_Neck device_0_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/130/segments/130_Neck device_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Asgardian device",
+    "object_version": 3,
+    "similarity_score": 0.7076120972633362,
+    "model": "resnet50",
+    "frame": "180",
+    "segment_id": "180_Holopad device_3_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/180/segments/180_Holopad device_3_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Asgardian device",
+    "object_version": 3,
+    "similarity_score": 0.7157807350158691,
+    "model": "resnet50",
+    "frame": "180",
+    "segment_id": "180_Holopad device_4_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/180/segments/180_Holopad device_4_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Time Collar",
+    "object_version": 3,
+    "similarity_score": 0.7135948538780212,
+    "model": "resnet50",
+    "frame": "206",
+    "segment_id": "206_Neck device_0_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/206/segments/206_Neck device_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Time Collar",
+    "object_version": 3,
+    "similarity_score": 0.7190824151039124,
+    "model": "resnet50",
+    "frame": "372",
+    "segment_id": "372_Neck device_0_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/372/segments/372_Neck device_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Loki's TVA jacket",
+    "object_version": 2,
+    "similarity_score": 0.7495570778846741,
+    "model": "resnet50",
+    "frame": "335",
+    "segment_id": "335_TVA jacket_0_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/335/segments/335_TVA jacket_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Loki's armor (THE AVENGERS)",
+    "object_version": 3,
+    "similarity_score": 0.708486795425415,
+    "model": "resnet50",
+    "frame": "379",
+    "segment_id": "379_TVA jacket_2_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/379/segments/379_TVA jacket_2_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Aligator Loki Plushie",
+    "object_version": 1,
+    "similarity_score": 0.7417101860046387,
+    "model": "resnet50",
+    "frame": "379",
+    "segment_id": "379_TVA jacket_1_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/379/segments/379_TVA jacket_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Time Collar",
+    "object_version": 2,
+    "similarity_score": 0.7111639976501465,
+    "model": "resnet50",
+    "frame": "218",
+    "segment_id": "218_Neck device_0_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/218/segments/218_Neck device_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Time Collar",
+    "object_version": 2,
+    "similarity_score": 0.7063320875167847,
+    "model": "resnet50",
+    "frame": "371",
+    "segment_id": "371_Neck device_0_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/371/segments/371_Neck device_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Asgardian device",
+    "object_version": 3,
+    "similarity_score": 0.7008282542228699,
+    "model": "resnet50",
+    "frame": "531",
+    "segment_id": "531_Holopad device_2_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/531/segments/531_Holopad device_2_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Time Collar",
+    "object_version": 3,
+    "similarity_score": 0.7125179767608643,
+    "model": "resnet50",
+    "frame": "360",
+    "segment_id": "360_Neck device_3_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/360/segments/360_Neck device_3_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Time Collar",
+    "object_version": 3,
+    "similarity_score": 0.7200589179992676,
+    "model": "resnet50",
+    "frame": "360",
+    "segment_id": "360_Neck device_2_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/360/segments/360_Neck device_2_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Time Collar",
+    "object_version": 3,
+    "similarity_score": 0.7095902562141418,
+    "model": "resnet50",
+    "frame": "360",
+    "segment_id": "360_Neck device_4_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/360/segments/360_Neck device_4_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Time Collar",
+    "object_version": 3,
+    "similarity_score": 0.7141388654708862,
+    "model": "resnet50",
+    "frame": "222",
+    "segment_id": "222_Neck device_0_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/222/segments/222_Neck device_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Time Collar",
+    "object_version": 2,
+    "similarity_score": 0.7150061726570129,
+    "model": "resnet50",
+    "frame": "223",
+    "segment_id": "223_Neck device_0_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/223/segments/223_Neck device_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Time Collar",
+    "object_version": 2,
+    "similarity_score": 0.7010838985443115,
+    "model": "resnet50",
+    "frame": "143",
+    "segment_id": "143_Neck device_0_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/143/segments/143_Neck device_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Loki's armor (THE AVENGERS)",
+    "object_version": 3,
+    "similarity_score": 0.7812075614929199,
+    "model": "resnet50",
+    "frame": "552",
+    "segment_id": "552_TVA jacket_4_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/552/segments/552_TVA jacket_4_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Time Collar",
+    "object_version": 3,
+    "similarity_score": 0.7040977478027344,
+    "model": "resnet50",
+    "frame": "346",
+    "segment_id": "346_Neck device_0_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/346/segments/346_Neck device_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Time Collar",
+    "object_version": 2,
+    "similarity_score": 0.7041534781455994,
+    "model": "resnet50",
+    "frame": "326",
+    "segment_id": "326_Neck device_0_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/326/segments/326_Neck device_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Time Collar",
+    "object_version": 3,
+    "similarity_score": 0.7038889527320862,
+    "model": "resnet50",
+    "frame": "216",
+    "segment_id": "216_Neck device_0_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/216/segments/216_Neck device_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Asgardian device",
+    "object_version": 3,
+    "similarity_score": 0.716231107711792,
+    "model": "resnet50",
+    "frame": "179",
+    "segment_id": "179_Holopad device_4_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/179/segments/179_Holopad device_4_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Loki's armor (THE AVENGERS)",
+    "object_version": 3,
+    "similarity_score": 0.7323726415634155,
+    "model": "resnet50",
+    "frame": "333",
+    "segment_id": "333_TVA jacket_2_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/333/segments/333_TVA jacket_2_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Loki's armor (THE AVENGERS)",
+    "object_version": 3,
+    "similarity_score": 0.7606105208396912,
+    "model": "resnet50",
+    "frame": "333",
+    "segment_id": "333_TVA jacket_1_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/333/segments/333_TVA jacket_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Loki's Scepter",
+    "object_version": 2,
+    "similarity_score": 0.7119837999343872,
+    "model": "resnet50",
+    "frame": "333",
+    "segment_id": "333_Neck device_0_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/333/segments/333_Neck device_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Time Collar",
+    "object_version": 3,
+    "similarity_score": 0.7002583146095276,
+    "model": "resnet50",
+    "frame": "548",
+    "segment_id": "548_Neck device_0_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/548/segments/548_Neck device_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Time Collar",
+    "object_version": 3,
+    "similarity_score": 0.7161248922348022,
+    "model": "resnet50",
+    "frame": "307",
+    "segment_id": "307_Neck device_2_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/307/segments/307_Neck device_2_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Time Collar",
+    "object_version": 3,
+    "similarity_score": 0.7130160927772522,
+    "model": "resnet50",
+    "frame": "307",
+    "segment_id": "307_Neck device_1_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/307/segments/307_Neck device_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Time Collar",
+    "object_version": 2,
+    "similarity_score": 0.708661675453186,
+    "model": "resnet50",
+    "frame": "132",
+    "segment_id": "132_Neck device_0_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/132/segments/132_Neck device_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Time Collar",
+    "object_version": 3,
+    "similarity_score": 0.7070671916007996,
+    "model": "resnet50",
+    "frame": "369",
+    "segment_id": "369_Neck device_0_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/369/segments/369_Neck device_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Time Collar",
+    "object_version": 3,
+    "similarity_score": 0.7207596898078918,
+    "model": "resnet50",
+    "frame": "352",
+    "segment_id": "352_Neck device_0_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/352/segments/352_Neck device_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Time Collar",
+    "object_version": 3,
+    "similarity_score": 0.7067950367927551,
+    "model": "resnet50",
+    "frame": "319",
+    "segment_id": "319_Neck device_0_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/319/segments/319_Neck device_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Asgardian device",
+    "object_version": 3,
+    "similarity_score": 0.7051938772201538,
+    "model": "resnet50",
+    "frame": "177",
+    "segment_id": "177_Holopad device_2_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/177/segments/177_Holopad device_2_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Time Collar",
+    "object_version": 2,
+    "similarity_score": 0.7093701958656311,
+    "model": "resnet50",
+    "frame": "345",
+    "segment_id": "345_Neck device_0_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/345/segments/345_Neck device_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Time Collar",
+    "object_version": 3,
+    "similarity_score": 0.7065867781639099,
+    "model": "resnet50",
+    "frame": "213",
+    "segment_id": "213_Neck device_0_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/213/segments/213_Neck device_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Time Collar",
+    "object_version": 2,
+    "similarity_score": 0.7079529762268066,
+    "model": "resnet50",
+    "frame": "55",
+    "segment_id": "55_Neck device_0_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/55/segments/55_Neck device_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Time Collar",
+    "object_version": 2,
+    "similarity_score": 0.7112360000610352,
+    "model": "resnet50",
+    "frame": "199",
+    "segment_id": "199_Neck device_3_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/199/segments/199_Neck device_3_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Time Collar",
+    "object_version": 2,
+    "similarity_score": 0.7000848650932312,
+    "model": "resnet50",
+    "frame": "199",
+    "segment_id": "199_Neck device_1_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/199/segments/199_Neck device_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Time Collar",
+    "object_version": 2,
+    "similarity_score": 0.702065110206604,
+    "model": "resnet50",
+    "frame": "145",
+    "segment_id": "145_Neck device_0_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/145/segments/145_Neck device_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Time Collar",
+    "object_version": 3,
+    "similarity_score": 0.7011520266532898,
+    "model": "resnet50",
+    "frame": "316",
+    "segment_id": "316_Neck device_0_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/316/segments/316_Neck device_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Time Collar",
+    "object_version": 2,
+    "similarity_score": 0.7045519948005676,
+    "model": "resnet50",
+    "frame": "142",
+    "segment_id": "142_Neck device_0_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/142/segments/142_Neck device_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Time Collar",
+    "object_version": 2,
+    "similarity_score": 0.7175133228302002,
+    "model": "resnet50",
+    "frame": "545",
+    "segment_id": "545_Neck device_0_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/545/segments/545_Neck device_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Loki's armor (THE AVENGERS)",
+    "object_version": 3,
+    "similarity_score": 0.7795863151550293,
+    "model": "resnet50",
+    "frame": "299",
+    "segment_id": "299_TVA jacket_5_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/299/segments/299_TVA jacket_5_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Time Collar",
+    "object_version": 2,
+    "similarity_score": 0.7043904066085815,
+    "model": "resnet50",
+    "frame": "299",
+    "segment_id": "299_Neck device_2_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/299/segments/299_Neck device_2_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Loki's armor (THE AVENGERS)",
+    "object_version": 3,
+    "similarity_score": 0.7216262817382812,
+    "model": "resnet50",
+    "frame": "66",
+    "segment_id": "66_TVA jacket_1_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/66/segments/66_TVA jacket_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Aligator Loki Plushie",
+    "object_version": 1,
+    "similarity_score": 0.748706579208374,
+    "model": "resnet50",
+    "frame": "66",
+    "segment_id": "66_TVA jacket_0_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/66/segments/66_TVA jacket_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Time Collar",
+    "object_version": 3,
+    "similarity_score": 0.7152442932128906,
+    "model": "resnet50",
+    "frame": "350",
+    "segment_id": "350_Neck device_0_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/350/segments/350_Neck device_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Loki's armor (THE AVENGERS)",
+    "object_version": 3,
+    "similarity_score": 0.8037303686141968,
+    "model": "resnet50",
+    "frame": "351",
+    "segment_id": "351_TVA jacket_5_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/351/segments/351_TVA jacket_5_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Time Collar",
+    "object_version": 3,
+    "similarity_score": 0.705791711807251,
+    "model": "resnet50",
+    "frame": "351",
+    "segment_id": "351_Neck device_4_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/351/segments/351_Neck device_4_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Time Collar",
+    "object_version": 2,
+    "similarity_score": 0.7059357762336731,
+    "model": "resnet50",
+    "frame": "351",
+    "segment_id": "351_Neck device_3_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/351/segments/351_Neck device_3_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Time Collar",
+    "object_version": 3,
+    "similarity_score": 0.7087439894676208,
+    "model": "resnet50",
+    "frame": "308",
+    "segment_id": "308_Neck device_0_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/308/segments/308_Neck device_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Loki's armor (THE AVENGERS)",
+    "object_version": 3,
+    "similarity_score": 0.7468470335006714,
+    "model": "resnet50",
+    "frame": "553",
+    "segment_id": "553_TVA jacket_3_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/553/segments/553_TVA jacket_3_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Asgardian device",
+    "object_version": 3,
+    "similarity_score": 0.7046148180961609,
+    "model": "resnet50",
+    "frame": "527",
+    "segment_id": "527_Holopad device_0_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/527/segments/527_Holopad device_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Time Collar",
+    "object_version": 2,
+    "similarity_score": 0.7083008885383606,
+    "model": "resnet50",
+    "frame": "217",
+    "segment_id": "217_Neck device_0_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/217/segments/217_Neck device_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Asgardian device",
+    "object_version": 3,
+    "similarity_score": 0.712844729423523,
+    "model": "resnet50",
+    "frame": "524",
+    "segment_id": "524_Holopad device_0_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/524/segments/524_Holopad device_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Time Collar",
+    "object_version": 3,
+    "similarity_score": 0.7141565680503845,
+    "model": "resnet50",
+    "frame": "356",
+    "segment_id": "356_Neck device_0_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/356/segments/356_Neck device_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Time Collar",
+    "object_version": 2,
+    "similarity_score": 0.7093181610107422,
+    "model": "resnet50",
+    "frame": "300",
+    "segment_id": "300_Neck device_0_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/300/segments/300_Neck device_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Time Collar",
+    "object_version": 2,
+    "similarity_score": 0.7145980596542358,
+    "model": "resnet50",
+    "frame": "184",
+    "segment_id": "184_Neck device_0_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/184/segments/184_Neck device_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Time Collar",
+    "object_version": 3,
+    "similarity_score": 0.7050080895423889,
+    "model": "resnet50",
+    "frame": "323",
+    "segment_id": "323_Neck device_0_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/323/segments/323_Neck device_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Time Collar",
+    "object_version": 2,
+    "similarity_score": 0.7115646600723267,
+    "model": "resnet50",
+    "frame": "303",
+    "segment_id": "303_Neck device_0_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/303/segments/303_Neck device_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Time Collar",
+    "object_version": 3,
+    "similarity_score": 0.714827835559845,
+    "model": "resnet50",
+    "frame": "364",
+    "segment_id": "364_Neck device_0_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/364/segments/364_Neck device_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Time Collar",
+    "object_version": 2,
+    "similarity_score": 0.7037544250488281,
+    "model": "resnet50",
+    "frame": "215",
+    "segment_id": "215_Neck device_0_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/215/segments/215_Neck device_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Loki's armor (THE AVENGERS)",
+    "object_version": 3,
+    "similarity_score": 0.7335500121116638,
+    "model": "resnet50",
+    "frame": "332",
+    "segment_id": "332_TVA jacket_1_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/332/segments/332_TVA jacket_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Loki's armor (THE AVENGERS)",
+    "object_version": 3,
+    "similarity_score": 0.7610373497009277,
+    "model": "resnet50",
+    "frame": "332",
+    "segment_id": "332_TVA jacket_0_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/332/segments/332_TVA jacket_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Time Collar",
+    "object_version": 2,
+    "similarity_score": 0.7009015083312988,
+    "model": "resnet50",
+    "frame": "129",
+    "segment_id": "129_Neck device_0_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/129/segments/129_Neck device_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Time Collar",
+    "object_version": 3,
+    "similarity_score": 0.7139482498168945,
+    "model": "resnet50",
+    "frame": "221",
+    "segment_id": "221_Neck device_0_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/221/segments/221_Neck device_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Time Collar",
+    "object_version": 2,
+    "similarity_score": 0.7053515911102295,
+    "model": "resnet50",
+    "frame": "327",
+    "segment_id": "327_Neck device_0_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/327/segments/327_Neck device_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Time Collar",
+    "object_version": 2,
+    "similarity_score": 0.7086293697357178,
+    "model": "resnet50",
+    "frame": "341",
+    "segment_id": "341_Neck device_0_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/341/segments/341_Neck device_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Time Collar",
+    "object_version": 3,
+    "similarity_score": 0.7018320560455322,
+    "model": "resnet50",
+    "frame": "322",
+    "segment_id": "322_Neck device_0_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/322/segments/322_Neck device_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Aligator Loki Plushie",
+    "object_version": 1,
+    "similarity_score": 0.7370845079421997,
+    "model": "resnet50",
+    "frame": "225",
+    "segment_id": "225_TVA jacket_1_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/225/segments/225_TVA jacket_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Time Collar",
+    "object_version": 3,
+    "similarity_score": 0.712512731552124,
+    "model": "resnet50",
+    "frame": "202",
+    "segment_id": "202_Neck device_0_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/202/segments/202_Neck device_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Aligator Loki Plushie",
+    "object_version": 1,
+    "similarity_score": 0.7235891819000244,
+    "model": "resnet50",
+    "frame": "230",
+    "segment_id": "230_TVA jacket_1_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/230/segments/230_TVA jacket_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Loki's TVA jacket",
+    "object_version": 2,
+    "similarity_score": 0.7354223728179932,
+    "model": "resnet50",
+    "frame": "230",
+    "segment_id": "230_TVA jacket_0_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/230/segments/230_TVA jacket_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Loki's armor (THE AVENGERS)",
+    "object_version": 3,
+    "similarity_score": 0.7422107458114624,
+    "model": "resnet50",
+    "frame": "331",
+    "segment_id": "331_TVA jacket_2_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/331/segments/331_TVA jacket_2_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Time Collar",
+    "object_version": 3,
+    "similarity_score": 0.7116709351539612,
+    "model": "resnet50",
+    "frame": "542",
+    "segment_id": "542_Neck device_0_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/542/segments/542_Neck device_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Time Collar",
+    "object_version": 2,
+    "similarity_score": 0.7207950353622437,
+    "model": "resnet50",
+    "frame": "121",
+    "segment_id": "121_Neck device_0_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/121/segments/121_Neck device_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Time Collar",
+    "object_version": 3,
+    "similarity_score": 0.7229900360107422,
+    "model": "resnet50",
+    "frame": "219",
+    "segment_id": "219_Neck device_0_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/219/segments/219_Neck device_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Loki's armor (THE AVENGERS)",
+    "object_version": 3,
+    "similarity_score": 0.7828617691993713,
+    "model": "resnet50",
+    "frame": "128",
+    "segment_id": "128_TVA jacket_5_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/128/segments/128_TVA jacket_5_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Time Collar",
+    "object_version": 2,
+    "similarity_score": 0.7006751298904419,
+    "model": "resnet50",
+    "frame": "126",
+    "segment_id": "126_Neck device_0_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/126/segments/126_Neck device_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Time Collar",
+    "object_version": 3,
+    "similarity_score": 0.7123233675956726,
+    "model": "resnet50",
+    "frame": "321",
+    "segment_id": "321_Neck device_0_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/321/segments/321_Neck device_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Time Collar",
+    "object_version": 3,
+    "similarity_score": 0.7117996215820312,
+    "model": "resnet50",
+    "frame": "211",
+    "segment_id": "211_Neck device_0_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/211/segments/211_Neck device_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Time Collar",
+    "object_version": 2,
+    "similarity_score": 0.7195065021514893,
+    "model": "resnet50",
+    "frame": "353",
+    "segment_id": "353_Neck device_1_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/353/segments/353_Neck device_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Loki's armor (THE AVENGERS)",
+    "object_version": 3,
+    "similarity_score": 0.7246800065040588,
+    "model": "resnet50",
+    "frame": "330",
+    "segment_id": "330_TVA jacket_2_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/330/segments/330_TVA jacket_2_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Loki's armor (THE AVENGERS)",
+    "object_version": 3,
+    "similarity_score": 0.736613929271698,
+    "model": "resnet50",
+    "frame": "330",
+    "segment_id": "330_TVA jacket_1_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/330/segments/330_TVA jacket_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Time Collar",
+    "object_version": 3,
+    "similarity_score": 0.7150920033454895,
+    "model": "resnet50",
+    "frame": "544",
+    "segment_id": "544_Neck device_2_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/544/segments/544_Neck device_2_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Time Collar",
+    "object_version": 3,
+    "similarity_score": 0.714942455291748,
+    "model": "resnet50",
+    "frame": "544",
+    "segment_id": "544_Neck device_1_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/544/segments/544_Neck device_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Time Collar",
+    "object_version": 3,
+    "similarity_score": 0.7193667888641357,
+    "model": "resnet50",
+    "frame": "220",
+    "segment_id": "220_Neck device_2_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/220/segments/220_Neck device_2_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Loki's armor (THE AVENGERS)",
+    "object_version": 3,
+    "similarity_score": 0.7938626408576965,
+    "model": "resnet50",
+    "frame": "195",
+    "segment_id": "195_TVA jacket_4_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/195/segments/195_TVA jacket_4_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Time Collar",
+    "object_version": 3,
+    "similarity_score": 0.7097020149230957,
+    "model": "resnet50",
+    "frame": "195",
+    "segment_id": "195_Neck device_3_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/195/segments/195_Neck device_3_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Time Collar",
+    "object_version": 3,
+    "similarity_score": 0.7134956121444702,
+    "model": "resnet50",
+    "frame": "195",
+    "segment_id": "195_Neck device_2_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/195/segments/195_Neck device_2_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Time Collar",
+    "object_version": 2,
+    "similarity_score": 0.7024698257446289,
+    "model": "resnet50",
+    "frame": "195",
+    "segment_id": "195_Neck device_1_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/195/segments/195_Neck device_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Time Collar",
+    "object_version": 3,
+    "similarity_score": 0.7053365111351013,
+    "model": "resnet50",
+    "frame": "195",
+    "segment_id": "195_Neck device_0_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/195/segments/195_Neck device_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389",
+    "predicted_object": "Time Collar",
+    "object_version": 3,
+    "similarity_score": 0.7169237732887268,
+    "model": "resnet50",
+    "frame": "355",
+    "segment_id": "355_Neck device_0_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-5a- only pu_20230815181240389/355/segments/355_Neck device_0_nopoint.png"
+  }
+]

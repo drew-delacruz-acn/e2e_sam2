@@ -1,0 +1,52 @@
+[
+  {
+    "video": "Scenes 041-060__156D-1- mos_20230815181940173",
+    "predicted_object": "Time Collar",
+    "object_version": 2,
+    "similarity_score": 0.7027662992477417,
+    "model": "resnet50",
+    "frame": "17",
+    "segment_id": "17_Holopad device_0_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156D-1- mos_20230815181940173/17/segments/17_Holopad device_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156D-1- mos_20230815181940173",
+    "predicted_object": "TemPad",
+    "object_version": 1,
+    "similarity_score": 0.7207634449005127,
+    "model": "resnet50",
+    "frame": "115",
+    "segment_id": "115_Holopad device_2_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156D-1- mos_20230815181940173/115/segments/115_Holopad device_2_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156D-1- mos_20230815181940173",
+    "predicted_object": "Time Collar",
+    "object_version": 1,
+    "similarity_score": 0.7298842668533325,
+    "model": "resnet50",
+    "frame": "115",
+    "segment_id": "115_Holopad device_0_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156D-1- mos_20230815181940173/115/segments/115_Holopad device_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156D-1- mos_20230815181940173",
+    "predicted_object": "Asgardian device",
+    "object_version": 1,
+    "similarity_score": 0.7111263871192932,
+    "model": "resnet50",
+    "frame": "209",
+    "segment_id": "209_Bomb device_0_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156D-1- mos_20230815181940173/209/segments/209_Bomb device_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156D-1- mos_20230815181940173",
+    "predicted_object": "Time Collar",
+    "object_version": 1,
+    "similarity_score": 0.7054547071456909,
+    "model": "resnet50",
+    "frame": "192",
+    "segment_id": "192_Holopad device_0_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156D-1- mos_20230815181940173/192/segments/192_Holopad device_0_nopoint.png"
+  }
+]

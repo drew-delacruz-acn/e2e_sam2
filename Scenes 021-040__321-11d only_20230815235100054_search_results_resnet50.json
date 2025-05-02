@@ -1,0 +1,12 @@
+[
+  {
+    "video": "Scenes 021-040__321-11d only_20230815235100054",
+    "predicted_object": "Laevateinn",
+    "object_version": 3,
+    "similarity_score": 0.725812554359436,
+    "model": "resnet50",
+    "frame": "26",
+    "segment_id": "26_TVA jacket_0_nopoint",
+    "segment_path": "all_frames/Scenes 021-040__321-11d only_20230815235100054/26/segments/26_TVA jacket_0_nopoint.png"
+  }
+]

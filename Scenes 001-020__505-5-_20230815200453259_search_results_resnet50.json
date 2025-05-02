@@ -1,0 +1,12 @@
+[
+  {
+    "video": "Scenes 001-020__505-5-_20230815200453259",
+    "predicted_object": "Sylvie's machete",
+    "object_version": 2,
+    "similarity_score": 0.7035127878189087,
+    "model": "resnet50",
+    "frame": "37",
+    "segment_id": "37_TVA jacket_0_nopoint",
+    "segment_path": "all_frames/Scenes 001-020__505-5-_20230815200453259/37/segments/37_TVA jacket_0_nopoint.png"
+  }
+]

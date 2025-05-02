@@ -1,0 +1,2752 @@
+[
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.7283447980880737,
+    "model": "resnet50",
+    "frame": "310",
+    "segment_id": "310_Glowing rod_0_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/310/segments/310_Glowing rod_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.7465469241142273,
+    "model": "resnet50",
+    "frame": "19",
+    "segment_id": "19_War hammer_0_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/19/segments/19_War hammer_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.7303872108459473,
+    "model": "resnet50",
+    "frame": "46",
+    "segment_id": "46_Glowing rod_0_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/46/segments/46_Glowing rod_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.7415152788162231,
+    "model": "resnet50",
+    "frame": "293",
+    "segment_id": "293_War hammer_0_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/293/segments/293_War hammer_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.7390788793563843,
+    "model": "resnet50",
+    "frame": "251",
+    "segment_id": "251_War hammer_0_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/251/segments/251_War hammer_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.7338966131210327,
+    "model": "resnet50",
+    "frame": "284",
+    "segment_id": "284_Glowing rod_0_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/284/segments/284_Glowing rod_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.7356632947921753,
+    "model": "resnet50",
+    "frame": "224",
+    "segment_id": "224_War hammer_0_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/224/segments/224_War hammer_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.7350384593009949,
+    "model": "resnet50",
+    "frame": "133",
+    "segment_id": "133_Glowing rod_0_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/133/segments/133_Glowing rod_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.7400761842727661,
+    "model": "resnet50",
+    "frame": "131",
+    "segment_id": "131_Glowing rod_0_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/131/segments/131_Glowing rod_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.732283890247345,
+    "model": "resnet50",
+    "frame": "254",
+    "segment_id": "254_War hammer_0_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/254/segments/254_War hammer_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.7291257381439209,
+    "model": "resnet50",
+    "frame": "287",
+    "segment_id": "287_Glowing rod_0_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/287/segments/287_Glowing rod_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.7287930250167847,
+    "model": "resnet50",
+    "frame": "83",
+    "segment_id": "83_War hammer_0_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/83/segments/83_War hammer_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.7190462350845337,
+    "model": "resnet50",
+    "frame": "263",
+    "segment_id": "263_War hammer_0_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/263/segments/263_War hammer_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.7385305762290955,
+    "model": "resnet50",
+    "frame": "234",
+    "segment_id": "234_War hammer_0_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/234/segments/234_War hammer_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Loki's armor (THE AVENGERS)",
+    "object_version": 1,
+    "similarity_score": 0.719598650932312,
+    "model": "resnet50",
+    "frame": "244",
+    "segment_id": "244_Leather coat_1_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/244/segments/244_Leather coat_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.7465016841888428,
+    "model": "resnet50",
+    "frame": "244",
+    "segment_id": "244_War hammer_0_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/244/segments/244_War hammer_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.7351900339126587,
+    "model": "resnet50",
+    "frame": "281",
+    "segment_id": "281_War hammer_0_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/281/segments/281_War hammer_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.7189167737960815,
+    "model": "resnet50",
+    "frame": "84",
+    "segment_id": "84_War hammer_0_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/84/segments/84_War hammer_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.7349072694778442,
+    "model": "resnet50",
+    "frame": "239",
+    "segment_id": "239_War hammer_0_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/239/segments/239_War hammer_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Loki's armor (THE AVENGERS)",
+    "object_version": 1,
+    "similarity_score": 0.7051084637641907,
+    "model": "resnet50",
+    "frame": "183",
+    "segment_id": "183_Leather coat_2_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/183/segments/183_Leather coat_2_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.7455095052719116,
+    "model": "resnet50",
+    "frame": "183",
+    "segment_id": "183_War hammer_1_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/183/segments/183_War hammer_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.7290594577789307,
+    "model": "resnet50",
+    "frame": "60",
+    "segment_id": "60_Glowing rod_0_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/60/segments/60_Glowing rod_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.7568051815032959,
+    "model": "resnet50",
+    "frame": "25",
+    "segment_id": "25_War hammer_0_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/25/segments/25_War hammer_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.7309476733207703,
+    "model": "resnet50",
+    "frame": "325",
+    "segment_id": "325_War hammer_0_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/325/segments/325_War hammer_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.7306534051895142,
+    "model": "resnet50",
+    "frame": "288",
+    "segment_id": "288_War hammer_1_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/288/segments/288_War hammer_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.7268521785736084,
+    "model": "resnet50",
+    "frame": "171",
+    "segment_id": "171_War hammer_0_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/171/segments/171_War hammer_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.7381622791290283,
+    "model": "resnet50",
+    "frame": "163",
+    "segment_id": "163_War hammer_0_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/163/segments/163_War hammer_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.7294069528579712,
+    "model": "resnet50",
+    "frame": "138",
+    "segment_id": "138_Glowing rod_2_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/138/segments/138_Glowing rod_2_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.7396337389945984,
+    "model": "resnet50",
+    "frame": "291",
+    "segment_id": "291_War hammer_0_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/291/segments/291_War hammer_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.7516528367996216,
+    "model": "resnet50",
+    "frame": "96",
+    "segment_id": "96_War hammer_2_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/96/segments/96_War hammer_2_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.7351630330085754,
+    "model": "resnet50",
+    "frame": "75",
+    "segment_id": "75_War hammer_0_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/75/segments/75_War hammer_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Loki's armor (THE AVENGERS)",
+    "object_version": 1,
+    "similarity_score": 0.7218497395515442,
+    "model": "resnet50",
+    "frame": "249",
+    "segment_id": "249_Leather coat_1_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/249/segments/249_Leather coat_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.7397395372390747,
+    "model": "resnet50",
+    "frame": "249",
+    "segment_id": "249_War hammer_0_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/249/segments/249_War hammer_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Loki's armor (THE AVENGERS)",
+    "object_version": 1,
+    "similarity_score": 0.7011440992355347,
+    "model": "resnet50",
+    "frame": "149",
+    "segment_id": "149_Leather coat_2_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/149/segments/149_Leather coat_2_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.7483817934989929,
+    "model": "resnet50",
+    "frame": "90",
+    "segment_id": "90_War hammer_0_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/90/segments/90_War hammer_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.7334374189376831,
+    "model": "resnet50",
+    "frame": "98",
+    "segment_id": "98_War hammer_0_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/98/segments/98_War hammer_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Loki's armor (THE AVENGERS)",
+    "object_version": 1,
+    "similarity_score": 0.7135279178619385,
+    "model": "resnet50",
+    "frame": "294",
+    "segment_id": "294_Leather coat_2_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/294/segments/294_Leather coat_2_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.7325479388237,
+    "model": "resnet50",
+    "frame": "294",
+    "segment_id": "294_War hammer_1_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/294/segments/294_War hammer_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.7331101894378662,
+    "model": "resnet50",
+    "frame": "168",
+    "segment_id": "168_War hammer_0_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/168/segments/168_War hammer_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.7397301197052002,
+    "model": "resnet50",
+    "frame": "317",
+    "segment_id": "317_War hammer_0_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/317/segments/317_War hammer_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.7466118931770325,
+    "model": "resnet50",
+    "frame": "127",
+    "segment_id": "127_War hammer_0_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/127/segments/127_War hammer_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.7514181137084961,
+    "model": "resnet50",
+    "frame": "101",
+    "segment_id": "101_War hammer_0_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/101/segments/101_War hammer_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.7512370347976685,
+    "model": "resnet50",
+    "frame": "228",
+    "segment_id": "228_War hammer_0_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/228/segments/228_War hammer_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.7386514544487,
+    "model": "resnet50",
+    "frame": "56",
+    "segment_id": "56_War hammer_0_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/56/segments/56_War hammer_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.7314988374710083,
+    "model": "resnet50",
+    "frame": "309",
+    "segment_id": "309_War hammer_0_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/309/segments/309_War hammer_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.748144268989563,
+    "model": "resnet50",
+    "frame": "29",
+    "segment_id": "29_War hammer_0_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/29/segments/29_War hammer_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.7274171113967896,
+    "model": "resnet50",
+    "frame": "176",
+    "segment_id": "176_War hammer_0_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/176/segments/176_War hammer_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.7346953749656677,
+    "model": "resnet50",
+    "frame": "167",
+    "segment_id": "167_War hammer_0_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/167/segments/167_War hammer_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.7340191006660461,
+    "model": "resnet50",
+    "frame": "240",
+    "segment_id": "240_War hammer_0_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/240/segments/240_War hammer_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.737756609916687,
+    "model": "resnet50",
+    "frame": "144",
+    "segment_id": "144_War hammer_2_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/144/segments/144_War hammer_2_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.7351375818252563,
+    "model": "resnet50",
+    "frame": "174",
+    "segment_id": "174_War hammer_0_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/174/segments/174_War hammer_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.7337798476219177,
+    "model": "resnet50",
+    "frame": "258",
+    "segment_id": "258_War hammer_0_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/258/segments/258_War hammer_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.730481743812561,
+    "model": "resnet50",
+    "frame": "292",
+    "segment_id": "292_War hammer_0_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/292/segments/292_War hammer_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Loki's armor (THE AVENGERS)",
+    "object_version": 1,
+    "similarity_score": 0.7209855318069458,
+    "model": "resnet50",
+    "frame": "148",
+    "segment_id": "148_Leather coat_1_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/148/segments/148_Leather coat_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.7347519397735596,
+    "model": "resnet50",
+    "frame": "148",
+    "segment_id": "148_War hammer_0_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/148/segments/148_War hammer_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.7371178865432739,
+    "model": "resnet50",
+    "frame": "226",
+    "segment_id": "226_War hammer_0_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/226/segments/226_War hammer_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.7392942309379578,
+    "model": "resnet50",
+    "frame": "173",
+    "segment_id": "173_War hammer_0_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/173/segments/173_War hammer_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.7404026985168457,
+    "model": "resnet50",
+    "frame": "62",
+    "segment_id": "62_War hammer_0_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/62/segments/62_War hammer_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.7371267080307007,
+    "model": "resnet50",
+    "frame": "70",
+    "segment_id": "70_War hammer_1_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/70/segments/70_War hammer_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.7302149534225464,
+    "model": "resnet50",
+    "frame": "141",
+    "segment_id": "141_War hammer_0_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/141/segments/141_War hammer_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.7329655885696411,
+    "model": "resnet50",
+    "frame": "74",
+    "segment_id": "74_War hammer_0_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/74/segments/74_War hammer_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.729943573474884,
+    "model": "resnet50",
+    "frame": "286",
+    "segment_id": "286_Glowing rod_1_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/286/segments/286_Glowing rod_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Collar",
+    "object_version": 1,
+    "similarity_score": 0.7144485712051392,
+    "model": "resnet50",
+    "frame": "157",
+    "segment_id": "157_Horned helmet_1_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/157/segments/157_Horned helmet_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.7384095191955566,
+    "model": "resnet50",
+    "frame": "178",
+    "segment_id": "178_War hammer_0_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/178/segments/178_War hammer_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Loki's armor (THE AVENGERS)",
+    "object_version": 1,
+    "similarity_score": 0.7207604646682739,
+    "model": "resnet50",
+    "frame": "100",
+    "segment_id": "100_Leather coat_2_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/100/segments/100_Leather coat_2_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.7554463148117065,
+    "model": "resnet50",
+    "frame": "100",
+    "segment_id": "100_War hammer_1_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/100/segments/100_War hammer_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.7397333383560181,
+    "model": "resnet50",
+    "frame": "72",
+    "segment_id": "72_War hammer_0_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/72/segments/72_War hammer_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.7435016632080078,
+    "model": "resnet50",
+    "frame": "97",
+    "segment_id": "97_War hammer_1_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/97/segments/97_War hammer_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Loki's armor (THE AVENGERS)",
+    "object_version": 1,
+    "similarity_score": 0.7267401218414307,
+    "model": "resnet50",
+    "frame": "201",
+    "segment_id": "201_Leather coat_1_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/201/segments/201_Leather coat_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Loki's armor (THE AVENGERS)",
+    "object_version": 3,
+    "similarity_score": 0.7117657661437988,
+    "model": "resnet50",
+    "frame": "245",
+    "segment_id": "245_Leather coat_2_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/245/segments/245_Leather coat_2_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.745343804359436,
+    "model": "resnet50",
+    "frame": "245",
+    "segment_id": "245_War hammer_1_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/245/segments/245_War hammer_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.7291094660758972,
+    "model": "resnet50",
+    "frame": "285",
+    "segment_id": "285_Glowing rod_0_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/285/segments/285_Glowing rod_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Collar",
+    "object_version": 1,
+    "similarity_score": 0.7049417495727539,
+    "model": "resnet50",
+    "frame": "150",
+    "segment_id": "150_Holopad device_2_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/150/segments/150_Holopad device_2_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.7344807386398315,
+    "model": "resnet50",
+    "frame": "17",
+    "segment_id": "17_War hammer_0_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/17/segments/17_War hammer_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Loki's armor (THE AVENGERS)",
+    "object_version": 1,
+    "similarity_score": 0.7243256568908691,
+    "model": "resnet50",
+    "frame": "272",
+    "segment_id": "272_Leather coat_3_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/272/segments/272_Leather coat_3_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.7378880381584167,
+    "model": "resnet50",
+    "frame": "272",
+    "segment_id": "272_War hammer_2_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/272/segments/272_War hammer_2_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Loki's armor (THE AVENGERS)",
+    "object_version": 1,
+    "similarity_score": 0.7329614162445068,
+    "model": "resnet50",
+    "frame": "256",
+    "segment_id": "256_Leather coat_1_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/256/segments/256_Leather coat_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.7363882064819336,
+    "model": "resnet50",
+    "frame": "256",
+    "segment_id": "256_War hammer_0_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/256/segments/256_War hammer_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Loki's armor (THE AVENGERS)",
+    "object_version": 3,
+    "similarity_score": 0.7070026397705078,
+    "model": "resnet50",
+    "frame": "247",
+    "segment_id": "247_Leather coat_3_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/247/segments/247_Leather coat_3_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.7290509939193726,
+    "model": "resnet50",
+    "frame": "247",
+    "segment_id": "247_War hammer_1_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/247/segments/247_War hammer_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Loki's armor (THE AVENGERS)",
+    "object_version": 3,
+    "similarity_score": 0.7056437730789185,
+    "model": "resnet50",
+    "frame": "33",
+    "segment_id": "33_Leather coat_1_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/33/segments/33_Leather coat_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.7460438013076782,
+    "model": "resnet50",
+    "frame": "33",
+    "segment_id": "33_War hammer_0_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/33/segments/33_War hammer_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.7381160855293274,
+    "model": "resnet50",
+    "frame": "324",
+    "segment_id": "324_War hammer_0_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/324/segments/324_War hammer_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.746319591999054,
+    "model": "resnet50",
+    "frame": "7",
+    "segment_id": "7_War hammer_0_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/7/segments/7_War hammer_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.7287518382072449,
+    "model": "resnet50",
+    "frame": "315",
+    "segment_id": "315_Glowing rod_0_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/315/segments/315_Glowing rod_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.7305252552032471,
+    "model": "resnet50",
+    "frame": "81",
+    "segment_id": "81_Glowing rod_0_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/81/segments/81_Glowing rod_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.7262927889823914,
+    "model": "resnet50",
+    "frame": "134",
+    "segment_id": "134_Glowing rod_0_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/134/segments/134_Glowing rod_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Loki's armor (THE AVENGERS)",
+    "object_version": 2,
+    "similarity_score": 0.7138011455535889,
+    "model": "resnet50",
+    "frame": "336",
+    "segment_id": "336_TVA jacket_1_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/336/segments/336_TVA jacket_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Loki's armor (THE AVENGERS)",
+    "object_version": 1,
+    "similarity_score": 0.7119193077087402,
+    "model": "resnet50",
+    "frame": "246",
+    "segment_id": "246_Leather coat_1_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/246/segments/246_Leather coat_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.7367064952850342,
+    "model": "resnet50",
+    "frame": "246",
+    "segment_id": "246_War hammer_0_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/246/segments/246_War hammer_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.7318181991577148,
+    "model": "resnet50",
+    "frame": "242",
+    "segment_id": "242_War hammer_0_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/242/segments/242_War hammer_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Loki's armor (THE AVENGERS)",
+    "object_version": 1,
+    "similarity_score": 0.7240192294120789,
+    "model": "resnet50",
+    "frame": "295",
+    "segment_id": "295_Leather coat_1_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/295/segments/295_Leather coat_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.7391154766082764,
+    "model": "resnet50",
+    "frame": "295",
+    "segment_id": "295_War hammer_0_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/295/segments/295_War hammer_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.7260037064552307,
+    "model": "resnet50",
+    "frame": "261",
+    "segment_id": "261_Glowing rod_0_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/261/segments/261_Glowing rod_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.7244421243667603,
+    "model": "resnet50",
+    "frame": "135",
+    "segment_id": "135_Glowing rod_1_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/135/segments/135_Glowing rod_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.7459992170333862,
+    "model": "resnet50",
+    "frame": "194",
+    "segment_id": "194_War hammer_0_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/194/segments/194_War hammer_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.7463492155075073,
+    "model": "resnet50",
+    "frame": "162",
+    "segment_id": "162_War hammer_0_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/162/segments/162_War hammer_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.7375292778015137,
+    "model": "resnet50",
+    "frame": "108",
+    "segment_id": "108_War hammer_0_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/108/segments/108_War hammer_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.7342808246612549,
+    "model": "resnet50",
+    "frame": "139",
+    "segment_id": "139_Glowing rod_2_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/139/segments/139_Glowing rod_2_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.7311185598373413,
+    "model": "resnet50",
+    "frame": "279",
+    "segment_id": "279_War hammer_0_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/279/segments/279_War hammer_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Loki's armor (THE AVENGERS)",
+    "object_version": 1,
+    "similarity_score": 0.7147496938705444,
+    "model": "resnet50",
+    "frame": "269",
+    "segment_id": "269_Leather coat_2_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/269/segments/269_Leather coat_2_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.738659679889679,
+    "model": "resnet50",
+    "frame": "269",
+    "segment_id": "269_War hammer_1_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/269/segments/269_War hammer_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.7361830472946167,
+    "model": "resnet50",
+    "frame": "318",
+    "segment_id": "318_War hammer_0_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/318/segments/318_War hammer_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.7471756339073181,
+    "model": "resnet50",
+    "frame": "290",
+    "segment_id": "290_War hammer_0_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/290/segments/290_War hammer_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.7581943869590759,
+    "model": "resnet50",
+    "frame": "39",
+    "segment_id": "39_War hammer_0_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/39/segments/39_War hammer_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Collar",
+    "object_version": 1,
+    "similarity_score": 0.712544322013855,
+    "model": "resnet50",
+    "frame": "35",
+    "segment_id": "35_Horned helmet_4_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/35/segments/35_Horned helmet_4_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Loki's armor (THE AVENGERS)",
+    "object_version": 1,
+    "similarity_score": 0.7047030925750732,
+    "model": "resnet50",
+    "frame": "35",
+    "segment_id": "35_Leather coat_3_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/35/segments/35_Leather coat_3_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.7707310914993286,
+    "model": "resnet50",
+    "frame": "35",
+    "segment_id": "35_War hammer_2_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/35/segments/35_War hammer_2_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.7654523849487305,
+    "model": "resnet50",
+    "frame": "38",
+    "segment_id": "38_War hammer_0_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/38/segments/38_War hammer_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.7421648502349854,
+    "model": "resnet50",
+    "frame": "169",
+    "segment_id": "169_War hammer_0_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/169/segments/169_War hammer_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Loki's armor (THE AVENGERS)",
+    "object_version": 1,
+    "similarity_score": 0.7165981531143188,
+    "model": "resnet50",
+    "frame": "116",
+    "segment_id": "116_Leather coat_1_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/116/segments/116_Leather coat_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.7537722587585449,
+    "model": "resnet50",
+    "frame": "24",
+    "segment_id": "24_War hammer_1_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/24/segments/24_War hammer_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.7331121563911438,
+    "model": "resnet50",
+    "frame": "165",
+    "segment_id": "165_War hammer_0_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/165/segments/165_War hammer_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Loki's armor (THE AVENGERS)",
+    "object_version": 1,
+    "similarity_score": 0.7106386423110962,
+    "model": "resnet50",
+    "frame": "271",
+    "segment_id": "271_Leather coat_2_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/271/segments/271_Leather coat_2_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.7472091913223267,
+    "model": "resnet50",
+    "frame": "271",
+    "segment_id": "271_War hammer_1_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/271/segments/271_War hammer_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Loki's armor (THE AVENGERS)",
+    "object_version": 1,
+    "similarity_score": 0.7279641032218933,
+    "model": "resnet50",
+    "frame": "175",
+    "segment_id": "175_Leather coat_2_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/175/segments/175_Leather coat_2_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.7265265583992004,
+    "model": "resnet50",
+    "frame": "175",
+    "segment_id": "175_War hammer_1_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/175/segments/175_War hammer_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.752757728099823,
+    "model": "resnet50",
+    "frame": "8",
+    "segment_id": "8_Glowing rod_0_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/8/segments/8_Glowing rod_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Loki's armor (THE AVENGERS)",
+    "object_version": 1,
+    "similarity_score": 0.7100327610969543,
+    "model": "resnet50",
+    "frame": "49",
+    "segment_id": "49_Leather coat_0_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/49/segments/49_Leather coat_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.7395563125610352,
+    "model": "resnet50",
+    "frame": "69",
+    "segment_id": "69_War hammer_1_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/69/segments/69_War hammer_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.7444591522216797,
+    "model": "resnet50",
+    "frame": "68",
+    "segment_id": "68_Glowing rod_0_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/68/segments/68_Glowing rod_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.7330089807510376,
+    "model": "resnet50",
+    "frame": "137",
+    "segment_id": "137_Glowing rod_0_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/137/segments/137_Glowing rod_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.7513267993927002,
+    "model": "resnet50",
+    "frame": "16",
+    "segment_id": "16_War hammer_1_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/16/segments/16_War hammer_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Loki's armor (THE AVENGERS)",
+    "object_version": 1,
+    "similarity_score": 0.7083783745765686,
+    "model": "resnet50",
+    "frame": "118",
+    "segment_id": "118_Leather coat_1_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/118/segments/118_Leather coat_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.7239898443222046,
+    "model": "resnet50",
+    "frame": "282",
+    "segment_id": "282_War hammer_0_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/282/segments/282_War hammer_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.7325578331947327,
+    "model": "resnet50",
+    "frame": "241",
+    "segment_id": "241_War hammer_0_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/241/segments/241_War hammer_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.7466117739677429,
+    "model": "resnet50",
+    "frame": "21",
+    "segment_id": "21_War hammer_1_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/21/segments/21_War hammer_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.718277096748352,
+    "model": "resnet50",
+    "frame": "196",
+    "segment_id": "196_War hammer_0_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/196/segments/196_War hammer_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.7326730489730835,
+    "model": "resnet50",
+    "frame": "57",
+    "segment_id": "57_War hammer_1_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/57/segments/57_War hammer_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.7591412663459778,
+    "model": "resnet50",
+    "frame": "34",
+    "segment_id": "34_War hammer_0_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/34/segments/34_War hammer_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.7215574979782104,
+    "model": "resnet50",
+    "frame": "193",
+    "segment_id": "193_War hammer_0_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/193/segments/193_War hammer_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.743097722530365,
+    "model": "resnet50",
+    "frame": "146",
+    "segment_id": "146_War hammer_0_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/146/segments/146_War hammer_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.7461400032043457,
+    "model": "resnet50",
+    "frame": "30",
+    "segment_id": "30_War hammer_0_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/30/segments/30_War hammer_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.7419198155403137,
+    "model": "resnet50",
+    "frame": "91",
+    "segment_id": "91_War hammer_0_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/91/segments/91_War hammer_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.7123398780822754,
+    "model": "resnet50",
+    "frame": "106",
+    "segment_id": "106_Scepter weapon_0_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/106/segments/106_Scepter weapon_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.7551178336143494,
+    "model": "resnet50",
+    "frame": "297",
+    "segment_id": "297_War hammer_0_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/297/segments/297_War hammer_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Loki's armor (THE AVENGERS)",
+    "object_version": 1,
+    "similarity_score": 0.7237430214881897,
+    "model": "resnet50",
+    "frame": "51",
+    "segment_id": "51_Leather coat_0_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/51/segments/51_Leather coat_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.7474458813667297,
+    "model": "resnet50",
+    "frame": "23",
+    "segment_id": "23_War hammer_0_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/23/segments/23_War hammer_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.7383289337158203,
+    "model": "resnet50",
+    "frame": "6",
+    "segment_id": "6_Glowing rod_0_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/6/segments/6_Glowing rod_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Collar",
+    "object_version": 1,
+    "similarity_score": 0.7175735235214233,
+    "model": "resnet50",
+    "frame": "155",
+    "segment_id": "155_Horned helmet_2_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/155/segments/155_Horned helmet_2_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.7359943389892578,
+    "model": "resnet50",
+    "frame": "238",
+    "segment_id": "238_War hammer_1_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/238/segments/238_War hammer_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.7344859838485718,
+    "model": "resnet50",
+    "frame": "227",
+    "segment_id": "227_War hammer_0_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/227/segments/227_War hammer_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.7373232841491699,
+    "model": "resnet50",
+    "frame": "289",
+    "segment_id": "289_War hammer_2_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/289/segments/289_War hammer_2_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.7434723973274231,
+    "model": "resnet50",
+    "frame": "102",
+    "segment_id": "102_War hammer_0_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/102/segments/102_War hammer_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Loki's armor (THE AVENGERS)",
+    "object_version": 1,
+    "similarity_score": 0.7031065821647644,
+    "model": "resnet50",
+    "frame": "334",
+    "segment_id": "334_Leather coat_2_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/334/segments/334_Leather coat_2_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Loki's armor (THE AVENGERS)",
+    "object_version": 1,
+    "similarity_score": 0.7017967700958252,
+    "model": "resnet50",
+    "frame": "160",
+    "segment_id": "160_Leather coat_1_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/160/segments/160_Leather coat_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.7550864219665527,
+    "model": "resnet50",
+    "frame": "27",
+    "segment_id": "27_War hammer_0_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/27/segments/27_War hammer_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.7326542735099792,
+    "model": "resnet50",
+    "frame": "266",
+    "segment_id": "266_War hammer_0_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/266/segments/266_War hammer_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Loki's armor (THE AVENGERS)",
+    "object_version": 3,
+    "similarity_score": 0.714191734790802,
+    "model": "resnet50",
+    "frame": "31",
+    "segment_id": "31_Leather coat_2_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/31/segments/31_Leather coat_2_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.7561925649642944,
+    "model": "resnet50",
+    "frame": "31",
+    "segment_id": "31_War hammer_1_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/31/segments/31_War hammer_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.7273399233818054,
+    "model": "resnet50",
+    "frame": "12",
+    "segment_id": "12_War hammer_0_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/12/segments/12_War hammer_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.7453045845031738,
+    "model": "resnet50",
+    "frame": "78",
+    "segment_id": "78_Glowing rod_0_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/78/segments/78_Glowing rod_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Loki's armor (THE AVENGERS)",
+    "object_version": 1,
+    "similarity_score": 0.7251099944114685,
+    "model": "resnet50",
+    "frame": "159",
+    "segment_id": "159_Leather coat_0_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/159/segments/159_Leather coat_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Loki's armor (THE AVENGERS)",
+    "object_version": 1,
+    "similarity_score": 0.7168524861335754,
+    "model": "resnet50",
+    "frame": "243",
+    "segment_id": "243_Leather coat_2_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/243/segments/243_Leather coat_2_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.7370073199272156,
+    "model": "resnet50",
+    "frame": "243",
+    "segment_id": "243_War hammer_1_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/243/segments/243_War hammer_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.7311141490936279,
+    "model": "resnet50",
+    "frame": "164",
+    "segment_id": "164_Glowing rod_0_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/164/segments/164_Glowing rod_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.7347545623779297,
+    "model": "resnet50",
+    "frame": "109",
+    "segment_id": "109_War hammer_0_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/109/segments/109_War hammer_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.7355049848556519,
+    "model": "resnet50",
+    "frame": "71",
+    "segment_id": "71_Glowing rod_0_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/71/segments/71_Glowing rod_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Loki's armor (THE AVENGERS)",
+    "object_version": 3,
+    "similarity_score": 0.7063958644866943,
+    "model": "resnet50",
+    "frame": "32",
+    "segment_id": "32_Leather coat_1_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/32/segments/32_Leather coat_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.7553778290748596,
+    "model": "resnet50",
+    "frame": "32",
+    "segment_id": "32_War hammer_0_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/32/segments/32_War hammer_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Loki's armor (THE AVENGERS)",
+    "object_version": 1,
+    "similarity_score": 0.720580518245697,
+    "model": "resnet50",
+    "frame": "270",
+    "segment_id": "270_Leather coat_2_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/270/segments/270_Leather coat_2_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.7333652377128601,
+    "model": "resnet50",
+    "frame": "270",
+    "segment_id": "270_War hammer_1_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/270/segments/270_War hammer_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.7335944175720215,
+    "model": "resnet50",
+    "frame": "250",
+    "segment_id": "250_War hammer_0_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/250/segments/250_War hammer_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.73832106590271,
+    "model": "resnet50",
+    "frame": "89",
+    "segment_id": "89_War hammer_1_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/89/segments/89_War hammer_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.7401300668716431,
+    "model": "resnet50",
+    "frame": "140",
+    "segment_id": "140_War hammer_0_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/140/segments/140_War hammer_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Loki's armor (THE AVENGERS)",
+    "object_version": 1,
+    "similarity_score": 0.7150446176528931,
+    "model": "resnet50",
+    "frame": "0",
+    "segment_id": "0_Leather coat_0_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/0/segments/0_Leather coat_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Loki's armor (THE AVENGERS)",
+    "object_version": 1,
+    "similarity_score": 0.7053272128105164,
+    "model": "resnet50",
+    "frame": "166",
+    "segment_id": "166_Leather coat_2_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/166/segments/166_Leather coat_2_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.7378348112106323,
+    "model": "resnet50",
+    "frame": "166",
+    "segment_id": "166_Glowing rod_0_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/166/segments/166_Glowing rod_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.7503724694252014,
+    "model": "resnet50",
+    "frame": "37",
+    "segment_id": "37_War hammer_0_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/37/segments/37_War hammer_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.7346383333206177,
+    "model": "resnet50",
+    "frame": "235",
+    "segment_id": "235_War hammer_0_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/235/segments/235_War hammer_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.7384971380233765,
+    "model": "resnet50",
+    "frame": "253",
+    "segment_id": "253_War hammer_0_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/253/segments/253_War hammer_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Loki's armor (THE AVENGERS)",
+    "object_version": 1,
+    "similarity_score": 0.7189168334007263,
+    "model": "resnet50",
+    "frame": "264",
+    "segment_id": "264_Leather coat_2_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/264/segments/264_Leather coat_2_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.7308849096298218,
+    "model": "resnet50",
+    "frame": "264",
+    "segment_id": "264_War hammer_1_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/264/segments/264_War hammer_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.7276700139045715,
+    "model": "resnet50",
+    "frame": "172",
+    "segment_id": "172_Glowing rod_0_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/172/segments/172_Glowing rod_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.7533901929855347,
+    "model": "resnet50",
+    "frame": "36",
+    "segment_id": "36_War hammer_0_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/36/segments/36_War hammer_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.7228908538818359,
+    "model": "resnet50",
+    "frame": "125",
+    "segment_id": "125_War hammer_0_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/125/segments/125_War hammer_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.734972357749939,
+    "model": "resnet50",
+    "frame": "229",
+    "segment_id": "229_War hammer_0_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/229/segments/229_War hammer_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.7386801242828369,
+    "model": "resnet50",
+    "frame": "170",
+    "segment_id": "170_Glowing rod_0_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/170/segments/170_Glowing rod_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.755449652671814,
+    "model": "resnet50",
+    "frame": "26",
+    "segment_id": "26_War hammer_0_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/26/segments/26_War hammer_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.7537909746170044,
+    "model": "resnet50",
+    "frame": "273",
+    "segment_id": "273_War hammer_0_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/273/segments/273_War hammer_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.736587405204773,
+    "model": "resnet50",
+    "frame": "76",
+    "segment_id": "76_Glowing rod_0_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/76/segments/76_Glowing rod_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.7413078546524048,
+    "model": "resnet50",
+    "frame": "259",
+    "segment_id": "259_War hammer_0_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/259/segments/259_War hammer_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.7416569590568542,
+    "model": "resnet50",
+    "frame": "136",
+    "segment_id": "136_Glowing rod_0_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/136/segments/136_Glowing rod_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.7576338052749634,
+    "model": "resnet50",
+    "frame": "28",
+    "segment_id": "28_War hammer_0_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/28/segments/28_War hammer_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.7393395900726318,
+    "model": "resnet50",
+    "frame": "283",
+    "segment_id": "283_Glowing rod_0_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/283/segments/283_Glowing rod_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Loki's dagger",
+    "object_version": 2,
+    "similarity_score": 0.7071875929832458,
+    "model": "resnet50",
+    "frame": "40",
+    "segment_id": "40_War hammer_1_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/40/segments/40_War hammer_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.7275181412696838,
+    "model": "resnet50",
+    "frame": "231",
+    "segment_id": "231_War hammer_0_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/231/segments/231_War hammer_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.7274452447891235,
+    "model": "resnet50",
+    "frame": "262",
+    "segment_id": "262_War hammer_0_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/262/segments/262_War hammer_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.7335411906242371,
+    "model": "resnet50",
+    "frame": "232",
+    "segment_id": "232_War hammer_0_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/232/segments/232_War hammer_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.7508793473243713,
+    "model": "resnet50",
+    "frame": "77",
+    "segment_id": "77_Glowing rod_0_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/77/segments/77_Glowing rod_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Loki's armor (THE AVENGERS)",
+    "object_version": 1,
+    "similarity_score": 0.7405096888542175,
+    "model": "resnet50",
+    "frame": "54",
+    "segment_id": "54_Leather coat_2_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/54/segments/54_Leather coat_2_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.7287383675575256,
+    "model": "resnet50",
+    "frame": "320",
+    "segment_id": "320_War hammer_0_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/320/segments/320_War hammer_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.7391529083251953,
+    "model": "resnet50",
+    "frame": "67",
+    "segment_id": "67_Glowing rod_0_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/67/segments/67_Glowing rod_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Loki's armor (THE AVENGERS)",
+    "object_version": 1,
+    "similarity_score": 0.7404007911682129,
+    "model": "resnet50",
+    "frame": "147",
+    "segment_id": "147_Leather coat_1_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/147/segments/147_Leather coat_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.7524642944335938,
+    "model": "resnet50",
+    "frame": "147",
+    "segment_id": "147_War hammer_0_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/147/segments/147_War hammer_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.7464150786399841,
+    "model": "resnet50",
+    "frame": "95",
+    "segment_id": "95_War hammer_0_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/95/segments/95_War hammer_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.7510274648666382,
+    "model": "resnet50",
+    "frame": "99",
+    "segment_id": "99_War hammer_0_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/99/segments/99_War hammer_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.7393052577972412,
+    "model": "resnet50",
+    "frame": "15",
+    "segment_id": "15_War hammer_0_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/15/segments/15_War hammer_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.7373936772346497,
+    "model": "resnet50",
+    "frame": "237",
+    "segment_id": "237_War hammer_0_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/237/segments/237_War hammer_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.7301881313323975,
+    "model": "resnet50",
+    "frame": "130",
+    "segment_id": "130_War hammer_1_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/130/segments/130_War hammer_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Loki's armor (THE AVENGERS)",
+    "object_version": 1,
+    "similarity_score": 0.7181205749511719,
+    "model": "resnet50",
+    "frame": "180",
+    "segment_id": "180_Leather coat_2_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/180/segments/180_Leather coat_2_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.7460147738456726,
+    "model": "resnet50",
+    "frame": "180",
+    "segment_id": "180_War hammer_1_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/180/segments/180_War hammer_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.7478269338607788,
+    "model": "resnet50",
+    "frame": "92",
+    "segment_id": "92_War hammer_0_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/92/segments/92_War hammer_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.7431706786155701,
+    "model": "resnet50",
+    "frame": "13",
+    "segment_id": "13_Glowing rod_1_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/13/segments/13_Glowing rod_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.7465870380401611,
+    "model": "resnet50",
+    "frame": "222",
+    "segment_id": "222_War hammer_0_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/222/segments/222_War hammer_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.7399536371231079,
+    "model": "resnet50",
+    "frame": "58",
+    "segment_id": "58_War hammer_0_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/58/segments/58_War hammer_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.7317128777503967,
+    "model": "resnet50",
+    "frame": "223",
+    "segment_id": "223_War hammer_0_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/223/segments/223_War hammer_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Loki's armor (THE AVENGERS)",
+    "object_version": 1,
+    "similarity_score": 0.7306105494499207,
+    "model": "resnet50",
+    "frame": "255",
+    "segment_id": "255_Leather coat_1_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/255/segments/255_Leather coat_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.7502517700195312,
+    "model": "resnet50",
+    "frame": "255",
+    "segment_id": "255_War hammer_0_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/255/segments/255_War hammer_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.745837390422821,
+    "model": "resnet50",
+    "frame": "85",
+    "segment_id": "85_War hammer_0_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/85/segments/85_War hammer_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.7392715811729431,
+    "model": "resnet50",
+    "frame": "64",
+    "segment_id": "64_War hammer_0_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/64/segments/64_War hammer_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.7227298021316528,
+    "model": "resnet50",
+    "frame": "143",
+    "segment_id": "143_War hammer_0_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/143/segments/143_War hammer_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.7276824712753296,
+    "model": "resnet50",
+    "frame": "233",
+    "segment_id": "233_War hammer_0_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/233/segments/233_War hammer_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.7406871914863586,
+    "model": "resnet50",
+    "frame": "326",
+    "segment_id": "326_War hammer_0_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/326/segments/326_War hammer_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.7456057071685791,
+    "model": "resnet50",
+    "frame": "179",
+    "segment_id": "179_War hammer_1_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/179/segments/179_War hammer_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.739169716835022,
+    "model": "resnet50",
+    "frame": "82",
+    "segment_id": "82_Glowing rod_0_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/82/segments/82_Glowing rod_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.7407355308532715,
+    "model": "resnet50",
+    "frame": "79",
+    "segment_id": "79_Glowing rod_0_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/79/segments/79_Glowing rod_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.7395185828208923,
+    "model": "resnet50",
+    "frame": "88",
+    "segment_id": "88_War hammer_1_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/88/segments/88_War hammer_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.7441976070404053,
+    "model": "resnet50",
+    "frame": "132",
+    "segment_id": "132_Glowing rod_1_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/132/segments/132_Glowing rod_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.7367002964019775,
+    "model": "resnet50",
+    "frame": "14",
+    "segment_id": "14_War hammer_0_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/14/segments/14_War hammer_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.7406790256500244,
+    "model": "resnet50",
+    "frame": "86",
+    "segment_id": "86_War hammer_0_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/86/segments/86_War hammer_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.7359548211097717,
+    "model": "resnet50",
+    "frame": "265",
+    "segment_id": "265_War hammer_0_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/265/segments/265_War hammer_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Loki's armor (THE AVENGERS)",
+    "object_version": 1,
+    "similarity_score": 0.7315143942832947,
+    "model": "resnet50",
+    "frame": "177",
+    "segment_id": "177_Leather coat_2_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/177/segments/177_Leather coat_2_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.7379668951034546,
+    "model": "resnet50",
+    "frame": "177",
+    "segment_id": "177_War hammer_1_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/177/segments/177_War hammer_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.7384200096130371,
+    "model": "resnet50",
+    "frame": "93",
+    "segment_id": "93_War hammer_0_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/93/segments/93_War hammer_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Loki's armor (THE AVENGERS)",
+    "object_version": 1,
+    "similarity_score": 0.721717119216919,
+    "model": "resnet50",
+    "frame": "248",
+    "segment_id": "248_Leather coat_0_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/248/segments/248_Leather coat_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.747692883014679,
+    "model": "resnet50",
+    "frame": "145",
+    "segment_id": "145_War hammer_0_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/145/segments/145_War hammer_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.7341445088386536,
+    "model": "resnet50",
+    "frame": "59",
+    "segment_id": "59_War hammer_0_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/59/segments/59_War hammer_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.7379639148712158,
+    "model": "resnet50",
+    "frame": "316",
+    "segment_id": "316_War hammer_0_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/316/segments/316_War hammer_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.744601845741272,
+    "model": "resnet50",
+    "frame": "142",
+    "segment_id": "142_War hammer_0_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/142/segments/142_War hammer_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.7323911190032959,
+    "model": "resnet50",
+    "frame": "110",
+    "segment_id": "110_War hammer_0_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/110/segments/110_War hammer_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.7288023233413696,
+    "model": "resnet50",
+    "frame": "66",
+    "segment_id": "66_Glowing rod_0_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/66/segments/66_Glowing rod_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Collar",
+    "object_version": 1,
+    "similarity_score": 0.7240636348724365,
+    "model": "resnet50",
+    "frame": "153",
+    "segment_id": "153_Horned helmet_2_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/153/segments/153_Horned helmet_2_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.7354685664176941,
+    "model": "resnet50",
+    "frame": "278",
+    "segment_id": "278_Glowing rod_0_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/278/segments/278_Glowing rod_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Loki's armor (THE AVENGERS)",
+    "object_version": 1,
+    "similarity_score": 0.7097702026367188,
+    "model": "resnet50",
+    "frame": "274",
+    "segment_id": "274_Leather coat_2_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/274/segments/274_Leather coat_2_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.7519651651382446,
+    "model": "resnet50",
+    "frame": "274",
+    "segment_id": "274_War hammer_1_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/274/segments/274_War hammer_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Loki's armor (THE AVENGERS)",
+    "object_version": 3,
+    "similarity_score": 0.7001473903656006,
+    "model": "resnet50",
+    "frame": "41",
+    "segment_id": "41_Leather coat_1_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/41/segments/41_Leather coat_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.7445608377456665,
+    "model": "resnet50",
+    "frame": "11",
+    "segment_id": "11_War hammer_0_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/11/segments/11_War hammer_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.7318734526634216,
+    "model": "resnet50",
+    "frame": "161",
+    "segment_id": "161_Glowing rod_0_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/161/segments/161_Glowing rod_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.7364082336425781,
+    "model": "resnet50",
+    "frame": "87",
+    "segment_id": "87_War hammer_1_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/87/segments/87_War hammer_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.7579094171524048,
+    "model": "resnet50",
+    "frame": "20",
+    "segment_id": "20_War hammer_0_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/20/segments/20_War hammer_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Collar",
+    "object_version": 1,
+    "similarity_score": 0.712620735168457,
+    "model": "resnet50",
+    "frame": "152",
+    "segment_id": "152_Horned helmet_3_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/152/segments/152_Horned helmet_3_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.7237969040870667,
+    "model": "resnet50",
+    "frame": "80",
+    "segment_id": "80_Glowing rod_0_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/80/segments/80_Glowing rod_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.752303421497345,
+    "model": "resnet50",
+    "frame": "22",
+    "segment_id": "22_War hammer_0_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/22/segments/22_War hammer_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.727790355682373,
+    "model": "resnet50",
+    "frame": "280",
+    "segment_id": "280_War hammer_0_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/280/segments/280_War hammer_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.7360649108886719,
+    "model": "resnet50",
+    "frame": "9",
+    "segment_id": "9_War hammer_0_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/9/segments/9_War hammer_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.7450954914093018,
+    "model": "resnet50",
+    "frame": "277",
+    "segment_id": "277_War hammer_0_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/277/segments/277_War hammer_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.7369901537895203,
+    "model": "resnet50",
+    "frame": "323",
+    "segment_id": "323_War hammer_0_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/323/segments/323_War hammer_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Loki's armor (THE AVENGERS)",
+    "object_version": 1,
+    "similarity_score": 0.709488570690155,
+    "model": "resnet50",
+    "frame": "181",
+    "segment_id": "181_Leather coat_2_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/181/segments/181_Leather coat_2_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.7411381602287292,
+    "model": "resnet50",
+    "frame": "181",
+    "segment_id": "181_War hammer_1_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/181/segments/181_War hammer_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.7346369028091431,
+    "model": "resnet50",
+    "frame": "257",
+    "segment_id": "257_War hammer_0_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/257/segments/257_War hammer_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.733056902885437,
+    "model": "resnet50",
+    "frame": "267",
+    "segment_id": "267_War hammer_1_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/267/segments/267_War hammer_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.7336117029190063,
+    "model": "resnet50",
+    "frame": "129",
+    "segment_id": "129_War hammer_0_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/129/segments/129_War hammer_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.7394983768463135,
+    "model": "resnet50",
+    "frame": "221",
+    "segment_id": "221_War hammer_0_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/221/segments/221_War hammer_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.7460692524909973,
+    "model": "resnet50",
+    "frame": "296",
+    "segment_id": "296_War hammer_0_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/296/segments/296_War hammer_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.7311569452285767,
+    "model": "resnet50",
+    "frame": "73",
+    "segment_id": "73_War hammer_0_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/73/segments/73_War hammer_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.7392346858978271,
+    "model": "resnet50",
+    "frame": "322",
+    "segment_id": "322_Glowing rod_0_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/322/segments/322_Glowing rod_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.7337718605995178,
+    "model": "resnet50",
+    "frame": "225",
+    "segment_id": "225_War hammer_0_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/225/segments/225_War hammer_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Loki's armor (THE AVENGERS)",
+    "object_version": 1,
+    "similarity_score": 0.7023017406463623,
+    "model": "resnet50",
+    "frame": "276",
+    "segment_id": "276_Leather coat_1_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/276/segments/276_Leather coat_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.7409379482269287,
+    "model": "resnet50",
+    "frame": "252",
+    "segment_id": "252_War hammer_0_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/252/segments/252_War hammer_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.753957986831665,
+    "model": "resnet50",
+    "frame": "182",
+    "segment_id": "182_War hammer_0_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/182/segments/182_War hammer_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.7363194227218628,
+    "model": "resnet50",
+    "frame": "260",
+    "segment_id": "260_War hammer_0_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/260/segments/260_War hammer_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.7269801497459412,
+    "model": "resnet50",
+    "frame": "230",
+    "segment_id": "230_War hammer_1_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/230/segments/230_War hammer_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.7306341528892517,
+    "model": "resnet50",
+    "frame": "236",
+    "segment_id": "236_War hammer_0_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/236/segments/236_War hammer_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.7421025633811951,
+    "model": "resnet50",
+    "frame": "18",
+    "segment_id": "18_War hammer_0_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/18/segments/18_War hammer_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.7392889261245728,
+    "model": "resnet50",
+    "frame": "268",
+    "segment_id": "268_War hammer_1_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/268/segments/268_War hammer_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Loki's armor (THE AVENGERS)",
+    "object_version": 1,
+    "similarity_score": 0.7354424595832825,
+    "model": "resnet50",
+    "frame": "219",
+    "segment_id": "219_Leather coat_0_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/219/segments/219_Leather coat_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.7385815382003784,
+    "model": "resnet50",
+    "frame": "128",
+    "segment_id": "128_War hammer_0_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/128/segments/128_War hammer_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.7286651730537415,
+    "model": "resnet50",
+    "frame": "126",
+    "segment_id": "126_War hammer_0_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/126/segments/126_War hammer_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.7332972288131714,
+    "model": "resnet50",
+    "frame": "321",
+    "segment_id": "321_War hammer_0_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/321/segments/321_War hammer_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Loki's armor (THE AVENGERS)",
+    "object_version": 1,
+    "similarity_score": 0.7213449478149414,
+    "model": "resnet50",
+    "frame": "61",
+    "segment_id": "61_Leather coat_1_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/61/segments/61_Leather coat_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.7498481273651123,
+    "model": "resnet50",
+    "frame": "61",
+    "segment_id": "61_War hammer_0_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/61/segments/61_War hammer_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.7391484975814819,
+    "model": "resnet50",
+    "frame": "10",
+    "segment_id": "10_War hammer_0_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/10/segments/10_War hammer_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.732986330986023,
+    "model": "resnet50",
+    "frame": "94",
+    "segment_id": "94_War hammer_0_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/94/segments/94_War hammer_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.7273015975952148,
+    "model": "resnet50",
+    "frame": "220",
+    "segment_id": "220_Curved sword_0_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__165A-4-_20230815180313546/220/segments/220_Curved sword_0_nopoint.png"
+  }
+]

@@ -1,0 +1,1152 @@
+[
+  {
+    "video": "Scenes 021-040__529C-1- mos_20230816070604261",
+    "predicted_object": "Aligator Loki Plushie",
+    "object_version": 1,
+    "similarity_score": 0.7177914381027222,
+    "model": "resnet50",
+    "frame": "19",
+    "segment_id": "19_Whale pillow_1_nopoint",
+    "segment_path": "all_frames/Scenes 021-040__529C-1- mos_20230816070604261/19/segments/19_Whale pillow_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__529C-1- mos_20230816070604261",
+    "predicted_object": "Aligator Loki Plushie",
+    "object_version": 3,
+    "similarity_score": 0.7178910970687866,
+    "model": "resnet50",
+    "frame": "19",
+    "segment_id": "19_Whale pillow_0_nopoint",
+    "segment_path": "all_frames/Scenes 021-040__529C-1- mos_20230816070604261/19/segments/19_Whale pillow_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__529C-1- mos_20230816070604261",
+    "predicted_object": "Aligator Loki Plushie",
+    "object_version": 3,
+    "similarity_score": 0.7231884002685547,
+    "model": "resnet50",
+    "frame": "46",
+    "segment_id": "46_Whale pillow_0_nopoint",
+    "segment_path": "all_frames/Scenes 021-040__529C-1- mos_20230816070604261/46/segments/46_Whale pillow_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__529C-1- mos_20230816070604261",
+    "predicted_object": "Aligator Loki Plushie",
+    "object_version": 1,
+    "similarity_score": 0.7357310056686401,
+    "model": "resnet50",
+    "frame": "46",
+    "segment_id": "46_Whale pillow_1_nopoint",
+    "segment_path": "all_frames/Scenes 021-040__529C-1- mos_20230816070604261/46/segments/46_Whale pillow_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__529C-1- mos_20230816070604261",
+    "predicted_object": "Aligator Loki Plushie",
+    "object_version": 1,
+    "similarity_score": 0.7495905160903931,
+    "model": "resnet50",
+    "frame": "52",
+    "segment_id": "52_Whale pillow_1_nopoint",
+    "segment_path": "all_frames/Scenes 021-040__529C-1- mos_20230816070604261/52/segments/52_Whale pillow_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__529C-1- mos_20230816070604261",
+    "predicted_object": "Aligator Loki Plushie",
+    "object_version": 3,
+    "similarity_score": 0.7161338329315186,
+    "model": "resnet50",
+    "frame": "52",
+    "segment_id": "52_Whale pillow_0_nopoint",
+    "segment_path": "all_frames/Scenes 021-040__529C-1- mos_20230816070604261/52/segments/52_Whale pillow_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__529C-1- mos_20230816070604261",
+    "predicted_object": "Aligator Loki Plushie",
+    "object_version": 1,
+    "similarity_score": 0.7338756322860718,
+    "model": "resnet50",
+    "frame": "45",
+    "segment_id": "45_Whale pillow_0_nopoint",
+    "segment_path": "all_frames/Scenes 021-040__529C-1- mos_20230816070604261/45/segments/45_Whale pillow_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__529C-1- mos_20230816070604261",
+    "predicted_object": "Aligator Loki Plushie",
+    "object_version": 3,
+    "similarity_score": 0.7265206575393677,
+    "model": "resnet50",
+    "frame": "45",
+    "segment_id": "45_Whale pillow_1_nopoint",
+    "segment_path": "all_frames/Scenes 021-040__529C-1- mos_20230816070604261/45/segments/45_Whale pillow_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__529C-1- mos_20230816070604261",
+    "predicted_object": "Aligator Loki Plushie",
+    "object_version": 3,
+    "similarity_score": 0.752853274345398,
+    "model": "resnet50",
+    "frame": "60",
+    "segment_id": "60_Whale pillow_3_nopoint",
+    "segment_path": "all_frames/Scenes 021-040__529C-1- mos_20230816070604261/60/segments/60_Whale pillow_3_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__529C-1- mos_20230816070604261",
+    "predicted_object": "Aligator Loki Plushie",
+    "object_version": 3,
+    "similarity_score": 0.705353856086731,
+    "model": "resnet50",
+    "frame": "60",
+    "segment_id": "60_Whale pillow_0_nopoint",
+    "segment_path": "all_frames/Scenes 021-040__529C-1- mos_20230816070604261/60/segments/60_Whale pillow_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__529C-1- mos_20230816070604261",
+    "predicted_object": "Aligator Loki Plushie",
+    "object_version": 3,
+    "similarity_score": 0.7199215292930603,
+    "model": "resnet50",
+    "frame": "60",
+    "segment_id": "60_Whale pillow_2_nopoint",
+    "segment_path": "all_frames/Scenes 021-040__529C-1- mos_20230816070604261/60/segments/60_Whale pillow_2_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__529C-1- mos_20230816070604261",
+    "predicted_object": "Aligator Loki Plushie",
+    "object_version": 3,
+    "similarity_score": 0.743834376335144,
+    "model": "resnet50",
+    "frame": "60",
+    "segment_id": "60_Whale pillow_1_nopoint",
+    "segment_path": "all_frames/Scenes 021-040__529C-1- mos_20230816070604261/60/segments/60_Whale pillow_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__529C-1- mos_20230816070604261",
+    "predicted_object": "Aligator Loki Plushie",
+    "object_version": 3,
+    "similarity_score": 0.7267332673072815,
+    "model": "resnet50",
+    "frame": "25",
+    "segment_id": "25_Whale pillow_2_nopoint",
+    "segment_path": "all_frames/Scenes 021-040__529C-1- mos_20230816070604261/25/segments/25_Whale pillow_2_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__529C-1- mos_20230816070604261",
+    "predicted_object": "Aligator Loki Plushie",
+    "object_version": 3,
+    "similarity_score": 0.7237607836723328,
+    "model": "resnet50",
+    "frame": "25",
+    "segment_id": "25_Whale pillow_1_nopoint",
+    "segment_path": "all_frames/Scenes 021-040__529C-1- mos_20230816070604261/25/segments/25_Whale pillow_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__529C-1- mos_20230816070604261",
+    "predicted_object": "Sylvie's machete",
+    "object_version": 2,
+    "similarity_score": 0.7106395959854126,
+    "model": "resnet50",
+    "frame": "25",
+    "segment_id": "25_War hammer_0_nopoint",
+    "segment_path": "all_frames/Scenes 021-040__529C-1- mos_20230816070604261/25/segments/25_War hammer_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__529C-1- mos_20230816070604261",
+    "predicted_object": "Aligator Loki Plushie",
+    "object_version": 3,
+    "similarity_score": 0.7151708602905273,
+    "model": "resnet50",
+    "frame": "119",
+    "segment_id": "119_Whale pillow_3_nopoint",
+    "segment_path": "all_frames/Scenes 021-040__529C-1- mos_20230816070604261/119/segments/119_Whale pillow_3_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__529C-1- mos_20230816070604261",
+    "predicted_object": "Aligator Loki Plushie",
+    "object_version": 3,
+    "similarity_score": 0.7253567576408386,
+    "model": "resnet50",
+    "frame": "119",
+    "segment_id": "119_Whale pillow_2_nopoint",
+    "segment_path": "all_frames/Scenes 021-040__529C-1- mos_20230816070604261/119/segments/119_Whale pillow_2_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__529C-1- mos_20230816070604261",
+    "predicted_object": "Aligator Loki Plushie",
+    "object_version": 3,
+    "similarity_score": 0.7430790066719055,
+    "model": "resnet50",
+    "frame": "56",
+    "segment_id": "56_Whale pillow_0_nopoint",
+    "segment_path": "all_frames/Scenes 021-040__529C-1- mos_20230816070604261/56/segments/56_Whale pillow_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__529C-1- mos_20230816070604261",
+    "predicted_object": "Aligator Loki Plushie",
+    "object_version": 3,
+    "similarity_score": 0.7283452749252319,
+    "model": "resnet50",
+    "frame": "56",
+    "segment_id": "56_Whale pillow_1_nopoint",
+    "segment_path": "all_frames/Scenes 021-040__529C-1- mos_20230816070604261/56/segments/56_Whale pillow_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__529C-1- mos_20230816070604261",
+    "predicted_object": "Aligator Loki Plushie",
+    "object_version": 2,
+    "similarity_score": 0.7298120856285095,
+    "model": "resnet50",
+    "frame": "29",
+    "segment_id": "29_Whale pillow_1_nopoint",
+    "segment_path": "all_frames/Scenes 021-040__529C-1- mos_20230816070604261/29/segments/29_Whale pillow_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__529C-1- mos_20230816070604261",
+    "predicted_object": "Aligator Loki Plushie",
+    "object_version": 3,
+    "similarity_score": 0.7145823240280151,
+    "model": "resnet50",
+    "frame": "29",
+    "segment_id": "29_Whale pillow_0_nopoint",
+    "segment_path": "all_frames/Scenes 021-040__529C-1- mos_20230816070604261/29/segments/29_Whale pillow_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__529C-1- mos_20230816070604261",
+    "predicted_object": "Aligator Loki Plushie",
+    "object_version": 3,
+    "similarity_score": 0.7791296243667603,
+    "model": "resnet50",
+    "frame": "122",
+    "segment_id": "122_Whale pillow_3_nopoint",
+    "segment_path": "all_frames/Scenes 021-040__529C-1- mos_20230816070604261/122/segments/122_Whale pillow_3_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__529C-1- mos_20230816070604261",
+    "predicted_object": "Aligator Loki Plushie",
+    "object_version": 3,
+    "similarity_score": 0.7027246952056885,
+    "model": "resnet50",
+    "frame": "122",
+    "segment_id": "122_Whale pillow_0_nopoint",
+    "segment_path": "all_frames/Scenes 021-040__529C-1- mos_20230816070604261/122/segments/122_Whale pillow_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__529C-1- mos_20230816070604261",
+    "predicted_object": "Aligator Loki Plushie",
+    "object_version": 3,
+    "similarity_score": 0.7410863637924194,
+    "model": "resnet50",
+    "frame": "122",
+    "segment_id": "122_Whale pillow_1_nopoint",
+    "segment_path": "all_frames/Scenes 021-040__529C-1- mos_20230816070604261/122/segments/122_Whale pillow_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__529C-1- mos_20230816070604261",
+    "predicted_object": "Aligator Loki Plushie",
+    "object_version": 3,
+    "similarity_score": 0.7399073839187622,
+    "model": "resnet50",
+    "frame": "62",
+    "segment_id": "62_Whale pillow_4_nopoint",
+    "segment_path": "all_frames/Scenes 021-040__529C-1- mos_20230816070604261/62/segments/62_Whale pillow_4_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__529C-1- mos_20230816070604261",
+    "predicted_object": "Aligator Loki Plushie",
+    "object_version": 1,
+    "similarity_score": 0.7210804224014282,
+    "model": "resnet50",
+    "frame": "62",
+    "segment_id": "62_Whale pillow_2_nopoint",
+    "segment_path": "all_frames/Scenes 021-040__529C-1- mos_20230816070604261/62/segments/62_Whale pillow_2_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__529C-1- mos_20230816070604261",
+    "predicted_object": "Aligator Loki Plushie",
+    "object_version": 3,
+    "similarity_score": 0.7008421421051025,
+    "model": "resnet50",
+    "frame": "62",
+    "segment_id": "62_Whale pillow_3_nopoint",
+    "segment_path": "all_frames/Scenes 021-040__529C-1- mos_20230816070604261/62/segments/62_Whale pillow_3_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__529C-1- mos_20230816070604261",
+    "predicted_object": "Aligator Loki Plushie",
+    "object_version": 3,
+    "similarity_score": 0.7121506929397583,
+    "model": "resnet50",
+    "frame": "62",
+    "segment_id": "62_Whale pillow_1_nopoint",
+    "segment_path": "all_frames/Scenes 021-040__529C-1- mos_20230816070604261/62/segments/62_Whale pillow_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__529C-1- mos_20230816070604261",
+    "predicted_object": "Aligator Loki Plushie",
+    "object_version": 3,
+    "similarity_score": 0.755157470703125,
+    "model": "resnet50",
+    "frame": "53",
+    "segment_id": "53_Whale pillow_1_nopoint",
+    "segment_path": "all_frames/Scenes 021-040__529C-1- mos_20230816070604261/53/segments/53_Whale pillow_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__529C-1- mos_20230816070604261",
+    "predicted_object": "Aligator Loki Plushie",
+    "object_version": 3,
+    "similarity_score": 0.7075046300888062,
+    "model": "resnet50",
+    "frame": "53",
+    "segment_id": "53_Whale pillow_0_nopoint",
+    "segment_path": "all_frames/Scenes 021-040__529C-1- mos_20230816070604261/53/segments/53_Whale pillow_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__529C-1- mos_20230816070604261",
+    "predicted_object": "Aligator Loki Plushie",
+    "object_version": 1,
+    "similarity_score": 0.7334632873535156,
+    "model": "resnet50",
+    "frame": "17",
+    "segment_id": "17_Whale pillow_1_nopoint",
+    "segment_path": "all_frames/Scenes 021-040__529C-1- mos_20230816070604261/17/segments/17_Whale pillow_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__529C-1- mos_20230816070604261",
+    "predicted_object": "Aligator Loki Plushie",
+    "object_version": 3,
+    "similarity_score": 0.7058026790618896,
+    "model": "resnet50",
+    "frame": "17",
+    "segment_id": "17_Whale pillow_0_nopoint",
+    "segment_path": "all_frames/Scenes 021-040__529C-1- mos_20230816070604261/17/segments/17_Whale pillow_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__529C-1- mos_20230816070604261",
+    "predicted_object": "Aligator Loki Plushie",
+    "object_version": 1,
+    "similarity_score": 0.7295091152191162,
+    "model": "resnet50",
+    "frame": "47",
+    "segment_id": "47_Whale pillow_1_nopoint",
+    "segment_path": "all_frames/Scenes 021-040__529C-1- mos_20230816070604261/47/segments/47_Whale pillow_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__529C-1- mos_20230816070604261",
+    "predicted_object": "Aligator Loki Plushie",
+    "object_version": 3,
+    "similarity_score": 0.7235435843467712,
+    "model": "resnet50",
+    "frame": "47",
+    "segment_id": "47_Whale pillow_0_nopoint",
+    "segment_path": "all_frames/Scenes 021-040__529C-1- mos_20230816070604261/47/segments/47_Whale pillow_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__529C-1- mos_20230816070604261",
+    "predicted_object": "Aligator Loki Plushie",
+    "object_version": 3,
+    "similarity_score": 0.7405000925064087,
+    "model": "resnet50",
+    "frame": "115",
+    "segment_id": "115_Whale pillow_1_nopoint",
+    "segment_path": "all_frames/Scenes 021-040__529C-1- mos_20230816070604261/115/segments/115_Whale pillow_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__529C-1- mos_20230816070604261",
+    "predicted_object": "Aligator Loki Plushie",
+    "object_version": 3,
+    "similarity_score": 0.7080111503601074,
+    "model": "resnet50",
+    "frame": "115",
+    "segment_id": "115_Whale pillow_0_nopoint",
+    "segment_path": "all_frames/Scenes 021-040__529C-1- mos_20230816070604261/115/segments/115_Whale pillow_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__529C-1- mos_20230816070604261",
+    "predicted_object": "Aligator Loki Plushie",
+    "object_version": 3,
+    "similarity_score": 0.730774998664856,
+    "model": "resnet50",
+    "frame": "108",
+    "segment_id": "108_Whale pillow_0_nopoint",
+    "segment_path": "all_frames/Scenes 021-040__529C-1- mos_20230816070604261/108/segments/108_Whale pillow_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__529C-1- mos_20230816070604261",
+    "predicted_object": "Aligator Loki Plushie",
+    "object_version": 3,
+    "similarity_score": 0.7178676128387451,
+    "model": "resnet50",
+    "frame": "108",
+    "segment_id": "108_Whale pillow_1_nopoint",
+    "segment_path": "all_frames/Scenes 021-040__529C-1- mos_20230816070604261/108/segments/108_Whale pillow_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__529C-1- mos_20230816070604261",
+    "predicted_object": "Aligator Loki Plushie",
+    "object_version": 3,
+    "similarity_score": 0.7322475910186768,
+    "model": "resnet50",
+    "frame": "44",
+    "segment_id": "44_Whale pillow_2_nopoint",
+    "segment_path": "all_frames/Scenes 021-040__529C-1- mos_20230816070604261/44/segments/44_Whale pillow_2_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__529C-1- mos_20230816070604261",
+    "predicted_object": "Aligator Loki Plushie",
+    "object_version": 1,
+    "similarity_score": 0.7251806259155273,
+    "model": "resnet50",
+    "frame": "44",
+    "segment_id": "44_Whale pillow_1_nopoint",
+    "segment_path": "all_frames/Scenes 021-040__529C-1- mos_20230816070604261/44/segments/44_Whale pillow_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__529C-1- mos_20230816070604261",
+    "predicted_object": "Aligator Loki Plushie",
+    "object_version": 3,
+    "similarity_score": 0.7203126549720764,
+    "model": "resnet50",
+    "frame": "44",
+    "segment_id": "44_Whale pillow_4_nopoint",
+    "segment_path": "all_frames/Scenes 021-040__529C-1- mos_20230816070604261/44/segments/44_Whale pillow_4_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__529C-1- mos_20230816070604261",
+    "predicted_object": "Aligator Loki Plushie",
+    "object_version": 3,
+    "similarity_score": 0.7056488990783691,
+    "model": "resnet50",
+    "frame": "113",
+    "segment_id": "113_Whale pillow_0_nopoint",
+    "segment_path": "all_frames/Scenes 021-040__529C-1- mos_20230816070604261/113/segments/113_Whale pillow_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__529C-1- mos_20230816070604261",
+    "predicted_object": "Aligator Loki Plushie",
+    "object_version": 3,
+    "similarity_score": 0.7105342149734497,
+    "model": "resnet50",
+    "frame": "113",
+    "segment_id": "113_Whale pillow_1_nopoint",
+    "segment_path": "all_frames/Scenes 021-040__529C-1- mos_20230816070604261/113/segments/113_Whale pillow_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__529C-1- mos_20230816070604261",
+    "predicted_object": "Aligator Loki Plushie",
+    "object_version": 3,
+    "similarity_score": 0.761465311050415,
+    "model": "resnet50",
+    "frame": "113",
+    "segment_id": "113_Whale pillow_2_nopoint",
+    "segment_path": "all_frames/Scenes 021-040__529C-1- mos_20230816070604261/113/segments/113_Whale pillow_2_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__529C-1- mos_20230816070604261",
+    "predicted_object": "Aligator Loki Plushie",
+    "object_version": 3,
+    "similarity_score": 0.7626351118087769,
+    "model": "resnet50",
+    "frame": "116",
+    "segment_id": "116_Whale pillow_2_nopoint",
+    "segment_path": "all_frames/Scenes 021-040__529C-1- mos_20230816070604261/116/segments/116_Whale pillow_2_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__529C-1- mos_20230816070604261",
+    "predicted_object": "Aligator Loki Plushie",
+    "object_version": 3,
+    "similarity_score": 0.7014464735984802,
+    "model": "resnet50",
+    "frame": "116",
+    "segment_id": "116_Whale pillow_1_nopoint",
+    "segment_path": "all_frames/Scenes 021-040__529C-1- mos_20230816070604261/116/segments/116_Whale pillow_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__529C-1- mos_20230816070604261",
+    "predicted_object": "Aligator Loki Plushie",
+    "object_version": 3,
+    "similarity_score": 0.7330107688903809,
+    "model": "resnet50",
+    "frame": "24",
+    "segment_id": "24_Whale pillow_1_nopoint",
+    "segment_path": "all_frames/Scenes 021-040__529C-1- mos_20230816070604261/24/segments/24_Whale pillow_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__529C-1- mos_20230816070604261",
+    "predicted_object": "Aligator Loki Plushie",
+    "object_version": 3,
+    "similarity_score": 0.715759813785553,
+    "model": "resnet50",
+    "frame": "24",
+    "segment_id": "24_Whale pillow_0_nopoint",
+    "segment_path": "all_frames/Scenes 021-040__529C-1- mos_20230816070604261/24/segments/24_Whale pillow_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__529C-1- mos_20230816070604261",
+    "predicted_object": "Aligator Loki Plushie",
+    "object_version": 3,
+    "similarity_score": 0.7523590326309204,
+    "model": "resnet50",
+    "frame": "111",
+    "segment_id": "111_Whale pillow_2_nopoint",
+    "segment_path": "all_frames/Scenes 021-040__529C-1- mos_20230816070604261/111/segments/111_Whale pillow_2_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__529C-1- mos_20230816070604261",
+    "predicted_object": "Aligator Loki Plushie",
+    "object_version": 1,
+    "similarity_score": 0.7085704207420349,
+    "model": "resnet50",
+    "frame": "111",
+    "segment_id": "111_Whale pillow_0_nopoint",
+    "segment_path": "all_frames/Scenes 021-040__529C-1- mos_20230816070604261/111/segments/111_Whale pillow_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__529C-1- mos_20230816070604261",
+    "predicted_object": "Aligator Loki Plushie",
+    "object_version": 3,
+    "similarity_score": 0.7056481242179871,
+    "model": "resnet50",
+    "frame": "111",
+    "segment_id": "111_Whale pillow_1_nopoint",
+    "segment_path": "all_frames/Scenes 021-040__529C-1- mos_20230816070604261/111/segments/111_Whale pillow_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__529C-1- mos_20230816070604261",
+    "predicted_object": "Aligator Loki Plushie",
+    "object_version": 3,
+    "similarity_score": 0.7440935373306274,
+    "model": "resnet50",
+    "frame": "49",
+    "segment_id": "49_Whale pillow_1_nopoint",
+    "segment_path": "all_frames/Scenes 021-040__529C-1- mos_20230816070604261/49/segments/49_Whale pillow_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__529C-1- mos_20230816070604261",
+    "predicted_object": "Aligator Loki Plushie",
+    "object_version": 3,
+    "similarity_score": 0.7223528027534485,
+    "model": "resnet50",
+    "frame": "49",
+    "segment_id": "49_Whale pillow_0_nopoint",
+    "segment_path": "all_frames/Scenes 021-040__529C-1- mos_20230816070604261/49/segments/49_Whale pillow_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__529C-1- mos_20230816070604261",
+    "predicted_object": "Aligator Loki Plushie",
+    "object_version": 1,
+    "similarity_score": 0.734093189239502,
+    "model": "resnet50",
+    "frame": "16",
+    "segment_id": "16_Whale pillow_1_nopoint",
+    "segment_path": "all_frames/Scenes 021-040__529C-1- mos_20230816070604261/16/segments/16_Whale pillow_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__529C-1- mos_20230816070604261",
+    "predicted_object": "Aligator Loki Plushie",
+    "object_version": 3,
+    "similarity_score": 0.7256708741188049,
+    "model": "resnet50",
+    "frame": "16",
+    "segment_id": "16_Whale pillow_0_nopoint",
+    "segment_path": "all_frames/Scenes 021-040__529C-1- mos_20230816070604261/16/segments/16_Whale pillow_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__529C-1- mos_20230816070604261",
+    "predicted_object": "Aligator Loki Plushie",
+    "object_version": 3,
+    "similarity_score": 0.7388526201248169,
+    "model": "resnet50",
+    "frame": "118",
+    "segment_id": "118_Whale pillow_1_nopoint",
+    "segment_path": "all_frames/Scenes 021-040__529C-1- mos_20230816070604261/118/segments/118_Whale pillow_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__529C-1- mos_20230816070604261",
+    "predicted_object": "Aligator Loki Plushie",
+    "object_version": 1,
+    "similarity_score": 0.7247681021690369,
+    "model": "resnet50",
+    "frame": "21",
+    "segment_id": "21_Whale pillow_0_nopoint",
+    "segment_path": "all_frames/Scenes 021-040__529C-1- mos_20230816070604261/21/segments/21_Whale pillow_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__529C-1- mos_20230816070604261",
+    "predicted_object": "Aligator Loki Plushie",
+    "object_version": 3,
+    "similarity_score": 0.7239890694618225,
+    "model": "resnet50",
+    "frame": "21",
+    "segment_id": "21_Whale pillow_1_nopoint",
+    "segment_path": "all_frames/Scenes 021-040__529C-1- mos_20230816070604261/21/segments/21_Whale pillow_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__529C-1- mos_20230816070604261",
+    "predicted_object": "Aligator Loki Plushie",
+    "object_version": 1,
+    "similarity_score": 0.7332664728164673,
+    "model": "resnet50",
+    "frame": "57",
+    "segment_id": "57_Whale pillow_0_nopoint",
+    "segment_path": "all_frames/Scenes 021-040__529C-1- mos_20230816070604261/57/segments/57_Whale pillow_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__529C-1- mos_20230816070604261",
+    "predicted_object": "Aligator Loki Plushie",
+    "object_version": 3,
+    "similarity_score": 0.7238414287567139,
+    "model": "resnet50",
+    "frame": "57",
+    "segment_id": "57_Whale pillow_2_nopoint",
+    "segment_path": "all_frames/Scenes 021-040__529C-1- mos_20230816070604261/57/segments/57_Whale pillow_2_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__529C-1- mos_20230816070604261",
+    "predicted_object": "Aligator Loki Plushie",
+    "object_version": 3,
+    "similarity_score": 0.7687680721282959,
+    "model": "resnet50",
+    "frame": "30",
+    "segment_id": "30_Whale pillow_0_nopoint",
+    "segment_path": "all_frames/Scenes 021-040__529C-1- mos_20230816070604261/30/segments/30_Whale pillow_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__529C-1- mos_20230816070604261",
+    "predicted_object": "Aligator Loki Plushie",
+    "object_version": 3,
+    "similarity_score": 0.7503854036331177,
+    "model": "resnet50",
+    "frame": "117",
+    "segment_id": "117_Whale pillow_3_nopoint",
+    "segment_path": "all_frames/Scenes 021-040__529C-1- mos_20230816070604261/117/segments/117_Whale pillow_3_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__529C-1- mos_20230816070604261",
+    "predicted_object": "Aligator Loki Plushie",
+    "object_version": 1,
+    "similarity_score": 0.7039097547531128,
+    "model": "resnet50",
+    "frame": "117",
+    "segment_id": "117_Whale pillow_0_nopoint",
+    "segment_path": "all_frames/Scenes 021-040__529C-1- mos_20230816070604261/117/segments/117_Whale pillow_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__529C-1- mos_20230816070604261",
+    "predicted_object": "Aligator Loki Plushie",
+    "object_version": 3,
+    "similarity_score": 0.7088876962661743,
+    "model": "resnet50",
+    "frame": "117",
+    "segment_id": "117_Whale pillow_2_nopoint",
+    "segment_path": "all_frames/Scenes 021-040__529C-1- mos_20230816070604261/117/segments/117_Whale pillow_2_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__529C-1- mos_20230816070604261",
+    "predicted_object": "Aligator Loki Plushie",
+    "object_version": 3,
+    "similarity_score": 0.7390922904014587,
+    "model": "resnet50",
+    "frame": "51",
+    "segment_id": "51_Whale pillow_1_nopoint",
+    "segment_path": "all_frames/Scenes 021-040__529C-1- mos_20230816070604261/51/segments/51_Whale pillow_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__529C-1- mos_20230816070604261",
+    "predicted_object": "Aligator Loki Plushie",
+    "object_version": 3,
+    "similarity_score": 0.7283254265785217,
+    "model": "resnet50",
+    "frame": "51",
+    "segment_id": "51_Whale pillow_0_nopoint",
+    "segment_path": "all_frames/Scenes 021-040__529C-1- mos_20230816070604261/51/segments/51_Whale pillow_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__529C-1- mos_20230816070604261",
+    "predicted_object": "Aligator Loki Plushie",
+    "object_version": 1,
+    "similarity_score": 0.7276382446289062,
+    "model": "resnet50",
+    "frame": "23",
+    "segment_id": "23_Whale pillow_1_nopoint",
+    "segment_path": "all_frames/Scenes 021-040__529C-1- mos_20230816070604261/23/segments/23_Whale pillow_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__529C-1- mos_20230816070604261",
+    "predicted_object": "Aligator Loki Plushie",
+    "object_version": 3,
+    "similarity_score": 0.7141314148902893,
+    "model": "resnet50",
+    "frame": "23",
+    "segment_id": "23_Whale pillow_0_nopoint",
+    "segment_path": "all_frames/Scenes 021-040__529C-1- mos_20230816070604261/23/segments/23_Whale pillow_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__529C-1- mos_20230816070604261",
+    "predicted_object": "Aligator Loki Plushie",
+    "object_version": 1,
+    "similarity_score": 0.7475293874740601,
+    "model": "resnet50",
+    "frame": "27",
+    "segment_id": "27_Whale pillow_1_nopoint",
+    "segment_path": "all_frames/Scenes 021-040__529C-1- mos_20230816070604261/27/segments/27_Whale pillow_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__529C-1- mos_20230816070604261",
+    "predicted_object": "Aligator Loki Plushie",
+    "object_version": 3,
+    "similarity_score": 0.7072171568870544,
+    "model": "resnet50",
+    "frame": "27",
+    "segment_id": "27_Whale pillow_0_nopoint",
+    "segment_path": "all_frames/Scenes 021-040__529C-1- mos_20230816070604261/27/segments/27_Whale pillow_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__529C-1- mos_20230816070604261",
+    "predicted_object": "Aligator Loki Plushie",
+    "object_version": 3,
+    "similarity_score": 0.7194443941116333,
+    "model": "resnet50",
+    "frame": "27",
+    "segment_id": "27_Whale pillow_2_nopoint",
+    "segment_path": "all_frames/Scenes 021-040__529C-1- mos_20230816070604261/27/segments/27_Whale pillow_2_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__529C-1- mos_20230816070604261",
+    "predicted_object": "Aligator Loki Plushie",
+    "object_version": 3,
+    "similarity_score": 0.7363468408584595,
+    "model": "resnet50",
+    "frame": "109",
+    "segment_id": "109_Whale pillow_1_nopoint",
+    "segment_path": "all_frames/Scenes 021-040__529C-1- mos_20230816070604261/109/segments/109_Whale pillow_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__529C-1- mos_20230816070604261",
+    "predicted_object": "Aligator Loki Plushie",
+    "object_version": 3,
+    "similarity_score": 0.7170985341072083,
+    "model": "resnet50",
+    "frame": "109",
+    "segment_id": "109_Whale pillow_0_nopoint",
+    "segment_path": "all_frames/Scenes 021-040__529C-1- mos_20230816070604261/109/segments/109_Whale pillow_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__529C-1- mos_20230816070604261",
+    "predicted_object": "Aligator Loki Plushie",
+    "object_version": 3,
+    "similarity_score": 0.7367057800292969,
+    "model": "resnet50",
+    "frame": "26",
+    "segment_id": "26_Whale pillow_1_nopoint",
+    "segment_path": "all_frames/Scenes 021-040__529C-1- mos_20230816070604261/26/segments/26_Whale pillow_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__529C-1- mos_20230816070604261",
+    "predicted_object": "Aligator Loki Plushie",
+    "object_version": 3,
+    "similarity_score": 0.7126672267913818,
+    "model": "resnet50",
+    "frame": "26",
+    "segment_id": "26_Whale pillow_0_nopoint",
+    "segment_path": "all_frames/Scenes 021-040__529C-1- mos_20230816070604261/26/segments/26_Whale pillow_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__529C-1- mos_20230816070604261",
+    "predicted_object": "Aligator Loki Plushie",
+    "object_version": 3,
+    "similarity_score": 0.740292489528656,
+    "model": "resnet50",
+    "frame": "43",
+    "segment_id": "43_Whale pillow_1_nopoint",
+    "segment_path": "all_frames/Scenes 021-040__529C-1- mos_20230816070604261/43/segments/43_Whale pillow_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__529C-1- mos_20230816070604261",
+    "predicted_object": "Aligator Loki Plushie",
+    "object_version": 3,
+    "similarity_score": 0.7127586603164673,
+    "model": "resnet50",
+    "frame": "43",
+    "segment_id": "43_Whale pillow_3_nopoint",
+    "segment_path": "all_frames/Scenes 021-040__529C-1- mos_20230816070604261/43/segments/43_Whale pillow_3_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__529C-1- mos_20230816070604261",
+    "predicted_object": "Aligator Loki Plushie",
+    "object_version": 1,
+    "similarity_score": 0.7073925733566284,
+    "model": "resnet50",
+    "frame": "43",
+    "segment_id": "43_Whale pillow_0_nopoint",
+    "segment_path": "all_frames/Scenes 021-040__529C-1- mos_20230816070604261/43/segments/43_Whale pillow_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__529C-1- mos_20230816070604261",
+    "predicted_object": "Sylvie's machete",
+    "object_version": 2,
+    "similarity_score": 0.7112979888916016,
+    "model": "resnet50",
+    "frame": "43",
+    "segment_id": "43_War hammer_2_nopoint",
+    "segment_path": "all_frames/Scenes 021-040__529C-1- mos_20230816070604261/43/segments/43_War hammer_2_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__529C-1- mos_20230816070604261",
+    "predicted_object": "Aligator Loki Plushie",
+    "object_version": 3,
+    "similarity_score": 0.7605723142623901,
+    "model": "resnet50",
+    "frame": "28",
+    "segment_id": "28_Whale pillow_0_nopoint",
+    "segment_path": "all_frames/Scenes 021-040__529C-1- mos_20230816070604261/28/segments/28_Whale pillow_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__529C-1- mos_20230816070604261",
+    "predicted_object": "Aligator Loki Plushie",
+    "object_version": 2,
+    "similarity_score": 0.7069000005722046,
+    "model": "resnet50",
+    "frame": "28",
+    "segment_id": "28_Whale pillow_1_nopoint",
+    "segment_path": "all_frames/Scenes 021-040__529C-1- mos_20230816070604261/28/segments/28_Whale pillow_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__529C-1- mos_20230816070604261",
+    "predicted_object": "Aligator Loki Plushie",
+    "object_version": 1,
+    "similarity_score": 0.7353741526603699,
+    "model": "resnet50",
+    "frame": "54",
+    "segment_id": "54_Whale pillow_0_nopoint",
+    "segment_path": "all_frames/Scenes 021-040__529C-1- mos_20230816070604261/54/segments/54_Whale pillow_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__529C-1- mos_20230816070604261",
+    "predicted_object": "Aligator Loki Plushie",
+    "object_version": 3,
+    "similarity_score": 0.7163500785827637,
+    "model": "resnet50",
+    "frame": "54",
+    "segment_id": "54_Whale pillow_1_nopoint",
+    "segment_path": "all_frames/Scenes 021-040__529C-1- mos_20230816070604261/54/segments/54_Whale pillow_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__529C-1- mos_20230816070604261",
+    "predicted_object": "Aligator Loki Plushie",
+    "object_version": 1,
+    "similarity_score": 0.7294145822525024,
+    "model": "resnet50",
+    "frame": "15",
+    "segment_id": "15_Whale pillow_2_nopoint",
+    "segment_path": "all_frames/Scenes 021-040__529C-1- mos_20230816070604261/15/segments/15_Whale pillow_2_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__529C-1- mos_20230816070604261",
+    "predicted_object": "Aligator Loki Plushie",
+    "object_version": 3,
+    "similarity_score": 0.7274742126464844,
+    "model": "resnet50",
+    "frame": "15",
+    "segment_id": "15_Whale pillow_0_nopoint",
+    "segment_path": "all_frames/Scenes 021-040__529C-1- mos_20230816070604261/15/segments/15_Whale pillow_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__529C-1- mos_20230816070604261",
+    "predicted_object": "Laevateinn",
+    "object_version": 1,
+    "similarity_score": 0.7250639796257019,
+    "model": "resnet50",
+    "frame": "15",
+    "segment_id": "15_War hammer_1_nopoint",
+    "segment_path": "all_frames/Scenes 021-040__529C-1- mos_20230816070604261/15/segments/15_War hammer_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__529C-1- mos_20230816070604261",
+    "predicted_object": "Aligator Loki Plushie",
+    "object_version": 3,
+    "similarity_score": 0.7395138740539551,
+    "model": "resnet50",
+    "frame": "58",
+    "segment_id": "58_Whale pillow_0_nopoint",
+    "segment_path": "all_frames/Scenes 021-040__529C-1- mos_20230816070604261/58/segments/58_Whale pillow_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__529C-1- mos_20230816070604261",
+    "predicted_object": "Aligator Loki Plushie",
+    "object_version": 3,
+    "similarity_score": 0.715700626373291,
+    "model": "resnet50",
+    "frame": "58",
+    "segment_id": "58_Whale pillow_1_nopoint",
+    "segment_path": "all_frames/Scenes 021-040__529C-1- mos_20230816070604261/58/segments/58_Whale pillow_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__529C-1- mos_20230816070604261",
+    "predicted_object": "Aligator Loki Plushie",
+    "object_version": 3,
+    "similarity_score": 0.7394620180130005,
+    "model": "resnet50",
+    "frame": "14",
+    "segment_id": "14_Whale pillow_1_nopoint",
+    "segment_path": "all_frames/Scenes 021-040__529C-1- mos_20230816070604261/14/segments/14_Whale pillow_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__529C-1- mos_20230816070604261",
+    "predicted_object": "Aligator Loki Plushie",
+    "object_version": 3,
+    "similarity_score": 0.7208191156387329,
+    "model": "resnet50",
+    "frame": "14",
+    "segment_id": "14_Whale pillow_0_nopoint",
+    "segment_path": "all_frames/Scenes 021-040__529C-1- mos_20230816070604261/14/segments/14_Whale pillow_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__529C-1- mos_20230816070604261",
+    "predicted_object": "Aligator Loki Plushie",
+    "object_version": 3,
+    "similarity_score": 0.7042204141616821,
+    "model": "resnet50",
+    "frame": "14",
+    "segment_id": "14_Whale pillow_2_nopoint",
+    "segment_path": "all_frames/Scenes 021-040__529C-1- mos_20230816070604261/14/segments/14_Whale pillow_2_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__529C-1- mos_20230816070604261",
+    "predicted_object": "Aligator Loki Plushie",
+    "object_version": 3,
+    "similarity_score": 0.7470014095306396,
+    "model": "resnet50",
+    "frame": "55",
+    "segment_id": "55_Whale pillow_0_nopoint",
+    "segment_path": "all_frames/Scenes 021-040__529C-1- mos_20230816070604261/55/segments/55_Whale pillow_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__529C-1- mos_20230816070604261",
+    "predicted_object": "Aligator Loki Plushie",
+    "object_version": 3,
+    "similarity_score": 0.731961727142334,
+    "model": "resnet50",
+    "frame": "55",
+    "segment_id": "55_Whale pillow_1_nopoint",
+    "segment_path": "all_frames/Scenes 021-040__529C-1- mos_20230816070604261/55/segments/55_Whale pillow_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__529C-1- mos_20230816070604261",
+    "predicted_object": "Aligator Loki Plushie",
+    "object_version": 3,
+    "similarity_score": 0.7055404186248779,
+    "model": "resnet50",
+    "frame": "59",
+    "segment_id": "59_Whale pillow_1_nopoint",
+    "segment_path": "all_frames/Scenes 021-040__529C-1- mos_20230816070604261/59/segments/59_Whale pillow_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__529C-1- mos_20230816070604261",
+    "predicted_object": "Aligator Loki Plushie",
+    "object_version": 2,
+    "similarity_score": 0.7370204329490662,
+    "model": "resnet50",
+    "frame": "59",
+    "segment_id": "59_Whale pillow_0_nopoint",
+    "segment_path": "all_frames/Scenes 021-040__529C-1- mos_20230816070604261/59/segments/59_Whale pillow_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__529C-1- mos_20230816070604261",
+    "predicted_object": "Aligator Loki Plushie",
+    "object_version": 3,
+    "similarity_score": 0.707567572593689,
+    "model": "resnet50",
+    "frame": "110",
+    "segment_id": "110_Whale pillow_0_nopoint",
+    "segment_path": "all_frames/Scenes 021-040__529C-1- mos_20230816070604261/110/segments/110_Whale pillow_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__529C-1- mos_20230816070604261",
+    "predicted_object": "Aligator Loki Plushie",
+    "object_version": 3,
+    "similarity_score": 0.7351175546646118,
+    "model": "resnet50",
+    "frame": "20",
+    "segment_id": "20_Whale pillow_2_nopoint",
+    "segment_path": "all_frames/Scenes 021-040__529C-1- mos_20230816070604261/20/segments/20_Whale pillow_2_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__529C-1- mos_20230816070604261",
+    "predicted_object": "Aligator Loki Plushie",
+    "object_version": 3,
+    "similarity_score": 0.7187694311141968,
+    "model": "resnet50",
+    "frame": "20",
+    "segment_id": "20_Whale pillow_0_nopoint",
+    "segment_path": "all_frames/Scenes 021-040__529C-1- mos_20230816070604261/20/segments/20_Whale pillow_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__529C-1- mos_20230816070604261",
+    "predicted_object": "Sylvie's machete",
+    "object_version": 2,
+    "similarity_score": 0.7034023404121399,
+    "model": "resnet50",
+    "frame": "20",
+    "segment_id": "20_War hammer_1_nopoint",
+    "segment_path": "all_frames/Scenes 021-040__529C-1- mos_20230816070604261/20/segments/20_War hammer_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__529C-1- mos_20230816070604261",
+    "predicted_object": "Aligator Loki Plushie",
+    "object_version": 3,
+    "similarity_score": 0.7676624059677124,
+    "model": "resnet50",
+    "frame": "22",
+    "segment_id": "22_Whale pillow_1_nopoint",
+    "segment_path": "all_frames/Scenes 021-040__529C-1- mos_20230816070604261/22/segments/22_Whale pillow_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__529C-1- mos_20230816070604261",
+    "predicted_object": "Aligator Loki Plushie",
+    "object_version": 3,
+    "similarity_score": 0.7130351066589355,
+    "model": "resnet50",
+    "frame": "22",
+    "segment_id": "22_Whale pillow_0_nopoint",
+    "segment_path": "all_frames/Scenes 021-040__529C-1- mos_20230816070604261/22/segments/22_Whale pillow_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__529C-1- mos_20230816070604261",
+    "predicted_object": "Aligator Loki Plushie",
+    "object_version": 3,
+    "similarity_score": 0.7583706378936768,
+    "model": "resnet50",
+    "frame": "114",
+    "segment_id": "114_Whale pillow_1_nopoint",
+    "segment_path": "all_frames/Scenes 021-040__529C-1- mos_20230816070604261/114/segments/114_Whale pillow_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__529C-1- mos_20230816070604261",
+    "predicted_object": "Aligator Loki Plushie",
+    "object_version": 3,
+    "similarity_score": 0.7030831575393677,
+    "model": "resnet50",
+    "frame": "114",
+    "segment_id": "114_Whale pillow_0_nopoint",
+    "segment_path": "all_frames/Scenes 021-040__529C-1- mos_20230816070604261/114/segments/114_Whale pillow_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__529C-1- mos_20230816070604261",
+    "predicted_object": "Aligator Loki Plushie",
+    "object_version": 1,
+    "similarity_score": 0.7231747508049011,
+    "model": "resnet50",
+    "frame": "18",
+    "segment_id": "18_Whale pillow_1_nopoint",
+    "segment_path": "all_frames/Scenes 021-040__529C-1- mos_20230816070604261/18/segments/18_Whale pillow_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__529C-1- mos_20230816070604261",
+    "predicted_object": "Aligator Loki Plushie",
+    "object_version": 3,
+    "similarity_score": 0.7302025556564331,
+    "model": "resnet50",
+    "frame": "18",
+    "segment_id": "18_Whale pillow_0_nopoint",
+    "segment_path": "all_frames/Scenes 021-040__529C-1- mos_20230816070604261/18/segments/18_Whale pillow_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__529C-1- mos_20230816070604261",
+    "predicted_object": "Aligator Loki Plushie",
+    "object_version": 3,
+    "similarity_score": 0.7651622295379639,
+    "model": "resnet50",
+    "frame": "121",
+    "segment_id": "121_Whale pillow_3_nopoint",
+    "segment_path": "all_frames/Scenes 021-040__529C-1- mos_20230816070604261/121/segments/121_Whale pillow_3_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__529C-1- mos_20230816070604261",
+    "predicted_object": "Aligator Loki Plushie",
+    "object_version": 3,
+    "similarity_score": 0.7286046743392944,
+    "model": "resnet50",
+    "frame": "121",
+    "segment_id": "121_Whale pillow_1_nopoint",
+    "segment_path": "all_frames/Scenes 021-040__529C-1- mos_20230816070604261/121/segments/121_Whale pillow_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__529C-1- mos_20230816070604261",
+    "predicted_object": "Aligator Loki Plushie",
+    "object_version": 3,
+    "similarity_score": 0.7010040283203125,
+    "model": "resnet50",
+    "frame": "121",
+    "segment_id": "121_Whale pillow_0_nopoint",
+    "segment_path": "all_frames/Scenes 021-040__529C-1- mos_20230816070604261/121/segments/121_Whale pillow_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__529C-1- mos_20230816070604261",
+    "predicted_object": "Aligator Loki Plushie",
+    "object_version": 2,
+    "similarity_score": 0.7519376277923584,
+    "model": "resnet50",
+    "frame": "107",
+    "segment_id": "107_Whale pillow_0_nopoint",
+    "segment_path": "all_frames/Scenes 021-040__529C-1- mos_20230816070604261/107/segments/107_Whale pillow_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__529C-1- mos_20230816070604261",
+    "predicted_object": "Aligator Loki Plushie",
+    "object_version": 3,
+    "similarity_score": 0.7129782438278198,
+    "model": "resnet50",
+    "frame": "107",
+    "segment_id": "107_Whale pillow_1_nopoint",
+    "segment_path": "all_frames/Scenes 021-040__529C-1- mos_20230816070604261/107/segments/107_Whale pillow_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__529C-1- mos_20230816070604261",
+    "predicted_object": "Aligator Loki Plushie",
+    "object_version": 1,
+    "similarity_score": 0.7457663416862488,
+    "model": "resnet50",
+    "frame": "50",
+    "segment_id": "50_Whale pillow_0_nopoint",
+    "segment_path": "all_frames/Scenes 021-040__529C-1- mos_20230816070604261/50/segments/50_Whale pillow_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__529C-1- mos_20230816070604261",
+    "predicted_object": "Aligator Loki Plushie",
+    "object_version": 3,
+    "similarity_score": 0.7179964184761047,
+    "model": "resnet50",
+    "frame": "50",
+    "segment_id": "50_Whale pillow_1_nopoint",
+    "segment_path": "all_frames/Scenes 021-040__529C-1- mos_20230816070604261/50/segments/50_Whale pillow_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__529C-1- mos_20230816070604261",
+    "predicted_object": "Aligator Loki Plushie",
+    "object_version": 3,
+    "similarity_score": 0.7587496638298035,
+    "model": "resnet50",
+    "frame": "48",
+    "segment_id": "48_Whale pillow_0_nopoint",
+    "segment_path": "all_frames/Scenes 021-040__529C-1- mos_20230816070604261/48/segments/48_Whale pillow_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__529C-1- mos_20230816070604261",
+    "predicted_object": "Aligator Loki Plushie",
+    "object_version": 3,
+    "similarity_score": 0.7063859701156616,
+    "model": "resnet50",
+    "frame": "48",
+    "segment_id": "48_Whale pillow_1_nopoint",
+    "segment_path": "all_frames/Scenes 021-040__529C-1- mos_20230816070604261/48/segments/48_Whale pillow_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__529C-1- mos_20230816070604261",
+    "predicted_object": "Aligator Loki Plushie",
+    "object_version": 2,
+    "similarity_score": 0.733783483505249,
+    "model": "resnet50",
+    "frame": "61",
+    "segment_id": "61_Whale pillow_1_nopoint",
+    "segment_path": "all_frames/Scenes 021-040__529C-1- mos_20230816070604261/61/segments/61_Whale pillow_1_nopoint.png"
+  }
+]

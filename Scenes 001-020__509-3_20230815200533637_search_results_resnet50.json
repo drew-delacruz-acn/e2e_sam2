@@ -1,0 +1,112 @@
+[
+  {
+    "video": "Scenes 001-020__509-3_20230815200533637",
+    "predicted_object": "Aligator Loki Plushie",
+    "object_version": 1,
+    "similarity_score": 0.7723910808563232,
+    "model": "resnet50",
+    "frame": "29",
+    "segment_id": "29_TVA jacket_1_nopoint",
+    "segment_path": "all_frames/Scenes 001-020__509-3_20230815200533637/29/segments/29_TVA jacket_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 001-020__509-3_20230815200533637",
+    "predicted_object": "Reset Charge",
+    "object_version": 1,
+    "similarity_score": 0.7044067978858948,
+    "model": "resnet50",
+    "frame": "39",
+    "segment_id": "39_Horned helmet_0_nopoint",
+    "segment_path": "all_frames/Scenes 001-020__509-3_20230815200533637/39/segments/39_Horned helmet_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 001-020__509-3_20230815200533637",
+    "predicted_object": "Reset Charge",
+    "object_version": 1,
+    "similarity_score": 0.7223087549209595,
+    "model": "resnet50",
+    "frame": "38",
+    "segment_id": "38_Horned helmet_0_nopoint",
+    "segment_path": "all_frames/Scenes 001-020__509-3_20230815200533637/38/segments/38_Horned helmet_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 001-020__509-3_20230815200533637",
+    "predicted_object": "Reset Charge",
+    "object_version": 1,
+    "similarity_score": 0.7030290961265564,
+    "model": "resnet50",
+    "frame": "44",
+    "segment_id": "44_Horned helmet_0_nopoint",
+    "segment_path": "all_frames/Scenes 001-020__509-3_20230815200533637/44/segments/44_Horned helmet_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 001-020__509-3_20230815200533637",
+    "predicted_object": "Asgardian device",
+    "object_version": 3,
+    "similarity_score": 0.7268729209899902,
+    "model": "resnet50",
+    "frame": "44",
+    "segment_id": "44_Horned helmet_2_nopoint",
+    "segment_path": "all_frames/Scenes 001-020__509-3_20230815200533637/44/segments/44_Horned helmet_2_nopoint.png"
+  },
+  {
+    "video": "Scenes 001-020__509-3_20230815200533637",
+    "predicted_object": "Loki's Scepter",
+    "object_version": 2,
+    "similarity_score": 0.7228947281837463,
+    "model": "resnet50",
+    "frame": "5",
+    "segment_id": "5_Glowing rod_0_nopoint",
+    "segment_path": "all_frames/Scenes 001-020__509-3_20230815200533637/5/segments/5_Glowing rod_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 001-020__509-3_20230815200533637",
+    "predicted_object": "Reset Charge",
+    "object_version": 1,
+    "similarity_score": 0.7029474973678589,
+    "model": "resnet50",
+    "frame": "34",
+    "segment_id": "34_Horned helmet_0_nopoint",
+    "segment_path": "all_frames/Scenes 001-020__509-3_20230815200533637/34/segments/34_Horned helmet_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 001-020__509-3_20230815200533637",
+    "predicted_object": "Loki's Scepter",
+    "object_version": 2,
+    "similarity_score": 0.7210782766342163,
+    "model": "resnet50",
+    "frame": "27",
+    "segment_id": "27_War hammer_5_nopoint",
+    "segment_path": "all_frames/Scenes 001-020__509-3_20230815200533637/27/segments/27_War hammer_5_nopoint.png"
+  },
+  {
+    "video": "Scenes 001-020__509-3_20230815200533637",
+    "predicted_object": "Reset Charge",
+    "object_version": 1,
+    "similarity_score": 0.7163561582565308,
+    "model": "resnet50",
+    "frame": "37",
+    "segment_id": "37_Horned helmet_0_nopoint",
+    "segment_path": "all_frames/Scenes 001-020__509-3_20230815200533637/37/segments/37_Horned helmet_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 001-020__509-3_20230815200533637",
+    "predicted_object": "Reset Charge",
+    "object_version": 1,
+    "similarity_score": 0.7070648074150085,
+    "model": "resnet50",
+    "frame": "36",
+    "segment_id": "36_Horned helmet_0_nopoint",
+    "segment_path": "all_frames/Scenes 001-020__509-3_20230815200533637/36/segments/36_Horned helmet_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 001-020__509-3_20230815200533637",
+    "predicted_object": "Asgardian device",
+    "object_version": 3,
+    "similarity_score": 0.7033156156539917,
+    "model": "resnet50",
+    "frame": "40",
+    "segment_id": "40_Horned helmet_0_nopoint",
+    "segment_path": "all_frames/Scenes 001-020__509-3_20230815200533637/40/segments/40_Horned helmet_0_nopoint.png"
+  }
+]

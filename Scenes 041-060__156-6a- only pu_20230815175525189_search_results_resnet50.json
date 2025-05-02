@@ -1,0 +1,602 @@
+[
+  {
+    "video": "Scenes 041-060__156-6a- only pu_20230815175525189",
+    "predicted_object": "Time Collar",
+    "object_version": 3,
+    "similarity_score": 0.711870014667511,
+    "model": "resnet50",
+    "frame": "46",
+    "segment_id": "46_Neck device_0_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-6a- only pu_20230815175525189/46/segments/46_Neck device_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-6a- only pu_20230815175525189",
+    "predicted_object": "Time Collar",
+    "object_version": 3,
+    "similarity_score": 0.7105910778045654,
+    "model": "resnet50",
+    "frame": "45",
+    "segment_id": "45_Neck device_0_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-6a- only pu_20230815175525189/45/segments/45_Neck device_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-6a- only pu_20230815175525189",
+    "predicted_object": "Time Collar",
+    "object_version": 3,
+    "similarity_score": 0.7170087099075317,
+    "model": "resnet50",
+    "frame": "96",
+    "segment_id": "96_Neck device_0_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-6a- only pu_20230815175525189/96/segments/96_Neck device_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-6a- only pu_20230815175525189",
+    "predicted_object": "Time Collar",
+    "object_version": 3,
+    "similarity_score": 0.7030115723609924,
+    "model": "resnet50",
+    "frame": "90",
+    "segment_id": "90_Neck device_0_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-6a- only pu_20230815175525189/90/segments/90_Neck device_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-6a- only pu_20230815175525189",
+    "predicted_object": "Time Collar",
+    "object_version": 3,
+    "similarity_score": 0.727099597454071,
+    "model": "resnet50",
+    "frame": "98",
+    "segment_id": "98_Neck device_0_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-6a- only pu_20230815175525189/98/segments/98_Neck device_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-6a- only pu_20230815175525189",
+    "predicted_object": "Aligator Loki Plushie",
+    "object_version": 1,
+    "similarity_score": 0.7352683544158936,
+    "model": "resnet50",
+    "frame": "119",
+    "segment_id": "119_TVA jacket_1_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-6a- only pu_20230815175525189/119/segments/119_TVA jacket_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-6a- only pu_20230815175525189",
+    "predicted_object": "Time Collar",
+    "object_version": 2,
+    "similarity_score": 0.7062551975250244,
+    "model": "resnet50",
+    "frame": "101",
+    "segment_id": "101_Neck device_0_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-6a- only pu_20230815175525189/101/segments/101_Neck device_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-6a- only pu_20230815175525189",
+    "predicted_object": "Aligator Loki Plushie",
+    "object_version": 1,
+    "similarity_score": 0.7655920386314392,
+    "model": "resnet50",
+    "frame": "56",
+    "segment_id": "56_TVA jacket_2_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-6a- only pu_20230815175525189/56/segments/56_TVA jacket_2_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-6a- only pu_20230815175525189",
+    "predicted_object": "Aligator Loki Plushie",
+    "object_version": 1,
+    "similarity_score": 0.7160819172859192,
+    "model": "resnet50",
+    "frame": "120",
+    "segment_id": "120_TVA jacket_2_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-6a- only pu_20230815175525189/120/segments/120_TVA jacket_2_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-6a- only pu_20230815175525189",
+    "predicted_object": "Aligator Loki Plushie",
+    "object_version": 1,
+    "similarity_score": 0.7405697107315063,
+    "model": "resnet50",
+    "frame": "120",
+    "segment_id": "120_TVA jacket_1_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-6a- only pu_20230815175525189/120/segments/120_TVA jacket_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-6a- only pu_20230815175525189",
+    "predicted_object": "Time Collar",
+    "object_version": 3,
+    "similarity_score": 0.7000625133514404,
+    "model": "resnet50",
+    "frame": "100",
+    "segment_id": "100_Neck device_0_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-6a- only pu_20230815175525189/100/segments/100_Neck device_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-6a- only pu_20230815175525189",
+    "predicted_object": "Time Collar",
+    "object_version": 2,
+    "similarity_score": 0.7082299590110779,
+    "model": "resnet50",
+    "frame": "97",
+    "segment_id": "97_Neck device_0_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-6a- only pu_20230815175525189/97/segments/97_Neck device_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-6a- only pu_20230815175525189",
+    "predicted_object": "Loki's armor (THE AVENGERS)",
+    "object_version": 3,
+    "similarity_score": 0.8068151473999023,
+    "model": "resnet50",
+    "frame": "33",
+    "segment_id": "33_TVA jacket_4_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-6a- only pu_20230815175525189/33/segments/33_TVA jacket_4_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-6a- only pu_20230815175525189",
+    "predicted_object": "Time Collar",
+    "object_version": 2,
+    "similarity_score": 0.7013015747070312,
+    "model": "resnet50",
+    "frame": "33",
+    "segment_id": "33_Neck device_2_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-6a- only pu_20230815175525189/33/segments/33_Neck device_2_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-6a- only pu_20230815175525189",
+    "predicted_object": "Time Collar",
+    "object_version": 3,
+    "similarity_score": 0.7013812065124512,
+    "model": "resnet50",
+    "frame": "47",
+    "segment_id": "47_Neck device_0_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-6a- only pu_20230815175525189/47/segments/47_Neck device_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-6a- only pu_20230815175525189",
+    "predicted_object": "Time Collar",
+    "object_version": 3,
+    "similarity_score": 0.7208669185638428,
+    "model": "resnet50",
+    "frame": "115",
+    "segment_id": "115_Neck device_0_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-6a- only pu_20230815175525189/115/segments/115_Neck device_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-6a- only pu_20230815175525189",
+    "predicted_object": "Time Collar",
+    "object_version": 3,
+    "similarity_score": 0.721330463886261,
+    "model": "resnet50",
+    "frame": "103",
+    "segment_id": "103_Neck device_0_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-6a- only pu_20230815175525189/103/segments/103_Neck device_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-6a- only pu_20230815175525189",
+    "predicted_object": "Time Collar",
+    "object_version": 3,
+    "similarity_score": 0.7157264947891235,
+    "model": "resnet50",
+    "frame": "108",
+    "segment_id": "108_Neck device_0_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-6a- only pu_20230815175525189/108/segments/108_Neck device_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-6a- only pu_20230815175525189",
+    "predicted_object": "Time Collar",
+    "object_version": 3,
+    "similarity_score": 0.7178945541381836,
+    "model": "resnet50",
+    "frame": "39",
+    "segment_id": "39_Neck device_0_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-6a- only pu_20230815175525189/39/segments/39_Neck device_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-6a- only pu_20230815175525189",
+    "predicted_object": "Time Collar",
+    "object_version": 3,
+    "similarity_score": 0.7147964239120483,
+    "model": "resnet50",
+    "frame": "38",
+    "segment_id": "38_Neck device_0_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-6a- only pu_20230815175525189/38/segments/38_Neck device_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-6a- only pu_20230815175525189",
+    "predicted_object": "Time Collar",
+    "object_version": 3,
+    "similarity_score": 0.7064821124076843,
+    "model": "resnet50",
+    "frame": "44",
+    "segment_id": "44_Neck device_0_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-6a- only pu_20230815175525189/44/segments/44_Neck device_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-6a- only pu_20230815175525189",
+    "predicted_object": "Time Collar",
+    "object_version": 3,
+    "similarity_score": 0.7191869020462036,
+    "model": "resnet50",
+    "frame": "113",
+    "segment_id": "113_Neck device_0_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-6a- only pu_20230815175525189/113/segments/113_Neck device_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-6a- only pu_20230815175525189",
+    "predicted_object": "Time Collar",
+    "object_version": 3,
+    "similarity_score": 0.7059772610664368,
+    "model": "resnet50",
+    "frame": "116",
+    "segment_id": "116_Neck device_0_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-6a- only pu_20230815175525189/116/segments/116_Neck device_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-6a- only pu_20230815175525189",
+    "predicted_object": "Time Collar",
+    "object_version": 3,
+    "similarity_score": 0.7226489186286926,
+    "model": "resnet50",
+    "frame": "111",
+    "segment_id": "111_Neck device_0_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-6a- only pu_20230815175525189/111/segments/111_Neck device_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-6a- only pu_20230815175525189",
+    "predicted_object": "Loki's armor (THE AVENGERS)",
+    "object_version": 3,
+    "similarity_score": 0.7449069619178772,
+    "model": "resnet50",
+    "frame": "118",
+    "segment_id": "118_TVA jacket_2_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-6a- only pu_20230815175525189/118/segments/118_TVA jacket_2_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-6a- only pu_20230815175525189",
+    "predicted_object": "Time Collar",
+    "object_version": 2,
+    "similarity_score": 0.7062784433364868,
+    "model": "resnet50",
+    "frame": "21",
+    "segment_id": "21_Neck device_0_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-6a- only pu_20230815175525189/21/segments/21_Neck device_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-6a- only pu_20230815175525189",
+    "predicted_object": "Aligator Loki Plushie",
+    "object_version": 1,
+    "similarity_score": 0.7377246618270874,
+    "model": "resnet50",
+    "frame": "57",
+    "segment_id": "57_TVA jacket_2_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-6a- only pu_20230815175525189/57/segments/57_TVA jacket_2_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-6a- only pu_20230815175525189",
+    "predicted_object": "Aligator Loki Plushie",
+    "object_version": 1,
+    "similarity_score": 0.7533211708068848,
+    "model": "resnet50",
+    "frame": "57",
+    "segment_id": "57_TVA jacket_1_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-6a- only pu_20230815175525189/57/segments/57_TVA jacket_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-6a- only pu_20230815175525189",
+    "predicted_object": "Time Collar",
+    "object_version": 2,
+    "similarity_score": 0.7030777931213379,
+    "model": "resnet50",
+    "frame": "34",
+    "segment_id": "34_Neck device_0_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-6a- only pu_20230815175525189/34/segments/34_Neck device_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-6a- only pu_20230815175525189",
+    "predicted_object": "Time Collar",
+    "object_version": 2,
+    "similarity_score": 0.7020424604415894,
+    "model": "resnet50",
+    "frame": "91",
+    "segment_id": "91_Neck device_0_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-6a- only pu_20230815175525189/91/segments/91_Neck device_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-6a- only pu_20230815175525189",
+    "predicted_object": "Time Collar",
+    "object_version": 3,
+    "similarity_score": 0.7343207597732544,
+    "model": "resnet50",
+    "frame": "106",
+    "segment_id": "106_Neck device_0_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-6a- only pu_20230815175525189/106/segments/106_Neck device_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-6a- only pu_20230815175525189",
+    "predicted_object": "Time Collar",
+    "object_version": 3,
+    "similarity_score": 0.7069399356842041,
+    "model": "resnet50",
+    "frame": "51",
+    "segment_id": "51_Neck device_0_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-6a- only pu_20230815175525189/51/segments/51_Neck device_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-6a- only pu_20230815175525189",
+    "predicted_object": "Time Collar",
+    "object_version": 2,
+    "similarity_score": 0.7085680961608887,
+    "model": "resnet50",
+    "frame": "102",
+    "segment_id": "102_Neck device_0_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-6a- only pu_20230815175525189/102/segments/102_Neck device_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-6a- only pu_20230815175525189",
+    "predicted_object": "Time Collar",
+    "object_version": 3,
+    "similarity_score": 0.7078983187675476,
+    "model": "resnet50",
+    "frame": "31",
+    "segment_id": "31_Neck device_0_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-6a- only pu_20230815175525189/31/segments/31_Neck device_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-6a- only pu_20230815175525189",
+    "predicted_object": "Asgardian device",
+    "object_version": 3,
+    "similarity_score": 0.7062079906463623,
+    "model": "resnet50",
+    "frame": "78",
+    "segment_id": "78_Holopad device_4_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-6a- only pu_20230815175525189/78/segments/78_Holopad device_4_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-6a- only pu_20230815175525189",
+    "predicted_object": "Time Collar",
+    "object_version": 3,
+    "similarity_score": 0.722200870513916,
+    "model": "resnet50",
+    "frame": "109",
+    "segment_id": "109_Neck device_0_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-6a- only pu_20230815175525189/109/segments/109_Neck device_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-6a- only pu_20230815175525189",
+    "predicted_object": "Time Collar",
+    "object_version": 3,
+    "similarity_score": 0.7042660713195801,
+    "model": "resnet50",
+    "frame": "32",
+    "segment_id": "32_Neck device_0_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-6a- only pu_20230815175525189/32/segments/32_Neck device_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-6a- only pu_20230815175525189",
+    "predicted_object": "Time Collar",
+    "object_version": 3,
+    "similarity_score": 0.7215452790260315,
+    "model": "resnet50",
+    "frame": "37",
+    "segment_id": "37_Neck device_0_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-6a- only pu_20230815175525189/37/segments/37_Neck device_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-6a- only pu_20230815175525189",
+    "predicted_object": "Time Collar",
+    "object_version": 3,
+    "similarity_score": 0.7007871866226196,
+    "model": "resnet50",
+    "frame": "36",
+    "segment_id": "36_Neck device_0_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-6a- only pu_20230815175525189/36/segments/36_Neck device_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-6a- only pu_20230815175525189",
+    "predicted_object": "Time Collar",
+    "object_version": 3,
+    "similarity_score": 0.7203311324119568,
+    "model": "resnet50",
+    "frame": "43",
+    "segment_id": "43_Neck device_0_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-6a- only pu_20230815175525189/43/segments/43_Neck device_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-6a- only pu_20230815175525189",
+    "predicted_object": "Time Collar",
+    "object_version": 3,
+    "similarity_score": 0.7217012643814087,
+    "model": "resnet50",
+    "frame": "40",
+    "segment_id": "40_Neck device_0_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-6a- only pu_20230815175525189/40/segments/40_Neck device_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-6a- only pu_20230815175525189",
+    "predicted_object": "Time Collar",
+    "object_version": 3,
+    "similarity_score": 0.7125174403190613,
+    "model": "resnet50",
+    "frame": "105",
+    "segment_id": "105_Neck device_0_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-6a- only pu_20230815175525189/105/segments/105_Neck device_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-6a- only pu_20230815175525189",
+    "predicted_object": "Loki's armor (THE AVENGERS)",
+    "object_version": 3,
+    "similarity_score": 0.740778386592865,
+    "model": "resnet50",
+    "frame": "77",
+    "segment_id": "77_TVA jacket_2_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-6a- only pu_20230815175525189/77/segments/77_TVA jacket_2_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-6a- only pu_20230815175525189",
+    "predicted_object": "Time Collar",
+    "object_version": 3,
+    "similarity_score": 0.7126266956329346,
+    "model": "resnet50",
+    "frame": "54",
+    "segment_id": "54_Neck device_0_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-6a- only pu_20230815175525189/54/segments/54_Neck device_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-6a- only pu_20230815175525189",
+    "predicted_object": "Time Collar",
+    "object_version": 3,
+    "similarity_score": 0.7214442491531372,
+    "model": "resnet50",
+    "frame": "42",
+    "segment_id": "42_Neck device_0_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-6a- only pu_20230815175525189/42/segments/42_Neck device_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-6a- only pu_20230815175525189",
+    "predicted_object": "Time Collar",
+    "object_version": 3,
+    "similarity_score": 0.7093970775604248,
+    "model": "resnet50",
+    "frame": "99",
+    "segment_id": "99_Neck device_0_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-6a- only pu_20230815175525189/99/segments/99_Neck device_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-6a- only pu_20230815175525189",
+    "predicted_object": "Time Collar",
+    "object_version": 3,
+    "similarity_score": 0.7120181322097778,
+    "model": "resnet50",
+    "frame": "104",
+    "segment_id": "104_Neck device_0_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-6a- only pu_20230815175525189/104/segments/104_Neck device_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-6a- only pu_20230815175525189",
+    "predicted_object": "Time Collar",
+    "object_version": 2,
+    "similarity_score": 0.7004386186599731,
+    "model": "resnet50",
+    "frame": "93",
+    "segment_id": "93_Neck device_0_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-6a- only pu_20230815175525189/93/segments/93_Neck device_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-6a- only pu_20230815175525189",
+    "predicted_object": "Time Collar",
+    "object_version": 3,
+    "similarity_score": 0.7165230512619019,
+    "model": "resnet50",
+    "frame": "112",
+    "segment_id": "112_Neck device_4_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-6a- only pu_20230815175525189/112/segments/112_Neck device_4_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-6a- only pu_20230815175525189",
+    "predicted_object": "Time Collar",
+    "object_version": 3,
+    "similarity_score": 0.7191219329833984,
+    "model": "resnet50",
+    "frame": "112",
+    "segment_id": "112_Neck device_3_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-6a- only pu_20230815175525189/112/segments/112_Neck device_3_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-6a- only pu_20230815175525189",
+    "predicted_object": "Time Collar",
+    "object_version": 3,
+    "similarity_score": 0.7154626250267029,
+    "model": "resnet50",
+    "frame": "110",
+    "segment_id": "110_Neck device_0_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-6a- only pu_20230815175525189/110/segments/110_Neck device_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-6a- only pu_20230815175525189",
+    "predicted_object": "Time Collar",
+    "object_version": 3,
+    "similarity_score": 0.7183331251144409,
+    "model": "resnet50",
+    "frame": "41",
+    "segment_id": "41_Neck device_0_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-6a- only pu_20230815175525189/41/segments/41_Neck device_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-6a- only pu_20230815175525189",
+    "predicted_object": "Time Collar",
+    "object_version": 2,
+    "similarity_score": 0.7111681699752808,
+    "model": "resnet50",
+    "frame": "80",
+    "segment_id": "80_Neck device_0_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-6a- only pu_20230815175525189/80/segments/80_Neck device_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-6a- only pu_20230815175525189",
+    "predicted_object": "Time Collar",
+    "object_version": 3,
+    "similarity_score": 0.7211330533027649,
+    "model": "resnet50",
+    "frame": "114",
+    "segment_id": "114_Neck device_0_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-6a- only pu_20230815175525189/114/segments/114_Neck device_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-6a- only pu_20230815175525189",
+    "predicted_object": "Time Collar",
+    "object_version": 2,
+    "similarity_score": 0.7103409767150879,
+    "model": "resnet50",
+    "frame": "18",
+    "segment_id": "18_Neck device_0_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-6a- only pu_20230815175525189/18/segments/18_Neck device_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-6a- only pu_20230815175525189",
+    "predicted_object": "Time Collar",
+    "object_version": 3,
+    "similarity_score": 0.718155026435852,
+    "model": "resnet50",
+    "frame": "107",
+    "segment_id": "107_Neck device_3_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-6a- only pu_20230815175525189/107/segments/107_Neck device_3_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-6a- only pu_20230815175525189",
+    "predicted_object": "Time Collar",
+    "object_version": 3,
+    "similarity_score": 0.7207571864128113,
+    "model": "resnet50",
+    "frame": "107",
+    "segment_id": "107_Neck device_2_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-6a- only pu_20230815175525189/107/segments/107_Neck device_2_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-6a- only pu_20230815175525189",
+    "predicted_object": "Time Collar",
+    "object_version": 3,
+    "similarity_score": 0.7001322507858276,
+    "model": "resnet50",
+    "frame": "50",
+    "segment_id": "50_Neck device_0_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-6a- only pu_20230815175525189/50/segments/50_Neck device_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-6a- only pu_20230815175525189",
+    "predicted_object": "Time Collar",
+    "object_version": 3,
+    "similarity_score": 0.7110657691955566,
+    "model": "resnet50",
+    "frame": "48",
+    "segment_id": "48_Neck device_0_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-6a- only pu_20230815175525189/48/segments/48_Neck device_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156-6a- only pu_20230815175525189",
+    "predicted_object": "Time Collar",
+    "object_version": 3,
+    "similarity_score": 0.7016800045967102,
+    "model": "resnet50",
+    "frame": "94",
+    "segment_id": "94_Neck device_0_nopoint",
+    "segment_path": "all_frames/Scenes 041-060__156-6a- only pu_20230815175525189/94/segments/94_Neck device_0_nopoint.png"
+  }
+]

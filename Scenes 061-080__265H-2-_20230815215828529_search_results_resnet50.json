@@ -1,0 +1,162 @@
+[
+  {
+    "video": "Scenes 061-080__265H-2-_20230815215828529",
+    "predicted_object": "Time Collar",
+    "object_version": 1,
+    "similarity_score": 0.7259868383407593,
+    "model": "resnet50",
+    "frame": "19",
+    "segment_id": "19_Horned helmet_0_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__265H-2-_20230815215828529/19/segments/19_Horned helmet_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__265H-2-_20230815215828529",
+    "predicted_object": "Laevateinn",
+    "object_version": 1,
+    "similarity_score": 0.7189875841140747,
+    "model": "resnet50",
+    "frame": "52",
+    "segment_id": "52_Glowing rod_0_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__265H-2-_20230815215828529/52/segments/52_Glowing rod_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__265H-2-_20230815215828529",
+    "predicted_object": "Aligator Loki Plushie",
+    "object_version": 1,
+    "similarity_score": 0.7148222923278809,
+    "model": "resnet50",
+    "frame": "45",
+    "segment_id": "45_TVA jacket_0_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__265H-2-_20230815215828529/45/segments/45_TVA jacket_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__265H-2-_20230815215828529",
+    "predicted_object": "Loki's armor (THE AVENGERS)",
+    "object_version": 3,
+    "similarity_score": 0.7300616502761841,
+    "model": "resnet50",
+    "frame": "33",
+    "segment_id": "33_TVA jacket_1_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__265H-2-_20230815215828529/33/segments/33_TVA jacket_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__265H-2-_20230815215828529",
+    "predicted_object": "Aligator Loki Plushie",
+    "object_version": 1,
+    "similarity_score": 0.7513015866279602,
+    "model": "resnet50",
+    "frame": "39",
+    "segment_id": "39_TVA jacket_0_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__265H-2-_20230815215828529/39/segments/39_TVA jacket_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__265H-2-_20230815215828529",
+    "predicted_object": "Aligator Loki Plushie",
+    "object_version": 1,
+    "similarity_score": 0.7433160543441772,
+    "model": "resnet50",
+    "frame": "34",
+    "segment_id": "34_TVA jacket_1_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__265H-2-_20230815215828529/34/segments/34_TVA jacket_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__265H-2-_20230815215828529",
+    "predicted_object": "Aligator Loki Plushie",
+    "object_version": 3,
+    "similarity_score": 0.7312781810760498,
+    "model": "resnet50",
+    "frame": "30",
+    "segment_id": "30_TVA jacket_0_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__265H-2-_20230815215828529/30/segments/30_TVA jacket_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__265H-2-_20230815215828529",
+    "predicted_object": "Time Stick",
+    "object_version": 3,
+    "similarity_score": 0.7020564079284668,
+    "model": "resnet50",
+    "frame": "6",
+    "segment_id": "6_War hammer_2_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__265H-2-_20230815215828529/6/segments/6_War hammer_2_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__265H-2-_20230815215828529",
+    "predicted_object": "Aligator Loki Plushie",
+    "object_version": 1,
+    "similarity_score": 0.7009007930755615,
+    "model": "resnet50",
+    "frame": "32",
+    "segment_id": "32_TVA jacket_1_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__265H-2-_20230815215828529/32/segments/32_TVA jacket_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__265H-2-_20230815215828529",
+    "predicted_object": "Aligator Loki Plushie",
+    "object_version": 1,
+    "similarity_score": 0.7156153321266174,
+    "model": "resnet50",
+    "frame": "43",
+    "segment_id": "43_TVA jacket_0_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__265H-2-_20230815215828529/43/segments/43_TVA jacket_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__265H-2-_20230815215828529",
+    "predicted_object": "Aligator Loki Plushie",
+    "object_version": 1,
+    "similarity_score": 0.7160995602607727,
+    "model": "resnet50",
+    "frame": "28",
+    "segment_id": "28_TVA jacket_0_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__265H-2-_20230815215828529/28/segments/28_TVA jacket_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__265H-2-_20230815215828529",
+    "predicted_object": "Aligator Loki Plushie",
+    "object_version": 1,
+    "similarity_score": 0.7101219892501831,
+    "model": "resnet50",
+    "frame": "42",
+    "segment_id": "42_TVA jacket_0_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__265H-2-_20230815215828529/42/segments/42_TVA jacket_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__265H-2-_20230815215828529",
+    "predicted_object": "Time Collar",
+    "object_version": 1,
+    "similarity_score": 0.706231415271759,
+    "model": "resnet50",
+    "frame": "13",
+    "segment_id": "13_Metal gauntlet_1_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__265H-2-_20230815215828529/13/segments/13_Metal gauntlet_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__265H-2-_20230815215828529",
+    "predicted_object": "Time Collar",
+    "object_version": 2,
+    "similarity_score": 0.7022439241409302,
+    "model": "resnet50",
+    "frame": "14",
+    "segment_id": "14_Horned helmet_0_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__265H-2-_20230815215828529/14/segments/14_Horned helmet_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__265H-2-_20230815215828529",
+    "predicted_object": "Asgardian device",
+    "object_version": 3,
+    "similarity_score": 0.7103452682495117,
+    "model": "resnet50",
+    "frame": "14",
+    "segment_id": "14_TVA jacket_1_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__265H-2-_20230815215828529/14/segments/14_TVA jacket_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__265H-2-_20230815215828529",
+    "predicted_object": "Laevateinn",
+    "object_version": 1,
+    "similarity_score": 0.7068870067596436,
+    "model": "resnet50",
+    "frame": "48",
+    "segment_id": "48_Glowing rod_0_nopoint",
+    "segment_path": "all_frames/Scenes 061-080__265H-2-_20230815215828529/48/segments/48_Glowing rod_0_nopoint.png"
+  }
+]

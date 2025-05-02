@@ -1,0 +1,52 @@
+[
+  {
+    "video": "Scenes 021-040__235-1-_20230815192601740",
+    "predicted_object": "Time Collar",
+    "object_version": 1,
+    "similarity_score": 0.7016083002090454,
+    "model": "resnet50",
+    "frame": "25",
+    "segment_id": "25_TVA jacket_3_nopoint",
+    "segment_path": "all_frames/Scenes 021-040__235-1-_20230815192601740/25/segments/25_TVA jacket_3_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__235-1-_20230815192601740",
+    "predicted_object": "Time Collar",
+    "object_version": 1,
+    "similarity_score": 0.7017579078674316,
+    "model": "resnet50",
+    "frame": "2",
+    "segment_id": "2_TVA jacket_2_nopoint",
+    "segment_path": "all_frames/Scenes 021-040__235-1-_20230815192601740/2/segments/2_TVA jacket_2_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__235-1-_20230815192601740",
+    "predicted_object": "Loki's armor (THE AVENGERS)",
+    "object_version": 1,
+    "similarity_score": 0.7251662015914917,
+    "model": "resnet50",
+    "frame": "27",
+    "segment_id": "27_Leather coat_1_nopoint",
+    "segment_path": "all_frames/Scenes 021-040__235-1-_20230815192601740/27/segments/27_Leather coat_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__235-1-_20230815192601740",
+    "predicted_object": "Time Collar",
+    "object_version": 1,
+    "similarity_score": 0.7038029432296753,
+    "model": "resnet50",
+    "frame": "31",
+    "segment_id": "31_TVA jacket_1_nopoint",
+    "segment_path": "all_frames/Scenes 021-040__235-1-_20230815192601740/31/segments/31_TVA jacket_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__235-1-_20230815192601740",
+    "predicted_object": "Boastful Loki's hammer",
+    "object_version": 1,
+    "similarity_score": 0.7008927464485168,
+    "model": "resnet50",
+    "frame": "26",
+    "segment_id": "26_Leather coat_4_nopoint",
+    "segment_path": "all_frames/Scenes 021-040__235-1-_20230815192601740/26/segments/26_Leather coat_4_nopoint.png"
+  }
+]

@@ -69,6 +69,10 @@ def parse_args():
     parser.add_argument("--no_points", action="store_false", dest="use_points",
                       help="Don't use foreground points with bbox")
     
+    # Add recursive processing option
+    parser.add_argument("--recursive", action="store_true",
+                      help="Process nested directories recursively")
+    
     # Debug options
     parser.add_argument("--debug", action="store_true",
                       help="Enable debug-level logging")
@@ -1027,7 +1031,6 @@ def visualize_detections(image, bboxes, labels, output_path, use_points=True):
         
         # Draw rectangle
         cv2.rectangle(vis_image, (int(x1), int(y1)), (int(x2), int(y2)), color, 2)
-        logger.debug(f"Drew detection {i}: label='{label}', bbox={bbox}")
         
         # Calculate midpoint 
         midpoint_x = int((x1 + x2) / 2)
@@ -1157,15 +1160,6 @@ def main():
     output_dir = Path(args.output_dir)
     os.makedirs(output_dir, exist_ok=True)
     
-    # Extract video name from input directory or image path
-    if args.input_dir:
-        video_name = Path(args.input_dir).name
-    else:
-        # If using single image, use parent directory name
-        video_name = Path(args.image).parent.name
-    
-    logger.info(f"Processing video: {video_name}")
-    
     # Initialize SAM2
     sam2_checkpoint = "checkpoints/sam2.1_hiera_base_plus.pt"
     model_cfg = "configs/sam2.1/sam2.1_hiera_b+.yaml"
@@ -1224,6 +1218,7 @@ def main():
     else:
         # Mode 1: Use automatic mask generator (default)
         logger.info("Using SAM2 automatic mask generator")
+        segmentation_mode = "automatic_mask_generator"
         mask_generator = SAM2AutomaticMaskGenerator(
             model=sam2,
             points_per_side=64,
@@ -1242,46 +1237,269 @@ def main():
         device=device
     )
     
-    # Prepare summary
-    summary = {
-        "output_directory": str(output_dir),
-        "video_name": video_name,  # Add video name to summary
-        "processed_images": [],
-        "segmentation_mode": segmentation_mode,
-        "used_points": args.use_points if segmentation_mode != "automatic_mask_generator" else None
-    }
-    
     # Determine processing mode - single image or directory
     if args.image:
         # Single image mode
-        image_file = Path(args.image)
-        if not image_file.exists():
-            logger.error(f"Image file '{image_file}' does not exist.")
+        process_single_image(
+            args.image, 
+            output_dir, 
+            process_func, 
+            embedding_generator, 
+            args.min_area,
+            args.detections_dir if args.detections_dir else None
+        )
+            
+    else:
+        # Directory mode - handle nested structure if requested
+        input_dir = Path(args.input_dir)
+        if not input_dir.exists() or not input_dir.is_dir():
+            logger.error(f"Input directory '{input_dir}' does not exist or is not a directory.")
             return 1
-            
-        # Check for corresponding detection file if using detection mode
-        if args.detections_dir:
-            detection_json_path = os.path.join(args.detections_dir, f"{image_file.stem}.json")
-            if not os.path.exists(detection_json_path):
-                logger.error(f"No detection JSON found for {image_file} at {detection_json_path}")
-                return 1
-            
-        logger.info(f"Processing single image: {image_file}")
-        summary["mode"] = "single_image"
-        summary["input_image"] = str(image_file)
         
-        # Process the single image
+        # Prepare master summary
+        master_summary = {
+            "output_directory": str(output_dir),
+            "processed_folders": [],
+            "segmentation_mode": segmentation_mode,
+            "used_points": args.use_points if segmentation_mode != "automatic_mask_generator" else None
+        }
+        
+        if args.recursive:
+            # Find all subdirectories (non-recursively)
+            subdirs = [d for d in input_dir.iterdir() if d.is_dir()]
+            
+            if not subdirs:
+                # If no subdirectories, process the input directory itself
+                subdirs = [input_dir]
+                
+            logger.info(f"Found {len(subdirs)} directories to process")
+            
+            # Process each subdirectory
+            for subdir in tqdm(subdirs, desc="Processing directories"):
+                # Video name is the subfolder name
+                video_name = subdir.name
+                
+                # Create video-specific output directory
+                video_output_dir = output_dir / video_name
+                os.makedirs(video_output_dir, exist_ok=True)
+                
+                # Process this subdirectory
+                summary = process_directory(
+                    subdir, 
+                    video_output_dir, 
+                    process_func, 
+                    embedding_generator, 
+                    args.min_area,
+                    args.extensions,
+                    args.detections_dir if args.detections_dir else None,
+                    video_name
+                )
+                
+                if summary:
+                    # Add to master summary
+                    master_summary["processed_folders"].append({
+                        "folder": str(subdir),
+                        "video_name": video_name,
+                        "output_dir": str(video_output_dir),
+                        "images_processed": len(summary["processed_images"]),
+                        "summary_file": str(video_output_dir / "processing_summary.json")
+                    })
+        else:
+            # Process the single directory normally
+            video_name = input_dir.name
+            summary = process_directory(
+                input_dir, 
+                output_dir, 
+                process_func, 
+                embedding_generator, 
+                args.min_area,
+                args.extensions,
+                args.detections_dir if args.detections_dir else None,
+                video_name
+            )
+            
+            if summary:
+                master_summary["processed_folders"].append({
+                    "folder": str(input_dir),
+                    "video_name": video_name,
+                    "output_dir": str(output_dir),
+                    "images_processed": len(summary["processed_images"]),
+                    "summary_file": str(output_dir / "processing_summary.json")
+                })
+        
+        # Save master summary if we processed multiple directories
+        if args.recursive and len(master_summary["processed_folders"]) > 1:
+            master_summary_path = output_dir / "master_summary.json"
+            with open(master_summary_path, 'w') as f:
+                json.dump(master_summary, f, indent=2)
+            
+            logger.info(f"Processed {len(master_summary['processed_folders'])} folders")
+            logger.info(f"Master summary saved to: {master_summary_path}")
+    
+    return 0
+
+
+def process_single_image(image_path, output_dir, process_func, embedding_generator, min_area, detections_dir=None):
+    """
+    Process a single image, generate segments and embeddings.
+    
+    Args:
+        image_path: Path to the image
+        output_dir: Directory to save results
+        process_func: Function to process the image
+        embedding_generator: Embedding generator instance
+        min_area: Minimum area for segments
+        detections_dir: Directory containing detection JSONs (optional)
+        
+    Returns:
+        Summary dictionary
+    """
+    image_file = Path(image_path)
+    if not image_file.exists():
+        logger.error(f"Image file '{image_file}' does not exist.")
+        return None
+        
+    # Check for corresponding detection file if using detection mode
+    if detections_dir:
+        detection_json_path = os.path.join(detections_dir, f"{image_file.stem}.json")
+        if not os.path.exists(detection_json_path):
+            logger.error(f"No detection JSON found for {image_file} at {detection_json_path}")
+            return None
+    
+    # Video name is the parent directory name
+    video_name = image_file.parent.name
+    logger.info(f"Processing single image: {image_file}")
+    
+    summary = {
+        "mode": "single_image",
+        "input_image": str(image_file),
+        "output_directory": str(output_dir),
+        "video_name": video_name,
+        "processed_images": []
+    }
+    
+    try:
+        # Generate segments
+        segment_paths, debug_vis_path, image_dir = process_func(
+            img_path=str(image_file),
+            out_dir=output_dir,
+            min_area=min_area
+        )
+        
+        if not segment_paths or not image_dir:
+            logger.warning(f"No valid segments found for {image_file}")
+            return summary
+        
+        # Generate embeddings for all segments
+        embeddings_path = generate_embeddings_for_segments(
+            segment_paths=segment_paths,
+            embedding_generator=embedding_generator,
+            image_dir=image_dir,
+            original_image=str(image_file),
+            video_name=video_name
+        )
+        
+        # Add to summary
+        summary["processed_images"].append({
+            "image": str(image_file),
+            "image_dir": image_dir,
+            "segments_count": len(segment_paths),
+            "segments": segment_paths,
+            "segmentation_overlay": debug_vis_path,
+            "mask_visualizations_dir": os.path.join(image_dir, "mask_visualizations"),
+            "embeddings_file": embeddings_path
+        })
+        
+    except Exception as e:
+        logger.error(f"Error processing {image_file}: {str(e)}")
+    
+    # Save summary
+    summary_path = output_dir / "processing_summary.json"
+    with open(summary_path, 'w') as f:
+        json.dump(summary, f, indent=2)
+    
+    logger.info(f"Processed {len(summary['processed_images'])} images")
+    logger.info(f"Summary saved to: {summary_path}")
+    
+    return summary
+
+
+def process_directory(input_dir, output_dir, process_func, embedding_generator, min_area, extensions, detections_dir=None, video_name=None):
+    """
+    Process all images in a directory, generate segments and embeddings.
+    
+    Args:
+        input_dir: Directory containing images
+        output_dir: Directory to save results
+        process_func: Function to process each image
+        embedding_generator: Embedding generator instance
+        min_area: Minimum area for segments
+        extensions: List of file extensions to process
+        detections_dir: Directory containing detection JSONs (optional)
+        video_name: Name of the video/folder (optional)
+        
+    Returns:
+        Summary dictionary
+    """
+    input_dir = Path(input_dir)
+    if not video_name:
+        video_name = input_dir.name
+    
+    logger.info(f"Processing directory: {input_dir} (video_name: {video_name})")
+    
+    # Prepare summary for this directory
+    summary = {
+        "mode": "directory",
+        "input_directory": str(input_dir),
+        "output_directory": str(output_dir),
+        "video_name": video_name,
+        "processed_images": []
+    }
+    
+    # Find all image files
+    image_files = []
+    for ext in extensions:
+        image_files.extend(list(input_dir.glob(f"*{ext}")))
+        image_files.extend(list(input_dir.glob(f"*{ext.upper()}")))
+    
+    if not image_files:
+        logger.error(f"No images found in {input_dir} with extensions: {', '.join(extensions)}")
+        return summary
+    
+    logger.info(f"Found {len(image_files)} images to process in {input_dir}")
+    
+    # If using detection mode, filter to only images with corresponding detection files
+    if detections_dir:
+        valid_image_files = []
+        for image_file in image_files:
+            detection_json_path = os.path.join(detections_dir, f"{image_file.stem}.json")
+            if os.path.exists(detection_json_path):
+                valid_image_files.append(image_file)
+            else:
+                logger.warning(f"Skipping {image_file}: no corresponding detection JSON found")
+        
+        logger.info(f"Found {len(valid_image_files)} out of {len(image_files)} images with corresponding detection files")
+        image_files = valid_image_files
+        
+        if not image_files:
+            logger.error(f"No images with corresponding detection files found")
+            return summary
+    
+    # Process each image in the directory
+    for image_file in tqdm(image_files, desc=f"Processing {video_name} images"):
         try:
+            logger.info(f"Processing {image_file}")
+            
             # Generate segments
             segment_paths, debug_vis_path, image_dir = process_func(
                 img_path=str(image_file),
                 out_dir=output_dir,
-                min_area=args.min_area
+                min_area=min_area
             )
             
             if not segment_paths or not image_dir:
                 logger.warning(f"No valid segments found for {image_file}")
-                return 1
+                continue
             
             # Generate embeddings for all segments
             embeddings_path = generate_embeddings_for_segments(
@@ -1289,7 +1507,7 @@ def main():
                 embedding_generator=embedding_generator,
                 image_dir=image_dir,
                 original_image=str(image_file),
-                video_name=video_name  # Pass video_name parameter
+                video_name=video_name
             )
             
             # Add to summary
@@ -1303,156 +1521,27 @@ def main():
                 "embeddings_file": embeddings_path
             })
             
+            # Clean up to avoid memory leaks
+            gc.collect()
+            if torch.cuda.is_available():
+                torch.cuda.empty_cache()
+                
         except Exception as e:
             logger.error(f"Error processing {image_file}: {str(e)}")
-            return 1
-            
-    else:
-        # Directory mode
-        input_dir = Path(args.input_dir)
-        if not input_dir.exists() or not input_dir.is_dir():
-            logger.error(f"Input directory '{input_dir}' does not exist or is not a directory.")
-            return 1
-        
-        summary["mode"] = "directory"
-        summary["input_directory"] = str(input_dir)
-        
-        # Find all image files
-        image_files = []
-        for ext in args.extensions:
-            image_files.extend(list(input_dir.glob(f"*{ext}")))
-            image_files.extend(list(input_dir.glob(f"*{ext.upper()}")))
-        
-        if not image_files:
-            logger.error(f"No images found in {input_dir} with extensions: {', '.join(args.extensions)}")
-            return 1
-        
-        logger.info(f"Found {len(image_files)} images to process")
-        
-        # If using detection mode, filter to only images with corresponding detection files
-        if args.detections_dir:
-            valid_image_files = []
-            for image_file in image_files:
-                detection_json_path = os.path.join(args.detections_dir, f"{image_file.stem}.json")
-                if os.path.exists(detection_json_path):
-                    valid_image_files.append(image_file)
-                else:
-                    logger.warning(f"Skipping {image_file}: no corresponding detection JSON found")
-            
-            logger.info(f"Found {len(valid_image_files)} out of {len(image_files)} images with corresponding detection files")
-            image_files = valid_image_files
-            
-            if not image_files:
-                logger.error(f"No images with corresponding detection files found")
-                return 1
-        
-        # Process each image in the directory
-        for image_file in tqdm(image_files, desc="Processing images"):
-            try:
-                logger.info(f"Processing {image_file}")
-                
-                # Generate segments
-                segment_paths, debug_vis_path, image_dir = process_func(
-                    img_path=str(image_file),
-                    out_dir=output_dir,
-                    min_area=args.min_area
-                )
-                
-                if not segment_paths or not image_dir:
-                    logger.warning(f"No valid segments found for {image_file}")
-                    continue
-                
-                # Generate embeddings for all segments
-                embeddings_path = generate_embeddings_for_segments(
-                    segment_paths=segment_paths,
-                    embedding_generator=embedding_generator,
-                    image_dir=image_dir,
-                    original_image=str(image_file),
-                    video_name=video_name  # Pass video_name parameter
-                )
-                
-                # Add to summary
-                summary["processed_images"].append({
-                    "image": str(image_file),
-                    "image_dir": image_dir,
-                    "segments_count": len(segment_paths),
-                    "segments": segment_paths,
-                    "segmentation_overlay": debug_vis_path,
-                    "mask_visualizations_dir": os.path.join(image_dir, "mask_visualizations"),
-                    "embeddings_file": embeddings_path
-                })
-                
-                # Clean up to avoid memory leaks
-                gc.collect()
-                if device.type == "cuda":
-                    torch.cuda.empty_cache()
-                    
-            except Exception as e:
-                logger.error(f"Error processing {image_file}: {str(e)}")
     
-    # Save summary
+    # Save summary for this directory
     summary_path = output_dir / "processing_summary.json"
     with open(summary_path, 'w') as f:
         json.dump(summary, f, indent=2)
     
-    logger.info(f"Processed {len(summary['processed_images'])} images")
-    logger.info(f"Summary saved to: {summary_path}")
+    logger.info(f"Processed {len(summary['processed_images'])} images in {input_dir}")
+    logger.info(f"Directory summary saved to: {summary_path}")
     
-    return 0
+    return summary
 
 if __name__ == "__main__":
     # Example commands:
     # Process directory: python segment_gemini.py --input_dir /path/to/directory --output_dir results
     # Process single image: python segment_gemini.py --image /path/to/image.jpg --output_dir results
+    # Process nested directories: python segment_gemini.py --input_dir /path/to/parent_directory --recursive --output_dir results
     sys.exit(main())
-
-
-
-    
-# def show_mask(mask, ax, random_color=False, borders = True):
-#     if random_color:
-#         color = np.concatenate([np.random.random(3), np.array([0.6])], axis=0)
-#     else:
-#         color = np.array([30/255, 144/255, 255/255, 0.6])
-#     h, w = mask.shape[-2:]
-#     mask = mask.astype(np.uint8)
-#     mask_image =  mask.reshape(h, w, 1) * color.reshape(1, 1, -1)
-#     if borders:
-#         import cv2
-#         contours, _ = cv2.findContours(mask,cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE) 
-#         # Try to smooth contours
-#         contours = [cv2.approxPolyDP(contour, epsilon=0.01, closed=True) for contour in contours]
-#         mask_image = cv2.drawContours(mask_image, contours, -1, (1, 1, 1, 0.5), thickness=2) 
-#     ax.imshow(mask_image)
-
-# def show_points(coords, labels, ax, marker_size=375):
-#     pos_points = coords[labels==1]
-#     neg_points = coords[labels==0]
-#     ax.scatter(pos_points[:, 0], pos_points[:, 1], color='green', marker='*', s=marker_size, edgecolor='white', linewidth=1.25)
-#     ax.scatter(neg_points[:, 0], neg_points[:, 1], color='red', marker='*', s=marker_size, edgecolor='white', linewidth=1.25)   
-
-# def show_box(box, ax):
-#     x0, y0 = box[0], box[1]
-#     w, h = box[2] - box[0], box[3] - box[1]
-#     ax.add_patch(plt.Rectangle((x0, y0), w, h, edgecolor='green', facecolor=(0, 0, 0, 0), lw=2))    
-
-# def show_masks(image, masks, scores, point_coords=None, box_coords=None, input_labels=None, borders=True):
-#     for i, (mask, score) in enumerate(zip(masks, scores)):
-#         plt.figure(figsize=(10, 10))
-#         plt.imshow(image)
-#         show_mask(mask, plt.gca(), borders=borders)
-#         if point_coords is not None:
-#             assert input_labels is not None
-#             show_points(point_coords, input_labels, plt.gca())
-#         if box_coords is not None:
-#             # boxes
-#             show_box(box_coords, plt.gca())
-#         if len(scores) > 1:
-#             plt.title(f"Mask {i+1}, Score: {score:.3f}", fontsize=18)
-#         plt.axis('off')
-#         plt.show()
-
-# show_masks(image, masks, scores, box_coords=input_box)
-
-
-# python e2e_pipeline_v2/experiments/segment_gemini.py --image path/to/image.jpg --output_dir results --detections_dir path/to/detections --use_points

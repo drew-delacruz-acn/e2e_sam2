@@ -165,16 +165,14 @@ def search_similar_segments_in_neo4j(embeddings_dir, model_type="resnet50"):
     embeddings = embedding_result["images"]
     print(f"Loaded embeddings for video '{video_name}' with {len(embeddings)} images")
     
-    # Prepare results container
-    all_results = {
-        "video_name": video_name,
-        "images": {}
-    }
+    # Prepare results as a flat array
+    results_array = []
     
     # Query for each segment's embedding
     with driver.session(database=NEO4J_DB) as session:
         for image_name, segments in embeddings.items():
-            image_results = {}
+            # The image_name (folder name) is used as the frame number
+            frame = image_name
             
             for segment_id, data in segments.items():
                 embedding = data["embedding"]
@@ -201,32 +199,33 @@ def search_similar_segments_in_neo4j(embeddings_dir, model_type="resnet50"):
                 )
                 
                 # Process results
-                segment_results = []
                 for record in results:
-                    segment_results.append({
-                        'predicted_object': record['result'],
-                        'object_version': record['version'], 
-                        'similarity_score': record['similarity']
-                    })
+                    # Create a flat result item for each match
+                    result_item = {
+                        "video_name": video_name,
+                        "predicted_object": record['result'],
+                        "object_version": record['version'],
+                        "similarity_score": record['similarity'],
+                        "model": model_type,
+                        "frame": frame,
+                        "segment_id": segment_id,
+                        "segment_path": segment_path
+                    }
+                    
+                    # Add to results array
+                    results_array.append(result_item)
                 
-                # Add to results
-                image_results[segment_id] = {
-                    'segment_path': segment_path,
-                    'matches': segment_results
-                }
-                
-                print(f"Processed segment {segment_id} from image {image_name}")
-            
-            all_results["images"][image_name] = image_results
+                print(f"Processed segment {segment_id} from frame {frame}")
     
     # Save all results to a JSON file
-    output_file = f"masked_segment_search_results_{model_type}.json"
+    output_file = f"{video_name}_search_results_{model_type}.json"
     with open(output_file, 'w') as f:
-        json.dump(all_results, f, indent=2)
+        json.dump(results_array, f, indent=2)
     
     print(f"Results saved to {output_file}")
+    print(f"Found {len(results_array)} matches across {len(embeddings)} frames")
     
-    return all_results
+    return results_array
 
 results = search_similar_segments_in_neo4j("white_vidname_padded_image_results", "resnet50")
 # print("Results:", results)

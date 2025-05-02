@@ -115,3 +115,91 @@ driver = GraphDatabase.driver(os.getenv("NEO4J_URI"), auth=(os.getenv("NEO4J_USE
 #             'similarity_score': record['similarity']
 #         })
 #     # save the results to a json
+
+def search_similar_segments_in_neo4j(embeddings_dir, model_type="resnet50"):
+    """
+    Load embeddings and search for similar segments in Neo4j.
+    
+    Args:
+        embeddings_dir: Directory containing segment embeddings
+        model_type: Type of embeddings to use ('resnet50', 'vit', or 'clip')
+    """
+    from neo4j import GraphDatabase
+    from dotenv import load_dotenv
+    import os
+    import json
+    
+    # Load environment variables
+    load_dotenv()
+    NEO4J_DB = 'ipid'
+    
+    # Connect to Neo4j
+    driver = GraphDatabase.driver(
+        os.getenv("NEO4J_URI"), 
+        auth=(os.getenv("NEO4J_USERNAME"), os.getenv("NEO4J_PASSWORD"))
+    )
+    
+    # Load embeddings
+    print(f"Loading {model_type} embeddings from {embeddings_dir}...")
+    embeddings = load_embeddings(embeddings_dir, model_type)
+    print(f"Loaded embeddings for {len(embeddings)} images")
+    
+    # Prepare results container
+    all_results = {}
+    
+    # Query for each segment's embedding
+    with driver.session(database=NEO4J_DB) as session:
+        for image_name, segments in embeddings.items():
+            image_results = {}
+            
+            for segment_id, data in segments.items():
+                embedding = data["embedding"]
+                segment_path = data["path"]
+                
+                # Use the Neo4j vector search query
+                query = """
+                CALL db.index.vector.queryNodes("resnet_index", 14752, $embedding)
+                YIELD node, score
+                MATCH (origin)-[:custom_hasResnetEmbedding]->(node)
+                WHERE NOT origin.value CONTAINS 'Scenes' AND origin.custom_hasPadding = true
+                WITH origin.value AS result, origin.omc_hasVersion as version, score AS similarity
+                WHERE similarity > $threshold
+                ORDER BY similarity DESC
+                RETURN DISTINCT result, version, similarity
+                LIMIT $top_k
+                """
+                
+                results = session.run(
+                    query, 
+                    embedding=embedding, 
+                    top_k=1, 
+                    threshold=0.7
+                )
+                
+                # Process results
+                segment_results = []
+                for record in results:
+                    segment_results.append({
+                        'predicted_object': record['result'],
+                        'object_version': record['version'], 
+                        'similarity_score': record['similarity']
+                    })
+                
+                # Add to results
+                image_results[segment_id] = {
+                    'segment_path': segment_path,
+                    'matches': segment_results
+                }
+                
+                print(f"Processed segment {segment_id} from image {image_name}")
+            
+            all_results[image_name] = image_results
+    
+    # Save all results to a JSON file
+    output_file = f"segment_search_results_{model_type}.json"
+    with open(output_file, 'w') as f:
+        json.dump(all_results, f, indent=2)
+    
+    print(f"Results saved to {output_file}")
+    
+    return all_results

@@ -1,0 +1,1664 @@
+{
+  "output_directory": "white_vidname_padded_image_results",
+  "video_name": "Scenes 001-020__101B-1-_20230726152900590",
+  "processed_images": [
+    {
+      "image": "/home/ubuntu/code/drew/test_data/frames/Scenes 001-020__101B-1-_20230726152900590/19.jpg",
+      "image_dir": "white_vidname_padded_image_results/19",
+      "segments_count": 5,
+      "segments": [
+        "white_vidname_padded_image_results/19/segments/19_dark blue wall panel_1_nopoint.png",
+        "white_vidname_padded_image_results/19/segments/19_white fluffy object_5_nopoint.png",
+        "white_vidname_padded_image_results/19/segments/19_reflected weapon_3_nopoint.png",
+        "white_vidname_padded_image_results/19/segments/19_large ornate mirror_0_nopoint.png",
+        "white_vidname_padded_image_results/19/segments/19_shoulder armor_2_nopoint.png"
+      ],
+      "segmentation_overlay": "white_vidname_padded_image_results/19/19_segmentation_overlay.png",
+      "mask_visualizations_dir": "white_vidname_padded_image_results/19/mask_visualizations",
+      "embeddings_file": "white_vidname_padded_image_results/19/embeddings/19_embeddings.json"
+    },
+    {
+      "image": "/home/ubuntu/code/drew/test_data/frames/Scenes 001-020__101B-1-_20230726152900590/46.jpg",
+      "image_dir": "white_vidname_padded_image_results/46",
+      "segments_count": 5,
+      "segments": [
+        "white_vidname_padded_image_results/46/segments/46_ornate mirror_0_nopoint.png",
+        "white_vidname_padded_image_results/46/segments/46_fluffy object_4_nopoint.png",
+        "white_vidname_padded_image_results/46/segments/46_black jacket_1_nopoint.png",
+        "white_vidname_padded_image_results/46/segments/46_wall panels_3_nopoint.png",
+        "white_vidname_padded_image_results/46/segments/46_shoulder armor_2_nopoint.png"
+      ],
+      "segmentation_overlay": "white_vidname_padded_image_results/46/46_segmentation_overlay.png",
+      "mask_visualizations_dir": "white_vidname_padded_image_results/46/mask_visualizations",
+      "embeddings_file": "white_vidname_padded_image_results/46/embeddings/46_embeddings.json"
+    },
+    {
+      "image": "/home/ubuntu/code/drew/test_data/frames/Scenes 001-020__101B-1-_20230726152900590/63.jpg",
+      "image_dir": "white_vidname_padded_image_results/63",
+      "segments_count": 3,
+      "segments": [
+        "white_vidname_padded_image_results/63/segments/63_wall paneling_3_nopoint.png",
+        "white_vidname_padded_image_results/63/segments/63_white decorations_1_nopoint.png",
+        "white_vidname_padded_image_results/63/segments/63_jacket_2_nopoint.png"
+      ],
+      "segmentation_overlay": "white_vidname_padded_image_results/63/63_segmentation_overlay.png",
+      "mask_visualizations_dir": "white_vidname_padded_image_results/63/mask_visualizations",
+      "embeddings_file": "white_vidname_padded_image_results/63/embeddings/63_embeddings.json"
+    },
+    {
+      "image": "/home/ubuntu/code/drew/test_data/frames/Scenes 001-020__101B-1-_20230726152900590/1.jpg",
+      "image_dir": "white_vidname_padded_image_results/1",
+      "segments_count": 8,
+      "segments": [
+        "white_vidname_padded_image_results/1/segments/1_digital display_7_nopoint.png",
+        "white_vidname_padded_image_results/1/segments/1_stuffed animal_4_nopoint.png",
+        "white_vidname_padded_image_results/1/segments/1_ornate mirror_0_nopoint.png",
+        "white_vidname_padded_image_results/1/segments/1_blue light_6_nopoint.png",
+        "white_vidname_padded_image_results/1/segments/1_vest_1_nopoint.png",
+        "white_vidname_padded_image_results/1/segments/1_stuffed animal_5_nopoint.png",
+        "white_vidname_padded_image_results/1/segments/1_shoulder armor_2_nopoint.png",
+        "white_vidname_padded_image_results/1/segments/1_dagger held by person in mirror_3_nopoint.png"
+      ],
+      "segmentation_overlay": "white_vidname_padded_image_results/1/1_segmentation_overlay.png",
+      "mask_visualizations_dir": "white_vidname_padded_image_results/1/mask_visualizations",
+      "embeddings_file": "white_vidname_padded_image_results/1/embeddings/1_embeddings.json"
+    },
+    {
+      "image": "/home/ubuntu/code/drew/test_data/frames/Scenes 001-020__101B-1-_20230726152900590/83.jpg",
+      "image_dir": "white_vidname_padded_image_results/83",
+      "segments_count": 7,
+      "segments": [
+        "white_vidname_padded_image_results/83/segments/83_dark wall panels_6_nopoint.png",
+        "white_vidname_padded_image_results/83/segments/83_dark wall panels_5_nopoint.png",
+        "white_vidname_padded_image_results/83/segments/83_armor in reflection_1_nopoint.png",
+        "white_vidname_padded_image_results/83/segments/83_ornate mirror_0_nopoint.png",
+        "white_vidname_padded_image_results/83/segments/83_shoulder armor_4_nopoint.png",
+        "white_vidname_padded_image_results/83/segments/83_black vest_3_nopoint.png",
+        "white_vidname_padded_image_results/83/segments/83_dagger in reflection_2_nopoint.png"
+      ],
+      "segmentation_overlay": "white_vidname_padded_image_results/83/83_segmentation_overlay.png",
+      "mask_visualizations_dir": "white_vidname_padded_image_results/83/mask_visualizations",
+      "embeddings_file": "white_vidname_padded_image_results/83/embeddings/83_embeddings.json"
+    },
+    {
+      "image": "/home/ubuntu/code/drew/test_data/frames/Scenes 001-020__101B-1-_20230726152900590/52.jpg",
+      "image_dir": "white_vidname_padded_image_results/52",
+      "segments_count": 6,
+      "segments": [
+        "white_vidname_padded_image_results/52/segments/52_wall panel_5_nopoint.png",
+        "white_vidname_padded_image_results/52/segments/52_furry object_2_nopoint.png",
+        "white_vidname_padded_image_results/52/segments/52_desk surface_6_nopoint.png",
+        "white_vidname_padded_image_results/52/segments/52_black vest_3_nopoint.png",
+        "white_vidname_padded_image_results/52/segments/52_shoulder armor_4_nopoint.png",
+        "white_vidname_padded_image_results/52/segments/52_ornate round mirror_0_nopoint.png"
+      ],
+      "segmentation_overlay": "white_vidname_padded_image_results/52/52_segmentation_overlay.png",
+      "mask_visualizations_dir": "white_vidname_padded_image_results/52/mask_visualizations",
+      "embeddings_file": "white_vidname_padded_image_results/52/embeddings/52_embeddings.json"
+    },
+    {
+      "image": "/home/ubuntu/code/drew/test_data/frames/Scenes 001-020__101B-1-_20230726152900590/84.jpg",
+      "image_dir": "white_vidname_padded_image_results/84",
+      "segments_count": 6,
+      "segments": [
+        "white_vidname_padded_image_results/84/segments/84_dark wall panels_3_nopoint.png",
+        "white_vidname_padded_image_results/84/segments/84_black clothing in reflection_5_nopoint.png",
+        "white_vidname_padded_image_results/84/segments/84_fluffy white object_7_nopoint.png",
+        "white_vidname_padded_image_results/84/segments/84_shoulder armor_2_nopoint.png",
+        "white_vidname_padded_image_results/84/segments/84_ornate gold mirror_0_nopoint.png",
+        "white_vidname_padded_image_results/84/segments/84_black clothing_4_nopoint.png"
+      ],
+      "segmentation_overlay": "white_vidname_padded_image_results/84/84_segmentation_overlay.png",
+      "mask_visualizations_dir": "white_vidname_padded_image_results/84/mask_visualizations",
+      "embeddings_file": "white_vidname_padded_image_results/84/embeddings/84_embeddings.json"
+    },
+    {
+      "image": "/home/ubuntu/code/drew/test_data/frames/Scenes 001-020__101B-1-_20230726152900590/45.jpg",
+      "image_dir": "white_vidname_padded_image_results/45",
+      "segments_count": 6,
+      "segments": [
+        "white_vidname_padded_image_results/45/segments/45_Dark Wood Wall Paneling_2_nopoint.png",
+        "white_vidname_padded_image_results/45/segments/45_Black Leather Jacket_4_nopoint.png",
+        "white_vidname_padded_image_results/45/segments/45_Light Wood Wall Paneling_0_nopoint.png",
+        "white_vidname_padded_image_results/45/segments/45_White Fuzzy Object_3_nopoint.png",
+        "white_vidname_padded_image_results/45/segments/45_Ornate Mirror_1_nopoint.png",
+        "white_vidname_padded_image_results/45/segments/45_Right Shoulder Armor_5_nopoint.png"
+      ],
+      "segmentation_overlay": "white_vidname_padded_image_results/45/45_segmentation_overlay.png",
+      "mask_visualizations_dir": "white_vidname_padded_image_results/45/mask_visualizations",
+      "embeddings_file": "white_vidname_padded_image_results/45/embeddings/45_embeddings.json"
+    },
+    {
+      "image": "/home/ubuntu/code/drew/test_data/frames/Scenes 001-020__101B-1-_20230726152900590/60.jpg",
+      "image_dir": "white_vidname_padded_image_results/60",
+      "segments_count": 7,
+      "segments": [
+        "white_vidname_padded_image_results/60/segments/60_wall panels_2_nopoint.png",
+        "white_vidname_padded_image_results/60/segments/60_wall panels_1_nopoint.png",
+        "white_vidname_padded_image_results/60/segments/60_dark surface_4_nopoint.png",
+        "white_vidname_padded_image_results/60/segments/60_dagger_5_nopoint.png",
+        "white_vidname_padded_image_results/60/segments/60_fluffy object_6_nopoint.png",
+        "white_vidname_padded_image_results/60/segments/60_ornate mirror_0_nopoint.png",
+        "white_vidname_padded_image_results/60/segments/60_armor_3_nopoint.png"
+      ],
+      "segmentation_overlay": "white_vidname_padded_image_results/60/60_segmentation_overlay.png",
+      "mask_visualizations_dir": "white_vidname_padded_image_results/60/mask_visualizations",
+      "embeddings_file": "white_vidname_padded_image_results/60/embeddings/60_embeddings.json"
+    },
+    {
+      "image": "/home/ubuntu/code/drew/test_data/frames/Scenes 001-020__101B-1-_20230726152900590/25.jpg",
+      "image_dir": "white_vidname_padded_image_results/25",
+      "segments_count": 3,
+      "segments": [
+        "white_vidname_padded_image_results/25/segments/25_wall_0_nopoint.png",
+        "white_vidname_padded_image_results/25/segments/25_dark clothing with gold accents_2_nopoint.png",
+        "white_vidname_padded_image_results/25/segments/25_ornate circular mirror_1_nopoint.png"
+      ],
+      "segmentation_overlay": "white_vidname_padded_image_results/25/25_segmentation_overlay.png",
+      "mask_visualizations_dir": "white_vidname_padded_image_results/25/mask_visualizations",
+      "embeddings_file": "white_vidname_padded_image_results/25/embeddings/25_embeddings.json"
+    },
+    {
+      "image": "/home/ubuntu/code/drew/test_data/frames/Scenes 001-020__101B-1-_20230726152900590/96.jpg",
+      "image_dir": "white_vidname_padded_image_results/96",
+      "segments_count": 6,
+      "segments": [
+        "white_vidname_padded_image_results/96/segments/96_wall paneling_3_nopoint.png",
+        "white_vidname_padded_image_results/96/segments/96_shoulder armor_4_nopoint.png",
+        "white_vidname_padded_image_results/96/segments/96_lamp base_1_nopoint.png",
+        "white_vidname_padded_image_results/96/segments/96_held object in mirror_5_nopoint.png",
+        "white_vidname_padded_image_results/96/segments/96_wall paneling_2_nopoint.png",
+        "white_vidname_padded_image_results/96/segments/96_large round mirror_0_nopoint.png"
+      ],
+      "segmentation_overlay": "white_vidname_padded_image_results/96/96_segmentation_overlay.png",
+      "mask_visualizations_dir": "white_vidname_padded_image_results/96/mask_visualizations",
+      "embeddings_file": "white_vidname_padded_image_results/96/embeddings/96_embeddings.json"
+    },
+    {
+      "image": "/home/ubuntu/code/drew/test_data/frames/Scenes 001-020__101B-1-_20230726152900590/75.jpg",
+      "image_dir": "white_vidname_padded_image_results/75",
+      "segments_count": 4,
+      "segments": [
+        "white_vidname_padded_image_results/75/segments/75_ornate mirror_0_nopoint.png",
+        "white_vidname_padded_image_results/75/segments/75_dark blue object_2_nopoint.png",
+        "white_vidname_padded_image_results/75/segments/75_black vest_3_nopoint.png",
+        "white_vidname_padded_image_results/75/segments/75_wall paneling_1_nopoint.png"
+      ],
+      "segmentation_overlay": "white_vidname_padded_image_results/75/75_segmentation_overlay.png",
+      "mask_visualizations_dir": "white_vidname_padded_image_results/75/mask_visualizations",
+      "embeddings_file": "white_vidname_padded_image_results/75/embeddings/75_embeddings.json"
+    },
+    {
+      "image": "/home/ubuntu/code/drew/test_data/frames/Scenes 001-020__101B-1-_20230726152900590/90.jpg",
+      "image_dir": "white_vidname_padded_image_results/90",
+      "segments_count": 8,
+      "segments": [
+        "white_vidname_padded_image_results/90/segments/90_lamp shade_3_nopoint.png",
+        "white_vidname_padded_image_results/90/segments/90_wall paneling_4_nopoint.png",
+        "white_vidname_padded_image_results/90/segments/90_lamp shade_1_nopoint.png",
+        "white_vidname_padded_image_results/90/segments/90_shoulder armor_6_nopoint.png",
+        "white_vidname_padded_image_results/90/segments/90_ornate mirror_0_nopoint.png",
+        "white_vidname_padded_image_results/90/segments/90_clothing_5_nopoint.png",
+        "white_vidname_padded_image_results/90/segments/90_lamp base_2_nopoint.png",
+        "white_vidname_padded_image_results/90/segments/90_dagger_7_nopoint.png"
+      ],
+      "segmentation_overlay": "white_vidname_padded_image_results/90/90_segmentation_overlay.png",
+      "mask_visualizations_dir": "white_vidname_padded_image_results/90/mask_visualizations",
+      "embeddings_file": "white_vidname_padded_image_results/90/embeddings/90_embeddings.json"
+    },
+    {
+      "image": "/home/ubuntu/code/drew/test_data/frames/Scenes 001-020__101B-1-_20230726152900590/98.jpg",
+      "image_dir": "white_vidname_padded_image_results/98",
+      "segments_count": 2,
+      "segments": [
+        "white_vidname_padded_image_results/98/segments/98_Clothing_1_nopoint.png",
+        "white_vidname_padded_image_results/98/segments/98_Mirror_0_nopoint.png"
+      ],
+      "segmentation_overlay": "white_vidname_padded_image_results/98/98_segmentation_overlay.png",
+      "mask_visualizations_dir": "white_vidname_padded_image_results/98/mask_visualizations",
+      "embeddings_file": "white_vidname_padded_image_results/98/embeddings/98_embeddings.json"
+    },
+    {
+      "image": "/home/ubuntu/code/drew/test_data/frames/Scenes 001-020__101B-1-_20230726152900590/101.jpg",
+      "image_dir": "white_vidname_padded_image_results/101",
+      "segments_count": 2,
+      "segments": [
+        "white_vidname_padded_image_results/101/segments/101_Decorative Mirror_0_nopoint.png",
+        "white_vidname_padded_image_results/101/segments/101_Clothing_1_nopoint.png"
+      ],
+      "segmentation_overlay": "white_vidname_padded_image_results/101/101_segmentation_overlay.png",
+      "mask_visualizations_dir": "white_vidname_padded_image_results/101/mask_visualizations",
+      "embeddings_file": "white_vidname_padded_image_results/101/embeddings/101_embeddings.json"
+    },
+    {
+      "image": "/home/ubuntu/code/drew/test_data/frames/Scenes 001-020__101B-1-_20230726152900590/56.jpg",
+      "image_dir": "white_vidname_padded_image_results/56",
+      "segments_count": 7,
+      "segments": [
+        "white_vidname_padded_image_results/56/segments/56_wall paneling_7_nopoint.png",
+        "white_vidname_padded_image_results/56/segments/56_wall paneling_6_nopoint.png",
+        "white_vidname_padded_image_results/56/segments/56_fuzzy object_5_nopoint.png",
+        "white_vidname_padded_image_results/56/segments/56_dagger reflected in mirror_1_nopoint.png",
+        "white_vidname_padded_image_results/56/segments/56_ornate gold mirror_0_nopoint.png",
+        "white_vidname_padded_image_results/56/segments/56_shoulder armor_3_nopoint.png",
+        "white_vidname_padded_image_results/56/segments/56_black armor_4_nopoint.png"
+      ],
+      "segmentation_overlay": "white_vidname_padded_image_results/56/56_segmentation_overlay.png",
+      "mask_visualizations_dir": "white_vidname_padded_image_results/56/mask_visualizations",
+      "embeddings_file": "white_vidname_padded_image_results/56/embeddings/56_embeddings.json"
+    },
+    {
+      "image": "/home/ubuntu/code/drew/test_data/frames/Scenes 001-020__101B-1-_20230726152900590/29.jpg",
+      "image_dir": "white_vidname_padded_image_results/29",
+      "segments_count": 3,
+      "segments": [
+        "white_vidname_padded_image_results/29/segments/29_wall_1_nopoint.png",
+        "white_vidname_padded_image_results/29/segments/29_clothing_2_nopoint.png",
+        "white_vidname_padded_image_results/29/segments/29_circular metal object_0_nopoint.png"
+      ],
+      "segmentation_overlay": "white_vidname_padded_image_results/29/29_segmentation_overlay.png",
+      "mask_visualizations_dir": "white_vidname_padded_image_results/29/mask_visualizations",
+      "embeddings_file": "white_vidname_padded_image_results/29/embeddings/29_embeddings.json"
+    },
+    {
+      "image": "/home/ubuntu/code/drew/test_data/frames/Scenes 001-020__101B-1-_20230726152900590/62.jpg",
+      "image_dir": "white_vidname_padded_image_results/62",
+      "segments_count": 3,
+      "segments": [
+        "white_vidname_padded_image_results/62/segments/62_Stuffed owl_1_nopoint.png",
+        "white_vidname_padded_image_results/62/segments/62_Wall paneling_2_nopoint.png",
+        "white_vidname_padded_image_results/62/segments/62_Large decorative mirror_0_nopoint.png"
+      ],
+      "segmentation_overlay": "white_vidname_padded_image_results/62/62_segmentation_overlay.png",
+      "mask_visualizations_dir": "white_vidname_padded_image_results/62/mask_visualizations",
+      "embeddings_file": "white_vidname_padded_image_results/62/embeddings/62_embeddings.json"
+    },
+    {
+      "image": "/home/ubuntu/code/drew/test_data/frames/Scenes 001-020__101B-1-_20230726152900590/70.jpg",
+      "image_dir": "white_vidname_padded_image_results/70",
+      "segments_count": 1,
+      "segments": [
+        "white_vidname_padded_image_results/70/segments/70_Blue and gold circular object_0_nopoint.png"
+      ],
+      "segmentation_overlay": "white_vidname_padded_image_results/70/70_segmentation_overlay.png",
+      "mask_visualizations_dir": "white_vidname_padded_image_results/70/mask_visualizations",
+      "embeddings_file": "white_vidname_padded_image_results/70/embeddings/70_embeddings.json"
+    },
+    {
+      "image": "/home/ubuntu/code/drew/test_data/frames/Scenes 001-020__101B-1-_20230726152900590/74.jpg",
+      "image_dir": "white_vidname_padded_image_results/74",
+      "segments_count": 1,
+      "segments": [
+        "white_vidname_padded_image_results/74/segments/74_blue circular shield_0_nopoint.png"
+      ],
+      "segmentation_overlay": "white_vidname_padded_image_results/74/74_segmentation_overlay.png",
+      "mask_visualizations_dir": "white_vidname_padded_image_results/74/mask_visualizations",
+      "embeddings_file": "white_vidname_padded_image_results/74/embeddings/74_embeddings.json"
+    },
+    {
+      "image": "/home/ubuntu/code/drew/test_data/frames/Scenes 001-020__101B-1-_20230726152900590/100.jpg",
+      "image_dir": "white_vidname_padded_image_results/100",
+      "segments_count": 2,
+      "segments": [
+        "white_vidname_padded_image_results/100/segments/100_Circular mirror_0_nopoint.png",
+        "white_vidname_padded_image_results/100/segments/100_Clothing_1_nopoint.png"
+      ],
+      "segmentation_overlay": "white_vidname_padded_image_results/100/100_segmentation_overlay.png",
+      "mask_visualizations_dir": "white_vidname_padded_image_results/100/mask_visualizations",
+      "embeddings_file": "white_vidname_padded_image_results/100/embeddings/100_embeddings.json"
+    },
+    {
+      "image": "/home/ubuntu/code/drew/test_data/frames/Scenes 001-020__101B-1-_20230726152900590/72.jpg",
+      "image_dir": "white_vidname_padded_image_results/72",
+      "segments_count": 1,
+      "segments": [
+        "white_vidname_padded_image_results/72/segments/72_Blue and brown circular object_0_nopoint.png"
+      ],
+      "segmentation_overlay": "white_vidname_padded_image_results/72/72_segmentation_overlay.png",
+      "mask_visualizations_dir": "white_vidname_padded_image_results/72/mask_visualizations",
+      "embeddings_file": "white_vidname_padded_image_results/72/embeddings/72_embeddings.json"
+    },
+    {
+      "image": "/home/ubuntu/code/drew/test_data/frames/Scenes 001-020__101B-1-_20230726152900590/97.jpg",
+      "image_dir": "white_vidname_padded_image_results/97",
+      "segments_count": 6,
+      "segments": [
+        "white_vidname_padded_image_results/97/segments/97_vest/armor_3_nopoint.png",
+        "white_vidname_padded_image_results/97/segments/97_dark surface_1_nopoint.png",
+        "white_vidname_padded_image_results/97/segments/97_wall paneling_2_nopoint.png",
+        "white_vidname_padded_image_results/97/segments/97_shoulder piece_4_nopoint.png",
+        "white_vidname_padded_image_results/97/segments/97_metallic object (in mirror)_5_nopoint.png",
+        "white_vidname_padded_image_results/97/segments/97_ornate mirror_0_nopoint.png"
+      ],
+      "segmentation_overlay": "white_vidname_padded_image_results/97/97_segmentation_overlay.png",
+      "mask_visualizations_dir": "white_vidname_padded_image_results/97/mask_visualizations",
+      "embeddings_file": null
+    },
+    {
+      "image": "/home/ubuntu/code/drew/test_data/frames/Scenes 001-020__101B-1-_20230726152900590/4.jpg",
+      "image_dir": "white_vidname_padded_image_results/4",
+      "segments_count": 2,
+      "segments": [
+        "white_vidname_padded_image_results/4/segments/4_Clapperboard_1_nopoint.png",
+        "white_vidname_padded_image_results/4/segments/4_Decorative Wheel_0_nopoint.png"
+      ],
+      "segmentation_overlay": "white_vidname_padded_image_results/4/4_segmentation_overlay.png",
+      "mask_visualizations_dir": "white_vidname_padded_image_results/4/mask_visualizations",
+      "embeddings_file": "white_vidname_padded_image_results/4/embeddings/4_embeddings.json"
+    },
+    {
+      "image": "/home/ubuntu/code/drew/test_data/frames/Scenes 001-020__101B-1-_20230726152900590/2.jpg",
+      "image_dir": "white_vidname_padded_image_results/2",
+      "segments_count": 5,
+      "segments": [
+        "white_vidname_padded_image_results/2/segments/2_text overlay_12_nopoint.png",
+        "white_vidname_padded_image_results/2/segments/2_text overlay_7_nopoint.png",
+        "white_vidname_padded_image_results/2/segments/2_text overlay_10_nopoint.png",
+        "white_vidname_padded_image_results/2/segments/2_ornate wall mirror_0_nopoint.png",
+        "white_vidname_padded_image_results/2/segments/2_rectangular screen_3_nopoint.png"
+      ],
+      "segmentation_overlay": "white_vidname_padded_image_results/2/2_segmentation_overlay.png",
+      "mask_visualizations_dir": "white_vidname_padded_image_results/2/mask_visualizations",
+      "embeddings_file": "white_vidname_padded_image_results/2/embeddings/2_embeddings.json"
+    },
+    {
+      "image": "/home/ubuntu/code/drew/test_data/frames/Scenes 001-020__101B-1-_20230726152900590/53.jpg",
+      "image_dir": "white_vidname_padded_image_results/53",
+      "segments_count": 5,
+      "segments": [
+        "white_vidname_padded_image_results/53/segments/53_blue-lit object in mirror reflection_4_nopoint.png",
+        "white_vidname_padded_image_results/53/segments/53_fluffy object_1_nopoint.png",
+        "white_vidname_padded_image_results/53/segments/53_dark panel_2_nopoint.png",
+        "white_vidname_padded_image_results/53/segments/53_shoulder armor_3_nopoint.png",
+        "white_vidname_padded_image_results/53/segments/53_ornate gold mirror_0_nopoint.png"
+      ],
+      "segmentation_overlay": "white_vidname_padded_image_results/53/53_segmentation_overlay.png",
+      "mask_visualizations_dir": "white_vidname_padded_image_results/53/mask_visualizations",
+      "embeddings_file": "white_vidname_padded_image_results/53/embeddings/53_embeddings.json"
+    },
+    {
+      "image": "/home/ubuntu/code/drew/test_data/frames/Scenes 001-020__101B-1-_20230726152900590/17.jpg",
+      "image_dir": "white_vidname_padded_image_results/17",
+      "segments_count": 5,
+      "segments": [
+        "white_vidname_padded_image_results/17/segments/17_wall panels_5_nopoint.png",
+        "white_vidname_padded_image_results/17/segments/17_ornate gold mirror_0_nopoint.png",
+        "white_vidname_padded_image_results/17/segments/17_weapon (in mirror reflection)_1_nopoint.png",
+        "white_vidname_padded_image_results/17/segments/17_shoulder armor_2_nopoint.png",
+        "white_vidname_padded_image_results/17/segments/17_desk_3_nopoint.png"
+      ],
+      "segmentation_overlay": "white_vidname_padded_image_results/17/17_segmentation_overlay.png",
+      "mask_visualizations_dir": "white_vidname_padded_image_results/17/mask_visualizations",
+      "embeddings_file": "white_vidname_padded_image_results/17/embeddings/17_embeddings.json"
+    },
+    {
+      "image": "/home/ubuntu/code/drew/test_data/frames/Scenes 001-020__101B-1-_20230726152900590/33.jpg",
+      "image_dir": "white_vidname_padded_image_results/33",
+      "segments_count": 3,
+      "segments": [
+        "white_vidname_padded_image_results/33/segments/33_Dark rectangular object_2_nopoint.png",
+        "white_vidname_padded_image_results/33/segments/33_Wooden wall paneling_0_nopoint.png",
+        "white_vidname_padded_image_results/33/segments/33_Blue and gold circular object_1_nopoint.png"
+      ],
+      "segmentation_overlay": "white_vidname_padded_image_results/33/33_segmentation_overlay.png",
+      "mask_visualizations_dir": "white_vidname_padded_image_results/33/mask_visualizations",
+      "embeddings_file": "white_vidname_padded_image_results/33/embeddings/33_embeddings.json"
+    },
+    {
+      "image": "/home/ubuntu/code/drew/test_data/frames/Scenes 001-020__101B-1-_20230726152900590/7.jpg",
+      "image_dir": "white_vidname_padded_image_results/7",
+      "segments_count": 4,
+      "segments": [
+        "white_vidname_padded_image_results/7/segments/7_jacket with red lettering_2_nopoint.png",
+        "white_vidname_padded_image_results/7/segments/7_circular object with holes_1_nopoint.png",
+        "white_vidname_padded_image_results/7/segments/7_wooden wall paneling_0_nopoint.png",
+        "white_vidname_padded_image_results/7/segments/7_dark sleeve_3_nopoint.png"
+      ],
+      "segmentation_overlay": "white_vidname_padded_image_results/7/7_segmentation_overlay.png",
+      "mask_visualizations_dir": "white_vidname_padded_image_results/7/mask_visualizations",
+      "embeddings_file": "white_vidname_padded_image_results/7/embeddings/7_embeddings.json"
+    },
+    {
+      "image": "/home/ubuntu/code/drew/test_data/frames/Scenes 001-020__101B-1-_20230726152900590/81.jpg",
+      "image_dir": "white_vidname_padded_image_results/81",
+      "segments_count": 6,
+      "segments": [
+        "white_vidname_padded_image_results/81/segments/81_shoulder armor in mirror_4_nopoint.png",
+        "white_vidname_padded_image_results/81/segments/81_fluffy object_3_nopoint.png",
+        "white_vidname_padded_image_results/81/segments/81_dagger in mirror_5_nopoint.png",
+        "white_vidname_padded_image_results/81/segments/81_gold shoulder armor_2_nopoint.png",
+        "white_vidname_padded_image_results/81/segments/81_ornate mirror_0_nopoint.png",
+        "white_vidname_padded_image_results/81/segments/81_black vest_1_nopoint.png"
+      ],
+      "segmentation_overlay": "white_vidname_padded_image_results/81/81_segmentation_overlay.png",
+      "mask_visualizations_dir": "white_vidname_padded_image_results/81/mask_visualizations",
+      "embeddings_file": "white_vidname_padded_image_results/81/embeddings/81_embeddings.json"
+    },
+    {
+      "image": "/home/ubuntu/code/drew/test_data/frames/Scenes 001-020__101B-1-_20230726152900590/47.jpg",
+      "image_dir": "white_vidname_padded_image_results/47",
+      "segments_count": 4,
+      "segments": [
+        "white_vidname_padded_image_results/47/segments/47_clothing_3_nopoint.png",
+        "white_vidname_padded_image_results/47/segments/47_ornate mirror_0_nopoint.png",
+        "white_vidname_padded_image_results/47/segments/47_shoulder armor_2_nopoint.png",
+        "white_vidname_padded_image_results/47/segments/47_weapon_1_nopoint.png"
+      ],
+      "segmentation_overlay": "white_vidname_padded_image_results/47/47_segmentation_overlay.png",
+      "mask_visualizations_dir": "white_vidname_padded_image_results/47/mask_visualizations",
+      "embeddings_file": "white_vidname_padded_image_results/47/embeddings/47_embeddings.json"
+    },
+    {
+      "image": "/home/ubuntu/code/drew/test_data/frames/Scenes 001-020__101B-1-_20230726152900590/103.jpg",
+      "image_dir": "white_vidname_padded_image_results/103",
+      "segments_count": 2,
+      "segments": [
+        "white_vidname_padded_image_results/103/segments/103_Black armor_1_nopoint.png",
+        "white_vidname_padded_image_results/103/segments/103_Circular blue-holed object_0_nopoint.png"
+      ],
+      "segmentation_overlay": "white_vidname_padded_image_results/103/103_segmentation_overlay.png",
+      "mask_visualizations_dir": "white_vidname_padded_image_results/103/mask_visualizations",
+      "embeddings_file": "white_vidname_padded_image_results/103/embeddings/103_embeddings.json"
+    },
+    {
+      "image": "/home/ubuntu/code/drew/test_data/frames/Scenes 001-020__101B-1-_20230726152900590/108.jpg",
+      "image_dir": "white_vidname_padded_image_results/108",
+      "segments_count": 3,
+      "segments": [
+        "white_vidname_padded_image_results/108/segments/108_Blue and tan circular object_0_nopoint.png",
+        "white_vidname_padded_image_results/108/segments/108_Wall_2_nopoint.png",
+        "white_vidname_padded_image_results/108/segments/108_Dark furniture_1_nopoint.png"
+      ],
+      "segmentation_overlay": "white_vidname_padded_image_results/108/108_segmentation_overlay.png",
+      "mask_visualizations_dir": "white_vidname_padded_image_results/108/mask_visualizations",
+      "embeddings_file": "white_vidname_padded_image_results/108/embeddings/108_embeddings.json"
+    },
+    {
+      "image": "/home/ubuntu/code/drew/test_data/frames/Scenes 001-020__101B-1-_20230726152900590/39.jpg",
+      "image_dir": "white_vidname_padded_image_results/39",
+      "segments_count": 4,
+      "segments": [
+        "white_vidname_padded_image_results/39/segments/39_shoulder armor_3_nopoint.png",
+        "white_vidname_padded_image_results/39/segments/39_wall paneling left_2_nopoint.png",
+        "white_vidname_padded_image_results/39/segments/39_ornate mirror_0_nopoint.png",
+        "white_vidname_padded_image_results/39/segments/39_glowing device reflection_4_nopoint.png"
+      ],
+      "segmentation_overlay": "white_vidname_padded_image_results/39/39_segmentation_overlay.png",
+      "mask_visualizations_dir": "white_vidname_padded_image_results/39/mask_visualizations",
+      "embeddings_file": "white_vidname_padded_image_results/39/embeddings/39_embeddings.json"
+    },
+    {
+      "image": "/home/ubuntu/code/drew/test_data/frames/Scenes 001-020__101B-1-_20230726152900590/35.jpg",
+      "image_dir": "white_vidname_padded_image_results/35",
+      "segments_count": 3,
+      "segments": [
+        "white_vidname_padded_image_results/35/segments/35_blue and gold decorative object_0_nopoint.png",
+        "white_vidname_padded_image_results/35/segments/35_wall paneling_1_nopoint.png",
+        "white_vidname_padded_image_results/35/segments/35_dark furniture_2_nopoint.png"
+      ],
+      "segmentation_overlay": "white_vidname_padded_image_results/35/35_segmentation_overlay.png",
+      "mask_visualizations_dir": "white_vidname_padded_image_results/35/mask_visualizations",
+      "embeddings_file": "white_vidname_padded_image_results/35/embeddings/35_embeddings.json"
+    },
+    {
+      "image": "/home/ubuntu/code/drew/test_data/frames/Scenes 001-020__101B-1-_20230726152900590/38.jpg",
+      "image_dir": "white_vidname_padded_image_results/38",
+      "segments_count": 5,
+      "segments": [
+        "white_vidname_padded_image_results/38/segments/38_wall paneling_4_nopoint.png",
+        "white_vidname_padded_image_results/38/segments/38_glowing blue object_3_nopoint.png",
+        "white_vidname_padded_image_results/38/segments/38_armor_2_nopoint.png",
+        "white_vidname_padded_image_results/38/segments/38_blue chair_1_nopoint.png",
+        "white_vidname_padded_image_results/38/segments/38_ornate gold mirror_0_nopoint.png"
+      ],
+      "segmentation_overlay": "white_vidname_padded_image_results/38/38_segmentation_overlay.png",
+      "mask_visualizations_dir": "white_vidname_padded_image_results/38/mask_visualizations",
+      "embeddings_file": "white_vidname_padded_image_results/38/embeddings/38_embeddings.json"
+    },
+    {
+      "image": "/home/ubuntu/code/drew/test_data/frames/Scenes 001-020__101B-1-_20230726152900590/44.jpg",
+      "image_dir": "white_vidname_padded_image_results/44",
+      "segments_count": 7,
+      "segments": [
+        "white_vidname_padded_image_results/44/segments/44_Wall Panels (Left)_6_nopoint.png",
+        "white_vidname_padded_image_results/44/segments/44_Shoulder Armor (Back)_1_nopoint.png",
+        "white_vidname_padded_image_results/44/segments/44_Fluffy Object_4_nopoint.png",
+        "white_vidname_padded_image_results/44/segments/44_Wall Panels (Right)_3_nopoint.png",
+        "white_vidname_padded_image_results/44/segments/44_Weapon/Staff (Reflection)_2_nopoint.png",
+        "white_vidname_padded_image_results/44/segments/44_Mirror_0_nopoint.png",
+        "white_vidname_padded_image_results/44/segments/44_Desk/Table_5_nopoint.png"
+      ],
+      "segmentation_overlay": "white_vidname_padded_image_results/44/44_segmentation_overlay.png",
+      "mask_visualizations_dir": "white_vidname_padded_image_results/44/mask_visualizations",
+      "embeddings_file": null
+    },
+    {
+      "image": "/home/ubuntu/code/drew/test_data/frames/Scenes 001-020__101B-1-_20230726152900590/113.jpg",
+      "image_dir": "white_vidname_padded_image_results/113",
+      "segments_count": 3,
+      "segments": [
+        "white_vidname_padded_image_results/113/segments/113_circular blue and brown object_0_nopoint.png",
+        "white_vidname_padded_image_results/113/segments/113_dark rectangular object_1_nopoint.png",
+        "white_vidname_padded_image_results/113/segments/113_wall_2_nopoint.png"
+      ],
+      "segmentation_overlay": "white_vidname_padded_image_results/113/113_segmentation_overlay.png",
+      "mask_visualizations_dir": "white_vidname_padded_image_results/113/mask_visualizations",
+      "embeddings_file": "white_vidname_padded_image_results/113/embeddings/113_embeddings.json"
+    },
+    {
+      "image": "/home/ubuntu/code/drew/test_data/frames/Scenes 001-020__101B-1-_20230726152900590/24.jpg",
+      "image_dir": "white_vidname_padded_image_results/24",
+      "segments_count": 5,
+      "segments": [
+        "white_vidname_padded_image_results/24/segments/24_wall paneling_0_nopoint.png",
+        "white_vidname_padded_image_results/24/segments/24_large ornate mirror_1_nopoint.png",
+        "white_vidname_padded_image_results/24/segments/24_small gold object_4_nopoint.png",
+        "white_vidname_padded_image_results/24/segments/24_shoulder armor_3_nopoint.png",
+        "white_vidname_padded_image_results/24/segments/24_smaller mirror_2_nopoint.png"
+      ],
+      "segmentation_overlay": "white_vidname_padded_image_results/24/24_segmentation_overlay.png",
+      "mask_visualizations_dir": "white_vidname_padded_image_results/24/mask_visualizations",
+      "embeddings_file": "white_vidname_padded_image_results/24/embeddings/24_embeddings.json"
+    },
+    {
+      "image": "/home/ubuntu/code/drew/test_data/frames/Scenes 001-020__101B-1-_20230726152900590/111.jpg",
+      "image_dir": "white_vidname_padded_image_results/111",
+      "segments_count": 3,
+      "segments": [
+        "white_vidname_padded_image_results/111/segments/111_Dark Rectangular Object_2_nopoint.png",
+        "white_vidname_padded_image_results/111/segments/111_Wall_1_nopoint.png",
+        "white_vidname_padded_image_results/111/segments/111_Blue and Brown Circular Object_0_nopoint.png"
+      ],
+      "segmentation_overlay": "white_vidname_padded_image_results/111/111_segmentation_overlay.png",
+      "mask_visualizations_dir": "white_vidname_padded_image_results/111/mask_visualizations",
+      "embeddings_file": "white_vidname_padded_image_results/111/embeddings/111_embeddings.json"
+    },
+    {
+      "image": "/home/ubuntu/code/drew/test_data/frames/Scenes 001-020__101B-1-_20230726152900590/8.jpg",
+      "image_dir": "white_vidname_padded_image_results/8",
+      "segments_count": 5,
+      "segments": [
+        "white_vidname_padded_image_results/8/segments/8_Dagger_3_nopoint.png",
+        "white_vidname_padded_image_results/8/segments/8_Shoulder Armor_4_nopoint.png",
+        "white_vidname_padded_image_results/8/segments/8_Black Rectangular Object_2_nopoint.png",
+        "white_vidname_padded_image_results/8/segments/8_Ornate Mirror Frame_0_nopoint.png",
+        "white_vidname_padded_image_results/8/segments/8_Central Mirror_1_nopoint.png"
+      ],
+      "segmentation_overlay": "white_vidname_padded_image_results/8/8_segmentation_overlay.png",
+      "mask_visualizations_dir": "white_vidname_padded_image_results/8/mask_visualizations",
+      "embeddings_file": "white_vidname_padded_image_results/8/embeddings/8_embeddings.json"
+    },
+    {
+      "image": "/home/ubuntu/code/drew/test_data/frames/Scenes 001-020__101B-1-_20230726152900590/49.jpg",
+      "image_dir": "white_vidname_padded_image_results/49",
+      "segments_count": 6,
+      "segments": [
+        "white_vidname_padded_image_results/49/segments/49_shoulder armor_3_nopoint.png",
+        "white_vidname_padded_image_results/49/segments/49_wall panel_1_nopoint.png",
+        "white_vidname_padded_image_results/49/segments/49_fluffy object_5_nopoint.png",
+        "white_vidname_padded_image_results/49/segments/49_ornate round mirror_0_nopoint.png",
+        "white_vidname_padded_image_results/49/segments/49_wall panel_2_nopoint.png",
+        "white_vidname_padded_image_results/49/segments/49_weapon reflected in mirror_4_nopoint.png"
+      ],
+      "segmentation_overlay": "white_vidname_padded_image_results/49/49_segmentation_overlay.png",
+      "mask_visualizations_dir": "white_vidname_padded_image_results/49/mask_visualizations",
+      "embeddings_file": "white_vidname_padded_image_results/49/embeddings/49_embeddings.json"
+    },
+    {
+      "image": "/home/ubuntu/code/drew/test_data/frames/Scenes 001-020__101B-1-_20230726152900590/69.jpg",
+      "image_dir": "white_vidname_padded_image_results/69",
+      "segments_count": 1,
+      "segments": [
+        "white_vidname_padded_image_results/69/segments/69_Blue and gold patterned object_0_nopoint.png"
+      ],
+      "segmentation_overlay": "white_vidname_padded_image_results/69/69_segmentation_overlay.png",
+      "mask_visualizations_dir": "white_vidname_padded_image_results/69/mask_visualizations",
+      "embeddings_file": "white_vidname_padded_image_results/69/embeddings/69_embeddings.json"
+    },
+    {
+      "image": "/home/ubuntu/code/drew/test_data/frames/Scenes 001-020__101B-1-_20230726152900590/68.jpg",
+      "image_dir": "white_vidname_padded_image_results/68",
+      "segments_count": 2,
+      "segments": [
+        "white_vidname_padded_image_results/68/segments/68_Blue and gold decorative object_0_nopoint.png",
+        "white_vidname_padded_image_results/68/segments/68_Blurry object_1_nopoint.png"
+      ],
+      "segmentation_overlay": "white_vidname_padded_image_results/68/68_segmentation_overlay.png",
+      "mask_visualizations_dir": "white_vidname_padded_image_results/68/mask_visualizations",
+      "embeddings_file": "white_vidname_padded_image_results/68/embeddings/68_embeddings.json"
+    },
+    {
+      "image": "/home/ubuntu/code/drew/test_data/frames/Scenes 001-020__101B-1-_20230726152900590/16.jpg",
+      "image_dir": "white_vidname_padded_image_results/16",
+      "segments_count": 6,
+      "segments": [
+        "white_vidname_padded_image_results/16/segments/16_armor_1_nopoint.png",
+        "white_vidname_padded_image_results/16/segments/16_wall panel_5_nopoint.png",
+        "white_vidname_padded_image_results/16/segments/16_small white objects on table_3_nopoint.png",
+        "white_vidname_padded_image_results/16/segments/16_wall panel_4_nopoint.png",
+        "white_vidname_padded_image_results/16/segments/16_ornate mirror_0_nopoint.png",
+        "white_vidname_padded_image_results/16/segments/16_armor_2_nopoint.png"
+      ],
+      "segmentation_overlay": "white_vidname_padded_image_results/16/16_segmentation_overlay.png",
+      "mask_visualizations_dir": "white_vidname_padded_image_results/16/mask_visualizations",
+      "embeddings_file": "white_vidname_padded_image_results/16/embeddings/16_embeddings.json"
+    },
+    {
+      "image": "/home/ubuntu/code/drew/test_data/frames/Scenes 001-020__101B-1-_20230726152900590/21.jpg",
+      "image_dir": "white_vidname_padded_image_results/21",
+      "segments_count": 5,
+      "segments": [
+        "white_vidname_padded_image_results/21/segments/21_wall panels_0_nopoint.png",
+        "white_vidname_padded_image_results/21/segments/21_lamp base_3_nopoint.png",
+        "white_vidname_padded_image_results/21/segments/21_fluffy object_4_nopoint.png",
+        "white_vidname_padded_image_results/21/segments/21_ornate mirror_1_nopoint.png",
+        "white_vidname_padded_image_results/21/segments/21_shoulder armor_2_nopoint.png"
+      ],
+      "segmentation_overlay": "white_vidname_padded_image_results/21/21_segmentation_overlay.png",
+      "mask_visualizations_dir": "white_vidname_padded_image_results/21/mask_visualizations",
+      "embeddings_file": "white_vidname_padded_image_results/21/embeddings/21_embeddings.json"
+    },
+    {
+      "image": "/home/ubuntu/code/drew/test_data/frames/Scenes 001-020__101B-1-_20230726152900590/57.jpg",
+      "image_dir": "white_vidname_padded_image_results/57",
+      "segments_count": 7,
+      "segments": [
+        "white_vidname_padded_image_results/57/segments/57_dark rectangular object_2_nopoint.png",
+        "white_vidname_padded_image_results/57/segments/57_wall paneling_1_nopoint.png",
+        "white_vidname_padded_image_results/57/segments/57_weapon_5_nopoint.png",
+        "white_vidname_padded_image_results/57/segments/57_fluffy object_6_nopoint.png",
+        "white_vidname_padded_image_results/57/segments/57_large round mirror_0_nopoint.png",
+        "white_vidname_padded_image_results/57/segments/57_shoulder armor_4_nopoint.png",
+        "white_vidname_padded_image_results/57/segments/57_black vest_3_nopoint.png"
+      ],
+      "segmentation_overlay": "white_vidname_padded_image_results/57/57_segmentation_overlay.png",
+      "mask_visualizations_dir": "white_vidname_padded_image_results/57/mask_visualizations",
+      "embeddings_file": "white_vidname_padded_image_results/57/embeddings/57_embeddings.json"
+    },
+    {
+      "image": "/home/ubuntu/code/drew/test_data/frames/Scenes 001-020__101B-1-_20230726152900590/5.jpg",
+      "image_dir": "white_vidname_padded_image_results/5",
+      "segments_count": 3,
+      "segments": [
+        "white_vidname_padded_image_results/5/segments/5_clapperboard_1_nopoint.png",
+        "white_vidname_padded_image_results/5/segments/5_large circular object with blue holes_0_nopoint.png",
+        "white_vidname_padded_image_results/5/segments/5_wooden wall_2_nopoint.png"
+      ],
+      "segmentation_overlay": "white_vidname_padded_image_results/5/5_segmentation_overlay.png",
+      "mask_visualizations_dir": "white_vidname_padded_image_results/5/mask_visualizations",
+      "embeddings_file": "white_vidname_padded_image_results/5/embeddings/5_embeddings.json"
+    },
+    {
+      "image": "/home/ubuntu/code/drew/test_data/frames/Scenes 001-020__101B-1-_20230726152900590/34.jpg",
+      "image_dir": "white_vidname_padded_image_results/34",
+      "segments_count": 3,
+      "segments": [
+        "white_vidname_padded_image_results/34/segments/34_Blue furniture_2_nopoint.png",
+        "white_vidname_padded_image_results/34/segments/34_Round blue and gold object_0_nopoint.png",
+        "white_vidname_padded_image_results/34/segments/34_Wall_1_nopoint.png"
+      ],
+      "segmentation_overlay": "white_vidname_padded_image_results/34/34_segmentation_overlay.png",
+      "mask_visualizations_dir": "white_vidname_padded_image_results/34/mask_visualizations",
+      "embeddings_file": "white_vidname_padded_image_results/34/embeddings/34_embeddings.json"
+    },
+    {
+      "image": "/home/ubuntu/code/drew/test_data/frames/Scenes 001-020__101B-1-_20230726152900590/30.jpg",
+      "image_dir": "white_vidname_padded_image_results/30",
+      "segments_count": 2,
+      "segments": [
+        "white_vidname_padded_image_results/30/segments/30_Jacket_1_nopoint.png",
+        "white_vidname_padded_image_results/30/segments/30_Circular metallic object_0_nopoint.png"
+      ],
+      "segmentation_overlay": "white_vidname_padded_image_results/30/30_segmentation_overlay.png",
+      "mask_visualizations_dir": "white_vidname_padded_image_results/30/mask_visualizations",
+      "embeddings_file": "white_vidname_padded_image_results/30/embeddings/30_embeddings.json"
+    },
+    {
+      "image": "/home/ubuntu/code/drew/test_data/frames/Scenes 001-020__101B-1-_20230726152900590/91.jpg",
+      "image_dir": "white_vidname_padded_image_results/91",
+      "segments_count": 8,
+      "segments": [
+        "white_vidname_padded_image_results/91/segments/91_Dark Table_3_nopoint.png",
+        "white_vidname_padded_image_results/91/segments/91_Dark Panel_4_nopoint.png",
+        "white_vidname_padded_image_results/91/segments/91_Dagger_7_nopoint.png",
+        "white_vidname_padded_image_results/91/segments/91_Ribbed Wall Panel_1_nopoint.png",
+        "white_vidname_padded_image_results/91/segments/91_Black Vest_8_nopoint.png",
+        "white_vidname_padded_image_results/91/segments/91_Ornate Mirror_0_nopoint.png",
+        "white_vidname_padded_image_results/91/segments/91_Furry Object_6_nopoint.png",
+        "white_vidname_padded_image_results/91/segments/91_Shoulder Armor_5_nopoint.png"
+      ],
+      "segmentation_overlay": "white_vidname_padded_image_results/91/91_segmentation_overlay.png",
+      "mask_visualizations_dir": "white_vidname_padded_image_results/91/mask_visualizations",
+      "embeddings_file": "white_vidname_padded_image_results/91/embeddings/91_embeddings.json"
+    },
+    {
+      "image": "/home/ubuntu/code/drew/test_data/frames/Scenes 001-020__101B-1-_20230726152900590/65.jpg",
+      "image_dir": "white_vidname_padded_image_results/65",
+      "segments_count": 3,
+      "segments": [
+        "white_vidname_padded_image_results/65/segments/65_Circular decorative wall object_0_nopoint.png",
+        "white_vidname_padded_image_results/65/segments/65_Black jacket_2_nopoint.png",
+        "white_vidname_padded_image_results/65/segments/65_Wall paneling_1_nopoint.png"
+      ],
+      "segmentation_overlay": "white_vidname_padded_image_results/65/65_segmentation_overlay.png",
+      "mask_visualizations_dir": "white_vidname_padded_image_results/65/mask_visualizations",
+      "embeddings_file": "white_vidname_padded_image_results/65/embeddings/65_embeddings.json"
+    },
+    {
+      "image": "/home/ubuntu/code/drew/test_data/frames/Scenes 001-020__101B-1-_20230726152900590/106.jpg",
+      "image_dir": "white_vidname_padded_image_results/106",
+      "segments_count": 3,
+      "segments": [
+        "white_vidname_padded_image_results/106/segments/106_Circular blue and brown object_0_nopoint.png",
+        "white_vidname_padded_image_results/106/segments/106_Dark rectangular object_1_nopoint.png",
+        "white_vidname_padded_image_results/106/segments/106_Wall_2_nopoint.png"
+      ],
+      "segmentation_overlay": "white_vidname_padded_image_results/106/106_segmentation_overlay.png",
+      "mask_visualizations_dir": "white_vidname_padded_image_results/106/mask_visualizations",
+      "embeddings_file": "white_vidname_padded_image_results/106/embeddings/106_embeddings.json"
+    },
+    {
+      "image": "/home/ubuntu/code/drew/test_data/frames/Scenes 001-020__101B-1-_20230726152900590/51.jpg",
+      "image_dir": "white_vidname_padded_image_results/51",
+      "segments_count": 8,
+      "segments": [
+        "white_vidname_padded_image_results/51/segments/51_lamp_2_nopoint.png",
+        "white_vidname_padded_image_results/51/segments/51_wall paneling_4_nopoint.png",
+        "white_vidname_padded_image_results/51/segments/51_text overlay_8_nopoint.png",
+        "white_vidname_padded_image_results/51/segments/51_weapon reflection in mirror_5_nopoint.png",
+        "white_vidname_padded_image_results/51/segments/51_weapon held by person_1_nopoint.png",
+        "white_vidname_padded_image_results/51/segments/51_shoulder armor reflection in mirror_6_nopoint.png",
+        "white_vidname_padded_image_results/51/segments/51_shoulder armor_3_nopoint.png",
+        "white_vidname_padded_image_results/51/segments/51_ornate mirror_0_nopoint.png"
+      ],
+      "segmentation_overlay": "white_vidname_padded_image_results/51/51_segmentation_overlay.png",
+      "mask_visualizations_dir": "white_vidname_padded_image_results/51/mask_visualizations",
+      "embeddings_file": "white_vidname_padded_image_results/51/embeddings/51_embeddings.json"
+    },
+    {
+      "image": "/home/ubuntu/code/drew/test_data/frames/Scenes 001-020__101B-1-_20230726152900590/23.jpg",
+      "image_dir": "white_vidname_padded_image_results/23",
+      "segments_count": 6,
+      "segments": [
+        "white_vidname_padded_image_results/23/segments/23_wall paneling_4_nopoint.png",
+        "white_vidname_padded_image_results/23/segments/23_table lamp base_3_nopoint.png",
+        "white_vidname_padded_image_results/23/segments/23_ornate circular mirror_0_nopoint.png",
+        "white_vidname_padded_image_results/23/segments/23_shoulder armor_2_nopoint.png",
+        "white_vidname_padded_image_results/23/segments/23_metallic object with blue light_1_nopoint.png",
+        "white_vidname_padded_image_results/23/segments/23_dark clothing_5_nopoint.png"
+      ],
+      "segmentation_overlay": "white_vidname_padded_image_results/23/23_segmentation_overlay.png",
+      "mask_visualizations_dir": "white_vidname_padded_image_results/23/mask_visualizations",
+      "embeddings_file": "white_vidname_padded_image_results/23/embeddings/23_embeddings.json"
+    },
+    {
+      "image": "/home/ubuntu/code/drew/test_data/frames/Scenes 001-020__101B-1-_20230726152900590/6.jpg",
+      "image_dir": "white_vidname_padded_image_results/6",
+      "segments_count": 2,
+      "segments": [
+        "white_vidname_padded_image_results/6/segments/6_clapperboard_1_nopoint.png",
+        "white_vidname_padded_image_results/6/segments/6_decorative wheel_0_nopoint.png"
+      ],
+      "segmentation_overlay": "white_vidname_padded_image_results/6/6_segmentation_overlay.png",
+      "mask_visualizations_dir": "white_vidname_padded_image_results/6/mask_visualizations",
+      "embeddings_file": "white_vidname_padded_image_results/6/embeddings/6_embeddings.json"
+    },
+    {
+      "image": "/home/ubuntu/code/drew/test_data/frames/Scenes 001-020__101B-1-_20230726152900590/102.jpg",
+      "image_dir": "white_vidname_padded_image_results/102",
+      "segments_count": 3,
+      "segments": [
+        "white_vidname_padded_image_results/102/segments/102_Wall_1_nopoint.png",
+        "white_vidname_padded_image_results/102/segments/102_Armor_2_nopoint.png",
+        "white_vidname_padded_image_results/102/segments/102_Circular metallic object_0_nopoint.png"
+      ],
+      "segmentation_overlay": "white_vidname_padded_image_results/102/102_segmentation_overlay.png",
+      "mask_visualizations_dir": "white_vidname_padded_image_results/102/mask_visualizations",
+      "embeddings_file": "white_vidname_padded_image_results/102/embeddings/102_embeddings.json"
+    },
+    {
+      "image": "/home/ubuntu/code/drew/test_data/frames/Scenes 001-020__101B-1-_20230726152900590/27.jpg",
+      "image_dir": "white_vidname_padded_image_results/27",
+      "segments_count": 2,
+      "segments": [
+        "white_vidname_padded_image_results/27/segments/27_Black and green jacket_1_nopoint.png",
+        "white_vidname_padded_image_results/27/segments/27_Circular decorative object_0_nopoint.png"
+      ],
+      "segmentation_overlay": "white_vidname_padded_image_results/27/27_segmentation_overlay.png",
+      "mask_visualizations_dir": "white_vidname_padded_image_results/27/mask_visualizations",
+      "embeddings_file": "white_vidname_padded_image_results/27/embeddings/27_embeddings.json"
+    },
+    {
+      "image": "/home/ubuntu/code/drew/test_data/frames/Scenes 001-020__101B-1-_20230726152900590/31.jpg",
+      "image_dir": "white_vidname_padded_image_results/31",
+      "segments_count": 3,
+      "segments": [
+        "white_vidname_padded_image_results/31/segments/31_Circular Wall Art_0_nopoint.png",
+        "white_vidname_padded_image_results/31/segments/31_Dark Furniture_1_nopoint.png",
+        "white_vidname_padded_image_results/31/segments/31_Wall_2_nopoint.png"
+      ],
+      "segmentation_overlay": "white_vidname_padded_image_results/31/31_segmentation_overlay.png",
+      "mask_visualizations_dir": "white_vidname_padded_image_results/31/mask_visualizations",
+      "embeddings_file": "white_vidname_padded_image_results/31/embeddings/31_embeddings.json"
+    },
+    {
+      "image": "/home/ubuntu/code/drew/test_data/frames/Scenes 001-020__101B-1-_20230726152900590/12.jpg",
+      "image_dir": "white_vidname_padded_image_results/12",
+      "segments_count": 7,
+      "segments": [
+        "white_vidname_padded_image_results/12/segments/12_wall paneling_1_nopoint.png",
+        "white_vidname_padded_image_results/12/segments/12_black clothing/armor (reflection)_5_nopoint.png",
+        "white_vidname_padded_image_results/12/segments/12_dagger (in reflection)_6_nopoint.png",
+        "white_vidname_padded_image_results/12/segments/12_black clothing/armor (back view)_3_nopoint.png",
+        "white_vidname_padded_image_results/12/segments/12_ornate mirror_0_nopoint.png",
+        "white_vidname_padded_image_results/12/segments/12_desk surface_2_nopoint.png",
+        "white_vidname_padded_image_results/12/segments/12_shoulder armor_4_nopoint.png"
+      ],
+      "segmentation_overlay": "white_vidname_padded_image_results/12/12_segmentation_overlay.png",
+      "mask_visualizations_dir": "white_vidname_padded_image_results/12/mask_visualizations",
+      "embeddings_file": null
+    },
+    {
+      "image": "/home/ubuntu/code/drew/test_data/frames/Scenes 001-020__101B-1-_20230726152900590/78.jpg",
+      "image_dir": "white_vidname_padded_image_results/78",
+      "segments_count": 7,
+      "segments": [
+        "white_vidname_padded_image_results/78/segments/78_wall panels_3_nopoint.png",
+        "white_vidname_padded_image_results/78/segments/78_shoulder armor (back view)_2_nopoint.png",
+        "white_vidname_padded_image_results/78/segments/78_chest armor (reflected)_4_nopoint.png",
+        "white_vidname_padded_image_results/78/segments/78_dagger (reflected)_6_nopoint.png",
+        "white_vidname_padded_image_results/78/segments/78_vest/jacket (back view)_1_nopoint.png",
+        "white_vidname_padded_image_results/78/segments/78_ornate mirror_0_nopoint.png",
+        "white_vidname_padded_image_results/78/segments/78_white fluffy object_7_nopoint.png"
+      ],
+      "segmentation_overlay": "white_vidname_padded_image_results/78/78_segmentation_overlay.png",
+      "mask_visualizations_dir": "white_vidname_padded_image_results/78/mask_visualizations",
+      "embeddings_file": null
+    },
+    {
+      "image": "/home/ubuntu/code/drew/test_data/frames/Scenes 001-020__101B-1-_20230726152900590/109.jpg",
+      "image_dir": "white_vidname_padded_image_results/109",
+      "segments_count": 3,
+      "segments": [
+        "white_vidname_padded_image_results/109/segments/109_blue and gold circular object_0_nopoint.png",
+        "white_vidname_padded_image_results/109/segments/109_dark furniture_1_nopoint.png",
+        "white_vidname_padded_image_results/109/segments/109_wall_2_nopoint.png"
+      ],
+      "segmentation_overlay": "white_vidname_padded_image_results/109/109_segmentation_overlay.png",
+      "mask_visualizations_dir": "white_vidname_padded_image_results/109/mask_visualizations",
+      "embeddings_file": "white_vidname_padded_image_results/109/embeddings/109_embeddings.json"
+    },
+    {
+      "image": "/home/ubuntu/code/drew/test_data/frames/Scenes 001-020__101B-1-_20230726152900590/71.jpg",
+      "image_dir": "white_vidname_padded_image_results/71",
+      "segments_count": 1,
+      "segments": [
+        "white_vidname_padded_image_results/71/segments/71_Blue and gold patterned object_0_nopoint.png"
+      ],
+      "segmentation_overlay": "white_vidname_padded_image_results/71/71_segmentation_overlay.png",
+      "mask_visualizations_dir": "white_vidname_padded_image_results/71/mask_visualizations",
+      "embeddings_file": "white_vidname_padded_image_results/71/embeddings/71_embeddings.json"
+    },
+    {
+      "image": "/home/ubuntu/code/drew/test_data/frames/Scenes 001-020__101B-1-_20230726152900590/32.jpg",
+      "image_dir": "white_vidname_padded_image_results/32",
+      "segments_count": 2,
+      "segments": [
+        "white_vidname_padded_image_results/32/segments/32_circular object with blue holes_0_nopoint.png",
+        "white_vidname_padded_image_results/32/segments/32_dark furniture_1_nopoint.png"
+      ],
+      "segmentation_overlay": "white_vidname_padded_image_results/32/32_segmentation_overlay.png",
+      "mask_visualizations_dir": "white_vidname_padded_image_results/32/mask_visualizations",
+      "embeddings_file": "white_vidname_padded_image_results/32/embeddings/32_embeddings.json"
+    },
+    {
+      "image": "/home/ubuntu/code/drew/test_data/frames/Scenes 001-020__101B-1-_20230726152900590/89.jpg",
+      "image_dir": "white_vidname_padded_image_results/89",
+      "segments_count": 7,
+      "segments": [
+        "white_vidname_padded_image_results/89/segments/89_blue fabric_2_nopoint.png",
+        "white_vidname_padded_image_results/89/segments/89_small gold object_3_nopoint.png",
+        "white_vidname_padded_image_results/89/segments/89_shoulder armor_5_nopoint.png",
+        "white_vidname_padded_image_results/89/segments/89_vest_4_nopoint.png",
+        "white_vidname_padded_image_results/89/segments/89_wall paneling_0_nopoint.png",
+        "white_vidname_padded_image_results/89/segments/89_ornate mirror_1_nopoint.png",
+        "white_vidname_padded_image_results/89/segments/89_armor piece in reflection_6_nopoint.png"
+      ],
+      "segmentation_overlay": "white_vidname_padded_image_results/89/89_segmentation_overlay.png",
+      "mask_visualizations_dir": "white_vidname_padded_image_results/89/mask_visualizations",
+      "embeddings_file": "white_vidname_padded_image_results/89/embeddings/89_embeddings.json"
+    },
+    {
+      "image": "/home/ubuntu/code/drew/test_data/frames/Scenes 001-020__101B-1-_20230726152900590/0.jpg",
+      "image_dir": "white_vidname_padded_image_results/0",
+      "segments_count": 4,
+      "segments": [
+        "white_vidname_padded_image_results/0/segments/0_wall paneling_1_nopoint.png",
+        "white_vidname_padded_image_results/0/segments/0_stuffed animal_4_nopoint.png",
+        "white_vidname_padded_image_results/0/segments/0_ornate circular mirror_0_nopoint.png",
+        "white_vidname_padded_image_results/0/segments/0_weapon with blue light_2_nopoint.png"
+      ],
+      "segmentation_overlay": "white_vidname_padded_image_results/0/0_segmentation_overlay.png",
+      "mask_visualizations_dir": "white_vidname_padded_image_results/0/mask_visualizations",
+      "embeddings_file": "white_vidname_padded_image_results/0/embeddings/0_embeddings.json"
+    },
+    {
+      "image": "/home/ubuntu/code/drew/test_data/frames/Scenes 001-020__101B-1-_20230726152900590/37.jpg",
+      "image_dir": "white_vidname_padded_image_results/37",
+      "segments_count": 3,
+      "segments": [
+        "white_vidname_padded_image_results/37/segments/37_Wall_0_nopoint.png",
+        "white_vidname_padded_image_results/37/segments/37_Chair_2_nopoint.png",
+        "white_vidname_padded_image_results/37/segments/37_Furniture_1_nopoint.png"
+      ],
+      "segmentation_overlay": "white_vidname_padded_image_results/37/37_segmentation_overlay.png",
+      "mask_visualizations_dir": "white_vidname_padded_image_results/37/mask_visualizations",
+      "embeddings_file": "white_vidname_padded_image_results/37/embeddings/37_embeddings.json"
+    },
+    {
+      "image": "/home/ubuntu/code/drew/test_data/frames/Scenes 001-020__101B-1-_20230726152900590/3.jpg",
+      "image_dir": "white_vidname_padded_image_results/3",
+      "segments_count": 2,
+      "segments": [
+        "white_vidname_padded_image_results/3/segments/3_clapperboard_1_nopoint.png",
+        "white_vidname_padded_image_results/3/segments/3_circular mirror_0_nopoint.png"
+      ],
+      "segmentation_overlay": "white_vidname_padded_image_results/3/3_segmentation_overlay.png",
+      "mask_visualizations_dir": "white_vidname_padded_image_results/3/mask_visualizations",
+      "embeddings_file": "white_vidname_padded_image_results/3/embeddings/3_embeddings.json"
+    },
+    {
+      "image": "/home/ubuntu/code/drew/test_data/frames/Scenes 001-020__101B-1-_20230726152900590/36.jpg",
+      "image_dir": "white_vidname_padded_image_results/36",
+      "segments_count": 3,
+      "segments": [
+        "white_vidname_padded_image_results/36/segments/36_Blue and gold decorative wall object_0_nopoint.png",
+        "white_vidname_padded_image_results/36/segments/36_Dark furniture_1_nopoint.png",
+        "white_vidname_padded_image_results/36/segments/36_Dark object (right)_3_nopoint.png"
+      ],
+      "segmentation_overlay": "white_vidname_padded_image_results/36/36_segmentation_overlay.png",
+      "mask_visualizations_dir": "white_vidname_padded_image_results/36/mask_visualizations",
+      "embeddings_file": "white_vidname_padded_image_results/36/embeddings/36_embeddings.json"
+    },
+    {
+      "image": "/home/ubuntu/code/drew/test_data/frames/Scenes 001-020__101B-1-_20230726152900590/26.jpg",
+      "image_dir": "white_vidname_padded_image_results/26",
+      "segments_count": 4,
+      "segments": [
+        "white_vidname_padded_image_results/26/segments/26_clothing_2_nopoint.png",
+        "white_vidname_padded_image_results/26/segments/26_flowers_3_nopoint.png",
+        "white_vidname_padded_image_results/26/segments/26_wall paneling_1_nopoint.png",
+        "white_vidname_padded_image_results/26/segments/26_circular mirror_0_nopoint.png"
+      ],
+      "segmentation_overlay": "white_vidname_padded_image_results/26/26_segmentation_overlay.png",
+      "mask_visualizations_dir": "white_vidname_padded_image_results/26/mask_visualizations",
+      "embeddings_file": "white_vidname_padded_image_results/26/embeddings/26_embeddings.json"
+    },
+    {
+      "image": "/home/ubuntu/code/drew/test_data/frames/Scenes 001-020__101B-1-_20230726152900590/76.jpg",
+      "image_dir": "white_vidname_padded_image_results/76",
+      "segments_count": 5,
+      "segments": [
+        "white_vidname_padded_image_results/76/segments/76_table lamp_4_nopoint.png",
+        "white_vidname_padded_image_results/76/segments/76_side table_3_nopoint.png",
+        "white_vidname_padded_image_results/76/segments/76_weapon_2_nopoint.png",
+        "white_vidname_padded_image_results/76/segments/76_armor_1_nopoint.png",
+        "white_vidname_padded_image_results/76/segments/76_circular mirror_0_nopoint.png"
+      ],
+      "segmentation_overlay": "white_vidname_padded_image_results/76/76_segmentation_overlay.png",
+      "mask_visualizations_dir": "white_vidname_padded_image_results/76/mask_visualizations",
+      "embeddings_file": "white_vidname_padded_image_results/76/embeddings/76_embeddings.json"
+    },
+    {
+      "image": "/home/ubuntu/code/drew/test_data/frames/Scenes 001-020__101B-1-_20230726152900590/43.jpg",
+      "image_dir": "white_vidname_padded_image_results/43",
+      "segments_count": 6,
+      "segments": [
+        "white_vidname_padded_image_results/43/segments/43_Reflected Costume_5_nopoint.png",
+        "white_vidname_padded_image_results/43/segments/43_Left Wall Panel_1_nopoint.png",
+        "white_vidname_padded_image_results/43/segments/43_Right Wall Panel_2_nopoint.png",
+        "white_vidname_padded_image_results/43/segments/43_Lamp_4_nopoint.png",
+        "white_vidname_padded_image_results/43/segments/43_Reflected Blue Glowing Object_6_nopoint.png",
+        "white_vidname_padded_image_results/43/segments/43_Ornate Mirror_0_nopoint.png"
+      ],
+      "segmentation_overlay": "white_vidname_padded_image_results/43/43_segmentation_overlay.png",
+      "mask_visualizations_dir": "white_vidname_padded_image_results/43/mask_visualizations",
+      "embeddings_file": "white_vidname_padded_image_results/43/embeddings/43_embeddings.json"
+    },
+    {
+      "image": "/home/ubuntu/code/drew/test_data/frames/Scenes 001-020__101B-1-_20230726152900590/28.jpg",
+      "image_dir": "white_vidname_padded_image_results/28",
+      "segments_count": 2,
+      "segments": [
+        "white_vidname_padded_image_results/28/segments/28_Circular decorative object_0_nopoint.png",
+        "white_vidname_padded_image_results/28/segments/28_Jacket_1_nopoint.png"
+      ],
+      "segmentation_overlay": "white_vidname_padded_image_results/28/28_segmentation_overlay.png",
+      "mask_visualizations_dir": "white_vidname_padded_image_results/28/mask_visualizations",
+      "embeddings_file": "white_vidname_padded_image_results/28/embeddings/28_embeddings.json"
+    },
+    {
+      "image": "/home/ubuntu/code/drew/test_data/frames/Scenes 001-020__101B-1-_20230726152900590/40.jpg",
+      "image_dir": "white_vidname_padded_image_results/40",
+      "segments_count": 4,
+      "segments": [
+        "white_vidname_padded_image_results/40/segments/40_dagger in reflection_3_nopoint.png",
+        "white_vidname_padded_image_results/40/segments/40_armor_1_nopoint.png",
+        "white_vidname_padded_image_results/40/segments/40_armor in reflection_2_nopoint.png",
+        "white_vidname_padded_image_results/40/segments/40_ornate mirror_0_nopoint.png"
+      ],
+      "segmentation_overlay": "white_vidname_padded_image_results/40/40_segmentation_overlay.png",
+      "mask_visualizations_dir": "white_vidname_padded_image_results/40/mask_visualizations",
+      "embeddings_file": "white_vidname_padded_image_results/40/embeddings/40_embeddings.json"
+    },
+    {
+      "image": "/home/ubuntu/code/drew/test_data/frames/Scenes 001-020__101B-1-_20230726152900590/105.jpg",
+      "image_dir": "white_vidname_padded_image_results/105",
+      "segments_count": 3,
+      "segments": [
+        "white_vidname_padded_image_results/105/segments/105_Blue circular object_0_nopoint.png",
+        "white_vidname_padded_image_results/105/segments/105_Dark furniture_2_nopoint.png",
+        "white_vidname_padded_image_results/105/segments/105_Wall_1_nopoint.png"
+      ],
+      "segmentation_overlay": "white_vidname_padded_image_results/105/105_segmentation_overlay.png",
+      "mask_visualizations_dir": "white_vidname_padded_image_results/105/mask_visualizations",
+      "embeddings_file": "white_vidname_padded_image_results/105/embeddings/105_embeddings.json"
+    },
+    {
+      "image": "/home/ubuntu/code/drew/test_data/frames/Scenes 001-020__101B-1-_20230726152900590/77.jpg",
+      "image_dir": "white_vidname_padded_image_results/77",
+      "segments_count": 5,
+      "segments": [
+        "white_vidname_padded_image_results/77/segments/77_wall paneling_2_nopoint.png",
+        "white_vidname_padded_image_results/77/segments/77_shoulder armor_3_nopoint.png",
+        "white_vidname_padded_image_results/77/segments/77_dark surface_1_nopoint.png",
+        "white_vidname_padded_image_results/77/segments/77_ornate mirror_0_nopoint.png",
+        "white_vidname_padded_image_results/77/segments/77_glowing object in reflection_5_nopoint.png"
+      ],
+      "segmentation_overlay": "white_vidname_padded_image_results/77/77_segmentation_overlay.png",
+      "mask_visualizations_dir": "white_vidname_padded_image_results/77/mask_visualizations",
+      "embeddings_file": "white_vidname_padded_image_results/77/embeddings/77_embeddings.json"
+    },
+    {
+      "image": "/home/ubuntu/code/drew/test_data/frames/Scenes 001-020__101B-1-_20230726152900590/54.jpg",
+      "image_dir": "white_vidname_padded_image_results/54",
+      "segments_count": 7,
+      "segments": [
+        "white_vidname_padded_image_results/54/segments/54_wall paneling_3_nopoint.png",
+        "white_vidname_padded_image_results/54/segments/54_crystal cluster_4_nopoint.png",
+        "white_vidname_padded_image_results/54/segments/54_ornate gold mirror_0_nopoint.png",
+        "white_vidname_padded_image_results/54/segments/54_reflected object with blue glow_6_nopoint.png",
+        "white_vidname_padded_image_results/54/segments/54_reflected shoulder armor_5_nopoint.png",
+        "white_vidname_padded_image_results/54/segments/54_rectangular screen_2_nopoint.png",
+        "white_vidname_padded_image_results/54/segments/54_shoulder armor_1_nopoint.png"
+      ],
+      "segmentation_overlay": "white_vidname_padded_image_results/54/54_segmentation_overlay.png",
+      "mask_visualizations_dir": "white_vidname_padded_image_results/54/mask_visualizations",
+      "embeddings_file": "white_vidname_padded_image_results/54/embeddings/54_embeddings.json"
+    },
+    {
+      "image": "/home/ubuntu/code/drew/test_data/frames/Scenes 001-020__101B-1-_20230726152900590/42.jpg",
+      "image_dir": "white_vidname_padded_image_results/42",
+      "segments_count": 5,
+      "segments": [
+        "white_vidname_padded_image_results/42/segments/42_dark object_1_nopoint.png",
+        "white_vidname_padded_image_results/42/segments/42_weapon_2_nopoint.png",
+        "white_vidname_padded_image_results/42/segments/42_fluffy object_3_nopoint.png",
+        "white_vidname_padded_image_results/42/segments/42_ornate mirror_0_nopoint.png",
+        "white_vidname_padded_image_results/42/segments/42_shoulder armor_4_nopoint.png"
+      ],
+      "segmentation_overlay": "white_vidname_padded_image_results/42/42_segmentation_overlay.png",
+      "mask_visualizations_dir": "white_vidname_padded_image_results/42/mask_visualizations",
+      "embeddings_file": "white_vidname_padded_image_results/42/embeddings/42_embeddings.json"
+    },
+    {
+      "image": "/home/ubuntu/code/drew/test_data/frames/Scenes 001-020__101B-1-_20230726152900590/67.jpg",
+      "image_dir": "white_vidname_padded_image_results/67",
+      "segments_count": 2,
+      "segments": [
+        "white_vidname_padded_image_results/67/segments/67_circular object with blue holes_0_nopoint.png",
+        "white_vidname_padded_image_results/67/segments/67_clothing_1_nopoint.png"
+      ],
+      "segmentation_overlay": "white_vidname_padded_image_results/67/67_segmentation_overlay.png",
+      "mask_visualizations_dir": "white_vidname_padded_image_results/67/mask_visualizations",
+      "embeddings_file": "white_vidname_padded_image_results/67/embeddings/67_embeddings.json"
+    },
+    {
+      "image": "/home/ubuntu/code/drew/test_data/frames/Scenes 001-020__101B-1-_20230726152900590/95.jpg",
+      "image_dir": "white_vidname_padded_image_results/95",
+      "segments_count": 6,
+      "segments": [
+        "white_vidname_padded_image_results/95/segments/95_black and gold armor in reflection_4_nopoint.png",
+        "white_vidname_padded_image_results/95/segments/95_white decorative object_3_nopoint.png",
+        "white_vidname_padded_image_results/95/segments/95_gold object_2_nopoint.png",
+        "white_vidname_padded_image_results/95/segments/95_ornate gold mirror_0_nopoint.png",
+        "white_vidname_padded_image_results/95/segments/95_black and gold armor_1_nopoint.png",
+        "white_vidname_padded_image_results/95/segments/95_weapon in reflection_5_nopoint.png"
+      ],
+      "segmentation_overlay": "white_vidname_padded_image_results/95/95_segmentation_overlay.png",
+      "mask_visualizations_dir": "white_vidname_padded_image_results/95/mask_visualizations",
+      "embeddings_file": "white_vidname_padded_image_results/95/embeddings/95_embeddings.json"
+    },
+    {
+      "image": "/home/ubuntu/code/drew/test_data/frames/Scenes 001-020__101B-1-_20230726152900590/99.jpg",
+      "image_dir": "white_vidname_padded_image_results/99",
+      "segments_count": 3,
+      "segments": [
+        "white_vidname_padded_image_results/99/segments/99_armor_2_nopoint.png",
+        "white_vidname_padded_image_results/99/segments/99_black square_1_nopoint.png",
+        "white_vidname_padded_image_results/99/segments/99_circular wall decoration_0_nopoint.png"
+      ],
+      "segmentation_overlay": "white_vidname_padded_image_results/99/99_segmentation_overlay.png",
+      "mask_visualizations_dir": "white_vidname_padded_image_results/99/mask_visualizations",
+      "embeddings_file": "white_vidname_padded_image_results/99/embeddings/99_embeddings.json"
+    },
+    {
+      "image": "/home/ubuntu/code/drew/test_data/frames/Scenes 001-020__101B-1-_20230726152900590/15.jpg",
+      "image_dir": "white_vidname_padded_image_results/15",
+      "segments_count": 7,
+      "segments": [
+        "white_vidname_padded_image_results/15/segments/15_wall paneling_1_nopoint.png",
+        "white_vidname_padded_image_results/15/segments/15_metal shoulder piece_3_nopoint.png",
+        "white_vidname_padded_image_results/15/segments/15_fluffy object_4_nopoint.png",
+        "white_vidname_padded_image_results/15/segments/15_glowing object in reflection_7_nopoint.png",
+        "white_vidname_padded_image_results/15/segments/15_ornate circular mirror_0_nopoint.png",
+        "white_vidname_padded_image_results/15/segments/15_black jacket_2_nopoint.png",
+        "white_vidname_padded_image_results/15/segments/15_armor in reflection_6_nopoint.png"
+      ],
+      "segmentation_overlay": "white_vidname_padded_image_results/15/15_segmentation_overlay.png",
+      "mask_visualizations_dir": "white_vidname_padded_image_results/15/mask_visualizations",
+      "embeddings_file": "white_vidname_padded_image_results/15/embeddings/15_embeddings.json"
+    },
+    {
+      "image": "/home/ubuntu/code/drew/test_data/frames/Scenes 001-020__101B-1-_20230726152900590/92.jpg",
+      "image_dir": "white_vidname_padded_image_results/92",
+      "segments_count": 5,
+      "segments": [
+        "white_vidname_padded_image_results/92/segments/92_gold object_2_nopoint.png",
+        "white_vidname_padded_image_results/92/segments/92_shoulder armor_4_nopoint.png",
+        "white_vidname_padded_image_results/92/segments/92_dark rectangular object_1_nopoint.png",
+        "white_vidname_padded_image_results/92/segments/92_ornate mirror_0_nopoint.png",
+        "white_vidname_padded_image_results/92/segments/92_fluffy white object_3_nopoint.png"
+      ],
+      "segmentation_overlay": "white_vidname_padded_image_results/92/92_segmentation_overlay.png",
+      "mask_visualizations_dir": "white_vidname_padded_image_results/92/mask_visualizations",
+      "embeddings_file": "white_vidname_padded_image_results/92/embeddings/92_embeddings.json"
+    },
+    {
+      "image": "/home/ubuntu/code/drew/test_data/frames/Scenes 001-020__101B-1-_20230726152900590/13.jpg",
+      "image_dir": "white_vidname_padded_image_results/13",
+      "segments_count": 5,
+      "segments": [
+        "white_vidname_padded_image_results/13/segments/13_shoulder armor_3_nopoint.png",
+        "white_vidname_padded_image_results/13/segments/13_black vest_2_nopoint.png",
+        "white_vidname_padded_image_results/13/segments/13_ornate mirror_0_nopoint.png",
+        "white_vidname_padded_image_results/13/segments/13_golden knob_1_nopoint.png",
+        "white_vidname_padded_image_results/13/segments/13_weapon_4_nopoint.png"
+      ],
+      "segmentation_overlay": "white_vidname_padded_image_results/13/13_segmentation_overlay.png",
+      "mask_visualizations_dir": "white_vidname_padded_image_results/13/mask_visualizations",
+      "embeddings_file": "white_vidname_padded_image_results/13/embeddings/13_embeddings.json"
+    },
+    {
+      "image": "/home/ubuntu/code/drew/test_data/frames/Scenes 001-020__101B-1-_20230726152900590/58.jpg",
+      "image_dir": "white_vidname_padded_image_results/58",
+      "segments_count": 4,
+      "segments": [
+        "white_vidname_padded_image_results/58/segments/58_wall paneling_4_nopoint.png",
+        "white_vidname_padded_image_results/58/segments/58_shoulder armor_2_nopoint.png",
+        "white_vidname_padded_image_results/58/segments/58_ornate mirror_0_nopoint.png",
+        "white_vidname_padded_image_results/58/segments/58_furry object_3_nopoint.png"
+      ],
+      "segmentation_overlay": "white_vidname_padded_image_results/58/58_segmentation_overlay.png",
+      "mask_visualizations_dir": "white_vidname_padded_image_results/58/mask_visualizations",
+      "embeddings_file": "white_vidname_padded_image_results/58/embeddings/58_embeddings.json"
+    },
+    {
+      "image": "/home/ubuntu/code/drew/test_data/frames/Scenes 001-020__101B-1-_20230726152900590/85.jpg",
+      "image_dir": "white_vidname_padded_image_results/85",
+      "segments_count": 8,
+      "segments": [
+        "white_vidname_padded_image_results/85/segments/85_Wall_0_nopoint.png",
+        "white_vidname_padded_image_results/85/segments/85_Black Vest_6_nopoint.png",
+        "white_vidname_padded_image_results/85/segments/85_Right Lamp Shade_5_nopoint.png",
+        "white_vidname_padded_image_results/85/segments/85_Left Lamp Base_3_nopoint.png",
+        "white_vidname_padded_image_results/85/segments/85_Ornate Mirror_1_nopoint.png",
+        "white_vidname_padded_image_results/85/segments/85_Left Lamp Shade_2_nopoint.png",
+        "white_vidname_padded_image_results/85/segments/85_Shoulder Armor_7_nopoint.png",
+        "white_vidname_padded_image_results/85/segments/85_Left Table_4_nopoint.png"
+      ],
+      "segmentation_overlay": "white_vidname_padded_image_results/85/85_segmentation_overlay.png",
+      "mask_visualizations_dir": "white_vidname_padded_image_results/85/mask_visualizations",
+      "embeddings_file": "white_vidname_padded_image_results/85/embeddings/85_embeddings.json"
+    },
+    {
+      "image": "/home/ubuntu/code/drew/test_data/frames/Scenes 001-020__101B-1-_20230726152900590/64.jpg",
+      "image_dir": "white_vidname_padded_image_results/64",
+      "segments_count": 3,
+      "segments": [
+        "white_vidname_padded_image_results/64/segments/64_Wall paneling_2_nopoint.png",
+        "white_vidname_padded_image_results/64/segments/64_Jacket_1_nopoint.png",
+        "white_vidname_padded_image_results/64/segments/64_Circular mirror_0_nopoint.png"
+      ],
+      "segmentation_overlay": "white_vidname_padded_image_results/64/64_segmentation_overlay.png",
+      "mask_visualizations_dir": "white_vidname_padded_image_results/64/mask_visualizations",
+      "embeddings_file": "white_vidname_padded_image_results/64/embeddings/64_embeddings.json"
+    },
+    {
+      "image": "/home/ubuntu/code/drew/test_data/frames/Scenes 001-020__101B-1-_20230726152900590/82.jpg",
+      "image_dir": "white_vidname_padded_image_results/82",
+      "segments_count": 9,
+      "segments": [
+        "white_vidname_padded_image_results/82/segments/82_Wall paneling (right)_1_nopoint.png",
+        "white_vidname_padded_image_results/82/segments/82_Lamp base_9_nopoint.png",
+        "white_vidname_padded_image_results/82/segments/82_Shoulder armor_3_nopoint.png",
+        "white_vidname_padded_image_results/82/segments/82_Wall paneling (left)_4_nopoint.png",
+        "white_vidname_padded_image_results/82/segments/82_Shoulder armor (reflection)_6_nopoint.png",
+        "white_vidname_padded_image_results/82/segments/82_White fluffy object_8_nopoint.png",
+        "white_vidname_padded_image_results/82/segments/82_Ornate mirror_0_nopoint.png",
+        "white_vidname_padded_image_results/82/segments/82_Clothing_2_nopoint.png",
+        "white_vidname_padded_image_results/82/segments/82_Clothing (reflection)_5_nopoint.png"
+      ],
+      "segmentation_overlay": "white_vidname_padded_image_results/82/82_segmentation_overlay.png",
+      "mask_visualizations_dir": "white_vidname_padded_image_results/82/mask_visualizations",
+      "embeddings_file": "white_vidname_padded_image_results/82/embeddings/82_embeddings.json"
+    },
+    {
+      "image": "/home/ubuntu/code/drew/test_data/frames/Scenes 001-020__101B-1-_20230726152900590/79.jpg",
+      "image_dir": "white_vidname_padded_image_results/79",
+      "segments_count": 6,
+      "segments": [
+        "white_vidname_padded_image_results/79/segments/79_wall paneling_4_nopoint.png",
+        "white_vidname_padded_image_results/79/segments/79_collar/cape in reflection_5_nopoint.png",
+        "white_vidname_padded_image_results/79/segments/79_glowing chest armor in reflection_6_nopoint.png",
+        "white_vidname_padded_image_results/79/segments/79_shoulder armor_2_nopoint.png",
+        "white_vidname_padded_image_results/79/segments/79_ornate mirror_0_nopoint.png",
+        "white_vidname_padded_image_results/79/segments/79_collar/cape_1_nopoint.png"
+      ],
+      "segmentation_overlay": "white_vidname_padded_image_results/79/79_segmentation_overlay.png",
+      "mask_visualizations_dir": "white_vidname_padded_image_results/79/mask_visualizations",
+      "embeddings_file": null
+    },
+    {
+      "image": "/home/ubuntu/code/drew/test_data/frames/Scenes 001-020__101B-1-_20230726152900590/88.jpg",
+      "image_dir": "white_vidname_padded_image_results/88",
+      "segments_count": 4,
+      "segments": [
+        "white_vidname_padded_image_results/88/segments/88_wall panel_3_nopoint.png",
+        "white_vidname_padded_image_results/88/segments/88_shoulder armor_2_nopoint.png",
+        "white_vidname_padded_image_results/88/segments/88_weapon_1_nopoint.png",
+        "white_vidname_padded_image_results/88/segments/88_ornate mirror_0_nopoint.png"
+      ],
+      "segmentation_overlay": "white_vidname_padded_image_results/88/88_segmentation_overlay.png",
+      "mask_visualizations_dir": "white_vidname_padded_image_results/88/mask_visualizations",
+      "embeddings_file": "white_vidname_padded_image_results/88/embeddings/88_embeddings.json"
+    },
+    {
+      "image": "/home/ubuntu/code/drew/test_data/frames/Scenes 001-020__101B-1-_20230726152900590/14.jpg",
+      "image_dir": "white_vidname_padded_image_results/14",
+      "segments_count": 5,
+      "segments": [
+        "white_vidname_padded_image_results/14/segments/14_wall panels_5_nopoint.png",
+        "white_vidname_padded_image_results/14/segments/14_dagger with glowing blue element_2_nopoint.png",
+        "white_vidname_padded_image_results/14/segments/14_shoulder armor_1_nopoint.png",
+        "white_vidname_padded_image_results/14/segments/14_ornate circular mirror_0_nopoint.png",
+        "white_vidname_padded_image_results/14/segments/14_dark table_3_nopoint.png"
+      ],
+      "segmentation_overlay": "white_vidname_padded_image_results/14/14_segmentation_overlay.png",
+      "mask_visualizations_dir": "white_vidname_padded_image_results/14/mask_visualizations",
+      "embeddings_file": "white_vidname_padded_image_results/14/embeddings/14_embeddings.json"
+    },
+    {
+      "image": "/home/ubuntu/code/drew/test_data/frames/Scenes 001-020__101B-1-_20230726152900590/86.jpg",
+      "image_dir": "white_vidname_padded_image_results/86",
+      "segments_count": 8,
+      "segments": [
+        "white_vidname_padded_image_results/86/segments/86_Right Wall Paneling_5_nopoint.png",
+        "white_vidname_padded_image_results/86/segments/86_Shoulder Armor_1_nopoint.png",
+        "white_vidname_padded_image_results/86/segments/86_Left Wall Paneling_4_nopoint.png",
+        "white_vidname_padded_image_results/86/segments/86_Golden Object_7_nopoint.png",
+        "white_vidname_padded_image_results/86/segments/86_Small Stand_6_nopoint.png",
+        "white_vidname_padded_image_results/86/segments/86_Clothing/Vest_2_nopoint.png",
+        "white_vidname_padded_image_results/86/segments/86_Ornate Mirror_0_nopoint.png",
+        "white_vidname_padded_image_results/86/segments/86_Dagger (Held part)_3_nopoint.png"
+      ],
+      "segmentation_overlay": "white_vidname_padded_image_results/86/86_segmentation_overlay.png",
+      "mask_visualizations_dir": "white_vidname_padded_image_results/86/mask_visualizations",
+      "embeddings_file": null
+    },
+    {
+      "image": "/home/ubuntu/code/drew/test_data/frames/Scenes 001-020__101B-1-_20230726152900590/104.jpg",
+      "image_dir": "white_vidname_padded_image_results/104",
+      "segments_count": 1,
+      "segments": [
+        "white_vidname_padded_image_results/104/segments/104_Blue patterned object_0_nopoint.png"
+      ],
+      "segmentation_overlay": "white_vidname_padded_image_results/104/104_segmentation_overlay.png",
+      "mask_visualizations_dir": "white_vidname_padded_image_results/104/mask_visualizations",
+      "embeddings_file": "white_vidname_padded_image_results/104/embeddings/104_embeddings.json"
+    },
+    {
+      "image": "/home/ubuntu/code/drew/test_data/frames/Scenes 001-020__101B-1-_20230726152900590/93.jpg",
+      "image_dir": "white_vidname_padded_image_results/93",
+      "segments_count": 8,
+      "segments": [
+        "white_vidname_padded_image_results/93/segments/93_table_3_nopoint.png",
+        "white_vidname_padded_image_results/93/segments/93_armor in reflection_6_nopoint.png",
+        "white_vidname_padded_image_results/93/segments/93_decorative object_5_nopoint.png",
+        "white_vidname_padded_image_results/93/segments/93_armor_2_nopoint.png",
+        "white_vidname_padded_image_results/93/segments/93_dagger_1_nopoint.png",
+        "white_vidname_padded_image_results/93/segments/93_ornate mirror_0_nopoint.png",
+        "white_vidname_padded_image_results/93/segments/93_lamp_4_nopoint.png",
+        "white_vidname_padded_image_results/93/segments/93_wall panel_7_nopoint.png"
+      ],
+      "segmentation_overlay": "white_vidname_padded_image_results/93/93_segmentation_overlay.png",
+      "mask_visualizations_dir": "white_vidname_padded_image_results/93/mask_visualizations",
+      "embeddings_file": "white_vidname_padded_image_results/93/embeddings/93_embeddings.json"
+    },
+    {
+      "image": "/home/ubuntu/code/drew/test_data/frames/Scenes 001-020__101B-1-_20230726152900590/55.jpg",
+      "image_dir": "white_vidname_padded_image_results/55",
+      "segments_count": 7,
+      "segments": [
+        "white_vidname_padded_image_results/55/segments/55_wall panel_4_nopoint.png",
+        "white_vidname_padded_image_results/55/segments/55_dagger_1_nopoint.png",
+        "white_vidname_padded_image_results/55/segments/55_black armor_3_nopoint.png",
+        "white_vidname_padded_image_results/55/segments/55_shoulder armor_2_nopoint.png",
+        "white_vidname_padded_image_results/55/segments/55_text_7_nopoint.png",
+        "white_vidname_padded_image_results/55/segments/55_lamp_5_nopoint.png",
+        "white_vidname_padded_image_results/55/segments/55_ornate mirror_0_nopoint.png"
+      ],
+      "segmentation_overlay": "white_vidname_padded_image_results/55/55_segmentation_overlay.png",
+      "mask_visualizations_dir": "white_vidname_padded_image_results/55/mask_visualizations",
+      "embeddings_file": "white_vidname_padded_image_results/55/embeddings/55_embeddings.json"
+    },
+    {
+      "image": "/home/ubuntu/code/drew/test_data/frames/Scenes 001-020__101B-1-_20230726152900590/59.jpg",
+      "image_dir": "white_vidname_padded_image_results/59",
+      "segments_count": 7,
+      "segments": [
+        "white_vidname_padded_image_results/59/segments/59_wall paneling_0_nopoint.png",
+        "white_vidname_padded_image_results/59/segments/59_wall paneling_2_nopoint.png",
+        "white_vidname_padded_image_results/59/segments/59_armor_4_nopoint.png",
+        "white_vidname_padded_image_results/59/segments/59_dark rectangular object_3_nopoint.png",
+        "white_vidname_padded_image_results/59/segments/59_fluffy object_6_nopoint.png",
+        "white_vidname_padded_image_results/59/segments/59_large circular mirror_1_nopoint.png",
+        "white_vidname_padded_image_results/59/segments/59_weapon_5_nopoint.png"
+      ],
+      "segmentation_overlay": "white_vidname_padded_image_results/59/59_segmentation_overlay.png",
+      "mask_visualizations_dir": "white_vidname_padded_image_results/59/mask_visualizations",
+      "embeddings_file": "white_vidname_padded_image_results/59/embeddings/59_embeddings.json"
+    },
+    {
+      "image": "/home/ubuntu/code/drew/test_data/frames/Scenes 001-020__101B-1-_20230726152900590/112.jpg",
+      "image_dir": "white_vidname_padded_image_results/112",
+      "segments_count": 3,
+      "segments": [
+        "white_vidname_padded_image_results/112/segments/112_Blue circular object_1_nopoint.png",
+        "white_vidname_padded_image_results/112/segments/112_Dark furniture_2_nopoint.png",
+        "white_vidname_padded_image_results/112/segments/112_Wall_0_nopoint.png"
+      ],
+      "segmentation_overlay": "white_vidname_padded_image_results/112/112_segmentation_overlay.png",
+      "mask_visualizations_dir": "white_vidname_padded_image_results/112/mask_visualizations",
+      "embeddings_file": "white_vidname_padded_image_results/112/embeddings/112_embeddings.json"
+    },
+    {
+      "image": "/home/ubuntu/code/drew/test_data/frames/Scenes 001-020__101B-1-_20230726152900590/110.jpg",
+      "image_dir": "white_vidname_padded_image_results/110",
+      "segments_count": 3,
+      "segments": [
+        "white_vidname_padded_image_results/110/segments/110_blue and brown circular object_0_nopoint.png",
+        "white_vidname_padded_image_results/110/segments/110_dark object_1_nopoint.png",
+        "white_vidname_padded_image_results/110/segments/110_wall_2_nopoint.png"
+      ],
+      "segmentation_overlay": "white_vidname_padded_image_results/110/110_segmentation_overlay.png",
+      "mask_visualizations_dir": "white_vidname_padded_image_results/110/mask_visualizations",
+      "embeddings_file": "white_vidname_padded_image_results/110/embeddings/110_embeddings.json"
+    },
+    {
+      "image": "/home/ubuntu/code/drew/test_data/frames/Scenes 001-020__101B-1-_20230726152900590/66.jpg",
+      "image_dir": "white_vidname_padded_image_results/66",
+      "segments_count": 3,
+      "segments": [
+        "white_vidname_padded_image_results/66/segments/66_wall paneling_2_nopoint.png",
+        "white_vidname_padded_image_results/66/segments/66_clothing_1_nopoint.png",
+        "white_vidname_padded_image_results/66/segments/66_circular object_0_nopoint.png"
+      ],
+      "segmentation_overlay": "white_vidname_padded_image_results/66/66_segmentation_overlay.png",
+      "mask_visualizations_dir": "white_vidname_padded_image_results/66/mask_visualizations",
+      "embeddings_file": "white_vidname_padded_image_results/66/embeddings/66_embeddings.json"
+    },
+    {
+      "image": "/home/ubuntu/code/drew/test_data/frames/Scenes 001-020__101B-1-_20230726152900590/41.jpg",
+      "image_dir": "white_vidname_padded_image_results/41",
+      "segments_count": 7,
+      "segments": [
+        "white_vidname_padded_image_results/41/segments/41_Shoulder Armor (Reflection)_4_nopoint.png",
+        "white_vidname_padded_image_results/41/segments/41_Desk/Table_7_nopoint.png",
+        "white_vidname_padded_image_results/41/segments/41_Wall Panels_2_nopoint.png",
+        "white_vidname_padded_image_results/41/segments/41_Shoulder Armor (Back)_1_nopoint.png",
+        "white_vidname_padded_image_results/41/segments/41_Ornate Mirror_0_nopoint.png",
+        "white_vidname_padded_image_results/41/segments/41_Dagger (Reflection)_3_nopoint.png",
+        "white_vidname_padded_image_results/41/segments/41_Crystal Formation_6_nopoint.png"
+      ],
+      "segmentation_overlay": "white_vidname_padded_image_results/41/41_segmentation_overlay.png",
+      "mask_visualizations_dir": "white_vidname_padded_image_results/41/mask_visualizations",
+      "embeddings_file": null
+    },
+    {
+      "image": "/home/ubuntu/code/drew/test_data/frames/Scenes 001-020__101B-1-_20230726152900590/11.jpg",
+      "image_dir": "white_vidname_padded_image_results/11",
+      "segments_count": 4,
+      "segments": [
+        "white_vidname_padded_image_results/11/segments/11_clothing (reflected)_1_nopoint.png",
+        "white_vidname_padded_image_results/11/segments/11_dagger_3_nopoint.png",
+        "white_vidname_padded_image_results/11/segments/11_ornate gold mirror_0_nopoint.png",
+        "white_vidname_padded_image_results/11/segments/11_clothing_2_nopoint.png"
+      ],
+      "segmentation_overlay": "white_vidname_padded_image_results/11/11_segmentation_overlay.png",
+      "mask_visualizations_dir": "white_vidname_padded_image_results/11/mask_visualizations",
+      "embeddings_file": "white_vidname_padded_image_results/11/embeddings/11_embeddings.json"
+    },
+    {
+      "image": "/home/ubuntu/code/drew/test_data/frames/Scenes 001-020__101B-1-_20230726152900590/87.jpg",
+      "image_dir": "white_vidname_padded_image_results/87",
+      "segments_count": 6,
+      "segments": [
+        "white_vidname_padded_image_results/87/segments/87_wall paneling right_6_nopoint.png",
+        "white_vidname_padded_image_results/87/segments/87_wall paneling left_5_nopoint.png",
+        "white_vidname_padded_image_results/87/segments/87_large circular mirror_0_nopoint.png",
+        "white_vidname_padded_image_results/87/segments/87_weapon reflection in mirror_1_nopoint.png",
+        "white_vidname_padded_image_results/87/segments/87_table_4_nopoint.png",
+        "white_vidname_padded_image_results/87/segments/87_shoulder armor_2_nopoint.png"
+      ],
+      "segmentation_overlay": "white_vidname_padded_image_results/87/87_segmentation_overlay.png",
+      "mask_visualizations_dir": "white_vidname_padded_image_results/87/mask_visualizations",
+      "embeddings_file": "white_vidname_padded_image_results/87/embeddings/87_embeddings.json"
+    },
+    {
+      "image": "/home/ubuntu/code/drew/test_data/frames/Scenes 001-020__101B-1-_20230726152900590/20.jpg",
+      "image_dir": "white_vidname_padded_image_results/20",
+      "segments_count": 7,
+      "segments": [
+        "white_vidname_padded_image_results/20/segments/20_lamp_4_nopoint.png",
+        "white_vidname_padded_image_results/20/segments/20_wall paneling_1_nopoint.png",
+        "white_vidname_padded_image_results/20/segments/20_clothing_3_nopoint.png",
+        "white_vidname_padded_image_results/20/segments/20_wall paneling_0_nopoint.png",
+        "white_vidname_padded_image_results/20/segments/20_dagger_6_nopoint.png",
+        "white_vidname_padded_image_results/20/segments/20_shoulder armor_5_nopoint.png",
+        "white_vidname_padded_image_results/20/segments/20_ornate mirror_2_nopoint.png"
+      ],
+      "segmentation_overlay": "white_vidname_padded_image_results/20/20_segmentation_overlay.png",
+      "mask_visualizations_dir": "white_vidname_padded_image_results/20/mask_visualizations",
+      "embeddings_file": "white_vidname_padded_image_results/20/embeddings/20_embeddings.json"
+    },
+    {
+      "image": "/home/ubuntu/code/drew/test_data/frames/Scenes 001-020__101B-1-_20230726152900590/80.jpg",
+      "image_dir": "white_vidname_padded_image_results/80",
+      "segments_count": 2,
+      "segments": [
+        "white_vidname_padded_image_results/80/segments/80_wooden wall paneling_1_nopoint.png",
+        "white_vidname_padded_image_results/80/segments/80_blue circular object with holes_0_nopoint.png"
+      ],
+      "segmentation_overlay": "white_vidname_padded_image_results/80/80_segmentation_overlay.png",
+      "mask_visualizations_dir": "white_vidname_padded_image_results/80/mask_visualizations",
+      "embeddings_file": "white_vidname_padded_image_results/80/embeddings/80_embeddings.json"
+    },
+    {
+      "image": "/home/ubuntu/code/drew/test_data/frames/Scenes 001-020__101B-1-_20230726152900590/22.jpg",
+      "image_dir": "white_vidname_padded_image_results/22",
+      "segments_count": 7,
+      "segments": [
+        "white_vidname_padded_image_results/22/segments/22_Wall Panels_4_nopoint.png",
+        "white_vidname_padded_image_results/22/segments/22_Ornate Mirror_0_nopoint.png",
+        "white_vidname_padded_image_results/22/segments/22_Leather Outfit (reflection)_5_nopoint.png",
+        "white_vidname_padded_image_results/22/segments/22_Leather Outfit (back view)_2_nopoint.png",
+        "white_vidname_padded_image_results/22/segments/22_Dagger (in reflection)_1_nopoint.png",
+        "white_vidname_padded_image_results/22/segments/22_Lamp_6_nopoint.png",
+        "white_vidname_padded_image_results/22/segments/22_Shoulder Armor (back view)_3_nopoint.png"
+      ],
+      "segmentation_overlay": "white_vidname_padded_image_results/22/22_segmentation_overlay.png",
+      "mask_visualizations_dir": "white_vidname_padded_image_results/22/mask_visualizations",
+      "embeddings_file": "white_vidname_padded_image_results/22/embeddings/22_embeddings.json"
+    },
+    {
+      "image": "/home/ubuntu/code/drew/test_data/frames/Scenes 001-020__101B-1-_20230726152900590/9.jpg",
+      "image_dir": "white_vidname_padded_image_results/9",
+      "segments_count": 6,
+      "segments": [
+        "white_vidname_padded_image_results/9/segments/9_wall_1_nopoint.png",
+        "white_vidname_padded_image_results/9/segments/9_armor in reflection_3_nopoint.png",
+        "white_vidname_padded_image_results/9/segments/9_armor_2_nopoint.png",
+        "white_vidname_padded_image_results/9/segments/9_object held in reflection_4_nopoint.png",
+        "white_vidname_padded_image_results/9/segments/9_circular mirror_0_nopoint.png",
+        "white_vidname_padded_image_results/9/segments/9_small objects below mirror_5_nopoint.png"
+      ],
+      "segmentation_overlay": "white_vidname_padded_image_results/9/9_segmentation_overlay.png",
+      "mask_visualizations_dir": "white_vidname_padded_image_results/9/mask_visualizations",
+      "embeddings_file": "white_vidname_padded_image_results/9/embeddings/9_embeddings.json"
+    },
+    {
+      "image": "/home/ubuntu/code/drew/test_data/frames/Scenes 001-020__101B-1-_20230726152900590/73.jpg",
+      "image_dir": "white_vidname_padded_image_results/73",
+      "segments_count": 1,
+      "segments": [
+        "white_vidname_padded_image_results/73/segments/73_Blue and brown circular object_0_nopoint.png"
+      ],
+      "segmentation_overlay": "white_vidname_padded_image_results/73/73_segmentation_overlay.png",
+      "mask_visualizations_dir": "white_vidname_padded_image_results/73/mask_visualizations",
+      "embeddings_file": "white_vidname_padded_image_results/73/embeddings/73_embeddings.json"
+    },
+    {
+      "image": "/home/ubuntu/code/drew/test_data/frames/Scenes 001-020__101B-1-_20230726152900590/18.jpg",
+      "image_dir": "white_vidname_padded_image_results/18",
+      "segments_count": 8,
+      "segments": [
+        "white_vidname_padded_image_results/18/segments/18_wall panels_4_nopoint.png",
+        "white_vidname_padded_image_results/18/segments/18_chair back_8_nopoint.png",
+        "white_vidname_padded_image_results/18/segments/18_blue chair_5_nopoint.png",
+        "white_vidname_padded_image_results/18/segments/18_white fabric object_3_nopoint.png",
+        "white_vidname_padded_image_results/18/segments/18_shoulder armor_2_nopoint.png",
+        "white_vidname_padded_image_results/18/segments/18_table_7_nopoint.png",
+        "white_vidname_padded_image_results/18/segments/18_weapon_1_nopoint.png",
+        "white_vidname_padded_image_results/18/segments/18_ornate gold mirror_0_nopoint.png"
+      ],
+      "segmentation_overlay": "white_vidname_padded_image_results/18/18_segmentation_overlay.png",
+      "mask_visualizations_dir": "white_vidname_padded_image_results/18/mask_visualizations",
+      "embeddings_file": "white_vidname_padded_image_results/18/embeddings/18_embeddings.json"
+    },
+    {
+      "image": "/home/ubuntu/code/drew/test_data/frames/Scenes 001-020__101B-1-_20230726152900590/107.jpg",
+      "image_dir": "white_vidname_padded_image_results/107",
+      "segments_count": 1,
+      "segments": [
+        "white_vidname_padded_image_results/107/segments/107_Circular blue and beige object_0_nopoint.png"
+      ],
+      "segmentation_overlay": "white_vidname_padded_image_results/107/107_segmentation_overlay.png",
+      "mask_visualizations_dir": "white_vidname_padded_image_results/107/mask_visualizations",
+      "embeddings_file": "white_vidname_padded_image_results/107/embeddings/107_embeddings.json"
+    },
+    {
+      "image": "/home/ubuntu/code/drew/test_data/frames/Scenes 001-020__101B-1-_20230726152900590/50.jpg",
+      "image_dir": "white_vidname_padded_image_results/50",
+      "segments_count": 3,
+      "segments": [
+        "white_vidname_padded_image_results/50/segments/50_weapon_2_nopoint.png",
+        "white_vidname_padded_image_results/50/segments/50_ornate mirror_0_nopoint.png",
+        "white_vidname_padded_image_results/50/segments/50_black clothing_1_nopoint.png"
+      ],
+      "segmentation_overlay": "white_vidname_padded_image_results/50/50_segmentation_overlay.png",
+      "mask_visualizations_dir": "white_vidname_padded_image_results/50/mask_visualizations",
+      "embeddings_file": "white_vidname_padded_image_results/50/embeddings/50_embeddings.json"
+    },
+    {
+      "image": "/home/ubuntu/code/drew/test_data/frames/Scenes 001-020__101B-1-_20230726152900590/48.jpg",
+      "image_dir": "white_vidname_padded_image_results/48",
+      "segments_count": 5,
+      "segments": [
+        "white_vidname_padded_image_results/48/segments/48_dark panel wall_4_nopoint.png",
+        "white_vidname_padded_image_results/48/segments/48_wood panel wall_1_nopoint.png",
+        "white_vidname_padded_image_results/48/segments/48_weapon in reflection_2_nopoint.png",
+        "white_vidname_padded_image_results/48/segments/48_ornate circular mirror_0_nopoint.png",
+        "white_vidname_padded_image_results/48/segments/48_shoulder armor_3_nopoint.png"
+      ],
+      "segmentation_overlay": "white_vidname_padded_image_results/48/48_segmentation_overlay.png",
+      "mask_visualizations_dir": "white_vidname_padded_image_results/48/mask_visualizations",
+      "embeddings_file": "white_vidname_padded_image_results/48/embeddings/48_embeddings.json"
+    },
+    {
+      "image": "/home/ubuntu/code/drew/test_data/frames/Scenes 001-020__101B-1-_20230726152900590/61.jpg",
+      "image_dir": "white_vidname_padded_image_results/61",
+      "segments_count": 5,
+      "segments": [
+        "white_vidname_padded_image_results/61/segments/61_white decorative object_3_nopoint.png",
+        "white_vidname_padded_image_results/61/segments/61_white decorative object_4_nopoint.png",
+        "white_vidname_padded_image_results/61/segments/61_weapon in reflection_2_nopoint.png",
+        "white_vidname_padded_image_results/61/segments/61_ornate mirror_0_nopoint.png",
+        "white_vidname_padded_image_results/61/segments/61_shoulder armor_1_nopoint.png"
+      ],
+      "segmentation_overlay": "white_vidname_padded_image_results/61/61_segmentation_overlay.png",
+      "mask_visualizations_dir": "white_vidname_padded_image_results/61/mask_visualizations",
+      "embeddings_file": "white_vidname_padded_image_results/61/embeddings/61_embeddings.json"
+    },
+    {
+      "image": "/home/ubuntu/code/drew/test_data/frames/Scenes 001-020__101B-1-_20230726152900590/10.jpg",
+      "image_dir": "white_vidname_padded_image_results/10",
+      "segments_count": 8,
+      "segments": [
+        "white_vidname_padded_image_results/10/segments/10_chest armor (reflection)_3_nopoint.png",
+        "white_vidname_padded_image_results/10/segments/10_desk_6_nopoint.png",
+        "white_vidname_padded_image_results/10/segments/10_dagger_1_nopoint.png",
+        "white_vidname_padded_image_results/10/segments/10_large ornate mirror_0_nopoint.png",
+        "white_vidname_padded_image_results/10/segments/10_wall paneling (left)_4_nopoint.png",
+        "white_vidname_padded_image_results/10/segments/10_shoulder armor_2_nopoint.png",
+        "white_vidname_padded_image_results/10/segments/10_wall paneling (right)_5_nopoint.png",
+        "white_vidname_padded_image_results/10/segments/10_gold object on desk_7_nopoint.png"
+      ],
+      "segmentation_overlay": "white_vidname_padded_image_results/10/10_segmentation_overlay.png",
+      "mask_visualizations_dir": "white_vidname_padded_image_results/10/mask_visualizations",
+      "embeddings_file": "white_vidname_padded_image_results/10/embeddings/10_embeddings.json"
+    },
+    {
+      "image": "/home/ubuntu/code/drew/test_data/frames/Scenes 001-020__101B-1-_20230726152900590/94.jpg",
+      "image_dir": "white_vidname_padded_image_results/94",
+      "segments_count": 8,
+      "segments": [
+        "white_vidname_padded_image_results/94/segments/94_wall panel_6_nopoint.png",
+        "white_vidname_padded_image_results/94/segments/94_gold lamp_4_nopoint.png",
+        "white_vidname_padded_image_results/94/segments/94_table_5_nopoint.png",
+        "white_vidname_padded_image_results/94/segments/94_wall panel_7_nopoint.png",
+        "white_vidname_padded_image_results/94/segments/94_ornate round mirror_0_nopoint.png",
+        "white_vidname_padded_image_results/94/segments/94_black jacket with shoulder armor_2_nopoint.png",
+        "white_vidname_padded_image_results/94/segments/94_dagger_1_nopoint.png",
+        "white_vidname_padded_image_results/94/segments/94_white furry object_3_nopoint.png"
+      ],
+      "segmentation_overlay": "white_vidname_padded_image_results/94/94_segmentation_overlay.png",
+      "mask_visualizations_dir": "white_vidname_padded_image_results/94/mask_visualizations",
+      "embeddings_file": "white_vidname_padded_image_results/94/embeddings/94_embeddings.json"
+    }
+  ],
+  "segmentation_mode": "detection_based",
+  "used_points": false,
+  "mode": "directory",
+  "input_directory": "/home/ubuntu/code/drew/test_data/frames/Scenes 001-020__101B-1-_20230726152900590"
+}

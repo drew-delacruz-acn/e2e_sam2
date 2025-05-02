@@ -301,8 +301,8 @@ def process_image_and_generate_segments(
             binary_mask = mask_data['segmentation']
             binary_mask = binary_mask.astype(bool)
             
-            # Create a copy of the original image
-            segment_image = np.zeros_like(image_np)
+            # Create a white background image instead of black
+            segment_image = np.ones_like(image_np) * 255
             
             # Copy the original pixels where the mask is True
             segment_image[binary_mask] = image_np[binary_mask]
@@ -330,7 +330,8 @@ def generate_embeddings_for_segments(
     segment_paths, 
     embedding_generator, 
     image_dir, 
-    original_image
+    original_image,
+    video_name=None  # Add video_name parameter with default None
 ):
     """
     Generate embeddings for all segments from a single image and save to one JSON.
@@ -340,6 +341,7 @@ def generate_embeddings_for_segments(
         embedding_generator: EmbeddingGenerator instance
         image_dir: Root directory for this image's outputs
         original_image: Path to the original image
+        video_name: Name of the video source (optional)
         
     Returns:
         Path to the generated JSON file
@@ -360,6 +362,7 @@ def generate_embeddings_for_segments(
         # Create embeddings dict
         embeddings_data = {
             "original_image": str(original_image),
+            "video_name": video_name,  # Add video name to embeddings data
             "segments": {}
         }
         
@@ -582,8 +585,8 @@ def process_image_with_predictor(
             binary_mask = mask_data['segmentation']
             binary_mask = binary_mask.astype(bool)
             
-            # Create a copy of the original image
-            segment_image = np.zeros_like(image_np)
+            # Create a white background image instead of black
+            segment_image = np.ones_like(image_np) * 255
             
             # Copy the original pixels where the mask is True
             segment_image[binary_mask] = image_np[binary_mask]
@@ -957,8 +960,8 @@ def process_image_with_detections(
             binary_mask = mask_data['segmentation']
             binary_mask = binary_mask.astype(bool)
             
-            # Create a copy of the original image
-            segment_image = np.zeros_like(image_np)
+            # Create a white background image instead of black
+            segment_image = np.ones_like(image_np) * 255
             
             # Copy the original pixels where the mask is True
             segment_image[binary_mask] = image_np[binary_mask]
@@ -1059,7 +1062,7 @@ def visualize_detections(image, bboxes, labels, output_path, use_points=True):
 def crop_and_center_mask(image_np, target_size=224):
     """
     Crop image to the bounding box of non-black pixels, then resize and center
-    in a black canvas of target_size x target_size.
+    in a white canvas of target_size x target_size.
     
     Args:
         image_np: Numpy array of the image (RGB)
@@ -1075,10 +1078,10 @@ def crop_and_center_mask(image_np, target_size=224):
     rows = np.any(mask, axis=1)
     cols = np.any(mask, axis=0)
     
-    # If the image is completely black, return a black image of target size
+    # If the image is completely black, return a white image of target size
     if not np.any(rows) or not np.any(cols):
         logger.warning("Image is completely black - no content to center")
-        return np.zeros((target_size, target_size, 3), dtype=np.uint8)
+        return np.ones((target_size, target_size, 3), dtype=np.uint8) * 255
     
     # Find the boundaries
     y_min, y_max = np.where(rows)[0][[0, -1]]
@@ -1105,14 +1108,14 @@ def crop_and_center_mask(image_np, target_size=224):
     # Resize the image
     resized = pil_cropped.resize((new_w, new_h), Image.LANCZOS)
     
-    # Create new black canvas
-    centered = Image.new("RGB", (target_size, target_size), "black")
+    # Create new white canvas
+    centered = Image.new("RGB", (target_size, target_size), "white")
     
     # Calculate position to paste (center the image)
     paste_x = (target_size - new_w) // 2
     paste_y = (target_size - new_h) // 2
     
-    # Paste the resized image onto the black background
+    # Paste the resized image onto the white background
     centered.paste(resized, (paste_x, paste_y))
     
     return np.array(centered)
@@ -1131,6 +1134,15 @@ def main():
     # Create output Path object
     output_dir = Path(args.output_dir)
     os.makedirs(output_dir, exist_ok=True)
+    
+    # Extract video name from input directory or image path
+    if args.input_dir:
+        video_name = Path(args.input_dir).name
+    else:
+        # If using single image, use parent directory name
+        video_name = Path(args.image).parent.name
+    
+    logger.info(f"Processing video: {video_name}")
     
     # Initialize SAM2
     sam2_checkpoint = "checkpoints/sam2.1_hiera_base_plus.pt"
@@ -1211,6 +1223,7 @@ def main():
     # Prepare summary
     summary = {
         "output_directory": str(output_dir),
+        "video_name": video_name,  # Add video name to summary
         "processed_images": [],
         "segmentation_mode": segmentation_mode,
         "used_points": args.use_points if segmentation_mode != "automatic_mask_generator" else None
@@ -1253,7 +1266,8 @@ def main():
                 segment_paths=segment_paths,
                 embedding_generator=embedding_generator,
                 image_dir=image_dir,
-                original_image=str(image_file)
+                original_image=str(image_file),
+                video_name=video_name  # Pass video_name parameter
             )
             
             # Add to summary
@@ -1331,7 +1345,8 @@ def main():
                     segment_paths=segment_paths,
                     embedding_generator=embedding_generator,
                     image_dir=image_dir,
-                    original_image=str(image_file)
+                    original_image=str(image_file),
+                    video_name=video_name  # Pass video_name parameter
                 )
                 
                 # Add to summary

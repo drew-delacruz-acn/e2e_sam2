@@ -198,7 +198,7 @@ def search_similar_segments_in_neo4j(embeddings_dir, model_type="resnet50"):
             all_results[image_name] = image_results
     
     # Save all results to a JSON file
-    output_file = f"masked_white_segment_search_results_{model_type}.json"
+    output_file = f"masked_segment_search_results_{model_type}.json"
     with open(output_file, 'w') as f:
         json.dump(all_results, f, indent=2)
     

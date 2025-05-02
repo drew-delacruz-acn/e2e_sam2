@@ -29,7 +29,7 @@ from e2e_pipeline_v2.modules.embedding import EmbeddingGenerator, ModelType
 # Configure logging
 logging.basicConfig(
     level=logging.INFO,
-    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+    format='%(asctime)s - %(name)s - %(levelname)s - %(filename)s:%(lineno)d - %(message)s'
 )
 logger = logging.getLogger('segment_and_embed')
 
@@ -60,12 +60,18 @@ def parse_args():
                       help="Use SAM2 image predictor with full image bounds")
     mode_group.add_argument("--use_bbox_json", type=str, metavar="JSON_PATH",
                       help="Use SAM2 image predictor with bounding boxes from JSON file")
+    mode_group.add_argument("--detections_dir", type=str,
+                      help="Directory containing detection JSONs corresponding to images")
     
     # Option to use foreground points
     parser.add_argument("--use_points", action="store_true", default=True,
                       help="Use foreground points at bbox midpoints (default: True)")
     parser.add_argument("--no_points", action="store_false", dest="use_points",
                       help="Don't use foreground points with bbox")
+    
+    # Debug options
+    parser.add_argument("--debug", action="store_true",
+                      help="Enable debug-level logging")
     
     return parser.parse_args()
 
@@ -165,6 +171,8 @@ def create_segmentation_visualization(image, masks, output_path):
         masks: List of mask dictionaries from SAM2
         output_path: Path to save the visualization
     """
+    logger.debug(f"Creating segmentation visualization with {len(masks)} masks")
+    
     # Create a copy of the original image
     vis_image = image.copy()
     
@@ -179,17 +187,25 @@ def create_segmentation_visualization(image, masks, output_path):
         color = np.random.randint(100, 255, size=3).tolist()
         colors.append(color)
     
+    logger.debug(f"Generated {len(colors)} colors for mask visualization")
+    
     # Draw each mask with a different color
     for i, mask_data in enumerate(masks):
         binary_mask = mask_data['segmentation']
         color = colors[i]
         
+        # Get metadata if available 
+        label = mask_data.get('label', f"Segment {i}")
+        score = mask_data.get('predicted_iou', 0.0)
+        area = mask_data.get('area', np.sum(binary_mask))
+        
+        logger.debug(f"Processing mask {i}: label='{label}', score={score:.4f}, area={area}")
+        
         # Color the mask area
         colored_mask = np.zeros_like(vis_image, dtype=np.uint8)
-        print('-----------------')
-        print(np.unique(binary_mask))
-        print('-----------------')
-        colored_mask[binary_mask.astype(bool)] = color
+        mask_bool = binary_mask.astype(bool)
+        colored_mask[mask_bool] = color
+        
         # Add to the overlay with transparency
         overlay = cv2.addWeighted(overlay, 1, colored_mask, 0.5, 0)
         
@@ -198,6 +214,7 @@ def create_segmentation_visualization(image, masks, output_path):
                                      cv2.RETR_EXTERNAL, 
                                      cv2.CHAIN_APPROX_SIMPLE)
         cv2.drawContours(vis_image, contours, -1, color, 2)
+        logger.debug(f"Drew mask {i} with {len(contours)} contours")
     
     # Combine the original image and the overlay
     result = cv2.addWeighted(vis_image, 0.7, overlay, 0.3, 0)
@@ -212,6 +229,9 @@ def create_segmentation_visualization(image, masks, output_path):
     for i, mask_data in enumerate(masks):
         binary_mask = mask_data['segmentation']
         
+        # Try to get label if available
+        label = mask_data.get('label', f"{i}")
+        
         # Find the centroid
         moments = cv2.moments(binary_mask.astype(np.uint8))
         if moments["m00"] != 0:
@@ -219,10 +239,11 @@ def create_segmentation_visualization(image, masks, output_path):
             cY = int(moments["m01"] / moments["m00"])
             
             # Draw segment number at centroid
-            cv2.putText(result, str(i), (cX, cY), font, font_scale, 
+            cv2.putText(result, label, (cX, cY), font, font_scale, 
                       (255, 255, 255), font_thickness + 1, cv2.LINE_AA)  # Shadow
-            cv2.putText(result, str(i), (cX, cY), font, font_scale, 
+            cv2.putText(result, label, (cX, cY), font, font_scale, 
                       colors[i], font_thickness, cv2.LINE_AA)
+            logger.debug(f"Added label '{label}' for mask {i} at centroid ({cX}, {cY})")
     
     # Save the visualization
     cv2.imwrite(output_path, cv2.cvtColor(result, cv2.COLOR_RGB2BGR))
@@ -697,9 +718,339 @@ def save_individual_mask_visualizations(image, masks, output_dir):
     logger.info(f"Individual mask visualizations saved to {mask_vis_dir}")
     return mask_vis_dir
 
+def load_detections_from_json(json_path):
+    """
+    Load detections from a JSON file.
+    
+    Expected format:
+    [
+        {
+            "coordinates": [x1, y1, x2, y2],
+            "label": "class_name"
+        },
+        ...
+    ]
+    
+    Args:
+        json_path: Path to the detection JSON file
+        
+    Returns:
+        List of detections, each with 'coordinates' and 'label'
+    """
+    try:
+        logger.info(f"Loading detections from: {json_path}")
+        with open(json_path, 'r') as f:
+            detections = json.load(f)
+        
+        # Log detection info
+        valid_detections = []
+        for i, detection in enumerate(detections):
+            if "coordinates" not in detection or "label" not in detection:
+                logger.warning(f"Detection {i} in {json_path} is missing required fields: {detection}")
+                continue
+                
+            coords = detection["coordinates"]
+            label = detection["label"]
+            
+            if len(coords) != 4:
+                logger.warning(f"Detection {i} in {json_path} has invalid coordinates format: {coords}")
+                continue
+                
+            valid_detections.append(detection)
+            logger.debug(f"Detection {i}: label='{label}', bbox={coords}")
+        
+        logger.info(f"Loaded {len(valid_detections)} valid detections out of {len(detections)} from {json_path}")
+        return valid_detections
+    except Exception as e:
+        logger.error(f"Error loading detections from {json_path}: {str(e)}")
+        logger.exception("Detailed error:")
+        return []
+
+def process_image_with_detections(
+    image_path,
+    predictor,
+    output_dir,
+    detections_dir,
+    min_area=1000,
+    use_points=True
+):
+    """
+    Process an image with SAM2 image predictor using detection boxes,
+    save segments, and return segment paths.
+    
+    Args:
+        image_path: Path to the input image
+        predictor: SAM2 image predictor
+        output_dir: Directory to save segments
+        detections_dir: Directory containing detection JSONs
+        min_area: Minimum area for segments to consider
+        use_points: Whether to use foreground points at bbox midpoints
+        
+    Returns:
+        Tuple of (list of segment paths, path to debug visualization, image_dir)
+    """
+    try:
+        # Get base filename without extension
+        image_basename = os.path.basename(image_path)
+        image_name = os.path.splitext(image_basename)[0]
+        
+        logger.info(f"=== Processing image with detections: {image_path} ===")
+        
+        # Find corresponding detection JSON 
+        detection_json_path = os.path.join(detections_dir, f"{image_name}.json")
+        if not os.path.exists(detection_json_path):
+            logger.error(f"No detection JSON found at {detection_json_path}")
+            return [], None, None
+        
+        logger.info(f"Found detection file: {detection_json_path}")    
+        
+        # Load detections
+        detections = load_detections_from_json(detection_json_path)
+        if not detections:
+            logger.error(f"No valid detections found in {detection_json_path}")
+            return [], None, None
+        
+        # Create organized directory structure
+        image_dir = os.path.join(output_dir, image_name)
+        segments_dir = os.path.join(image_dir, "segments")
+        
+        # Create directories
+        os.makedirs(image_dir, exist_ok=True)
+        os.makedirs(segments_dir, exist_ok=True)
+        logger.debug(f"Created output directories: {image_dir}, {segments_dir}")
+        
+        # Load and process the image
+        logger.info(f"Loading image: {image_path}")
+        image = Image.open(image_path)
+        image_np = np.array(image.convert("RGB"))
+        logger.debug(f"Image loaded with shape: {image_np.shape}")
+        
+        # Set the image for the predictor
+        predictor.set_image(image_np)
+        logger.debug(f"Set image for SAM2 predictor")
+        
+        # Process each bounding box from detections
+        all_masks = []
+        all_scores = []
+        segment_paths = []
+        boxes_to_process = []
+        labels = []
+        
+        # Extract bounding boxes and labels from detections
+        for i, detection in enumerate(detections):
+            if "coordinates" not in detection or "label" not in detection:
+                logger.warning(f"Skipping detection {i}: missing coordinates or label")
+                continue
+                
+            bbox = detection["coordinates"]
+            label = detection["label"]
+            
+            if len(bbox) != 4:
+                logger.warning(f"Skipping detection {i}: invalid coordinates format")
+                continue
+                
+            boxes_to_process.append(bbox)
+            labels.append(label)
+        
+        logger.info(f"Processing {len(boxes_to_process)} detections for {image_basename}")
+        
+        start_time = time.time()
+        
+        # Process each detection's bounding box
+        for box_idx, (bbox, label) in enumerate(zip(boxes_to_process, labels)):
+            # Extract coordinates
+            x1, y1, x2, y2 = bbox
+            
+            # Log progress
+            logger.info(f"Processing detection {box_idx+1}/{len(boxes_to_process)}: label='{label}', bbox={bbox}")
+            
+            # Convert box to torch tensor and correct format
+            box_torch = torch.tensor(bbox, device=predictor.device)[None, :]
+            
+            # Prepare point inputs if using points
+            point_coords = None
+            point_labels = None
+            
+            if use_points:
+                midpoint_x = (x1 + x2) / 2
+                midpoint_y = (y1 + y2) / 2
+                
+                # Create point coordinates tensor (shape [1, 2])
+                point_coords = torch.tensor([[midpoint_x, midpoint_y]], device=predictor.device)
+                
+                # Create point labels tensor (1 = foreground point)
+                point_labels = torch.tensor([1], device=predictor.device)
+                
+                logger.info(f"Using foreground point at ({midpoint_x:.1f}, {midpoint_y:.1f}) for detection {box_idx} ({label})")
+            else:
+                logger.info(f"Using only bounding box without points for detection {box_idx} ({label})")
+            
+            # Get prediction with box and optional point
+            logger.debug(f"Running SAM2 prediction for detection {box_idx}...")
+            mask_start_time = time.time()
+            try:
+                with torch.inference_mode():
+                    masks, scores, logits = predictor.predict(
+                        point_coords=point_coords,
+                        point_labels=point_labels,
+                        box=box_torch,
+                        multimask_output=False
+                    )
+                mask_time = time.time() - mask_start_time
+                logger.debug(f"SAM2 prediction completed in {mask_time:.2f}s, got {len(masks)} masks")
+            except Exception as e:
+                logger.error(f"Error during SAM2 prediction for detection {box_idx}: {str(e)}")
+                logger.exception("Detailed error:")
+                continue
+            
+            # Create a format similar to automatic mask generator for visualization
+            for i, mask in enumerate(masks):
+                # Calculate area
+                area = np.sum(mask)
+                logger.debug(f"Mask {i} for detection {box_idx} has area: {area} pixels")
+                
+                if area < min_area:
+                    logger.debug(f"Skipping mask {i} (area {area} < min_area {min_area})")
+                    continue
+                    
+                all_masks.append({
+                    'segmentation': mask,
+                    'area': area,
+                    'bbox': bbox,
+                    'predicted_iou': scores[i],
+                    'source_box_idx': box_idx,
+                    'label': label,
+                    'used_point': use_points
+                })
+                all_scores.append(scores[i])
+                logger.debug(f"Added mask {i} for detection {box_idx} with score: {scores[i]:.4f}")
+        
+        total_time = time.time() - start_time
+        logger.info(f"Generated {len(all_masks)} valid masks in {total_time:.2f}s")
+        
+        if len(all_masks) == 0:
+            logger.warning(f"No valid masks generated for {image_basename}")
+            return [], None, None
+        
+        # Sort masks by score for better visualization
+        sorted_indices = np.argsort(all_scores)[::-1]  # Descending order
+        filtered_masks = [all_masks[i] for i in sorted_indices]
+        
+        logger.info(f"Saving {len(filtered_masks)} segments...")
+        
+        # Process and save each segment
+        for i, mask_data in enumerate(filtered_masks):
+            # Get the binary mask
+            binary_mask = mask_data['segmentation']
+            binary_mask = binary_mask.astype(bool)
+            
+            # Create a copy of the original image
+            segment_image = np.zeros_like(image_np)
+            
+            # Copy the original pixels where the mask is True
+            segment_image[binary_mask] = image_np[binary_mask]
+            
+            # Get metadata for naming
+            box_idx = mask_data.get('source_box_idx', 0)
+            label = mask_data.get('label', 'unknown')
+            point_suffix = "_point" if mask_data.get('used_point', False) else "_nopoint"
+            score = mask_data.get('predicted_iou', 0.0)
+            
+            # Create output path with the requested naming format:
+            # image_name_label_detection_index.png
+            output_path = os.path.join(segments_dir, f"{image_name}_{label}_{box_idx}{point_suffix}.png")
+            
+            # Save with proper color conversion
+            cv2.imwrite(output_path, cv2.cvtColor(segment_image, cv2.COLOR_RGB2BGR))
+            logger.debug(f"Saved segment {i} to {output_path} (score: {score:.4f})")
+            
+            # Add to segment paths
+            segment_paths.append(output_path)
+        
+        # Create and save a visualization with all segments overlaid on the original image
+        logger.info(f"Creating visualization overlays...")
+        debug_vis_path = os.path.join(image_dir, f"{image_name}_segmentation_overlay.png")
+        create_segmentation_visualization(image_np, filtered_masks, debug_vis_path)
+        
+        # Also create a visualization of the bounding boxes with labels
+        bbox_vis_path = os.path.join(image_dir, f"{image_name}_detections.png")
+        visualize_detections(image_np, boxes_to_process, labels, bbox_vis_path, use_points=use_points)
+        
+        logger.info(f"=== Finished processing {image_basename}: {len(segment_paths)} segments created ===")
+        return segment_paths, debug_vis_path, image_dir
+    
+    except Exception as e:
+        logger.error(f"Error processing {image_path} with detections: {str(e)}")
+        logger.exception("Detailed error:")
+        return [], None, None
+
+def visualize_detections(image, bboxes, labels, output_path, use_points=True):
+    """
+    Create a visualization of the detection bounding boxes with labels on the image.
+    
+    Args:
+        image: Original image as numpy array
+        bboxes: List of bounding box coordinates [x1, y1, x2, y2]
+        labels: List of class labels for each box
+        output_path: Path to save the visualization
+        use_points: Whether to visualize the midpoint used as foreground point
+    """
+    logger.debug(f"Creating detection visualization with {len(bboxes)} boxes")
+    
+    # Create a copy of the image for visualization
+    vis_image = image.copy()
+    
+    # Draw each bounding box
+    for i, (bbox, label) in enumerate(zip(bboxes, labels)):
+        x1, y1, x2, y2 = bbox
+        
+        # Generate a color based on the label for consistency
+        # Hash the label string to get a consistent color for each class
+        hash_val = hash(label) % 255
+        color = (hash_val, 255 - hash_val, (hash_val * 2) % 255)
+        
+        # Draw rectangle
+        cv2.rectangle(vis_image, (int(x1), int(y1)), (int(x2), int(y2)), color, 2)
+        logger.debug(f"Drew detection {i}: label='{label}', bbox={bbox}")
+        
+        # Calculate midpoint 
+        midpoint_x = int((x1 + x2) / 2)
+        midpoint_y = int((y1 + y2) / 2)
+        
+        # Draw midpoint if using points
+        if use_points:
+            # Draw a circle at the midpoint (point coordinate)
+            cv2.circle(vis_image, (midpoint_x, midpoint_y), 5, (0, 255, 0), -1)  # Green filled circle
+            cv2.circle(vis_image, (midpoint_x, midpoint_y), 5, (0, 0, 0), 1)     # Black outline
+            logger.debug(f"Drew point for detection {i} at ({midpoint_x}, {midpoint_y})")
+        
+        # Add label
+        text = f"{label} ({i})"
+        
+        # Calculate text size and position
+        font = cv2.FONT_HERSHEY_SIMPLEX
+        font_scale = 0.6
+        thickness = 2
+        (text_width, text_height), _ = cv2.getTextSize(text, font, font_scale, thickness)
+        
+        # Draw background rectangle for text
+        cv2.rectangle(vis_image, (int(x1), int(y1)-text_height-10), (int(x1)+text_width+5, int(y1)), color, -1)
+        
+        # Draw text
+        cv2.putText(vis_image, text, (int(x1), int(y1)-5), font, font_scale, (255, 255, 255), thickness)
+    
+    # Save the visualization
+    cv2.imwrite(output_path, cv2.cvtColor(vis_image, cv2.COLOR_RGB2BGR))
+    logger.info(f"Detection visualization saved to {output_path}")
+
 def main():
     args = parse_args()
     
+    # Set debug level if requested
+    if args.debug:
+        logger.setLevel(logging.DEBUG)
+        logger.debug("Debug logging enabled")
+        
     # Setup device
     device = get_device()
     
@@ -748,10 +1099,23 @@ def main():
             use_points=args.use_points
         )
         
+    elif args.detections_dir:
+        # Mode 4: Use detection-based segmentation
+        logger.info(f"Using detection-based segmentation with directory: {args.detections_dir}")
+        segmentation_mode = "detection_based"
+        predictor = SAM2ImagePredictor(sam2)
+        process_func = lambda img_path, out_dir, min_area: process_image_with_detections(
+            img_path, 
+            predictor, 
+            out_dir, 
+            args.detections_dir,
+            min_area=min_area,
+            use_points=args.use_points
+        )
+        
     else:
         # Mode 1: Use automatic mask generator (default)
         logger.info("Using SAM2 automatic mask generator")
-        segmentation_mode = "automatic_mask_generator"
         mask_generator = SAM2AutomaticMaskGenerator(
             model=sam2,
             points_per_side=64,
@@ -786,6 +1150,13 @@ def main():
             logger.error(f"Image file '{image_file}' does not exist.")
             return 1
             
+        # Check for corresponding detection file if using detection mode
+        if args.detections_dir:
+            detection_json_path = os.path.join(args.detections_dir, f"{image_file.stem}.json")
+            if not os.path.exists(detection_json_path):
+                logger.error(f"No detection JSON found for {image_file} at {detection_json_path}")
+                return 1
+            
         logger.info(f"Processing single image: {image_file}")
         summary["mode"] = "single_image"
         summary["input_image"] = str(image_file)
@@ -818,6 +1189,7 @@ def main():
                 "segments_count": len(segment_paths),
                 "segments": segment_paths,
                 "segmentation_overlay": debug_vis_path,
+                "mask_visualizations_dir": os.path.join(image_dir, "mask_visualizations"),
                 "embeddings_file": embeddings_path
             })
             
@@ -846,6 +1218,23 @@ def main():
             return 1
         
         logger.info(f"Found {len(image_files)} images to process")
+        
+        # If using detection mode, filter to only images with corresponding detection files
+        if args.detections_dir:
+            valid_image_files = []
+            for image_file in image_files:
+                detection_json_path = os.path.join(args.detections_dir, f"{image_file.stem}.json")
+                if os.path.exists(detection_json_path):
+                    valid_image_files.append(image_file)
+                else:
+                    logger.warning(f"Skipping {image_file}: no corresponding detection JSON found")
+            
+            logger.info(f"Found {len(valid_image_files)} out of {len(image_files)} images with corresponding detection files")
+            image_files = valid_image_files
+            
+            if not image_files:
+                logger.error(f"No images with corresponding detection files found")
+                return 1
         
         # Process each image in the directory
         for image_file in tqdm(image_files, desc="Processing images"):
@@ -878,6 +1267,7 @@ def main():
                     "segments_count": len(segment_paths),
                     "segments": segment_paths,
                     "segmentation_overlay": debug_vis_path,
+                    "mask_visualizations_dir": os.path.join(image_dir, "mask_visualizations"),
                     "embeddings_file": embeddings_path
                 })
                 
@@ -952,3 +1342,6 @@ if __name__ == "__main__":
 #         plt.show()
 
 # show_masks(image, masks, scores, box_coords=input_box)
+
+
+# python e2e_pipeline_v2/experiments/segment_gemini.py --image path/to/image.jpg --output_dir results --detections_dir path/to/detections --use_points

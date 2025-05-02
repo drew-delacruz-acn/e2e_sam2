@@ -11,7 +11,7 @@ def load_embeddings(results_dir, model_type="resnet50"):
         model_type: Type of embeddings to load ("resnet50", "vit", or "clip")
         
     Returns:
-        Dictionary mapping image names to their segment embeddings
+        Dictionary with video_name and images (mapping image names to their segment embeddings)
     """
     # Validate model type
     if model_type not in ["resnet50", "vit", "clip"]:
@@ -19,6 +19,7 @@ def load_embeddings(results_dir, model_type="resnet50"):
     
     results_path = Path(results_dir)
     all_embeddings = {}
+    video_name = results_path.name  # Default to directory name
     
     # First check if there's a processing summary
     summary_path = results_path / "processing_summary.json"
@@ -27,11 +28,19 @@ def load_embeddings(results_dir, model_type="resnet50"):
         with open(summary_path, 'r') as f:
             summary = json.load(f)
         
+        # Get video name from summary if available
+        if "video_name" in summary:
+            video_name = summary["video_name"]
+            
         for img_data in summary.get("processed_images", []):
             embeddings_file = img_data.get("embeddings_file")
             if embeddings_file and os.path.exists(embeddings_file):
                 with open(embeddings_file, 'r') as f:
                     img_embeddings = json.load(f)
+                
+                # Check if the embedding file has a video_name that should override our default
+                if "video_name" in img_embeddings and img_embeddings["video_name"]:
+                    video_name = img_embeddings["video_name"]
                 
                 image_name = Path(img_embeddings["original_image"]).stem
                 all_embeddings[image_name] = {}
@@ -53,6 +62,10 @@ def load_embeddings(results_dir, model_type="resnet50"):
                         with open(embed_file, 'r') as f:
                             img_embeddings = json.load(f)
                         
+                        # Check if the embedding file has a video_name that should override our default
+                        if "video_name" in img_embeddings and img_embeddings["video_name"]:
+                            video_name = img_embeddings["video_name"]
+                        
                         image_name = img_dir.name
                         all_embeddings[image_name] = {}
                         
@@ -64,24 +77,30 @@ def load_embeddings(results_dir, model_type="resnet50"):
                                     "path": segment_data["path"]
                                 }
     
-    return all_embeddings
+    # Return both the video name and the embeddings
+    return {
+        "video_name": video_name,
+        "images": all_embeddings
+    }
 
 
-# # Use the function
-# print("Loading embeddings...")
-# print("In directory:", os.getcwd())
-# embeddings = load_embeddings("center_padded_image_results", "resnet50")
-# counter = 0
-# # Now you have access to all embeddings
-# for image_name, segments in embeddings.items():
-#     for segment_id, data in segments.items():
-#         embedding = data["embedding"]
-#         segment_path = data["path"]
-#         counter += 1
+# Use the function
+print("Loading embeddings...")
+print("In directory:", os.getcwd())
+embedding_result = load_embeddings("center_padded_image_results", "resnet50")
+counter = 0
+# Now you have access to all embeddings
+video_name = embedding_result["video_name"]
+embeddings = embedding_result["images"]
+for image_name, segments in embeddings.items():
+    for segment_id, data in segments.items():
+        embedding = data["embedding"]
+        segment_path = data["path"]
+        counter += 1
 
 
-# print(f'Loaded {len(embeddings)} images with embeddings.')
-# print(counter)
+print(f'Loaded {len(embeddings)} images with embeddings for video: {video_name}')
+print(f'Total segments: {counter}')
 
 
 # from neo4j import GraphDatabase
@@ -141,11 +160,16 @@ def search_similar_segments_in_neo4j(embeddings_dir, model_type="resnet50"):
     
     # Load embeddings
     print(f"Loading {model_type} embeddings from {embeddings_dir}...")
-    embeddings = load_embeddings(embeddings_dir, model_type)
-    print(f"Loaded embeddings for {len(embeddings)} images")
+    embedding_result = load_embeddings(embeddings_dir, model_type)
+    video_name = embedding_result["video_name"]
+    embeddings = embedding_result["images"]
+    print(f"Loaded embeddings for video '{video_name}' with {len(embeddings)} images")
     
     # Prepare results container
-    all_results = {}
+    all_results = {
+        "video_name": video_name,
+        "images": {}
+    }
     
     # Query for each segment's embedding
     with driver.session(database=NEO4J_DB) as session:
@@ -155,15 +179,13 @@ def search_similar_segments_in_neo4j(embeddings_dir, model_type="resnet50"):
             for segment_id, data in segments.items():
                 embedding = data["embedding"]
                 segment_path = data["path"]
-                # print(f"Processing segment {segment_id} from image {image_name}...")
-                # print(f"Embedding: {embedding}")
-
+                
                 # Use the Neo4j vector search query
-                query = f"""
+                query = """
                 CALL db.index.vector.queryNodes("resnet_index", 14752, $embedding)
                 YIELD node, score
                 MATCH (origin)-[:custom_hasResnetEmbedding]->(node)
-                WHERE NOT origin.value CONTAINS 'Scenes' AND origin.custom_isMasked = true
+                WHERE NOT origin.value CONTAINS 'Scenes' AND origin.custom_hasPadding = true
                 WITH origin.value AS result, origin.omc_hasVersion as version, score AS similarity
                 WHERE similarity > $threshold
                 ORDER BY similarity DESC
@@ -195,10 +217,10 @@ def search_similar_segments_in_neo4j(embeddings_dir, model_type="resnet50"):
                 
                 print(f"Processed segment {segment_id} from image {image_name}")
             
-            all_results[image_name] = image_results
+            all_results["images"][image_name] = image_results
     
     # Save all results to a JSON file
-    output_file = f"masked_white_segment_search_results_{model_type}.json"
+    output_file = f"{video_name}_search_results_{model_type}.json"
     with open(output_file, 'w') as f:
         json.dump(all_results, f, indent=2)
     

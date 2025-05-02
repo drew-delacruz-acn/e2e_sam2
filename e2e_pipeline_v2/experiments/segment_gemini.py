@@ -1061,7 +1061,7 @@ def visualize_detections(image, bboxes, labels, output_path, use_points=True):
 
 def crop_and_center_mask(image_np, target_size=224):
     """
-    Crop image to the bounding box of non-black pixels, then resize and center
+    Crop image to the bounding box of the object, then resize and center
     in a white canvas of target_size x target_size.
     
     Args:
@@ -1071,21 +1071,43 @@ def crop_and_center_mask(image_np, target_size=224):
     Returns:
         Numpy array of the centered image
     """
-    # Find non-black pixels (any channel value > 0 means it's not black)
-    mask = np.sum(image_np, axis=2) > 0
+    # Now that backgrounds are white (255,255,255), we need to find the object boundaries
+    # Convert to grayscale for simpler processing
+    if len(image_np.shape) == 3 and image_np.shape[2] == 3:
+        gray = cv2.cvtColor(image_np, cv2.COLOR_RGB2GRAY)
+    else:
+        gray = image_np.mean(axis=2).astype(np.uint8)
     
-    # Get the bounding box of non-black pixels
-    rows = np.any(mask, axis=1)
-    cols = np.any(mask, axis=0)
+    # Find pixels that are not white (not 255) - these are part of the object
+    # Allow some tolerance for anti-aliasing or compression artifacts
+    object_mask = gray < 250
     
-    # If the image is completely black, return a white image of target size
-    if not np.any(rows) or not np.any(cols):
-        logger.warning("Image is completely black - no content to center")
-        return np.ones((target_size, target_size, 3), dtype=np.uint8) * 255
+    # Check if there are any object pixels
+    if not np.any(object_mask):
+        logger.warning("No object pixels found - returning full image")
+        # Just resize the entire image to the target size
+        pil_image = Image.fromarray(image_np)
+        pil_image = pil_image.resize((target_size, target_size), Image.LANCZOS)
+        return np.array(pil_image)
+    
+    # Get the bounding box of object pixels
+    rows = np.any(object_mask, axis=1)
+    cols = np.any(object_mask, axis=0)
     
     # Find the boundaries
     y_min, y_max = np.where(rows)[0][[0, -1]]
     x_min, x_max = np.where(cols)[0][[0, -1]]
+    
+    # Add a small margin around the object (2% of dimensions)
+    margin_y = max(1, int((y_max - y_min) * 0.02))
+    margin_x = max(1, int((x_max - x_min) * 0.02))
+    
+    # Apply margins but stay within image boundaries
+    height, width = image_np.shape[:2]
+    y_min = max(0, y_min - margin_y)
+    y_max = min(height - 1, y_max + margin_y)
+    x_min = max(0, x_min - margin_x)
+    x_max = min(width - 1, x_max + margin_x)
     
     # Crop to bounding box
     cropped = image_np[y_min:y_max+1, x_min:x_max+1]

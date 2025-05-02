@@ -68,10 +68,50 @@ def load_embeddings(results_dir, model_type="resnet50"):
 
 
 # Use the function
-embeddings = load_embeddings("path/to/results", "vit")
-
+print("Loading embeddings...")
+print("In directory:", os.getcwd())
+embeddings = load_embeddings("center_padded_image_results", "resnet50")
+counter = 0
 # Now you have access to all embeddings
 for image_name, segments in embeddings.items():
     for segment_id, data in segments.items():
         embedding = data["embedding"]
         segment_path = data["path"]
+        counter += 1
+
+
+print(f'Loaded {len(embeddings)} images with embeddings.')
+print(counter)
+
+
+from neo4j import GraphDatabase
+from dotenv import load_dotenv
+import os
+load_dotenv()
+NEO4J_DB = 'ipid'
+
+driver = GraphDatabase.driver(os.getenv("NEO4J_URI"), auth=(os.getenv("NEO4J_USERNAME"), os.getenv("NEO4J_PASSWORD")))
+
+# with driver.session(database=NEO4J_DB) as session:
+#     embedding = THIS SHOULD BE YOUR KEY 'renset50' IN YOUR JSON
+#     query = f"""
+#         CALL db.index.vector.queryNodes("resnet_index", 14752, $embedding)
+#         YIELD node, score
+#         MATCH (origin)-[:custom_hasResnetEmbedding]->(node)
+#         WHERE NOT origin.value CONTAINS 'Scenes' AND origin.custom_hasPadding = true
+#         WITH origin.value AS result, origin.omc_hasVersion as version, score AS similarity
+#         WHERE similarity > $threshold
+#         ORDER BY similarity DESC
+#         RETURN DISTINCT result, version, similarity
+#         LIMIT $top_k
+#         """
+
+#     results = session.run(query, embedding=embedding, top_k=1, threshold=0.7)
+#     top_results = []
+#     for record in results:
+#         top_results.append({
+#             'predicted_object': record['result'],
+#             'object_version': record['version'], 
+#             'similarity_score': record['similarity']
+#         })
+#     # save the results to a json

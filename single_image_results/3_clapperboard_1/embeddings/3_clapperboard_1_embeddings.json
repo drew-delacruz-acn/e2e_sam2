@@ -1,9 +1,9 @@
 {
   "original_image": "/home/ubuntu/code/drew/test_data/objects/Scenes 001-020__106D-5-_20230815151758589/3_clapperboard_1.png",
   "segments": {
-    "3_clapperboard_1_box0_seg0": {
-      "path": "single_image_results/3_clapperboard_1/segments/3_clapperboard_1_box0_seg0.png",
-      "padded_path": "single_image_results/3_clapperboard_1/padded_segments/padded_3_clapperboard_1_box0_seg0.png",
+    "3_clapperboard_1_box0_nopoint_seg0": {
+      "path": "single_image_results/3_clapperboard_1/segments/3_clapperboard_1_box0_nopoint_seg0.png",
+      "padded_path": "single_image_results/3_clapperboard_1/padded_segments/padded_3_clapperboard_1_box0_nopoint_seg0.png",
       "embeddings": {
         "vit": [
           -0.006409020163118839,

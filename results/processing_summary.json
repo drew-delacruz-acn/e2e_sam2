@@ -1,0 +1,23 @@
+{
+  "output_directory": "results",
+  "processed_images": [
+    {
+      "image": "/home/ubuntu/code/drew/test_data/frames/Scenes 001-020__101B-1-_20230726152900590/0.jpg",
+      "image_dir": "results/0",
+      "segments_count": 4,
+      "segments": [
+        "results/0/segments/0_wall paneling_1_nopoint.png",
+        "results/0/segments/0_stuffed animal_4_nopoint.png",
+        "results/0/segments/0_ornate circular mirror_0_nopoint.png",
+        "results/0/segments/0_weapon with blue light_2_nopoint.png"
+      ],
+      "segmentation_overlay": "results/0/0_segmentation_overlay.png",
+      "mask_visualizations_dir": "results/0/mask_visualizations",
+      "embeddings_file": "results/0/embeddings/0_embeddings.json"
+    }
+  ],
+  "segmentation_mode": "detection_based",
+  "used_points": false,
+  "mode": "single_image",
+  "input_image": "/home/ubuntu/code/drew/test_data/frames/Scenes 001-020__101B-1-_20230726152900590/0.jpg"
+}

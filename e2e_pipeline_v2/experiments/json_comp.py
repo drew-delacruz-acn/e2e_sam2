@@ -50,7 +50,7 @@ def load_embeddings(results_dir, model_type="resnet50"):
                     if model_type in segment_data["embeddings"]:
                         all_embeddings[image_name][segment_id] = {
                             "embedding": segment_data["embeddings"][model_type],
-                            "path": segment_data["path"]
+                            "path": segment_data.get("padded_path", segment_data.get("path"))  # Prefer padded_path
                         }
     else:
         # Scan directory structure to find embedding files
@@ -74,7 +74,7 @@ def load_embeddings(results_dir, model_type="resnet50"):
                             if model_type in segment_data["embeddings"]:
                                 all_embeddings[image_name][segment_id] = {
                                     "embedding": segment_data["embeddings"][model_type],
-                                    "path": segment_data["path"]
+                                    "path": segment_data.get("padded_path", segment_data.get("path"))  # Prefer padded_path
                                 }
     
     # Return both the video name and the embeddings
@@ -216,7 +216,7 @@ def search_similar_segments_in_neo4j(embeddings_dir, model_type="resnet50"):
                         "model": model_type,
                         "frame": frame,
                         "segment_id": segment_id,
-                        "segment_path": segment_path
+                        "bbox_path": segment_path  # Changed from segment_path to bbox_path
                     }
                     
                     # Add to results array

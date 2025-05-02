@@ -814,12 +814,23 @@ def process_image_with_detections(
         image_basename = os.path.basename(image_path)
         image_name = os.path.splitext(image_basename)[0]
         
+        # Get video name from parent directory of the image
+        video_name = Path(image_path).parent.name
+        
         logger.info(f"=== Processing image with detections: {image_path} ===")
         
-        # Find corresponding detection JSON 
-        detection_json_path = os.path.join(detections_dir, f"{image_name}.json")
+        # Find corresponding detection JSON
+        # First try video-specific subdirectory
+        video_detections_dir = os.path.join(detections_dir, video_name)
+        detection_json_path = os.path.join(video_detections_dir, f"{image_name}.json")
+        
+        # If not found, try the root detections directory as fallback
         if not os.path.exists(detection_json_path):
-            logger.error(f"No detection JSON found at {detection_json_path}")
+            detection_json_path = os.path.join(detections_dir, f"{image_name}.json")
+            logger.info(f"No detection found in {video_detections_dir}, trying {detections_dir}")
+            
+        if not os.path.exists(detection_json_path):
+            logger.error(f"No detection JSON found at either {os.path.join(video_detections_dir, f'{image_name}.json')} or {os.path.join(detections_dir, f'{image_name}.json')}")
             return [], None, None
         
         logger.info(f"Found detection file: {detection_json_path}")    
@@ -1358,17 +1369,24 @@ def process_single_image(image_path, output_dir, process_func, embedding_generat
     if not image_file.exists():
         logger.error(f"Image file '{image_file}' does not exist.")
         return None
-        
-    # Check for corresponding detection file if using detection mode
-    if detections_dir:
-        detection_json_path = os.path.join(detections_dir, f"{image_file.stem}.json")
-        if not os.path.exists(detection_json_path):
-            logger.error(f"No detection JSON found for {image_file} at {detection_json_path}")
-            return None
     
     # Video name is the parent directory name
     video_name = image_file.parent.name
     logger.info(f"Processing single image: {image_file}")
+        
+    # Check for corresponding detection file if using detection mode
+    if detections_dir:
+        # Try video-specific detection subdirectory first
+        video_detections_dir = os.path.join(detections_dir, video_name)
+        detection_json_path = os.path.join(video_detections_dir, f"{image_file.stem}.json")
+        
+        # If not found, fall back to main detections directory
+        if not os.path.exists(detection_json_path):
+            detection_json_path = os.path.join(detections_dir, f"{image_file.stem}.json")
+            
+        if not os.path.exists(detection_json_path):
+            logger.error(f"No detection JSON found for {image_file} at either {os.path.join(video_detections_dir, f'{image_file.stem}.json')} or {os.path.join(detections_dir, f'{image_file.stem}.json')}")
+            return None
     
     summary = {
         "mode": "single_image",
@@ -1470,13 +1488,27 @@ def process_directory(input_dir, output_dir, process_func, embedding_generator, 
     
     # If using detection mode, filter to only images with corresponding detection files
     if detections_dir:
+        # Check for video-specific detections subdirectory
+        video_detections_dir = os.path.join(detections_dir, video_name)
+        has_video_subdir = os.path.exists(video_detections_dir) and os.path.isdir(video_detections_dir)
+        
+        logger.info(f"Looking for detections in {'video-specific directory: ' + video_detections_dir if has_video_subdir else 'main directory: ' + detections_dir}")
+        
         valid_image_files = []
         for image_file in image_files:
+            # Try video-specific detection subdirectory first
+            if has_video_subdir:
+                detection_json_path = os.path.join(video_detections_dir, f"{image_file.stem}.json")
+                if os.path.exists(detection_json_path):
+                    valid_image_files.append(image_file)
+                    continue
+            
+            # Fall back to main detections directory
             detection_json_path = os.path.join(detections_dir, f"{image_file.stem}.json")
             if os.path.exists(detection_json_path):
                 valid_image_files.append(image_file)
             else:
-                logger.warning(f"Skipping {image_file}: no corresponding detection JSON found")
+                logger.warning(f"Skipping {image_file}: no corresponding detection JSON found in either {video_detections_dir if has_video_subdir else 'N/A'} or {detections_dir}")
         
         logger.info(f"Found {len(valid_image_files)} out of {len(image_files)} images with corresponding detection files")
         image_files = valid_image_files

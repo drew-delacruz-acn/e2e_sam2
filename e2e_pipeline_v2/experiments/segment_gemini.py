@@ -134,7 +134,7 @@ def apply_image_tranforms(image_path, output_path):
         pad_top = max((target_height - new_height) // 2, 0)
         pad_bottom = target_height - new_height - pad_top
         
-        resized_padded_image = ImageOps.expand(image, (pad_left, pad_top, pad_right, pad_bottom), fill='grey')
+        resized_padded_image = ImageOps.expand(image, (pad_left, pad_top, pad_right, pad_bottom), fill='black')
     
     # Ensure the output directory exists
     os.makedirs(os.path.dirname(output_path), exist_ok=True)
@@ -369,9 +369,21 @@ def generate_embeddings_for_segments(
             segment_basename = os.path.basename(segment_path)
             segment_id = os.path.splitext(segment_basename)[0]  # Remove extension
             
-            # Apply padding to create a properly sized image for embedding
+            # Load segment image
+            segment_image = cv2.imread(segment_path)
+            # Convert BGR to RGB
+            segment_image_rgb = cv2.cvtColor(segment_image, cv2.COLOR_BGR2RGB)
+            
+            # Apply crop and center function
+            centered_image = crop_and_center_mask(segment_image_rgb)
+            
+            # Create output path for padded image
             padded_path = os.path.join(padded_dir, f"padded_{segment_basename}")
-            apply_image_tranforms(segment_path, padded_path)
+            
+            # Save padded image
+            cv2.imwrite(padded_path, cv2.cvtColor(centered_image, cv2.COLOR_RGB2BGR))
+            
+            logger.debug(f"Created centered mask image for {segment_id}")
             
             # Generate embeddings for each model
             segment_embeddings = {}
@@ -406,6 +418,7 @@ def generate_embeddings_for_segments(
     
     except Exception as e:
         logger.error(f"Error generating embeddings: {str(e)}")
+        logger.exception("Detailed error:")
         return None
 
 def load_bboxes_from_json(json_path):
@@ -1042,6 +1055,67 @@ def visualize_detections(image, bboxes, labels, output_path, use_points=True):
     # Save the visualization
     cv2.imwrite(output_path, cv2.cvtColor(vis_image, cv2.COLOR_RGB2BGR))
     logger.info(f"Detection visualization saved to {output_path}")
+
+def crop_and_center_mask(image_np, target_size=224):
+    """
+    Crop image to the bounding box of non-black pixels, then resize and center
+    in a black canvas of target_size x target_size.
+    
+    Args:
+        image_np: Numpy array of the image (RGB)
+        target_size: Target dimension for width and height (square)
+        
+    Returns:
+        Numpy array of the centered image
+    """
+    # Find non-black pixels (any channel value > 0 means it's not black)
+    mask = np.sum(image_np, axis=2) > 0
+    
+    # Get the bounding box of non-black pixels
+    rows = np.any(mask, axis=1)
+    cols = np.any(mask, axis=0)
+    
+    # If the image is completely black, return a black image of target size
+    if not np.any(rows) or not np.any(cols):
+        logger.warning("Image is completely black - no content to center")
+        return np.zeros((target_size, target_size, 3), dtype=np.uint8)
+    
+    # Find the boundaries
+    y_min, y_max = np.where(rows)[0][[0, -1]]
+    x_min, x_max = np.where(cols)[0][[0, -1]]
+    
+    # Crop to bounding box
+    cropped = image_np[y_min:y_max+1, x_min:x_max+1]
+    
+    # Convert to PIL for resizing
+    pil_cropped = Image.fromarray(cropped)
+    
+    # Calculate dimensions for resizing while maintaining aspect ratio
+    crop_w, crop_h = pil_cropped.size
+    
+    if crop_w >= crop_h:
+        # Width is the limiting factor
+        new_w = target_size
+        new_h = min(target_size, int(crop_h * (target_size / crop_w)))
+    else:
+        # Height is the limiting factor
+        new_h = target_size
+        new_w = min(target_size, int(crop_w * (target_size / crop_h)))
+    
+    # Resize the image
+    resized = pil_cropped.resize((new_w, new_h), Image.LANCZOS)
+    
+    # Create new black canvas
+    centered = Image.new("RGB", (target_size, target_size), "black")
+    
+    # Calculate position to paste (center the image)
+    paste_x = (target_size - new_w) // 2
+    paste_y = (target_size - new_h) // 2
+    
+    # Paste the resized image onto the black background
+    centered.paste(resized, (paste_x, paste_y))
+    
+    return np.array(centered)
 
 def main():
     args = parse_args()

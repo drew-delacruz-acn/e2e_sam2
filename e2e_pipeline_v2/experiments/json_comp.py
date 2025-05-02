@@ -84,56 +84,60 @@ def load_embeddings(results_dir, model_type="resnet50"):
     }
 
 
-# Use the function
-print("Loading embeddings...")
-print("In directory:", os.getcwd())
-embedding_result = load_embeddings("center_padded_image_results", "resnet50")
-counter = 0
-# Now you have access to all embeddings
-video_name = embedding_result["video_name"]
-embeddings = embedding_result["images"]
-for image_name, segments in embeddings.items():
-    for segment_id, data in segments.items():
-        embedding = data["embedding"]
-        segment_path = data["path"]
-        counter += 1
+def process_master_summary(results_dir, model_type="resnet50"):
+    """
+    Process all videos in a master summary.
+    
+    Args:
+        results_dir: Path to the results directory containing the master_summary.json
+        model_type: Type of embeddings to use ('resnet50', 'vit', or 'clip')
+        
+    Returns:
+        Combined array of results from all videos
+    """
+    master_summary_path = Path(results_dir) / "master_summary.json"
+    if not master_summary_path.exists():
+        print(f"No master summary found at {master_summary_path}")
+        # If no master summary, try to process as a single video directory
+        return search_similar_segments_in_neo4j(results_dir, model_type)
+    
+    print(f"Found master summary at {master_summary_path}")
+    with open(master_summary_path, 'r') as f:
+        master_summary = json.load(f)
+    
+    all_results = []
+    processed_videos = []
+    
+    for folder_data in master_summary.get("processed_folders", []):
+        video_name = folder_data.get("video_name")
+        video_dir = folder_data.get("output_dir")
+        
+        if not video_name or not video_dir:
+            print(f"Skipping invalid folder data: {folder_data}")
+            continue
+            
+        print(f"\n========== Processing video: {video_name} ==========")
+        video_results = search_similar_segments_in_neo4j(video_dir, model_type)
+        
+        # Add to combined results
+        all_results.extend(video_results)
+        processed_videos.append(video_name)
+    
+    if all_results:
+        # Save combined results
+        output_file = f"combined_search_results_{model_type}.json"
+        with open(output_file, 'w') as f:
+            json.dump(all_results, f, indent=2)
+        
+        print(f"\n========== Summary ==========")
+        print(f"Processed {len(processed_videos)} videos: {', '.join(processed_videos)}")
+        print(f"Combined results saved to {output_file}")
+        print(f"Found {len(all_results)} total matches across all videos")
+    else:
+        print("No results found in any video.")
+    
+    return all_results
 
-
-print(f'Loaded {len(embeddings)} images with embeddings for video: {video_name}')
-print(f'Total segments: {counter}')
-
-
-# from neo4j import GraphDatabase
-# from dotenv import load_dotenv
-# import os
-# load_dotenv()
-# NEO4J_DB = 'ipid'
-
-# driver = GraphDatabase.driver(os.getenv("NEO4J_URI"), auth=(os.getenv("NEO4J_USERNAME"), os.getenv("NEO4J_PASSWORD")))
-
-# # with driver.session(database=NEO4J_DB) as session:
-# #     embedding = THIS SHOULD BE YOUR KEY 'renset50' IN YOUR JSON
-# #     query = f"""
-# #         CALL db.index.vector.queryNodes("resnet_index", 14752, $embedding)
-# #         YIELD node, score
-# #         MATCH (origin)-[:custom_hasResnetEmbedding]->(node)
-# #         WHERE NOT origin.value CONTAINS 'Scenes' AND origin.custom_hasPadding = true
-# #         WITH origin.value AS result, origin.omc_hasVersion as version, score AS similarity
-# #         WHERE similarity > $threshold
-# #         ORDER BY similarity DESC
-# #         RETURN DISTINCT result, version, similarity
-# #         LIMIT $top_k
-# #         """
-
-# #     results = session.run(query, embedding=embedding, top_k=1, threshold=0.7)
-# #     top_results = []
-# #     for record in results:
-# #         top_results.append({
-# #             'predicted_object': record['result'],
-# #             'object_version': record['version'], 
-# #             'similarity_score': record['similarity']
-# #         })
-# #     # save the results to a json
 
 def search_similar_segments_in_neo4j(embeddings_dir, model_type="resnet50"):
     """
@@ -142,6 +146,9 @@ def search_similar_segments_in_neo4j(embeddings_dir, model_type="resnet50"):
     Args:
         embeddings_dir: Directory containing segment embeddings
         model_type: Type of embeddings to use ('resnet50', 'vit', or 'clip')
+        
+    Returns:
+        Array of match results
     """
     from neo4j import GraphDatabase
     from dotenv import load_dotenv
@@ -227,6 +234,36 @@ def search_similar_segments_in_neo4j(embeddings_dir, model_type="resnet50"):
     
     return results_array
 
-results = search_similar_segments_in_neo4j("white_vidname_padded_image_results", "resnet50")
-# print("Results:", results)
-print("Done.")
+
+if __name__ == "__main__":
+    import argparse
+    
+    parser = argparse.ArgumentParser(description="Search for similar segments in Neo4j")
+    parser.add_argument("--results_dir", type=str, required=True,
+                      help="Path to the results directory")
+    parser.add_argument("--model", type=str, default="resnet50",
+                      choices=["resnet50", "vit", "clip"],
+                      help="Embedding model to use")
+    parser.add_argument("--process_all", action="store_true",
+                      help="Process all videos in the master summary")
+    
+    args = parser.parse_args()
+    
+    if args.process_all:
+        # Process all videos in the master summary
+        process_master_summary(args.results_dir, args.model)
+    else:
+        # Process a single video directory
+        search_similar_segments_in_neo4j(args.results_dir, args.model)
+
+# Example usage:
+# 
+# # Process a specific video directory:
+# python json_comp.py --results_dir results/video1 --model resnet50
+#
+# # Process all videos from master summary:
+# python json_comp.py --results_dir results --model resnet50 --process_all
+#
+# # Or use the functions directly:
+# results = search_similar_segments_in_neo4j("results/video1", "resnet50")
+# all_results = process_master_summary("results", "resnet50")

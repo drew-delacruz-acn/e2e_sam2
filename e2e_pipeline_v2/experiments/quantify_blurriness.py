@@ -396,8 +396,7 @@ if __name__ == "__main__":
         logger.info(f"Blur Detection Script started at {timestamp}")
         logger.info("=" * 40)
         
-        # Get video path from args or use default
-        video_path = args.video if args.video else "/Users/andrewdelacruz/e2e_sam2/data/Young_African_American_Woman_Headphones_1.mp4"
+        video_path = "/home/ubuntu/code/drew/e2e_sam2/data/Scenes 001-020__5B14-5a- only_20230816051800694.mp4"  # Replace with your video file
         
         if not os.path.exists(video_path):
             logger.error(f"Video file not found: {video_path}")

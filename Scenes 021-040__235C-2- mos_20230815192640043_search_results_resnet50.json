@@ -1,0 +1,12 @@
+[
+  {
+    "video": "Scenes 021-040__235C-2- mos_20230815192640043",
+    "predicted_object": "Time Collar",
+    "object_version": 2,
+    "similarity_score": 0.703857958316803,
+    "model": "resnet50",
+    "frame": "0",
+    "segment_id": "0_TVA jacket_1_nopoint",
+    "bbox_path": "all_frames/Scenes 021-040__235C-2- mos_20230815192640043/0/padded_segments/padded_0_TVA jacket_1_nopoint.png"
+  }
+]

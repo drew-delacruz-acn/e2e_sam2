@@ -1,0 +1,1522 @@
+[
+  {
+    "video": "Scenes 021-040__536A-3-_20230816063724398",
+    "predicted_object": "Loki's dagger",
+    "object_version": 2,
+    "similarity_score": 0.7031349539756775,
+    "model": "resnet50",
+    "frame": "19",
+    "segment_id": "19_War hammer_5_nopoint",
+    "bbox_path": "all_frames/Scenes 021-040__536A-3-_20230816063724398/19/padded_segments/padded_19_War hammer_5_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__536A-3-_20230816063724398",
+    "predicted_object": "Sylvie's horned headpiece",
+    "object_version": 1,
+    "similarity_score": 0.7014396786689758,
+    "model": "resnet50",
+    "frame": "19",
+    "segment_id": "19_Horned helmet_4_nopoint",
+    "bbox_path": "all_frames/Scenes 021-040__536A-3-_20230816063724398/19/padded_segments/padded_19_Horned helmet_4_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__536A-3-_20230816063724398",
+    "predicted_object": "Time Collar",
+    "object_version": 3,
+    "similarity_score": 0.7010350227355957,
+    "model": "resnet50",
+    "frame": "46",
+    "segment_id": "46_Horned helmet_0_nopoint",
+    "bbox_path": "all_frames/Scenes 021-040__536A-3-_20230816063724398/46/padded_segments/padded_46_Horned helmet_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__536A-3-_20230816063724398",
+    "predicted_object": "Loki's armor (THE AVENGERS)",
+    "object_version": 3,
+    "similarity_score": 0.7572165727615356,
+    "model": "resnet50",
+    "frame": "63",
+    "segment_id": "63_TVA jacket_1_nopoint",
+    "bbox_path": "all_frames/Scenes 021-040__536A-3-_20230816063724398/63/padded_segments/padded_63_TVA jacket_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__536A-3-_20230816063724398",
+    "predicted_object": "Loki's Scepter",
+    "object_version": 1,
+    "similarity_score": 0.7021203637123108,
+    "model": "resnet50",
+    "frame": "63",
+    "segment_id": "63_Horned helmet_0_nopoint",
+    "bbox_path": "all_frames/Scenes 021-040__536A-3-_20230816063724398/63/padded_segments/padded_63_Horned helmet_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__536A-3-_20230816063724398",
+    "predicted_object": "Laevateinn",
+    "object_version": 1,
+    "similarity_score": 0.7100564241409302,
+    "model": "resnet50",
+    "frame": "133",
+    "segment_id": "133_Horned helmet_0_nopoint",
+    "bbox_path": "all_frames/Scenes 021-040__536A-3-_20230816063724398/133/padded_segments/padded_133_Horned helmet_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__536A-3-_20230816063724398",
+    "predicted_object": "Laevateinn",
+    "object_version": 3,
+    "similarity_score": 0.7130722403526306,
+    "model": "resnet50",
+    "frame": "83",
+    "segment_id": "83_Horned helmet_1_nopoint",
+    "bbox_path": "all_frames/Scenes 021-040__536A-3-_20230816063724398/83/padded_segments/padded_83_Horned helmet_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__536A-3-_20230816063724398",
+    "predicted_object": "Asgardian device",
+    "object_version": 3,
+    "similarity_score": 0.7080396413803101,
+    "model": "resnet50",
+    "frame": "52",
+    "segment_id": "52_Horned helmet_0_nopoint",
+    "bbox_path": "all_frames/Scenes 021-040__536A-3-_20230816063724398/52/padded_segments/padded_52_Horned helmet_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__536A-3-_20230816063724398",
+    "predicted_object": "Laevateinn",
+    "object_version": 1,
+    "similarity_score": 0.7098903059959412,
+    "model": "resnet50",
+    "frame": "84",
+    "segment_id": "84_Horned helmet_0_nopoint",
+    "bbox_path": "all_frames/Scenes 021-040__536A-3-_20230816063724398/84/padded_segments/padded_84_Horned helmet_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__536A-3-_20230816063724398",
+    "predicted_object": "Time Collar",
+    "object_version": 2,
+    "similarity_score": 0.7300667762756348,
+    "model": "resnet50",
+    "frame": "183",
+    "segment_id": "183_TVA jacket_0_nopoint",
+    "bbox_path": "all_frames/Scenes 021-040__536A-3-_20230816063724398/183/padded_segments/padded_183_TVA jacket_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__536A-3-_20230816063724398",
+    "predicted_object": "Asgardian device",
+    "object_version": 3,
+    "similarity_score": 0.7074832320213318,
+    "model": "resnet50",
+    "frame": "204",
+    "segment_id": "204_Horned helmet_0_nopoint",
+    "bbox_path": "all_frames/Scenes 021-040__536A-3-_20230816063724398/204/padded_segments/padded_204_Horned helmet_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__536A-3-_20230816063724398",
+    "predicted_object": "Laevateinn",
+    "object_version": 1,
+    "similarity_score": 0.7032046914100647,
+    "model": "resnet50",
+    "frame": "204",
+    "segment_id": "204_Horned helmet_1_nopoint",
+    "bbox_path": "all_frames/Scenes 021-040__536A-3-_20230816063724398/204/padded_segments/padded_204_Horned helmet_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__536A-3-_20230816063724398",
+    "predicted_object": "Loki's armor (THE AVENGERS)",
+    "object_version": 3,
+    "similarity_score": 0.7387732863426208,
+    "model": "resnet50",
+    "frame": "171",
+    "segment_id": "171_TVA jacket_1_nopoint",
+    "bbox_path": "all_frames/Scenes 021-040__536A-3-_20230816063724398/171/padded_segments/padded_171_TVA jacket_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__536A-3-_20230816063724398",
+    "predicted_object": "Loki's Scepter",
+    "object_version": 1,
+    "similarity_score": 0.7016602158546448,
+    "model": "resnet50",
+    "frame": "171",
+    "segment_id": "171_Horned helmet_0_nopoint",
+    "bbox_path": "all_frames/Scenes 021-040__536A-3-_20230816063724398/171/padded_segments/padded_171_Horned helmet_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__536A-3-_20230816063724398",
+    "predicted_object": "Loki's armor (THE AVENGERS)",
+    "object_version": 2,
+    "similarity_score": 0.7151163816452026,
+    "model": "resnet50",
+    "frame": "163",
+    "segment_id": "163_TVA jacket_1_nopoint",
+    "bbox_path": "all_frames/Scenes 021-040__536A-3-_20230816063724398/163/padded_segments/padded_163_TVA jacket_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__536A-3-_20230816063724398",
+    "predicted_object": "Time Collar",
+    "object_version": 3,
+    "similarity_score": 0.7473112344741821,
+    "model": "resnet50",
+    "frame": "163",
+    "segment_id": "163_Horned helmet_0_nopoint",
+    "bbox_path": "all_frames/Scenes 021-040__536A-3-_20230816063724398/163/padded_segments/padded_163_Horned helmet_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__536A-3-_20230816063724398",
+    "predicted_object": "Laevateinn",
+    "object_version": 1,
+    "similarity_score": 0.7014238834381104,
+    "model": "resnet50",
+    "frame": "138",
+    "segment_id": "138_Horned helmet_1_nopoint",
+    "bbox_path": "all_frames/Scenes 021-040__536A-3-_20230816063724398/138/padded_segments/padded_138_Horned helmet_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__536A-3-_20230816063724398",
+    "predicted_object": "Asgardian device",
+    "object_version": 3,
+    "similarity_score": 0.7060582041740417,
+    "model": "resnet50",
+    "frame": "149",
+    "segment_id": "149_Horned helmet_2_nopoint",
+    "bbox_path": "all_frames/Scenes 021-040__536A-3-_20230816063724398/149/padded_segments/padded_149_Horned helmet_2_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__536A-3-_20230816063724398",
+    "predicted_object": "Time Collar",
+    "object_version": 3,
+    "similarity_score": 0.7022467851638794,
+    "model": "resnet50",
+    "frame": "149",
+    "segment_id": "149_Horned helmet_0_nopoint",
+    "bbox_path": "all_frames/Scenes 021-040__536A-3-_20230816063724398/149/padded_segments/padded_149_Horned helmet_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__536A-3-_20230816063724398",
+    "predicted_object": "Boastful Loki's hammer",
+    "object_version": 1,
+    "similarity_score": 0.7024813890457153,
+    "model": "resnet50",
+    "frame": "56",
+    "segment_id": "56_TVA jacket_1_nopoint",
+    "bbox_path": "all_frames/Scenes 021-040__536A-3-_20230816063724398/56/padded_segments/padded_56_TVA jacket_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__536A-3-_20230816063724398",
+    "predicted_object": "Loki's armor (THE AVENGERS)",
+    "object_version": 3,
+    "similarity_score": 0.7518346309661865,
+    "model": "resnet50",
+    "frame": "167",
+    "segment_id": "167_TVA jacket_1_nopoint",
+    "bbox_path": "all_frames/Scenes 021-040__536A-3-_20230816063724398/167/padded_segments/padded_167_TVA jacket_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__536A-3-_20230816063724398",
+    "predicted_object": "Sylvie's machete",
+    "object_version": 2,
+    "similarity_score": 0.7174059152603149,
+    "model": "resnet50",
+    "frame": "167",
+    "segment_id": "167_Horned helmet_0_nopoint",
+    "bbox_path": "all_frames/Scenes 021-040__536A-3-_20230816063724398/167/padded_segments/padded_167_Horned helmet_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__536A-3-_20230816063724398",
+    "predicted_object": "Laevateinn",
+    "object_version": 1,
+    "similarity_score": 0.7007622718811035,
+    "model": "resnet50",
+    "frame": "207",
+    "segment_id": "207_Horned helmet_0_nopoint",
+    "bbox_path": "all_frames/Scenes 021-040__536A-3-_20230816063724398/207/padded_segments/padded_207_Horned helmet_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__536A-3-_20230816063724398",
+    "predicted_object": "Laevateinn",
+    "object_version": 1,
+    "similarity_score": 0.7008256912231445,
+    "model": "resnet50",
+    "frame": "124",
+    "segment_id": "124_Horned helmet_1_nopoint",
+    "bbox_path": "all_frames/Scenes 021-040__536A-3-_20230816063724398/124/padded_segments/padded_124_Horned helmet_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__536A-3-_20230816063724398",
+    "predicted_object": "Loki's armor (THE AVENGERS)",
+    "object_version": 2,
+    "similarity_score": 0.7177326679229736,
+    "model": "resnet50",
+    "frame": "174",
+    "segment_id": "174_TVA jacket_1_nopoint",
+    "bbox_path": "all_frames/Scenes 021-040__536A-3-_20230816063724398/174/padded_segments/padded_174_TVA jacket_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__536A-3-_20230816063724398",
+    "predicted_object": "Loki's armor (THE AVENGERS)",
+    "object_version": 3,
+    "similarity_score": 0.7303511500358582,
+    "model": "resnet50",
+    "frame": "185",
+    "segment_id": "185_TVA jacket_0_nopoint",
+    "bbox_path": "all_frames/Scenes 021-040__536A-3-_20230816063724398/185/padded_segments/padded_185_TVA jacket_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__536A-3-_20230816063724398",
+    "predicted_object": "Time Collar",
+    "object_version": 1,
+    "similarity_score": 0.7119133472442627,
+    "model": "resnet50",
+    "frame": "173",
+    "segment_id": "173_Horned helmet_0_nopoint",
+    "bbox_path": "all_frames/Scenes 021-040__536A-3-_20230816063724398/173/padded_segments/padded_173_Horned helmet_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__536A-3-_20230816063724398",
+    "predicted_object": "Asgardian device",
+    "object_version": 3,
+    "similarity_score": 0.7222462892532349,
+    "model": "resnet50",
+    "frame": "62",
+    "segment_id": "62_Horned helmet_0_nopoint",
+    "bbox_path": "all_frames/Scenes 021-040__536A-3-_20230816063724398/62/padded_segments/padded_62_Horned helmet_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__536A-3-_20230816063724398",
+    "predicted_object": "Time Collar",
+    "object_version": 3,
+    "similarity_score": 0.7112889289855957,
+    "model": "resnet50",
+    "frame": "210",
+    "segment_id": "210_Horned helmet_0_nopoint",
+    "bbox_path": "all_frames/Scenes 021-040__536A-3-_20230816063724398/210/padded_segments/padded_210_Horned helmet_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__536A-3-_20230816063724398",
+    "predicted_object": "Loki's Scepter",
+    "object_version": 1,
+    "similarity_score": 0.7191547751426697,
+    "model": "resnet50",
+    "frame": "74",
+    "segment_id": "74_Horned helmet_0_nopoint",
+    "bbox_path": "all_frames/Scenes 021-040__536A-3-_20230816063724398/74/padded_segments/padded_74_Horned helmet_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__536A-3-_20230816063724398",
+    "predicted_object": "Laevateinn",
+    "object_version": 1,
+    "similarity_score": 0.7149363160133362,
+    "model": "resnet50",
+    "frame": "186",
+    "segment_id": "186_Horned helmet_0_nopoint",
+    "bbox_path": "all_frames/Scenes 021-040__536A-3-_20230816063724398/186/padded_segments/padded_186_Horned helmet_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__536A-3-_20230816063724398",
+    "predicted_object": "Laevateinn",
+    "object_version": 1,
+    "similarity_score": 0.7031713128089905,
+    "model": "resnet50",
+    "frame": "157",
+    "segment_id": "157_Horned helmet_1_nopoint",
+    "bbox_path": "all_frames/Scenes 021-040__536A-3-_20230816063724398/157/padded_segments/padded_157_Horned helmet_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__536A-3-_20230816063724398",
+    "predicted_object": "Asgardian device",
+    "object_version": 3,
+    "similarity_score": 0.703319787979126,
+    "model": "resnet50",
+    "frame": "157",
+    "segment_id": "157_Horned helmet_0_nopoint",
+    "bbox_path": "all_frames/Scenes 021-040__536A-3-_20230816063724398/157/padded_segments/padded_157_Horned helmet_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__536A-3-_20230816063724398",
+    "predicted_object": "Asgardian device",
+    "object_version": 3,
+    "similarity_score": 0.7101761102676392,
+    "model": "resnet50",
+    "frame": "72",
+    "segment_id": "72_Horned helmet_0_nopoint",
+    "bbox_path": "all_frames/Scenes 021-040__536A-3-_20230816063724398/72/padded_segments/padded_72_Horned helmet_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__536A-3-_20230816063724398",
+    "predicted_object": "Laevateinn",
+    "object_version": 1,
+    "similarity_score": 0.7048249840736389,
+    "model": "resnet50",
+    "frame": "201",
+    "segment_id": "201_Horned helmet_2_nopoint",
+    "bbox_path": "all_frames/Scenes 021-040__536A-3-_20230816063724398/201/padded_segments/padded_201_Horned helmet_2_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__536A-3-_20230816063724398",
+    "predicted_object": "Asgardian device",
+    "object_version": 3,
+    "similarity_score": 0.7000937461853027,
+    "model": "resnet50",
+    "frame": "201",
+    "segment_id": "201_Horned helmet_1_nopoint",
+    "bbox_path": "all_frames/Scenes 021-040__536A-3-_20230816063724398/201/padded_segments/padded_201_Horned helmet_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__536A-3-_20230816063724398",
+    "predicted_object": "Time Collar",
+    "object_version": 3,
+    "similarity_score": 0.7011891007423401,
+    "model": "resnet50",
+    "frame": "17",
+    "segment_id": "17_Horned helmet_4_nopoint",
+    "bbox_path": "all_frames/Scenes 021-040__536A-3-_20230816063724398/17/padded_segments/padded_17_Horned helmet_4_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__536A-3-_20230816063724398",
+    "predicted_object": "Time Collar",
+    "object_version": 1,
+    "similarity_score": 0.7131970524787903,
+    "model": "resnet50",
+    "frame": "17",
+    "segment_id": "17_Horned helmet_0_nopoint",
+    "bbox_path": "all_frames/Scenes 021-040__536A-3-_20230816063724398/17/padded_segments/padded_17_Horned helmet_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__536A-3-_20230816063724398",
+    "predicted_object": "Asgardian device",
+    "object_version": 3,
+    "similarity_score": 0.7069073915481567,
+    "model": "resnet50",
+    "frame": "188",
+    "segment_id": "188_Horned helmet_0_nopoint",
+    "bbox_path": "all_frames/Scenes 021-040__536A-3-_20230816063724398/188/padded_segments/padded_188_Horned helmet_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__536A-3-_20230816063724398",
+    "predicted_object": "Laevateinn",
+    "object_version": 1,
+    "similarity_score": 0.7064517736434937,
+    "model": "resnet50",
+    "frame": "205",
+    "segment_id": "205_Horned helmet_0_nopoint",
+    "bbox_path": "all_frames/Scenes 021-040__536A-3-_20230816063724398/205/padded_segments/padded_205_Horned helmet_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__536A-3-_20230816063724398",
+    "predicted_object": "Asgardian device",
+    "object_version": 3,
+    "similarity_score": 0.7082823514938354,
+    "model": "resnet50",
+    "frame": "47",
+    "segment_id": "47_Horned helmet_0_nopoint",
+    "bbox_path": "all_frames/Scenes 021-040__536A-3-_20230816063724398/47/padded_segments/padded_47_Horned helmet_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__536A-3-_20230816063724398",
+    "predicted_object": "Laevateinn",
+    "object_version": 1,
+    "similarity_score": 0.7318002581596375,
+    "model": "resnet50",
+    "frame": "47",
+    "segment_id": "47_Horned helmet_1_nopoint",
+    "bbox_path": "all_frames/Scenes 021-040__536A-3-_20230816063724398/47/padded_segments/padded_47_Horned helmet_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__536A-3-_20230816063724398",
+    "predicted_object": "Loki's armor (THE AVENGERS)",
+    "object_version": 3,
+    "similarity_score": 0.7030181884765625,
+    "model": "resnet50",
+    "frame": "162",
+    "segment_id": "162_TVA jacket_1_nopoint",
+    "bbox_path": "all_frames/Scenes 021-040__536A-3-_20230816063724398/162/padded_segments/padded_162_TVA jacket_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__536A-3-_20230816063724398",
+    "predicted_object": "Time Collar",
+    "object_version": 3,
+    "similarity_score": 0.7288739681243896,
+    "model": "resnet50",
+    "frame": "162",
+    "segment_id": "162_Horned helmet_0_nopoint",
+    "bbox_path": "all_frames/Scenes 021-040__536A-3-_20230816063724398/162/padded_segments/padded_162_Horned helmet_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__536A-3-_20230816063724398",
+    "predicted_object": "Laevateinn",
+    "object_version": 1,
+    "similarity_score": 0.7118256092071533,
+    "model": "resnet50",
+    "frame": "203",
+    "segment_id": "203_Horned helmet_1_nopoint",
+    "bbox_path": "all_frames/Scenes 021-040__536A-3-_20230816063724398/203/padded_segments/padded_203_Horned helmet_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__536A-3-_20230816063724398",
+    "predicted_object": "Time Collar",
+    "object_version": 2,
+    "similarity_score": 0.7020646929740906,
+    "model": "resnet50",
+    "frame": "39",
+    "segment_id": "39_Metal gauntlet_6_nopoint",
+    "bbox_path": "all_frames/Scenes 021-040__536A-3-_20230816063724398/39/padded_segments/padded_39_Metal gauntlet_6_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__536A-3-_20230816063724398",
+    "predicted_object": "Asgardian device",
+    "object_version": 3,
+    "similarity_score": 0.7025247812271118,
+    "model": "resnet50",
+    "frame": "39",
+    "segment_id": "39_Horned helmet_1_nopoint",
+    "bbox_path": "all_frames/Scenes 021-040__536A-3-_20230816063724398/39/padded_segments/padded_39_Horned helmet_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__536A-3-_20230816063724398",
+    "predicted_object": "Loki's armor (THE AVENGERS)",
+    "object_version": 2,
+    "similarity_score": 0.7088520526885986,
+    "model": "resnet50",
+    "frame": "35",
+    "segment_id": "35_TVA jacket_1_nopoint",
+    "bbox_path": "all_frames/Scenes 021-040__536A-3-_20230816063724398/35/padded_segments/padded_35_TVA jacket_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__536A-3-_20230816063724398",
+    "predicted_object": "Loki's dagger",
+    "object_version": 2,
+    "similarity_score": 0.7129625082015991,
+    "model": "resnet50",
+    "frame": "35",
+    "segment_id": "35_War hammer_2_nopoint",
+    "bbox_path": "all_frames/Scenes 021-040__536A-3-_20230816063724398/35/padded_segments/padded_35_War hammer_2_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__536A-3-_20230816063724398",
+    "predicted_object": "Laevateinn",
+    "object_version": 1,
+    "similarity_score": 0.7117300033569336,
+    "model": "resnet50",
+    "frame": "198",
+    "segment_id": "198_Horned helmet_0_nopoint",
+    "bbox_path": "all_frames/Scenes 021-040__536A-3-_20230816063724398/198/padded_segments/padded_198_Horned helmet_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__536A-3-_20230816063724398",
+    "predicted_object": "Laevateinn",
+    "object_version": 1,
+    "similarity_score": 0.7131821513175964,
+    "model": "resnet50",
+    "frame": "44",
+    "segment_id": "44_Horned helmet_1_nopoint",
+    "bbox_path": "all_frames/Scenes 021-040__536A-3-_20230816063724398/44/padded_segments/padded_44_Horned helmet_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__536A-3-_20230816063724398",
+    "predicted_object": "Loki's armor (THE AVENGERS)",
+    "object_version": 2,
+    "similarity_score": 0.7433131337165833,
+    "model": "resnet50",
+    "frame": "169",
+    "segment_id": "169_TVA jacket_0_nopoint",
+    "bbox_path": "all_frames/Scenes 021-040__536A-3-_20230816063724398/169/padded_segments/padded_169_TVA jacket_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__536A-3-_20230816063724398",
+    "predicted_object": "Asgardian device",
+    "object_version": 3,
+    "similarity_score": 0.7002454996109009,
+    "model": "resnet50",
+    "frame": "175",
+    "segment_id": "175_Horned helmet_0_nopoint",
+    "bbox_path": "all_frames/Scenes 021-040__536A-3-_20230816063724398/175/padded_segments/padded_175_Horned helmet_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__536A-3-_20230816063724398",
+    "predicted_object": "Asgardian device",
+    "object_version": 3,
+    "similarity_score": 0.7070366740226746,
+    "model": "resnet50",
+    "frame": "49",
+    "segment_id": "49_Horned helmet_0_nopoint",
+    "bbox_path": "all_frames/Scenes 021-040__536A-3-_20230816063724398/49/padded_segments/padded_49_Horned helmet_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__536A-3-_20230816063724398",
+    "predicted_object": "Laevateinn",
+    "object_version": 1,
+    "similarity_score": 0.7141420841217041,
+    "model": "resnet50",
+    "frame": "49",
+    "segment_id": "49_Horned helmet_2_nopoint",
+    "bbox_path": "all_frames/Scenes 021-040__536A-3-_20230816063724398/49/padded_segments/padded_49_Horned helmet_2_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__536A-3-_20230816063724398",
+    "predicted_object": "Time Collar",
+    "object_version": 3,
+    "similarity_score": 0.7369363903999329,
+    "model": "resnet50",
+    "frame": "68",
+    "segment_id": "68_Horned helmet_0_nopoint",
+    "bbox_path": "all_frames/Scenes 021-040__536A-3-_20230816063724398/68/padded_segments/padded_68_Horned helmet_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__536A-3-_20230816063724398",
+    "predicted_object": "Laevateinn",
+    "object_version": 1,
+    "similarity_score": 0.7042853236198425,
+    "model": "resnet50",
+    "frame": "16",
+    "segment_id": "16_Horned helmet_0_nopoint",
+    "bbox_path": "all_frames/Scenes 021-040__536A-3-_20230816063724398/16/padded_segments/padded_16_Horned helmet_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__536A-3-_20230816063724398",
+    "predicted_object": "Time Collar",
+    "object_version": 3,
+    "similarity_score": 0.7016525864601135,
+    "model": "resnet50",
+    "frame": "196",
+    "segment_id": "196_Horned helmet_0_nopoint",
+    "bbox_path": "all_frames/Scenes 021-040__536A-3-_20230816063724398/196/padded_segments/padded_196_Horned helmet_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__536A-3-_20230816063724398",
+    "predicted_object": "Asgardian device",
+    "object_version": 3,
+    "similarity_score": 0.7139724493026733,
+    "model": "resnet50",
+    "frame": "196",
+    "segment_id": "196_Horned helmet_2_nopoint",
+    "bbox_path": "all_frames/Scenes 021-040__536A-3-_20230816063724398/196/padded_segments/padded_196_Horned helmet_2_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__536A-3-_20230816063724398",
+    "predicted_object": "Asgardian device",
+    "object_version": 3,
+    "similarity_score": 0.7234154343605042,
+    "model": "resnet50",
+    "frame": "57",
+    "segment_id": "57_Horned helmet_0_nopoint",
+    "bbox_path": "all_frames/Scenes 021-040__536A-3-_20230816063724398/57/padded_segments/padded_57_Horned helmet_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__536A-3-_20230816063724398",
+    "predicted_object": "Asgardian device",
+    "object_version": 3,
+    "similarity_score": 0.7150747179985046,
+    "model": "resnet50",
+    "frame": "209",
+    "segment_id": "209_Horned helmet_2_nopoint",
+    "bbox_path": "all_frames/Scenes 021-040__536A-3-_20230816063724398/209/padded_segments/padded_209_Horned helmet_2_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__536A-3-_20230816063724398",
+    "predicted_object": "Asgardian device",
+    "object_version": 3,
+    "similarity_score": 0.7093928456306458,
+    "model": "resnet50",
+    "frame": "187",
+    "segment_id": "187_Horned helmet_0_nopoint",
+    "bbox_path": "all_frames/Scenes 021-040__536A-3-_20230816063724398/187/padded_segments/padded_187_Horned helmet_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__536A-3-_20230816063724398",
+    "predicted_object": "Asgardian device",
+    "object_version": 3,
+    "similarity_score": 0.7019507884979248,
+    "model": "resnet50",
+    "frame": "146",
+    "segment_id": "146_Horned helmet_1_nopoint",
+    "bbox_path": "all_frames/Scenes 021-040__536A-3-_20230816063724398/146/padded_segments/padded_146_Horned helmet_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__536A-3-_20230816063724398",
+    "predicted_object": "Loki's armor (THE AVENGERS)",
+    "object_version": 2,
+    "similarity_score": 0.7526566982269287,
+    "model": "resnet50",
+    "frame": "212",
+    "segment_id": "212_TVA jacket_1_nopoint",
+    "bbox_path": "all_frames/Scenes 021-040__536A-3-_20230816063724398/212/padded_segments/padded_212_TVA jacket_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__536A-3-_20230816063724398",
+    "predicted_object": "Asgardian device",
+    "object_version": 3,
+    "similarity_score": 0.7004405856132507,
+    "model": "resnet50",
+    "frame": "212",
+    "segment_id": "212_Horned helmet_0_nopoint",
+    "bbox_path": "all_frames/Scenes 021-040__536A-3-_20230816063724398/212/padded_segments/padded_212_Horned helmet_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__536A-3-_20230816063724398",
+    "predicted_object": "Laevateinn",
+    "object_version": 1,
+    "similarity_score": 0.7015753388404846,
+    "model": "resnet50",
+    "frame": "158",
+    "segment_id": "158_Horned helmet_3_nopoint",
+    "bbox_path": "all_frames/Scenes 021-040__536A-3-_20230816063724398/158/padded_segments/padded_158_Horned helmet_3_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__536A-3-_20230816063724398",
+    "predicted_object": "Asgardian device",
+    "object_version": 3,
+    "similarity_score": 0.7165080904960632,
+    "model": "resnet50",
+    "frame": "158",
+    "segment_id": "158_Horned helmet_2_nopoint",
+    "bbox_path": "all_frames/Scenes 021-040__536A-3-_20230816063724398/158/padded_segments/padded_158_Horned helmet_2_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__536A-3-_20230816063724398",
+    "predicted_object": "Loki's Scepter",
+    "object_version": 1,
+    "similarity_score": 0.7220284938812256,
+    "model": "resnet50",
+    "frame": "65",
+    "segment_id": "65_Horned helmet_0_nopoint",
+    "bbox_path": "all_frames/Scenes 021-040__536A-3-_20230816063724398/65/padded_segments/padded_65_Horned helmet_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__536A-3-_20230816063724398",
+    "predicted_object": "Loki's armor (THE AVENGERS)",
+    "object_version": 2,
+    "similarity_score": 0.7747414112091064,
+    "model": "resnet50",
+    "frame": "65",
+    "segment_id": "65_TVA jacket_2_nopoint",
+    "bbox_path": "all_frames/Scenes 021-040__536A-3-_20230816063724398/65/padded_segments/padded_65_TVA jacket_2_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__536A-3-_20230816063724398",
+    "predicted_object": "Laevateinn",
+    "object_version": 1,
+    "similarity_score": 0.7092990279197693,
+    "model": "resnet50",
+    "frame": "51",
+    "segment_id": "51_Horned helmet_4_nopoint",
+    "bbox_path": "all_frames/Scenes 021-040__536A-3-_20230816063724398/51/padded_segments/padded_51_Horned helmet_4_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__536A-3-_20230816063724398",
+    "predicted_object": "Laevateinn",
+    "object_version": 1,
+    "similarity_score": 0.7093811631202698,
+    "model": "resnet50",
+    "frame": "155",
+    "segment_id": "155_Horned helmet_1_nopoint",
+    "bbox_path": "all_frames/Scenes 021-040__536A-3-_20230816063724398/155/padded_segments/padded_155_Horned helmet_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__536A-3-_20230816063724398",
+    "predicted_object": "Laevateinn",
+    "object_version": 1,
+    "similarity_score": 0.7085849046707153,
+    "model": "resnet50",
+    "frame": "102",
+    "segment_id": "102_Horned helmet_1_nopoint",
+    "bbox_path": "all_frames/Scenes 021-040__536A-3-_20230816063724398/102/padded_segments/padded_102_Horned helmet_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__536A-3-_20230816063724398",
+    "predicted_object": "Time Collar",
+    "object_version": 3,
+    "similarity_score": 0.7106601595878601,
+    "model": "resnet50",
+    "frame": "160",
+    "segment_id": "160_Horned helmet_0_nopoint",
+    "bbox_path": "all_frames/Scenes 021-040__536A-3-_20230816063724398/160/padded_segments/padded_160_Horned helmet_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__536A-3-_20230816063724398",
+    "predicted_object": "Asgardian device",
+    "object_version": 3,
+    "similarity_score": 0.7066786289215088,
+    "model": "resnet50",
+    "frame": "200",
+    "segment_id": "200_Horned helmet_1_nopoint",
+    "bbox_path": "all_frames/Scenes 021-040__536A-3-_20230816063724398/200/padded_segments/padded_200_Horned helmet_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__536A-3-_20230816063724398",
+    "predicted_object": "Laevateinn",
+    "object_version": 1,
+    "similarity_score": 0.7171664237976074,
+    "model": "resnet50",
+    "frame": "200",
+    "segment_id": "200_Horned helmet_0_nopoint",
+    "bbox_path": "all_frames/Scenes 021-040__536A-3-_20230816063724398/200/padded_segments/padded_200_Horned helmet_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__536A-3-_20230816063724398",
+    "predicted_object": "Asgardian device",
+    "object_version": 1,
+    "similarity_score": 0.7222369313240051,
+    "model": "resnet50",
+    "frame": "78",
+    "segment_id": "78_Horned helmet_0_nopoint",
+    "bbox_path": "all_frames/Scenes 021-040__536A-3-_20230816063724398/78/padded_segments/padded_78_Horned helmet_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__536A-3-_20230816063724398",
+    "predicted_object": "Time Collar",
+    "object_version": 3,
+    "similarity_score": 0.7005900740623474,
+    "model": "resnet50",
+    "frame": "159",
+    "segment_id": "159_Horned helmet_0_nopoint",
+    "bbox_path": "all_frames/Scenes 021-040__536A-3-_20230816063724398/159/padded_segments/padded_159_Horned helmet_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__536A-3-_20230816063724398",
+    "predicted_object": "Time Collar",
+    "object_version": 2,
+    "similarity_score": 0.7027689218521118,
+    "model": "resnet50",
+    "frame": "159",
+    "segment_id": "159_Horned helmet_1_nopoint",
+    "bbox_path": "all_frames/Scenes 021-040__536A-3-_20230816063724398/159/padded_segments/padded_159_Horned helmet_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__536A-3-_20230816063724398",
+    "predicted_object": "Loki's armor (THE AVENGERS)",
+    "object_version": 3,
+    "similarity_score": 0.7370397448539734,
+    "model": "resnet50",
+    "frame": "164",
+    "segment_id": "164_TVA jacket_1_nopoint",
+    "bbox_path": "all_frames/Scenes 021-040__536A-3-_20230816063724398/164/padded_segments/padded_164_TVA jacket_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__536A-3-_20230816063724398",
+    "predicted_object": "Asgardian device",
+    "object_version": 3,
+    "similarity_score": 0.7156099081039429,
+    "model": "resnet50",
+    "frame": "71",
+    "segment_id": "71_Horned helmet_0_nopoint",
+    "bbox_path": "all_frames/Scenes 021-040__536A-3-_20230816063724398/71/padded_segments/padded_71_Horned helmet_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__536A-3-_20230816063724398",
+    "predicted_object": "Laevateinn",
+    "object_version": 1,
+    "similarity_score": 0.7010389566421509,
+    "model": "resnet50",
+    "frame": "89",
+    "segment_id": "89_Horned helmet_0_nopoint",
+    "bbox_path": "all_frames/Scenes 021-040__536A-3-_20230816063724398/89/padded_segments/padded_89_Horned helmet_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__536A-3-_20230816063724398",
+    "predicted_object": "Loki's armor (THE AVENGERS)",
+    "object_version": 2,
+    "similarity_score": 0.7409728169441223,
+    "model": "resnet50",
+    "frame": "166",
+    "segment_id": "166_TVA jacket_1_nopoint",
+    "bbox_path": "all_frames/Scenes 021-040__536A-3-_20230816063724398/166/padded_segments/padded_166_TVA jacket_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__536A-3-_20230816063724398",
+    "predicted_object": "Time Collar",
+    "object_version": 3,
+    "similarity_score": 0.7172762751579285,
+    "model": "resnet50",
+    "frame": "172",
+    "segment_id": "172_Horned helmet_0_nopoint",
+    "bbox_path": "all_frames/Scenes 021-040__536A-3-_20230816063724398/172/padded_segments/padded_172_Horned helmet_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__536A-3-_20230816063724398",
+    "predicted_object": "Loki's armor (THE AVENGERS)",
+    "object_version": 2,
+    "similarity_score": 0.7630586624145508,
+    "model": "resnet50",
+    "frame": "172",
+    "segment_id": "172_TVA jacket_1_nopoint",
+    "bbox_path": "all_frames/Scenes 021-040__536A-3-_20230816063724398/172/padded_segments/padded_172_TVA jacket_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__536A-3-_20230816063724398",
+    "predicted_object": "Reset Charge",
+    "object_version": 1,
+    "similarity_score": 0.7033133506774902,
+    "model": "resnet50",
+    "frame": "125",
+    "segment_id": "125_Horned helmet_0_nopoint",
+    "bbox_path": "all_frames/Scenes 021-040__536A-3-_20230816063724398/125/padded_segments/padded_125_Horned helmet_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__536A-3-_20230816063724398",
+    "predicted_object": "Boastful Loki's hammer",
+    "object_version": 1,
+    "similarity_score": 0.7293189167976379,
+    "model": "resnet50",
+    "frame": "170",
+    "segment_id": "170_TVA jacket_0_nopoint",
+    "bbox_path": "all_frames/Scenes 021-040__536A-3-_20230816063724398/170/padded_segments/padded_170_TVA jacket_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__536A-3-_20230816063724398",
+    "predicted_object": "Laevateinn",
+    "object_version": 1,
+    "similarity_score": 0.7118328809738159,
+    "model": "resnet50",
+    "frame": "26",
+    "segment_id": "26_Horned helmet_1_nopoint",
+    "bbox_path": "all_frames/Scenes 021-040__536A-3-_20230816063724398/26/padded_segments/padded_26_Horned helmet_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__536A-3-_20230816063724398",
+    "predicted_object": "Loki's Scepter",
+    "object_version": 1,
+    "similarity_score": 0.7192391157150269,
+    "model": "resnet50",
+    "frame": "76",
+    "segment_id": "76_Horned helmet_0_nopoint",
+    "bbox_path": "all_frames/Scenes 021-040__536A-3-_20230816063724398/76/padded_segments/padded_76_Horned helmet_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__536A-3-_20230816063724398",
+    "predicted_object": "Reset Charge",
+    "object_version": 1,
+    "similarity_score": 0.7156367301940918,
+    "model": "resnet50",
+    "frame": "105",
+    "segment_id": "105_Horned helmet_0_nopoint",
+    "bbox_path": "all_frames/Scenes 021-040__536A-3-_20230816063724398/105/padded_segments/padded_105_Horned helmet_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__536A-3-_20230816063724398",
+    "predicted_object": "Asgardian device",
+    "object_version": 3,
+    "similarity_score": 0.7212867140769958,
+    "model": "resnet50",
+    "frame": "77",
+    "segment_id": "77_Horned helmet_0_nopoint",
+    "bbox_path": "all_frames/Scenes 021-040__536A-3-_20230816063724398/77/padded_segments/padded_77_Horned helmet_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__536A-3-_20230816063724398",
+    "predicted_object": "Asgardian device",
+    "object_version": 3,
+    "similarity_score": 0.7010531425476074,
+    "model": "resnet50",
+    "frame": "54",
+    "segment_id": "54_TVA jacket_1_nopoint",
+    "bbox_path": "all_frames/Scenes 021-040__536A-3-_20230816063724398/54/padded_segments/padded_54_TVA jacket_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__536A-3-_20230816063724398",
+    "predicted_object": "Asgardian device",
+    "object_version": 3,
+    "similarity_score": 0.7030168175697327,
+    "model": "resnet50",
+    "frame": "214",
+    "segment_id": "214_Horned helmet_0_nopoint",
+    "bbox_path": "all_frames/Scenes 021-040__536A-3-_20230816063724398/214/padded_segments/padded_214_Horned helmet_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__536A-3-_20230816063724398",
+    "predicted_object": "Time Collar",
+    "object_version": 3,
+    "similarity_score": 0.7034324407577515,
+    "model": "resnet50",
+    "frame": "67",
+    "segment_id": "67_Horned helmet_1_nopoint",
+    "bbox_path": "all_frames/Scenes 021-040__536A-3-_20230816063724398/67/padded_segments/padded_67_Horned helmet_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__536A-3-_20230816063724398",
+    "predicted_object": "Time Collar",
+    "object_version": 3,
+    "similarity_score": 0.7471060752868652,
+    "model": "resnet50",
+    "frame": "67",
+    "segment_id": "67_Horned helmet_0_nopoint",
+    "bbox_path": "all_frames/Scenes 021-040__536A-3-_20230816063724398/67/padded_segments/padded_67_Horned helmet_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__536A-3-_20230816063724398",
+    "predicted_object": "Loki's armor (THE AVENGERS)",
+    "object_version": 2,
+    "similarity_score": 0.7437344789505005,
+    "model": "resnet50",
+    "frame": "67",
+    "segment_id": "67_TVA jacket_3_nopoint",
+    "bbox_path": "all_frames/Scenes 021-040__536A-3-_20230816063724398/67/padded_segments/padded_67_TVA jacket_3_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__536A-3-_20230816063724398",
+    "predicted_object": "Time Collar",
+    "object_version": 3,
+    "similarity_score": 0.7102670669555664,
+    "model": "resnet50",
+    "frame": "192",
+    "segment_id": "192_Horned helmet_2_nopoint",
+    "bbox_path": "all_frames/Scenes 021-040__536A-3-_20230816063724398/192/padded_segments/padded_192_Horned helmet_2_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__536A-3-_20230816063724398",
+    "predicted_object": "Asgardian device",
+    "object_version": 3,
+    "similarity_score": 0.7002742290496826,
+    "model": "resnet50",
+    "frame": "147",
+    "segment_id": "147_Horned helmet_2_nopoint",
+    "bbox_path": "all_frames/Scenes 021-040__536A-3-_20230816063724398/147/padded_segments/padded_147_Horned helmet_2_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__536A-3-_20230816063724398",
+    "predicted_object": "Time Collar",
+    "object_version": 3,
+    "similarity_score": 0.7243013978004456,
+    "model": "resnet50",
+    "frame": "147",
+    "segment_id": "147_Horned helmet_0_nopoint",
+    "bbox_path": "all_frames/Scenes 021-040__536A-3-_20230816063724398/147/padded_segments/padded_147_Horned helmet_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__536A-3-_20230816063724398",
+    "predicted_object": "Laevateinn",
+    "object_version": 1,
+    "similarity_score": 0.7031822204589844,
+    "model": "resnet50",
+    "frame": "189",
+    "segment_id": "189_Horned helmet_1_nopoint",
+    "bbox_path": "all_frames/Scenes 021-040__536A-3-_20230816063724398/189/padded_segments/padded_189_Horned helmet_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__536A-3-_20230816063724398",
+    "predicted_object": "Laevateinn",
+    "object_version": 1,
+    "similarity_score": 0.723000168800354,
+    "model": "resnet50",
+    "frame": "130",
+    "segment_id": "130_Horned helmet_0_nopoint",
+    "bbox_path": "all_frames/Scenes 021-040__536A-3-_20230816063724398/130/padded_segments/padded_130_Horned helmet_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__536A-3-_20230816063724398",
+    "predicted_object": "Loki's armor (THE AVENGERS)",
+    "object_version": 2,
+    "similarity_score": 0.715633749961853,
+    "model": "resnet50",
+    "frame": "180",
+    "segment_id": "180_TVA jacket_2_nopoint",
+    "bbox_path": "all_frames/Scenes 021-040__536A-3-_20230816063724398/180/padded_segments/padded_180_TVA jacket_2_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__536A-3-_20230816063724398",
+    "predicted_object": "Time Collar",
+    "object_version": 2,
+    "similarity_score": 0.7001084089279175,
+    "model": "resnet50",
+    "frame": "92",
+    "segment_id": "92_Horned helmet_0_nopoint",
+    "bbox_path": "all_frames/Scenes 021-040__536A-3-_20230816063724398/92/padded_segments/padded_92_Horned helmet_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__536A-3-_20230816063724398",
+    "predicted_object": "Asgardian device",
+    "object_version": 3,
+    "similarity_score": 0.7046149969100952,
+    "model": "resnet50",
+    "frame": "191",
+    "segment_id": "191_Horned helmet_2_nopoint",
+    "bbox_path": "all_frames/Scenes 021-040__536A-3-_20230816063724398/191/padded_segments/padded_191_Horned helmet_2_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__536A-3-_20230816063724398",
+    "predicted_object": "Laevateinn",
+    "object_version": 3,
+    "similarity_score": 0.7271257042884827,
+    "model": "resnet50",
+    "frame": "191",
+    "segment_id": "191_Horned helmet_0_nopoint",
+    "bbox_path": "all_frames/Scenes 021-040__536A-3-_20230816063724398/191/padded_segments/padded_191_Horned helmet_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__536A-3-_20230816063724398",
+    "predicted_object": "Loki's armor (THE AVENGERS)",
+    "object_version": 3,
+    "similarity_score": 0.7111190557479858,
+    "model": "resnet50",
+    "frame": "58",
+    "segment_id": "58_Leather coat_4_nopoint",
+    "bbox_path": "all_frames/Scenes 021-040__536A-3-_20230816063724398/58/padded_segments/padded_58_Leather coat_4_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__536A-3-_20230816063724398",
+    "predicted_object": "Time Collar",
+    "object_version": 3,
+    "similarity_score": 0.7007759809494019,
+    "model": "resnet50",
+    "frame": "64",
+    "segment_id": "64_Horned helmet_0_nopoint",
+    "bbox_path": "all_frames/Scenes 021-040__536A-3-_20230816063724398/64/padded_segments/padded_64_Horned helmet_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__536A-3-_20230816063724398",
+    "predicted_object": "Laevateinn",
+    "object_version": 1,
+    "similarity_score": 0.7193554043769836,
+    "model": "resnet50",
+    "frame": "143",
+    "segment_id": "143_Horned helmet_1_nopoint",
+    "bbox_path": "all_frames/Scenes 021-040__536A-3-_20230816063724398/143/padded_segments/padded_143_Horned helmet_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__536A-3-_20230816063724398",
+    "predicted_object": "Loki's armor (THE AVENGERS)",
+    "object_version": 2,
+    "similarity_score": 0.7519861459732056,
+    "model": "resnet50",
+    "frame": "179",
+    "segment_id": "179_TVA jacket_3_nopoint",
+    "bbox_path": "all_frames/Scenes 021-040__536A-3-_20230816063724398/179/padded_segments/padded_179_TVA jacket_3_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__536A-3-_20230816063724398",
+    "predicted_object": "Loki's Scepter",
+    "object_version": 1,
+    "similarity_score": 0.7175188064575195,
+    "model": "resnet50",
+    "frame": "179",
+    "segment_id": "179_Horned helmet_0_nopoint",
+    "bbox_path": "all_frames/Scenes 021-040__536A-3-_20230816063724398/179/padded_segments/padded_179_Horned helmet_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__536A-3-_20230816063724398",
+    "predicted_object": "Time Collar",
+    "object_version": 1,
+    "similarity_score": 0.7362033128738403,
+    "model": "resnet50",
+    "frame": "179",
+    "segment_id": "179_Horned helmet_1_nopoint",
+    "bbox_path": "all_frames/Scenes 021-040__536A-3-_20230816063724398/179/padded_segments/padded_179_Horned helmet_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__536A-3-_20230816063724398",
+    "predicted_object": "Laevateinn",
+    "object_version": 1,
+    "similarity_score": 0.7024296522140503,
+    "model": "resnet50",
+    "frame": "82",
+    "segment_id": "82_Horned helmet_1_nopoint",
+    "bbox_path": "all_frames/Scenes 021-040__536A-3-_20230816063724398/82/padded_segments/padded_82_Horned helmet_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__536A-3-_20230816063724398",
+    "predicted_object": "Time Collar",
+    "object_version": 1,
+    "similarity_score": 0.7085433602333069,
+    "model": "resnet50",
+    "frame": "82",
+    "segment_id": "82_Horned helmet_0_nopoint",
+    "bbox_path": "all_frames/Scenes 021-040__536A-3-_20230816063724398/82/padded_segments/padded_82_Horned helmet_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__536A-3-_20230816063724398",
+    "predicted_object": "Laevateinn",
+    "object_version": 1,
+    "similarity_score": 0.7119680643081665,
+    "model": "resnet50",
+    "frame": "88",
+    "segment_id": "88_Horned helmet_1_nopoint",
+    "bbox_path": "all_frames/Scenes 021-040__536A-3-_20230816063724398/88/padded_segments/padded_88_Horned helmet_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__536A-3-_20230816063724398",
+    "predicted_object": "Tesseract",
+    "object_version": 1,
+    "similarity_score": 0.7218638062477112,
+    "model": "resnet50",
+    "frame": "88",
+    "segment_id": "88_Horned helmet_0_nopoint",
+    "bbox_path": "all_frames/Scenes 021-040__536A-3-_20230816063724398/88/padded_segments/padded_88_Horned helmet_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__536A-3-_20230816063724398",
+    "predicted_object": "Laevateinn",
+    "object_version": 1,
+    "similarity_score": 0.7434045076370239,
+    "model": "resnet50",
+    "frame": "132",
+    "segment_id": "132_Horned helmet_0_nopoint",
+    "bbox_path": "all_frames/Scenes 021-040__536A-3-_20230816063724398/132/padded_segments/padded_132_Horned helmet_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__536A-3-_20230816063724398",
+    "predicted_object": "Time Collar",
+    "object_version": 3,
+    "similarity_score": 0.7050747275352478,
+    "model": "resnet50",
+    "frame": "132",
+    "segment_id": "132_Horned helmet_1_nopoint",
+    "bbox_path": "all_frames/Scenes 021-040__536A-3-_20230816063724398/132/padded_segments/padded_132_Horned helmet_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__536A-3-_20230816063724398",
+    "predicted_object": "Asgardian device",
+    "object_version": 1,
+    "similarity_score": 0.7014600038528442,
+    "model": "resnet50",
+    "frame": "104",
+    "segment_id": "104_Horned helmet_0_nopoint",
+    "bbox_path": "all_frames/Scenes 021-040__536A-3-_20230816063724398/104/padded_segments/padded_104_Horned helmet_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__536A-3-_20230816063724398",
+    "predicted_object": "Time Collar",
+    "object_version": 3,
+    "similarity_score": 0.7256169319152832,
+    "model": "resnet50",
+    "frame": "177",
+    "segment_id": "177_Horned helmet_0_nopoint",
+    "bbox_path": "all_frames/Scenes 021-040__536A-3-_20230816063724398/177/padded_segments/padded_177_Horned helmet_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__536A-3-_20230816063724398",
+    "predicted_object": "Asgardian device",
+    "object_version": 3,
+    "similarity_score": 0.7063810229301453,
+    "model": "resnet50",
+    "frame": "213",
+    "segment_id": "213_Horned helmet_0_nopoint",
+    "bbox_path": "all_frames/Scenes 021-040__536A-3-_20230816063724398/213/padded_segments/padded_213_Horned helmet_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__536A-3-_20230816063724398",
+    "predicted_object": "Asgardian device",
+    "object_version": 3,
+    "similarity_score": 0.7324923872947693,
+    "model": "resnet50",
+    "frame": "93",
+    "segment_id": "93_Horned helmet_0_nopoint",
+    "bbox_path": "all_frames/Scenes 021-040__536A-3-_20230816063724398/93/padded_segments/padded_93_Horned helmet_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__536A-3-_20230816063724398",
+    "predicted_object": "Asgardian device",
+    "object_version": 3,
+    "similarity_score": 0.7095372676849365,
+    "model": "resnet50",
+    "frame": "199",
+    "segment_id": "199_Horned helmet_2_nopoint",
+    "bbox_path": "all_frames/Scenes 021-040__536A-3-_20230816063724398/199/padded_segments/padded_199_Horned helmet_2_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__536A-3-_20230816063724398",
+    "predicted_object": "Laevateinn",
+    "object_version": 1,
+    "similarity_score": 0.7168405055999756,
+    "model": "resnet50",
+    "frame": "154",
+    "segment_id": "154_Horned helmet_1_nopoint",
+    "bbox_path": "all_frames/Scenes 021-040__536A-3-_20230816063724398/154/padded_segments/padded_154_Horned helmet_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__536A-3-_20230816063724398",
+    "predicted_object": "Time Collar",
+    "object_version": 1,
+    "similarity_score": 0.7002917528152466,
+    "model": "resnet50",
+    "frame": "66",
+    "segment_id": "66_Horned helmet_0_nopoint",
+    "bbox_path": "all_frames/Scenes 021-040__536A-3-_20230816063724398/66/padded_segments/padded_66_Horned helmet_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__536A-3-_20230816063724398",
+    "predicted_object": "Laevateinn",
+    "object_version": 1,
+    "similarity_score": 0.7092534303665161,
+    "model": "resnet50",
+    "frame": "156",
+    "segment_id": "156_Horned helmet_1_nopoint",
+    "bbox_path": "all_frames/Scenes 021-040__536A-3-_20230816063724398/156/padded_segments/padded_156_Horned helmet_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__536A-3-_20230816063724398",
+    "predicted_object": "Asgardian device",
+    "object_version": 3,
+    "similarity_score": 0.7116806507110596,
+    "model": "resnet50",
+    "frame": "156",
+    "segment_id": "156_Horned helmet_3_nopoint",
+    "bbox_path": "all_frames/Scenes 021-040__536A-3-_20230816063724398/156/padded_segments/padded_156_Horned helmet_3_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__536A-3-_20230816063724398",
+    "predicted_object": "Time Collar",
+    "object_version": 3,
+    "similarity_score": 0.7358805537223816,
+    "model": "resnet50",
+    "frame": "41",
+    "segment_id": "41_Horned helmet_0_nopoint",
+    "bbox_path": "all_frames/Scenes 021-040__536A-3-_20230816063724398/41/padded_segments/padded_41_Horned helmet_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__536A-3-_20230816063724398",
+    "predicted_object": "Asgardian device",
+    "object_version": 3,
+    "similarity_score": 0.705517053604126,
+    "model": "resnet50",
+    "frame": "41",
+    "segment_id": "41_Horned helmet_3_nopoint",
+    "bbox_path": "all_frames/Scenes 021-040__536A-3-_20230816063724398/41/padded_segments/padded_41_Horned helmet_3_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__536A-3-_20230816063724398",
+    "predicted_object": "Time Collar",
+    "object_version": 2,
+    "similarity_score": 0.7089326977729797,
+    "model": "resnet50",
+    "frame": "11",
+    "segment_id": "11_Horned helmet_3_nopoint",
+    "bbox_path": "all_frames/Scenes 021-040__536A-3-_20230816063724398/11/padded_segments/padded_11_Horned helmet_3_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__536A-3-_20230816063724398",
+    "predicted_object": "Time Collar",
+    "object_version": 3,
+    "similarity_score": 0.7146672010421753,
+    "model": "resnet50",
+    "frame": "161",
+    "segment_id": "161_Horned helmet_0_nopoint",
+    "bbox_path": "all_frames/Scenes 021-040__536A-3-_20230816063724398/161/padded_segments/padded_161_Horned helmet_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__536A-3-_20230816063724398",
+    "predicted_object": "Asgardian device",
+    "object_version": 3,
+    "similarity_score": 0.707155704498291,
+    "model": "resnet50",
+    "frame": "161",
+    "segment_id": "161_TVA jacket_1_nopoint",
+    "bbox_path": "all_frames/Scenes 021-040__536A-3-_20230816063724398/161/padded_segments/padded_161_TVA jacket_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__536A-3-_20230816063724398",
+    "predicted_object": "Asgardian device",
+    "object_version": 1,
+    "similarity_score": 0.7090860605239868,
+    "model": "resnet50",
+    "frame": "217",
+    "segment_id": "217_Horned helmet_0_nopoint",
+    "bbox_path": "all_frames/Scenes 021-040__536A-3-_20230816063724398/217/padded_segments/padded_217_Horned helmet_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__536A-3-_20230816063724398",
+    "predicted_object": "Loki's armor (THE AVENGERS)",
+    "object_version": 2,
+    "similarity_score": 0.753733217716217,
+    "model": "resnet50",
+    "frame": "217",
+    "segment_id": "217_TVA jacket_3_nopoint",
+    "bbox_path": "all_frames/Scenes 021-040__536A-3-_20230816063724398/217/padded_segments/padded_217_TVA jacket_3_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__536A-3-_20230816063724398",
+    "predicted_object": "Time Collar",
+    "object_version": 1,
+    "similarity_score": 0.733922004699707,
+    "model": "resnet50",
+    "frame": "20",
+    "segment_id": "20_Horned helmet_0_nopoint",
+    "bbox_path": "all_frames/Scenes 021-040__536A-3-_20230816063724398/20/padded_segments/padded_20_Horned helmet_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__536A-3-_20230816063724398",
+    "predicted_object": "Asgardian device",
+    "object_version": 3,
+    "similarity_score": 0.7030906677246094,
+    "model": "resnet50",
+    "frame": "20",
+    "segment_id": "20_Horned helmet_3_nopoint",
+    "bbox_path": "all_frames/Scenes 021-040__536A-3-_20230816063724398/20/padded_segments/padded_20_Horned helmet_3_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__536A-3-_20230816063724398",
+    "predicted_object": "Time Collar",
+    "object_version": 2,
+    "similarity_score": 0.7088508605957031,
+    "model": "resnet50",
+    "frame": "20",
+    "segment_id": "20_Horned helmet_6_nopoint",
+    "bbox_path": "all_frames/Scenes 021-040__536A-3-_20230816063724398/20/padded_segments/padded_20_Horned helmet_6_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__536A-3-_20230816063724398",
+    "predicted_object": "Laevateinn",
+    "object_version": 1,
+    "similarity_score": 0.7017825245857239,
+    "model": "resnet50",
+    "frame": "152",
+    "segment_id": "152_Horned helmet_1_nopoint",
+    "bbox_path": "all_frames/Scenes 021-040__536A-3-_20230816063724398/152/padded_segments/padded_152_Horned helmet_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__536A-3-_20230816063724398",
+    "predicted_object": "Laevateinn",
+    "object_version": 1,
+    "similarity_score": 0.7043360471725464,
+    "model": "resnet50",
+    "frame": "152",
+    "segment_id": "152_Horned helmet_4_nopoint",
+    "bbox_path": "all_frames/Scenes 021-040__536A-3-_20230816063724398/152/padded_segments/padded_152_Horned helmet_4_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__536A-3-_20230816063724398",
+    "predicted_object": "Asgardian device",
+    "object_version": 3,
+    "similarity_score": 0.7091026306152344,
+    "model": "resnet50",
+    "frame": "80",
+    "segment_id": "80_Horned helmet_1_nopoint",
+    "bbox_path": "all_frames/Scenes 021-040__536A-3-_20230816063724398/80/padded_segments/padded_80_Horned helmet_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__536A-3-_20230816063724398",
+    "predicted_object": "Asgardian device",
+    "object_version": 2,
+    "similarity_score": 0.7336528897285461,
+    "model": "resnet50",
+    "frame": "184",
+    "segment_id": "184_TVA jacket_0_nopoint",
+    "bbox_path": "all_frames/Scenes 021-040__536A-3-_20230816063724398/184/padded_segments/padded_184_TVA jacket_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__536A-3-_20230816063724398",
+    "predicted_object": "Loki's armor (THE AVENGERS)",
+    "object_version": 3,
+    "similarity_score": 0.7507433891296387,
+    "model": "resnet50",
+    "frame": "181",
+    "segment_id": "181_TVA jacket_1_nopoint",
+    "bbox_path": "all_frames/Scenes 021-040__536A-3-_20230816063724398/181/padded_segments/padded_181_TVA jacket_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__536A-3-_20230816063724398",
+    "predicted_object": "Laevateinn",
+    "object_version": 3,
+    "similarity_score": 0.7296358346939087,
+    "model": "resnet50",
+    "frame": "181",
+    "segment_id": "181_Horned helmet_0_nopoint",
+    "bbox_path": "all_frames/Scenes 021-040__536A-3-_20230816063724398/181/padded_segments/padded_181_Horned helmet_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__536A-3-_20230816063724398",
+    "predicted_object": "Asgardian device",
+    "object_version": 3,
+    "similarity_score": 0.7182969450950623,
+    "model": "resnet50",
+    "frame": "129",
+    "segment_id": "129_Horned helmet_2_nopoint",
+    "bbox_path": "all_frames/Scenes 021-040__536A-3-_20230816063724398/129/padded_segments/padded_129_Horned helmet_2_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__536A-3-_20230816063724398",
+    "predicted_object": "Laevateinn",
+    "object_version": 1,
+    "similarity_score": 0.7153979539871216,
+    "model": "resnet50",
+    "frame": "129",
+    "segment_id": "129_Horned helmet_1_nopoint",
+    "bbox_path": "all_frames/Scenes 021-040__536A-3-_20230816063724398/129/padded_segments/padded_129_Horned helmet_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__536A-3-_20230816063724398",
+    "predicted_object": "Laevateinn",
+    "object_version": 1,
+    "similarity_score": 0.706274151802063,
+    "model": "resnet50",
+    "frame": "202",
+    "segment_id": "202_Horned helmet_0_nopoint",
+    "bbox_path": "all_frames/Scenes 021-040__536A-3-_20230816063724398/202/padded_segments/padded_202_Horned helmet_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__536A-3-_20230816063724398",
+    "predicted_object": "Laevateinn",
+    "object_version": 1,
+    "similarity_score": 0.7034012079238892,
+    "model": "resnet50",
+    "frame": "107",
+    "segment_id": "107_Horned helmet_1_nopoint",
+    "bbox_path": "all_frames/Scenes 021-040__536A-3-_20230816063724398/107/padded_segments/padded_107_Horned helmet_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__536A-3-_20230816063724398",
+    "predicted_object": "Laevateinn",
+    "object_version": 1,
+    "similarity_score": 0.7110668420791626,
+    "model": "resnet50",
+    "frame": "128",
+    "segment_id": "128_Horned helmet_0_nopoint",
+    "bbox_path": "all_frames/Scenes 021-040__536A-3-_20230816063724398/128/padded_segments/padded_128_Horned helmet_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__536A-3-_20230816063724398",
+    "predicted_object": "Sylvie's machete",
+    "object_version": 2,
+    "similarity_score": 0.7017304301261902,
+    "model": "resnet50",
+    "frame": "126",
+    "segment_id": "126_Horned helmet_0_nopoint",
+    "bbox_path": "all_frames/Scenes 021-040__536A-3-_20230816063724398/126/padded_segments/padded_126_Horned helmet_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__536A-3-_20230816063724398",
+    "predicted_object": "Asgardian device",
+    "object_version": 3,
+    "similarity_score": 0.703224778175354,
+    "model": "resnet50",
+    "frame": "50",
+    "segment_id": "50_Horned helmet_0_nopoint",
+    "bbox_path": "all_frames/Scenes 021-040__536A-3-_20230816063724398/50/padded_segments/padded_50_Horned helmet_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__536A-3-_20230816063724398",
+    "predicted_object": "Laevateinn",
+    "object_version": 1,
+    "similarity_score": 0.7070937156677246,
+    "model": "resnet50",
+    "frame": "50",
+    "segment_id": "50_Horned helmet_1_nopoint",
+    "bbox_path": "all_frames/Scenes 021-040__536A-3-_20230816063724398/50/padded_segments/padded_50_Horned helmet_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__536A-3-_20230816063724398",
+    "predicted_object": "Asgardian device",
+    "object_version": 3,
+    "similarity_score": 0.7012492418289185,
+    "model": "resnet50",
+    "frame": "211",
+    "segment_id": "211_Horned helmet_0_nopoint",
+    "bbox_path": "all_frames/Scenes 021-040__536A-3-_20230816063724398/211/padded_segments/padded_211_Horned helmet_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__536A-3-_20230816063724398",
+    "predicted_object": "Laevateinn",
+    "object_version": 1,
+    "similarity_score": 0.7096334099769592,
+    "model": "resnet50",
+    "frame": "48",
+    "segment_id": "48_Horned helmet_1_nopoint",
+    "bbox_path": "all_frames/Scenes 021-040__536A-3-_20230816063724398/48/padded_segments/padded_48_Horned helmet_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 021-040__536A-3-_20230816063724398",
+    "predicted_object": "Laevateinn",
+    "object_version": 1,
+    "similarity_score": 0.7116798162460327,
+    "model": "resnet50",
+    "frame": "48",
+    "segment_id": "48_Horned helmet_3_nopoint",
+    "bbox_path": "all_frames/Scenes 021-040__536A-3-_20230816063724398/48/padded_segments/padded_48_Horned helmet_3_nopoint.png"
+  }
+]

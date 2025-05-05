@@ -209,7 +209,7 @@ def search_similar_segments_in_neo4j(embeddings_dir, model_type="resnet50"):
                 for record in results:
                     # Create a flat result item for each match
                     result_item = {
-                        "video_name": video_name,
+                        "video": video_name,
                         "predicted_object": record['result'],
                         "object_version": record['version'],
                         "similarity_score": record['similarity'],

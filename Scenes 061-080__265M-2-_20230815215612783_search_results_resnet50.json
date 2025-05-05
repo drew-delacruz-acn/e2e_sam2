@@ -1,0 +1,72 @@
+[
+  {
+    "video": "Scenes 061-080__265M-2-_20230815215612783",
+    "predicted_object": "Laevateinn",
+    "object_version": 1,
+    "similarity_score": 0.7169616222381592,
+    "model": "resnet50",
+    "frame": "7",
+    "segment_id": "7_Curved sword_4_nopoint",
+    "bbox_path": "all_frames/Scenes 061-080__265M-2-_20230815215612783/7/padded_segments/padded_7_Curved sword_4_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__265M-2-_20230815215612783",
+    "predicted_object": "Laevateinn",
+    "object_version": 1,
+    "similarity_score": 0.7053229808807373,
+    "model": "resnet50",
+    "frame": "7",
+    "segment_id": "7_War hammer_3_nopoint",
+    "bbox_path": "all_frames/Scenes 061-080__265M-2-_20230815215612783/7/padded_segments/padded_7_War hammer_3_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__265M-2-_20230815215612783",
+    "predicted_object": "Boastful Loki's hammer",
+    "object_version": 1,
+    "similarity_score": 0.7011091709136963,
+    "model": "resnet50",
+    "frame": "39",
+    "segment_id": "39_Leather coat_0_nopoint",
+    "bbox_path": "all_frames/Scenes 061-080__265M-2-_20230815215612783/39/padded_segments/padded_39_Leather coat_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__265M-2-_20230815215612783",
+    "predicted_object": "Time Collar",
+    "object_version": 2,
+    "similarity_score": 0.7130197286605835,
+    "model": "resnet50",
+    "frame": "68",
+    "segment_id": "68_TVA jacket_0_nopoint",
+    "bbox_path": "all_frames/Scenes 061-080__265M-2-_20230815215612783/68/padded_segments/padded_68_TVA jacket_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__265M-2-_20230815215612783",
+    "predicted_object": "Loki's dagger",
+    "object_version": 2,
+    "similarity_score": 0.7029412984848022,
+    "model": "resnet50",
+    "frame": "6",
+    "segment_id": "6_Glowing rod_0_nopoint",
+    "bbox_path": "all_frames/Scenes 061-080__265M-2-_20230815215612783/6/padded_segments/padded_6_Glowing rod_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__265M-2-_20230815215612783",
+    "predicted_object": "Time Collar",
+    "object_version": 2,
+    "similarity_score": 0.7032725811004639,
+    "model": "resnet50",
+    "frame": "66",
+    "segment_id": "66_TVA jacket_0_nopoint",
+    "bbox_path": "all_frames/Scenes 061-080__265M-2-_20230815215612783/66/padded_segments/padded_66_TVA jacket_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 061-080__265M-2-_20230815215612783",
+    "predicted_object": "Boastful Loki's hammer",
+    "object_version": 1,
+    "similarity_score": 0.7090074419975281,
+    "model": "resnet50",
+    "frame": "61",
+    "segment_id": "61_Leather coat_1_nopoint",
+    "bbox_path": "all_frames/Scenes 061-080__265M-2-_20230815215612783/61/padded_segments/padded_61_Leather coat_1_nopoint.png"
+  }
+]

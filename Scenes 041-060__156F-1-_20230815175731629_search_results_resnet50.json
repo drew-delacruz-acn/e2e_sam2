@@ -1,0 +1,22 @@
+[
+  {
+    "video": "Scenes 041-060__156F-1-_20230815175731629",
+    "predicted_object": "Asgardian device",
+    "object_version": 1,
+    "similarity_score": 0.7329592108726501,
+    "model": "resnet50",
+    "frame": "74",
+    "segment_id": "74_Bomb device_1_nopoint",
+    "bbox_path": "all_frames/Scenes 041-060__156F-1-_20230815175731629/74/padded_segments/padded_74_Bomb device_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 041-060__156F-1-_20230815175731629",
+    "predicted_object": "Asgardian device",
+    "object_version": 3,
+    "similarity_score": 0.741736114025116,
+    "model": "resnet50",
+    "frame": "26",
+    "segment_id": "26_Bomb device_1_nopoint",
+    "bbox_path": "all_frames/Scenes 041-060__156F-1-_20230815175731629/26/padded_segments/padded_26_Bomb device_1_nopoint.png"
+  }
+]

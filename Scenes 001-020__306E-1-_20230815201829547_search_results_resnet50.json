@@ -1,0 +1,512 @@
+[
+  {
+    "video": "Scenes 001-020__306E-1-_20230815201829547",
+    "predicted_object": "Loki's armor (THE AVENGERS)",
+    "object_version": 3,
+    "similarity_score": 0.7000081539154053,
+    "model": "resnet50",
+    "frame": "19",
+    "segment_id": "19_TVA jacket_0_nopoint",
+    "bbox_path": "all_frames/Scenes 001-020__306E-1-_20230815201829547/19/padded_segments/padded_19_TVA jacket_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 001-020__306E-1-_20230815201829547",
+    "predicted_object": "Aligator Loki Plushie",
+    "object_version": 1,
+    "similarity_score": 0.7342641949653625,
+    "model": "resnet50",
+    "frame": "19",
+    "segment_id": "19_TVA jacket_1_nopoint",
+    "bbox_path": "all_frames/Scenes 001-020__306E-1-_20230815201829547/19/padded_segments/padded_19_TVA jacket_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 001-020__306E-1-_20230815201829547",
+    "predicted_object": "Loki's armor (THE AVENGERS)",
+    "object_version": 3,
+    "similarity_score": 0.7042174935340881,
+    "model": "resnet50",
+    "frame": "46",
+    "segment_id": "46_TVA jacket_1_nopoint",
+    "bbox_path": "all_frames/Scenes 001-020__306E-1-_20230815201829547/46/padded_segments/padded_46_TVA jacket_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 001-020__306E-1-_20230815201829547",
+    "predicted_object": "Loki's armor (THE AVENGERS)",
+    "object_version": 3,
+    "similarity_score": 0.7381211519241333,
+    "model": "resnet50",
+    "frame": "45",
+    "segment_id": "45_TVA jacket_1_nopoint",
+    "bbox_path": "all_frames/Scenes 001-020__306E-1-_20230815201829547/45/padded_segments/padded_45_TVA jacket_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 001-020__306E-1-_20230815201829547",
+    "predicted_object": "Aligator Loki Plushie",
+    "object_version": 1,
+    "similarity_score": 0.7335578203201294,
+    "model": "resnet50",
+    "frame": "45",
+    "segment_id": "45_TVA jacket_0_nopoint",
+    "bbox_path": "all_frames/Scenes 001-020__306E-1-_20230815201829547/45/padded_segments/padded_45_TVA jacket_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 001-020__306E-1-_20230815201829547",
+    "predicted_object": "Loki's armor (THE AVENGERS)",
+    "object_version": 1,
+    "similarity_score": 0.7414798140525818,
+    "model": "resnet50",
+    "frame": "60",
+    "segment_id": "60_TVA jacket_1_nopoint",
+    "bbox_path": "all_frames/Scenes 001-020__306E-1-_20230815201829547/60/padded_segments/padded_60_TVA jacket_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 001-020__306E-1-_20230815201829547",
+    "predicted_object": "Loki's armor (THE AVENGERS)",
+    "object_version": 3,
+    "similarity_score": 0.7264957427978516,
+    "model": "resnet50",
+    "frame": "25",
+    "segment_id": "25_TVA jacket_2_nopoint",
+    "bbox_path": "all_frames/Scenes 001-020__306E-1-_20230815201829547/25/padded_segments/padded_25_TVA jacket_2_nopoint.png"
+  },
+  {
+    "video": "Scenes 001-020__306E-1-_20230815201829547",
+    "predicted_object": "Aligator Loki Plushie",
+    "object_version": 1,
+    "similarity_score": 0.7075004577636719,
+    "model": "resnet50",
+    "frame": "25",
+    "segment_id": "25_TVA jacket_1_nopoint",
+    "bbox_path": "all_frames/Scenes 001-020__306E-1-_20230815201829547/25/padded_segments/padded_25_TVA jacket_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 001-020__306E-1-_20230815201829547",
+    "predicted_object": "Loki's armor (THE AVENGERS)",
+    "object_version": 3,
+    "similarity_score": 0.7321779131889343,
+    "model": "resnet50",
+    "frame": "29",
+    "segment_id": "29_TVA jacket_0_nopoint",
+    "bbox_path": "all_frames/Scenes 001-020__306E-1-_20230815201829547/29/padded_segments/padded_29_TVA jacket_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 001-020__306E-1-_20230815201829547",
+    "predicted_object": "Loki's armor (THE AVENGERS)",
+    "object_version": 3,
+    "similarity_score": 0.7073262929916382,
+    "model": "resnet50",
+    "frame": "29",
+    "segment_id": "29_TVA jacket_1_nopoint",
+    "bbox_path": "all_frames/Scenes 001-020__306E-1-_20230815201829547/29/padded_segments/padded_29_TVA jacket_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 001-020__306E-1-_20230815201829547",
+    "predicted_object": "Loki's armor (THE AVENGERS)",
+    "object_version": 3,
+    "similarity_score": 0.7020505666732788,
+    "model": "resnet50",
+    "frame": "33",
+    "segment_id": "33_TVA jacket_0_nopoint",
+    "bbox_path": "all_frames/Scenes 001-020__306E-1-_20230815201829547/33/padded_segments/padded_33_TVA jacket_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 001-020__306E-1-_20230815201829547",
+    "predicted_object": "Loki's armor (THE AVENGERS)",
+    "object_version": 3,
+    "similarity_score": 0.7240191102027893,
+    "model": "resnet50",
+    "frame": "33",
+    "segment_id": "33_TVA jacket_1_nopoint",
+    "bbox_path": "all_frames/Scenes 001-020__306E-1-_20230815201829547/33/padded_segments/padded_33_TVA jacket_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 001-020__306E-1-_20230815201829547",
+    "predicted_object": "Loki's TVA jacket",
+    "object_version": 1,
+    "similarity_score": 0.7021090984344482,
+    "model": "resnet50",
+    "frame": "47",
+    "segment_id": "47_TVA jacket_1_nopoint",
+    "bbox_path": "all_frames/Scenes 001-020__306E-1-_20230815201829547/47/padded_segments/padded_47_TVA jacket_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 001-020__306E-1-_20230815201829547",
+    "predicted_object": "Loki's armor (THE AVENGERS)",
+    "object_version": 3,
+    "similarity_score": 0.7274918556213379,
+    "model": "resnet50",
+    "frame": "39",
+    "segment_id": "39_TVA jacket_0_nopoint",
+    "bbox_path": "all_frames/Scenes 001-020__306E-1-_20230815201829547/39/padded_segments/padded_39_TVA jacket_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 001-020__306E-1-_20230815201829547",
+    "predicted_object": "Aligator Loki Plushie",
+    "object_version": 1,
+    "similarity_score": 0.7640699148178101,
+    "model": "resnet50",
+    "frame": "39",
+    "segment_id": "39_TVA jacket_1_nopoint",
+    "bbox_path": "all_frames/Scenes 001-020__306E-1-_20230815201829547/39/padded_segments/padded_39_TVA jacket_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 001-020__306E-1-_20230815201829547",
+    "predicted_object": "Loki's armor (THE AVENGERS)",
+    "object_version": 3,
+    "similarity_score": 0.7419878244400024,
+    "model": "resnet50",
+    "frame": "35",
+    "segment_id": "35_TVA jacket_0_nopoint",
+    "bbox_path": "all_frames/Scenes 001-020__306E-1-_20230815201829547/35/padded_segments/padded_35_TVA jacket_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 001-020__306E-1-_20230815201829547",
+    "predicted_object": "Aligator Loki Plushie",
+    "object_version": 1,
+    "similarity_score": 0.7507522106170654,
+    "model": "resnet50",
+    "frame": "35",
+    "segment_id": "35_TVA jacket_1_nopoint",
+    "bbox_path": "all_frames/Scenes 001-020__306E-1-_20230815201829547/35/padded_segments/padded_35_TVA jacket_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 001-020__306E-1-_20230815201829547",
+    "predicted_object": "Loki's armor (THE AVENGERS)",
+    "object_version": 3,
+    "similarity_score": 0.7224737405776978,
+    "model": "resnet50",
+    "frame": "38",
+    "segment_id": "38_TVA jacket_0_nopoint",
+    "bbox_path": "all_frames/Scenes 001-020__306E-1-_20230815201829547/38/padded_segments/padded_38_TVA jacket_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 001-020__306E-1-_20230815201829547",
+    "predicted_object": "Loki's armor (THE AVENGERS)",
+    "object_version": 3,
+    "similarity_score": 0.7577449679374695,
+    "model": "resnet50",
+    "frame": "21",
+    "segment_id": "21_TVA jacket_2_nopoint",
+    "bbox_path": "all_frames/Scenes 001-020__306E-1-_20230815201829547/21/padded_segments/padded_21_TVA jacket_2_nopoint.png"
+  },
+  {
+    "video": "Scenes 001-020__306E-1-_20230815201829547",
+    "predicted_object": "Loki's armor (THE AVENGERS)",
+    "object_version": 3,
+    "similarity_score": 0.7462467551231384,
+    "model": "resnet50",
+    "frame": "34",
+    "segment_id": "34_TVA jacket_0_nopoint",
+    "bbox_path": "all_frames/Scenes 001-020__306E-1-_20230815201829547/34/padded_segments/padded_34_TVA jacket_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 001-020__306E-1-_20230815201829547",
+    "predicted_object": "Aligator Loki Plushie",
+    "object_version": 1,
+    "similarity_score": 0.7654222249984741,
+    "model": "resnet50",
+    "frame": "34",
+    "segment_id": "34_TVA jacket_1_nopoint",
+    "bbox_path": "all_frames/Scenes 001-020__306E-1-_20230815201829547/34/padded_segments/padded_34_TVA jacket_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 001-020__306E-1-_20230815201829547",
+    "predicted_object": "Loki's armor (THE AVENGERS)",
+    "object_version": 3,
+    "similarity_score": 0.7057551741600037,
+    "model": "resnet50",
+    "frame": "30",
+    "segment_id": "30_TVA jacket_0_nopoint",
+    "bbox_path": "all_frames/Scenes 001-020__306E-1-_20230815201829547/30/padded_segments/padded_30_TVA jacket_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 001-020__306E-1-_20230815201829547",
+    "predicted_object": "Loki's armor (THE AVENGERS)",
+    "object_version": 3,
+    "similarity_score": 0.7432461380958557,
+    "model": "resnet50",
+    "frame": "30",
+    "segment_id": "30_TVA jacket_2_nopoint",
+    "bbox_path": "all_frames/Scenes 001-020__306E-1-_20230815201829547/30/padded_segments/padded_30_TVA jacket_2_nopoint.png"
+  },
+  {
+    "video": "Scenes 001-020__306E-1-_20230815201829547",
+    "predicted_object": "Loki's armor (THE AVENGERS)",
+    "object_version": 3,
+    "similarity_score": 0.715847373008728,
+    "model": "resnet50",
+    "frame": "23",
+    "segment_id": "23_TVA jacket_1_nopoint",
+    "bbox_path": "all_frames/Scenes 001-020__306E-1-_20230815201829547/23/padded_segments/padded_23_TVA jacket_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 001-020__306E-1-_20230815201829547",
+    "predicted_object": "Aligator Loki Plushie",
+    "object_version": 1,
+    "similarity_score": 0.719878077507019,
+    "model": "resnet50",
+    "frame": "23",
+    "segment_id": "23_TVA jacket_0_nopoint",
+    "bbox_path": "all_frames/Scenes 001-020__306E-1-_20230815201829547/23/padded_segments/padded_23_TVA jacket_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 001-020__306E-1-_20230815201829547",
+    "predicted_object": "Loki's armor (THE AVENGERS)",
+    "object_version": 3,
+    "similarity_score": 0.7125966548919678,
+    "model": "resnet50",
+    "frame": "6",
+    "segment_id": "6_TVA jacket_0_nopoint",
+    "bbox_path": "all_frames/Scenes 001-020__306E-1-_20230815201829547/6/padded_segments/padded_6_TVA jacket_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 001-020__306E-1-_20230815201829547",
+    "predicted_object": "Loki's armor (THE AVENGERS)",
+    "object_version": 3,
+    "similarity_score": 0.7027571797370911,
+    "model": "resnet50",
+    "frame": "27",
+    "segment_id": "27_TVA jacket_0_nopoint",
+    "bbox_path": "all_frames/Scenes 001-020__306E-1-_20230815201829547/27/padded_segments/padded_27_TVA jacket_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 001-020__306E-1-_20230815201829547",
+    "predicted_object": "Loki's armor (THE AVENGERS)",
+    "object_version": 3,
+    "similarity_score": 0.7364370226860046,
+    "model": "resnet50",
+    "frame": "27",
+    "segment_id": "27_TVA jacket_2_nopoint",
+    "bbox_path": "all_frames/Scenes 001-020__306E-1-_20230815201829547/27/padded_segments/padded_27_TVA jacket_2_nopoint.png"
+  },
+  {
+    "video": "Scenes 001-020__306E-1-_20230815201829547",
+    "predicted_object": "Aligator Loki Plushie",
+    "object_version": 1,
+    "similarity_score": 0.71355140209198,
+    "model": "resnet50",
+    "frame": "27",
+    "segment_id": "27_TVA jacket_1_nopoint",
+    "bbox_path": "all_frames/Scenes 001-020__306E-1-_20230815201829547/27/padded_segments/padded_27_TVA jacket_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 001-020__306E-1-_20230815201829547",
+    "predicted_object": "Aligator Loki Plushie",
+    "object_version": 1,
+    "similarity_score": 0.7239581346511841,
+    "model": "resnet50",
+    "frame": "31",
+    "segment_id": "31_TVA jacket_1_nopoint",
+    "bbox_path": "all_frames/Scenes 001-020__306E-1-_20230815201829547/31/padded_segments/padded_31_TVA jacket_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 001-020__306E-1-_20230815201829547",
+    "predicted_object": "Loki's armor (THE AVENGERS)",
+    "object_version": 3,
+    "similarity_score": 0.7312774062156677,
+    "model": "resnet50",
+    "frame": "32",
+    "segment_id": "32_TVA jacket_1_nopoint",
+    "bbox_path": "all_frames/Scenes 001-020__306E-1-_20230815201829547/32/padded_segments/padded_32_TVA jacket_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 001-020__306E-1-_20230815201829547",
+    "predicted_object": "Loki's armor (THE AVENGERS)",
+    "object_version": 3,
+    "similarity_score": 0.7198096513748169,
+    "model": "resnet50",
+    "frame": "37",
+    "segment_id": "37_TVA jacket_1_nopoint",
+    "bbox_path": "all_frames/Scenes 001-020__306E-1-_20230815201829547/37/padded_segments/padded_37_TVA jacket_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 001-020__306E-1-_20230815201829547",
+    "predicted_object": "Aligator Loki Plushie",
+    "object_version": 1,
+    "similarity_score": 0.7677580118179321,
+    "model": "resnet50",
+    "frame": "37",
+    "segment_id": "37_TVA jacket_2_nopoint",
+    "bbox_path": "all_frames/Scenes 001-020__306E-1-_20230815201829547/37/padded_segments/padded_37_TVA jacket_2_nopoint.png"
+  },
+  {
+    "video": "Scenes 001-020__306E-1-_20230815201829547",
+    "predicted_object": "Loki's armor (THE AVENGERS)",
+    "object_version": 3,
+    "similarity_score": 0.7197909355163574,
+    "model": "resnet50",
+    "frame": "36",
+    "segment_id": "36_TVA jacket_0_nopoint",
+    "bbox_path": "all_frames/Scenes 001-020__306E-1-_20230815201829547/36/padded_segments/padded_36_TVA jacket_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 001-020__306E-1-_20230815201829547",
+    "predicted_object": "Aligator Loki Plushie",
+    "object_version": 1,
+    "similarity_score": 0.7119508981704712,
+    "model": "resnet50",
+    "frame": "36",
+    "segment_id": "36_TVA jacket_1_nopoint",
+    "bbox_path": "all_frames/Scenes 001-020__306E-1-_20230815201829547/36/padded_segments/padded_36_TVA jacket_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 001-020__306E-1-_20230815201829547",
+    "predicted_object": "Aligator Loki Plushie",
+    "object_version": 1,
+    "similarity_score": 0.7120120525360107,
+    "model": "resnet50",
+    "frame": "26",
+    "segment_id": "26_TVA jacket_1_nopoint",
+    "bbox_path": "all_frames/Scenes 001-020__306E-1-_20230815201829547/26/padded_segments/padded_26_TVA jacket_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 001-020__306E-1-_20230815201829547",
+    "predicted_object": "Loki's TVA jacket",
+    "object_version": 1,
+    "similarity_score": 0.7204403281211853,
+    "model": "resnet50",
+    "frame": "43",
+    "segment_id": "43_TVA jacket_0_nopoint",
+    "bbox_path": "all_frames/Scenes 001-020__306E-1-_20230815201829547/43/padded_segments/padded_43_TVA jacket_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 001-020__306E-1-_20230815201829547",
+    "predicted_object": "Loki's armor (THE AVENGERS)",
+    "object_version": 3,
+    "similarity_score": 0.7303136587142944,
+    "model": "resnet50",
+    "frame": "28",
+    "segment_id": "28_TVA jacket_1_nopoint",
+    "bbox_path": "all_frames/Scenes 001-020__306E-1-_20230815201829547/28/padded_segments/padded_28_TVA jacket_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 001-020__306E-1-_20230815201829547",
+    "predicted_object": "Loki's TVA jacket",
+    "object_version": 1,
+    "similarity_score": 0.7124499678611755,
+    "model": "resnet50",
+    "frame": "40",
+    "segment_id": "40_TVA jacket_2_nopoint",
+    "bbox_path": "all_frames/Scenes 001-020__306E-1-_20230815201829547/40/padded_segments/padded_40_TVA jacket_2_nopoint.png"
+  },
+  {
+    "video": "Scenes 001-020__306E-1-_20230815201829547",
+    "predicted_object": "Aligator Loki Plushie",
+    "object_version": 1,
+    "similarity_score": 0.7361142635345459,
+    "model": "resnet50",
+    "frame": "40",
+    "segment_id": "40_TVA jacket_1_nopoint",
+    "bbox_path": "all_frames/Scenes 001-020__306E-1-_20230815201829547/40/padded_segments/padded_40_TVA jacket_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 001-020__306E-1-_20230815201829547",
+    "predicted_object": "Aligator Loki Plushie",
+    "object_version": 1,
+    "similarity_score": 0.7071713805198669,
+    "model": "resnet50",
+    "frame": "40",
+    "segment_id": "40_TVA jacket_0_nopoint",
+    "bbox_path": "all_frames/Scenes 001-020__306E-1-_20230815201829547/40/padded_segments/padded_40_TVA jacket_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 001-020__306E-1-_20230815201829547",
+    "predicted_object": "Aligator Loki Plushie",
+    "object_version": 1,
+    "similarity_score": 0.719734787940979,
+    "model": "resnet50",
+    "frame": "42",
+    "segment_id": "42_TVA jacket_1_nopoint",
+    "bbox_path": "all_frames/Scenes 001-020__306E-1-_20230815201829547/42/padded_segments/padded_42_TVA jacket_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 001-020__306E-1-_20230815201829547",
+    "predicted_object": "Loki's armor (THE AVENGERS)",
+    "object_version": 1,
+    "similarity_score": 0.7438143491744995,
+    "model": "resnet50",
+    "frame": "64",
+    "segment_id": "64_Leather coat_1_nopoint",
+    "bbox_path": "all_frames/Scenes 001-020__306E-1-_20230815201829547/64/padded_segments/padded_64_Leather coat_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 001-020__306E-1-_20230815201829547",
+    "predicted_object": "Loki's armor (THE AVENGERS)",
+    "object_version": 1,
+    "similarity_score": 0.7203356623649597,
+    "model": "resnet50",
+    "frame": "55",
+    "segment_id": "55_TVA jacket_1_nopoint",
+    "bbox_path": "all_frames/Scenes 001-020__306E-1-_20230815201829547/55/padded_segments/padded_55_TVA jacket_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 001-020__306E-1-_20230815201829547",
+    "predicted_object": "Loki's armor (THE AVENGERS)",
+    "object_version": 1,
+    "similarity_score": 0.7432184219360352,
+    "model": "resnet50",
+    "frame": "59",
+    "segment_id": "59_Leather coat_1_nopoint",
+    "bbox_path": "all_frames/Scenes 001-020__306E-1-_20230815201829547/59/padded_segments/padded_59_Leather coat_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 001-020__306E-1-_20230815201829547",
+    "predicted_object": "Aligator Loki Plushie",
+    "object_version": 1,
+    "similarity_score": 0.7028623819351196,
+    "model": "resnet50",
+    "frame": "41",
+    "segment_id": "41_TVA jacket_0_nopoint",
+    "bbox_path": "all_frames/Scenes 001-020__306E-1-_20230815201829547/41/padded_segments/padded_41_TVA jacket_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 001-020__306E-1-_20230815201829547",
+    "predicted_object": "Aligator Loki Plushie",
+    "object_version": 1,
+    "similarity_score": 0.723239004611969,
+    "model": "resnet50",
+    "frame": "20",
+    "segment_id": "20_TVA jacket_0_nopoint",
+    "bbox_path": "all_frames/Scenes 001-020__306E-1-_20230815201829547/20/padded_segments/padded_20_TVA jacket_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 001-020__306E-1-_20230815201829547",
+    "predicted_object": "Aligator Loki Plushie",
+    "object_version": 1,
+    "similarity_score": 0.7356098890304565,
+    "model": "resnet50",
+    "frame": "18",
+    "segment_id": "18_TVA jacket_0_nopoint",
+    "bbox_path": "all_frames/Scenes 001-020__306E-1-_20230815201829547/18/padded_segments/padded_18_TVA jacket_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 001-020__306E-1-_20230815201829547",
+    "predicted_object": "Aligator Loki Plushie",
+    "object_version": 3,
+    "similarity_score": 0.7149960994720459,
+    "model": "resnet50",
+    "frame": "18",
+    "segment_id": "18_TVA jacket_1_nopoint",
+    "bbox_path": "all_frames/Scenes 001-020__306E-1-_20230815201829547/18/padded_segments/padded_18_TVA jacket_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 001-020__306E-1-_20230815201829547",
+    "predicted_object": "Aligator Loki Plushie",
+    "object_version": 1,
+    "similarity_score": 0.717802107334137,
+    "model": "resnet50",
+    "frame": "48",
+    "segment_id": "48_TVA jacket_1_nopoint",
+    "bbox_path": "all_frames/Scenes 001-020__306E-1-_20230815201829547/48/padded_segments/padded_48_TVA jacket_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 001-020__306E-1-_20230815201829547",
+    "predicted_object": "Loki's armor (THE AVENGERS)",
+    "object_version": 1,
+    "similarity_score": 0.7513943910598755,
+    "model": "resnet50",
+    "frame": "61",
+    "segment_id": "61_TVA jacket_1_nopoint",
+    "bbox_path": "all_frames/Scenes 001-020__306E-1-_20230815201829547/61/padded_segments/padded_61_TVA jacket_1_nopoint.png"
+  }
+]

@@ -19,7 +19,7 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 # Check for CUDA availability
-USE_CUDA = True
+USE_CUDA = False
 HAVE_CUPY = False
 try:
     # First check if cv2.cuda attribute exists (OpenCV with CUDA support)

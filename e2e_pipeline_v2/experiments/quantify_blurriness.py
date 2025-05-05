@@ -19,7 +19,7 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 # Check for CUDA availability
-USE_CUDA = False
+USE_CUDA = True
 HAVE_CUPY = False
 try:
     if cv2.cuda.getCudaEnabledDeviceCount() > 0:

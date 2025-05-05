@@ -706,6 +706,323 @@ def visualize_method_comparison(all_frames, method_classifications, thresholds, 
     except Exception as e:
         logger.error(f"Error creating method comparison visualization: {e}")
 
+def calculate_blur_confidence(score, all_scores, thresholds, method='percentile'):
+    """
+    Calculate confidence score for blur classification (-100 to +100)
+    Negative = blurry, Positive = sharp, Magnitude = confidence
+    """
+    # Extract values and thresholds
+    lap, ten, fft = score['laplacian'], score['tenengrad'], score['fft']
+    lap_thresh = thresholds[method]['laplacian']
+    ten_thresh = thresholds[method]['tenengrad']
+    fft_thresh = thresholds[method]['fft']
+    
+    # Get ranges from all scores for normalization
+    all_lap = np.array([s['laplacian'] for s in all_scores])
+    all_ten = np.array([s['tenengrad'] for s in all_scores])
+    all_fft = np.array([s['fft'] for s in all_scores])
+    
+    # Calculate normalized distances from thresholds (-1 to +1)
+    lap_conf = normalize_to_range(lap - lap_thresh, all_lap - lap_thresh)
+    ten_conf = normalize_to_range(ten - ten_thresh, all_ten - ten_thresh)
+    fft_conf = normalize_to_range(fft - fft_thresh, all_fft - fft_thresh)
+    
+    # Calculate overall confidence (weighted average)
+    weights = [0.5, 0.3, 0.2]  # Laplacian more important
+    overall_conf = weights[0] * lap_conf + weights[1] * ten_conf + weights[2] * fft_conf
+    
+    # Scale to percentage (-100 to +100)
+    confidence = int(100 * overall_conf)
+    
+    # Determine most influential metric
+    influences = [abs(lap_conf * weights[0]), abs(ten_conf * weights[1]), abs(fft_conf * weights[2])]
+    most_influential = ['laplacian', 'tenengrad', 'fft'][np.argmax(influences)]
+    
+    return confidence, most_influential
+
+def normalize_to_range(value, distribution):
+    """Normalize a value to -1 to +1 range based on distribution"""
+    p10, p90 = np.percentile(distribution, [10, 90])
+    range_half = max(abs(p10), abs(p90))
+    if range_half == 0:
+        return 0
+    return np.clip(value / range_half, -1, 1)
+
+def generate_executive_summary(blur_scores, blur_flags, thresholds, all_frames, method_classifications, selected_method='percentile', save_dir=None):
+    """Create comprehensive executive summary of blur detection methodology"""
+    logger.info("Generating executive summary for stakeholders")
+    
+    if not save_dir:
+        logger.error("Save directory required for executive summary")
+        return None, None, None
+        
+    # Try to import seaborn for nicer plots
+    try:
+        import seaborn as sns
+        have_seaborn = True
+    except ImportError:
+        logger.warning("Seaborn not installed. Install with 'pip install seaborn' for better visualizations.")
+        have_seaborn = False
+        
+    summary_dir = os.path.join(save_dir, "summary")
+    os.makedirs(summary_dir, exist_ok=True)
+    
+    # Calculate confidence scores for all frames
+    confidence_scores = []
+    for i, score in enumerate(blur_scores):
+        conf, metric = calculate_blur_confidence(score, blur_scores, thresholds, selected_method)
+        confidence_scores.append({
+            'frame': score['frame'],
+            'confidence': conf,
+            'leading_metric': metric,
+            'is_blurry': blur_flags[selected_method][i]
+        })
+    
+    # Create main summary figure (2x2 grid)
+    fig = plt.figure(figsize=(15, 12))
+    gs = fig.add_gridspec(2, 2)
+    
+    # 1. Distribution plot with thresholds
+    ax1 = fig.add_subplot(gs[0, 0])
+    create_distribution_plot(ax1, blur_scores, thresholds, selected_method, have_seaborn)
+    
+    # 2. Confidence distribution
+    ax2 = fig.add_subplot(gs[0, 1])
+    create_confidence_histogram(ax2, confidence_scores)
+    
+    # 3. Sample frames at different confidence levels
+    ax3 = fig.add_subplot(gs[1, 0])
+    display_confidence_examples(ax3, blur_scores, confidence_scores, all_frames)
+    
+    # 4. Show comparison pairs explaining classification differences
+    ax4 = fig.add_subplot(gs[1, 1])
+    create_comparison_visualization(ax4, blur_scores, confidence_scores, all_frames, thresholds, selected_method)
+    
+    # Add title and save
+    fig.suptitle(f"Blur Detection Methodology: {selected_method.capitalize()} Method", fontsize=16)
+    plt.tight_layout(rect=[0, 0, 1, 0.96])
+    summary_path = os.path.join(summary_dir, "executive_summary.png")
+    plt.savefig(summary_path)
+    logger.info(f"Executive summary saved to {summary_path}")
+    plt.close(fig)
+    
+    # Create confidence-scored CSV
+    csv_path = os.path.join(summary_dir, "blur_scores_with_confidence.csv")
+    with open(csv_path, 'w') as f:
+        f.write("frame,laplacian,tenengrad,fft,is_blurry,confidence,leading_metric\n")
+        for i, score in enumerate(blur_scores):
+            conf_data = confidence_scores[i]
+            f.write(f"{score['frame']},{score['laplacian']:.2f},{score['tenengrad']:.2f},{score['fft']:.2f},"
+                   f"{conf_data['is_blurry']},{conf_data['confidence']},{conf_data['leading_metric']}\n")
+    
+    # Generate a text report with methodology explanation
+    report_path = os.path.join(summary_dir, "summary_report.txt")
+    with open(report_path, 'w') as f:
+        f.write("BLUR DETECTION METHODOLOGY SUMMARY\n")
+        f.write("==================================\n\n")
+        f.write(f"Method: {selected_method.capitalize()}\n\n")
+        f.write("How Blur is Detected:\n")
+        f.write("1. Each frame is analyzed using three metrics:\n")
+        f.write("   - Laplacian Variance: Measures edge intensity (higher = sharper)\n")
+        f.write("   - Tenengrad: Measures gradient magnitude (higher = sharper)\n")
+        f.write("   - FFT: Measures high-frequency content (higher = sharper)\n\n")
+        f.write("2. Thresholds are calculated based on the selected method:\n")
+        for metric, value in thresholds[selected_method].items():
+            f.write(f"   - {metric}: {value:.2f}\n")
+        f.write("\n3. A frame is classified as blurry when ALL metrics fall below their thresholds\n")
+        f.write("4. Additionally, a temporal check flags frames with significant drops compared to neighbors\n\n")
+        f.write("5. Confidence scores (-100 to +100) indicate how far from thresholds a frame's metrics are\n")
+        f.write("   - Negative scores = blurry, Positive scores = sharp\n")
+        f.write("   - The magnitude indicates confidence (higher = more confident)\n\n")
+        f.write("Results Summary:\n")
+        blur_count = sum(blur_flags[selected_method])
+        total = len(blur_flags[selected_method])
+        f.write(f"  - Sharp frames: {total - blur_count} ({(total - blur_count)/total*100:.1f}%)\n")
+        f.write(f"  - Blurry frames: {blur_count} ({blur_count/total*100:.1f}%)\n")
+        
+    return summary_path, csv_path, report_path
+
+# Helper functions for the executive summary
+def create_distribution_plot(ax, blur_scores, thresholds, method, have_seaborn=False):
+    """Create distribution plot with thresholds marked"""
+    lap_vals = [score['laplacian'] for score in blur_scores]
+    ten_vals = [score['tenengrad'] for score in blur_scores]
+    fft_vals = [score['fft'] for score in blur_scores]
+    
+    # Plot distributions with kernel density estimates or histograms
+    if have_seaborn:
+        import seaborn as sns
+        sns.kdeplot(lap_vals, ax=ax, label="Laplacian", color="blue")
+        sns.kdeplot(ten_vals, ax=ax, label="Tenengrad", color="orange")
+        sns.kdeplot(fft_vals, ax=ax, label="FFT", color="green")
+    else:
+        # Use histograms if seaborn not available
+        ax.hist(lap_vals, bins=20, alpha=0.3, label="Laplacian", color="blue")
+        ax.hist(ten_vals, bins=20, alpha=0.3, label="Tenengrad", color="orange")
+        ax.hist(fft_vals, bins=20, alpha=0.3, label="FFT", color="green")
+    
+    # Add threshold lines
+    ax.axvline(x=thresholds[method]['laplacian'], color='blue', linestyle='--', 
+               label=f"Laplacian Threshold ({thresholds[method]['laplacian']:.2f})")
+    ax.axvline(x=thresholds[method]['tenengrad'], color='orange', linestyle='--',
+               label=f"Tenengrad Threshold ({thresholds[method]['tenengrad']:.2f})")
+    ax.axvline(x=thresholds[method]['fft'], color='green', linestyle='--',
+               label=f"FFT Threshold ({thresholds[method]['fft']:.2f})")
+    
+    ax.set_title("Blur Metric Distributions with Thresholds")
+    ax.set_xlabel("Value")
+    ax.set_ylabel("Density" if have_seaborn else "Count")
+    ax.legend(fontsize='small')
+    
+def create_confidence_histogram(ax, confidence_scores):
+    """Create histogram of confidence scores"""
+    confidences = [score['confidence'] for score in confidence_scores]
+    
+    # Create histogram
+    bins = np.linspace(-100, 100, 21)  # 10-point bins from -100 to 100
+    ax.hist(confidences, bins=bins, alpha=0.7)
+    
+    # Add vertical line at 0 (threshold)
+    ax.axvline(x=0, color='red', linestyle='--', label="Classification Threshold")
+    
+    # Add explanatory text
+    ax.text(-90, ax.get_ylim()[1]*0.9, "← More Blurry", fontsize=10)
+    ax.text(10, ax.get_ylim()[1]*0.9, "More Sharp →", fontsize=10)
+    
+    ax.set_title("Distribution of Confidence Scores")
+    ax.set_xlabel("Confidence Score (-100 to +100)")
+    ax.set_ylabel("Number of Frames")
+    ax.legend()
+    
+def display_confidence_examples(ax, blur_scores, confidence_scores, all_frames):
+    """Display example frames at different confidence levels"""
+    # Select frames at different confidence levels
+    conf_ranges = [
+        ("Very Blurry (< -70)", lambda s: s['confidence'] < -70),
+        ("Slightly Blurry (-30 to 0)", lambda s: -30 <= s['confidence'] < 0),
+        ("Slightly Sharp (0 to 30)", lambda s: 0 <= s['confidence'] < 30),
+        ("Very Sharp (> 70)", lambda s: s['confidence'] > 70)
+    ]
+    
+    examples = []
+    for label, condition in conf_ranges:
+        matching = [s for s in confidence_scores if condition(s) and s['frame'] in all_frames]
+        if matching:
+            # Take middle example from each range
+            examples.append((label, matching[len(matching)//2]))
+    
+    # Create a grid within the axes
+    grid_size = (2, 2)
+    
+    # Create mini subplots for each example
+    for i, (label, conf_score) in enumerate(examples):
+        if i >= grid_size[0] * grid_size[1]:
+            break
+            
+        # Calculate grid position
+        row, col = i // grid_size[1], i % grid_size[1]
+        
+        # Get frame
+        frame_id = conf_score['frame']
+        frame = all_frames[frame_id]
+        
+        # Get score
+        score = next((s for s in blur_scores if s['frame'] == frame_id), None)
+        if not score:
+            continue
+        
+        # Create subplot
+        subax = ax.inset_axes([col/grid_size[1], 1-row/grid_size[0]-1/grid_size[0], 
+                              1/grid_size[1], 1/grid_size[0]])
+        
+        # Display frame
+        subax.imshow(cv2.cvtColor(frame, cv2.COLOR_BGR2RGB))
+        subax.set_title(f"{label}\nConfidence: {conf_score['confidence']}")
+        subax.axis('off')
+    
+    ax.axis('off')
+    ax.set_title("Examples at Different Confidence Levels", y=1.05)
+    
+def create_comparison_visualization(ax, blur_scores, confidence_scores, all_frames, thresholds, method):
+    """Create visualization comparing similar frames with different classifications"""
+    # Find a pair of frames with different classifications but similar appearance
+    # This could be frames close to the threshold
+    blurry_near_threshold = [s for s in confidence_scores if s['is_blurry'] and s['confidence'] > -30]
+    sharp_near_threshold = [s for s in confidence_scores if not s['is_blurry'] and s['confidence'] < 30]
+    
+    # Sort by confidence to get closest to threshold
+    blurry_near_threshold.sort(key=lambda x: abs(x['confidence']))
+    sharp_near_threshold.sort(key=lambda x: abs(x['confidence']))
+    
+    # Get a pair if possible
+    if blurry_near_threshold and sharp_near_threshold:
+        blurry_frame = blurry_near_threshold[0]
+        sharp_frame = sharp_near_threshold[0]
+        
+        # Get corresponding blur_scores entry
+        blurry_score = next((s for s in blur_scores if s['frame'] == blurry_frame['frame']), None)
+        sharp_score = next((s for s in blur_scores if s['frame'] == sharp_frame['frame']), None)
+        
+        if blurry_score and sharp_score and blurry_frame['frame'] in all_frames and sharp_frame['frame'] in all_frames:
+            # Get frames
+            blurry_img = all_frames[blurry_frame['frame']]
+            sharp_img = all_frames[sharp_frame['frame']]
+            
+            # Create side-by-side comparison
+            subax1 = ax.inset_axes([0, 0.5, 0.5, 0.5])
+            subax1.imshow(cv2.cvtColor(blurry_img, cv2.COLOR_BGR2RGB))
+            subax1.set_title(f"Blurry: Frame {blurry_frame['frame']}\nConfidence: {blurry_frame['confidence']}")
+            subax1.axis('off')
+            
+            subax2 = ax.inset_axes([0.5, 0.5, 0.5, 0.5])
+            subax2.imshow(cv2.cvtColor(sharp_img, cv2.COLOR_BGR2RGB))
+            subax2.set_title(f"Sharp: Frame {sharp_frame['frame']}\nConfidence: {sharp_frame['confidence']}")
+            subax2.axis('off')
+            
+            # Add metric comparison table
+            table_data = [
+                ["Metric", "Blurry Frame", "Sharp Frame", "Threshold"],
+                ["Laplacian", f"{blurry_score['laplacian']:.2f}", f"{sharp_score['laplacian']:.2f}", f"{thresholds[method]['laplacian']:.2f}"],
+                ["Tenengrad", f"{blurry_score['tenengrad']:.2f}", f"{sharp_score['tenengrad']:.2f}", f"{thresholds[method]['tenengrad']:.2f}"],
+                ["FFT", f"{blurry_score['fft']:.2f}", f"{sharp_score['fft']:.2f}", f"{thresholds[method]['fft']:.2f}"]
+            ]
+            
+            # Create table at the bottom
+            table_ax = ax.inset_axes([0.1, 0, 0.8, 0.4])
+            table = table_ax.table(cellText=table_data, loc='center', cellLoc='center')
+            table.auto_set_font_size(False)
+            table.set_fontsize(10)
+            table.scale(1, 1.5)
+            
+            # Highlight values below threshold
+            for i, row in enumerate(table_data[1:], 1):  # Skip header row
+                metric = row[0].lower()
+                blurry_val = float(row[1])
+                sharp_val = float(row[2])
+                threshold = thresholds[method][metric]
+                
+                if blurry_val < threshold:
+                    table[(i, 1)].set_facecolor("#ffcccc")  # Light red for values below threshold
+                
+                if sharp_val < threshold:
+                    table[(i, 2)].set_facecolor("#ffcccc")  # Light red for values below threshold
+            
+            table_ax.axis('off')
+            
+            # Add explanation text
+            ax.text(0.5, 0.45, 
+                   "Values highlighted in red fall below threshold and contribute to the blur classification.",
+                   ha='center', fontsize=10)
+            
+            ax.axis('off')
+            ax.set_title("Comparison of Borderline Cases", y=1.05)
+        else:
+            ax.text(0.5, 0.5, "No suitable comparison frames found", ha='center', va='center')
+            ax.axis('off')
+    else:
+        ax.text(0.5, 0.5, "No suitable comparison frames found", ha='center', va='center')
+        ax.axis('off')
+
 def parse_arguments():
     parser = argparse.ArgumentParser(description='Video blur detection with multiple methods')
     parser.add_argument('--video', type=str, help='Path to video file')
@@ -714,6 +1031,11 @@ def parse_arguments():
     parser.add_argument('--save_path', type=str, help='Path to save the results plot')
     parser.add_argument('--method', type=str, default='percentile', choices=['percentile', 'stddev', 'fixed'], 
                         help='Threshold method to use for blur detection')
+    
+    # New arguments for stakeholder visualizations
+    parser.add_argument('--stakeholder', action='store_true', help='Generate stakeholder-friendly visualizations')
+    parser.add_argument('--confidence', action='store_true', help='Include confidence scores in output')
+    
     return parser.parse_args()
 
 if __name__ == "__main__":
@@ -748,6 +1070,39 @@ if __name__ == "__main__":
                 # Save results to file
                 plot_path = args.save_path if args.save_path else os.path.join(run_dir, f"blur_plot_{timestamp}.png")
                 plot_blur_metrics(blur_scores, thresholds, save_path=plot_path)
+                
+                # Include confidence scores if requested
+                if args.confidence or args.stakeholder:
+                    # Calculate confidence scores
+                    confidence_data = []
+                    for i, score in enumerate(blur_scores):
+                        confidence, metric = calculate_blur_confidence(score, blur_scores, thresholds, args.method)
+                        confidence_data.append({
+                            'frame': score['frame'],
+                            'confidence': confidence,
+                            'leading_metric': metric,
+                            'is_blurry': blur_flags[args.method][i]
+                        })
+                    
+                    # Save confidence data to CSV
+                    confidence_csv = os.path.join(run_dir, f"confidence_scores_{timestamp}.csv")
+                    with open(confidence_csv, 'w') as f:
+                        f.write("frame,laplacian,tenengrad,fft,is_blurry,confidence,leading_metric\n")
+                        for i, score in enumerate(blur_scores):
+                            conf = confidence_data[i]
+                            f.write(f"{score['frame']},{score['laplacian']:.2f},{score['tenengrad']:.2f},{score['fft']:.2f},"
+                                  f"{conf['is_blurry']},{conf['confidence']},{conf['leading_metric']}\n")
+                    logger.info(f"Confidence scores saved to {confidence_csv}")
+                
+                # Generate stakeholder report if requested
+                if args.stakeholder:
+                    summary_path, csv_path, report_path = generate_executive_summary(
+                        blur_scores, blur_flags, thresholds, all_frames, 
+                        method_classifications, args.method, save_dir=run_dir
+                    )
+                    logger.info(f"Executive summary saved to {summary_path}")
+                    logger.info(f"Confidence scores saved to {csv_path}")
+                    logger.info(f"Summary report saved to {report_path}")
                 
                 # Visualize sample frames
                 visualize_sample_frames(sample_frames, sample_indices, blur_scores, thresholds, save_dir=run_dir)

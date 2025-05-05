@@ -7,7 +7,7 @@
     "model": "resnet50",
     "frame": "29",
     "segment_id": "29_Bomb device_0_nopoint",
-    "segment_path": "all_frames/Scenes 021-040__323A-1_20230816000111901/29/segments/29_Bomb device_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 021-040__323A-1_20230816000111901/29/padded_segments/padded_29_Bomb device_0_nopoint.png"
   },
   {
     "video": "Scenes 021-040__323A-1_20230816000111901",
@@ -17,7 +17,7 @@
     "model": "resnet50",
     "frame": "4",
     "segment_id": "4_Bomb device_0_nopoint",
-    "segment_path": "all_frames/Scenes 021-040__323A-1_20230816000111901/4/segments/4_Bomb device_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 021-040__323A-1_20230816000111901/4/padded_segments/padded_4_Bomb device_0_nopoint.png"
   },
   {
     "video": "Scenes 021-040__323A-1_20230816000111901",
@@ -27,7 +27,7 @@
     "model": "resnet50",
     "frame": "5",
     "segment_id": "5_Bomb device_0_nopoint",
-    "segment_path": "all_frames/Scenes 021-040__323A-1_20230816000111901/5/segments/5_Bomb device_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 021-040__323A-1_20230816000111901/5/padded_segments/padded_5_Bomb device_0_nopoint.png"
   },
   {
     "video": "Scenes 021-040__323A-1_20230816000111901",
@@ -37,7 +37,7 @@
     "model": "resnet50",
     "frame": "31",
     "segment_id": "31_Bomb device_0_nopoint",
-    "segment_path": "all_frames/Scenes 021-040__323A-1_20230816000111901/31/segments/31_Bomb device_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 021-040__323A-1_20230816000111901/31/padded_segments/padded_31_Bomb device_0_nopoint.png"
   },
   {
     "video": "Scenes 021-040__323A-1_20230816000111901",
@@ -47,7 +47,7 @@
     "model": "resnet50",
     "frame": "3",
     "segment_id": "3_Bomb device_0_nopoint",
-    "segment_path": "all_frames/Scenes 021-040__323A-1_20230816000111901/3/segments/3_Bomb device_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 021-040__323A-1_20230816000111901/3/padded_segments/padded_3_Bomb device_0_nopoint.png"
   },
   {
     "video": "Scenes 021-040__323A-1_20230816000111901",
@@ -57,6 +57,6 @@
     "model": "resnet50",
     "frame": "28",
     "segment_id": "28_Bomb device_0_nopoint",
-    "segment_path": "all_frames/Scenes 021-040__323A-1_20230816000111901/28/segments/28_Bomb device_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 021-040__323A-1_20230816000111901/28/padded_segments/padded_28_Bomb device_0_nopoint.png"
   }
 ]

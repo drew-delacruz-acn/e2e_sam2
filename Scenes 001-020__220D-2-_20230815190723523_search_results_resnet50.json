@@ -1,0 +1,102 @@
+[
+  {
+    "video": "Scenes 001-020__220D-2-_20230815190723523",
+    "predicted_object": "Tesseract",
+    "object_version": 1,
+    "similarity_score": 0.7138221859931946,
+    "model": "resnet50",
+    "frame": "63",
+    "segment_id": "63_Neck device_0_nopoint",
+    "bbox_path": "all_frames/Scenes 001-020__220D-2-_20230815190723523/63/padded_segments/padded_63_Neck device_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 001-020__220D-2-_20230815190723523",
+    "predicted_object": "Asgardian device",
+    "object_version": 3,
+    "similarity_score": 0.7048647403717041,
+    "model": "resnet50",
+    "frame": "45",
+    "segment_id": "45_Scepter weapon_0_nopoint",
+    "bbox_path": "all_frames/Scenes 001-020__220D-2-_20230815190723523/45/padded_segments/padded_45_Scepter weapon_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 001-020__220D-2-_20230815190723523",
+    "predicted_object": "Laevateinn",
+    "object_version": 3,
+    "similarity_score": 0.711100697517395,
+    "model": "resnet50",
+    "frame": "7",
+    "segment_id": "7_Glowing rod_0_nopoint",
+    "bbox_path": "all_frames/Scenes 001-020__220D-2-_20230815190723523/7/padded_segments/padded_7_Glowing rod_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 001-020__220D-2-_20230815190723523",
+    "predicted_object": "Asgardian device",
+    "object_version": 3,
+    "similarity_score": 0.7109885215759277,
+    "model": "resnet50",
+    "frame": "39",
+    "segment_id": "39_Scepter weapon_0_nopoint",
+    "bbox_path": "all_frames/Scenes 001-020__220D-2-_20230815190723523/39/padded_segments/padded_39_Scepter weapon_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 001-020__220D-2-_20230815190723523",
+    "predicted_object": "Time Collar",
+    "object_version": 3,
+    "similarity_score": 0.7427355647087097,
+    "model": "resnet50",
+    "frame": "57",
+    "segment_id": "57_Neck device_0_nopoint",
+    "bbox_path": "all_frames/Scenes 001-020__220D-2-_20230815190723523/57/padded_segments/padded_57_Neck device_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 001-020__220D-2-_20230815190723523",
+    "predicted_object": "Asgardian device",
+    "object_version": 3,
+    "similarity_score": 0.7249205112457275,
+    "model": "resnet50",
+    "frame": "36",
+    "segment_id": "36_Metal gauntlet_1_nopoint",
+    "bbox_path": "all_frames/Scenes 001-020__220D-2-_20230815190723523/36/padded_segments/padded_36_Metal gauntlet_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 001-020__220D-2-_20230815190723523",
+    "predicted_object": "Laevateinn",
+    "object_version": 3,
+    "similarity_score": 0.7013376355171204,
+    "model": "resnet50",
+    "frame": "15",
+    "segment_id": "15_Glowing rod_0_nopoint",
+    "bbox_path": "all_frames/Scenes 001-020__220D-2-_20230815190723523/15/padded_segments/padded_15_Glowing rod_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 001-020__220D-2-_20230815190723523",
+    "predicted_object": "Laevateinn",
+    "object_version": 1,
+    "similarity_score": 0.7086654901504517,
+    "model": "resnet50",
+    "frame": "92",
+    "segment_id": "92_Curved sword_0_nopoint",
+    "bbox_path": "all_frames/Scenes 001-020__220D-2-_20230815190723523/92/padded_segments/padded_92_Curved sword_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 001-020__220D-2-_20230815190723523",
+    "predicted_object": "Laevateinn",
+    "object_version": 3,
+    "similarity_score": 0.708624541759491,
+    "model": "resnet50",
+    "frame": "9",
+    "segment_id": "9_Glowing rod_0_nopoint",
+    "bbox_path": "all_frames/Scenes 001-020__220D-2-_20230815190723523/9/padded_segments/padded_9_Glowing rod_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 001-020__220D-2-_20230815190723523",
+    "predicted_object": "Asgardian device",
+    "object_version": 3,
+    "similarity_score": 0.7205175757408142,
+    "model": "resnet50",
+    "frame": "48",
+    "segment_id": "48_Scepter weapon_1_nopoint",
+    "bbox_path": "all_frames/Scenes 001-020__220D-2-_20230815190723523/48/padded_segments/padded_48_Scepter weapon_1_nopoint.png"
+  }
+]

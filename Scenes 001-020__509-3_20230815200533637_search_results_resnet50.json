@@ -7,7 +7,7 @@
     "model": "resnet50",
     "frame": "29",
     "segment_id": "29_TVA jacket_1_nopoint",
-    "segment_path": "all_frames/Scenes 001-020__509-3_20230815200533637/29/segments/29_TVA jacket_1_nopoint.png"
+    "bbox_path": "all_frames/Scenes 001-020__509-3_20230815200533637/29/padded_segments/padded_29_TVA jacket_1_nopoint.png"
   },
   {
     "video": "Scenes 001-020__509-3_20230815200533637",
@@ -17,7 +17,7 @@
     "model": "resnet50",
     "frame": "39",
     "segment_id": "39_Horned helmet_0_nopoint",
-    "segment_path": "all_frames/Scenes 001-020__509-3_20230815200533637/39/segments/39_Horned helmet_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 001-020__509-3_20230815200533637/39/padded_segments/padded_39_Horned helmet_0_nopoint.png"
   },
   {
     "video": "Scenes 001-020__509-3_20230815200533637",
@@ -27,7 +27,7 @@
     "model": "resnet50",
     "frame": "38",
     "segment_id": "38_Horned helmet_0_nopoint",
-    "segment_path": "all_frames/Scenes 001-020__509-3_20230815200533637/38/segments/38_Horned helmet_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 001-020__509-3_20230815200533637/38/padded_segments/padded_38_Horned helmet_0_nopoint.png"
   },
   {
     "video": "Scenes 001-020__509-3_20230815200533637",
@@ -37,7 +37,7 @@
     "model": "resnet50",
     "frame": "44",
     "segment_id": "44_Horned helmet_0_nopoint",
-    "segment_path": "all_frames/Scenes 001-020__509-3_20230815200533637/44/segments/44_Horned helmet_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 001-020__509-3_20230815200533637/44/padded_segments/padded_44_Horned helmet_0_nopoint.png"
   },
   {
     "video": "Scenes 001-020__509-3_20230815200533637",
@@ -47,7 +47,7 @@
     "model": "resnet50",
     "frame": "44",
     "segment_id": "44_Horned helmet_2_nopoint",
-    "segment_path": "all_frames/Scenes 001-020__509-3_20230815200533637/44/segments/44_Horned helmet_2_nopoint.png"
+    "bbox_path": "all_frames/Scenes 001-020__509-3_20230815200533637/44/padded_segments/padded_44_Horned helmet_2_nopoint.png"
   },
   {
     "video": "Scenes 001-020__509-3_20230815200533637",
@@ -57,7 +57,7 @@
     "model": "resnet50",
     "frame": "5",
     "segment_id": "5_Glowing rod_0_nopoint",
-    "segment_path": "all_frames/Scenes 001-020__509-3_20230815200533637/5/segments/5_Glowing rod_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 001-020__509-3_20230815200533637/5/padded_segments/padded_5_Glowing rod_0_nopoint.png"
   },
   {
     "video": "Scenes 001-020__509-3_20230815200533637",
@@ -67,7 +67,7 @@
     "model": "resnet50",
     "frame": "34",
     "segment_id": "34_Horned helmet_0_nopoint",
-    "segment_path": "all_frames/Scenes 001-020__509-3_20230815200533637/34/segments/34_Horned helmet_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 001-020__509-3_20230815200533637/34/padded_segments/padded_34_Horned helmet_0_nopoint.png"
   },
   {
     "video": "Scenes 001-020__509-3_20230815200533637",
@@ -77,7 +77,7 @@
     "model": "resnet50",
     "frame": "27",
     "segment_id": "27_War hammer_5_nopoint",
-    "segment_path": "all_frames/Scenes 001-020__509-3_20230815200533637/27/segments/27_War hammer_5_nopoint.png"
+    "bbox_path": "all_frames/Scenes 001-020__509-3_20230815200533637/27/padded_segments/padded_27_War hammer_5_nopoint.png"
   },
   {
     "video": "Scenes 001-020__509-3_20230815200533637",
@@ -87,7 +87,7 @@
     "model": "resnet50",
     "frame": "37",
     "segment_id": "37_Horned helmet_0_nopoint",
-    "segment_path": "all_frames/Scenes 001-020__509-3_20230815200533637/37/segments/37_Horned helmet_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 001-020__509-3_20230815200533637/37/padded_segments/padded_37_Horned helmet_0_nopoint.png"
   },
   {
     "video": "Scenes 001-020__509-3_20230815200533637",
@@ -97,7 +97,7 @@
     "model": "resnet50",
     "frame": "36",
     "segment_id": "36_Horned helmet_0_nopoint",
-    "segment_path": "all_frames/Scenes 001-020__509-3_20230815200533637/36/segments/36_Horned helmet_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 001-020__509-3_20230815200533637/36/padded_segments/padded_36_Horned helmet_0_nopoint.png"
   },
   {
     "video": "Scenes 001-020__509-3_20230815200533637",
@@ -107,6 +107,6 @@
     "model": "resnet50",
     "frame": "40",
     "segment_id": "40_Horned helmet_0_nopoint",
-    "segment_path": "all_frames/Scenes 001-020__509-3_20230815200533637/40/segments/40_Horned helmet_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 001-020__509-3_20230815200533637/40/padded_segments/padded_40_Horned helmet_0_nopoint.png"
   }
 ]

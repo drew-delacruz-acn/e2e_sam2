@@ -7,7 +7,7 @@
     "model": "resnet50",
     "frame": "19",
     "segment_id": "19_Leather coat_0_nopoint",
-    "segment_path": "all_frames/Scenes 001-020__504K-1-_20230816050602143/19/segments/19_Leather coat_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 001-020__504K-1-_20230816050602143/19/padded_segments/padded_19_Leather coat_0_nopoint.png"
   },
   {
     "video": "Scenes 001-020__504K-1-_20230816050602143",
@@ -17,7 +17,7 @@
     "model": "resnet50",
     "frame": "46",
     "segment_id": "46_Neck device_0_nopoint",
-    "segment_path": "all_frames/Scenes 001-020__504K-1-_20230816050602143/46/segments/46_Neck device_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 001-020__504K-1-_20230816050602143/46/padded_segments/padded_46_Neck device_0_nopoint.png"
   },
   {
     "video": "Scenes 001-020__504K-1-_20230816050602143",
@@ -27,7 +27,7 @@
     "model": "resnet50",
     "frame": "63",
     "segment_id": "63_Leather coat_5_nopoint",
-    "segment_path": "all_frames/Scenes 001-020__504K-1-_20230816050602143/63/segments/63_Leather coat_5_nopoint.png"
+    "bbox_path": "all_frames/Scenes 001-020__504K-1-_20230816050602143/63/padded_segments/padded_63_Leather coat_5_nopoint.png"
   },
   {
     "video": "Scenes 001-020__504K-1-_20230816050602143",
@@ -37,7 +37,7 @@
     "model": "resnet50",
     "frame": "63",
     "segment_id": "63_Curved sword_0_nopoint",
-    "segment_path": "all_frames/Scenes 001-020__504K-1-_20230816050602143/63/segments/63_Curved sword_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 001-020__504K-1-_20230816050602143/63/padded_segments/padded_63_Curved sword_0_nopoint.png"
   },
   {
     "video": "Scenes 001-020__504K-1-_20230816050602143",
@@ -47,7 +47,7 @@
     "model": "resnet50",
     "frame": "63",
     "segment_id": "63_Curved sword_2_nopoint",
-    "segment_path": "all_frames/Scenes 001-020__504K-1-_20230816050602143/63/segments/63_Curved sword_2_nopoint.png"
+    "bbox_path": "all_frames/Scenes 001-020__504K-1-_20230816050602143/63/padded_segments/padded_63_Curved sword_2_nopoint.png"
   },
   {
     "video": "Scenes 001-020__504K-1-_20230816050602143",
@@ -57,7 +57,7 @@
     "model": "resnet50",
     "frame": "1",
     "segment_id": "1_Curved sword_0_nopoint",
-    "segment_path": "all_frames/Scenes 001-020__504K-1-_20230816050602143/1/segments/1_Curved sword_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 001-020__504K-1-_20230816050602143/1/padded_segments/padded_1_Curved sword_0_nopoint.png"
   },
   {
     "video": "Scenes 001-020__504K-1-_20230816050602143",
@@ -67,7 +67,7 @@
     "model": "resnet50",
     "frame": "1",
     "segment_id": "1_Leather coat_1_nopoint",
-    "segment_path": "all_frames/Scenes 001-020__504K-1-_20230816050602143/1/segments/1_Leather coat_1_nopoint.png"
+    "bbox_path": "all_frames/Scenes 001-020__504K-1-_20230816050602143/1/padded_segments/padded_1_Leather coat_1_nopoint.png"
   },
   {
     "video": "Scenes 001-020__504K-1-_20230816050602143",
@@ -77,7 +77,7 @@
     "model": "resnet50",
     "frame": "83",
     "segment_id": "83_Curved sword_0_nopoint",
-    "segment_path": "all_frames/Scenes 001-020__504K-1-_20230816050602143/83/segments/83_Curved sword_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 001-020__504K-1-_20230816050602143/83/padded_segments/padded_83_Curved sword_0_nopoint.png"
   },
   {
     "video": "Scenes 001-020__504K-1-_20230816050602143",
@@ -87,7 +87,7 @@
     "model": "resnet50",
     "frame": "52",
     "segment_id": "52_Leather coat_0_nopoint",
-    "segment_path": "all_frames/Scenes 001-020__504K-1-_20230816050602143/52/segments/52_Leather coat_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 001-020__504K-1-_20230816050602143/52/padded_segments/padded_52_Leather coat_0_nopoint.png"
   },
   {
     "video": "Scenes 001-020__504K-1-_20230816050602143",
@@ -97,7 +97,7 @@
     "model": "resnet50",
     "frame": "84",
     "segment_id": "84_Leather coat_3_nopoint",
-    "segment_path": "all_frames/Scenes 001-020__504K-1-_20230816050602143/84/segments/84_Leather coat_3_nopoint.png"
+    "bbox_path": "all_frames/Scenes 001-020__504K-1-_20230816050602143/84/padded_segments/padded_84_Leather coat_3_nopoint.png"
   },
   {
     "video": "Scenes 001-020__504K-1-_20230816050602143",
@@ -107,7 +107,7 @@
     "model": "resnet50",
     "frame": "84",
     "segment_id": "84_Curved sword_0_nopoint",
-    "segment_path": "all_frames/Scenes 001-020__504K-1-_20230816050602143/84/segments/84_Curved sword_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 001-020__504K-1-_20230816050602143/84/padded_segments/padded_84_Curved sword_0_nopoint.png"
   },
   {
     "video": "Scenes 001-020__504K-1-_20230816050602143",
@@ -117,7 +117,7 @@
     "model": "resnet50",
     "frame": "84",
     "segment_id": "84_Leather coat_2_nopoint",
-    "segment_path": "all_frames/Scenes 001-020__504K-1-_20230816050602143/84/segments/84_Leather coat_2_nopoint.png"
+    "bbox_path": "all_frames/Scenes 001-020__504K-1-_20230816050602143/84/padded_segments/padded_84_Leather coat_2_nopoint.png"
   },
   {
     "video": "Scenes 001-020__504K-1-_20230816050602143",
@@ -127,7 +127,7 @@
     "model": "resnet50",
     "frame": "60",
     "segment_id": "60_Leather coat_3_nopoint",
-    "segment_path": "all_frames/Scenes 001-020__504K-1-_20230816050602143/60/segments/60_Leather coat_3_nopoint.png"
+    "bbox_path": "all_frames/Scenes 001-020__504K-1-_20230816050602143/60/padded_segments/padded_60_Leather coat_3_nopoint.png"
   },
   {
     "video": "Scenes 001-020__504K-1-_20230816050602143",
@@ -137,7 +137,7 @@
     "model": "resnet50",
     "frame": "60",
     "segment_id": "60_Curved sword_0_nopoint",
-    "segment_path": "all_frames/Scenes 001-020__504K-1-_20230816050602143/60/segments/60_Curved sword_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 001-020__504K-1-_20230816050602143/60/padded_segments/padded_60_Curved sword_0_nopoint.png"
   },
   {
     "video": "Scenes 001-020__504K-1-_20230816050602143",
@@ -147,7 +147,7 @@
     "model": "resnet50",
     "frame": "60",
     "segment_id": "60_Metal sword_1_nopoint",
-    "segment_path": "all_frames/Scenes 001-020__504K-1-_20230816050602143/60/segments/60_Metal sword_1_nopoint.png"
+    "bbox_path": "all_frames/Scenes 001-020__504K-1-_20230816050602143/60/padded_segments/padded_60_Metal sword_1_nopoint.png"
   },
   {
     "video": "Scenes 001-020__504K-1-_20230816050602143",
@@ -157,7 +157,7 @@
     "model": "resnet50",
     "frame": "56",
     "segment_id": "56_Leather coat_0_nopoint",
-    "segment_path": "all_frames/Scenes 001-020__504K-1-_20230816050602143/56/segments/56_Leather coat_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 001-020__504K-1-_20230816050602143/56/padded_segments/padded_56_Leather coat_0_nopoint.png"
   },
   {
     "video": "Scenes 001-020__504K-1-_20230816050602143",
@@ -167,7 +167,7 @@
     "model": "resnet50",
     "frame": "62",
     "segment_id": "62_Leather coat_2_nopoint",
-    "segment_path": "all_frames/Scenes 001-020__504K-1-_20230816050602143/62/segments/62_Leather coat_2_nopoint.png"
+    "bbox_path": "all_frames/Scenes 001-020__504K-1-_20230816050602143/62/padded_segments/padded_62_Leather coat_2_nopoint.png"
   },
   {
     "video": "Scenes 001-020__504K-1-_20230816050602143",
@@ -177,7 +177,7 @@
     "model": "resnet50",
     "frame": "62",
     "segment_id": "62_Curved sword_0_nopoint",
-    "segment_path": "all_frames/Scenes 001-020__504K-1-_20230816050602143/62/segments/62_Curved sword_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 001-020__504K-1-_20230816050602143/62/padded_segments/padded_62_Curved sword_0_nopoint.png"
   },
   {
     "video": "Scenes 001-020__504K-1-_20230816050602143",
@@ -187,7 +187,7 @@
     "model": "resnet50",
     "frame": "62",
     "segment_id": "62_Curved sword_1_nopoint",
-    "segment_path": "all_frames/Scenes 001-020__504K-1-_20230816050602143/62/segments/62_Curved sword_1_nopoint.png"
+    "bbox_path": "all_frames/Scenes 001-020__504K-1-_20230816050602143/62/padded_segments/padded_62_Curved sword_1_nopoint.png"
   },
   {
     "video": "Scenes 001-020__504K-1-_20230816050602143",
@@ -197,7 +197,7 @@
     "model": "resnet50",
     "frame": "70",
     "segment_id": "70_Leather coat_1_nopoint",
-    "segment_path": "all_frames/Scenes 001-020__504K-1-_20230816050602143/70/segments/70_Leather coat_1_nopoint.png"
+    "bbox_path": "all_frames/Scenes 001-020__504K-1-_20230816050602143/70/padded_segments/padded_70_Leather coat_1_nopoint.png"
   },
   {
     "video": "Scenes 001-020__504K-1-_20230816050602143",
@@ -207,7 +207,7 @@
     "model": "resnet50",
     "frame": "74",
     "segment_id": "74_Leather coat_1_nopoint",
-    "segment_path": "all_frames/Scenes 001-020__504K-1-_20230816050602143/74/segments/74_Leather coat_1_nopoint.png"
+    "bbox_path": "all_frames/Scenes 001-020__504K-1-_20230816050602143/74/padded_segments/padded_74_Leather coat_1_nopoint.png"
   },
   {
     "video": "Scenes 001-020__504K-1-_20230816050602143",
@@ -217,7 +217,7 @@
     "model": "resnet50",
     "frame": "72",
     "segment_id": "72_Curved sword_0_nopoint",
-    "segment_path": "all_frames/Scenes 001-020__504K-1-_20230816050602143/72/segments/72_Curved sword_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 001-020__504K-1-_20230816050602143/72/padded_segments/padded_72_Curved sword_0_nopoint.png"
   },
   {
     "video": "Scenes 001-020__504K-1-_20230816050602143",
@@ -227,7 +227,7 @@
     "model": "resnet50",
     "frame": "2",
     "segment_id": "2_Leather coat_1_nopoint",
-    "segment_path": "all_frames/Scenes 001-020__504K-1-_20230816050602143/2/segments/2_Leather coat_1_nopoint.png"
+    "bbox_path": "all_frames/Scenes 001-020__504K-1-_20230816050602143/2/padded_segments/padded_2_Leather coat_1_nopoint.png"
   },
   {
     "video": "Scenes 001-020__504K-1-_20230816050602143",
@@ -237,7 +237,7 @@
     "model": "resnet50",
     "frame": "53",
     "segment_id": "53_Leather coat_0_nopoint",
-    "segment_path": "all_frames/Scenes 001-020__504K-1-_20230816050602143/53/segments/53_Leather coat_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 001-020__504K-1-_20230816050602143/53/padded_segments/padded_53_Leather coat_0_nopoint.png"
   },
   {
     "video": "Scenes 001-020__504K-1-_20230816050602143",
@@ -247,7 +247,7 @@
     "model": "resnet50",
     "frame": "17",
     "segment_id": "17_War hammer_0_nopoint",
-    "segment_path": "all_frames/Scenes 001-020__504K-1-_20230816050602143/17/segments/17_War hammer_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 001-020__504K-1-_20230816050602143/17/padded_segments/padded_17_War hammer_0_nopoint.png"
   },
   {
     "video": "Scenes 001-020__504K-1-_20230816050602143",
@@ -257,7 +257,7 @@
     "model": "resnet50",
     "frame": "17",
     "segment_id": "17_Leather coat_1_nopoint",
-    "segment_path": "all_frames/Scenes 001-020__504K-1-_20230816050602143/17/segments/17_Leather coat_1_nopoint.png"
+    "bbox_path": "all_frames/Scenes 001-020__504K-1-_20230816050602143/17/padded_segments/padded_17_Leather coat_1_nopoint.png"
   },
   {
     "video": "Scenes 001-020__504K-1-_20230816050602143",
@@ -267,7 +267,7 @@
     "model": "resnet50",
     "frame": "33",
     "segment_id": "33_Curved sword_1_nopoint",
-    "segment_path": "all_frames/Scenes 001-020__504K-1-_20230816050602143/33/segments/33_Curved sword_1_nopoint.png"
+    "bbox_path": "all_frames/Scenes 001-020__504K-1-_20230816050602143/33/padded_segments/padded_33_Curved sword_1_nopoint.png"
   },
   {
     "video": "Scenes 001-020__504K-1-_20230816050602143",
@@ -277,7 +277,7 @@
     "model": "resnet50",
     "frame": "33",
     "segment_id": "33_TVA jacket_0_nopoint",
-    "segment_path": "all_frames/Scenes 001-020__504K-1-_20230816050602143/33/segments/33_TVA jacket_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 001-020__504K-1-_20230816050602143/33/padded_segments/padded_33_TVA jacket_0_nopoint.png"
   },
   {
     "video": "Scenes 001-020__504K-1-_20230816050602143",
@@ -287,7 +287,7 @@
     "model": "resnet50",
     "frame": "81",
     "segment_id": "81_Leather coat_1_nopoint",
-    "segment_path": "all_frames/Scenes 001-020__504K-1-_20230816050602143/81/segments/81_Leather coat_1_nopoint.png"
+    "bbox_path": "all_frames/Scenes 001-020__504K-1-_20230816050602143/81/padded_segments/padded_81_Leather coat_1_nopoint.png"
   },
   {
     "video": "Scenes 001-020__504K-1-_20230816050602143",
@@ -297,7 +297,7 @@
     "model": "resnet50",
     "frame": "47",
     "segment_id": "47_Curved sword_0_nopoint",
-    "segment_path": "all_frames/Scenes 001-020__504K-1-_20230816050602143/47/segments/47_Curved sword_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 001-020__504K-1-_20230816050602143/47/padded_segments/padded_47_Curved sword_0_nopoint.png"
   },
   {
     "video": "Scenes 001-020__504K-1-_20230816050602143",
@@ -307,7 +307,7 @@
     "model": "resnet50",
     "frame": "35",
     "segment_id": "35_Curved sword_0_nopoint",
-    "segment_path": "all_frames/Scenes 001-020__504K-1-_20230816050602143/35/segments/35_Curved sword_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 001-020__504K-1-_20230816050602143/35/padded_segments/padded_35_Curved sword_0_nopoint.png"
   },
   {
     "video": "Scenes 001-020__504K-1-_20230816050602143",
@@ -317,7 +317,7 @@
     "model": "resnet50",
     "frame": "38",
     "segment_id": "38_Curved sword_0_nopoint",
-    "segment_path": "all_frames/Scenes 001-020__504K-1-_20230816050602143/38/segments/38_Curved sword_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 001-020__504K-1-_20230816050602143/38/padded_segments/padded_38_Curved sword_0_nopoint.png"
   },
   {
     "video": "Scenes 001-020__504K-1-_20230816050602143",
@@ -327,7 +327,7 @@
     "model": "resnet50",
     "frame": "38",
     "segment_id": "38_Leather coat_1_nopoint",
-    "segment_path": "all_frames/Scenes 001-020__504K-1-_20230816050602143/38/segments/38_Leather coat_1_nopoint.png"
+    "bbox_path": "all_frames/Scenes 001-020__504K-1-_20230816050602143/38/padded_segments/padded_38_Leather coat_1_nopoint.png"
   },
   {
     "video": "Scenes 001-020__504K-1-_20230816050602143",
@@ -337,7 +337,7 @@
     "model": "resnet50",
     "frame": "44",
     "segment_id": "44_Leather coat_1_nopoint",
-    "segment_path": "all_frames/Scenes 001-020__504K-1-_20230816050602143/44/segments/44_Leather coat_1_nopoint.png"
+    "bbox_path": "all_frames/Scenes 001-020__504K-1-_20230816050602143/44/padded_segments/padded_44_Leather coat_1_nopoint.png"
   },
   {
     "video": "Scenes 001-020__504K-1-_20230816050602143",
@@ -347,7 +347,7 @@
     "model": "resnet50",
     "frame": "69",
     "segment_id": "69_Curved sword_0_nopoint",
-    "segment_path": "all_frames/Scenes 001-020__504K-1-_20230816050602143/69/segments/69_Curved sword_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 001-020__504K-1-_20230816050602143/69/padded_segments/padded_69_Curved sword_0_nopoint.png"
   },
   {
     "video": "Scenes 001-020__504K-1-_20230816050602143",
@@ -357,7 +357,7 @@
     "model": "resnet50",
     "frame": "69",
     "segment_id": "69_Leather coat_1_nopoint",
-    "segment_path": "all_frames/Scenes 001-020__504K-1-_20230816050602143/69/segments/69_Leather coat_1_nopoint.png"
+    "bbox_path": "all_frames/Scenes 001-020__504K-1-_20230816050602143/69/padded_segments/padded_69_Leather coat_1_nopoint.png"
   },
   {
     "video": "Scenes 001-020__504K-1-_20230816050602143",
@@ -367,7 +367,7 @@
     "model": "resnet50",
     "frame": "68",
     "segment_id": "68_Curved sword_2_nopoint",
-    "segment_path": "all_frames/Scenes 001-020__504K-1-_20230816050602143/68/segments/68_Curved sword_2_nopoint.png"
+    "bbox_path": "all_frames/Scenes 001-020__504K-1-_20230816050602143/68/padded_segments/padded_68_Curved sword_2_nopoint.png"
   },
   {
     "video": "Scenes 001-020__504K-1-_20230816050602143",
@@ -377,7 +377,7 @@
     "model": "resnet50",
     "frame": "68",
     "segment_id": "68_Leather coat_6_nopoint",
-    "segment_path": "all_frames/Scenes 001-020__504K-1-_20230816050602143/68/segments/68_Leather coat_6_nopoint.png"
+    "bbox_path": "all_frames/Scenes 001-020__504K-1-_20230816050602143/68/padded_segments/padded_68_Leather coat_6_nopoint.png"
   },
   {
     "video": "Scenes 001-020__504K-1-_20230816050602143",
@@ -387,7 +387,7 @@
     "model": "resnet50",
     "frame": "68",
     "segment_id": "68_Metal sword_5_nopoint",
-    "segment_path": "all_frames/Scenes 001-020__504K-1-_20230816050602143/68/segments/68_Metal sword_5_nopoint.png"
+    "bbox_path": "all_frames/Scenes 001-020__504K-1-_20230816050602143/68/padded_segments/padded_68_Metal sword_5_nopoint.png"
   },
   {
     "video": "Scenes 001-020__504K-1-_20230816050602143",
@@ -397,7 +397,7 @@
     "model": "resnet50",
     "frame": "16",
     "segment_id": "16_Leather coat_2_nopoint",
-    "segment_path": "all_frames/Scenes 001-020__504K-1-_20230816050602143/16/segments/16_Leather coat_2_nopoint.png"
+    "bbox_path": "all_frames/Scenes 001-020__504K-1-_20230816050602143/16/padded_segments/padded_16_Leather coat_2_nopoint.png"
   },
   {
     "video": "Scenes 001-020__504K-1-_20230816050602143",
@@ -407,7 +407,7 @@
     "model": "resnet50",
     "frame": "16",
     "segment_id": "16_Curved sword_0_nopoint",
-    "segment_path": "all_frames/Scenes 001-020__504K-1-_20230816050602143/16/segments/16_Curved sword_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 001-020__504K-1-_20230816050602143/16/padded_segments/padded_16_Curved sword_0_nopoint.png"
   },
   {
     "video": "Scenes 001-020__504K-1-_20230816050602143",
@@ -417,7 +417,7 @@
     "model": "resnet50",
     "frame": "57",
     "segment_id": "57_Leather coat_0_nopoint",
-    "segment_path": "all_frames/Scenes 001-020__504K-1-_20230816050602143/57/segments/57_Leather coat_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 001-020__504K-1-_20230816050602143/57/padded_segments/padded_57_Leather coat_0_nopoint.png"
   },
   {
     "video": "Scenes 001-020__504K-1-_20230816050602143",
@@ -427,7 +427,7 @@
     "model": "resnet50",
     "frame": "34",
     "segment_id": "34_Leather coat_1_nopoint",
-    "segment_path": "all_frames/Scenes 001-020__504K-1-_20230816050602143/34/segments/34_Leather coat_1_nopoint.png"
+    "bbox_path": "all_frames/Scenes 001-020__504K-1-_20230816050602143/34/padded_segments/padded_34_Leather coat_1_nopoint.png"
   },
   {
     "video": "Scenes 001-020__504K-1-_20230816050602143",
@@ -437,7 +437,7 @@
     "model": "resnet50",
     "frame": "30",
     "segment_id": "30_Curved sword_0_nopoint",
-    "segment_path": "all_frames/Scenes 001-020__504K-1-_20230816050602143/30/segments/30_Curved sword_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 001-020__504K-1-_20230816050602143/30/padded_segments/padded_30_Curved sword_0_nopoint.png"
   },
   {
     "video": "Scenes 001-020__504K-1-_20230816050602143",
@@ -447,7 +447,7 @@
     "model": "resnet50",
     "frame": "51",
     "segment_id": "51_Leather coat_0_nopoint",
-    "segment_path": "all_frames/Scenes 001-020__504K-1-_20230816050602143/51/segments/51_Leather coat_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 001-020__504K-1-_20230816050602143/51/padded_segments/padded_51_Leather coat_0_nopoint.png"
   },
   {
     "video": "Scenes 001-020__504K-1-_20230816050602143",
@@ -457,7 +457,7 @@
     "model": "resnet50",
     "frame": "27",
     "segment_id": "27_Leather coat_3_nopoint",
-    "segment_path": "all_frames/Scenes 001-020__504K-1-_20230816050602143/27/segments/27_Leather coat_3_nopoint.png"
+    "bbox_path": "all_frames/Scenes 001-020__504K-1-_20230816050602143/27/padded_segments/padded_27_Leather coat_3_nopoint.png"
   },
   {
     "video": "Scenes 001-020__504K-1-_20230816050602143",
@@ -467,7 +467,7 @@
     "model": "resnet50",
     "frame": "12",
     "segment_id": "12_Curved sword_0_nopoint",
-    "segment_path": "all_frames/Scenes 001-020__504K-1-_20230816050602143/12/segments/12_Curved sword_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 001-020__504K-1-_20230816050602143/12/padded_segments/padded_12_Curved sword_0_nopoint.png"
   },
   {
     "video": "Scenes 001-020__504K-1-_20230816050602143",
@@ -477,7 +477,7 @@
     "model": "resnet50",
     "frame": "71",
     "segment_id": "71_Leather coat_2_nopoint",
-    "segment_path": "all_frames/Scenes 001-020__504K-1-_20230816050602143/71/segments/71_Leather coat_2_nopoint.png"
+    "bbox_path": "all_frames/Scenes 001-020__504K-1-_20230816050602143/71/padded_segments/padded_71_Leather coat_2_nopoint.png"
   },
   {
     "video": "Scenes 001-020__504K-1-_20230816050602143",
@@ -487,7 +487,7 @@
     "model": "resnet50",
     "frame": "0",
     "segment_id": "0_Leather coat_1_nopoint",
-    "segment_path": "all_frames/Scenes 001-020__504K-1-_20230816050602143/0/segments/0_Leather coat_1_nopoint.png"
+    "bbox_path": "all_frames/Scenes 001-020__504K-1-_20230816050602143/0/padded_segments/padded_0_Leather coat_1_nopoint.png"
   },
   {
     "video": "Scenes 001-020__504K-1-_20230816050602143",
@@ -497,7 +497,7 @@
     "model": "resnet50",
     "frame": "37",
     "segment_id": "37_Curved sword_0_nopoint",
-    "segment_path": "all_frames/Scenes 001-020__504K-1-_20230816050602143/37/segments/37_Curved sword_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 001-020__504K-1-_20230816050602143/37/padded_segments/padded_37_Curved sword_0_nopoint.png"
   },
   {
     "video": "Scenes 001-020__504K-1-_20230816050602143",
@@ -507,7 +507,7 @@
     "model": "resnet50",
     "frame": "37",
     "segment_id": "37_Leather coat_1_nopoint",
-    "segment_path": "all_frames/Scenes 001-020__504K-1-_20230816050602143/37/segments/37_Leather coat_1_nopoint.png"
+    "bbox_path": "all_frames/Scenes 001-020__504K-1-_20230816050602143/37/padded_segments/padded_37_Leather coat_1_nopoint.png"
   },
   {
     "video": "Scenes 001-020__504K-1-_20230816050602143",
@@ -517,7 +517,7 @@
     "model": "resnet50",
     "frame": "3",
     "segment_id": "3_TVA jacket_1_nopoint",
-    "segment_path": "all_frames/Scenes 001-020__504K-1-_20230816050602143/3/segments/3_TVA jacket_1_nopoint.png"
+    "bbox_path": "all_frames/Scenes 001-020__504K-1-_20230816050602143/3/padded_segments/padded_3_TVA jacket_1_nopoint.png"
   },
   {
     "video": "Scenes 001-020__504K-1-_20230816050602143",
@@ -527,7 +527,7 @@
     "model": "resnet50",
     "frame": "36",
     "segment_id": "36_Leather coat_3_nopoint",
-    "segment_path": "all_frames/Scenes 001-020__504K-1-_20230816050602143/36/segments/36_Leather coat_3_nopoint.png"
+    "bbox_path": "all_frames/Scenes 001-020__504K-1-_20230816050602143/36/padded_segments/padded_36_Leather coat_3_nopoint.png"
   },
   {
     "video": "Scenes 001-020__504K-1-_20230816050602143",
@@ -537,7 +537,7 @@
     "model": "resnet50",
     "frame": "36",
     "segment_id": "36_Curved sword_0_nopoint",
-    "segment_path": "all_frames/Scenes 001-020__504K-1-_20230816050602143/36/segments/36_Curved sword_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 001-020__504K-1-_20230816050602143/36/padded_segments/padded_36_Curved sword_0_nopoint.png"
   },
   {
     "video": "Scenes 001-020__504K-1-_20230816050602143",
@@ -547,7 +547,7 @@
     "model": "resnet50",
     "frame": "36",
     "segment_id": "36_Metal sword_2_nopoint",
-    "segment_path": "all_frames/Scenes 001-020__504K-1-_20230816050602143/36/segments/36_Metal sword_2_nopoint.png"
+    "bbox_path": "all_frames/Scenes 001-020__504K-1-_20230816050602143/36/padded_segments/padded_36_Metal sword_2_nopoint.png"
   },
   {
     "video": "Scenes 001-020__504K-1-_20230816050602143",
@@ -557,7 +557,7 @@
     "model": "resnet50",
     "frame": "28",
     "segment_id": "28_Curved sword_0_nopoint",
-    "segment_path": "all_frames/Scenes 001-020__504K-1-_20230816050602143/28/segments/28_Curved sword_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 001-020__504K-1-_20230816050602143/28/padded_segments/padded_28_Curved sword_0_nopoint.png"
   },
   {
     "video": "Scenes 001-020__504K-1-_20230816050602143",
@@ -567,7 +567,7 @@
     "model": "resnet50",
     "frame": "28",
     "segment_id": "28_Curved sword_3_nopoint",
-    "segment_path": "all_frames/Scenes 001-020__504K-1-_20230816050602143/28/segments/28_Curved sword_3_nopoint.png"
+    "bbox_path": "all_frames/Scenes 001-020__504K-1-_20230816050602143/28/padded_segments/padded_28_Curved sword_3_nopoint.png"
   },
   {
     "video": "Scenes 001-020__504K-1-_20230816050602143",
@@ -577,7 +577,7 @@
     "model": "resnet50",
     "frame": "77",
     "segment_id": "77_Leather coat_1_nopoint",
-    "segment_path": "all_frames/Scenes 001-020__504K-1-_20230816050602143/77/segments/77_Leather coat_1_nopoint.png"
+    "bbox_path": "all_frames/Scenes 001-020__504K-1-_20230816050602143/77/padded_segments/padded_77_Leather coat_1_nopoint.png"
   },
   {
     "video": "Scenes 001-020__504K-1-_20230816050602143",
@@ -587,7 +587,7 @@
     "model": "resnet50",
     "frame": "42",
     "segment_id": "42_Curved sword_0_nopoint",
-    "segment_path": "all_frames/Scenes 001-020__504K-1-_20230816050602143/42/segments/42_Curved sword_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 001-020__504K-1-_20230816050602143/42/padded_segments/padded_42_Curved sword_0_nopoint.png"
   },
   {
     "video": "Scenes 001-020__504K-1-_20230816050602143",
@@ -597,7 +597,7 @@
     "model": "resnet50",
     "frame": "15",
     "segment_id": "15_Curved sword_0_nopoint",
-    "segment_path": "all_frames/Scenes 001-020__504K-1-_20230816050602143/15/segments/15_Curved sword_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 001-020__504K-1-_20230816050602143/15/padded_segments/padded_15_Curved sword_0_nopoint.png"
   },
   {
     "video": "Scenes 001-020__504K-1-_20230816050602143",
@@ -607,7 +607,7 @@
     "model": "resnet50",
     "frame": "13",
     "segment_id": "13_Leather coat_1_nopoint",
-    "segment_path": "all_frames/Scenes 001-020__504K-1-_20230816050602143/13/segments/13_Leather coat_1_nopoint.png"
+    "bbox_path": "all_frames/Scenes 001-020__504K-1-_20230816050602143/13/padded_segments/padded_13_Leather coat_1_nopoint.png"
   },
   {
     "video": "Scenes 001-020__504K-1-_20230816050602143",
@@ -617,7 +617,7 @@
     "model": "resnet50",
     "frame": "13",
     "segment_id": "13_Curved sword_0_nopoint",
-    "segment_path": "all_frames/Scenes 001-020__504K-1-_20230816050602143/13/segments/13_Curved sword_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 001-020__504K-1-_20230816050602143/13/padded_segments/padded_13_Curved sword_0_nopoint.png"
   },
   {
     "video": "Scenes 001-020__504K-1-_20230816050602143",
@@ -627,7 +627,7 @@
     "model": "resnet50",
     "frame": "58",
     "segment_id": "58_Leather coat_1_nopoint",
-    "segment_path": "all_frames/Scenes 001-020__504K-1-_20230816050602143/58/segments/58_Leather coat_1_nopoint.png"
+    "bbox_path": "all_frames/Scenes 001-020__504K-1-_20230816050602143/58/padded_segments/padded_58_Leather coat_1_nopoint.png"
   },
   {
     "video": "Scenes 001-020__504K-1-_20230816050602143",
@@ -637,7 +637,7 @@
     "model": "resnet50",
     "frame": "58",
     "segment_id": "58_Curved sword_0_nopoint",
-    "segment_path": "all_frames/Scenes 001-020__504K-1-_20230816050602143/58/segments/58_Curved sword_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 001-020__504K-1-_20230816050602143/58/padded_segments/padded_58_Curved sword_0_nopoint.png"
   },
   {
     "video": "Scenes 001-020__504K-1-_20230816050602143",
@@ -647,7 +647,7 @@
     "model": "resnet50",
     "frame": "85",
     "segment_id": "85_Curved sword_0_nopoint",
-    "segment_path": "all_frames/Scenes 001-020__504K-1-_20230816050602143/85/segments/85_Curved sword_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 001-020__504K-1-_20230816050602143/85/padded_segments/padded_85_Curved sword_0_nopoint.png"
   },
   {
     "video": "Scenes 001-020__504K-1-_20230816050602143",
@@ -657,7 +657,7 @@
     "model": "resnet50",
     "frame": "64",
     "segment_id": "64_Curved sword_5_nopoint",
-    "segment_path": "all_frames/Scenes 001-020__504K-1-_20230816050602143/64/segments/64_Curved sword_5_nopoint.png"
+    "bbox_path": "all_frames/Scenes 001-020__504K-1-_20230816050602143/64/padded_segments/padded_64_Curved sword_5_nopoint.png"
   },
   {
     "video": "Scenes 001-020__504K-1-_20230816050602143",
@@ -667,7 +667,7 @@
     "model": "resnet50",
     "frame": "64",
     "segment_id": "64_Horned helmet_0_nopoint",
-    "segment_path": "all_frames/Scenes 001-020__504K-1-_20230816050602143/64/segments/64_Horned helmet_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 001-020__504K-1-_20230816050602143/64/padded_segments/padded_64_Horned helmet_0_nopoint.png"
   },
   {
     "video": "Scenes 001-020__504K-1-_20230816050602143",
@@ -677,7 +677,7 @@
     "model": "resnet50",
     "frame": "82",
     "segment_id": "82_Leather coat_0_nopoint",
-    "segment_path": "all_frames/Scenes 001-020__504K-1-_20230816050602143/82/segments/82_Leather coat_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 001-020__504K-1-_20230816050602143/82/padded_segments/padded_82_Leather coat_0_nopoint.png"
   },
   {
     "video": "Scenes 001-020__504K-1-_20230816050602143",
@@ -687,7 +687,7 @@
     "model": "resnet50",
     "frame": "79",
     "segment_id": "79_Leather coat_0_nopoint",
-    "segment_path": "all_frames/Scenes 001-020__504K-1-_20230816050602143/79/segments/79_Leather coat_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 001-020__504K-1-_20230816050602143/79/padded_segments/padded_79_Leather coat_0_nopoint.png"
   },
   {
     "video": "Scenes 001-020__504K-1-_20230816050602143",
@@ -697,7 +697,7 @@
     "model": "resnet50",
     "frame": "14",
     "segment_id": "14_Leather coat_1_nopoint",
-    "segment_path": "all_frames/Scenes 001-020__504K-1-_20230816050602143/14/segments/14_Leather coat_1_nopoint.png"
+    "bbox_path": "all_frames/Scenes 001-020__504K-1-_20230816050602143/14/padded_segments/padded_14_Leather coat_1_nopoint.png"
   },
   {
     "video": "Scenes 001-020__504K-1-_20230816050602143",
@@ -707,7 +707,7 @@
     "model": "resnet50",
     "frame": "14",
     "segment_id": "14_Curved sword_0_nopoint",
-    "segment_path": "all_frames/Scenes 001-020__504K-1-_20230816050602143/14/segments/14_Curved sword_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 001-020__504K-1-_20230816050602143/14/padded_segments/padded_14_Curved sword_0_nopoint.png"
   },
   {
     "video": "Scenes 001-020__504K-1-_20230816050602143",
@@ -717,7 +717,7 @@
     "model": "resnet50",
     "frame": "55",
     "segment_id": "55_Leather coat_0_nopoint",
-    "segment_path": "all_frames/Scenes 001-020__504K-1-_20230816050602143/55/segments/55_Leather coat_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 001-020__504K-1-_20230816050602143/55/padded_segments/padded_55_Leather coat_0_nopoint.png"
   },
   {
     "video": "Scenes 001-020__504K-1-_20230816050602143",
@@ -727,7 +727,7 @@
     "model": "resnet50",
     "frame": "59",
     "segment_id": "59_Curved sword_1_nopoint",
-    "segment_path": "all_frames/Scenes 001-020__504K-1-_20230816050602143/59/segments/59_Curved sword_1_nopoint.png"
+    "bbox_path": "all_frames/Scenes 001-020__504K-1-_20230816050602143/59/padded_segments/padded_59_Curved sword_1_nopoint.png"
   },
   {
     "video": "Scenes 001-020__504K-1-_20230816050602143",
@@ -737,7 +737,7 @@
     "model": "resnet50",
     "frame": "59",
     "segment_id": "59_Curved sword_2_nopoint",
-    "segment_path": "all_frames/Scenes 001-020__504K-1-_20230816050602143/59/segments/59_Curved sword_2_nopoint.png"
+    "bbox_path": "all_frames/Scenes 001-020__504K-1-_20230816050602143/59/padded_segments/padded_59_Curved sword_2_nopoint.png"
   },
   {
     "video": "Scenes 001-020__504K-1-_20230816050602143",
@@ -747,7 +747,7 @@
     "model": "resnet50",
     "frame": "66",
     "segment_id": "66_Curved sword_0_nopoint",
-    "segment_path": "all_frames/Scenes 001-020__504K-1-_20230816050602143/66/segments/66_Curved sword_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 001-020__504K-1-_20230816050602143/66/padded_segments/padded_66_Curved sword_0_nopoint.png"
   },
   {
     "video": "Scenes 001-020__504K-1-_20230816050602143",
@@ -757,7 +757,7 @@
     "model": "resnet50",
     "frame": "66",
     "segment_id": "66_Leather coat_2_nopoint",
-    "segment_path": "all_frames/Scenes 001-020__504K-1-_20230816050602143/66/segments/66_Leather coat_2_nopoint.png"
+    "bbox_path": "all_frames/Scenes 001-020__504K-1-_20230816050602143/66/padded_segments/padded_66_Leather coat_2_nopoint.png"
   },
   {
     "video": "Scenes 001-020__504K-1-_20230816050602143",
@@ -767,7 +767,7 @@
     "model": "resnet50",
     "frame": "66",
     "segment_id": "66_Curved sword_1_nopoint",
-    "segment_path": "all_frames/Scenes 001-020__504K-1-_20230816050602143/66/segments/66_Curved sword_1_nopoint.png"
+    "bbox_path": "all_frames/Scenes 001-020__504K-1-_20230816050602143/66/padded_segments/padded_66_Curved sword_1_nopoint.png"
   },
   {
     "video": "Scenes 001-020__504K-1-_20230816050602143",
@@ -777,7 +777,7 @@
     "model": "resnet50",
     "frame": "11",
     "segment_id": "11_Curved sword_0_nopoint",
-    "segment_path": "all_frames/Scenes 001-020__504K-1-_20230816050602143/11/segments/11_Curved sword_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 001-020__504K-1-_20230816050602143/11/padded_segments/padded_11_Curved sword_0_nopoint.png"
   },
   {
     "video": "Scenes 001-020__504K-1-_20230816050602143",
@@ -787,7 +787,7 @@
     "model": "resnet50",
     "frame": "11",
     "segment_id": "11_Leather coat_1_nopoint",
-    "segment_path": "all_frames/Scenes 001-020__504K-1-_20230816050602143/11/segments/11_Leather coat_1_nopoint.png"
+    "bbox_path": "all_frames/Scenes 001-020__504K-1-_20230816050602143/11/padded_segments/padded_11_Leather coat_1_nopoint.png"
   },
   {
     "video": "Scenes 001-020__504K-1-_20230816050602143",
@@ -797,7 +797,7 @@
     "model": "resnet50",
     "frame": "20",
     "segment_id": "20_Leather coat_2_nopoint",
-    "segment_path": "all_frames/Scenes 001-020__504K-1-_20230816050602143/20/segments/20_Leather coat_2_nopoint.png"
+    "bbox_path": "all_frames/Scenes 001-020__504K-1-_20230816050602143/20/padded_segments/padded_20_Leather coat_2_nopoint.png"
   },
   {
     "video": "Scenes 001-020__504K-1-_20230816050602143",
@@ -807,7 +807,7 @@
     "model": "resnet50",
     "frame": "20",
     "segment_id": "20_Curved sword_0_nopoint",
-    "segment_path": "all_frames/Scenes 001-020__504K-1-_20230816050602143/20/segments/20_Curved sword_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 001-020__504K-1-_20230816050602143/20/padded_segments/padded_20_Curved sword_0_nopoint.png"
   },
   {
     "video": "Scenes 001-020__504K-1-_20230816050602143",
@@ -817,7 +817,7 @@
     "model": "resnet50",
     "frame": "73",
     "segment_id": "73_Leather coat_0_nopoint",
-    "segment_path": "all_frames/Scenes 001-020__504K-1-_20230816050602143/73/segments/73_Leather coat_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 001-020__504K-1-_20230816050602143/73/padded_segments/padded_73_Leather coat_0_nopoint.png"
   },
   {
     "video": "Scenes 001-020__504K-1-_20230816050602143",
@@ -827,7 +827,7 @@
     "model": "resnet50",
     "frame": "18",
     "segment_id": "18_Curved sword_0_nopoint",
-    "segment_path": "all_frames/Scenes 001-020__504K-1-_20230816050602143/18/segments/18_Curved sword_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 001-020__504K-1-_20230816050602143/18/padded_segments/padded_18_Curved sword_0_nopoint.png"
   },
   {
     "video": "Scenes 001-020__504K-1-_20230816050602143",
@@ -837,7 +837,7 @@
     "model": "resnet50",
     "frame": "18",
     "segment_id": "18_Leather coat_1_nopoint",
-    "segment_path": "all_frames/Scenes 001-020__504K-1-_20230816050602143/18/segments/18_Leather coat_1_nopoint.png"
+    "bbox_path": "all_frames/Scenes 001-020__504K-1-_20230816050602143/18/padded_segments/padded_18_Leather coat_1_nopoint.png"
   },
   {
     "video": "Scenes 001-020__504K-1-_20230816050602143",
@@ -847,7 +847,7 @@
     "model": "resnet50",
     "frame": "48",
     "segment_id": "48_Leather coat_0_nopoint",
-    "segment_path": "all_frames/Scenes 001-020__504K-1-_20230816050602143/48/segments/48_Leather coat_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 001-020__504K-1-_20230816050602143/48/padded_segments/padded_48_Leather coat_0_nopoint.png"
   },
   {
     "video": "Scenes 001-020__504K-1-_20230816050602143",
@@ -857,7 +857,7 @@
     "model": "resnet50",
     "frame": "61",
     "segment_id": "61_Leather coat_2_nopoint",
-    "segment_path": "all_frames/Scenes 001-020__504K-1-_20230816050602143/61/segments/61_Leather coat_2_nopoint.png"
+    "bbox_path": "all_frames/Scenes 001-020__504K-1-_20230816050602143/61/padded_segments/padded_61_Leather coat_2_nopoint.png"
   },
   {
     "video": "Scenes 001-020__504K-1-_20230816050602143",
@@ -867,7 +867,7 @@
     "model": "resnet50",
     "frame": "61",
     "segment_id": "61_Curved sword_0_nopoint",
-    "segment_path": "all_frames/Scenes 001-020__504K-1-_20230816050602143/61/segments/61_Curved sword_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 001-020__504K-1-_20230816050602143/61/padded_segments/padded_61_Curved sword_0_nopoint.png"
   },
   {
     "video": "Scenes 001-020__504K-1-_20230816050602143",
@@ -877,7 +877,7 @@
     "model": "resnet50",
     "frame": "61",
     "segment_id": "61_Metal sword_1_nopoint",
-    "segment_path": "all_frames/Scenes 001-020__504K-1-_20230816050602143/61/segments/61_Metal sword_1_nopoint.png"
+    "bbox_path": "all_frames/Scenes 001-020__504K-1-_20230816050602143/61/padded_segments/padded_61_Metal sword_1_nopoint.png"
   },
   {
     "video": "Scenes 001-020__504K-1-_20230816050602143",
@@ -887,6 +887,6 @@
     "model": "resnet50",
     "frame": "10",
     "segment_id": "10_Curved sword_0_nopoint",
-    "segment_path": "all_frames/Scenes 001-020__504K-1-_20230816050602143/10/segments/10_Curved sword_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 001-020__504K-1-_20230816050602143/10/padded_segments/padded_10_Curved sword_0_nopoint.png"
   }
 ]

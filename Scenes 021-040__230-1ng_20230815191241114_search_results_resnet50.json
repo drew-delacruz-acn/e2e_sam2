@@ -7,7 +7,7 @@
     "model": "resnet50",
     "frame": "2",
     "segment_id": "2_Leather coat_2_nopoint",
-    "segment_path": "all_frames/Scenes 021-040__230-1ng_20230815191241114/2/segments/2_Leather coat_2_nopoint.png"
+    "bbox_path": "all_frames/Scenes 021-040__230-1ng_20230815191241114/2/padded_segments/padded_2_Leather coat_2_nopoint.png"
   },
   {
     "video": "Scenes 021-040__230-1ng_20230815191241114",
@@ -17,6 +17,6 @@
     "model": "resnet50",
     "frame": "2",
     "segment_id": "2_TVA jacket_0_nopoint",
-    "segment_path": "all_frames/Scenes 021-040__230-1ng_20230815191241114/2/segments/2_TVA jacket_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 021-040__230-1ng_20230815191241114/2/padded_segments/padded_2_TVA jacket_0_nopoint.png"
   }
 ]

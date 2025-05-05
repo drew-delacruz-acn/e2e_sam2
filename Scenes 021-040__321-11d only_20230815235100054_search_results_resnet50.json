@@ -7,6 +7,6 @@
     "model": "resnet50",
     "frame": "26",
     "segment_id": "26_TVA jacket_0_nopoint",
-    "segment_path": "all_frames/Scenes 021-040__321-11d only_20230815235100054/26/segments/26_TVA jacket_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 021-040__321-11d only_20230815235100054/26/padded_segments/padded_26_TVA jacket_0_nopoint.png"
   }
 ]

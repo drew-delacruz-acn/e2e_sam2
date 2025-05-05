@@ -1,0 +1,752 @@
+[
+  {
+    "video": "Scenes 001-020__303K-3-_20230815223320788",
+    "predicted_object": "Laevateinn",
+    "object_version": 1,
+    "similarity_score": 0.7135748863220215,
+    "model": "resnet50",
+    "frame": "131",
+    "segment_id": "131_Glowing rod_0_nopoint",
+    "bbox_path": "all_frames/Scenes 001-020__303K-3-_20230815223320788/131/padded_segments/padded_131_Glowing rod_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 001-020__303K-3-_20230815223320788",
+    "predicted_object": "Loki's armor (THE AVENGERS)",
+    "object_version": 3,
+    "similarity_score": 0.707863450050354,
+    "model": "resnet50",
+    "frame": "254",
+    "segment_id": "254_Leather coat_1_nopoint",
+    "bbox_path": "all_frames/Scenes 001-020__303K-3-_20230815223320788/254/padded_segments/padded_254_Leather coat_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 001-020__303K-3-_20230815223320788",
+    "predicted_object": "Time Collar",
+    "object_version": 2,
+    "similarity_score": 0.7430718541145325,
+    "model": "resnet50",
+    "frame": "234",
+    "segment_id": "234_Horned helmet_0_nopoint",
+    "bbox_path": "all_frames/Scenes 001-020__303K-3-_20230815223320788/234/padded_segments/padded_234_Horned helmet_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 001-020__303K-3-_20230815223320788",
+    "predicted_object": "Aligator Loki Plushie",
+    "object_version": 1,
+    "similarity_score": 0.7156356573104858,
+    "model": "resnet50",
+    "frame": "45",
+    "segment_id": "45_TVA jacket_3_nopoint",
+    "bbox_path": "all_frames/Scenes 001-020__303K-3-_20230815223320788/45/padded_segments/padded_45_TVA jacket_3_nopoint.png"
+  },
+  {
+    "video": "Scenes 001-020__303K-3-_20230815223320788",
+    "predicted_object": "Laevateinn",
+    "object_version": 3,
+    "similarity_score": 0.7642631530761719,
+    "model": "resnet50",
+    "frame": "123",
+    "segment_id": "123_Leather coat_3_nopoint",
+    "bbox_path": "all_frames/Scenes 001-020__303K-3-_20230815223320788/123/padded_segments/padded_123_Leather coat_3_nopoint.png"
+  },
+  {
+    "video": "Scenes 001-020__303K-3-_20230815223320788",
+    "predicted_object": "Sylvie's machete",
+    "object_version": 2,
+    "similarity_score": 0.7186614274978638,
+    "model": "resnet50",
+    "frame": "204",
+    "segment_id": "204_Leather coat_0_nopoint",
+    "bbox_path": "all_frames/Scenes 001-020__303K-3-_20230815223320788/204/padded_segments/padded_204_Leather coat_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 001-020__303K-3-_20230815223320788",
+    "predicted_object": "Sylvie's machete",
+    "object_version": 2,
+    "similarity_score": 0.7184865474700928,
+    "model": "resnet50",
+    "frame": "171",
+    "segment_id": "171_Leather coat_1_nopoint",
+    "bbox_path": "all_frames/Scenes 001-020__303K-3-_20230815223320788/171/padded_segments/padded_171_Leather coat_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 001-020__303K-3-_20230815223320788",
+    "predicted_object": "Laevateinn",
+    "object_version": 3,
+    "similarity_score": 0.7406580448150635,
+    "model": "resnet50",
+    "frame": "163",
+    "segment_id": "163_Leather coat_4_nopoint",
+    "bbox_path": "all_frames/Scenes 001-020__303K-3-_20230815223320788/163/padded_segments/padded_163_Leather coat_4_nopoint.png"
+  },
+  {
+    "video": "Scenes 001-020__303K-3-_20230815223320788",
+    "predicted_object": "Laevateinn",
+    "object_version": 3,
+    "similarity_score": 0.7081680297851562,
+    "model": "resnet50",
+    "frame": "163",
+    "segment_id": "163_Neck device_3_nopoint",
+    "bbox_path": "all_frames/Scenes 001-020__303K-3-_20230815223320788/163/padded_segments/padded_163_Neck device_3_nopoint.png"
+  },
+  {
+    "video": "Scenes 001-020__303K-3-_20230815223320788",
+    "predicted_object": "Asgardian device",
+    "object_version": 1,
+    "similarity_score": 0.7116661071777344,
+    "model": "resnet50",
+    "frame": "138",
+    "segment_id": "138_Leather coat_0_nopoint",
+    "bbox_path": "all_frames/Scenes 001-020__303K-3-_20230815223320788/138/padded_segments/padded_138_Leather coat_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 001-020__303K-3-_20230815223320788",
+    "predicted_object": "Laevateinn",
+    "object_version": 3,
+    "similarity_score": 0.7326818108558655,
+    "model": "resnet50",
+    "frame": "96",
+    "segment_id": "96_Leather coat_0_nopoint",
+    "bbox_path": "all_frames/Scenes 001-020__303K-3-_20230815223320788/96/padded_segments/padded_96_Leather coat_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 001-020__303K-3-_20230815223320788",
+    "predicted_object": "Asgardian device",
+    "object_version": 1,
+    "similarity_score": 0.7019707560539246,
+    "model": "resnet50",
+    "frame": "249",
+    "segment_id": "249_Horned helmet_0_nopoint",
+    "bbox_path": "all_frames/Scenes 001-020__303K-3-_20230815223320788/249/padded_segments/padded_249_Horned helmet_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 001-020__303K-3-_20230815223320788",
+    "predicted_object": "Asgardian device",
+    "object_version": 1,
+    "similarity_score": 0.7237405776977539,
+    "model": "resnet50",
+    "frame": "149",
+    "segment_id": "149_Horned helmet_0_nopoint",
+    "bbox_path": "all_frames/Scenes 001-020__303K-3-_20230815223320788/149/padded_segments/padded_149_Horned helmet_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 001-020__303K-3-_20230815223320788",
+    "predicted_object": "Loki's armor (THE AVENGERS)",
+    "object_version": 3,
+    "similarity_score": 0.7491168975830078,
+    "model": "resnet50",
+    "frame": "98",
+    "segment_id": "98_TVA jacket_1_nopoint",
+    "bbox_path": "all_frames/Scenes 001-020__303K-3-_20230815223320788/98/padded_segments/padded_98_TVA jacket_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 001-020__303K-3-_20230815223320788",
+    "predicted_object": "Loki's armor (THE AVENGERS)",
+    "object_version": 3,
+    "similarity_score": 0.7383648157119751,
+    "model": "resnet50",
+    "frame": "168",
+    "segment_id": "168_Leather coat_2_nopoint",
+    "bbox_path": "all_frames/Scenes 001-020__303K-3-_20230815223320788/168/padded_segments/padded_168_Leather coat_2_nopoint.png"
+  },
+  {
+    "video": "Scenes 001-020__303K-3-_20230815223320788",
+    "predicted_object": "Sylvie's machete",
+    "object_version": 2,
+    "similarity_score": 0.7238832712173462,
+    "model": "resnet50",
+    "frame": "228",
+    "segment_id": "228_Leather coat_0_nopoint",
+    "bbox_path": "all_frames/Scenes 001-020__303K-3-_20230815223320788/228/padded_segments/padded_228_Leather coat_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 001-020__303K-3-_20230815223320788",
+    "predicted_object": "Time Collar",
+    "object_version": 1,
+    "similarity_score": 0.7236813902854919,
+    "model": "resnet50",
+    "frame": "56",
+    "segment_id": "56_Horned helmet_0_nopoint",
+    "bbox_path": "all_frames/Scenes 001-020__303K-3-_20230815223320788/56/padded_segments/padded_56_Horned helmet_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 001-020__303K-3-_20230815223320788",
+    "predicted_object": "Laevateinn",
+    "object_version": 3,
+    "similarity_score": 0.7019732594490051,
+    "model": "resnet50",
+    "frame": "167",
+    "segment_id": "167_Leather coat_0_nopoint",
+    "bbox_path": "all_frames/Scenes 001-020__303K-3-_20230815223320788/167/padded_segments/padded_167_Leather coat_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 001-020__303K-3-_20230815223320788",
+    "predicted_object": "Time Collar",
+    "object_version": 1,
+    "similarity_score": 0.7239727973937988,
+    "model": "resnet50",
+    "frame": "185",
+    "segment_id": "185_Horned helmet_0_nopoint",
+    "bbox_path": "all_frames/Scenes 001-020__303K-3-_20230815223320788/185/padded_segments/padded_185_Horned helmet_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 001-020__303K-3-_20230815223320788",
+    "predicted_object": "Asgardian device",
+    "object_version": 1,
+    "similarity_score": 0.7081704139709473,
+    "model": "resnet50",
+    "frame": "173",
+    "segment_id": "173_Horned helmet_0_nopoint",
+    "bbox_path": "all_frames/Scenes 001-020__303K-3-_20230815223320788/173/padded_segments/padded_173_Horned helmet_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 001-020__303K-3-_20230815223320788",
+    "predicted_object": "Sylvie's machete",
+    "object_version": 2,
+    "similarity_score": 0.7336291074752808,
+    "model": "resnet50",
+    "frame": "62",
+    "segment_id": "62_Leather coat_0_nopoint",
+    "bbox_path": "all_frames/Scenes 001-020__303K-3-_20230815223320788/62/padded_segments/padded_62_Leather coat_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 001-020__303K-3-_20230815223320788",
+    "predicted_object": "Loki's dagger",
+    "object_version": 2,
+    "similarity_score": 0.7163909077644348,
+    "model": "resnet50",
+    "frame": "141",
+    "segment_id": "141_Metal sword_0_nopoint",
+    "bbox_path": "all_frames/Scenes 001-020__303K-3-_20230815223320788/141/padded_segments/padded_141_Metal sword_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 001-020__303K-3-_20230815223320788",
+    "predicted_object": "Loki's dagger",
+    "object_version": 2,
+    "similarity_score": 0.7158315181732178,
+    "model": "resnet50",
+    "frame": "72",
+    "segment_id": "72_Horned helmet_0_nopoint",
+    "bbox_path": "all_frames/Scenes 001-020__303K-3-_20230815223320788/72/padded_segments/padded_72_Horned helmet_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 001-020__303K-3-_20230815223320788",
+    "predicted_object": "Asgardian device",
+    "object_version": 1,
+    "similarity_score": 0.7039856910705566,
+    "model": "resnet50",
+    "frame": "97",
+    "segment_id": "97_Horned helmet_0_nopoint",
+    "bbox_path": "all_frames/Scenes 001-020__303K-3-_20230815223320788/97/padded_segments/padded_97_Horned helmet_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 001-020__303K-3-_20230815223320788",
+    "predicted_object": "Loki's dagger",
+    "object_version": 2,
+    "similarity_score": 0.7044466733932495,
+    "model": "resnet50",
+    "frame": "4",
+    "segment_id": "4_Glowing rod_0_nopoint",
+    "bbox_path": "all_frames/Scenes 001-020__303K-3-_20230815223320788/4/padded_segments/padded_4_Glowing rod_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 001-020__303K-3-_20230815223320788",
+    "predicted_object": "Loki's armor (THE AVENGERS)",
+    "object_version": 3,
+    "similarity_score": 0.7060033082962036,
+    "model": "resnet50",
+    "frame": "201",
+    "segment_id": "201_TVA jacket_0_nopoint",
+    "bbox_path": "all_frames/Scenes 001-020__303K-3-_20230815223320788/201/padded_segments/padded_201_TVA jacket_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 001-020__303K-3-_20230815223320788",
+    "predicted_object": "Laevateinn",
+    "object_version": 3,
+    "similarity_score": 0.7226005792617798,
+    "model": "resnet50",
+    "frame": "245",
+    "segment_id": "245_Leather coat_0_nopoint",
+    "bbox_path": "all_frames/Scenes 001-020__303K-3-_20230815223320788/245/padded_segments/padded_245_Leather coat_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 001-020__303K-3-_20230815223320788",
+    "predicted_object": "Time Collar",
+    "object_version": 2,
+    "similarity_score": 0.7327122092247009,
+    "model": "resnet50",
+    "frame": "150",
+    "segment_id": "150_Horned helmet_0_nopoint",
+    "bbox_path": "all_frames/Scenes 001-020__303K-3-_20230815223320788/150/padded_segments/padded_150_Horned helmet_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 001-020__303K-3-_20230815223320788",
+    "predicted_object": "Aligator Loki Plushie",
+    "object_version": 3,
+    "similarity_score": 0.7045893669128418,
+    "model": "resnet50",
+    "frame": "17",
+    "segment_id": "17_Leather coat_1_nopoint",
+    "bbox_path": "all_frames/Scenes 001-020__303K-3-_20230815223320788/17/padded_segments/padded_17_Leather coat_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 001-020__303K-3-_20230815223320788",
+    "predicted_object": "Loki's dagger",
+    "object_version": 2,
+    "similarity_score": 0.7093651294708252,
+    "model": "resnet50",
+    "frame": "17",
+    "segment_id": "17_Glowing rod_0_nopoint",
+    "bbox_path": "all_frames/Scenes 001-020__303K-3-_20230815223320788/17/padded_segments/padded_17_Glowing rod_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 001-020__303K-3-_20230815223320788",
+    "predicted_object": "Sylvie's machete",
+    "object_version": 2,
+    "similarity_score": 0.7306045889854431,
+    "model": "resnet50",
+    "frame": "256",
+    "segment_id": "256_Leather coat_2_nopoint",
+    "bbox_path": "all_frames/Scenes 001-020__303K-3-_20230815223320788/256/padded_segments/padded_256_Leather coat_2_nopoint.png"
+  },
+  {
+    "video": "Scenes 001-020__303K-3-_20230815223320788",
+    "predicted_object": "Laevateinn",
+    "object_version": 1,
+    "similarity_score": 0.7074478268623352,
+    "model": "resnet50",
+    "frame": "135",
+    "segment_id": "135_Glowing rod_0_nopoint",
+    "bbox_path": "all_frames/Scenes 001-020__303K-3-_20230815223320788/135/padded_segments/padded_135_Glowing rod_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 001-020__303K-3-_20230815223320788",
+    "predicted_object": "Loki's armor (THE AVENGERS)",
+    "object_version": 3,
+    "similarity_score": 0.7231009602546692,
+    "model": "resnet50",
+    "frame": "103",
+    "segment_id": "103_TVA jacket_0_nopoint",
+    "bbox_path": "all_frames/Scenes 001-020__303K-3-_20230815223320788/103/padded_segments/padded_103_TVA jacket_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 001-020__303K-3-_20230815223320788",
+    "predicted_object": "Sylvie's machete",
+    "object_version": 2,
+    "similarity_score": 0.7006065845489502,
+    "model": "resnet50",
+    "frame": "162",
+    "segment_id": "162_Curved sword_1_nopoint",
+    "bbox_path": "all_frames/Scenes 001-020__303K-3-_20230815223320788/162/padded_segments/padded_162_Curved sword_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 001-020__303K-3-_20230815223320788",
+    "predicted_object": "Time Collar",
+    "object_version": 2,
+    "similarity_score": 0.7099910378456116,
+    "model": "resnet50",
+    "frame": "162",
+    "segment_id": "162_Horned helmet_0_nopoint",
+    "bbox_path": "all_frames/Scenes 001-020__303K-3-_20230815223320788/162/padded_segments/padded_162_Horned helmet_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 001-020__303K-3-_20230815223320788",
+    "predicted_object": "Loki's armor (THE AVENGERS)",
+    "object_version": 3,
+    "similarity_score": 0.7605312466621399,
+    "model": "resnet50",
+    "frame": "108",
+    "segment_id": "108_TVA jacket_2_nopoint",
+    "bbox_path": "all_frames/Scenes 001-020__303K-3-_20230815223320788/108/padded_segments/padded_108_TVA jacket_2_nopoint.png"
+  },
+  {
+    "video": "Scenes 001-020__303K-3-_20230815223320788",
+    "predicted_object": "Laevateinn",
+    "object_version": 1,
+    "similarity_score": 0.7071948647499084,
+    "model": "resnet50",
+    "frame": "108",
+    "segment_id": "108_Glowing rod_0_nopoint",
+    "bbox_path": "all_frames/Scenes 001-020__303K-3-_20230815223320788/108/padded_segments/padded_108_Glowing rod_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 001-020__303K-3-_20230815223320788",
+    "predicted_object": "Loki's dagger",
+    "object_version": 2,
+    "similarity_score": 0.7042627334594727,
+    "model": "resnet50",
+    "frame": "108",
+    "segment_id": "108_Metal sword_1_nopoint",
+    "bbox_path": "all_frames/Scenes 001-020__303K-3-_20230815223320788/108/padded_segments/padded_108_Metal sword_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 001-020__303K-3-_20230815223320788",
+    "predicted_object": "Loki's armor (THE AVENGERS)",
+    "object_version": 3,
+    "similarity_score": 0.7289228439331055,
+    "model": "resnet50",
+    "frame": "39",
+    "segment_id": "39_TVA jacket_3_nopoint",
+    "bbox_path": "all_frames/Scenes 001-020__303K-3-_20230815223320788/39/padded_segments/padded_39_TVA jacket_3_nopoint.png"
+  },
+  {
+    "video": "Scenes 001-020__303K-3-_20230815223320788",
+    "predicted_object": "Boastful Loki's hammer",
+    "object_version": 1,
+    "similarity_score": 0.7046436071395874,
+    "model": "resnet50",
+    "frame": "39",
+    "segment_id": "39_Horned helmet_0_nopoint",
+    "bbox_path": "all_frames/Scenes 001-020__303K-3-_20230815223320788/39/padded_segments/padded_39_Horned helmet_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 001-020__303K-3-_20230815223320788",
+    "predicted_object": "Loki's dagger",
+    "object_version": 2,
+    "similarity_score": 0.700302243232727,
+    "model": "resnet50",
+    "frame": "111",
+    "segment_id": "111_Glowing rod_0_nopoint",
+    "bbox_path": "all_frames/Scenes 001-020__303K-3-_20230815223320788/111/padded_segments/padded_111_Glowing rod_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 001-020__303K-3-_20230815223320788",
+    "predicted_object": "Loki's dagger",
+    "object_version": 2,
+    "similarity_score": 0.7259311676025391,
+    "model": "resnet50",
+    "frame": "8",
+    "segment_id": "8_Metal sword_0_nopoint",
+    "bbox_path": "all_frames/Scenes 001-020__303K-3-_20230815223320788/8/padded_segments/padded_8_Metal sword_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 001-020__303K-3-_20230815223320788",
+    "predicted_object": "Asgardian device",
+    "object_version": 1,
+    "similarity_score": 0.7244511842727661,
+    "model": "resnet50",
+    "frame": "21",
+    "segment_id": "21_Leather coat_3_nopoint",
+    "bbox_path": "all_frames/Scenes 001-020__303K-3-_20230815223320788/21/padded_segments/padded_21_Leather coat_3_nopoint.png"
+  },
+  {
+    "video": "Scenes 001-020__303K-3-_20230815223320788",
+    "predicted_object": "Laevateinn",
+    "object_version": 1,
+    "similarity_score": 0.7076234817504883,
+    "model": "resnet50",
+    "frame": "21",
+    "segment_id": "21_Metal sword_1_nopoint",
+    "bbox_path": "all_frames/Scenes 001-020__303K-3-_20230815223320788/21/padded_segments/padded_21_Metal sword_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 001-020__303K-3-_20230815223320788",
+    "predicted_object": "Loki's armor (THE AVENGERS)",
+    "object_version": 3,
+    "similarity_score": 0.7290974855422974,
+    "model": "resnet50",
+    "frame": "196",
+    "segment_id": "196_TVA jacket_2_nopoint",
+    "bbox_path": "all_frames/Scenes 001-020__303K-3-_20230815223320788/196/padded_segments/padded_196_TVA jacket_2_nopoint.png"
+  },
+  {
+    "video": "Scenes 001-020__303K-3-_20230815223320788",
+    "predicted_object": "Loki's dagger",
+    "object_version": 2,
+    "similarity_score": 0.7052807807922363,
+    "model": "resnet50",
+    "frame": "196",
+    "segment_id": "196_Metal sword_1_nopoint",
+    "bbox_path": "all_frames/Scenes 001-020__303K-3-_20230815223320788/196/padded_segments/padded_196_Metal sword_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 001-020__303K-3-_20230815223320788",
+    "predicted_object": "Time Collar",
+    "object_version": 2,
+    "similarity_score": 0.700157880783081,
+    "model": "resnet50",
+    "frame": "196",
+    "segment_id": "196_Horned helmet_0_nopoint",
+    "bbox_path": "all_frames/Scenes 001-020__303K-3-_20230815223320788/196/padded_segments/padded_196_Horned helmet_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 001-020__303K-3-_20230815223320788",
+    "predicted_object": "Asgardian device",
+    "object_version": 3,
+    "similarity_score": 0.7088214755058289,
+    "model": "resnet50",
+    "frame": "209",
+    "segment_id": "209_Horned helmet_0_nopoint",
+    "bbox_path": "all_frames/Scenes 001-020__303K-3-_20230815223320788/209/padded_segments/padded_209_Horned helmet_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 001-020__303K-3-_20230815223320788",
+    "predicted_object": "Asgardian device",
+    "object_version": 3,
+    "similarity_score": 0.701934278011322,
+    "model": "resnet50",
+    "frame": "117",
+    "segment_id": "117_Horned helmet_0_nopoint",
+    "bbox_path": "all_frames/Scenes 001-020__303K-3-_20230815223320788/117/padded_segments/padded_117_Horned helmet_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 001-020__303K-3-_20230815223320788",
+    "predicted_object": "Laevateinn",
+    "object_version": 3,
+    "similarity_score": 0.7327730655670166,
+    "model": "resnet50",
+    "frame": "106",
+    "segment_id": "106_TVA jacket_0_nopoint",
+    "bbox_path": "all_frames/Scenes 001-020__303K-3-_20230815223320788/106/padded_segments/padded_106_TVA jacket_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 001-020__303K-3-_20230815223320788",
+    "predicted_object": "Loki's armor (THE AVENGERS)",
+    "object_version": 3,
+    "similarity_score": 0.742727518081665,
+    "model": "resnet50",
+    "frame": "102",
+    "segment_id": "102_TVA jacket_0_nopoint",
+    "bbox_path": "all_frames/Scenes 001-020__303K-3-_20230815223320788/102/padded_segments/padded_102_TVA jacket_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 001-020__303K-3-_20230815223320788",
+    "predicted_object": "Time Collar",
+    "object_version": 2,
+    "similarity_score": 0.7037763595581055,
+    "model": "resnet50",
+    "frame": "160",
+    "segment_id": "160_Horned helmet_0_nopoint",
+    "bbox_path": "all_frames/Scenes 001-020__303K-3-_20230815223320788/160/padded_segments/padded_160_Horned helmet_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 001-020__303K-3-_20230815223320788",
+    "predicted_object": "Laevateinn",
+    "object_version": 1,
+    "similarity_score": 0.7016046047210693,
+    "model": "resnet50",
+    "frame": "31",
+    "segment_id": "31_Glowing rod_0_nopoint",
+    "bbox_path": "all_frames/Scenes 001-020__303K-3-_20230815223320788/31/padded_segments/padded_31_Glowing rod_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 001-020__303K-3-_20230815223320788",
+    "predicted_object": "Laevateinn",
+    "object_version": 3,
+    "similarity_score": 0.7478334307670593,
+    "model": "resnet50",
+    "frame": "71",
+    "segment_id": "71_Leather coat_0_nopoint",
+    "bbox_path": "all_frames/Scenes 001-020__303K-3-_20230815223320788/71/padded_segments/padded_71_Leather coat_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 001-020__303K-3-_20230815223320788",
+    "predicted_object": "Time Stick",
+    "object_version": 2,
+    "similarity_score": 0.714807391166687,
+    "model": "resnet50",
+    "frame": "36",
+    "segment_id": "36_Leather coat_4_nopoint",
+    "bbox_path": "all_frames/Scenes 001-020__303K-3-_20230815223320788/36/padded_segments/padded_36_Leather coat_4_nopoint.png"
+  },
+  {
+    "video": "Scenes 001-020__303K-3-_20230815223320788",
+    "predicted_object": "Aligator Loki Plushie",
+    "object_version": 1,
+    "similarity_score": 0.7123245000839233,
+    "model": "resnet50",
+    "frame": "125",
+    "segment_id": "125_Leather coat_0_nopoint",
+    "bbox_path": "all_frames/Scenes 001-020__303K-3-_20230815223320788/125/padded_segments/padded_125_Leather coat_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 001-020__303K-3-_20230815223320788",
+    "predicted_object": "Laevateinn",
+    "object_version": 3,
+    "similarity_score": 0.7096127867698669,
+    "model": "resnet50",
+    "frame": "229",
+    "segment_id": "229_Leather coat_0_nopoint",
+    "bbox_path": "all_frames/Scenes 001-020__303K-3-_20230815223320788/229/padded_segments/padded_229_Leather coat_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 001-020__303K-3-_20230815223320788",
+    "predicted_object": "Loki's armor (THE AVENGERS)",
+    "object_version": 3,
+    "similarity_score": 0.7390615940093994,
+    "model": "resnet50",
+    "frame": "43",
+    "segment_id": "43_TVA jacket_2_nopoint",
+    "bbox_path": "all_frames/Scenes 001-020__303K-3-_20230815223320788/43/padded_segments/padded_43_TVA jacket_2_nopoint.png"
+  },
+  {
+    "video": "Scenes 001-020__303K-3-_20230815223320788",
+    "predicted_object": "Aligator Loki Plushie",
+    "object_version": 3,
+    "similarity_score": 0.7041097283363342,
+    "model": "resnet50",
+    "frame": "28",
+    "segment_id": "28_Leather coat_0_nopoint",
+    "bbox_path": "all_frames/Scenes 001-020__303K-3-_20230815223320788/28/padded_segments/padded_28_Leather coat_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 001-020__303K-3-_20230815223320788",
+    "predicted_object": "Loki's armor (THE AVENGERS)",
+    "object_version": 3,
+    "similarity_score": 0.7541329860687256,
+    "model": "resnet50",
+    "frame": "105",
+    "segment_id": "105_TVA jacket_0_nopoint",
+    "bbox_path": "all_frames/Scenes 001-020__303K-3-_20230815223320788/105/padded_segments/padded_105_TVA jacket_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 001-020__303K-3-_20230815223320788",
+    "predicted_object": "Asgardian device",
+    "object_version": 3,
+    "similarity_score": 0.7002321481704712,
+    "model": "resnet50",
+    "frame": "214",
+    "segment_id": "214_Horned helmet_0_nopoint",
+    "bbox_path": "all_frames/Scenes 001-020__303K-3-_20230815223320788/214/padded_segments/padded_214_Horned helmet_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 001-020__303K-3-_20230815223320788",
+    "predicted_object": "Loki's dagger",
+    "object_version": 2,
+    "similarity_score": 0.7325979471206665,
+    "model": "resnet50",
+    "frame": "189",
+    "segment_id": "189_Metal sword_2_nopoint",
+    "bbox_path": "all_frames/Scenes 001-020__303K-3-_20230815223320788/189/padded_segments/padded_189_Metal sword_2_nopoint.png"
+  },
+  {
+    "video": "Scenes 001-020__303K-3-_20230815223320788",
+    "predicted_object": "Loki's armor (THE AVENGERS)",
+    "object_version": 3,
+    "similarity_score": 0.7385103106498718,
+    "model": "resnet50",
+    "frame": "99",
+    "segment_id": "99_TVA jacket_2_nopoint",
+    "bbox_path": "all_frames/Scenes 001-020__303K-3-_20230815223320788/99/padded_segments/padded_99_TVA jacket_2_nopoint.png"
+  },
+  {
+    "video": "Scenes 001-020__303K-3-_20230815223320788",
+    "predicted_object": "Loki's armor (THE AVENGERS)",
+    "object_version": 3,
+    "similarity_score": 0.7216389179229736,
+    "model": "resnet50",
+    "frame": "15",
+    "segment_id": "15_TVA jacket_1_nopoint",
+    "bbox_path": "all_frames/Scenes 001-020__303K-3-_20230815223320788/15/padded_segments/padded_15_TVA jacket_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 001-020__303K-3-_20230815223320788",
+    "predicted_object": "Time Collar",
+    "object_version": 1,
+    "similarity_score": 0.7291361093521118,
+    "model": "resnet50",
+    "frame": "191",
+    "segment_id": "191_Horned helmet_0_nopoint",
+    "bbox_path": "all_frames/Scenes 001-020__303K-3-_20230815223320788/191/padded_segments/padded_191_Horned helmet_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 001-020__303K-3-_20230815223320788",
+    "predicted_object": "Asgardian device",
+    "object_version": 3,
+    "similarity_score": 0.7062990665435791,
+    "model": "resnet50",
+    "frame": "222",
+    "segment_id": "222_Horned helmet_0_nopoint",
+    "bbox_path": "all_frames/Scenes 001-020__303K-3-_20230815223320788/222/padded_segments/padded_222_Horned helmet_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 001-020__303K-3-_20230815223320788",
+    "predicted_object": "Asgardian device",
+    "object_version": 1,
+    "similarity_score": 0.7053645849227905,
+    "model": "resnet50",
+    "frame": "79",
+    "segment_id": "79_Horned helmet_0_nopoint",
+    "bbox_path": "all_frames/Scenes 001-020__303K-3-_20230815223320788/79/padded_segments/padded_79_Horned helmet_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 001-020__303K-3-_20230815223320788",
+    "predicted_object": "Laevateinn",
+    "object_version": 1,
+    "similarity_score": 0.7025707960128784,
+    "model": "resnet50",
+    "frame": "154",
+    "segment_id": "154_Glowing rod_0_nopoint",
+    "bbox_path": "all_frames/Scenes 001-020__303K-3-_20230815223320788/154/padded_segments/padded_154_Glowing rod_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 001-020__303K-3-_20230815223320788",
+    "predicted_object": "Sylvie's machete",
+    "object_version": 2,
+    "similarity_score": 0.718783438205719,
+    "model": "resnet50",
+    "frame": "87",
+    "segment_id": "87_Leather coat_1_nopoint",
+    "bbox_path": "all_frames/Scenes 001-020__303K-3-_20230815223320788/87/padded_segments/padded_87_Leather coat_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 001-020__303K-3-_20230815223320788",
+    "predicted_object": "Laevateinn",
+    "object_version": 1,
+    "similarity_score": 0.7130727171897888,
+    "model": "resnet50",
+    "frame": "73",
+    "segment_id": "73_Metal sword_0_nopoint",
+    "bbox_path": "all_frames/Scenes 001-020__303K-3-_20230815223320788/73/padded_segments/padded_73_Metal sword_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 001-020__303K-3-_20230815223320788",
+    "predicted_object": "Sylvie's machete",
+    "object_version": 2,
+    "similarity_score": 0.7131760120391846,
+    "model": "resnet50",
+    "frame": "252",
+    "segment_id": "252_Leather coat_0_nopoint",
+    "bbox_path": "all_frames/Scenes 001-020__303K-3-_20230815223320788/252/padded_segments/padded_252_Leather coat_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 001-020__303K-3-_20230815223320788",
+    "predicted_object": "Aligator Loki Plushie",
+    "object_version": 3,
+    "similarity_score": 0.7296955585479736,
+    "model": "resnet50",
+    "frame": "107",
+    "segment_id": "107_TVA jacket_0_nopoint",
+    "bbox_path": "all_frames/Scenes 001-020__303K-3-_20230815223320788/107/padded_segments/padded_107_TVA jacket_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 001-020__303K-3-_20230815223320788",
+    "predicted_object": "Sylvie's machete",
+    "object_version": 2,
+    "similarity_score": 0.714971661567688,
+    "model": "resnet50",
+    "frame": "126",
+    "segment_id": "126_Leather coat_0_nopoint",
+    "bbox_path": "all_frames/Scenes 001-020__303K-3-_20230815223320788/126/padded_segments/padded_126_Leather coat_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 001-020__303K-3-_20230815223320788",
+    "predicted_object": "Loki's dagger",
+    "object_version": 2,
+    "similarity_score": 0.7246929407119751,
+    "model": "resnet50",
+    "frame": "48",
+    "segment_id": "48_Metal sword_0_nopoint",
+    "bbox_path": "all_frames/Scenes 001-020__303K-3-_20230815223320788/48/padded_segments/padded_48_Metal sword_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 001-020__303K-3-_20230815223320788",
+    "predicted_object": "Laevateinn",
+    "object_version": 1,
+    "similarity_score": 0.7274993658065796,
+    "model": "resnet50",
+    "frame": "61",
+    "segment_id": "61_Glowing rod_0_nopoint",
+    "bbox_path": "all_frames/Scenes 001-020__303K-3-_20230815223320788/61/padded_segments/padded_61_Glowing rod_0_nopoint.png"
+  }
+]

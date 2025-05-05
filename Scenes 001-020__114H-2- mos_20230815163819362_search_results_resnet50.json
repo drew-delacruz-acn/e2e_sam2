@@ -1,0 +1,12 @@
+[
+  {
+    "video": "Scenes 001-020__114H-2- mos_20230815163819362",
+    "predicted_object": "Laevateinn",
+    "object_version": 3,
+    "similarity_score": 0.725740373134613,
+    "model": "resnet50",
+    "frame": "1",
+    "segment_id": "1_Holopad device_0_nopoint",
+    "bbox_path": "all_frames/Scenes 001-020__114H-2- mos_20230815163819362/1/padded_segments/padded_1_Holopad device_0_nopoint.png"
+  }
+]

@@ -7,7 +7,7 @@
     "model": "resnet50",
     "frame": "46",
     "segment_id": "46_Holopad device_0_nopoint",
-    "segment_path": "all_frames/Scenes 041-060__157C-2- pu_20230815175939817/46/segments/46_Holopad device_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 041-060__157C-2- pu_20230815175939817/46/padded_segments/padded_46_Holopad device_0_nopoint.png"
   },
   {
     "video": "Scenes 041-060__157C-2- pu_20230815175939817",
@@ -17,7 +17,7 @@
     "model": "resnet50",
     "frame": "133",
     "segment_id": "133_Holopad device_0_nopoint",
-    "segment_path": "all_frames/Scenes 041-060__157C-2- pu_20230815175939817/133/segments/133_Holopad device_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 041-060__157C-2- pu_20230815175939817/133/padded_segments/padded_133_Holopad device_0_nopoint.png"
   },
   {
     "video": "Scenes 041-060__157C-2- pu_20230815175939817",
@@ -27,7 +27,7 @@
     "model": "resnet50",
     "frame": "1",
     "segment_id": "1_War hammer_0_nopoint",
-    "segment_path": "all_frames/Scenes 041-060__157C-2- pu_20230815175939817/1/segments/1_War hammer_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 041-060__157C-2- pu_20230815175939817/1/padded_segments/padded_1_War hammer_0_nopoint.png"
   },
   {
     "video": "Scenes 041-060__157C-2- pu_20230815175939817",
@@ -37,7 +37,7 @@
     "model": "resnet50",
     "frame": "131",
     "segment_id": "131_Holopad device_0_nopoint",
-    "segment_path": "all_frames/Scenes 041-060__157C-2- pu_20230815175939817/131/segments/131_Holopad device_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 041-060__157C-2- pu_20230815175939817/131/padded_segments/padded_131_Holopad device_0_nopoint.png"
   },
   {
     "video": "Scenes 041-060__157C-2- pu_20230815175939817",
@@ -47,7 +47,7 @@
     "model": "resnet50",
     "frame": "84",
     "segment_id": "84_Holopad device_0_nopoint",
-    "segment_path": "all_frames/Scenes 041-060__157C-2- pu_20230815175939817/84/segments/84_Holopad device_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 041-060__157C-2- pu_20230815175939817/84/padded_segments/padded_84_Holopad device_0_nopoint.png"
   },
   {
     "video": "Scenes 041-060__157C-2- pu_20230815175939817",
@@ -57,7 +57,7 @@
     "model": "resnet50",
     "frame": "119",
     "segment_id": "119_Holopad device_0_nopoint",
-    "segment_path": "all_frames/Scenes 041-060__157C-2- pu_20230815175939817/119/segments/119_Holopad device_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 041-060__157C-2- pu_20230815175939817/119/padded_segments/padded_119_Holopad device_0_nopoint.png"
   },
   {
     "video": "Scenes 041-060__157C-2- pu_20230815175939817",
@@ -67,7 +67,7 @@
     "model": "resnet50",
     "frame": "127",
     "segment_id": "127_Holopad device_0_nopoint",
-    "segment_path": "all_frames/Scenes 041-060__157C-2- pu_20230815175939817/127/segments/127_Holopad device_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 041-060__157C-2- pu_20230815175939817/127/padded_segments/padded_127_Holopad device_0_nopoint.png"
   },
   {
     "video": "Scenes 041-060__157C-2- pu_20230815175939817",
@@ -77,7 +77,7 @@
     "model": "resnet50",
     "frame": "167",
     "segment_id": "167_Holopad device_0_nopoint",
-    "segment_path": "all_frames/Scenes 041-060__157C-2- pu_20230815175939817/167/segments/167_Holopad device_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 041-060__157C-2- pu_20230815175939817/167/padded_segments/padded_167_Holopad device_0_nopoint.png"
   },
   {
     "video": "Scenes 041-060__157C-2- pu_20230815175939817",
@@ -87,7 +87,7 @@
     "model": "resnet50",
     "frame": "173",
     "segment_id": "173_Holopad device_0_nopoint",
-    "segment_path": "all_frames/Scenes 041-060__157C-2- pu_20230815175939817/173/segments/173_Holopad device_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 041-060__157C-2- pu_20230815175939817/173/padded_segments/padded_173_Holopad device_0_nopoint.png"
   },
   {
     "video": "Scenes 041-060__157C-2- pu_20230815175939817",
@@ -97,7 +97,7 @@
     "model": "resnet50",
     "frame": "62",
     "segment_id": "62_Holopad device_0_nopoint",
-    "segment_path": "all_frames/Scenes 041-060__157C-2- pu_20230815175939817/62/segments/62_Holopad device_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 041-060__157C-2- pu_20230815175939817/62/padded_segments/padded_62_Holopad device_0_nopoint.png"
   },
   {
     "video": "Scenes 041-060__157C-2- pu_20230815175939817",
@@ -107,7 +107,7 @@
     "model": "resnet50",
     "frame": "157",
     "segment_id": "157_Holopad device_0_nopoint",
-    "segment_path": "all_frames/Scenes 041-060__157C-2- pu_20230815175939817/157/segments/157_Holopad device_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 041-060__157C-2- pu_20230815175939817/157/padded_segments/padded_157_Holopad device_0_nopoint.png"
   },
   {
     "video": "Scenes 041-060__157C-2- pu_20230815175939817",
@@ -117,7 +117,7 @@
     "model": "resnet50",
     "frame": "72",
     "segment_id": "72_Holopad device_0_nopoint",
-    "segment_path": "all_frames/Scenes 041-060__157C-2- pu_20230815175939817/72/segments/72_Holopad device_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 041-060__157C-2- pu_20230815175939817/72/padded_segments/padded_72_Holopad device_0_nopoint.png"
   },
   {
     "video": "Scenes 041-060__157C-2- pu_20230815175939817",
@@ -127,7 +127,7 @@
     "model": "resnet50",
     "frame": "97",
     "segment_id": "97_Holopad device_0_nopoint",
-    "segment_path": "all_frames/Scenes 041-060__157C-2- pu_20230815175939817/97/segments/97_Holopad device_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 041-060__157C-2- pu_20230815175939817/97/padded_segments/padded_97_Holopad device_0_nopoint.png"
   },
   {
     "video": "Scenes 041-060__157C-2- pu_20230815175939817",
@@ -137,7 +137,7 @@
     "model": "resnet50",
     "frame": "33",
     "segment_id": "33_Holopad device_0_nopoint",
-    "segment_path": "all_frames/Scenes 041-060__157C-2- pu_20230815175939817/33/segments/33_Holopad device_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 041-060__157C-2- pu_20230815175939817/33/padded_segments/padded_33_Holopad device_0_nopoint.png"
   },
   {
     "video": "Scenes 041-060__157C-2- pu_20230815175939817",
@@ -147,7 +147,7 @@
     "model": "resnet50",
     "frame": "81",
     "segment_id": "81_Holopad device_0_nopoint",
-    "segment_path": "all_frames/Scenes 041-060__157C-2- pu_20230815175939817/81/segments/81_Holopad device_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 041-060__157C-2- pu_20230815175939817/81/padded_segments/padded_81_Holopad device_0_nopoint.png"
   },
   {
     "video": "Scenes 041-060__157C-2- pu_20230815175939817",
@@ -157,7 +157,7 @@
     "model": "resnet50",
     "frame": "38",
     "segment_id": "38_Holopad device_0_nopoint",
-    "segment_path": "all_frames/Scenes 041-060__157C-2- pu_20230815175939817/38/segments/38_Holopad device_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 041-060__157C-2- pu_20230815175939817/38/padded_segments/padded_38_Holopad device_0_nopoint.png"
   },
   {
     "video": "Scenes 041-060__157C-2- pu_20230815175939817",
@@ -167,7 +167,7 @@
     "model": "resnet50",
     "frame": "24",
     "segment_id": "24_Holopad device_0_nopoint",
-    "segment_path": "all_frames/Scenes 041-060__157C-2- pu_20230815175939817/24/segments/24_Holopad device_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 041-060__157C-2- pu_20230815175939817/24/padded_segments/padded_24_Holopad device_0_nopoint.png"
   },
   {
     "video": "Scenes 041-060__157C-2- pu_20230815175939817",
@@ -177,7 +177,7 @@
     "model": "resnet50",
     "frame": "165",
     "segment_id": "165_Holopad device_0_nopoint",
-    "segment_path": "all_frames/Scenes 041-060__157C-2- pu_20230815175939817/165/segments/165_Holopad device_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 041-060__157C-2- pu_20230815175939817/165/padded_segments/padded_165_Holopad device_0_nopoint.png"
   },
   {
     "video": "Scenes 041-060__157C-2- pu_20230815175939817",
@@ -187,7 +187,7 @@
     "model": "resnet50",
     "frame": "175",
     "segment_id": "175_Holopad device_0_nopoint",
-    "segment_path": "all_frames/Scenes 041-060__157C-2- pu_20230815175939817/175/segments/175_Holopad device_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 041-060__157C-2- pu_20230815175939817/175/padded_segments/padded_175_Holopad device_0_nopoint.png"
   },
   {
     "video": "Scenes 041-060__157C-2- pu_20230815175939817",
@@ -197,7 +197,7 @@
     "model": "resnet50",
     "frame": "158",
     "segment_id": "158_Holopad device_0_nopoint",
-    "segment_path": "all_frames/Scenes 041-060__157C-2- pu_20230815175939817/158/segments/158_Holopad device_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 041-060__157C-2- pu_20230815175939817/158/padded_segments/padded_158_Holopad device_0_nopoint.png"
   },
   {
     "video": "Scenes 041-060__157C-2- pu_20230815175939817",
@@ -207,7 +207,7 @@
     "model": "resnet50",
     "frame": "160",
     "segment_id": "160_Holopad device_0_nopoint",
-    "segment_path": "all_frames/Scenes 041-060__157C-2- pu_20230815175939817/160/segments/160_Holopad device_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 041-060__157C-2- pu_20230815175939817/160/padded_segments/padded_160_Holopad device_0_nopoint.png"
   },
   {
     "video": "Scenes 041-060__157C-2- pu_20230815175939817",
@@ -217,7 +217,7 @@
     "model": "resnet50",
     "frame": "159",
     "segment_id": "159_Holopad device_0_nopoint",
-    "segment_path": "all_frames/Scenes 041-060__157C-2- pu_20230815175939817/159/segments/159_Holopad device_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 041-060__157C-2- pu_20230815175939817/159/padded_segments/padded_159_Holopad device_0_nopoint.png"
   },
   {
     "video": "Scenes 041-060__157C-2- pu_20230815175939817",
@@ -227,7 +227,7 @@
     "model": "resnet50",
     "frame": "166",
     "segment_id": "166_Holopad device_0_nopoint",
-    "segment_path": "all_frames/Scenes 041-060__157C-2- pu_20230815175939817/166/segments/166_Holopad device_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 041-060__157C-2- pu_20230815175939817/166/padded_segments/padded_166_Holopad device_0_nopoint.png"
   },
   {
     "video": "Scenes 041-060__157C-2- pu_20230815175939817",
@@ -237,7 +237,7 @@
     "model": "resnet50",
     "frame": "37",
     "segment_id": "37_Holopad device_0_nopoint",
-    "segment_path": "all_frames/Scenes 041-060__157C-2- pu_20230815175939817/37/segments/37_Holopad device_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 041-060__157C-2- pu_20230815175939817/37/padded_segments/padded_37_Holopad device_0_nopoint.png"
   },
   {
     "video": "Scenes 041-060__157C-2- pu_20230815175939817",
@@ -247,7 +247,7 @@
     "model": "resnet50",
     "frame": "125",
     "segment_id": "125_Holopad device_0_nopoint",
-    "segment_path": "all_frames/Scenes 041-060__157C-2- pu_20230815175939817/125/segments/125_Holopad device_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 041-060__157C-2- pu_20230815175939817/125/padded_segments/padded_125_Holopad device_0_nopoint.png"
   },
   {
     "video": "Scenes 041-060__157C-2- pu_20230815175939817",
@@ -257,7 +257,7 @@
     "model": "resnet50",
     "frame": "43",
     "segment_id": "43_Holopad device_1_nopoint",
-    "segment_path": "all_frames/Scenes 041-060__157C-2- pu_20230815175939817/43/segments/43_Holopad device_1_nopoint.png"
+    "bbox_path": "all_frames/Scenes 041-060__157C-2- pu_20230815175939817/43/padded_segments/padded_43_Holopad device_1_nopoint.png"
   },
   {
     "video": "Scenes 041-060__157C-2- pu_20230815175939817",
@@ -267,7 +267,7 @@
     "model": "resnet50",
     "frame": "42",
     "segment_id": "42_Holopad device_0_nopoint",
-    "segment_path": "all_frames/Scenes 041-060__157C-2- pu_20230815175939817/42/segments/42_Holopad device_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 041-060__157C-2- pu_20230815175939817/42/padded_segments/padded_42_Holopad device_0_nopoint.png"
   },
   {
     "video": "Scenes 041-060__157C-2- pu_20230815175939817",
@@ -277,7 +277,7 @@
     "model": "resnet50",
     "frame": "67",
     "segment_id": "67_Holopad device_0_nopoint",
-    "segment_path": "all_frames/Scenes 041-060__157C-2- pu_20230815175939817/67/segments/67_Holopad device_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 041-060__157C-2- pu_20230815175939817/67/padded_segments/padded_67_Holopad device_0_nopoint.png"
   },
   {
     "video": "Scenes 041-060__157C-2- pu_20230815175939817",
@@ -287,7 +287,7 @@
     "model": "resnet50",
     "frame": "180",
     "segment_id": "180_Holopad device_0_nopoint",
-    "segment_path": "all_frames/Scenes 041-060__157C-2- pu_20230815175939817/180/segments/180_Holopad device_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 041-060__157C-2- pu_20230815175939817/180/padded_segments/padded_180_Holopad device_0_nopoint.png"
   },
   {
     "video": "Scenes 041-060__157C-2- pu_20230815175939817",
@@ -297,7 +297,7 @@
     "model": "resnet50",
     "frame": "58",
     "segment_id": "58_Holopad device_0_nopoint",
-    "segment_path": "all_frames/Scenes 041-060__157C-2- pu_20230815175939817/58/segments/58_Holopad device_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 041-060__157C-2- pu_20230815175939817/58/padded_segments/padded_58_Holopad device_0_nopoint.png"
   },
   {
     "video": "Scenes 041-060__157C-2- pu_20230815175939817",
@@ -307,7 +307,7 @@
     "model": "resnet50",
     "frame": "79",
     "segment_id": "79_Holopad device_0_nopoint",
-    "segment_path": "all_frames/Scenes 041-060__157C-2- pu_20230815175939817/79/segments/79_Holopad device_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 041-060__157C-2- pu_20230815175939817/79/padded_segments/padded_79_Holopad device_0_nopoint.png"
   },
   {
     "video": "Scenes 041-060__157C-2- pu_20230815175939817",
@@ -317,7 +317,7 @@
     "model": "resnet50",
     "frame": "93",
     "segment_id": "93_Holopad device_0_nopoint",
-    "segment_path": "all_frames/Scenes 041-060__157C-2- pu_20230815175939817/93/segments/93_Holopad device_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 041-060__157C-2- pu_20230815175939817/93/padded_segments/padded_93_Holopad device_0_nopoint.png"
   },
   {
     "video": "Scenes 041-060__157C-2- pu_20230815175939817",
@@ -327,7 +327,7 @@
     "model": "resnet50",
     "frame": "55",
     "segment_id": "55_Holopad device_0_nopoint",
-    "segment_path": "all_frames/Scenes 041-060__157C-2- pu_20230815175939817/55/segments/55_Holopad device_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 041-060__157C-2- pu_20230815175939817/55/padded_segments/padded_55_Holopad device_0_nopoint.png"
   },
   {
     "video": "Scenes 041-060__157C-2- pu_20230815175939817",
@@ -337,7 +337,7 @@
     "model": "resnet50",
     "frame": "154",
     "segment_id": "154_Holopad device_0_nopoint",
-    "segment_path": "all_frames/Scenes 041-060__157C-2- pu_20230815175939817/154/segments/154_Holopad device_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 041-060__157C-2- pu_20230815175939817/154/padded_segments/padded_154_Holopad device_0_nopoint.png"
   },
   {
     "video": "Scenes 041-060__157C-2- pu_20230815175939817",
@@ -347,7 +347,7 @@
     "model": "resnet50",
     "frame": "145",
     "segment_id": "145_Holopad device_0_nopoint",
-    "segment_path": "all_frames/Scenes 041-060__157C-2- pu_20230815175939817/145/segments/145_Holopad device_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 041-060__157C-2- pu_20230815175939817/145/padded_segments/padded_145_Holopad device_0_nopoint.png"
   },
   {
     "video": "Scenes 041-060__157C-2- pu_20230815175939817",
@@ -357,7 +357,7 @@
     "model": "resnet50",
     "frame": "59",
     "segment_id": "59_Holopad device_0_nopoint",
-    "segment_path": "all_frames/Scenes 041-060__157C-2- pu_20230815175939817/59/segments/59_Holopad device_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 041-060__157C-2- pu_20230815175939817/59/padded_segments/padded_59_Holopad device_0_nopoint.png"
   },
   {
     "video": "Scenes 041-060__157C-2- pu_20230815175939817",
@@ -367,7 +367,7 @@
     "model": "resnet50",
     "frame": "41",
     "segment_id": "41_Holopad device_0_nopoint",
-    "segment_path": "all_frames/Scenes 041-060__157C-2- pu_20230815175939817/41/segments/41_Holopad device_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 041-060__157C-2- pu_20230815175939817/41/padded_segments/padded_41_Holopad device_0_nopoint.png"
   },
   {
     "video": "Scenes 041-060__157C-2- pu_20230815175939817",
@@ -377,7 +377,7 @@
     "model": "resnet50",
     "frame": "161",
     "segment_id": "161_Holopad device_0_nopoint",
-    "segment_path": "all_frames/Scenes 041-060__157C-2- pu_20230815175939817/161/segments/161_Holopad device_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 041-060__157C-2- pu_20230815175939817/161/padded_segments/padded_161_Holopad device_0_nopoint.png"
   },
   {
     "video": "Scenes 041-060__157C-2- pu_20230815175939817",
@@ -387,7 +387,7 @@
     "model": "resnet50",
     "frame": "87",
     "segment_id": "87_Holopad device_1_nopoint",
-    "segment_path": "all_frames/Scenes 041-060__157C-2- pu_20230815175939817/87/segments/87_Holopad device_1_nopoint.png"
+    "bbox_path": "all_frames/Scenes 041-060__157C-2- pu_20230815175939817/87/padded_segments/padded_87_Holopad device_1_nopoint.png"
   },
   {
     "video": "Scenes 041-060__157C-2- pu_20230815175939817",
@@ -397,7 +397,7 @@
     "model": "resnet50",
     "frame": "9",
     "segment_id": "9_Holopad device_0_nopoint",
-    "segment_path": "all_frames/Scenes 041-060__157C-2- pu_20230815175939817/9/segments/9_Holopad device_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 041-060__157C-2- pu_20230815175939817/9/padded_segments/padded_9_Holopad device_0_nopoint.png"
   },
   {
     "video": "Scenes 041-060__157C-2- pu_20230815175939817",
@@ -407,7 +407,7 @@
     "model": "resnet50",
     "frame": "129",
     "segment_id": "129_Holopad device_0_nopoint",
-    "segment_path": "all_frames/Scenes 041-060__157C-2- pu_20230815175939817/129/segments/129_Holopad device_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 041-060__157C-2- pu_20230815175939817/129/padded_segments/padded_129_Holopad device_0_nopoint.png"
   },
   {
     "video": "Scenes 041-060__157C-2- pu_20230815175939817",
@@ -417,7 +417,7 @@
     "model": "resnet50",
     "frame": "73",
     "segment_id": "73_Holopad device_0_nopoint",
-    "segment_path": "all_frames/Scenes 041-060__157C-2- pu_20230815175939817/73/segments/73_Holopad device_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 041-060__157C-2- pu_20230815175939817/73/padded_segments/padded_73_Holopad device_0_nopoint.png"
   },
   {
     "video": "Scenes 041-060__157C-2- pu_20230815175939817",
@@ -427,7 +427,7 @@
     "model": "resnet50",
     "frame": "121",
     "segment_id": "121_Holopad device_0_nopoint",
-    "segment_path": "all_frames/Scenes 041-060__157C-2- pu_20230815175939817/121/segments/121_Holopad device_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 041-060__157C-2- pu_20230815175939817/121/padded_segments/padded_121_Holopad device_0_nopoint.png"
   },
   {
     "video": "Scenes 041-060__157C-2- pu_20230815175939817",
@@ -437,6 +437,6 @@
     "model": "resnet50",
     "frame": "10",
     "segment_id": "10_Holopad device_0_nopoint",
-    "segment_path": "all_frames/Scenes 041-060__157C-2- pu_20230815175939817/10/segments/10_Holopad device_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 041-060__157C-2- pu_20230815175939817/10/padded_segments/padded_10_Holopad device_0_nopoint.png"
   }
 ]

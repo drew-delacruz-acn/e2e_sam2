@@ -1,0 +1,222 @@
+[
+  {
+    "video": "Scenes 001-020__211-1-_20230815190444533",
+    "predicted_object": "Loki's armor (THE AVENGERS)",
+    "object_version": 1,
+    "similarity_score": 0.7059928178787231,
+    "model": "resnet50",
+    "frame": "171",
+    "segment_id": "171_Leather coat_2_nopoint",
+    "bbox_path": "all_frames/Scenes 001-020__211-1-_20230815190444533/171/padded_segments/padded_171_Leather coat_2_nopoint.png"
+  },
+  {
+    "video": "Scenes 001-020__211-1-_20230815190444533",
+    "predicted_object": "Boastful Loki's hammer",
+    "object_version": 1,
+    "similarity_score": 0.7183647751808167,
+    "model": "resnet50",
+    "frame": "171",
+    "segment_id": "171_TVA jacket_1_nopoint",
+    "bbox_path": "all_frames/Scenes 001-020__211-1-_20230815190444533/171/padded_segments/padded_171_TVA jacket_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 001-020__211-1-_20230815190444533",
+    "predicted_object": "Loki's armor (THE AVENGERS)",
+    "object_version": 1,
+    "similarity_score": 0.7093133926391602,
+    "model": "resnet50",
+    "frame": "168",
+    "segment_id": "168_Leather coat_0_nopoint",
+    "bbox_path": "all_frames/Scenes 001-020__211-1-_20230815190444533/168/padded_segments/padded_168_Leather coat_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 001-020__211-1-_20230815190444533",
+    "predicted_object": "Loki's armor (THE AVENGERS)",
+    "object_version": 1,
+    "similarity_score": 0.7209671139717102,
+    "model": "resnet50",
+    "frame": "176",
+    "segment_id": "176_Leather coat_0_nopoint",
+    "bbox_path": "all_frames/Scenes 001-020__211-1-_20230815190444533/176/padded_segments/padded_176_Leather coat_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 001-020__211-1-_20230815190444533",
+    "predicted_object": "Loki's armor (THE AVENGERS)",
+    "object_version": 1,
+    "similarity_score": 0.7114027142524719,
+    "model": "resnet50",
+    "frame": "174",
+    "segment_id": "174_Leather coat_1_nopoint",
+    "bbox_path": "all_frames/Scenes 001-020__211-1-_20230815190444533/174/padded_segments/padded_174_Leather coat_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 001-020__211-1-_20230815190444533",
+    "predicted_object": "Boastful Loki's hammer",
+    "object_version": 1,
+    "similarity_score": 0.7018808126449585,
+    "model": "resnet50",
+    "frame": "173",
+    "segment_id": "173_TVA jacket_1_nopoint",
+    "bbox_path": "all_frames/Scenes 001-020__211-1-_20230815190444533/173/padded_segments/padded_173_TVA jacket_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 001-020__211-1-_20230815190444533",
+    "predicted_object": "Loki's armor (THE AVENGERS)",
+    "object_version": 1,
+    "similarity_score": 0.7042026519775391,
+    "model": "resnet50",
+    "frame": "186",
+    "segment_id": "186_Leather coat_2_nopoint",
+    "bbox_path": "all_frames/Scenes 001-020__211-1-_20230815190444533/186/padded_segments/padded_186_Leather coat_2_nopoint.png"
+  },
+  {
+    "video": "Scenes 001-020__211-1-_20230815190444533",
+    "predicted_object": "Sylvie's machete",
+    "object_version": 2,
+    "similarity_score": 0.7012803554534912,
+    "model": "resnet50",
+    "frame": "178",
+    "segment_id": "178_Leather coat_0_nopoint",
+    "bbox_path": "all_frames/Scenes 001-020__211-1-_20230815190444533/178/padded_segments/padded_178_Leather coat_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 001-020__211-1-_20230815190444533",
+    "predicted_object": "Loki's armor (THE AVENGERS)",
+    "object_version": 1,
+    "similarity_score": 0.7211421728134155,
+    "model": "resnet50",
+    "frame": "205",
+    "segment_id": "205_Leather coat_0_nopoint",
+    "bbox_path": "all_frames/Scenes 001-020__211-1-_20230815190444533/205/padded_segments/padded_205_Leather coat_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 001-020__211-1-_20230815190444533",
+    "predicted_object": "Loki's armor (THE AVENGERS)",
+    "object_version": 1,
+    "similarity_score": 0.7058019042015076,
+    "model": "resnet50",
+    "frame": "162",
+    "segment_id": "162_Leather coat_1_nopoint",
+    "bbox_path": "all_frames/Scenes 001-020__211-1-_20230815190444533/162/padded_segments/padded_162_Leather coat_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 001-020__211-1-_20230815190444533",
+    "predicted_object": "Loki's armor (THE AVENGERS)",
+    "object_version": 1,
+    "similarity_score": 0.7198411226272583,
+    "model": "resnet50",
+    "frame": "169",
+    "segment_id": "169_Leather coat_0_nopoint",
+    "bbox_path": "all_frames/Scenes 001-020__211-1-_20230815190444533/169/padded_segments/padded_169_Leather coat_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 001-020__211-1-_20230815190444533",
+    "predicted_object": "Boastful Loki's hammer",
+    "object_version": 1,
+    "similarity_score": 0.7152149081230164,
+    "model": "resnet50",
+    "frame": "175",
+    "segment_id": "175_Leather coat_1_nopoint",
+    "bbox_path": "all_frames/Scenes 001-020__211-1-_20230815190444533/175/padded_segments/padded_175_Leather coat_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 001-020__211-1-_20230815190444533",
+    "predicted_object": "Loki's armor (THE AVENGERS)",
+    "object_version": 1,
+    "similarity_score": 0.7164043188095093,
+    "model": "resnet50",
+    "frame": "209",
+    "segment_id": "209_Leather coat_1_nopoint",
+    "bbox_path": "all_frames/Scenes 001-020__211-1-_20230815190444533/209/padded_segments/padded_209_Leather coat_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 001-020__211-1-_20230815190444533",
+    "predicted_object": "Loki's armor (THE AVENGERS)",
+    "object_version": 2,
+    "similarity_score": 0.7517995834350586,
+    "model": "resnet50",
+    "frame": "12",
+    "segment_id": "12_Leather coat_2_nopoint",
+    "bbox_path": "all_frames/Scenes 001-020__211-1-_20230815190444533/12/padded_segments/padded_12_Leather coat_2_nopoint.png"
+  },
+  {
+    "video": "Scenes 001-020__211-1-_20230815190444533",
+    "predicted_object": "Loki's armor (THE AVENGERS)",
+    "object_version": 1,
+    "similarity_score": 0.7018246650695801,
+    "model": "resnet50",
+    "frame": "71",
+    "segment_id": "71_TVA jacket_1_nopoint",
+    "bbox_path": "all_frames/Scenes 001-020__211-1-_20230815190444533/71/padded_segments/padded_71_TVA jacket_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 001-020__211-1-_20230815190444533",
+    "predicted_object": "Boastful Loki's hammer",
+    "object_version": 1,
+    "similarity_score": 0.7180097699165344,
+    "model": "resnet50",
+    "frame": "172",
+    "segment_id": "172_Leather coat_1_nopoint",
+    "bbox_path": "all_frames/Scenes 001-020__211-1-_20230815190444533/172/padded_segments/padded_172_Leather coat_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 001-020__211-1-_20230815190444533",
+    "predicted_object": "Loki's armor (THE AVENGERS)",
+    "object_version": 1,
+    "similarity_score": 0.7140430212020874,
+    "model": "resnet50",
+    "frame": "95",
+    "segment_id": "95_Leather coat_2_nopoint",
+    "bbox_path": "all_frames/Scenes 001-020__211-1-_20230815190444533/95/padded_segments/padded_95_Leather coat_2_nopoint.png"
+  },
+  {
+    "video": "Scenes 001-020__211-1-_20230815190444533",
+    "predicted_object": "Loki's armor (THE AVENGERS)",
+    "object_version": 1,
+    "similarity_score": 0.7163827419281006,
+    "model": "resnet50",
+    "frame": "180",
+    "segment_id": "180_Leather coat_2_nopoint",
+    "bbox_path": "all_frames/Scenes 001-020__211-1-_20230815190444533/180/padded_segments/padded_180_Leather coat_2_nopoint.png"
+  },
+  {
+    "video": "Scenes 001-020__211-1-_20230815190444533",
+    "predicted_object": "Loki's armor (THE AVENGERS)",
+    "object_version": 1,
+    "similarity_score": 0.7283097505569458,
+    "model": "resnet50",
+    "frame": "177",
+    "segment_id": "177_Leather coat_0_nopoint",
+    "bbox_path": "all_frames/Scenes 001-020__211-1-_20230815190444533/177/padded_segments/padded_177_Leather coat_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 001-020__211-1-_20230815190444533",
+    "predicted_object": "Loki's armor (THE AVENGERS)",
+    "object_version": 3,
+    "similarity_score": 0.7025253772735596,
+    "model": "resnet50",
+    "frame": "161",
+    "segment_id": "161_Leather coat_0_nopoint",
+    "bbox_path": "all_frames/Scenes 001-020__211-1-_20230815190444533/161/padded_segments/padded_161_Leather coat_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 001-020__211-1-_20230815190444533",
+    "predicted_object": "Time Collar",
+    "object_version": 2,
+    "similarity_score": 0.7042135000228882,
+    "model": "resnet50",
+    "frame": "18",
+    "segment_id": "18_Horned helmet_1_nopoint",
+    "bbox_path": "all_frames/Scenes 001-020__211-1-_20230815190444533/18/padded_segments/padded_18_Horned helmet_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 001-020__211-1-_20230815190444533",
+    "predicted_object": "Loki's armor (THE AVENGERS)",
+    "object_version": 3,
+    "similarity_score": 0.7039591073989868,
+    "model": "resnet50",
+    "frame": "121",
+    "segment_id": "121_Leather coat_2_nopoint",
+    "bbox_path": "all_frames/Scenes 001-020__211-1-_20230815190444533/121/padded_segments/padded_121_Leather coat_2_nopoint.png"
+  }
+]

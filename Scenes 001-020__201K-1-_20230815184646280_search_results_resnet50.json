@@ -1,0 +1,72 @@
+[
+  {
+    "video": "Scenes 001-020__201K-1-_20230815184646280",
+    "predicted_object": "Sylvie's machete",
+    "object_version": 2,
+    "similarity_score": 0.7072898149490356,
+    "model": "resnet50",
+    "frame": "4",
+    "segment_id": "4_Scepter weapon_2_nopoint",
+    "bbox_path": "all_frames/Scenes 001-020__201K-1-_20230815184646280/4/padded_segments/padded_4_Scepter weapon_2_nopoint.png"
+  },
+  {
+    "video": "Scenes 001-020__201K-1-_20230815184646280",
+    "predicted_object": "Sylvie's machete",
+    "object_version": 2,
+    "similarity_score": 0.717258632183075,
+    "model": "resnet50",
+    "frame": "17",
+    "segment_id": "17_Curved sword_1_nopoint",
+    "bbox_path": "all_frames/Scenes 001-020__201K-1-_20230815184646280/17/padded_segments/padded_17_Curved sword_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 001-020__201K-1-_20230815184646280",
+    "predicted_object": "Sylvie's machete",
+    "object_version": 2,
+    "similarity_score": 0.7068647146224976,
+    "model": "resnet50",
+    "frame": "7",
+    "segment_id": "7_Scepter weapon_0_nopoint",
+    "bbox_path": "all_frames/Scenes 001-020__201K-1-_20230815184646280/7/padded_segments/padded_7_Scepter weapon_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 001-020__201K-1-_20230815184646280",
+    "predicted_object": "Loki's Scepter",
+    "object_version": 2,
+    "similarity_score": 0.7119753360748291,
+    "model": "resnet50",
+    "frame": "8",
+    "segment_id": "8_Curved sword_1_nopoint",
+    "bbox_path": "all_frames/Scenes 001-020__201K-1-_20230815184646280/8/padded_segments/padded_8_Curved sword_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 001-020__201K-1-_20230815184646280",
+    "predicted_object": "Sylvie's machete",
+    "object_version": 2,
+    "similarity_score": 0.7223348021507263,
+    "model": "resnet50",
+    "frame": "15",
+    "segment_id": "15_Curved sword_1_nopoint",
+    "bbox_path": "all_frames/Scenes 001-020__201K-1-_20230815184646280/15/padded_segments/padded_15_Curved sword_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 001-020__201K-1-_20230815184646280",
+    "predicted_object": "Asgardian device",
+    "object_version": 1,
+    "similarity_score": 0.7036813497543335,
+    "model": "resnet50",
+    "frame": "14",
+    "segment_id": "14_Leather coat_4_nopoint",
+    "bbox_path": "all_frames/Scenes 001-020__201K-1-_20230815184646280/14/padded_segments/padded_14_Leather coat_4_nopoint.png"
+  },
+  {
+    "video": "Scenes 001-020__201K-1-_20230815184646280",
+    "predicted_object": "Time Stick",
+    "object_version": 1,
+    "similarity_score": 0.7036552429199219,
+    "model": "resnet50",
+    "frame": "20",
+    "segment_id": "20_Scepter weapon_0_nopoint",
+    "bbox_path": "all_frames/Scenes 001-020__201K-1-_20230815184646280/20/padded_segments/padded_20_Scepter weapon_0_nopoint.png"
+  }
+]

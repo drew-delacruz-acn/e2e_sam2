@@ -7,7 +7,7 @@
     "model": "resnet50",
     "frame": "1",
     "segment_id": "1_Bomb device_0_nopoint",
-    "segment_path": "all_frames/Scenes 001-020__507-1ng_20230816050923979/1/segments/1_Bomb device_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 001-020__507-1ng_20230816050923979/1/padded_segments/padded_1_Bomb device_0_nopoint.png"
   },
   {
     "video": "Scenes 001-020__507-1ng_20230816050923979",
@@ -17,6 +17,6 @@
     "model": "resnet50",
     "frame": "0",
     "segment_id": "0_Bomb device_0_nopoint",
-    "segment_path": "all_frames/Scenes 001-020__507-1ng_20230816050923979/0/segments/0_Bomb device_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 001-020__507-1ng_20230816050923979/0/padded_segments/padded_0_Bomb device_0_nopoint.png"
   }
 ]

@@ -7,7 +7,7 @@
     "model": "resnet50",
     "frame": "39",
     "segment_id": "39_Scepter weapon_0_nopoint",
-    "segment_path": "all_frames/Scenes 061-080__265N-1_20230815220141511/39/segments/39_Scepter weapon_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 061-080__265N-1_20230815220141511/39/padded_segments/padded_39_Scepter weapon_0_nopoint.png"
   },
   {
     "video": "Scenes 061-080__265N-1_20230815220141511",
@@ -17,7 +17,7 @@
     "model": "resnet50",
     "frame": "35",
     "segment_id": "35_TVA jacket_0_nopoint",
-    "segment_path": "all_frames/Scenes 061-080__265N-1_20230815220141511/35/segments/35_TVA jacket_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 061-080__265N-1_20230815220141511/35/padded_segments/padded_35_TVA jacket_0_nopoint.png"
   },
   {
     "video": "Scenes 061-080__265N-1_20230815220141511",
@@ -27,7 +27,7 @@
     "model": "resnet50",
     "frame": "24",
     "segment_id": "24_War hammer_0_nopoint",
-    "segment_path": "all_frames/Scenes 061-080__265N-1_20230815220141511/24/segments/24_War hammer_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 061-080__265N-1_20230815220141511/24/padded_segments/padded_24_War hammer_0_nopoint.png"
   },
   {
     "video": "Scenes 061-080__265N-1_20230815220141511",
@@ -37,7 +37,7 @@
     "model": "resnet50",
     "frame": "21",
     "segment_id": "21_War hammer_0_nopoint",
-    "segment_path": "all_frames/Scenes 061-080__265N-1_20230815220141511/21/segments/21_War hammer_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 061-080__265N-1_20230815220141511/21/padded_segments/padded_21_War hammer_0_nopoint.png"
   },
   {
     "video": "Scenes 061-080__265N-1_20230815220141511",
@@ -47,7 +47,7 @@
     "model": "resnet50",
     "frame": "34",
     "segment_id": "34_War hammer_0_nopoint",
-    "segment_path": "all_frames/Scenes 061-080__265N-1_20230815220141511/34/segments/34_War hammer_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 061-080__265N-1_20230815220141511/34/padded_segments/padded_34_War hammer_0_nopoint.png"
   },
   {
     "video": "Scenes 061-080__265N-1_20230815220141511",
@@ -57,7 +57,7 @@
     "model": "resnet50",
     "frame": "36",
     "segment_id": "36_Curved sword_0_nopoint",
-    "segment_path": "all_frames/Scenes 061-080__265N-1_20230815220141511/36/segments/36_Curved sword_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 061-080__265N-1_20230815220141511/36/padded_segments/padded_36_Curved sword_0_nopoint.png"
   },
   {
     "video": "Scenes 061-080__265N-1_20230815220141511",
@@ -67,7 +67,7 @@
     "model": "resnet50",
     "frame": "54",
     "segment_id": "54_War hammer_0_nopoint",
-    "segment_path": "all_frames/Scenes 061-080__265N-1_20230815220141511/54/segments/54_War hammer_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 061-080__265N-1_20230815220141511/54/padded_segments/padded_54_War hammer_0_nopoint.png"
   },
   {
     "video": "Scenes 061-080__265N-1_20230815220141511",
@@ -77,7 +77,7 @@
     "model": "resnet50",
     "frame": "20",
     "segment_id": "20_War hammer_0_nopoint",
-    "segment_path": "all_frames/Scenes 061-080__265N-1_20230815220141511/20/segments/20_War hammer_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 061-080__265N-1_20230815220141511/20/padded_segments/padded_20_War hammer_0_nopoint.png"
   },
   {
     "video": "Scenes 061-080__265N-1_20230815220141511",
@@ -87,7 +87,7 @@
     "model": "resnet50",
     "frame": "22",
     "segment_id": "22_Leather coat_0_nopoint",
-    "segment_path": "all_frames/Scenes 061-080__265N-1_20230815220141511/22/segments/22_Leather coat_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 061-080__265N-1_20230815220141511/22/padded_segments/padded_22_Leather coat_0_nopoint.png"
   },
   {
     "video": "Scenes 061-080__265N-1_20230815220141511",
@@ -97,7 +97,7 @@
     "model": "resnet50",
     "frame": "22",
     "segment_id": "22_Curved sword_1_nopoint",
-    "segment_path": "all_frames/Scenes 061-080__265N-1_20230815220141511/22/segments/22_Curved sword_1_nopoint.png"
+    "bbox_path": "all_frames/Scenes 061-080__265N-1_20230815220141511/22/padded_segments/padded_22_Curved sword_1_nopoint.png"
   },
   {
     "video": "Scenes 061-080__265N-1_20230815220141511",
@@ -107,6 +107,6 @@
     "model": "resnet50",
     "frame": "50",
     "segment_id": "50_TVA jacket_0_nopoint",
-    "segment_path": "all_frames/Scenes 061-080__265N-1_20230815220141511/50/segments/50_TVA jacket_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 061-080__265N-1_20230815220141511/50/padded_segments/padded_50_TVA jacket_0_nopoint.png"
   }
 ]

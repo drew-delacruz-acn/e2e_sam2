@@ -7,7 +7,7 @@
     "model": "resnet50",
     "frame": "17",
     "segment_id": "17_Holopad device_0_nopoint",
-    "segment_path": "all_frames/Scenes 041-060__156D-1- mos_20230815181940173/17/segments/17_Holopad device_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 041-060__156D-1- mos_20230815181940173/17/padded_segments/padded_17_Holopad device_0_nopoint.png"
   },
   {
     "video": "Scenes 041-060__156D-1- mos_20230815181940173",
@@ -17,7 +17,7 @@
     "model": "resnet50",
     "frame": "115",
     "segment_id": "115_Holopad device_2_nopoint",
-    "segment_path": "all_frames/Scenes 041-060__156D-1- mos_20230815181940173/115/segments/115_Holopad device_2_nopoint.png"
+    "bbox_path": "all_frames/Scenes 041-060__156D-1- mos_20230815181940173/115/padded_segments/padded_115_Holopad device_2_nopoint.png"
   },
   {
     "video": "Scenes 041-060__156D-1- mos_20230815181940173",
@@ -27,7 +27,7 @@
     "model": "resnet50",
     "frame": "115",
     "segment_id": "115_Holopad device_0_nopoint",
-    "segment_path": "all_frames/Scenes 041-060__156D-1- mos_20230815181940173/115/segments/115_Holopad device_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 041-060__156D-1- mos_20230815181940173/115/padded_segments/padded_115_Holopad device_0_nopoint.png"
   },
   {
     "video": "Scenes 041-060__156D-1- mos_20230815181940173",
@@ -37,7 +37,7 @@
     "model": "resnet50",
     "frame": "209",
     "segment_id": "209_Bomb device_0_nopoint",
-    "segment_path": "all_frames/Scenes 041-060__156D-1- mos_20230815181940173/209/segments/209_Bomb device_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 041-060__156D-1- mos_20230815181940173/209/padded_segments/padded_209_Bomb device_0_nopoint.png"
   },
   {
     "video": "Scenes 041-060__156D-1- mos_20230815181940173",
@@ -47,6 +47,6 @@
     "model": "resnet50",
     "frame": "192",
     "segment_id": "192_Holopad device_0_nopoint",
-    "segment_path": "all_frames/Scenes 041-060__156D-1- mos_20230815181940173/192/segments/192_Holopad device_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 041-060__156D-1- mos_20230815181940173/192/padded_segments/padded_192_Holopad device_0_nopoint.png"
   }
 ]

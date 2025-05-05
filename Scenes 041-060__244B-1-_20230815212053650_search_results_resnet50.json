@@ -7,7 +7,7 @@
     "model": "resnet50",
     "frame": "19",
     "segment_id": "19_TVA jacket_0_nopoint",
-    "segment_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/19/segments/19_TVA jacket_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/19/padded_segments/padded_19_TVA jacket_0_nopoint.png"
   },
   {
     "video": "Scenes 041-060__244B-1-_20230815212053650",
@@ -17,7 +17,7 @@
     "model": "resnet50",
     "frame": "63",
     "segment_id": "63_TVA jacket_0_nopoint",
-    "segment_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/63/segments/63_TVA jacket_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/63/padded_segments/padded_63_TVA jacket_0_nopoint.png"
   },
   {
     "video": "Scenes 041-060__244B-1-_20230815212053650",
@@ -27,7 +27,7 @@
     "model": "resnet50",
     "frame": "83",
     "segment_id": "83_TVA jacket_0_nopoint",
-    "segment_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/83/segments/83_TVA jacket_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/83/padded_segments/padded_83_TVA jacket_0_nopoint.png"
   },
   {
     "video": "Scenes 041-060__244B-1-_20230815212053650",
@@ -37,7 +37,7 @@
     "model": "resnet50",
     "frame": "84",
     "segment_id": "84_Leather coat_0_nopoint",
-    "segment_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/84/segments/84_Leather coat_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/84/padded_segments/padded_84_Leather coat_0_nopoint.png"
   },
   {
     "video": "Scenes 041-060__244B-1-_20230815212053650",
@@ -47,7 +47,7 @@
     "model": "resnet50",
     "frame": "123",
     "segment_id": "123_TVA jacket_0_nopoint",
-    "segment_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/123/segments/123_TVA jacket_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/123/padded_segments/padded_123_TVA jacket_0_nopoint.png"
   },
   {
     "video": "Scenes 041-060__244B-1-_20230815212053650",
@@ -57,7 +57,7 @@
     "model": "resnet50",
     "frame": "60",
     "segment_id": "60_TVA jacket_0_nopoint",
-    "segment_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/60/segments/60_TVA jacket_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/60/padded_segments/padded_60_TVA jacket_0_nopoint.png"
   },
   {
     "video": "Scenes 041-060__244B-1-_20230815212053650",
@@ -67,7 +67,7 @@
     "model": "resnet50",
     "frame": "25",
     "segment_id": "25_Leather coat_0_nopoint",
-    "segment_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/25/segments/25_Leather coat_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/25/padded_segments/padded_25_Leather coat_0_nopoint.png"
   },
   {
     "video": "Scenes 041-060__244B-1-_20230815212053650",
@@ -77,7 +77,7 @@
     "model": "resnet50",
     "frame": "171",
     "segment_id": "171_TVA jacket_1_nopoint",
-    "segment_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/171/segments/171_TVA jacket_1_nopoint.png"
+    "bbox_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/171/padded_segments/padded_171_TVA jacket_1_nopoint.png"
   },
   {
     "video": "Scenes 041-060__244B-1-_20230815212053650",
@@ -87,7 +87,7 @@
     "model": "resnet50",
     "frame": "163",
     "segment_id": "163_Leather coat_0_nopoint",
-    "segment_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/163/segments/163_Leather coat_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/163/padded_segments/padded_163_Leather coat_0_nopoint.png"
   },
   {
     "video": "Scenes 041-060__244B-1-_20230815212053650",
@@ -97,7 +97,7 @@
     "model": "resnet50",
     "frame": "138",
     "segment_id": "138_TVA jacket_0_nopoint",
-    "segment_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/138/segments/138_TVA jacket_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/138/padded_segments/padded_138_TVA jacket_0_nopoint.png"
   },
   {
     "video": "Scenes 041-060__244B-1-_20230815212053650",
@@ -107,7 +107,7 @@
     "model": "resnet50",
     "frame": "75",
     "segment_id": "75_TVA jacket_0_nopoint",
-    "segment_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/75/segments/75_TVA jacket_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/75/padded_segments/padded_75_TVA jacket_0_nopoint.png"
   },
   {
     "video": "Scenes 041-060__244B-1-_20230815212053650",
@@ -117,7 +117,7 @@
     "model": "resnet50",
     "frame": "119",
     "segment_id": "119_TVA jacket_0_nopoint",
-    "segment_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/119/segments/119_TVA jacket_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/119/padded_segments/padded_119_TVA jacket_0_nopoint.png"
   },
   {
     "video": "Scenes 041-060__244B-1-_20230815212053650",
@@ -127,7 +127,7 @@
     "model": "resnet50",
     "frame": "168",
     "segment_id": "168_Leather coat_0_nopoint",
-    "segment_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/168/segments/168_Leather coat_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/168/padded_segments/padded_168_Leather coat_0_nopoint.png"
   },
   {
     "video": "Scenes 041-060__244B-1-_20230815212053650",
@@ -137,7 +137,7 @@
     "model": "resnet50",
     "frame": "127",
     "segment_id": "127_TVA jacket_0_nopoint",
-    "segment_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/127/segments/127_TVA jacket_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/127/padded_segments/padded_127_TVA jacket_0_nopoint.png"
   },
   {
     "video": "Scenes 041-060__244B-1-_20230815212053650",
@@ -147,7 +147,7 @@
     "model": "resnet50",
     "frame": "29",
     "segment_id": "29_Leather coat_0_nopoint",
-    "segment_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/29/segments/29_Leather coat_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/29/padded_segments/padded_29_Leather coat_0_nopoint.png"
   },
   {
     "video": "Scenes 041-060__244B-1-_20230815212053650",
@@ -157,7 +157,7 @@
     "model": "resnet50",
     "frame": "176",
     "segment_id": "176_TVA jacket_0_nopoint",
-    "segment_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/176/segments/176_TVA jacket_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/176/padded_segments/padded_176_TVA jacket_0_nopoint.png"
   },
   {
     "video": "Scenes 041-060__244B-1-_20230815212053650",
@@ -167,7 +167,7 @@
     "model": "resnet50",
     "frame": "167",
     "segment_id": "167_Leather coat_0_nopoint",
-    "segment_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/167/segments/167_Leather coat_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/167/padded_segments/padded_167_Leather coat_0_nopoint.png"
   },
   {
     "video": "Scenes 041-060__244B-1-_20230815212053650",
@@ -177,7 +177,7 @@
     "model": "resnet50",
     "frame": "124",
     "segment_id": "124_TVA jacket_0_nopoint",
-    "segment_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/124/segments/124_TVA jacket_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/124/padded_segments/padded_124_TVA jacket_0_nopoint.png"
   },
   {
     "video": "Scenes 041-060__244B-1-_20230815212053650",
@@ -187,7 +187,7 @@
     "model": "resnet50",
     "frame": "120",
     "segment_id": "120_TVA jacket_0_nopoint",
-    "segment_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/120/segments/120_TVA jacket_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/120/padded_segments/padded_120_TVA jacket_0_nopoint.png"
   },
   {
     "video": "Scenes 041-060__244B-1-_20230815212053650",
@@ -197,7 +197,7 @@
     "model": "resnet50",
     "frame": "144",
     "segment_id": "144_TVA jacket_0_nopoint",
-    "segment_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/144/segments/144_TVA jacket_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/144/padded_segments/padded_144_TVA jacket_0_nopoint.png"
   },
   {
     "video": "Scenes 041-060__244B-1-_20230815212053650",
@@ -207,7 +207,7 @@
     "model": "resnet50",
     "frame": "174",
     "segment_id": "174_TVA jacket_1_nopoint",
-    "segment_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/174/segments/174_TVA jacket_1_nopoint.png"
+    "bbox_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/174/padded_segments/padded_174_TVA jacket_1_nopoint.png"
   },
   {
     "video": "Scenes 041-060__244B-1-_20230815212053650",
@@ -217,7 +217,7 @@
     "model": "resnet50",
     "frame": "122",
     "segment_id": "122_TVA jacket_0_nopoint",
-    "segment_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/122/segments/122_TVA jacket_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/122/padded_segments/padded_122_TVA jacket_0_nopoint.png"
   },
   {
     "video": "Scenes 041-060__244B-1-_20230815212053650",
@@ -227,7 +227,7 @@
     "model": "resnet50",
     "frame": "173",
     "segment_id": "173_TVA jacket_0_nopoint",
-    "segment_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/173/segments/173_TVA jacket_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/173/padded_segments/padded_173_TVA jacket_0_nopoint.png"
   },
   {
     "video": "Scenes 041-060__244B-1-_20230815212053650",
@@ -237,7 +237,7 @@
     "model": "resnet50",
     "frame": "62",
     "segment_id": "62_TVA jacket_0_nopoint",
-    "segment_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/62/segments/62_TVA jacket_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/62/padded_segments/padded_62_TVA jacket_0_nopoint.png"
   },
   {
     "video": "Scenes 041-060__244B-1-_20230815212053650",
@@ -247,7 +247,7 @@
     "model": "resnet50",
     "frame": "70",
     "segment_id": "70_TVA jacket_0_nopoint",
-    "segment_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/70/segments/70_TVA jacket_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/70/padded_segments/padded_70_TVA jacket_0_nopoint.png"
   },
   {
     "video": "Scenes 041-060__244B-1-_20230815212053650",
@@ -257,7 +257,7 @@
     "model": "resnet50",
     "frame": "74",
     "segment_id": "74_TVA jacket_1_nopoint",
-    "segment_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/74/segments/74_TVA jacket_1_nopoint.png"
+    "bbox_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/74/padded_segments/padded_74_TVA jacket_1_nopoint.png"
   },
   {
     "video": "Scenes 041-060__244B-1-_20230815212053650",
@@ -267,7 +267,7 @@
     "model": "resnet50",
     "frame": "157",
     "segment_id": "157_TVA jacket_0_nopoint",
-    "segment_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/157/segments/157_TVA jacket_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/157/padded_segments/padded_157_TVA jacket_0_nopoint.png"
   },
   {
     "video": "Scenes 041-060__244B-1-_20230815212053650",
@@ -277,7 +277,7 @@
     "model": "resnet50",
     "frame": "72",
     "segment_id": "72_TVA jacket_1_nopoint",
-    "segment_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/72/segments/72_TVA jacket_1_nopoint.png"
+    "bbox_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/72/padded_segments/padded_72_TVA jacket_1_nopoint.png"
   },
   {
     "video": "Scenes 041-060__244B-1-_20230815212053650",
@@ -287,7 +287,7 @@
     "model": "resnet50",
     "frame": "33",
     "segment_id": "33_Leather coat_0_nopoint",
-    "segment_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/33/segments/33_Leather coat_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/33/padded_segments/padded_33_Leather coat_0_nopoint.png"
   },
   {
     "video": "Scenes 041-060__244B-1-_20230815212053650",
@@ -297,7 +297,7 @@
     "model": "resnet50",
     "frame": "81",
     "segment_id": "81_Leather coat_0_nopoint",
-    "segment_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/81/segments/81_Leather coat_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/81/padded_segments/padded_81_Leather coat_0_nopoint.png"
   },
   {
     "video": "Scenes 041-060__244B-1-_20230815212053650",
@@ -307,7 +307,7 @@
     "model": "resnet50",
     "frame": "115",
     "segment_id": "115_Leather coat_0_nopoint",
-    "segment_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/115/segments/115_Leather coat_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/115/padded_segments/padded_115_Leather coat_0_nopoint.png"
   },
   {
     "video": "Scenes 041-060__244B-1-_20230815212053650",
@@ -317,7 +317,7 @@
     "model": "resnet50",
     "frame": "162",
     "segment_id": "162_Leather coat_2_nopoint",
-    "segment_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/162/segments/162_Leather coat_2_nopoint.png"
+    "bbox_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/162/padded_segments/padded_162_Leather coat_2_nopoint.png"
   },
   {
     "video": "Scenes 041-060__244B-1-_20230815212053650",
@@ -327,7 +327,7 @@
     "model": "resnet50",
     "frame": "139",
     "segment_id": "139_TVA jacket_0_nopoint",
-    "segment_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/139/segments/139_TVA jacket_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/139/padded_segments/padded_139_TVA jacket_0_nopoint.png"
   },
   {
     "video": "Scenes 041-060__244B-1-_20230815212053650",
@@ -337,7 +337,7 @@
     "model": "resnet50",
     "frame": "39",
     "segment_id": "39_Leather coat_0_nopoint",
-    "segment_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/39/segments/39_Leather coat_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/39/padded_segments/padded_39_Leather coat_0_nopoint.png"
   },
   {
     "video": "Scenes 041-060__244B-1-_20230815212053650",
@@ -347,7 +347,7 @@
     "model": "resnet50",
     "frame": "35",
     "segment_id": "35_Leather coat_0_nopoint",
-    "segment_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/35/segments/35_Leather coat_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/35/padded_segments/padded_35_Leather coat_0_nopoint.png"
   },
   {
     "video": "Scenes 041-060__244B-1-_20230815212053650",
@@ -357,7 +357,7 @@
     "model": "resnet50",
     "frame": "38",
     "segment_id": "38_Leather coat_0_nopoint",
-    "segment_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/38/segments/38_Leather coat_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/38/padded_segments/padded_38_Leather coat_0_nopoint.png"
   },
   {
     "video": "Scenes 041-060__244B-1-_20230815212053650",
@@ -367,7 +367,7 @@
     "model": "resnet50",
     "frame": "113",
     "segment_id": "113_Leather coat_0_nopoint",
-    "segment_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/113/segments/113_Leather coat_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/113/padded_segments/padded_113_Leather coat_0_nopoint.png"
   },
   {
     "video": "Scenes 041-060__244B-1-_20230815212053650",
@@ -377,7 +377,7 @@
     "model": "resnet50",
     "frame": "169",
     "segment_id": "169_TVA jacket_0_nopoint",
-    "segment_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/169/segments/169_TVA jacket_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/169/padded_segments/padded_169_TVA jacket_0_nopoint.png"
   },
   {
     "video": "Scenes 041-060__244B-1-_20230815212053650",
@@ -387,7 +387,7 @@
     "model": "resnet50",
     "frame": "116",
     "segment_id": "116_TVA jacket_0_nopoint",
-    "segment_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/116/segments/116_TVA jacket_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/116/padded_segments/padded_116_TVA jacket_0_nopoint.png"
   },
   {
     "video": "Scenes 041-060__244B-1-_20230815212053650",
@@ -397,7 +397,7 @@
     "model": "resnet50",
     "frame": "24",
     "segment_id": "24_Leather coat_0_nopoint",
-    "segment_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/24/segments/24_Leather coat_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/24/padded_segments/padded_24_Leather coat_0_nopoint.png"
   },
   {
     "video": "Scenes 041-060__244B-1-_20230815212053650",
@@ -407,7 +407,7 @@
     "model": "resnet50",
     "frame": "165",
     "segment_id": "165_Leather coat_0_nopoint",
-    "segment_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/165/segments/165_Leather coat_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/165/padded_segments/padded_165_Leather coat_0_nopoint.png"
   },
   {
     "video": "Scenes 041-060__244B-1-_20230815212053650",
@@ -417,7 +417,7 @@
     "model": "resnet50",
     "frame": "111",
     "segment_id": "111_TVA jacket_0_nopoint",
-    "segment_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/111/segments/111_TVA jacket_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/111/padded_segments/padded_111_TVA jacket_0_nopoint.png"
   },
   {
     "video": "Scenes 041-060__244B-1-_20230815212053650",
@@ -427,7 +427,7 @@
     "model": "resnet50",
     "frame": "175",
     "segment_id": "175_TVA jacket_0_nopoint",
-    "segment_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/175/segments/175_TVA jacket_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/175/padded_segments/padded_175_TVA jacket_0_nopoint.png"
   },
   {
     "video": "Scenes 041-060__244B-1-_20230815212053650",
@@ -437,7 +437,7 @@
     "model": "resnet50",
     "frame": "69",
     "segment_id": "69_TVA jacket_0_nopoint",
-    "segment_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/69/segments/69_TVA jacket_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/69/padded_segments/padded_69_TVA jacket_0_nopoint.png"
   },
   {
     "video": "Scenes 041-060__244B-1-_20230815212053650",
@@ -447,7 +447,7 @@
     "model": "resnet50",
     "frame": "68",
     "segment_id": "68_TVA jacket_0_nopoint",
-    "segment_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/68/segments/68_TVA jacket_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/68/padded_segments/padded_68_TVA jacket_0_nopoint.png"
   },
   {
     "video": "Scenes 041-060__244B-1-_20230815212053650",
@@ -457,7 +457,7 @@
     "model": "resnet50",
     "frame": "137",
     "segment_id": "137_TVA jacket_0_nopoint",
-    "segment_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/137/segments/137_TVA jacket_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/137/padded_segments/padded_137_TVA jacket_0_nopoint.png"
   },
   {
     "video": "Scenes 041-060__244B-1-_20230815212053650",
@@ -467,7 +467,7 @@
     "model": "resnet50",
     "frame": "118",
     "segment_id": "118_TVA jacket_0_nopoint",
-    "segment_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/118/segments/118_TVA jacket_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/118/padded_segments/padded_118_TVA jacket_0_nopoint.png"
   },
   {
     "video": "Scenes 041-060__244B-1-_20230815212053650",
@@ -477,7 +477,7 @@
     "model": "resnet50",
     "frame": "21",
     "segment_id": "21_Leather coat_0_nopoint",
-    "segment_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/21/segments/21_Leather coat_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/21/padded_segments/padded_21_Leather coat_0_nopoint.png"
   },
   {
     "video": "Scenes 041-060__244B-1-_20230815212053650",
@@ -487,7 +487,7 @@
     "model": "resnet50",
     "frame": "57",
     "segment_id": "57_TVA jacket_0_nopoint",
-    "segment_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/57/segments/57_TVA jacket_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/57/padded_segments/padded_57_TVA jacket_0_nopoint.png"
   },
   {
     "video": "Scenes 041-060__244B-1-_20230815212053650",
@@ -497,7 +497,7 @@
     "model": "resnet50",
     "frame": "34",
     "segment_id": "34_Leather coat_0_nopoint",
-    "segment_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/34/segments/34_Leather coat_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/34/padded_segments/padded_34_Leather coat_0_nopoint.png"
   },
   {
     "video": "Scenes 041-060__244B-1-_20230815212053650",
@@ -507,7 +507,7 @@
     "model": "resnet50",
     "frame": "30",
     "segment_id": "30_Leather coat_0_nopoint",
-    "segment_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/30/segments/30_Leather coat_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/30/padded_segments/padded_30_Leather coat_0_nopoint.png"
   },
   {
     "video": "Scenes 041-060__244B-1-_20230815212053650",
@@ -517,7 +517,7 @@
     "model": "resnet50",
     "frame": "117",
     "segment_id": "117_TVA jacket_0_nopoint",
-    "segment_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/117/segments/117_TVA jacket_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/117/padded_segments/padded_117_TVA jacket_0_nopoint.png"
   },
   {
     "video": "Scenes 041-060__244B-1-_20230815212053650",
@@ -527,7 +527,7 @@
     "model": "resnet50",
     "frame": "158",
     "segment_id": "158_TVA jacket_0_nopoint",
-    "segment_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/158/segments/158_TVA jacket_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/158/padded_segments/padded_158_TVA jacket_0_nopoint.png"
   },
   {
     "video": "Scenes 041-060__244B-1-_20230815212053650",
@@ -537,7 +537,7 @@
     "model": "resnet50",
     "frame": "65",
     "segment_id": "65_TVA jacket_0_nopoint",
-    "segment_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/65/segments/65_TVA jacket_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/65/padded_segments/padded_65_TVA jacket_0_nopoint.png"
   },
   {
     "video": "Scenes 041-060__244B-1-_20230815212053650",
@@ -547,7 +547,7 @@
     "model": "resnet50",
     "frame": "23",
     "segment_id": "23_Leather coat_0_nopoint",
-    "segment_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/23/segments/23_Leather coat_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/23/padded_segments/padded_23_Leather coat_0_nopoint.png"
   },
   {
     "video": "Scenes 041-060__244B-1-_20230815212053650",
@@ -557,7 +557,7 @@
     "model": "resnet50",
     "frame": "160",
     "segment_id": "160_Leather coat_0_nopoint",
-    "segment_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/160/segments/160_Leather coat_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/160/padded_segments/padded_160_Leather coat_0_nopoint.png"
   },
   {
     "video": "Scenes 041-060__244B-1-_20230815212053650",
@@ -567,7 +567,7 @@
     "model": "resnet50",
     "frame": "27",
     "segment_id": "27_Leather coat_0_nopoint",
-    "segment_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/27/segments/27_Leather coat_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/27/padded_segments/padded_27_Leather coat_0_nopoint.png"
   },
   {
     "video": "Scenes 041-060__244B-1-_20230815212053650",
@@ -577,7 +577,7 @@
     "model": "resnet50",
     "frame": "31",
     "segment_id": "31_Leather coat_0_nopoint",
-    "segment_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/31/segments/31_Leather coat_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/31/padded_segments/padded_31_Leather coat_0_nopoint.png"
   },
   {
     "video": "Scenes 041-060__244B-1-_20230815212053650",
@@ -587,7 +587,7 @@
     "model": "resnet50",
     "frame": "78",
     "segment_id": "78_TVA jacket_0_nopoint",
-    "segment_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/78/segments/78_TVA jacket_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/78/padded_segments/padded_78_TVA jacket_0_nopoint.png"
   },
   {
     "video": "Scenes 041-060__244B-1-_20230815212053650",
@@ -597,7 +597,7 @@
     "model": "resnet50",
     "frame": "164",
     "segment_id": "164_Leather coat_0_nopoint",
-    "segment_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/164/segments/164_Leather coat_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/164/padded_segments/padded_164_Leather coat_0_nopoint.png"
   },
   {
     "video": "Scenes 041-060__244B-1-_20230815212053650",
@@ -607,7 +607,7 @@
     "model": "resnet50",
     "frame": "71",
     "segment_id": "71_Leather coat_0_nopoint",
-    "segment_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/71/segments/71_Leather coat_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/71/padded_segments/padded_71_Leather coat_0_nopoint.png"
   },
   {
     "video": "Scenes 041-060__244B-1-_20230815212053650",
@@ -617,7 +617,7 @@
     "model": "resnet50",
     "frame": "32",
     "segment_id": "32_Leather coat_0_nopoint",
-    "segment_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/32/segments/32_Leather coat_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/32/padded_segments/padded_32_Leather coat_0_nopoint.png"
   },
   {
     "video": "Scenes 041-060__244B-1-_20230815212053650",
@@ -627,7 +627,7 @@
     "model": "resnet50",
     "frame": "89",
     "segment_id": "89_TVA jacket_0_nopoint",
-    "segment_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/89/segments/89_TVA jacket_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/89/padded_segments/padded_89_TVA jacket_0_nopoint.png"
   },
   {
     "video": "Scenes 041-060__244B-1-_20230815212053650",
@@ -637,7 +637,7 @@
     "model": "resnet50",
     "frame": "140",
     "segment_id": "140_TVA jacket_0_nopoint",
-    "segment_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/140/segments/140_TVA jacket_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/140/padded_segments/padded_140_TVA jacket_0_nopoint.png"
   },
   {
     "video": "Scenes 041-060__244B-1-_20230815212053650",
@@ -647,7 +647,7 @@
     "model": "resnet50",
     "frame": "166",
     "segment_id": "166_TVA jacket_0_nopoint",
-    "segment_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/166/segments/166_TVA jacket_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/166/padded_segments/padded_166_TVA jacket_0_nopoint.png"
   },
   {
     "video": "Scenes 041-060__244B-1-_20230815212053650",
@@ -657,7 +657,7 @@
     "model": "resnet50",
     "frame": "37",
     "segment_id": "37_Leather coat_0_nopoint",
-    "segment_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/37/segments/37_Leather coat_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/37/padded_segments/padded_37_Leather coat_0_nopoint.png"
   },
   {
     "video": "Scenes 041-060__244B-1-_20230815212053650",
@@ -667,7 +667,7 @@
     "model": "resnet50",
     "frame": "172",
     "segment_id": "172_TVA jacket_0_nopoint",
-    "segment_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/172/segments/172_TVA jacket_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/172/padded_segments/padded_172_TVA jacket_0_nopoint.png"
   },
   {
     "video": "Scenes 041-060__244B-1-_20230815212053650",
@@ -677,7 +677,7 @@
     "model": "resnet50",
     "frame": "36",
     "segment_id": "36_Leather coat_0_nopoint",
-    "segment_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/36/segments/36_Leather coat_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/36/padded_segments/padded_36_Leather coat_0_nopoint.png"
   },
   {
     "video": "Scenes 041-060__244B-1-_20230815212053650",
@@ -687,7 +687,7 @@
     "model": "resnet50",
     "frame": "125",
     "segment_id": "125_TVA jacket_0_nopoint",
-    "segment_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/125/segments/125_TVA jacket_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/125/padded_segments/padded_125_TVA jacket_0_nopoint.png"
   },
   {
     "video": "Scenes 041-060__244B-1-_20230815212053650",
@@ -697,7 +697,7 @@
     "model": "resnet50",
     "frame": "170",
     "segment_id": "170_TVA jacket_0_nopoint",
-    "segment_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/170/segments/170_TVA jacket_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/170/padded_segments/padded_170_TVA jacket_0_nopoint.png"
   },
   {
     "video": "Scenes 041-060__244B-1-_20230815212053650",
@@ -707,7 +707,7 @@
     "model": "resnet50",
     "frame": "26",
     "segment_id": "26_Leather coat_0_nopoint",
-    "segment_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/26/segments/26_Leather coat_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/26/padded_segments/padded_26_Leather coat_0_nopoint.png"
   },
   {
     "video": "Scenes 041-060__244B-1-_20230815212053650",
@@ -717,7 +717,7 @@
     "model": "resnet50",
     "frame": "76",
     "segment_id": "76_TVA jacket_1_nopoint",
-    "segment_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/76/segments/76_TVA jacket_1_nopoint.png"
+    "bbox_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/76/padded_segments/padded_76_TVA jacket_1_nopoint.png"
   },
   {
     "video": "Scenes 041-060__244B-1-_20230815212053650",
@@ -727,7 +727,7 @@
     "model": "resnet50",
     "frame": "136",
     "segment_id": "136_TVA jacket_0_nopoint",
-    "segment_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/136/segments/136_TVA jacket_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/136/padded_segments/padded_136_TVA jacket_0_nopoint.png"
   },
   {
     "video": "Scenes 041-060__244B-1-_20230815212053650",
@@ -737,7 +737,7 @@
     "model": "resnet50",
     "frame": "43",
     "segment_id": "43_Leather coat_0_nopoint",
-    "segment_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/43/segments/43_Leather coat_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/43/padded_segments/padded_43_Leather coat_0_nopoint.png"
   },
   {
     "video": "Scenes 041-060__244B-1-_20230815212053650",
@@ -747,7 +747,7 @@
     "model": "resnet50",
     "frame": "28",
     "segment_id": "28_Leather coat_0_nopoint",
-    "segment_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/28/segments/28_Leather coat_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/28/padded_segments/padded_28_Leather coat_0_nopoint.png"
   },
   {
     "video": "Scenes 041-060__244B-1-_20230815212053650",
@@ -757,7 +757,7 @@
     "model": "resnet50",
     "frame": "40",
     "segment_id": "40_Leather coat_0_nopoint",
-    "segment_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/40/segments/40_Leather coat_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/40/padded_segments/padded_40_Leather coat_0_nopoint.png"
   },
   {
     "video": "Scenes 041-060__244B-1-_20230815212053650",
@@ -767,7 +767,7 @@
     "model": "resnet50",
     "frame": "77",
     "segment_id": "77_TVA jacket_1_nopoint",
-    "segment_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/77/segments/77_TVA jacket_1_nopoint.png"
+    "bbox_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/77/padded_segments/padded_77_TVA jacket_1_nopoint.png"
   },
   {
     "video": "Scenes 041-060__244B-1-_20230815212053650",
@@ -777,7 +777,7 @@
     "model": "resnet50",
     "frame": "42",
     "segment_id": "42_Leather coat_0_nopoint",
-    "segment_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/42/segments/42_Leather coat_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/42/padded_segments/padded_42_Leather coat_0_nopoint.png"
   },
   {
     "video": "Scenes 041-060__244B-1-_20230815212053650",
@@ -787,7 +787,7 @@
     "model": "resnet50",
     "frame": "85",
     "segment_id": "85_Leather coat_1_nopoint",
-    "segment_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/85/segments/85_Leather coat_1_nopoint.png"
+    "bbox_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/85/padded_segments/padded_85_Leather coat_1_nopoint.png"
   },
   {
     "video": "Scenes 041-060__244B-1-_20230815212053650",
@@ -797,7 +797,7 @@
     "model": "resnet50",
     "frame": "64",
     "segment_id": "64_TVA jacket_0_nopoint",
-    "segment_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/64/segments/64_TVA jacket_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/64/padded_segments/padded_64_TVA jacket_0_nopoint.png"
   },
   {
     "video": "Scenes 041-060__244B-1-_20230815212053650",
@@ -807,7 +807,7 @@
     "model": "resnet50",
     "frame": "143",
     "segment_id": "143_TVA jacket_0_nopoint",
-    "segment_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/143/segments/143_TVA jacket_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/143/padded_segments/padded_143_TVA jacket_0_nopoint.png"
   },
   {
     "video": "Scenes 041-060__244B-1-_20230815212053650",
@@ -817,7 +817,7 @@
     "model": "resnet50",
     "frame": "82",
     "segment_id": "82_TVA jacket_1_nopoint",
-    "segment_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/82/segments/82_TVA jacket_1_nopoint.png"
+    "bbox_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/82/padded_segments/padded_82_TVA jacket_1_nopoint.png"
   },
   {
     "video": "Scenes 041-060__244B-1-_20230815212053650",
@@ -827,7 +827,7 @@
     "model": "resnet50",
     "frame": "79",
     "segment_id": "79_Leather coat_0_nopoint",
-    "segment_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/79/segments/79_Leather coat_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/79/padded_segments/padded_79_Leather coat_0_nopoint.png"
   },
   {
     "video": "Scenes 041-060__244B-1-_20230815212053650",
@@ -837,7 +837,7 @@
     "model": "resnet50",
     "frame": "88",
     "segment_id": "88_TVA jacket_0_nopoint",
-    "segment_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/88/segments/88_TVA jacket_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/88/padded_segments/padded_88_TVA jacket_0_nopoint.png"
   },
   {
     "video": "Scenes 041-060__244B-1-_20230815212053650",
@@ -847,7 +847,7 @@
     "model": "resnet50",
     "frame": "86",
     "segment_id": "86_Leather coat_1_nopoint",
-    "segment_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/86/segments/86_Leather coat_1_nopoint.png"
+    "bbox_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/86/padded_segments/padded_86_Leather coat_1_nopoint.png"
   },
   {
     "video": "Scenes 041-060__244B-1-_20230815212053650",
@@ -857,7 +857,7 @@
     "model": "resnet50",
     "frame": "177",
     "segment_id": "177_TVA jacket_0_nopoint",
-    "segment_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/177/segments/177_TVA jacket_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/177/padded_segments/padded_177_TVA jacket_0_nopoint.png"
   },
   {
     "video": "Scenes 041-060__244B-1-_20230815212053650",
@@ -867,7 +867,7 @@
     "model": "resnet50",
     "frame": "93",
     "segment_id": "93_TVA jacket_0_nopoint",
-    "segment_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/93/segments/93_TVA jacket_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/93/padded_segments/padded_93_TVA jacket_0_nopoint.png"
   },
   {
     "video": "Scenes 041-060__244B-1-_20230815212053650",
@@ -877,7 +877,7 @@
     "model": "resnet50",
     "frame": "154",
     "segment_id": "154_TVA jacket_0_nopoint",
-    "segment_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/154/segments/154_TVA jacket_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/154/padded_segments/padded_154_TVA jacket_0_nopoint.png"
   },
   {
     "video": "Scenes 041-060__244B-1-_20230815212053650",
@@ -887,7 +887,7 @@
     "model": "resnet50",
     "frame": "145",
     "segment_id": "145_TVA jacket_0_nopoint",
-    "segment_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/145/segments/145_TVA jacket_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/145/padded_segments/padded_145_TVA jacket_0_nopoint.png"
   },
   {
     "video": "Scenes 041-060__244B-1-_20230815212053650",
@@ -897,7 +897,7 @@
     "model": "resnet50",
     "frame": "112",
     "segment_id": "112_TVA jacket_0_nopoint",
-    "segment_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/112/segments/112_TVA jacket_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/112/padded_segments/padded_112_TVA jacket_0_nopoint.png"
   },
   {
     "video": "Scenes 041-060__244B-1-_20230815212053650",
@@ -907,7 +907,7 @@
     "model": "resnet50",
     "frame": "66",
     "segment_id": "66_TVA jacket_0_nopoint",
-    "segment_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/66/segments/66_TVA jacket_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/66/padded_segments/padded_66_TVA jacket_0_nopoint.png"
   },
   {
     "video": "Scenes 041-060__244B-1-_20230815212053650",
@@ -917,7 +917,7 @@
     "model": "resnet50",
     "frame": "41",
     "segment_id": "41_Leather coat_0_nopoint",
-    "segment_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/41/segments/41_Leather coat_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/41/padded_segments/padded_41_Leather coat_0_nopoint.png"
   },
   {
     "video": "Scenes 041-060__244B-1-_20230815212053650",
@@ -927,7 +927,7 @@
     "model": "resnet50",
     "frame": "161",
     "segment_id": "161_Leather coat_0_nopoint",
-    "segment_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/161/segments/161_Leather coat_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/161/padded_segments/padded_161_Leather coat_0_nopoint.png"
   },
   {
     "video": "Scenes 041-060__244B-1-_20230815212053650",
@@ -937,7 +937,7 @@
     "model": "resnet50",
     "frame": "87",
     "segment_id": "87_Leather coat_0_nopoint",
-    "segment_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/87/segments/87_Leather coat_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/87/padded_segments/padded_87_Leather coat_0_nopoint.png"
   },
   {
     "video": "Scenes 041-060__244B-1-_20230815212053650",
@@ -947,7 +947,7 @@
     "model": "resnet50",
     "frame": "20",
     "segment_id": "20_Leather coat_0_nopoint",
-    "segment_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/20/segments/20_Leather coat_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/20/padded_segments/padded_20_Leather coat_0_nopoint.png"
   },
   {
     "video": "Scenes 041-060__244B-1-_20230815212053650",
@@ -957,7 +957,7 @@
     "model": "resnet50",
     "frame": "80",
     "segment_id": "80_Leather coat_0_nopoint",
-    "segment_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/80/segments/80_Leather coat_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/80/padded_segments/padded_80_Leather coat_0_nopoint.png"
   },
   {
     "video": "Scenes 041-060__244B-1-_20230815212053650",
@@ -967,7 +967,7 @@
     "model": "resnet50",
     "frame": "22",
     "segment_id": "22_Leather coat_0_nopoint",
-    "segment_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/22/segments/22_Leather coat_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/22/padded_segments/padded_22_Leather coat_0_nopoint.png"
   },
   {
     "video": "Scenes 041-060__244B-1-_20230815212053650",
@@ -977,7 +977,7 @@
     "model": "resnet50",
     "frame": "181",
     "segment_id": "181_Leather coat_0_nopoint",
-    "segment_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/181/segments/181_Leather coat_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/181/padded_segments/padded_181_Leather coat_0_nopoint.png"
   },
   {
     "video": "Scenes 041-060__244B-1-_20230815212053650",
@@ -987,7 +987,7 @@
     "model": "resnet50",
     "frame": "129",
     "segment_id": "129_TVA jacket_0_nopoint",
-    "segment_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/129/segments/129_TVA jacket_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/129/padded_segments/padded_129_TVA jacket_0_nopoint.png"
   },
   {
     "video": "Scenes 041-060__244B-1-_20230815212053650",
@@ -997,7 +997,7 @@
     "model": "resnet50",
     "frame": "73",
     "segment_id": "73_TVA jacket_1_nopoint",
-    "segment_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/73/segments/73_TVA jacket_1_nopoint.png"
+    "bbox_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/73/padded_segments/padded_73_TVA jacket_1_nopoint.png"
   },
   {
     "video": "Scenes 041-060__244B-1-_20230815212053650",
@@ -1007,7 +1007,7 @@
     "model": "resnet50",
     "frame": "114",
     "segment_id": "114_Leather coat_0_nopoint",
-    "segment_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/114/segments/114_Leather coat_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/114/padded_segments/padded_114_Leather coat_0_nopoint.png"
   },
   {
     "video": "Scenes 041-060__244B-1-_20230815212053650",
@@ -1017,7 +1017,7 @@
     "model": "resnet50",
     "frame": "18",
     "segment_id": "18_TVA jacket_0_nopoint",
-    "segment_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/18/segments/18_TVA jacket_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/18/padded_segments/padded_18_TVA jacket_0_nopoint.png"
   },
   {
     "video": "Scenes 041-060__244B-1-_20230815212053650",
@@ -1027,7 +1027,7 @@
     "model": "resnet50",
     "frame": "121",
     "segment_id": "121_TVA jacket_0_nopoint",
-    "segment_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/121/segments/121_TVA jacket_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/121/padded_segments/padded_121_TVA jacket_0_nopoint.png"
   },
   {
     "video": "Scenes 041-060__244B-1-_20230815212053650",
@@ -1037,7 +1037,7 @@
     "model": "resnet50",
     "frame": "128",
     "segment_id": "128_TVA jacket_0_nopoint",
-    "segment_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/128/segments/128_TVA jacket_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/128/padded_segments/padded_128_TVA jacket_0_nopoint.png"
   },
   {
     "video": "Scenes 041-060__244B-1-_20230815212053650",
@@ -1047,7 +1047,7 @@
     "model": "resnet50",
     "frame": "126",
     "segment_id": "126_TVA jacket_0_nopoint",
-    "segment_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/126/segments/126_TVA jacket_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/126/padded_segments/padded_126_TVA jacket_0_nopoint.png"
   },
   {
     "video": "Scenes 041-060__244B-1-_20230815212053650",
@@ -1057,6 +1057,6 @@
     "model": "resnet50",
     "frame": "61",
     "segment_id": "61_TVA jacket_0_nopoint",
-    "segment_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/61/segments/61_TVA jacket_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 041-060__244B-1-_20230815212053650/61/padded_segments/padded_61_TVA jacket_0_nopoint.png"
   }
 ]

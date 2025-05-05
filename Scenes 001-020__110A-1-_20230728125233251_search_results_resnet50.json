@@ -1,0 +1,242 @@
+[
+  {
+    "video": "Scenes 001-020__110A-1-_20230728125233251",
+    "predicted_object": "Reset Charge",
+    "object_version": 2,
+    "similarity_score": 0.7087088823318481,
+    "model": "resnet50",
+    "frame": "19",
+    "segment_id": "19_Neck device_3_nopoint",
+    "bbox_path": "all_frames/Scenes 001-020__110A-1-_20230728125233251/19/padded_segments/padded_19_Neck device_3_nopoint.png"
+  },
+  {
+    "video": "Scenes 001-020__110A-1-_20230728125233251",
+    "predicted_object": "Time Collar",
+    "object_version": 1,
+    "similarity_score": 0.704899787902832,
+    "model": "resnet50",
+    "frame": "19",
+    "segment_id": "19_Neck device_2_nopoint",
+    "bbox_path": "all_frames/Scenes 001-020__110A-1-_20230728125233251/19/padded_segments/padded_19_Neck device_2_nopoint.png"
+  },
+  {
+    "video": "Scenes 001-020__110A-1-_20230728125233251",
+    "predicted_object": "Time Collar",
+    "object_version": 3,
+    "similarity_score": 0.7066137194633484,
+    "model": "resnet50",
+    "frame": "131",
+    "segment_id": "131_Neck device_0_nopoint",
+    "bbox_path": "all_frames/Scenes 001-020__110A-1-_20230728125233251/131/padded_segments/padded_131_Neck device_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 001-020__110A-1-_20230728125233251",
+    "predicted_object": "Time Collar",
+    "object_version": 2,
+    "similarity_score": 0.711082935333252,
+    "model": "resnet50",
+    "frame": "138",
+    "segment_id": "138_Neck device_0_nopoint",
+    "bbox_path": "all_frames/Scenes 001-020__110A-1-_20230728125233251/138/padded_segments/padded_138_Neck device_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 001-020__110A-1-_20230728125233251",
+    "predicted_object": "Time Collar",
+    "object_version": 2,
+    "similarity_score": 0.7056195735931396,
+    "model": "resnet50",
+    "frame": "127",
+    "segment_id": "127_Neck device_0_nopoint",
+    "bbox_path": "all_frames/Scenes 001-020__110A-1-_20230728125233251/127/padded_segments/padded_127_Neck device_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 001-020__110A-1-_20230728125233251",
+    "predicted_object": "Time Collar",
+    "object_version": 2,
+    "similarity_score": 0.7003254890441895,
+    "model": "resnet50",
+    "frame": "167",
+    "segment_id": "167_Neck device_0_nopoint",
+    "bbox_path": "all_frames/Scenes 001-020__110A-1-_20230728125233251/167/padded_segments/padded_167_Neck device_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 001-020__110A-1-_20230728125233251",
+    "predicted_object": "Time Collar",
+    "object_version": 3,
+    "similarity_score": 0.7025955319404602,
+    "model": "resnet50",
+    "frame": "173",
+    "segment_id": "173_Neck device_0_nopoint",
+    "bbox_path": "all_frames/Scenes 001-020__110A-1-_20230728125233251/173/padded_segments/padded_173_Neck device_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 001-020__110A-1-_20230728125233251",
+    "predicted_object": "Time Collar",
+    "object_version": 2,
+    "similarity_score": 0.7024698853492737,
+    "model": "resnet50",
+    "frame": "134",
+    "segment_id": "134_Neck device_0_nopoint",
+    "bbox_path": "all_frames/Scenes 001-020__110A-1-_20230728125233251/134/padded_segments/padded_134_Neck device_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 001-020__110A-1-_20230728125233251",
+    "predicted_object": "Time Collar",
+    "object_version": 2,
+    "similarity_score": 0.7037787437438965,
+    "model": "resnet50",
+    "frame": "135",
+    "segment_id": "135_Neck device_0_nopoint",
+    "bbox_path": "all_frames/Scenes 001-020__110A-1-_20230728125233251/135/padded_segments/padded_135_Neck device_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 001-020__110A-1-_20230728125233251",
+    "predicted_object": "Sylvie's machete",
+    "object_version": 2,
+    "similarity_score": 0.716671347618103,
+    "model": "resnet50",
+    "frame": "108",
+    "segment_id": "108_Neck device_0_nopoint",
+    "bbox_path": "all_frames/Scenes 001-020__110A-1-_20230728125233251/108/padded_segments/padded_108_Neck device_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 001-020__110A-1-_20230728125233251",
+    "predicted_object": "Time Collar",
+    "object_version": 2,
+    "similarity_score": 0.7023071050643921,
+    "model": "resnet50",
+    "frame": "139",
+    "segment_id": "139_Neck device_0_nopoint",
+    "bbox_path": "all_frames/Scenes 001-020__110A-1-_20230728125233251/139/padded_segments/padded_139_Neck device_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 001-020__110A-1-_20230728125233251",
+    "predicted_object": "Time Collar",
+    "object_version": 3,
+    "similarity_score": 0.7089245319366455,
+    "model": "resnet50",
+    "frame": "137",
+    "segment_id": "137_Neck device_2_nopoint",
+    "bbox_path": "all_frames/Scenes 001-020__110A-1-_20230728125233251/137/padded_segments/padded_137_Neck device_2_nopoint.png"
+  },
+  {
+    "video": "Scenes 001-020__110A-1-_20230728125233251",
+    "predicted_object": "Time Collar",
+    "object_version": 2,
+    "similarity_score": 0.7043511271476746,
+    "model": "resnet50",
+    "frame": "146",
+    "segment_id": "146_Neck device_0_nopoint",
+    "bbox_path": "all_frames/Scenes 001-020__110A-1-_20230728125233251/146/padded_segments/padded_146_Neck device_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 001-020__110A-1-_20230728125233251",
+    "predicted_object": "Time Collar",
+    "object_version": 2,
+    "similarity_score": 0.7117529511451721,
+    "model": "resnet50",
+    "frame": "51",
+    "segment_id": "51_Neck device_0_nopoint",
+    "bbox_path": "all_frames/Scenes 001-020__110A-1-_20230728125233251/51/padded_segments/padded_51_Neck device_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 001-020__110A-1-_20230728125233251",
+    "predicted_object": "Time Collar",
+    "object_version": 2,
+    "similarity_score": 0.7035195827484131,
+    "model": "resnet50",
+    "frame": "155",
+    "segment_id": "155_Neck device_0_nopoint",
+    "bbox_path": "all_frames/Scenes 001-020__110A-1-_20230728125233251/155/padded_segments/padded_155_Neck device_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 001-020__110A-1-_20230728125233251",
+    "predicted_object": "Time Collar",
+    "object_version": 2,
+    "similarity_score": 0.7059791684150696,
+    "model": "resnet50",
+    "frame": "164",
+    "segment_id": "164_Neck device_0_nopoint",
+    "bbox_path": "all_frames/Scenes 001-020__110A-1-_20230728125233251/164/padded_segments/padded_164_Neck device_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 001-020__110A-1-_20230728125233251",
+    "predicted_object": "Time Collar",
+    "object_version": 2,
+    "similarity_score": 0.7036633491516113,
+    "model": "resnet50",
+    "frame": "136",
+    "segment_id": "136_Neck device_0_nopoint",
+    "bbox_path": "all_frames/Scenes 001-020__110A-1-_20230728125233251/136/padded_segments/padded_136_Neck device_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 001-020__110A-1-_20230728125233251",
+    "predicted_object": "Time Collar",
+    "object_version": 2,
+    "similarity_score": 0.7153306603431702,
+    "model": "resnet50",
+    "frame": "143",
+    "segment_id": "143_Neck device_0_nopoint",
+    "bbox_path": "all_frames/Scenes 001-020__110A-1-_20230728125233251/143/padded_segments/padded_143_Neck device_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 001-020__110A-1-_20230728125233251",
+    "predicted_object": "Time Collar",
+    "object_version": 2,
+    "similarity_score": 0.7107670903205872,
+    "model": "resnet50",
+    "frame": "82",
+    "segment_id": "82_Neck device_0_nopoint",
+    "bbox_path": "all_frames/Scenes 001-020__110A-1-_20230728125233251/82/padded_segments/padded_82_Neck device_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 001-020__110A-1-_20230728125233251",
+    "predicted_object": "Time Collar",
+    "object_version": 2,
+    "similarity_score": 0.705454409122467,
+    "model": "resnet50",
+    "frame": "177",
+    "segment_id": "177_Neck device_0_nopoint",
+    "bbox_path": "all_frames/Scenes 001-020__110A-1-_20230728125233251/177/padded_segments/padded_177_Neck device_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 001-020__110A-1-_20230728125233251",
+    "predicted_object": "Time Collar",
+    "object_version": 2,
+    "similarity_score": 0.7246159315109253,
+    "model": "resnet50",
+    "frame": "142",
+    "segment_id": "142_Neck device_0_nopoint",
+    "bbox_path": "all_frames/Scenes 001-020__110A-1-_20230728125233251/142/padded_segments/padded_142_Neck device_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 001-020__110A-1-_20230728125233251",
+    "predicted_object": "Time Collar",
+    "object_version": 2,
+    "similarity_score": 0.7000027894973755,
+    "model": "resnet50",
+    "frame": "153",
+    "segment_id": "153_Neck device_0_nopoint",
+    "bbox_path": "all_frames/Scenes 001-020__110A-1-_20230728125233251/153/padded_segments/padded_153_Neck device_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 001-020__110A-1-_20230728125233251",
+    "predicted_object": "Time Collar",
+    "object_version": 2,
+    "similarity_score": 0.7202574014663696,
+    "model": "resnet50",
+    "frame": "80",
+    "segment_id": "80_Neck device_0_nopoint",
+    "bbox_path": "all_frames/Scenes 001-020__110A-1-_20230728125233251/80/padded_segments/padded_80_Neck device_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 001-020__110A-1-_20230728125233251",
+    "predicted_object": "Time Collar",
+    "object_version": 2,
+    "similarity_score": 0.7040389180183411,
+    "model": "resnet50",
+    "frame": "128",
+    "segment_id": "128_Neck device_3_nopoint",
+    "bbox_path": "all_frames/Scenes 001-020__110A-1-_20230728125233251/128/padded_segments/padded_128_Neck device_3_nopoint.png"
+  }
+]

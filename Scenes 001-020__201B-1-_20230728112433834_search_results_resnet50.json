@@ -1,0 +1,32 @@
+[
+  {
+    "video": "Scenes 001-020__201B-1-_20230728112433834",
+    "predicted_object": "Loki's armor (THE AVENGERS)",
+    "object_version": 3,
+    "similarity_score": 0.7268320322036743,
+    "model": "resnet50",
+    "frame": "24",
+    "segment_id": "24_TVA jacket_1_nopoint",
+    "bbox_path": "all_frames/Scenes 001-020__201B-1-_20230728112433834/24/padded_segments/padded_24_TVA jacket_1_nopoint.png"
+  },
+  {
+    "video": "Scenes 001-020__201B-1-_20230728112433834",
+    "predicted_object": "Asgardian device",
+    "object_version": 3,
+    "similarity_score": 0.7130004167556763,
+    "model": "resnet50",
+    "frame": "57",
+    "segment_id": "57_Leather coat_0_nopoint",
+    "bbox_path": "all_frames/Scenes 001-020__201B-1-_20230728112433834/57/padded_segments/padded_57_Leather coat_0_nopoint.png"
+  },
+  {
+    "video": "Scenes 001-020__201B-1-_20230728112433834",
+    "predicted_object": "Sylvie's machete",
+    "object_version": 2,
+    "similarity_score": 0.706902027130127,
+    "model": "resnet50",
+    "frame": "23",
+    "segment_id": "23_Leather coat_0_nopoint",
+    "bbox_path": "all_frames/Scenes 001-020__201B-1-_20230728112433834/23/padded_segments/padded_23_Leather coat_0_nopoint.png"
+  }
+]

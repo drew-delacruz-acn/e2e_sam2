@@ -7,7 +7,7 @@
     "model": "resnet50",
     "frame": "70",
     "segment_id": "70_TVA jacket_0_nopoint",
-    "segment_path": "all_frames/Scenes 041-060__244G-1-_20230815212159478/70/segments/70_TVA jacket_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 041-060__244G-1-_20230815212159478/70/padded_segments/padded_70_TVA jacket_0_nopoint.png"
   },
   {
     "video": "Scenes 041-060__244G-1-_20230815212159478",
@@ -17,7 +17,7 @@
     "model": "resnet50",
     "frame": "2",
     "segment_id": "2_War hammer_0_nopoint",
-    "segment_path": "all_frames/Scenes 041-060__244G-1-_20230815212159478/2/segments/2_War hammer_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 041-060__244G-1-_20230815212159478/2/padded_segments/padded_2_War hammer_0_nopoint.png"
   },
   {
     "video": "Scenes 041-060__244G-1-_20230815212159478",
@@ -27,7 +27,7 @@
     "model": "resnet50",
     "frame": "35",
     "segment_id": "35_TVA jacket_0_nopoint",
-    "segment_path": "all_frames/Scenes 041-060__244G-1-_20230815212159478/35/segments/35_TVA jacket_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 041-060__244G-1-_20230815212159478/35/padded_segments/padded_35_TVA jacket_0_nopoint.png"
   },
   {
     "video": "Scenes 041-060__244G-1-_20230815212159478",
@@ -37,7 +37,7 @@
     "model": "resnet50",
     "frame": "69",
     "segment_id": "69_TVA jacket_0_nopoint",
-    "segment_path": "all_frames/Scenes 041-060__244G-1-_20230815212159478/69/segments/69_TVA jacket_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 041-060__244G-1-_20230815212159478/69/padded_segments/padded_69_TVA jacket_0_nopoint.png"
   },
   {
     "video": "Scenes 041-060__244G-1-_20230815212159478",
@@ -47,7 +47,7 @@
     "model": "resnet50",
     "frame": "68",
     "segment_id": "68_TVA jacket_0_nopoint",
-    "segment_path": "all_frames/Scenes 041-060__244G-1-_20230815212159478/68/segments/68_TVA jacket_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 041-060__244G-1-_20230815212159478/68/padded_segments/padded_68_TVA jacket_0_nopoint.png"
   },
   {
     "video": "Scenes 041-060__244G-1-_20230815212159478",
@@ -57,7 +57,7 @@
     "model": "resnet50",
     "frame": "3",
     "segment_id": "3_War hammer_0_nopoint",
-    "segment_path": "all_frames/Scenes 041-060__244G-1-_20230815212159478/3/segments/3_War hammer_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 041-060__244G-1-_20230815212159478/3/padded_segments/padded_3_War hammer_0_nopoint.png"
   },
   {
     "video": "Scenes 041-060__244G-1-_20230815212159478",
@@ -67,7 +67,7 @@
     "model": "resnet50",
     "frame": "40",
     "segment_id": "40_Leather coat_0_nopoint",
-    "segment_path": "all_frames/Scenes 041-060__244G-1-_20230815212159478/40/segments/40_Leather coat_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 041-060__244G-1-_20230815212159478/40/padded_segments/padded_40_Leather coat_0_nopoint.png"
   },
   {
     "video": "Scenes 041-060__244G-1-_20230815212159478",
@@ -77,7 +77,7 @@
     "model": "resnet50",
     "frame": "64",
     "segment_id": "64_TVA jacket_0_nopoint",
-    "segment_path": "all_frames/Scenes 041-060__244G-1-_20230815212159478/64/segments/64_TVA jacket_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 041-060__244G-1-_20230815212159478/64/padded_segments/padded_64_TVA jacket_0_nopoint.png"
   },
   {
     "video": "Scenes 041-060__244G-1-_20230815212159478",
@@ -87,6 +87,6 @@
     "model": "resnet50",
     "frame": "41",
     "segment_id": "41_Leather coat_0_nopoint",
-    "segment_path": "all_frames/Scenes 041-060__244G-1-_20230815212159478/41/segments/41_Leather coat_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 041-060__244G-1-_20230815212159478/41/padded_segments/padded_41_Leather coat_0_nopoint.png"
   }
 ]

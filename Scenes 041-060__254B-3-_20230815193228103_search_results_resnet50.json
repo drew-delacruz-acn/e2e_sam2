@@ -7,6 +7,6 @@
     "model": "resnet50",
     "frame": "20",
     "segment_id": "20_War hammer_0_nopoint",
-    "segment_path": "all_frames/Scenes 041-060__254B-3-_20230815193228103/20/segments/20_War hammer_0_nopoint.png"
+    "bbox_path": "all_frames/Scenes 041-060__254B-3-_20230815193228103/20/padded_segments/padded_20_War hammer_0_nopoint.png"
   }
 ]

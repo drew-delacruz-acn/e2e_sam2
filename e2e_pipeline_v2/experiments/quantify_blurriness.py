@@ -18,151 +18,48 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
-# Check for CUDA availability
-USE_CUDA = False
-HAVE_CUPY = False
-try:
-    # First check if cv2.cuda attribute exists (OpenCV with CUDA support)
-    if hasattr(cv2, 'cuda'):
-        cuda_devices = cv2.cuda.getCudaEnabledDeviceCount()
-        if cuda_devices > 0:
-            USE_CUDA = True
-            logger.info(f"CUDA is available for OpenCV with {cuda_devices} device(s)")
-            try:
-                import cupy as cp
-                HAVE_CUPY = True
-                logger.info("CuPy is available for GPU-accelerated FFT")
-            except ImportError:
-                logger.info("CuPy not found, using NumPy for FFT")
-        else:
-            logger.info("No CUDA devices found, using CPU processing")
-    else:
-        logger.info("OpenCV was compiled without CUDA support, using CPU processing")
-except Exception as e:
-    logger.info(f"Could not check CUDA availability due to: {e}. Using CPU processing")
+# Removed CUDA detection code since it's not needed
 
-def laplacian_blur(gray, use_cuda=USE_CUDA):
+def laplacian_blur(gray):
+    """Calculate blur score using Laplacian variance (higher = sharper)"""
     try:
-        # Only attempt CUDA if OpenCV has cuda module
-        if use_cuda and hasattr(cv2, 'cuda') and HAVE_CUPY:
-            # Convert to CuPy array for GPU processing
-            gray_gpu = cp.asarray(gray)
-            # No direct Laplacian in CuPy, but we can use a kernel
-            kernel = cp.array([[0, 1, 0], [1, -4, 1], [0, 1, 0]], dtype=cp.float32)
-            laplacian = cp.abs(cp.correlate2d(gray_gpu, kernel, mode='same'))
-            return float(cp.var(laplacian).get())
-        elif use_cuda and hasattr(cv2, 'cuda'):
-            # Use OpenCV CUDA module
-            gray_cuda = cv2.cuda_GpuMat()
-            gray_cuda.upload(gray)
-            laplacian_cuda = cv2.cuda.createLaplacianFilter(cv2.CV_64F, 1)
-            result_cuda = laplacian_cuda.apply(gray_cuda)
-            result = result_cuda.download()
-            return result.var()
-        else:
-            # CPU version
-            return cv2.Laplacian(gray, cv2.CV_64F).var()
+        return cv2.Laplacian(gray, cv2.CV_64F).var()
     except Exception as e:
-        logger.error(f"Error in laplacian_blur (using GPU={use_cuda}): {e}")
-        # Fallback to CPU if CUDA failed
-        try:
-            return cv2.Laplacian(gray, cv2.CV_64F).var()
-        except Exception as e2:
-            logger.error(f"CPU fallback also failed: {e2}")
-            return 0
+        logger.error(f"Error in laplacian_blur: {e}")
+        return 0
 
-def tenengrad_blur(gray, use_cuda=USE_CUDA):
+def tenengrad_blur(gray):
+    """Calculate blur score using Tenengrad (Sobel gradient magnitude) (higher = sharper)"""
     try:
-        # Only attempt CUDA if OpenCV has cuda module
-        if use_cuda and hasattr(cv2, 'cuda'):
-            # Use OpenCV CUDA module for Sobel
-            gpu_mat = cv2.cuda_GpuMat()
-            gpu_mat.upload(gray)
-            
-            # Create CUDA Sobel filters
-            sobel_x = cv2.cuda.createSobelFilter(cv2.CV_64F, 1, 0)
-            sobel_y = cv2.cuda.createSobelFilter(cv2.CV_64F, 0, 1)
-            
-            # Apply filters
-            gx_cuda = sobel_x.apply(gpu_mat)
-            gy_cuda = sobel_y.apply(gpu_mat)
-            
-            # Download results
-            gx = gx_cuda.download()
-            gy = gy_cuda.download()
-            
-            # Calculate magnitude
-            g = np.sqrt(gx**2 + gy**2)
-            return np.mean(g)
-        else:
-            # CPU version
-            gx = cv2.Sobel(gray, cv2.CV_64F, 1, 0)
-            gy = cv2.Sobel(gray, cv2.CV_64F, 0, 1)
-            g = np.sqrt(gx**2 + gy**2)
-            return np.mean(g)
+        gx = cv2.Sobel(gray, cv2.CV_64F, 1, 0)
+        gy = cv2.Sobel(gray, cv2.CV_64F, 0, 1)
+        g = np.sqrt(gx**2 + gy**2)
+        return np.mean(g)
     except Exception as e:
-        logger.error(f"Error in tenengrad_blur (using GPU={use_cuda}): {e}")
-        # Fallback to CPU
-        try:
-            gx = cv2.Sobel(gray, cv2.CV_64F, 1, 0)
-            gy = cv2.Sobel(gray, cv2.CV_64F, 0, 1)
-            g = np.sqrt(gx**2 + gy**2)
-            return np.mean(g)
-        except Exception as e2:
-            logger.error(f"CPU fallback also failed: {e2}")
-            return 0
+        logger.error(f"Error in tenengrad_blur: {e}")
+        return 0
 
-def fft_blur(gray, cutoff_size=30, use_cuda=USE_CUDA):
+def fft_blur(gray, cutoff_size=30):
+    """Calculate blur score using FFT high-frequency energy (higher = sharper)"""
     try:
         start_time = time.time()
         
-        if use_cuda and HAVE_CUPY:
-            # GPU-accelerated FFT with CuPy
-            gray_gpu = cp.asarray(gray)
-            f = cp.fft.fft2(gray_gpu)
-            fshift = cp.fft.fftshift(f)
-            
-            # Create mask
-            h, w = gray.shape
-            cx, cy = w//2, h//2
-            mask = cp.ones_like(fshift)
-            mask[cy-cutoff_size:cy+cutoff_size, cx-cutoff_size:cx+cutoff_size] = 0
-            
-            fshift = fshift * mask
-            ishift = cp.fft.ifftshift(fshift)
-            img_back = cp.fft.ifft2(ishift)
-            magnitude = cp.abs(img_back)
-            result = float(cp.mean(magnitude).get())
-        else:
-            # CPU version with NumPy
-            f = np.fft.fft2(gray)
-            fshift = np.fft.fftshift(f)
-            h, w = gray.shape
-            cx, cy = w//2, h//2
-            fshift[cy-cutoff_size:cy+cutoff_size, cx-cutoff_size:cx+cutoff_size] = 0
-            ishift = np.fft.ifftshift(fshift)
-            img_back = np.fft.ifft2(ishift)
-            magnitude = np.abs(img_back)
-            result = np.mean(magnitude)
+        # CPU version with NumPy
+        f = np.fft.fft2(gray)
+        fshift = np.fft.fftshift(f)
+        h, w = gray.shape
+        cx, cy = w//2, h//2
+        fshift[cy-cutoff_size:cy+cutoff_size, cx-cutoff_size:cx+cutoff_size] = 0
+        ishift = np.fft.ifftshift(fshift)
+        img_back = np.fft.ifft2(ishift)
+        magnitude = np.abs(img_back)
+        result = np.mean(magnitude)
             
         logger.debug(f"FFT calculation took {time.time() - start_time:.4f} seconds")
         return result
     except Exception as e:
-        logger.error(f"Error in fft_blur (using GPU={use_cuda}): {e}")
-        # Fallback to CPU if needed
-        try:
-            f = np.fft.fft2(gray)
-            fshift = np.fft.fftshift(f)
-            h, w = gray.shape
-            cx, cy = w//2, h//2
-            fshift[cy-cutoff_size:cy+cutoff_size, cx-cutoff_size:cx+cutoff_size] = 0
-            ishift = np.fft.ifftshift(fshift)
-            img_back = np.fft.ifft2(ishift)
-            magnitude = np.abs(img_back)
-            return np.mean(magnitude)
-        except Exception as e2:
-            logger.error(f"CPU fallback also failed: {e2}")
-            return 0
+        logger.error(f"Error in fft_blur: {e}")
+        return 0
 
 # -- PARAMETERS --
 LAPLACIAN_THRESH = 100
@@ -185,23 +82,22 @@ def get_video_info(cap):
     return {"width": width, "height": height, "fps": fps, 
             "frame_count": frame_count, "duration": duration}
 
-def analyze_video(video_path, resize_factor=1.0, use_cuda=USE_CUDA, skip_frames=1):
+def analyze_video(video_path, resize_factor=1.0, skip_frames=1):
     start_time = time.time()
     logger.info(f"Starting video analysis on: {video_path}")
-    logger.info(f"Using CUDA: {use_cuda}")
     logger.info(f"Resize factor: {resize_factor}")
     logger.info(f"Processing every {skip_frames} frame(s)")
     
     if not os.path.exists(video_path):
         logger.error(f"Video file not found: {video_path}")
-        return None, None, None, None, None
+        return None, None, None, None, None, None
     
     # -- MAIN --
     try:
         cap = cv2.VideoCapture(video_path)
         if not cap.isOpened():
             logger.error("Error opening video file")
-            return None, None, None, None, None
+            return None, None, None, None, None, None
             
         video_info = get_video_info(cap)
         blur_scores = []
@@ -216,6 +112,9 @@ def analyze_video(video_path, resize_factor=1.0, use_cuda=USE_CUDA, skip_frames=
         # Sample frames for visualization
         sample_frames = []
         sample_indices = []
+        
+        # For method comparison visualizations
+        all_frames = {} # Store frames by category for later visualization
         
         # Suggest downscaling for large videos
         if video_info["width"] > 1920 and resize_factor == 1.0:
@@ -254,6 +153,12 @@ def analyze_video(video_path, resize_factor=1.0, use_cuda=USE_CUDA, skip_frames=
                     sample_frames.append(frame.copy())
                     sample_indices.append(frame_idx)
                 
+                # Store all frames for method comparison visualization
+                # Store a regular sampling of frames (about 20-30 total for performance)
+                sample_interval = max(1, (total_frames // skip_frames) // 25)
+                if processed_count % sample_interval == 0:
+                    all_frames[frame_idx] = frame.copy()
+                
                 # Resize large frames if needed
                 if resize_factor != 1.0:
                     h, w = frame.shape[:2]
@@ -264,17 +169,17 @@ def analyze_video(video_path, resize_factor=1.0, use_cuda=USE_CUDA, skip_frames=
                 
                 # Measure performance of each algorithm
                 t1 = time.time()
-                lap = laplacian_blur(gray, use_cuda)
+                lap = laplacian_blur(gray)
                 t2 = time.time()
                 processing_times['laplacian'].append(t2-t1)
                 
                 t1 = time.time()
-                ten = tenengrad_blur(gray, use_cuda)
+                ten = tenengrad_blur(gray)
                 t2 = time.time()
                 processing_times['tenengrad'].append(t2-t1)
                 
                 t1 = time.time()
-                fft = fft_blur(gray, use_cuda=use_cuda)
+                fft = fft_blur(gray)
                 t2 = time.time()
                 processing_times['fft'].append(t2-t1)
 
@@ -308,7 +213,7 @@ def analyze_video(video_path, resize_factor=1.0, use_cuda=USE_CUDA, skip_frames=
 
     except Exception as e:
         logger.error(f"Error during video processing: {e}")
-        return None, None, None, None, None
+        return None, None, None, None, None, None
 
     # -- Calculate dynamic thresholds --
     logger.info("Calculating dynamic thresholds from statistics")
@@ -356,9 +261,17 @@ def analyze_video(video_path, resize_factor=1.0, use_cuda=USE_CUDA, skip_frames=
         'fixed': []
     }
     
+    # Track frames by classification for each method
+    method_classifications = {
+        'percentile': {'sharp': [], 'blurry': []},
+        'stddev': {'sharp': [], 'blurry': []},
+        'fixed': {'sharp': [], 'blurry': []}
+    }
+    
     try:
         for i, scores in enumerate(blur_scores):
             lap, ten, fft = scores['laplacian'], scores['tenengrad'], scores['fft']
+            frame_id = scores['frame']
             
             # Check each threshold method
             for method, thresh in thresholds.items():
@@ -378,6 +291,11 @@ def analyze_video(video_path, resize_factor=1.0, use_cuda=USE_CUDA, skip_frames=
                             logger.debug(f"Frame {scores['frame']} failed temporal check")
 
                 blur_flags[method].append(not sharp)
+                
+                # Track frame classification for later visualization
+                if frame_id in all_frames:
+                    target_bucket = 'sharp' if sharp else 'blurry'
+                    method_classifications[method][target_bucket].append(frame_id)
             
             # Log detailed analysis for some frames with the default method
             if i % 10 == 0 or not sharp:
@@ -398,7 +316,7 @@ def analyze_video(video_path, resize_factor=1.0, use_cuda=USE_CUDA, skip_frames=
             blur_percentage = (blur_count / len(flags)) * 100
             logger.info(f"{method.capitalize()} method: Found {blur_count} blurry frames out of {len(flags)} ({blur_percentage:.1f}%)")
     
-    return blur_scores, blur_flags, thresholds, sample_frames, sample_indices
+    return blur_scores, blur_flags, thresholds, sample_frames, sample_indices, all_frames, method_classifications
 
 def plot_blur_metrics(blur_scores, thresholds, save_path=None):
     if not blur_scores:
@@ -597,13 +515,203 @@ def visualize_sample_frames(sample_frames, sample_indices, blur_scores, threshol
     except Exception as e:
         logger.error(f"Error visualizing sample frames: {e}")
 
+def visualize_method_comparison(all_frames, method_classifications, thresholds, save_dir=None):
+    """Create visualization showing how different methods classify the same frames"""
+    if not all_frames or not method_classifications:
+        logger.error("No frames or classifications available for method comparison")
+        return
+        
+    logger.info(f"Creating method comparison visualization with {len(all_frames)} frames")
+    
+    try:
+        methods = list(method_classifications.keys())
+        
+        # Create directories for each method if saving
+        if save_dir:
+            for method in methods:
+                method_dir = os.path.join(save_dir, f"method_{method}")
+                os.makedirs(os.path.join(method_dir, "sharp"), exist_ok=True)
+                os.makedirs(os.path.join(method_dir, "blurry"), exist_ok=True)
+                
+            # Also create a comparison directory
+            comparison_dir = os.path.join(save_dir, "method_comparison")
+            os.makedirs(comparison_dir, exist_ok=True)
+        
+        # Generate visualizations for each method
+        for method in methods:
+            classifications = method_classifications[method]
+            
+            # Save individual images categorized by this method
+            if save_dir:
+                method_dir = os.path.join(save_dir, f"method_{method}")
+                
+                # Save sharp frames
+                for frame_id in classifications['sharp']:
+                    if frame_id in all_frames:
+                        frame = all_frames[frame_id].copy()
+                        h, w = frame.shape[:2]
+                        text_size = max(h / 720, 0.5)
+                        
+                        # Add classification info
+                        cv2.putText(frame, f"{method.capitalize()}: SHARP", 
+                                   (10, int(30*text_size)), cv2.FONT_HERSHEY_SIMPLEX, 
+                                   text_size, (0, 255, 0), 2)
+                        
+                        # Save frame
+                        cv2.imwrite(os.path.join(method_dir, "sharp", f"frame_{frame_id:04d}.jpg"), frame)
+                
+                # Save blurry frames
+                for frame_id in classifications['blurry']:
+                    if frame_id in all_frames:
+                        frame = all_frames[frame_id].copy()
+                        h, w = frame.shape[:2]
+                        text_size = max(h / 720, 0.5)
+                        
+                        # Add classification info
+                        cv2.putText(frame, f"{method.capitalize()}: BLURRY", 
+                                   (10, int(30*text_size)), cv2.FONT_HERSHEY_SIMPLEX, 
+                                   text_size, (0, 0, 255), 2)
+                        
+                        # Save frame
+                        cv2.imwrite(os.path.join(method_dir, "blurry", f"frame_{frame_id:04d}.jpg"), frame)
+        
+        # Create a multi-method comparison for selected frames
+        # This shows how each method classifies the same frame
+        common_frames = sorted(all_frames.keys())
+        
+        # Take a sample if we have too many frames
+        if len(common_frames) > 12:
+            # Sample frames across the range, focusing on disagreement cases
+            disagreement_frames = []
+            for frame_id in common_frames:
+                # Check if methods disagree on this frame
+                classifications = [method_classifications[m]['sharp' if frame_id in method_classifications[m]['sharp'] else 'blurry'] for m in methods]
+                if len(set(tuple(c) for c in classifications)) > 1:  # If there's disagreement
+                    disagreement_frames.append(frame_id)
+            
+            # If we have disagreement frames, prioritize them
+            if disagreement_frames:
+                if len(disagreement_frames) > 12:
+                    common_frames = np.array(disagreement_frames)[np.linspace(0, len(disagreement_frames)-1, 12, dtype=int)]
+                else:
+                    common_frames = disagreement_frames
+            else:
+                # Otherwise, take evenly spaced samples
+                common_frames = np.array(common_frames)[np.linspace(0, len(common_frames)-1, 12, dtype=int)]
+        
+        # Create comparison grid - rows are frames, columns are methods
+        n_frames = len(common_frames)
+        n_methods = len(methods)
+        
+        # Create a large figure
+        fig, axes = plt.subplots(n_frames, n_methods, figsize=(n_methods*5, n_frames*4))
+        
+        # Handle single row or column case
+        if n_frames == 1:
+            axes = axes.reshape(1, -1)
+        if n_methods == 1:
+            axes = axes.reshape(-1, 1)
+        
+        # Track methods that frequently disagree with others
+        disagreements = {m: 0 for m in methods}
+        
+        # Populate the grid
+        for i, frame_id in enumerate(common_frames):
+            frame = all_frames[frame_id]
+            rgb_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+            
+            # Get scores for this frame
+            frame_scores = None
+            for score in blur_scores:
+                if score['frame'] == frame_id:
+                    frame_scores = score
+                    break
+            
+            # Find method classifications for this frame
+            frame_classifications = {}
+            for method in methods:
+                if frame_id in method_classifications[method]['sharp']:
+                    frame_classifications[method] = 'sharp'
+                else:
+                    frame_classifications[method] = 'blurry'
+            
+            # Count disagreements
+            opinions = list(frame_classifications.values())
+            for m_idx, method in enumerate(methods):
+                # Check if this method disagrees with the majority
+                if opinions.count(frame_classifications[method]) < len(methods)/2:
+                    disagreements[method] += 1
+            
+            # Display each method's classification
+            for j, method in enumerate(methods):
+                ax = axes[i, j]
+                
+                # Display the frame
+                ax.imshow(rgb_frame)
+                
+                # Add method-specific classification and threshold
+                is_sharp = frame_id in method_classifications[method]['sharp']
+                
+                title_color = 'green' if is_sharp else 'red'
+                classification = 'SHARP' if is_sharp else 'BLURRY'
+                
+                if frame_scores:
+                    lap, ten, fft = frame_scores['laplacian'], frame_scores['tenengrad'], frame_scores['fft']
+                    thresh = thresholds[method]
+                    
+                    # Format title with metrics and thresholds
+                    title = f"{method.capitalize()}: {classification}\n"
+                    title += f"Lap: {lap:.1f} > {thresh['laplacian']:.1f}\n"
+                    title += f"Ten: {ten:.1f} > {thresh['tenengrad']:.1f}\n"
+                    title += f"FFT: {fft:.1f} > {thresh['fft']:.1f}"
+                else:
+                    title = f"{method.capitalize()}: {classification}"
+                
+                ax.set_title(title, color=title_color)
+                ax.axis('off')
+                
+                # Add a colored border for easy identification
+                for spine in ax.spines.values():
+                    spine.set_visible(True)
+                    spine.set_color(title_color)
+                    spine.set_linewidth(5)
+        
+        plt.tight_layout()
+        
+        # Save the comparison grid
+        if save_dir:
+            comparison_path = os.path.join(comparison_dir, "method_comparison_grid.png")
+            plt.savefig(comparison_path)
+            logger.info(f"Method comparison grid saved to {comparison_path}")
+            plt.close()
+            
+            # Save information about method disagreements
+            with open(os.path.join(comparison_dir, "method_analysis.txt"), 'w') as f:
+                f.write("Method Disagreement Analysis:\n")
+                f.write("Number of frames where each method disagrees with majority opinion:\n\n")
+                
+                for method, count in disagreements.items():
+                    percentage = (count / len(common_frames)) * 100
+                    f.write(f"{method.capitalize()}: {count}/{len(common_frames)} frames ({percentage:.1f}%)\n")
+                
+                # Add threshold information
+                f.write("\nThresholds used by each method:\n\n")
+                for method, thresh in thresholds.items():
+                    f.write(f"{method.capitalize()}:\n")
+                    for metric, value in thresh.items():
+                        f.write(f"  {metric}: {value:.2f}\n")
+        else:
+            plt.show()
+            
+    except Exception as e:
+        logger.error(f"Error creating method comparison visualization: {e}")
+
 def parse_arguments():
     parser = argparse.ArgumentParser(description='Video blur detection with multiple methods')
     parser.add_argument('--video', type=str, help='Path to video file')
     parser.add_argument('--resize', type=float, default=1.0, help='Resize factor for video frames (e.g., 0.5 for half size)')
     parser.add_argument('--skip', type=int, default=1, help='Process every Nth frame')
     parser.add_argument('--save_path', type=str, help='Path to save the results plot')
-    parser.add_argument('--no_cuda', action='store_true', help='Disable CUDA even if available')
     parser.add_argument('--method', type=str, default='percentile', choices=['percentile', 'stddev', 'fixed'], 
                         help='Threshold method to use for blur detection')
     return parser.parse_args()
@@ -629,14 +737,10 @@ if __name__ == "__main__":
             run_dir = os.path.join(results_dir, f"analysis_{timestamp}")
             os.makedirs(run_dir, exist_ok=True)
             
-            # Determine if CUDA should be used
-            use_cuda = USE_CUDA and not args.no_cuda
-            
             # Run analysis with options from command line
-            blur_scores, blur_flags, thresholds, sample_frames, sample_indices = analyze_video(
+            blur_scores, blur_flags, thresholds, sample_frames, sample_indices, all_frames, method_classifications = analyze_video(
                 video_path, 
                 resize_factor=args.resize,
-                use_cuda=use_cuda,
                 skip_frames=args.skip
             )
             
@@ -647,6 +751,9 @@ if __name__ == "__main__":
                 
                 # Visualize sample frames
                 visualize_sample_frames(sample_frames, sample_indices, blur_scores, thresholds, save_dir=run_dir)
+                
+                # Create method comparison visualization
+                visualize_method_comparison(all_frames, method_classifications, thresholds, save_dir=run_dir)
                 
                 # Save numerical results
                 results_path = os.path.join(run_dir, f"blur_data_{timestamp}.csv")

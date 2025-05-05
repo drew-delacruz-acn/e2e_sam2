@@ -194,14 +194,14 @@ def analyze_video(video_path, resize_factor=1.0, use_cuda=USE_CUDA, skip_frames=
     
     if not os.path.exists(video_path):
         logger.error(f"Video file not found: {video_path}")
-        return None, None
+        return None, None, None, None, None
     
     # -- MAIN --
     try:
         cap = cv2.VideoCapture(video_path)
         if not cap.isOpened():
             logger.error("Error opening video file")
-            return None, None
+            return None, None, None, None, None
             
         video_info = get_video_info(cap)
         blur_scores = []
@@ -212,6 +212,10 @@ def analyze_video(video_path, resize_factor=1.0, use_cuda=USE_CUDA, skip_frames=
             'tenengrad': [], 
             'fft': []
         }
+        
+        # Sample frames for visualization
+        sample_frames = []
+        sample_indices = []
         
         # Suggest downscaling for large videos
         if video_info["width"] > 1920 and resize_factor == 1.0:
@@ -245,6 +249,11 @@ def analyze_video(video_path, resize_factor=1.0, use_cuda=USE_CUDA, skip_frames=
             logger.debug(f"Processing frame {frame_idx}")
             
             try:
+                # Save original frame for sample visualization
+                if processed_count % (total_frames // min(10, total_frames // skip_frames or 1)) == 0:
+                    sample_frames.append(frame.copy())
+                    sample_indices.append(frame_idx)
+                
                 # Resize large frames if needed
                 if resize_factor != 1.0:
                     h, w = frame.shape[:2]
@@ -299,31 +308,78 @@ def analyze_video(video_path, resize_factor=1.0, use_cuda=USE_CUDA, skip_frames=
 
     except Exception as e:
         logger.error(f"Error during video processing: {e}")
-        return None, None
+        return None, None, None, None, None
 
-    # -- TEMPORAL ANALYSIS --
-    logger.info("Starting temporal analysis")
-    blur_flags = []
+    # -- Calculate dynamic thresholds --
+    logger.info("Calculating dynamic thresholds from statistics")
+    # Extract values
+    lap_vals = np.array([x['laplacian'] for x in blur_scores])
+    ten_vals = np.array([x['tenengrad'] for x in blur_scores])
+    fft_vals = np.array([x['fft'] for x in blur_scores])
+    
+    # Different statistical threshold methods
+    thresholds = {
+        # Method 1: Percentile-based
+        'percentile': {
+            'laplacian': np.percentile(lap_vals, 25),  # Lower 25% are blurry
+            'tenengrad': np.percentile(ten_vals, 25),
+            'fft': np.percentile(fft_vals, 25)
+        },
+        # Method 2: Mean - StdDev based
+        'stddev': {
+            'laplacian': max(0, np.mean(lap_vals) - 1.0 * np.std(lap_vals)),
+            'tenengrad': max(0, np.mean(ten_vals) - 1.0 * np.std(ten_vals)),
+            'fft': max(0, np.mean(fft_vals) - 1.0 * np.std(fft_vals))
+        },
+        # Method 3: Fixed thresholds (original)
+        'fixed': {
+            'laplacian': LAPLACIAN_THRESH,
+            'tenengrad': TENENGRAD_THRESH,
+            'fft': FFT_THRESH
+        }
+    }
+    
+    logger.info("Calculated thresholds:")
+    for method, values in thresholds.items():
+        logger.info(f"  {method.capitalize()} method:")
+        for metric, value in values.items():
+            logger.info(f"    {metric}: {value:.2f}")
+    
+    # -- TEMPORAL ANALYSIS with dynamic thresholds--
+    logger.info("Starting temporal analysis with dynamic thresholds")
+    # Use percentile method as default
+    current_thresholds = thresholds['percentile']
+    
+    blur_flags = {
+        'percentile': [], 
+        'stddev': [], 
+        'fixed': []
+    }
+    
     try:
         for i, scores in enumerate(blur_scores):
             lap, ten, fft = scores['laplacian'], scores['tenengrad'], scores['fft']
-            sharp = (
-                lap > LAPLACIAN_THRESH and
-                ten > TENENGRAD_THRESH and
-                fft > FFT_THRESH
-            )
-
-            # Compare to neighbor average (temporal check)
-            if 1 <= i < len(blur_scores) - 1:
-                prev = blur_scores[i-1]['laplacian']
-                nxt = blur_scores[i+1]['laplacian']
-                if lap < 0.5 * ((prev + nxt) / 2):
-                    sharp = False
-                    logger.debug(f"Frame {scores['frame']} failed temporal check")
-
-            blur_flags.append(not sharp)
             
-            # Log detailed analysis for some frames
+            # Check each threshold method
+            for method, thresh in thresholds.items():
+                sharp = (
+                    lap > thresh['laplacian'] and
+                    ten > thresh['tenengrad'] and
+                    fft > thresh['fft']
+                )
+
+                # Compare to neighbor average (temporal check)
+                if 1 <= i < len(blur_scores) - 1:
+                    prev = blur_scores[i-1]['laplacian']
+                    nxt = blur_scores[i+1]['laplacian']
+                    if lap < 0.5 * ((prev + nxt) / 2):
+                        sharp = False
+                        if method == 'percentile':  # Only log for the default method
+                            logger.debug(f"Frame {scores['frame']} failed temporal check")
+
+                blur_flags[method].append(not sharp)
+            
+            # Log detailed analysis for some frames with the default method
             if i % 10 == 0 or not sharp:
                 logger.info(f"Frame {scores['frame']:04d}: Sharp={sharp} | Lap={lap:.2f} | Ten={ten:.2f} | FFT={fft:.2f}")
     
@@ -335,15 +391,16 @@ def analyze_video(video_path, resize_factor=1.0, use_cuda=USE_CUDA, skip_frames=
     if processed_count > 0:
         logger.info(f"Average time per frame: {total_time/processed_count:.4f} seconds")
     
-    # Calculate blur statistics
-    if blur_flags:
-        blur_count = sum(blur_flags)
-        blur_percentage = (blur_count / len(blur_flags)) * 100
-        logger.info(f"Found {blur_count} blurry frames out of {len(blur_flags)} ({blur_percentage:.1f}%)")
+    # Calculate blur statistics for each method
+    for method, flags in blur_flags.items():
+        if flags:
+            blur_count = sum(flags)
+            blur_percentage = (blur_count / len(flags)) * 100
+            logger.info(f"{method.capitalize()} method: Found {blur_count} blurry frames out of {len(flags)} ({blur_percentage:.1f}%)")
     
-    return blur_scores, blur_flags
+    return blur_scores, blur_flags, thresholds, sample_frames, sample_indices
 
-def plot_blur_metrics(blur_scores, save_path=None):
+def plot_blur_metrics(blur_scores, thresholds, save_path=None):
     if not blur_scores:
         logger.error("No blur scores to plot")
         return
@@ -356,28 +413,189 @@ def plot_blur_metrics(blur_scores, save_path=None):
         ten_vals = [x['tenengrad'] for x in blur_scores]
         fft_vals = [x['fft'] for x in blur_scores]
 
-        plt.figure(figsize=(10, 6))
-        plt.plot(frames, lap_vals, label='Laplacian')
-        plt.plot(frames, ten_vals, label='Tenengrad')
-        plt.plot(frames, fft_vals, label='FFT')
-        plt.title("Blur Metrics per Frame")
-        plt.xlabel("Frame")
-        plt.ylabel("Score")
-        plt.legend()
+        fig, (ax1, ax2, ax3) = plt.subplots(3, 1, figsize=(12, 14), sharex=True)
         
-        # Add threshold lines
-        plt.axhline(y=LAPLACIAN_THRESH, color='blue', linestyle='--', alpha=0.5)
-        plt.axhline(y=TENENGRAD_THRESH, color='orange', linestyle='--', alpha=0.5)
-        plt.axhline(y=FFT_THRESH, color='green', linestyle='--', alpha=0.5)
+        # Plot 1: Laplacian
+        ax1.plot(frames, lap_vals, label='Laplacian Variance')
+        for method, thresh in thresholds.items():
+            ax1.axhline(y=thresh['laplacian'], color=('r' if method=='fixed' else 'g' if method=='percentile' else 'b'), 
+                       linestyle='--', alpha=0.7, label=f"{method.capitalize()} Threshold")
+        ax1.set_title("Laplacian Variance (Edge Sharpness)")
+        ax1.set_ylabel("Value")
+        ax1.legend()
+        ax1.grid(True, alpha=0.3)
+        
+        # Plot 2: Tenengrad
+        ax2.plot(frames, ten_vals, label='Tenengrad', color='orange')
+        for method, thresh in thresholds.items():
+            ax2.axhline(y=thresh['tenengrad'], color=('r' if method=='fixed' else 'g' if method=='percentile' else 'b'), 
+                       linestyle='--', alpha=0.7, label=f"{method.capitalize()} Threshold")
+        ax2.set_title("Tenengrad (Gradient Magnitude)")
+        ax2.set_ylabel("Value")
+        ax2.legend()
+        ax2.grid(True, alpha=0.3)
+        
+        # Plot 3: FFT
+        ax3.plot(frames, fft_vals, label='FFT Energy', color='green')
+        for method, thresh in thresholds.items():
+            ax3.axhline(y=thresh['fft'], color=('r' if method=='fixed' else 'g' if method=='percentile' else 'b'), 
+                       linestyle='--', alpha=0.7, label=f"{method.capitalize()} Threshold")
+        ax3.set_title("FFT High-Frequency Energy")
+        ax3.set_xlabel("Frame")
+        ax3.set_ylabel("Value")
+        ax3.legend()
+        ax3.grid(True, alpha=0.3)
+        
+        plt.tight_layout()
         
         if save_path:
             plt.savefig(save_path)
             logger.info(f"Plot saved to {save_path}")
+            plt.close()
+        else:
+            plt.show()
+            
+        # Generate histograms to help with threshold selection
+        fig, (ax1, ax2, ax3) = plt.subplots(1, 3, figsize=(15, 5))
+        
+        # Laplacian histogram
+        ax1.hist(lap_vals, bins=30, alpha=0.7)
+        for method, thresh in thresholds.items():
+            ax1.axvline(x=thresh['laplacian'], color=('r' if method=='fixed' else 'g' if method=='percentile' else 'b'), 
+                      linestyle='--', label=f"{method.capitalize()}")
+        ax1.set_title("Laplacian Distribution")
+        ax1.set_xlabel("Value")
+        ax1.set_ylabel("Frequency")
+        ax1.legend()
+        
+        # Tenengrad histogram
+        ax2.hist(ten_vals, bins=30, alpha=0.7, color='orange')
+        for method, thresh in thresholds.items():
+            ax2.axvline(x=thresh['tenengrad'], color=('r' if method=='fixed' else 'g' if method=='percentile' else 'b'), 
+                      linestyle='--', label=f"{method.capitalize()}")
+        ax2.set_title("Tenengrad Distribution")
+        ax2.set_xlabel("Value")
+        ax2.legend()
+        
+        # FFT histogram
+        ax3.hist(fft_vals, bins=30, alpha=0.7, color='green')
+        for method, thresh in thresholds.items():
+            ax3.axvline(x=thresh['fft'], color=('r' if method=='fixed' else 'g' if method=='percentile' else 'b'), 
+                      linestyle='--', label=f"{method.capitalize()}")
+        ax3.set_title("FFT Distribution")
+        ax3.set_xlabel("Value")
+        ax3.legend()
+        
+        plt.tight_layout()
+        
+        # Save histograms
+        if save_path:
+            histogram_path = save_path.replace('.png', '_histograms.png')
+            plt.savefig(histogram_path)
+            logger.info(f"Histograms saved to {histogram_path}")
+            plt.close()
         else:
             plt.show()
             
     except Exception as e:
-        logger.error(f"Error generating plot: {e}")
+        logger.error(f"Error generating plots: {e}")
+
+def visualize_sample_frames(sample_frames, sample_indices, blur_scores, thresholds, save_dir=None):
+    """Visualize sample frames with their blur metrics"""
+    if not sample_frames or not blur_scores:
+        logger.error("No sample frames or blur scores to visualize")
+        return
+        
+    logger.info(f"Visualizing {len(sample_frames)} sample frames")
+    
+    try:
+        # Get scores for the sample frames
+        sample_scores = []
+        for idx in sample_indices:
+            for score in blur_scores:
+                if score['frame'] == idx:
+                    sample_scores.append(score)
+                    break
+        
+        # Sort samples by Laplacian score (ascending)
+        sorted_indices = np.argsort([score['laplacian'] for score in sample_scores])
+        
+        # Create a figure with sample frames
+        n_samples = len(sample_frames)
+        fig, axes = plt.subplots(n_samples, 1, figsize=(10, n_samples * 4))
+        if n_samples == 1:
+            axes = [axes]
+            
+        for i, idx in enumerate(sorted_indices):
+            frame = sample_frames[idx]
+            score = sample_scores[idx]
+            frame_idx = sample_indices[idx]
+            
+            # Determine sharpness status based on percentile method
+            sharp = (
+                score['laplacian'] > thresholds['percentile']['laplacian'] and
+                score['tenengrad'] > thresholds['percentile']['tenengrad'] and
+                score['fft'] > thresholds['percentile']['fft']
+            )
+            
+            # Display the frame
+            axes[i].imshow(cv2.cvtColor(frame, cv2.COLOR_BGR2RGB))
+            axes[i].set_title(f"Frame {frame_idx}: {'Sharp' if sharp else 'Blurry'}\n"
+                             f"Laplacian: {score['laplacian']:.2f} (Threshold: {thresholds['percentile']['laplacian']:.2f})\n"
+                             f"Tenengrad: {score['tenengrad']:.2f} (Threshold: {thresholds['percentile']['tenengrad']:.2f})\n"
+                             f"FFT: {score['fft']:.2f} (Threshold: {thresholds['percentile']['fft']:.2f})")
+            axes[i].axis('off')
+            
+        plt.tight_layout()
+        
+        if save_dir:
+            os.makedirs(save_dir, exist_ok=True)
+            samples_path = os.path.join(save_dir, 'sample_frames.png')
+            plt.savefig(samples_path)
+            logger.info(f"Sample frames saved to {samples_path}")
+            plt.close()
+            
+            # Save individual frames with scores
+            for i, idx in enumerate(sorted_indices):
+                frame = sample_frames[idx]
+                score = sample_scores[idx]
+                frame_idx = sample_indices[idx]
+                
+                # Add text to frame with scores
+                text_frame = frame.copy()
+                h, w = text_frame.shape[:2]
+                text_size = max(h / 720, 0.5)  # Scale text based on image size
+                
+                # Create a semi-transparent overlay for text background
+                overlay = text_frame.copy()
+                cv2.rectangle(overlay, (0, 0), (w, int(h/5)), (0, 0, 0), -1)
+                cv2.addWeighted(overlay, 0.6, text_frame, 0.4, 0, text_frame)
+                
+                # Add metrics text
+                sharp = (
+                    score['laplacian'] > thresholds['percentile']['laplacian'] and
+                    score['tenengrad'] > thresholds['percentile']['tenengrad'] and
+                    score['fft'] > thresholds['percentile']['fft']
+                )
+                
+                status = f"{'SHARP' if sharp else 'BLURRY'}"
+                cv2.putText(text_frame, f"Frame {frame_idx}: {status}", 
+                           (10, int(30*text_size)), cv2.FONT_HERSHEY_SIMPLEX, 
+                           text_size, (0, 255, 255) if sharp else (0, 0, 255), 2)
+                
+                cv2.putText(text_frame, 
+                           f"Lap: {score['laplacian']:.1f} / Ten: {score['tenengrad']:.1f} / FFT: {score['fft']:.1f}", 
+                           (10, int(70*text_size)), cv2.FONT_HERSHEY_SIMPLEX, 
+                           text_size*0.8, (255, 255, 255), 2)
+                
+                frame_path = os.path.join(save_dir, f"frame_{frame_idx:04d}_{status.lower()}.jpg")
+                cv2.imwrite(frame_path, text_frame)
+                
+        else:
+            plt.show()
+            
+    except Exception as e:
+        logger.error(f"Error visualizing sample frames: {e}")
 
 def parse_arguments():
     parser = argparse.ArgumentParser(description='Video blur detection with multiple methods')
@@ -386,6 +604,8 @@ def parse_arguments():
     parser.add_argument('--skip', type=int, default=1, help='Process every Nth frame')
     parser.add_argument('--save_path', type=str, help='Path to save the results plot')
     parser.add_argument('--no_cuda', action='store_true', help='Disable CUDA even if available')
+    parser.add_argument('--method', type=str, default='percentile', choices=['percentile', 'stddev', 'fixed'], 
+                        help='Threshold method to use for blur detection')
     return parser.parse_args()
 
 if __name__ == "__main__":
@@ -396,7 +616,8 @@ if __name__ == "__main__":
         logger.info(f"Blur Detection Script started at {timestamp}")
         logger.info("=" * 40)
         
-        video_path = "/home/ubuntu/code/drew/e2e_sam2/data/Scenes 001-020__5B14-5a- only_20230816051800694.mp4"  # Replace with your video file
+        # Get video path from args or use default
+        video_path = args.video if args.video else "/Users/andrewdelacruz/e2e_sam2/data/Young_African_American_Woman_Headphones_1.mp4"
         
         if not os.path.exists(video_path):
             logger.error(f"Video file not found: {video_path}")
@@ -404,11 +625,15 @@ if __name__ == "__main__":
             results_dir = "blur_results"
             os.makedirs(results_dir, exist_ok=True)
             
+            # Create a folder for this run
+            run_dir = os.path.join(results_dir, f"analysis_{timestamp}")
+            os.makedirs(run_dir, exist_ok=True)
+            
             # Determine if CUDA should be used
             use_cuda = USE_CUDA and not args.no_cuda
             
             # Run analysis with options from command line
-            blur_scores, blur_flags = analyze_video(
+            blur_scores, blur_flags, thresholds, sample_frames, sample_indices = analyze_video(
                 video_path, 
                 resize_factor=args.resize,
                 use_cuda=use_cuda,
@@ -417,19 +642,45 @@ if __name__ == "__main__":
             
             if blur_scores:
                 # Save results to file
-                plot_path = args.save_path if args.save_path else os.path.join(results_dir, f"blur_plot_{timestamp}.png")
-                plot_blur_metrics(blur_scores, save_path=plot_path)
+                plot_path = args.save_path if args.save_path else os.path.join(run_dir, f"blur_plot_{timestamp}.png")
+                plot_blur_metrics(blur_scores, thresholds, save_path=plot_path)
+                
+                # Visualize sample frames
+                visualize_sample_frames(sample_frames, sample_indices, blur_scores, thresholds, save_dir=run_dir)
                 
                 # Save numerical results
-                results_path = os.path.join(results_dir, f"blur_data_{timestamp}.csv")
+                results_path = os.path.join(run_dir, f"blur_data_{timestamp}.csv")
                 try:
                     with open(results_path, 'w') as f:
-                        f.write("frame,laplacian,tenengrad,fft,is_blurry\n")
+                        f.write("frame,laplacian,tenengrad,fft,is_blurry_percentile,is_blurry_stddev,is_blurry_fixed\n")
                         for i, score in enumerate(blur_scores):
-                            f.write(f"{score['frame']},{score['laplacian']:.2f},{score['tenengrad']:.2f},{score['fft']:.2f},{blur_flags[i]}\n")
+                            f.write(f"{score['frame']},{score['laplacian']:.2f},{score['tenengrad']:.2f},{score['fft']:.2f},"
+                                   f"{blur_flags['percentile'][i]},{blur_flags['stddev'][i]},{blur_flags['fixed'][i]}\n")
                     logger.info(f"Results saved to {results_path}")
                 except Exception as e:
                     logger.error(f"Error saving results: {e}")
+                
+                # Save threshold information
+                thresh_path = os.path.join(run_dir, f"thresholds_{timestamp}.txt")
+                try:
+                    with open(thresh_path, 'w') as f:
+                        f.write("Calculated Thresholds:\n")
+                        for method, values in thresholds.items():
+                            f.write(f"{method.capitalize()} method:\n")
+                            for metric, value in values.items():
+                                f.write(f"  {metric}: {value:.2f}\n")
+                        
+                        # Add stats about blur detection
+                        f.write("\nBlur Detection Results:\n")
+                        for method, flags in blur_flags.items():
+                            if flags:
+                                blur_count = sum(flags)
+                                blur_percentage = (blur_count / len(flags)) * 100
+                                f.write(f"{method.capitalize()} method: Found {blur_count} blurry frames out of {len(flags)} ({blur_percentage:.1f}%)\n")
+                    
+                    logger.info(f"Threshold information saved to {thresh_path}")
+                except Exception as e:
+                    logger.error(f"Error saving threshold information: {e}")
             
         logger.info("=" * 40)
         logger.info("Blur Detection Script finished")
@@ -437,7 +688,3 @@ if __name__ == "__main__":
     except Exception as e:
         logger.error(f"Unhandled exception: {e}")
 
-
-##terminal command
-##sudo apt --purge remove '*cublas*' '*cufft*' '*curand*' '*cusolver*' '*cusparse*' '*npp*' '*nvjpeg*' 'cuda*' 'nsight*' 
-# sudo apt autoremove

@@ -22,30 +22,36 @@ logger = logging.getLogger(__name__)
 USE_CUDA = False
 HAVE_CUPY = False
 try:
-    if cv2.cuda.getCudaEnabledDeviceCount() > 0:
-        USE_CUDA = True
-        logger.info("CUDA is available for OpenCV")
-        try:
-            import cupy as cp
-            HAVE_CUPY = True
-            logger.info("CuPy is available for GPU-accelerated FFT")
-        except ImportError:
-            logger.info("CuPy not found, using NumPy for FFT")
+    # First check if cv2.cuda attribute exists (OpenCV with CUDA support)
+    if hasattr(cv2, 'cuda'):
+        cuda_devices = cv2.cuda.getCudaEnabledDeviceCount()
+        if cuda_devices > 0:
+            USE_CUDA = True
+            logger.info(f"CUDA is available for OpenCV with {cuda_devices} device(s)")
+            try:
+                import cupy as cp
+                HAVE_CUPY = True
+                logger.info("CuPy is available for GPU-accelerated FFT")
+            except ImportError:
+                logger.info("CuPy not found, using NumPy for FFT")
+        else:
+            logger.info("No CUDA devices found, using CPU processing")
     else:
-        logger.info("CUDA is not available, using CPU processing")
-except:
-    logger.info("Could not check CUDA availability, using CPU processing")
+        logger.info("OpenCV was compiled without CUDA support, using CPU processing")
+except Exception as e:
+    logger.info(f"Could not check CUDA availability due to: {e}. Using CPU processing")
 
 def laplacian_blur(gray, use_cuda=USE_CUDA):
     try:
-        if use_cuda and HAVE_CUPY:
+        # Only attempt CUDA if OpenCV has cuda module
+        if use_cuda and hasattr(cv2, 'cuda') and HAVE_CUPY:
             # Convert to CuPy array for GPU processing
             gray_gpu = cp.asarray(gray)
             # No direct Laplacian in CuPy, but we can use a kernel
             kernel = cp.array([[0, 1, 0], [1, -4, 1], [0, 1, 0]], dtype=cp.float32)
             laplacian = cp.abs(cp.correlate2d(gray_gpu, kernel, mode='same'))
             return float(cp.var(laplacian).get())
-        elif use_cuda:
+        elif use_cuda and hasattr(cv2, 'cuda'):
             # Use OpenCV CUDA module
             gray_cuda = cv2.cuda_GpuMat()
             gray_cuda.upload(gray)
@@ -57,16 +63,18 @@ def laplacian_blur(gray, use_cuda=USE_CUDA):
             # CPU version
             return cv2.Laplacian(gray, cv2.CV_64F).var()
     except Exception as e:
-        logger.error(f"Error in laplacian_blur: {e}")
+        logger.error(f"Error in laplacian_blur (using GPU={use_cuda}): {e}")
         # Fallback to CPU if CUDA failed
         try:
             return cv2.Laplacian(gray, cv2.CV_64F).var()
-        except:
+        except Exception as e2:
+            logger.error(f"CPU fallback also failed: {e2}")
             return 0
 
 def tenengrad_blur(gray, use_cuda=USE_CUDA):
     try:
-        if use_cuda:
+        # Only attempt CUDA if OpenCV has cuda module
+        if use_cuda and hasattr(cv2, 'cuda'):
             # Use OpenCV CUDA module for Sobel
             gpu_mat = cv2.cuda_GpuMat()
             gpu_mat.upload(gray)
@@ -93,14 +101,15 @@ def tenengrad_blur(gray, use_cuda=USE_CUDA):
             g = np.sqrt(gx**2 + gy**2)
             return np.mean(g)
     except Exception as e:
-        logger.error(f"Error in tenengrad_blur: {e}")
+        logger.error(f"Error in tenengrad_blur (using GPU={use_cuda}): {e}")
         # Fallback to CPU
         try:
             gx = cv2.Sobel(gray, cv2.CV_64F, 1, 0)
             gy = cv2.Sobel(gray, cv2.CV_64F, 0, 1)
             g = np.sqrt(gx**2 + gy**2)
             return np.mean(g)
-        except:
+        except Exception as e2:
+            logger.error(f"CPU fallback also failed: {e2}")
             return 0
 
 def fft_blur(gray, cutoff_size=30, use_cuda=USE_CUDA):
@@ -139,7 +148,7 @@ def fft_blur(gray, cutoff_size=30, use_cuda=USE_CUDA):
         logger.debug(f"FFT calculation took {time.time() - start_time:.4f} seconds")
         return result
     except Exception as e:
-        logger.error(f"Error in fft_blur: {e}")
+        logger.error(f"Error in fft_blur (using GPU={use_cuda}): {e}")
         # Fallback to CPU if needed
         try:
             f = np.fft.fft2(gray)
@@ -151,7 +160,8 @@ def fft_blur(gray, cutoff_size=30, use_cuda=USE_CUDA):
             img_back = np.fft.ifft2(ishift)
             magnitude = np.abs(img_back)
             return np.mean(magnitude)
-        except:
+        except Exception as e2:
+            logger.error(f"CPU fallback also failed: {e2}")
             return 0
 
 # -- PARAMETERS --
@@ -427,3 +437,8 @@ if __name__ == "__main__":
         logger.info("=" * 40)
     except Exception as e:
         logger.error(f"Unhandled exception: {e}")
+
+
+##terminal command
+##sudo apt --purge remove '*cublas*' '*cufft*' '*curand*' '*cusolver*' '*cusparse*' '*npp*' '*nvjpeg*' 'cuda*' 'nsight*' 
+# sudo apt autoremove

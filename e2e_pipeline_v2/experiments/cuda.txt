@@ -1,0 +1,77 @@
+Thanks — that gives us a clear picture:
+
+### 🔍 Current Situation
+
+* ✅ `nvidia-smi` works → Your **GPU drivers are installed correctly**.
+* ❌ `nvcc` gives no output → The **CUDA toolkit (compiler)** is **not installed** or not in your `PATH`.
+
+---
+
+### ✅ Next Step: Install CUDA Toolkit (Compiler)
+
+You need `nvcc` to compile OpenCV with CUDA. Since you're on Ubuntu 24.04.2 and have a **Tesla T4 (compute capability 7.5)**, here's how to install CUDA properly:
+
+---
+
+### 🔧 Step-by-Step: Install CUDA Toolkit on Ubuntu 24.04.2
+
+#### 1. **Clean up any old CUDA versions (optional)**
+
+```bash
+sudo apt --purge remove '*cublas*' '*cufft*' '*curand*' '*cusolver*' '*cusparse*' '*npp*' '*nvjpeg*' 'cuda*' 'nsight*' 
+sudo apt autoremove
+```
+
+#### 2. **Download the CUDA Toolkit Installer**
+
+Go to the official [CUDA Toolkit download page](https://developer.nvidia.com/cuda-downloads).
+
+* Select:
+
+  * **OS:** Linux
+  * **Architecture:** x86\_64
+  * **Distribution:** Ubuntu
+  * **Version:** 24.04
+  * **Installer Type:** `deb (local)` is easiest
+
+It will give you commands like:
+
+```bash
+wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2404/x86_64/cuda-ubuntu2404.pin
+sudo mv cuda-ubuntu2404.pin /etc/apt/preferences.d/cuda-repository-pin-600
+sudo apt-key adv --fetch-keys https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2404/x86_64/3bf863cc.pub
+sudo add-apt-repository "deb https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2404/x86_64/ /"
+sudo apt update
+sudo apt install -y cuda
+```
+
+Let me know if you want me to get the latest working commands from the site for you.
+
+---
+
+#### 3. **Add CUDA to your PATH**
+
+After installation, add these lines to your shell config (`~/.bashrc` or `~/.zshrc`):
+
+```bash
+export PATH=/usr/local/cuda/bin:$PATH
+export LD_LIBRARY_PATH=/usr/local/cuda/lib64:$LD_LIBRARY_PATH
+```
+
+Then reload:
+
+```bash
+source ~/.bashrc  # or source ~/.zshrc
+```
+
+Test:
+
+```bash
+nvcc --version
+```
+
+---
+
+Once `nvcc` works, you're ready to go back to building OpenCV with CUDA.
+
+Would you like help automating this setup with a script or checking for cuDNN as well?

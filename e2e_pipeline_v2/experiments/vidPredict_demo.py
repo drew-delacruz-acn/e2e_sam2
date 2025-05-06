@@ -109,12 +109,14 @@ plt.figure(figsize=(9, 6))
 plt.title(f"frame {ann_frame_idx}")
 plt.imshow(Image.open(os.path.join(video_dir, frame_names[ann_frame_idx])))
 show_box(box, plt.gca())
-show_mask((out_mask_logits[0] > 0.0).cpu().numpy(), plt.gca(), obj_id=out_obj_ids[0])
+# Use the safer conversion function
+mask_np = tensor_to_numpy(out_mask_logits[0]) > 0.0
+show_mask(mask_np, plt.gca(), obj_id=out_obj_ids[0])
 # Save the figure
 plt.savefig(os.path.join(results_dir, f"frame_{ann_frame_idx}_box_mask.png"))
 
 # Let's also save the raw mask as a separate file
-binary_mask = (out_mask_logits[0] > 0.0).cpu().numpy()
+binary_mask = tensor_to_numpy(out_mask_logits[0]) > 0.0
 plt.figure(figsize=(9, 6))
 plt.title(f"Binary mask for frame {ann_frame_idx}")
 plt.imshow(binary_mask, cmap='gray')
@@ -122,6 +124,13 @@ plt.savefig(os.path.join(results_dir, f"frame_{ann_frame_idx}_mask_only.png"))
 
 # Add propagation to other frames and save results
 num_frames_to_process = min(10, len(frame_names))  # Process first 10 frames or all if less
+
+def tensor_to_numpy(tensor):
+    """Safely convert tensor to numpy array, handling device and gradient issues."""
+    if isinstance(tensor, torch.Tensor):
+        # Move to CPU if on another device and detach from computation graph
+        return tensor.detach().cpu().numpy()
+    return tensor  # Already a numpy array or other format
 
 for frame_idx in range(num_frames_to_process):
     if frame_idx == ann_frame_idx:
@@ -143,7 +152,10 @@ for frame_idx in range(num_frames_to_process):
     if len(obj_ids) > 0:
         for i, obj_id in enumerate(obj_ids):
             if obj_id == ann_obj_id:
-                mask = (mask_logits[i] > 0.0).cpu().numpy()
+                # Make sure mask_logits is properly converted
+                mask_logit = tensor_to_numpy(mask_logits[i])
+                # Apply threshold to get binary mask
+                mask = mask_logit > 0.0
                 show_mask(mask, plt.gca(), obj_id=obj_id)
     
     # Save the figure

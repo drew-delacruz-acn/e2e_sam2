@@ -5,6 +5,55 @@ import seaborn as sns
 import numpy as np
 import os
 from PIL import Image
+import glob
+
+def find_scene_folder(base_dir, scene_name):
+    """
+    Find the folder matching the scene name in the base directory.
+    """
+    # First try exact match
+    exact_path = os.path.join(base_dir, scene_name)
+    if os.path.exists(exact_path) and os.path.isdir(exact_path):
+        return exact_path
+    
+    # If exact match doesn't exist, look for partial matches
+    for item in os.listdir(base_dir):
+        item_path = os.path.join(base_dir, item)
+        if os.path.isdir(item_path) and scene_name in item:
+            return item_path
+    
+    # If no match, return None
+    return None
+
+def find_image_file(directory, filename):
+    """
+    Find an image file in a directory, trying different extensions if needed.
+    """
+    # Try exact filename first
+    exact_path = os.path.join(directory, filename)
+    if os.path.exists(exact_path):
+        return exact_path
+    
+    # Try adding .jpg extension if needed
+    if not filename.endswith(('.jpg', '.jpeg', '.png')):
+        jpg_path = os.path.join(directory, f"{filename}.jpg")
+        if os.path.exists(jpg_path):
+            return jpg_path
+    
+    # Try finding by number (e.g., if filename is "42.jpg" or just "42")
+    base_filename = os.path.splitext(filename)[0]
+    pattern = os.path.join(directory, f"{base_filename}.*")
+    matching_files = glob.glob(pattern)
+    if matching_files:
+        return matching_files[0]
+    
+    # If still not found, look for any file containing the number
+    if base_filename.isdigit():
+        for file in os.listdir(directory):
+            if base_filename in os.path.splitext(file)[0] and file.endswith(('.jpg', '.jpeg', '.png')):
+                return os.path.join(directory, file)
+    
+    return None
 
 def main():
     st.title("Blur Analysis Visualization Tool")
@@ -71,8 +120,12 @@ def main():
         # Display sample images
         st.subheader("Sample Images")
         
-        # Display images near the threshold
-        if os.path.exists(base_dir):
+        # Find the scene folder
+        scene_folder = find_scene_folder(base_dir, selected_scene)
+        
+        if scene_folder is not None:
+            st.write(f"Found scene folder: {os.path.basename(scene_folder)}")
+            
             # Get frames just below and above threshold
             scene_data_sorted = scene_data.sort_values(by=metric)
             
@@ -86,30 +139,34 @@ def main():
             with col1:
                 st.write("#### Classified as Blurry")
                 for _, row in below_threshold.iterrows():
-                    img_path = os.path.join(base_dir, row['scene'], row['filename'])
-                    try:
-                        if os.path.exists(img_path):
+                    img_path = find_image_file(scene_folder, row['filename'])
+                    if img_path:
+                        try:
                             img = Image.open(img_path)
                             st.image(img, caption=f"Filename: {row['filename']}, {metric}: {row[metric]:.2f}")
-                        else:
-                            st.write(f"Image not found: {img_path}")
-                    except Exception as e:
-                        st.write(f"Error loading image: {e}")
+                        except Exception as e:
+                            st.write(f"Error loading image: {e}")
+                    else:
+                        st.write(f"Image not found: {row['filename']}")
             
             with col2:
                 st.write("#### Classified as Clear")
                 for _, row in above_threshold.iterrows():
-                    img_path = os.path.join(base_dir, row['scene'], row['filename'])
-                    try:
-                        if os.path.exists(img_path):
+                    img_path = find_image_file(scene_folder, row['filename'])
+                    if img_path:
+                        try:
                             img = Image.open(img_path)
                             st.image(img, caption=f"Filename: {row['filename']}, {metric}: {row[metric]:.2f}")
-                        else:
-                            st.write(f"Image not found: {img_path}")
-                    except Exception as e:
-                        st.write(f"Error loading image: {e}")
+                        except Exception as e:
+                            st.write(f"Error loading image: {e}")
+                    else:
+                        st.write(f"Image not found: {row['filename']}")
         else:
-            st.error(f"Base directory not found: {base_dir}")
+            st.error(f"Scene folder not found for: {selected_scene}")
+            # For debugging: show what folders are actually available
+            available_folders = [f for f in os.listdir(base_dir) if os.path.isdir(os.path.join(base_dir, f))]
+            st.write("Available folders:")
+            st.write(available_folders[:10])  # Show first 10 folders to avoid overwhelming the UI
 
 if __name__ == "__main__":
     main() 

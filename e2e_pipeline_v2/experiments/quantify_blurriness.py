@@ -1142,10 +1142,11 @@ def create_comparison_visualization(ax, blur_scores, confidence_scores, all_fram
         ax.text(0.5, 0.5, "No suitable comparison frames found", ha='center', va='center')
         ax.axis('off')
 
-def analyze_frame_directory(image_paths, resize_factor=1.0, skip=1, bg_remove=False, visualize_mask=False, run_dir=".", method='percentile', confidence=False):
+def analyze_frame_directory(image_paths, identifier, run_dir, resize_factor=1.0, skip=1, bg_remove=False, visualize_mask=False, method='percentile', confidence=False):
     """Analyze a directory of individual image frames for blur."""
     start_time = time.time()
-    logger.info(f"Starting analysis of {len(image_paths)} image frames.")
+    logger.info(f"--- Starting analysis for frame set: {identifier} ---")
+    logger.info(f"Found {len(image_paths)} image frames.")
     logger.info(f"Resize factor: {resize_factor}")
     logger.info(f"Processing every {skip} image(s)")
     logger.info(f"Background removal: {'Enabled' if bg_remove else 'Disabled'}")
@@ -1220,7 +1221,8 @@ def analyze_frame_directory(image_paths, resize_factor=1.0, skip=1, bg_remove=Fa
                             axes[1, 1].set_title("Final Foreground Mask")
                             axes[1, 1].axis('off')
                             plt.tight_layout()
-                            vis_save_path = os.path.join(run_dir, f"foreground_mask_visualization_img_{frame_idx_for_log}.png")
+                            # Use identifier in filename
+                            vis_save_path = os.path.join(run_dir, f"foreground_mask_visualization_img_{identifier}_{frame_idx_for_log}.png")
                             plt.savefig(vis_save_path)
                             plt.close(fig)
                             logger.info(f"Saved foreground mask visualization to {vis_save_path}")
@@ -1338,7 +1340,7 @@ def analyze_frame_directory(image_paths, resize_factor=1.0, skip=1, bg_remove=Fa
             })
 
     total_time = time.time() - start_time
-    logger.info(f"Image analysis completed in {total_time:.2f} seconds")
+    logger.info(f"Image analysis for {identifier} completed in {total_time:.2f} seconds")
     
     # Log overall blur stats for the selected method
     if blur_flags[method]:
@@ -1457,8 +1459,10 @@ if __name__ == "__main__":
         run_dir = os.path.join(results_dir, f"analysis_{timestamp}")
         os.makedirs(run_dir, exist_ok=True)
         
+        processing_multiple_frame_dirs = False # Flag for the new mode
+        
         aggregated_results = {} # Initialize dictionary for results
-        final_json_output = {} # Structure for the final JSON file
+        frame_sets_to_process = [] # List to hold tasks for multiple frame directories
         
         # --- Processing ---
         if processing_frames:
@@ -1466,46 +1470,44 @@ if __name__ == "__main__":
             logger.info("Starting frame directory analysis...")
             frame_analysis_output = analyze_frame_directory(
                  image_paths=image_files_to_process,
+                 identifier=os.path.basename(os.path.normpath(input_path)),
+                 run_dir=run_dir,
                  resize_factor=args.resize,
                  skip=args.skip,
                  bg_remove=args.bg_remove,
                  visualize_mask=args.visualize_mask,
-                 run_dir=run_dir,
                  method=args.method,
                  confidence=(args.confidence or args.stakeholder)
             )
             
             if frame_analysis_output:
                 # Structure the output JSON for frames
-                final_json_output = {
-                    os.path.basename(os.path.normpath(input_path)): {
-                        "type": "frames",
-                        "settings": {
-                            "resize_factor": args.resize,
-                            "skip": args.skip,
-                            "bg_remove": args.bg_remove,
-                            "method": args.method
-                        },
-                        "thresholds": frame_analysis_output["thresholds"],
-                        "results": frame_analysis_output["results"],
-                        "confidence": frame_analysis_output["confidence"] 
-                    }
+                aggregated_results[os.path.basename(os.path.normpath(input_path))] = {
+                    "type": "frames",
+                    "settings": {
+                        "resize_factor": args.resize,
+                        "skip": args.skip,
+                        "bg_remove": args.bg_remove,
+                        "method": args.method
+                    },
+                    "thresholds": frame_analysis_output["thresholds"],
+                    "results": frame_analysis_output["results"],
+                    "confidence": frame_analysis_output["confidence"]
                 }
                 logger.info("Frame directory analysis complete.")
-                
-                # --- Generate Plots for Frames Mode ---
-                logger.info("Generating score plots for frame analysis...")
+                # Generate Plots for the single directory
                 plot_path = os.path.join(run_dir, f"blur_plot_frames_{os.path.basename(os.path.normpath(input_path))}_{timestamp}.png")
                 plot_blur_metrics(
                     blur_scores=frame_analysis_output["results"],
                     thresholds=frame_analysis_output["thresholds"],
                     save_path=plot_path,
-                    is_frames_mode=True # Indicate frame mode
+                    is_frames_mode=True
                 )
-                
             else:
                 logger.error("Frame directory analysis failed to produce results.")
-                
+                # Store error information for this specific frame set
+                aggregated_results[os.path.basename(os.path.normpath(input_path))] = {"error": "Analysis failed to produce results"}
+            
         else:
             # --- Process Single Video or Directory of Videos ---
             logger.info("Starting video analysis...")
@@ -1633,11 +1635,11 @@ if __name__ == "__main__":
                  final_json_output = aggregated_results
                  
         # --- Final JSON Output ---
-        if final_json_output:
+        if aggregated_results:
             json_output_path = os.path.join(run_dir, "aggregated_results.json")
             try:
                 with open(json_output_path, 'w') as f:
-                    json.dump(final_json_output, f, indent=4)
+                    json.dump(aggregated_results, f, indent=4)
                 logger.info(f"Aggregated results saved to: {json_output_path}")
             except Exception as e:
                  logger.error(f"Error saving aggregated JSON results: {e}")

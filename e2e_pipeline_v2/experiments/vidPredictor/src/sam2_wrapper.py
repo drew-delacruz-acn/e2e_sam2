@@ -113,6 +113,13 @@ class SAM2VideoWrapper:
         )
         return mask
     
+    def tensor_to_numpy(self, tensor):
+        """Safely convert tensor to numpy array, handling device and gradient issues."""
+        if isinstance(tensor, torch.Tensor):
+            # Move to CPU if on another device and detach from computation graph
+            return tensor.detach().cpu().numpy()
+        return tensor  # Already a numpy array or other format
+    
     def propagate_masks(self, objects_to_track=None):
         """Propagate masks to all frames in the video
         
@@ -122,45 +129,35 @@ class SAM2VideoWrapper:
         Returns:
             Dictionary mapping frame indices to segmentation results
         """
-        # Run propagation using the correct method
-        try:
-            # This is the correct method name in SAM2
-            segments = self.predictor.propagate_in_video(self.inference_state)
+        if self.inference_state is None:
+            raise ValueError("Must call set_video before propagating masks")
             
-            # Convert returned segments to the desired format
-            video_segments = {}
-            
-            # Process segments based on the structure returned
-            # The exact structure might vary depending on SAM2 implementation,
-            # so we'll handle the most likely cases
-            
-            if isinstance(segments, dict):
-                # If already in frame_idx -> data format
-                for frame_idx, data in segments.items():
-                    if 'masks' in data and 'obj_ids' in data:
-                        masks = data['masks']
-                        obj_ids = data['obj_ids']
-                        
-                        # Convert masks to numpy if needed
-                        if isinstance(masks, torch.Tensor):
-                            masks = masks.cpu().detach().numpy()
-                            # Handle dimensions
-                            if masks.ndim > 3:
-                                masks = masks.squeeze(0)
-                        
-                        video_segments[frame_idx] = {
-                            'masks': masks,
-                            'obj_ids': obj_ids
-                        }
-            else:
-                # If returned as a list or other structure,
-                # we need to adapt the processing accordingly
-                print("Propagation result format may require adapting the processing code.")
-                # Return the raw result for debugging
-                return segments
-            
-            return video_segments
+        # Run propagation through all frames - correctly handling the iterator
+        video_segments = {}  # video_segments contains the per-frame segmentation results
         
+        try:
+            # Iterate through the propagation results
+            for out_frame_idx, out_obj_ids, out_mask_logits in self.predictor.propagate_in_video(self.inference_state):
+                # Filter objects if needed
+                if objects_to_track is not None:
+                    indices = [i for i, obj_id in enumerate(out_obj_ids) if obj_id in objects_to_track]
+                    if not indices:
+                        continue
+                    filtered_obj_ids = [out_obj_ids[i] for i in indices]
+                    filtered_mask_logits = [out_mask_logits[i] for i in indices]
+                else:
+                    filtered_obj_ids = out_obj_ids
+                    filtered_mask_logits = out_mask_logits
+                
+                # Store masks by object ID
+                video_segments[out_frame_idx] = {
+                    obj_id: (self.tensor_to_numpy(mask_logit) > 0.0)
+                    for obj_id, mask_logit in zip(filtered_obj_ids, filtered_mask_logits)
+                }
+                print(f"Processed frame {out_frame_idx}, found {len(filtered_obj_ids)} objects")
+                
+            return video_segments
+            
         except Exception as e:
             print(f"Error during mask propagation: {str(e)}")
             # Print available methods for debugging

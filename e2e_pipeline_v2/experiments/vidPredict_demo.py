@@ -41,7 +41,7 @@ def tensor_to_numpy(tensor):
     """Safely convert tensor to numpy array, handling device and gradient issues."""
     if isinstance(tensor, torch.Tensor):
         # Move to CPU if on another device and detach from computation graph
-        return tensor.detach().cpu().numpy()
+        return tensor.detach().cpu().numpy().squeeze(0) if tensor.ndim > 0 else tensor.detach().cpu().numpy()
     return tensor  # Already a numpy array or other format
 
 def show_mask(mask, ax, obj_id=None, random_color=False):

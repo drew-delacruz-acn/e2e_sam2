@@ -39,18 +39,19 @@ sam_wrapper.visualize_frame(
     output_dir=output_dir
 )
 
-# # Test propagation
-# print("Propagating masks...")
-# segments = sam_wrapper.propagate_masks(objects_to_track=[1])
-# print(f'saving results to {output_dir}')
-# # Visualize a few propagated frames
-# for idx in range(0, min(len(frames), 30), 10):
-#     if idx in segments:
-#         masks = segments[idx]["masks"]
-#         obj_ids = segments[idx]["obj_ids"]
-#         sam_wrapper.visualize_frame(
-#             idx,
-#             mask=masks,
-#             obj_ids=obj_ids,
-#             output_dir=output_dir
-#         )
+# Test propagation
+print("Propagating masks...")
+segments = sam_wrapper.propagate_masks(objects_to_track=[1])
+print(f'saving results to {output_dir}')
+# Visualize a few propagated frames
+for idx in range(0, min(len(frames), 30), 10):
+    if idx in segments:
+        print(segments[idx])
+        masks = segments[idx][1]
+        obj_ids = segments[idx]["obj_ids"]
+        sam_wrapper.visualize_frame(
+            idx,
+            mask=masks,
+            obj_ids=obj_ids,
+            output_dir=output_dir
+        )

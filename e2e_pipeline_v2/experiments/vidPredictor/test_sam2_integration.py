@@ -3,6 +3,7 @@ from src.frame_loader import load_frames_from_directory
 from src.sam2_wrapper import SAM2VideoWrapper
 import os
 import torch
+import numpy as np
 
 # Create output directory
 output_dir = "./sam2_results"
@@ -51,6 +52,14 @@ for idx in range(0, min(len(frames), 30), 10):
         print(f"Visualizing frame {idx}")
         # The segments dictionary maps frame_idx -> {obj_id -> mask}
         frame_segments = segments[idx]
+        
+        # Debug print to check the mask shapes
+        for obj_id, mask in frame_segments.items():
+            print(f"  Object {obj_id} mask shape: {mask.shape}")
+            # Ensure the mask is properly squeezed to 2D
+            if mask.ndim > 2:
+                frame_segments[obj_id] = np.squeeze(mask)
+                print(f"  After squeeze: {frame_segments[obj_id].shape}")
         
         # Extract masks and corresponding object IDs
         obj_ids = list(frame_segments.keys())

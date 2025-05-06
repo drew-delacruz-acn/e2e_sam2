@@ -207,9 +207,10 @@ class SAM2VideoWrapper:
                 # Single mask - ensure it's a numpy array
                 if isinstance(mask, torch.Tensor):
                     mask = self.tensor_to_numpy(mask)
-                    # Squeeze if necessary
-                    if mask.ndim > 2:
-                        mask = np.squeeze(mask, axis=0)
+                # Squeeze if necessary - remove ALL extra dimensions
+                if mask.ndim > 2:
+                    mask = np.squeeze(mask)
+                print(f"Single mask shape: {mask.shape}")
                 plt.imshow(mask, alpha=0.5, cmap="jet")
             else:
                 # Multiple masks
@@ -217,9 +218,10 @@ class SAM2VideoWrapper:
                     # Ensure mask is a numpy array
                     if isinstance(m, torch.Tensor):
                         m = self.tensor_to_numpy(m)
-                        # Squeeze if necessary
-                        if m.ndim > 2:
-                            m = np.squeeze(m, axis=0)
+                    # Squeeze if necessary - remove ALL extra dimensions
+                    if m.ndim > 2:
+                        m = np.squeeze(m)
+                    print(f"Mask {i} shape: {m.shape}")
                     
                     color_idx = (obj_id % len(colors))
                     plt.imshow(m, alpha=0.5, cmap=plt.cm.colors.ListedColormap([colors[color_idx]]))

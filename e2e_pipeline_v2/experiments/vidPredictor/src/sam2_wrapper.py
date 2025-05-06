@@ -274,4 +274,5 @@ class SAM2VideoWrapper:
             print(f"Saved segmentation visualization to {vis_path}")
         
         plt.show()
+        print('HELLO')
         #WHY

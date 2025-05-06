@@ -1388,9 +1388,10 @@ if __name__ == "__main__":
         # --- Input Handling ---
         input_path = args.input
         video_files_to_process = []
-        image_files_to_process = []
+        image_files_to_process = [] # Holds images if found directly in input_path
         processing_directory_videos = False
         processing_frames = False
+        processing_multiple_frame_dirs = False # Flag for the new mode
         
         if not os.path.exists(input_path):
             logger.error(f"Input path not found: {input_path}")
@@ -1448,6 +1449,26 @@ if __name__ == "__main__":
                 exit(1)
             logger.info(f"Found {len(image_files_to_process)} image file(s) to process.")
             
+            else:
+                 # Scenario B: Look for subdirectories containing images
+                 logger.info("No images found directly. Looking for subdirectories with images...")
+                 frame_sets_to_process = [] # Re-initialize here to be sure
+                 for item in os.listdir(input_path):
+                     item_path = os.path.join(input_path, item)
+                     if os.path.isdir(item_path):
+                         frame_sets_to_process.append(item_path)
+                         logger.info(f"Found subdirectory: {item_path}")
+                     else:
+                         logger.error(f"Input directory contains neither supported image files nor subdirectories with supported image files: {input_path}")
+                         exit(1)
+                 
+            # Final check: ensure we found *something* to process
+            if not image_files_to_process and not frame_sets_to_process:
+                logger.error(f"No supported image files found to process in: {input_path} (checked direct files and subdirectories)")
+                exit(1)
+            elif not processing_multiple_frame_dirs and image_files_to_process: # Only log this if we found direct files AND are not processing subdirs
+                logger.info(f"Processing {len(image_files_to_process)} image file(s) found directly.")
+            
         else:
             # Should not happen due to argparse choices, but good practice
             logger.error(f"Invalid input_type specified: {args.input_type}")
@@ -1458,8 +1479,6 @@ if __name__ == "__main__":
         os.makedirs(results_dir, exist_ok=True)
         run_dir = os.path.join(results_dir, f"analysis_{timestamp}")
         os.makedirs(run_dir, exist_ok=True)
-        
-        processing_multiple_frame_dirs = False # Flag for the new mode
         
         aggregated_results = {} # Initialize dictionary for results
         frame_sets_to_process = [] # List to hold tasks for multiple frame directories

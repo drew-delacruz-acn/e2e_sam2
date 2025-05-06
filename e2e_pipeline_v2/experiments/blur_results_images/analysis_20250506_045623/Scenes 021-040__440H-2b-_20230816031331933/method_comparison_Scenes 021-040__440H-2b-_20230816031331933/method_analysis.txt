@@ -1,0 +1,6 @@
+Method Disagreement Analysis for Sequence: Scenes 021-040__440H-2b-_20230816031331933
+Based on 12 sampled frames:
+
+Percentile: 0/12 frames disagreed with majority (0.0%)
+Stddev: 5/12 frames disagreed with majority (41.7%)
+Fixed: 7/12 frames disagreed with majority (58.3%)

@@ -1,0 +1,6 @@
+Method Disagreement Analysis for Sequence: Scenes 001-020__112P-5- mos_20230728143243774
+Based on 7 sampled frames:
+
+Percentile: 4/7 frames disagreed with majority (57.1%)
+Stddev: 0/7 frames disagreed with majority (0.0%)
+Fixed: 3/7 frames disagreed with majority (42.9%)

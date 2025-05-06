@@ -1,0 +1,10 @@
+processed_index,original_index,filename,laplacian,tenengrad,fft,is_blurry_percentile,is_blurry_stddev,is_blurry_fixed
+0,0,0.jpg,600.23,13.28,3.47,True,True,True
+1,1,1.jpg,626.75,15.07,4.08,False,False,True
+2,2,2.jpg,604.45,13.26,3.47,True,True,True
+3,3,3.jpg,588.36,12.20,3.32,True,True,True
+4,4,4.jpg,570.83,17.99,4.91,True,True,True
+5,5,5.jpg,569.84,17.08,4.83,True,True,True
+6,6,6.jpg,568.67,17.04,4.86,True,True,True
+7,7,7.jpg,584.86,17.64,5.01,False,False,True
+8,8,8.jpg,599.10,20.36,5.36,False,False,True

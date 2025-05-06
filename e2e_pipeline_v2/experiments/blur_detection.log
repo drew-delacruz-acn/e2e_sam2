@@ -9239,3 +9239,9 @@
 2025-05-06 03:01:13,588 - INFO - Processing image frames in directory: /home/ubuntu/code/drew/e2e_sam2/frames/
 2025-05-06 03:01:13,602 - INFO - Using natsort for natural sorting of filenames.
 2025-05-06 03:01:13,602 - ERROR - No supported image files found in directory: /home/ubuntu/code/drew/e2e_sam2/frames/
+2025-05-06 03:10:37,655 - INFO - ========================================
+2025-05-06 03:10:37,656 - INFO - Blur Detection Script started at 20250506_031037
+2025-05-06 03:10:37,656 - INFO - ========================================
+2025-05-06 03:10:37,656 - INFO - Processing image frames in directory: /home/ubuntu/code/drew/e2e_sam2/frames/
+2025-05-06 03:10:37,670 - INFO - Using natsort for natural sorting of filenames.
+2025-05-06 03:10:37,671 - ERROR - Unhandled exception: name 'frame_sets_to_process' is not defined

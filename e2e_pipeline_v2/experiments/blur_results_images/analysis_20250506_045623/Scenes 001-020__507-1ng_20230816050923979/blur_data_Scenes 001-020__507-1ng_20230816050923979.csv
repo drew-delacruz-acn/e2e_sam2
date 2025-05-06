@@ -1,0 +1,4 @@
+processed_index,original_index,filename,laplacian,tenengrad,fft,is_blurry_percentile,is_blurry_stddev,is_blurry_fixed
+0,0,0.jpg,585.67,16.21,4.11,True,True,True
+1,1,1.jpg,581.12,16.46,4.13,True,True,True
+2,2,2.jpg,596.73,16.71,4.11,False,False,True

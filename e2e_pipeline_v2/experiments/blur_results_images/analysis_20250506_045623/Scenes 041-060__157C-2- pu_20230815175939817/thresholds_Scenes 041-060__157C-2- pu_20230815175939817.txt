@@ -1,0 +1,21 @@
+Calculated Thresholds for Sequence: Scenes 041-060__157C-2- pu_20230815175939817
+
+Percentile method:
+  Laplacian: 608.79
+  Tenengrad: 18.16
+  Fft: 4.41
+
+Stddev method:
+  Laplacian: 603.87
+  Tenengrad: 17.80
+  Fft: 4.32
+
+Fixed method:
+  Laplacian: 100.00
+  Tenengrad: 20.00
+  Fft: 10.00
+
+Blur Detection Results (Processed Frames):
+Percentile method: Found 59 blurry frames out of 181 (32.6%)
+Stddev method: Found 34 blurry frames out of 181 (18.8%)
+Fixed method: Found 181 blurry frames out of 181 (100.0%)

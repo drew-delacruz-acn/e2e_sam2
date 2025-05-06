@@ -41,14 +41,10 @@ def tensor_to_numpy(tensor):
     """Safely convert tensor to numpy array, handling device and gradient issues."""
     if isinstance(tensor, torch.Tensor):
         # Move to CPU if on another device and detach from computation graph
-        return tensor.detach().cpu().numpy()
+        return tensor.detach().cpu().numpy().squeeze(0)
     return tensor  # Already a numpy array or other format
 
 def show_mask(mask, ax, obj_id=None, random_color=False):
-    # Ensure mask is a numpy array
-    if isinstance(mask, torch.Tensor):
-        mask = tensor_to_numpy(mask)
-        
     if random_color:
         color = np.concatenate([np.random.random(3), np.array([0.6])], axis=0)
     else:
@@ -95,17 +91,17 @@ plt.title(f"frame {frame_idx}")
 plt.imshow(Image.open(os.path.join(video_dir, frame_names[frame_idx])))
 # Save the figure
 plt.savefig(os.path.join(results_dir, f"frame_{frame_idx}_original.png"))
-plt.close()
 
-# Initialize the video inference state
+
 inference_state = predictor.init_state(video_path=video_dir)
+
+
 predictor.reset_state(inference_state)
 
-# Define the frame we want to annotate and the object ID
 ann_frame_idx = 0  # the frame index we interact with
 ann_obj_id = 4  # give a unique id to each object we interact with (it can be any integers)
 
-# Let's add a box at (x_min, y_min, x_max, y_max)
+# Let's add a box at (x_min, y_min, x_max, y_max) = (300, 0, 500, 400) to get started
 box = np.array([250, 69, 773, 474], dtype=np.float32)
 _, out_obj_ids, out_mask_logits = predictor.add_new_points_or_box(
     inference_state=inference_state,
@@ -114,7 +110,7 @@ _, out_obj_ids, out_mask_logits = predictor.add_new_points_or_box(
     box=box,
 )
 
-# Show the results on the current (interacted) frame
+# show the results on the current (interacted) frame
 plt.figure(figsize=(9, 6))
 plt.title(f"frame {ann_frame_idx}")
 plt.imshow(Image.open(os.path.join(video_dir, frame_names[ann_frame_idx])))
@@ -124,56 +120,52 @@ mask_np = tensor_to_numpy(out_mask_logits[0]) > 0.0
 show_mask(mask_np, plt.gca(), obj_id=out_obj_ids[0])
 # Save the figure
 plt.savefig(os.path.join(results_dir, f"frame_{ann_frame_idx}_box_mask.png"))
-print(f'Saving to {os.path.join(results_dir, f"frame_{ann_frame_idx}_box_mask.png")}')
-
-# Save the raw mask as a separate file
+print(f'saviong to {os.path.join(results_dir, f"frame_{ann_frame_idx}_box_mask.png")}')
+# Let's also save the raw mask as a separate file
 binary_mask = tensor_to_numpy(out_mask_logits[0]) > 0.0
 print(f"Binary mask shape: {binary_mask.shape}")
 plt.figure(figsize=(9, 6))
 plt.title(f"Binary mask for frame {ann_frame_idx}")
 plt.imshow(binary_mask, cmap='gray')
 plt.savefig(os.path.join(results_dir, f"frame_{ann_frame_idx}_mask_only.png"))
-plt.close()
 
-# ----- NOTEBOOK-STYLE PROPAGATION -----
-print("Running video propagation like the notebook...")
-
-# Run propagation throughout the video and collect the results in a dict
-video_segments = {}  # video_segments contains the per-frame segmentation results
-for out_frame_idx, out_obj_ids, out_mask_logits in predictor.propagate_in_video(inference_state):
-    # Convert masks to numpy and store by object ID
-    video_segments[out_frame_idx] = {
-        out_obj_id: (tensor_to_numpy(out_mask_logits[i]) > 0.0)
-        for i, out_obj_id in enumerate(out_obj_ids)
-    }
-    print(f"Processed frame {out_frame_idx}, found {len(out_obj_ids)} objects")
-
-# Define how many frames to process
+# Add propagation to other frames and save results
 num_frames_to_process = min(10, len(frame_names))  # Process first 10 frames or all if less
-vis_frame_stride = 1  # Process every frame (set higher for skipping frames)
 
-# Render the segmentation results
-plt.close("all")
-for out_frame_idx in range(0, num_frames_to_process, vis_frame_stride):
-    if out_frame_idx == ann_frame_idx:
-        continue  # Skip the annotated frame we already processed
-        
-    plt.figure(figsize=(9, 6))
-    plt.title(f"frame {out_frame_idx}")
-    plt.imshow(Image.open(os.path.join(video_dir, frame_names[out_frame_idx])))
+
+for frame_idx in range(num_frames_to_process):
+    if frame_idx == ann_frame_idx:
+        continue  # Skip the initial frame we already processed
+    test = predictor.propagate_in_video(
+        inference_state=inference_state
+    )
+
+    print(f'-------------------------')
+    print(f'test {test}')
+    print(f'--------------------------')
+    # Propagate to this frame
+    _,obj_ids, mask_logits = predictor.propagate_in_video(
+        inference_state=inference_state
+    )
     
-    # Show masks for this frame if available
-    if out_frame_idx in video_segments:
-        masks_for_frame = video_segments[out_frame_idx]
-        for out_obj_id, out_mask in masks_for_frame.items():
-            if out_obj_id == ann_obj_id:  # Only show our object of interest
-                show_mask(out_mask, plt.gca(), obj_id=out_obj_id)
-                print(f"Rendering mask for object {out_obj_id} in frame {out_frame_idx}")
-    else:
-        print(f"No masks found for frame {out_frame_idx}")
+    # Create visualization
+    plt.figure(figsize=(9, 6))
+    plt.title(f"frame {frame_idx} - propagated mask")
+    img = Image.open(os.path.join(video_dir, frame_names[frame_idx]))
+    plt.imshow(img)
+    
+    # Find the index of our object ID in the returned results
+    if len(obj_ids) > 0:
+        for i, obj_id in enumerate(obj_ids):
+            if obj_id == ann_obj_id:
+                # Make sure mask_logits is properly converted
+                mask_logit = tensor_to_numpy(mask_logits[i])
+                # Apply threshold to get binary mask
+                mask = mask_logit > 0.0
+                show_mask(mask, plt.gca(), obj_id=obj_id)
     
     # Save the figure
-    plt.savefig(os.path.join(results_dir, f"frame_{out_frame_idx}_propagated.png"))
+    plt.savefig(os.path.join(results_dir, f"frame_{frame_idx}_propagated.png"))
     plt.close()  # Close figure to avoid memory issues
 
 print(f"All results saved to: {results_dir}")

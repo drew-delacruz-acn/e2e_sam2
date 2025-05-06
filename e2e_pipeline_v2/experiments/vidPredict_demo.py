@@ -37,6 +37,12 @@ model_cfg = "configs/sam2.1/sam2.1_hiera_l.yaml"
 
 predictor = build_sam2_video_predictor(model_cfg, sam2_checkpoint, device=device)
 
+def tensor_to_numpy(tensor):
+    """Safely convert tensor to numpy array, handling device and gradient issues."""
+    if isinstance(tensor, torch.Tensor):
+        # Move to CPU if on another device and detach from computation graph
+        return tensor.detach().cpu().numpy()
+    return tensor  # Already a numpy array or other format
 
 def show_mask(mask, ax, obj_id=None, random_color=False):
     if random_color:
@@ -125,12 +131,6 @@ plt.savefig(os.path.join(results_dir, f"frame_{ann_frame_idx}_mask_only.png"))
 # Add propagation to other frames and save results
 num_frames_to_process = min(10, len(frame_names))  # Process first 10 frames or all if less
 
-def tensor_to_numpy(tensor):
-    """Safely convert tensor to numpy array, handling device and gradient issues."""
-    if isinstance(tensor, torch.Tensor):
-        # Move to CPU if on another device and detach from computation graph
-        return tensor.detach().cpu().numpy()
-    return tensor  # Already a numpy array or other format
 
 for frame_idx in range(num_frames_to_process):
     if frame_idx == ann_frame_idx:

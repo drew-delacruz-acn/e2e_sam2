@@ -57,6 +57,8 @@ class SAM2VideoWrapper:
             return
             
         elif frames is not None:
+
+            print(f'USING DIRECT FRAMES APPROACH')
             # Using direct frames approach - save frames to temporary directory
             import tempfile
             import cv2

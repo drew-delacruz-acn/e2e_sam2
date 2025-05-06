@@ -1,10 +1,11 @@
-# sam2_wrapper.py
+# sam2_wrapper.py (corrected version)
 import numpy as np
 import torch
 import matplotlib.pyplot as plt
+import os
 from PIL import Image
 
-# Assuming the SAM2 package is installed and available
+# Import SAM2 functionality
 from sam2.build_sam import build_sam2_video_predictor
 
 class SAM2VideoWrapper:
@@ -36,15 +37,58 @@ class SAM2VideoWrapper:
                 
         # Initialize the predictor
         self.predictor = build_sam2_video_predictor(config_path, checkpoint_path, device=device)
-        self.frames = None
-        self.num_frames = 0
+        self.inference_state = None
+        self.frames_dir = None
     
-    def set_video(self, frames):
-        """Set video frames for processing"""
-        self.frames = frames
-        self.num_frames = len(frames)
-        self.predictor.initialize_video_frames(frames)
-        print(f"Set {len(frames)} frames for processing")
+    def set_video(self, frames=None, frames_dir=None):
+        """
+        Set video for processing either from frames array or directory
+        
+        Args:
+            frames: List of frames as numpy arrays (optional)
+            frames_dir: Directory containing video frames (optional)
+        """
+        if frames_dir is not None:
+            # Using directory path approach (like in vidPredict_demo.py)
+            self.frames_dir = frames_dir
+            self.inference_state = self.predictor.init_state(video_path=frames_dir)
+            self.predictor.reset_state(self.inference_state)
+            print(f"Set video from directory: {frames_dir}")
+            return
+            
+        elif frames is not None:
+            # Using direct frames approach - save frames to temporary directory
+            import tempfile
+            import cv2
+            
+            # Create temp directory
+            temp_dir = tempfile.mkdtemp()
+            print(f"Creating temporary directory for frames: {temp_dir}")
+            
+            # Save frames to temp directory
+            for i, frame in enumerate(frames):
+                # Convert to BGR for OpenCV
+                if isinstance(frame, np.ndarray):
+                    # If RGB, convert to BGR
+                    if frame.shape[2] == 3:
+                        frame_bgr = cv2.cvtColor(frame, cv2.COLOR_RGB2BGR)
+                    else:
+                        frame_bgr = frame
+                else:
+                    # If PIL image, convert to numpy then BGR
+                    frame_np = np.array(frame)
+                    frame_bgr = cv2.cvtColor(frame_np, cv2.COLOR_RGB2BGR)
+                
+                # Save frame
+                cv2.imwrite(os.path.join(temp_dir, f"{i}.jpg"), frame_bgr)
+            
+            # Initialize with temp directory
+            self.frames_dir = temp_dir
+            self.inference_state = self.predictor.init_state(video_path=temp_dir)
+            self.predictor.reset_state(self.inference_state)
+            print(f"Set {len(frames)} frames via temporary directory")
+        else:
+            raise ValueError("Either frames or frames_dir must be provided")
     
     def add_box(self, frame_idx, obj_id, box):
         """Add a box prompt for an object
@@ -78,8 +122,19 @@ class SAM2VideoWrapper:
         """
         video_segments = {}
         
+        # Get number of frames
+        if self.frames_dir:
+            frame_files = [
+                p for p in os.listdir(self.frames_dir)
+                if os.path.splitext(p)[-1].lower() in [".jpg", ".jpeg", ".png"]
+            ]
+            num_frames = len(frame_files)
+        else:
+            # If we don't know, use a reasonable default
+            num_frames = 100
+        
         # Propagate to all frames
-        for frame_idx in range(self.num_frames):
+        for frame_idx in range(num_frames):
             masks, obj_ids = self.predictor.propagate_masks_to_frame(
                 frame_idx=frame_idx,
                 objects_to_track=objects_to_track
@@ -93,13 +148,32 @@ class SAM2VideoWrapper:
         
         return video_segments
     
-    def visualize_frame(self, frame_idx, mask=None, obj_ids=None, box=None):
+    def visualize_frame(self, frame_idx, mask=None, obj_ids=None, box=None, output_dir=None):
         """Visualize a frame with segmentation mask and prompts"""
-        frame = self.predictor.get_video_frame(frame_idx)
+        # Get the frame
+        if self.frames_dir:
+            # Find frame file
+            frame_files = [
+                p for p in os.listdir(self.frames_dir)
+                if os.path.splitext(p)[-1].lower() in [".jpg", ".jpeg", ".png"]
+            ]
+            frame_files.sort(key=lambda p: int(os.path.splitext(p)[0]))
+            
+            if frame_idx < len(frame_files):
+                frame_path = os.path.join(self.frames_dir, frame_files[frame_idx])
+                frame = np.array(Image.open(frame_path))
+            else:
+                raise ValueError(f"Frame index {frame_idx} out of range")
+        else:
+            # Try to get from predictor
+            try:
+                frame = self.predictor.get_video_frame(frame_idx)
+            except:
+                raise ValueError("Cannot retrieve frame - no frames directory or getter method available")
         
         plt.figure(figsize=(10, 10))
         plt.imshow(frame)
-        plt.title(f"frame {frame_idx}")
+        plt.title(f"Frame {frame_idx}")
         
         if mask is not None:
             colors = [(1, 0, 0, 0.5), (0, 1, 0, 0.5), (0, 0, 1, 0.5), (1, 1, 0, 0.5), (1, 0, 1, 0.5)]
@@ -119,4 +193,12 @@ class SAM2VideoWrapper:
         
         plt.axis('off')
         plt.tight_layout()
+        
+        # Save visualization if output directory provided
+        if output_dir is not None:
+            os.makedirs(output_dir, exist_ok=True)
+            vis_path = os.path.join(output_dir, f"segment_frame_{frame_idx:04d}.jpg")
+            plt.savefig(vis_path, bbox_inches='tight', dpi=150)
+            print(f"Saved segmentation visualization to {vis_path}")
+        
         plt.show()

@@ -1,9 +1,10 @@
-# owlv2_detector.py
+# owlv2_detector.py (updated version)
 import torch
 from PIL import Image
 import numpy as np
-from transformers import Owlv2Processor, Owlv2ForObjectDetection
+import os
 import matplotlib.pyplot as plt
+from transformers import Owlv2Processor, Owlv2ForObjectDetection
 
 class OWLv2Detector:
     def __init__(self, model_name="google/owlv2-base-patch16", device=None):
@@ -83,8 +84,20 @@ class OWLv2Detector:
         
         return detections
     
-    def visualize_detections(self, image, detections):
-        """Visualize detections on the image"""
+    def visualize_detections(self, image, detections, output_dir=None, frame_idx=None, show=True):
+        """
+        Visualize detections on the image and optionally save to directory
+        
+        Args:
+            image: Image to visualize (PIL.Image or numpy array)
+            detections: List of detections from detect() method
+            output_dir: Directory to save visualizations (None to skip saving)
+            frame_idx: Frame index for naming saved files
+            show: Whether to display the visualization with plt.show()
+        
+        Returns:
+            Path to saved visualization (if output_dir is provided)
+        """
         # Convert PIL Image to numpy array if needed
         if not isinstance(image, np.ndarray):
             image_np = np.array(image)
@@ -116,4 +129,29 @@ class OWLv2Detector:
         
         plt.axis('off')
         plt.tight_layout()
-        plt.show()
+        
+        # Save to file if output directory is provided
+        save_path = None
+        if output_dir is not None:
+            # Create directory if it doesn't exist
+            os.makedirs(output_dir, exist_ok=True)
+            
+            # Determine filename
+            if frame_idx is not None:
+                filename = f"frame_{frame_idx:04d}_detections.jpg"
+            else:
+                # Use timestamp if frame_idx not provided
+                import time
+                filename = f"detection_{int(time.time())}.jpg"
+            
+            save_path = os.path.join(output_dir, filename)
+            plt.savefig(save_path, bbox_inches='tight', dpi=150)
+            print(f"Saved detection visualization to {save_path}")
+        
+        # Show the plot if requested
+        if show:
+            plt.show()
+        else:
+            plt.close()
+            
+        return save_path

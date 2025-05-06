@@ -276,3 +276,22 @@ class SAM2VideoWrapper:
         plt.show()
         print('HELLO')
         #WHY
+
+#         Adding box to frame 0...
+# /home/ubuntu/code/drew/sam2/sam2/sam2_video_predictor.py:786: UserWarning: cannot import name '_C' from 'sam2' (/home/ubuntu/code/drew/sam2/sam2/__init__.py)
+
+# Skipping the post-processing step due to the error above. You can still use SAM 2 and it's OK to ignore the error above, although some post-processing functionality may be limited (which doesn't affect the results in most cases; see https://github.com/facebookresearch/sam2/blob/main/INSTALL.md).
+#   pred_masks_gpu = fill_holes_in_mask_scores(
+# Mask shape: (540, 960)
+# Mask dtype: bool
+# Mask values: min=False, max=True
+# Number of True pixels: 88393
+# Traceback (most recent call last):
+#   File "/home/ubuntu/code/drew/e2e_sam2/e2e_pipeline_v2/experiments/vidPredictor/test_sam2_integration.py", line 41, in <module>
+#     sam_wrapper.visualize_frame(
+#   File "/home/ubuntu/code/drew/e2e_sam2/e2e_pipeline_v2/experiments/vidPredictor/src/sam2_wrapper.py", line 258, in visualize_frame
+#     self.show_mask(m, ax, obj_id=obj_id)
+#   File "/home/ubuntu/code/drew/e2e_sam2/e2e_pipeline_v2/experiments/vidPredictor/src/sam2_wrapper.py", line 158, in show_mask
+#     h, w = mask.shape
+#     ^^^^
+# ValueError: not enough values to unpack (expected 2, got 1)

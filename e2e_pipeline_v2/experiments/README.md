@@ -143,7 +143,8 @@ Results are saved in a timestamped directory under `blur_results/analysis_{times
     }
   }
   ```
-- **No individual plots, CSVs, stakeholder reports, or video-specific visualizations** (like time-series plots) are generated in frames mode.
+- Score distribution/sequence plots (`blur_plot_frames_{dir_name}_{timestamp}.png` and associated histograms) *are* generated. Note: the sequence plot's x-axis represents the image index in the sorted list, not time.
+- **Other individual plots, CSVs, stakeholder reports, and sample image visualizations are not generated** in frames mode.
 - Optional: `foreground_mask_visualization_img_{image_index}.png` if `--bg_remove` and `--visualize_mask` are used (saved once per run for the first image with a valid mask).
 
 ### Interpreting Results

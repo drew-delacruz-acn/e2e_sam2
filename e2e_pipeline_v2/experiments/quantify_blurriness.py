@@ -319,7 +319,7 @@ def analyze_video(video_path, resize_factor=1.0, skip_frames=1, bg_remove=False,
         cap.release()
         
         # Log performance stats
-        logger.info(f"Processed {processed_count} frames out of {frame_idx} total frames")
+        logger.info(f"Processed {processed_count} frames out of {frame_idx} total frames ")
         if processing_times['laplacian']:
             logger.info(f"Average processing times per frame:")
             logger.info(f"  Laplacian: {np.mean(processing_times['laplacian']):.4f} seconds")
@@ -1424,7 +1424,7 @@ if __name__ == "__main__":
             if not os.path.isdir(input_path):
                  logger.error(f"Input path must be a directory when input_type is 'frames': {input_path}")
                  exit(1)
-                
+                 
             processing_frames = True
             logger.info(f"Processing image frames in directory: {input_path}")
             valid_extensions = ('.png', '.jpg', '.jpeg', '.bmp', '.tiff')
@@ -1652,8 +1652,3 @@ if __name__ == "__main__":
     except Exception as e:
         logger.error(f"Unhandled exception: {e}")
 
-
-
-
-# /home/ubuntu/code/drew/e2e_sam2/frames/Scenes 001-020__101B-1-_20230726152900590
-# /home/ubuntu/code/drew/e2e_sam2/frames/Scenes 001-020__101B-1-_20230726152900590

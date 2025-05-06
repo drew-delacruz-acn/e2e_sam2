@@ -1424,7 +1424,7 @@ if __name__ == "__main__":
             if not os.path.isdir(input_path):
                  logger.error(f"Input path must be a directory when input_type is 'frames': {input_path}")
                  exit(1)
-                 
+                
             processing_frames = True
             logger.info(f"Processing image frames in directory: {input_path}")
             valid_extensions = ('.png', '.jpg', '.jpeg', '.bmp', '.tiff')
@@ -1652,3 +1652,8 @@ if __name__ == "__main__":
     except Exception as e:
         logger.error(f"Unhandled exception: {e}")
 
+
+
+
+# /home/ubuntu/code/drew/e2e_sam2/frames/Scenes 001-020__101B-1-_20230726152900590
+# /home/ubuntu/code/drew/e2e_sam2/frames/Scenes 001-020__101B-1-_20230726152900590

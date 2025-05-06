@@ -123,7 +123,7 @@ class SAM2VideoWrapper:
         # Run propagation using the correct method
         try:
             # This is the correct method name in SAM2
-            segments = self.predictor.propagate_in_video(objects_to_track=objects_to_track)
+            segments = self.predictor.propagate_in_video(self.inference_state)
             
             # Convert returned segments to the desired format
             video_segments = {}

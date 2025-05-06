@@ -84,3 +84,22 @@ inference_state = predictor.init_state(video_path=video_dir)
 
 
 predictor.reset_state(inference_state)
+
+ann_frame_idx = 0  # the frame index we interact with
+ann_obj_id = 4  # give a unique id to each object we interact with (it can be any integers)
+
+# Let's add a box at (x_min, y_min, x_max, y_max) = (300, 0, 500, 400) to get started
+box = np.array([300, 0, 500, 400], dtype=np.float32)
+_, out_obj_ids, out_mask_logits = predictor.add_new_points_or_box(
+    inference_state=inference_state,
+    frame_idx=ann_frame_idx,
+    obj_id=ann_obj_id,
+    box=box,
+)
+
+# show the results on the current (interacted) frame
+plt.figure(figsize=(9, 6))
+plt.title(f"frame {ann_frame_idx}")
+plt.imshow(Image.open(os.path.join(video_dir, frame_names[ann_frame_idx])))
+show_box(box, plt.gca())
+show_mask((out_mask_logits[0] > 0.0).cpu().numpy(), plt.gca(), obj_id=out_obj_ids[0])

@@ -148,72 +148,101 @@ class OWLv2Detector:
         plt.show()
 
 
-def load_video_frame(video_path=None, frames_dir=None, frame_pattern="*.jpg", frame_idx=0):
+def load_frame_from_directory(frames_dir, frame_pattern="*.jpg", frame_idx=0, return_info=False):
     """
-    Load a specific frame from a video or directory
+    Load a specific frame from a directory of frames
     
     Args:
-        video_path: Path to video file
-        frames_dir: Path to directory with frames
-        frame_pattern: Pattern for frame files
-        frame_idx: Index of frame to load
+        frames_dir: Path to directory containing the frames
+        frame_pattern: Pattern for frame files (e.g., "*.jpg", "frame_*.png")
+        frame_idx: Index of frame to load (0-based)
+        return_info: Whether to return additional frame information
         
     Returns:
-        Selected frame as numpy array
+        Frame as numpy array and optionally frame path and total frame count
     """
-    if video_path and os.path.exists(video_path):
-        # Load frame from video file
-        cap = cv2.VideoCapture(video_path)
-        
-        if not cap.isOpened():
-            raise ValueError(f"Could not open video file: {video_path}")
-        
-        # Set position to the requested frame
-        cap.set(cv2.CAP_PROP_POS_FRAMES, frame_idx)
-        ret, frame = cap.read()
-        
-        if not ret:
-            raise ValueError(f"Could not read frame {frame_idx} from video")
-        
-        # Convert BGR to RGB
-        frame_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
-        cap.release()
-        
-        return frame_rgb
-        
-    elif frames_dir and os.path.isdir(frames_dir):
-        # Load frame from directory
-        frame_files = sorted(glob.glob(os.path.join(frames_dir, frame_pattern)))
-        
-        if not frame_files:
-            raise ValueError(f"No frames found in {frames_dir} with pattern {frame_pattern}")
-        
-        if frame_idx >= len(frame_files):
-            raise ValueError(f"Frame index {frame_idx} out of range (only {len(frame_files)} frames available)")
-        
-        frame = np.array(Image.open(frame_files[frame_idx]).convert("RGB"))
-        return frame
+    if not os.path.isdir(frames_dir):
+        raise ValueError(f"Directory not found: {frames_dir}")
     
+    # Get all frame files matching the pattern
+    frame_files = sorted(glob.glob(os.path.join(frames_dir, frame_pattern)))
+    
+    if not frame_files:
+        raise ValueError(f"No frames found in {frames_dir} with pattern {frame_pattern}")
+    
+    # Check if the requested frame index is valid
+    if frame_idx >= len(frame_files):
+        raise ValueError(f"Frame index {frame_idx} out of range (only {len(frame_files)} frames available)")
+    
+    # Load the specified frame
+    frame_path = frame_files[frame_idx]
+    frame = np.array(Image.open(frame_path).convert("RGB"))
+    
+    if return_info:
+        return frame, frame_path, len(frame_files)
     else:
-        raise ValueError("Either video_path or frames_dir must be provided")
+        return frame
+
+
+def list_available_frames(frames_dir, frame_pattern="*.jpg"):
+    """
+    List all available frames in the directory
+    
+    Args:
+        frames_dir: Path to directory containing the frames
+        frame_pattern: Pattern for frame files
+        
+    Returns:
+        List of frame file paths
+    """
+    if not os.path.isdir(frames_dir):
+        raise ValueError(f"Directory not found: {frames_dir}")
+    
+    frame_files = sorted(glob.glob(os.path.join(frames_dir, frame_pattern)))
+    
+    if not frame_files:
+        print(f"No frames found in {frames_dir} with pattern {frame_pattern}")
+        return []
+    
+    print(f"Found {len(frame_files)} frames in {frames_dir}")
+    
+    # Print a sample of frame filenames (first 5 and last 5)
+    if len(frame_files) > 10:
+        sample_frames = frame_files[:5] + ['...'] + frame_files[-5:]
+    else:
+        sample_frames = frame_files
+    
+    for i, frame in enumerate(sample_frames):
+        if frame == '...':
+            print('...')
+        else:
+            print(f"{i if i < 5 else len(frame_files) - 10 + i}: {os.path.basename(frame)}")
+    
+    return frame_files
 
 
 def main():
-    parser = argparse.ArgumentParser(description="OWLv2 Video Object Detection")
+    parser = argparse.ArgumentParser(description="OWLv2 Frame-Based Object Detection")
     parser.add_argument("--model", type=str, default="google/owlv2-base-patch16", help="OWLv2 model name")
-    parser.add_argument("--video", type=str, help="Path to video file")
-    parser.add_argument("--frames-dir", type=str, help="Directory containing video frames")
-    parser.add_argument("--frame-pattern", type=str, default="*.jpg", help="Pattern for frame files")
-    parser.add_argument("--frame-idx", type=int, default=0, help="Frame index to process")
+    parser.add_argument("--frames-dir", type=str, required=True, help="Directory containing video frames")
+    parser.add_argument("--frame-pattern", type=str, default="*.jpg", help="Pattern for frame files (e.g., '*.jpg', 'frame_*.png')")
+    parser.add_argument("--frame-idx", type=int, default=0, help="Frame index to process (0-based)")
     parser.add_argument("--text-prompt", type=str, required=True, help="Text prompt(s) for detection, comma-separated")
     parser.add_argument("--threshold", type=float, default=0.1, help="Detection confidence threshold")
     parser.add_argument("--device", type=str, choices=["cuda", "mps", "cpu"], help="Device for inference")
+    parser.add_argument("--list-frames", action="store_true", help="List available frames and exit")
     
     args = parser.parse_args()
     
-    # Validate input
-    if not args.video and not args.frames_dir:
-        parser.error("Either --video or --frames-dir must be provided")
+    # Check if the frames directory exists
+    if not os.path.isdir(args.frames_dir):
+        print(f"Error: Directory not found: {args.frames_dir}")
+        return
+    
+    # List frames and exit if requested
+    if args.list_frames:
+        list_available_frames(args.frames_dir, args.frame_pattern)
+        return
     
     # Parse text prompts
     text_queries = [q.strip() for q in args.text_prompt.split(",")]
@@ -221,13 +250,14 @@ def main():
     
     # Load selected frame
     try:
-        frame = load_video_frame(
-            args.video, 
+        frame, frame_path, total_frames = load_frame_from_directory(
             args.frames_dir, 
             args.frame_pattern, 
-            args.frame_idx
+            args.frame_idx,
+            return_info=True
         )
-        print(f"Loaded frame {args.frame_idx} with shape {frame.shape}")
+        print(f"Loaded frame {args.frame_idx}/{total_frames-1}: {os.path.basename(frame_path)}")
+        print(f"Frame shape: {frame.shape}")
     except Exception as e:
         print(f"Error loading frame: {e}")
         return
@@ -241,6 +271,12 @@ def main():
     # Visualize results
     if detections:
         detector.visualize_detections(frame, detections)
+        
+        # Print bounding boxes for integration with SAM2
+        print("\nBounding boxes for SAM2 integration:")
+        for i, det in enumerate(detections):
+            box_str = ', '.join(f"{c:.1f}" for c in det["box"])
+            print(f"Object {i+1} ({det['text']}): [{box_str}]")
     else:
         print(f"No objects matching {text_queries} found in frame {args.frame_idx}")
 

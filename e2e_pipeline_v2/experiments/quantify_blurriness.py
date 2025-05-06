@@ -433,7 +433,8 @@ def analyze_video(video_path, resize_factor=1.0, skip_frames=1, bg_remove=False,
     
     return blur_scores, blur_flags, thresholds, sample_frames, sample_indices, all_frames, method_classifications
 
-def plot_blur_metrics(blur_scores, thresholds, save_path=None):
+def plot_blur_metrics(blur_scores, thresholds, save_path=None, is_frames_mode=False):
+    """Generate plots for blur metrics (works for video frames or image sequences)."""
     if not blur_scores:
         logger.error("No blur scores to plot")
         return
@@ -441,7 +442,10 @@ def plot_blur_metrics(blur_scores, thresholds, save_path=None):
     logger.info("Generating blur metrics plot")
     try:
         # -- PLOT BLUR METRICS --
-        frames = [x['frame'] for x in blur_scores]
+        # Use 'index' for frames mode, 'frame' for video mode
+        x_values = [x['index' if is_frames_mode else 'frame'] for x in blur_scores]
+        x_label = "Image Index" if is_frames_mode else "Frame"
+        
         lap_vals = [x['laplacian'] for x in blur_scores]
         ten_vals = [x['tenengrad'] for x in blur_scores]
         fft_vals = [x['fft'] for x in blur_scores]
@@ -449,7 +453,7 @@ def plot_blur_metrics(blur_scores, thresholds, save_path=None):
         fig, (ax1, ax2, ax3) = plt.subplots(3, 1, figsize=(12, 14), sharex=True)
         
         # Plot 1: Laplacian
-        ax1.plot(frames, lap_vals, label='Laplacian Variance')
+        ax1.plot(x_values, lap_vals, label='Laplacian Variance')
         for method, thresh in thresholds.items():
             ax1.axhline(y=thresh['laplacian'], color=('r' if method=='fixed' else 'g' if method=='percentile' else 'b'), 
                        linestyle='--', alpha=0.7, label=f"{method.capitalize()} Threshold")
@@ -459,7 +463,7 @@ def plot_blur_metrics(blur_scores, thresholds, save_path=None):
         ax1.grid(True, alpha=0.3)
         
         # Plot 2: Tenengrad
-        ax2.plot(frames, ten_vals, label='Tenengrad', color='orange')
+        ax2.plot(x_values, ten_vals, label='Tenengrad', color='orange')
         for method, thresh in thresholds.items():
             ax2.axhline(y=thresh['tenengrad'], color=('r' if method=='fixed' else 'g' if method=='percentile' else 'b'), 
                        linestyle='--', alpha=0.7, label=f"{method.capitalize()} Threshold")
@@ -469,12 +473,12 @@ def plot_blur_metrics(blur_scores, thresholds, save_path=None):
         ax2.grid(True, alpha=0.3)
         
         # Plot 3: FFT
-        ax3.plot(frames, fft_vals, label='FFT Energy', color='green')
+        ax3.plot(x_values, fft_vals, label='FFT Energy', color='green')
         for method, thresh in thresholds.items():
             ax3.axhline(y=thresh['fft'], color=('r' if method=='fixed' else 'g' if method=='percentile' else 'b'), 
                        linestyle='--', alpha=0.7, label=f"{method.capitalize()} Threshold")
         ax3.set_title("FFT High-Frequency Energy")
-        ax3.set_xlabel("Frame")
+        ax3.set_xlabel(x_label) # Use dynamic x-axis label
         ax3.set_ylabel("Value")
         ax3.legend()
         ax3.grid(True, alpha=0.3)
@@ -1488,6 +1492,17 @@ if __name__ == "__main__":
                     }
                 }
                 logger.info("Frame directory analysis complete.")
+                
+                # --- Generate Plots for Frames Mode ---
+                logger.info("Generating score plots for frame analysis...")
+                plot_path = os.path.join(run_dir, f"blur_plot_frames_{os.path.basename(os.path.normpath(input_path))}_{timestamp}.png")
+                plot_blur_metrics(
+                    blur_scores=frame_analysis_output["results"],
+                    thresholds=frame_analysis_output["thresholds"],
+                    save_path=plot_path,
+                    is_frames_mode=True # Indicate frame mode
+                )
+                
             else:
                 logger.error("Frame directory analysis failed to produce results.")
                 

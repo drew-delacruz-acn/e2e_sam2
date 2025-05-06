@@ -41,7 +41,7 @@ def tensor_to_numpy(tensor):
     """Safely convert tensor to numpy array, handling device and gradient issues."""
     if isinstance(tensor, torch.Tensor):
         # Move to CPU if on another device and detach from computation graph
-        return tensor.detach().cpu().numpy()
+        return tensor.detach().cpu().numpy().squeeze(0)
     return tensor  # Already a numpy array or other format
 
 def show_mask(mask, ax, obj_id=None, random_color=False):
@@ -120,9 +120,10 @@ mask_np = tensor_to_numpy(out_mask_logits[0]) > 0.0
 show_mask(mask_np, plt.gca(), obj_id=out_obj_ids[0])
 # Save the figure
 plt.savefig(os.path.join(results_dir, f"frame_{ann_frame_idx}_box_mask.png"))
-
+print(f'saviong to {os.path.join(results_dir, f"frame_{ann_frame_idx}_box_mask.png")}')
 # Let's also save the raw mask as a separate file
 binary_mask = tensor_to_numpy(out_mask_logits[0]) > 0.0
+print(f"Binary mask shape: {binary_mask.shape}")
 plt.figure(figsize=(9, 6))
 plt.title(f"Binary mask for frame {ann_frame_idx}")
 plt.imshow(binary_mask, cmap='gray')
@@ -135,11 +136,16 @@ num_frames_to_process = min(10, len(frame_names))  # Process first 10 frames or 
 for frame_idx in range(num_frames_to_process):
     if frame_idx == ann_frame_idx:
         continue  # Skip the initial frame we already processed
-    
+    test = predictor.propagate_in_video(
+        inference_state=inference_state
+    )
+
+    print(f'-------------------------')
+    print(f'test {test}')
+    print(f'--------------------------')
     # Propagate to this frame
-    obj_ids, mask_logits = predictor.propagate_in_video(
-        inference_state=inference_state,
-        frame_idx=frame_idx,
+    _,obj_ids, mask_logits = predictor.propagate_in_video(
+        inference_state=inference_state
     )
     
     # Create visualization

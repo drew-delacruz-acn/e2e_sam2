@@ -13,8 +13,10 @@
 *.jpg
 *.png
 *.gif
+*.log
 
 # Data folder
+blur_results/
 all_frames/
 detections/
 data/

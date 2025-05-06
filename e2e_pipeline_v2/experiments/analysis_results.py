@@ -1,33 +1,48 @@
 import pandas as pd
 import os
-import argparse # Added import for argparse
+import argparse
 
-def read_csvs_from_subdirs(directory_path: str):
+def read_csvs_from_subdirs(directory_path: str) -> pd.DataFrame:
     """
-    Reads a CSV file from each subdirectory within the given directory.
+    Reads a CSV file from each subdirectory within the given directory
+    and concatenates them into a single DataFrame.
 
     Args:
         directory_path: The path to the main directory containing subdirectories.
+    
+    Returns:
+        A pandas DataFrame containing all data from the CSVs, or an empty
+        DataFrame if no CSVs are found or an error occurs.
     """
+    all_dataframes = []
     for item in os.listdir(directory_path):
         item_path = os.path.join(directory_path, item)
         if os.path.isdir(item_path):
-            # This is a subdirectory, look for a CSV file inside it
             for sub_item in os.listdir(item_path):
                 if sub_item.endswith('.csv'):
                     csv_path = os.path.join(item_path, sub_item)
                     try:
                         df = pd.read_csv(csv_path)
-                        print(f"Successfully read {csv_path}")
-                        print(df.head())
-                        # TODO: Add further processing for the DataFrame 'df'
-                        # For now, we just read one CSV per subdirectory.
-                        # If multiple CSVs are expected, this logic needs adjustment.
-                        break # Assuming one CSV per subdirectory
+                        print(f"Successfully read {csv_path} (shape: {df.shape})")
+                        all_dataframes.append(df)
+                        # Assuming one CSV per subdirectory for this logic
+                        break 
                     except Exception as e:
                         print(f"Error reading {csv_path}: {e}")
-            else:
-                print(f"No CSV file found in subdirectory: {item_path}")
+            # Removed the "No CSV file found in subdirectory" message here 
+            # as we will check if all_dataframes is empty later.
+
+    if not all_dataframes:
+        print("No CSV files were successfully read.")
+        return pd.DataFrame() # Return an empty DataFrame
+    
+    try:
+        combined_df = pd.concat(all_dataframes, ignore_index=True)
+        print(f"Successfully combined {len(all_dataframes)} CSV file(s) into a DataFrame with shape: {combined_df.shape}")
+        return combined_df
+    except Exception as e:
+        print(f"Error concatenating DataFrames: {e}")
+        return pd.DataFrame() # Return an empty DataFrame on error
 
 # Example usage (commented out):
 # if __name__ == '__main__':
@@ -42,17 +57,16 @@ def read_csvs_from_subdirs(directory_path: str):
 #     read_csvs_from_subdirs("main_dir")
 
 if __name__ == '__main__':
-    parser = argparse.ArgumentParser(description="Read CSVs from subdirectories of a main directory.")
+    parser = argparse.ArgumentParser(description="Read CSVs from subdirectories of a main directory and combine them.")
     parser.add_argument("--main_dir", type=str, help="Path to the main directory.")
+    parser.add_argument("--output_file", type=str, help="Name for the combined output CSV file.")
     args = parser.parse_args()
 
     main_dir_name = args.main_dir
     if not main_dir_name:
         main_dir_name = input("Please enter the path to the main directory: ")
 
-    # Create dummy directories and CSV files for testing if they don't exist
-    # This part is for demonstration. You might want to remove or modify it
-    # if you are working with existing directories.
+    # Dummy data creation part (for testing)
     print(f"Using main directory: {main_dir_name}")
     subdir1_path = os.path.join(main_dir_name, "subdir1")
     subdir2_path = os.path.join(main_dir_name, "subdir2")
@@ -73,6 +87,20 @@ if __name__ == '__main__':
     if not os.path.exists(dummy_csv2_path):
         print(f"Creating dummy CSV: {dummy_csv2_path}")
         pd.DataFrame({'colA': ['a', 'b'], 'colB': ['c', 'd']}).to_csv(dummy_csv2_path, index=False)
+    # End of dummy data creation
 
-    read_csvs_from_subdirs(main_dir_name)
+    combined_dataframe = read_csvs_from_subdirs(main_dir_name)
+
+    if not combined_dataframe.empty:
+        output_filename = args.output_file
+        if not output_filename:
+            output_filename = input("Enter the name for the combined CSV file (e.g., combined_output.csv): ")
+        
+        try:
+            combined_dataframe.to_csv(output_filename, index=False)
+            print(f"Combined data successfully saved to {output_filename}")
+        except Exception as e:
+            print(f"Error saving combined data to {output_filename}: {e}")
+    else:
+        print("No data to save as the combined DataFrame is empty.")
 

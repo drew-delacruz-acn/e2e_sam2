@@ -14,8 +14,10 @@
 *.png
 *.gif
 *.json
+*.log
 
 # Data folder
+blur_results/
 all_frames/
 detections/
 data/

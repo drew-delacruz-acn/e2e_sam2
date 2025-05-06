@@ -50,6 +50,11 @@ Basic usage (directory of image frames):
 python quantify_blurriness.py --input path/to/your/frames_directory/ --input_type frames
 ```
 
+Basic usage (directory containing subdirectories of frames):
+```bash
+python quantify_blurriness.py --input path/to/your/parent_frame_dirs/ --input_type frames
+```
+
 With performance optimizations (works for video and frames):
 ```bash
 python quantify_blurriness.py --input path/to/your/video.mp4 --input_type video --resize 0.25 --skip 5
@@ -69,7 +74,7 @@ python quantify_blurriness.py --input path/to/your/frames_directory/ --input_typ
 
 All options:
 ```
---input       Path to video file, directory of videos, OR directory of image frames (Required)
+--input       Path to: video file, dir of videos, dir of image frames, OR dir of subdirs containing image frames (Required)
 --input_type  Specify if input is 'video' or 'frames' (Required)
 --resize      Resize factor (e.g., 0.5 for half size) [Default: 1.0]
 --skip        Process every N frames/images [Default: 1]
@@ -118,16 +123,18 @@ Results are saved in a timestamped directory under `blur_results/analysis_{times
 
 **When processing a directory of frames (`--input_type frames`):**
 
-- `aggregated_results.json`: A JSON file containing results for all processed image frames. Key is the input directory name.
+- `aggregated_results.json`: A JSON file containing results for all processed image frames.
+  - If the input directory contained images directly, the top-level key is the input directory name.
+  - If the input directory contained subdirectories with images, the top-level keys are the names of those subdirectories.
   ```json
   {
-    "input_directory_name": {
+    "Scene1": {
       "type": "frames",
       "settings": { "resize_factor": ..., "skip": ..., "bg_remove": ..., "method": ... },
       "thresholds": { "percentile": { ... }, "stddev": { ... }, "fixed": { ... } },
       "results": [
         { 
-          "index": 0, // Index in the sorted file list
+          "index": 0,
           "filename": "frame_0001.png",
           "laplacian": ..., 
           "tenengrad": ..., 
@@ -137,15 +144,16 @@ Results are saved in a timestamped directory under `blur_results/analysis_{times
         ...
       ],
       "confidence": [
-        { "index": 0, "filename": "frame_0001.png", "confidence": 85, "leading_metric": "laplacian", "is_blurry": false }, // Optional
+        { "index": 0, "filename": "frame_0001.png", "confidence": 85, "leading_metric": "laplacian", "is_blurry": false },
         ...
       ]
-    }
+    },
+    "Scene2": { ... }
   }
   ```
-- Score distribution/sequence plots (`blur_plot_frames_{dir_name}_{timestamp}.png` and associated histograms) *are* generated. Note: the sequence plot's x-axis represents the image index in the sorted list, not time.
+- Score distribution/sequence plots (`blur_plot_frames_{dir_or_subdir_name}_{timestamp}.png` and associated histograms) *are* generated, **one set per processed subdirectory** (or for the main directory if it contained images directly). Note: the sequence plot's x-axis represents the image index in the sorted list, not time.
 - **Other individual plots, CSVs, stakeholder reports, and sample image visualizations are not generated** in frames mode.
-- Optional: `foreground_mask_visualization_img_{image_index}.png` if `--bg_remove` and `--visualize_mask` are used (saved once per run for the first image with a valid mask).
+- Optional: `foreground_mask_visualization_img_{dir_or_subdir_name}_{image_index}.png` if `--bg_remove` and `--visualize_mask` are used (saved once *per subdirectory* for the first image with a valid mask).
 
 ### Interpreting Results
 

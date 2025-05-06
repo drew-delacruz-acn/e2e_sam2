@@ -44,6 +44,7 @@ print("Propagating masks...")
 segments = sam_wrapper.propagate_masks(objects_to_track=[1])
 print(f'saving results to {output_dir}')
 
+print('gut check')
 # Visualize a few propagated frames
 for idx in range(0, min(len(frames), 30), 10):
     if idx in segments:

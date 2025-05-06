@@ -103,12 +103,12 @@ class SAM2VideoWrapper:
         """
         box_coords = np.array(box, dtype=np.float32)
         
-        mask, _ = self.predictor.add_new_points_or_box(
+        _,_,mask = self.predictor.add_new_points_or_box(
+            inference_state=self.inference_state,
             frame_idx=frame_idx,
             obj_id=obj_id,
-            box_coords=box_coords
+            box=box_coords
         )
-        
         return mask
     
     def propagate_masks(self, objects_to_track=None):

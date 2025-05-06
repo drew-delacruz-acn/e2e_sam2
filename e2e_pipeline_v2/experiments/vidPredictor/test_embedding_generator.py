@@ -7,8 +7,8 @@ import numpy as np
 extractor = EmbeddingExtractor()
 
 # Test on a sample image
-image = Image.open("test_image.jpg")
-crop = image.crop((100, 100, 300, 300))  # Example crop
+image = Image.open("/home/ubuntu/code/drew/test_data/frames/Scenes 001-020__220D-2-_20230815190723523/subset/21.jpg")
+crop = image.crop((6, 69, 773, 474))  # Example crop
 
 # Extract embedding
 embedding = extractor.extract(crop)

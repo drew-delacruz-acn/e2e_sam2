@@ -65,6 +65,7 @@ All options:
 --bg_remove   Enable foreground extraction based on edge density
 --stakeholder Generate stakeholder-friendly visualizations (single video only)
 --confidence  Include confidence scores in output
+--visualize_mask Save a visualization of the foreground mask creation steps for one frame (requires --bg_remove)
 ```
 
 ### Output
@@ -100,6 +101,7 @@ Results are saved in a timestamped directory under `blur_results/analysis_{times
   }
   ```
 - Individual plots, visualizations, and CSV files are generally *not* generated for each video when processing a directory to avoid clutter.
+- Optional: `foreground_mask_visualization_frame_{frame_idx}.png` if `--bg_remove` and `--visualize_mask` are used (saved once per run for the first frame with a valid mask).
 
 ### Interpreting Results
 

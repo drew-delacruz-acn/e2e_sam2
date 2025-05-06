@@ -146,6 +146,20 @@ class SAM2VideoWrapper:
         # Ensure mask is properly processed
         if isinstance(mask, torch.Tensor):
             mask = self.process_mask_logits(mask)
+        
+        # Ensure mask is 2D
+        print(f"Original mask shape in show_mask: {mask.shape}")
+        if len(mask.shape) == 1:
+            print(f"Warning: Mask is 1D with shape {mask.shape}, cannot display properly")
+            # Return without trying to display this mask
+            return
+        elif len(mask.shape) > 2:
+            # Squeeze to make it 2D
+            mask = np.squeeze(mask)
+            print(f"Squeezed mask to shape: {mask.shape}")
+            
+        # Get mask dimensions - now we're sure it's 2D
+        h, w = mask.shape
             
         # Choose color based on object ID
         if obj_id is None:
@@ -153,9 +167,6 @@ class SAM2VideoWrapper:
         else:
             cmap = plt.get_cmap("tab10")
             color = np.array([*cmap(obj_id % 10)[:3], 0.6])
-            
-        # Get mask dimensions
-        h, w = mask.shape
         
         # Create colored mask
         mask_image = mask.reshape(h, w, 1) * color.reshape(1, 1, -1)

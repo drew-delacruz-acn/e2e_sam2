@@ -37,47 +37,60 @@ if mask is not None:
 else:
     print("No mask returned!")
 
-# Visualize and save
+# Visualize and save - pass the single mask directly, not in a list
 sam_wrapper.visualize_frame(
     frame_idx, 
-    mask=mask, 
-    obj_ids=[1], 
+    mask=mask,  # Changed from [mask] to just mask 
+    obj_ids=None,  # Changed from [1] to None since we're passing a single mask
     box=box,
     output_dir=output_dir
 )
 
-# # Test propagation
-# print("Propagating masks...")
-# segments = sam_wrapper.propagate_masks(objects_to_track=[1])
-# print(f'Saving results to {output_dir}')
+# Test propagation
+print("Propagating masks...")
+segments = sam_wrapper.propagate_masks(objects_to_track=[1])
+print(f'Saving results to {output_dir}')
 
-# print('Visualizing propagated frames...')
-# # Visualize a few propagated frames
-# for idx in range(0, min(len(frames), 30), 10):
-#     if idx in segments:
-#         print(f"Visualizing frame {idx}")
-#         # The segments dictionary maps frame_idx -> {obj_id -> mask}
-#         frame_segments = segments[idx]
+print('Visualizing propagated frames...')
+# Visualize a few propagated frames
+for idx in range(0, min(len(frames), 30), 10):
+    if idx in segments:
+        print(f"Visualizing frame {idx}")
+        # The segments dictionary maps frame_idx -> {obj_id -> mask}
+        frame_segments = segments[idx]
         
-#         # Debug print to check the mask shapes
-#         for obj_id, mask in frame_segments.items():
-#             print(f"  Object {obj_id} mask shape: {mask.shape}")
-#             print(f"  Object {obj_id} mask type: {mask.dtype}")
-#             print(f"  Object {obj_id} number of True pixels: {np.sum(mask)}")
+        # Debug print to check the mask shapes
+        for obj_id, mask in frame_segments.items():
+            print(f"  Object {obj_id} mask shape: {mask.shape}")
+            print(f"  Object {obj_id} mask type: {mask.dtype}")
+            print(f"  Object {obj_id} number of True pixels: {np.sum(mask)}")
         
-#         # Extract masks and corresponding object IDs
-#         obj_ids = list(frame_segments.keys())
-#         masks = [frame_segments[obj_id] for obj_id in obj_ids]
-        
-#         # Visualize the frame with all masks
-#         sam_wrapper.visualize_frame(
-#             idx,
-#             mask=masks,
-#             obj_ids=obj_ids,
-#             output_dir=output_dir
-#         )
-#     else:
-#         print(f"No segments found for frame {idx}")
+        # For a single object, just pass the mask directly
+        if len(frame_segments) == 1:
+            obj_id = list(frame_segments.keys())[0]
+            mask = frame_segments[obj_id]
+            
+            # Visualize with a single mask
+            sam_wrapper.visualize_frame(
+                idx,
+                mask=mask,
+                obj_ids=None,
+                output_dir=output_dir
+            )
+        else:
+            # For multiple objects, pass lists
+            obj_ids = list(frame_segments.keys())
+            masks = [frame_segments[obj_id] for obj_id in obj_ids]
+            
+            # Visualize the frame with all masks
+            sam_wrapper.visualize_frame(
+                idx,
+                mask=masks,
+                obj_ids=obj_ids,
+                output_dir=output_dir
+            )
+    else:
+        print(f"No segments found for frame {idx}")
 
 #esults to ./sam2_results
 # gut check

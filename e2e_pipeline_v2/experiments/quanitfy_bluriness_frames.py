@@ -1085,6 +1085,7 @@ def parse_arguments():
     parser.add_argument('--confidence', action='store_true', help='Include confidence scores in output (implied by --stakeholder)')
     parser.add_argument('--bg_remove', action='store_true', help='Enable foreground extraction based on edge density')
     parser.add_argument('--visualize_mask', action='store_true', help='Save a visualization of the foreground mask creation steps (requires --bg_remove)')
+    parser.add_argument('--slim', action='store_true', help='Only generate the aggregated JSON summary and skip all other output files')
 
     return parser.parse_args()
 
@@ -1157,7 +1158,14 @@ if __name__ == "__main__":
 
             # Create subdirectory for this sequence's results
             sequence_run_dir = os.path.join(run_dir, sequence_name)
-            os.makedirs(sequence_run_dir, exist_ok=True)
+            # os.makedirs(sequence_run_dir, exist_ok=True) # Moved conditional creation later
+
+            # Determine if mask visualization should occur and prepare its directory if needed.
+            # The mask image is saved by analyze_image_sequence in the 'run_dir' it receives.
+            _visualize_mask_for_this_sequence = args.visualize_mask and not args.slim
+            if _visualize_mask_for_this_sequence:
+                os.makedirs(sequence_run_dir, exist_ok=True)
+
 
             # Call the modified analysis function
             analysis_results = analyze_image_sequence(
@@ -1166,7 +1174,7 @@ if __name__ == "__main__":
                 resize_factor=args.resize,
                 skip_frames=args.skip,
                 bg_remove=args.bg_remove,
-                visualize_mask=args.visualize_mask,
+                visualize_mask=_visualize_mask_for_this_sequence, # Pass conditional flag
                 run_dir=sequence_run_dir # Pass sequence-specific dir for mask viz
             )
 
@@ -1187,19 +1195,20 @@ if __name__ == "__main__":
                 all_results_summary[sequence_name]['thresholds'] = thresholds
                 all_results_summary[sequence_name]['blur_flags'] = blur_flags # Store flags for all methods
 
-                # Include confidence scores if requested
-                confidence_data = None
+                # Include confidence scores if requested for the aggregated summary
+                # This data is also used for the individual CSV if not in slim mode.
+                _calculated_confidence_data = None
                 if (args.confidence or args.stakeholder) and thresholds and args.method in blur_flags:
-                    confidence_data = []
+                    _calculated_confidence_data = []
                     for i, score in enumerate(blur_scores):
                         confidence, metric = calculate_blur_confidence(score, blur_scores, thresholds, args.method)
-                        confidence_data.append({
+                        _calculated_confidence_data.append({
                             'frame': score['frame'], # Processed index
                             'confidence': confidence,
                             'leading_metric': metric,
                             'is_blurry': blur_flags[args.method][i]
                         })
-                    all_results_summary[sequence_name]['confidence_scores'] = confidence_data
+                    all_results_summary[sequence_name]['confidence_scores'] = _calculated_confidence_data
 
                 # --- Save Individual Sequence Results ---
                 logger.info(f"Saving results for sequence: {sequence_name}")
@@ -1209,20 +1218,19 @@ if __name__ == "__main__":
                 plot_blur_metrics(blur_scores, thresholds, sequence_name, save_path=plot_path)
 
                 # Save confidence data to CSV (if calculated)
-                if confidence_data:
+                if _calculated_confidence_data:
                     confidence_csv = os.path.join(sequence_run_dir, f"confidence_scores_{sequence_name}.csv")
                     try:
                         with open(confidence_csv, 'w') as f:
                              # Match header in generate_executive_summary CSV
                              f.write("processed_index,original_index,filename,laplacian,tenengrad,fft,is_blurry,confidence,leading_metric\n")
-                             for i, score in enumerate(blur_scores):
-                                 conf = confidence_data[i]
-                                 # Find original index and filename from blur_scores
-                                 orig_idx = score.get('original_frame_index', 'N/A')
-                                 filename = score.get('path', 'N/A')
-                                 f.write(f"{score['frame']},{orig_idx},{filename},"
-                                         f"{score['laplacian']:.2f},{score['tenengrad']:.2f},{score['fft']:.2f},"
-                                         f"{conf['is_blurry']},{conf['confidence']},{conf['leading_metric']}\n")
+                             for i, score_item in enumerate(blur_scores): # Iterate through blur_scores to get all info
+                                 conf_item = _calculated_confidence_data[i] # Assumes blur_scores and _calculated_confidence_data align
+                                 orig_idx = score_item.get('original_frame_index', 'N/A')
+                                 filename = score_item.get('path', 'N/A')
+                                 f.write(f"{score_item['frame']},{orig_idx},{filename},"
+                                         f"{score_item['laplacian']:.2f},{score_item['tenengrad']:.2f},{score_item['fft']:.2f},"
+                                         f"{conf_item['is_blurry']},{conf_item['confidence']},{conf_item['leading_metric']}\n")
                         logger.info(f"Confidence scores CSV saved to {confidence_csv}")
                     except Exception as e:
                          logger.error(f"Error saving confidence CSV for {sequence_name}: {e}")
@@ -1311,7 +1319,10 @@ if __name__ == "__main__":
 
         logger.info("=" * 40)
         logger.info("Image Sequence Blur Detection Script finished")
-        logger.info(f"Overall results directory: {run_dir}")
+        if not args.slim:
+            logger.info(f"Overall results directory: {run_dir}")
+        else:
+            logger.info(f"Aggregated JSON summary saved to: {json_output_path}")
         logger.info("=" * 40)
 
     except SystemExit:

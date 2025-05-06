@@ -92,6 +92,28 @@ class SAM2VideoWrapper:
         else:
             raise ValueError("Either frames or frames_dir must be provided")
     
+    def tensor_to_numpy(self, tensor):
+        """Safely convert tensor to numpy array, handling device and gradient issues."""
+        if isinstance(tensor, torch.Tensor):
+            # Move to CPU if on another device and detach from computation graph
+            return tensor.detach().cpu().numpy()
+        return tensor  # Already a numpy array or other format
+    
+    def process_mask_logits(self, mask_logits, threshold=0.0):
+        """Process mask logits to binary masks with proper dimensions"""
+        # Convert to numpy if needed
+        if isinstance(mask_logits, torch.Tensor):
+            mask_np = self.tensor_to_numpy(mask_logits)
+        else:
+            mask_np = mask_logits
+            
+        # Squeeze dimensions
+        if mask_np.ndim > 2:
+            mask_np = np.squeeze(mask_np)
+            
+        # Apply threshold to get binary mask
+        return mask_np > threshold
+    
     def add_box(self, frame_idx, obj_id, box):
         """Add a box prompt for an object
         
@@ -101,24 +123,45 @@ class SAM2VideoWrapper:
             box: Bounding box coordinates [x_min, y_min, x_max, y_max]
         
         Returns:
-            Mask on the current frame
+            Binary mask on the current frame
         """
         box_coords = np.array(box, dtype=np.float32)
         
-        _,_,mask = self.predictor.add_new_points_or_box(
+        _, out_obj_ids, out_mask_logits = self.predictor.add_new_points_or_box(
             inference_state=self.inference_state,
             frame_idx=frame_idx,
             obj_id=obj_id,
             box=box_coords
         )
-        return mask
+        
+        # Match vidPredict_demo.py by thresholding the logits
+        # Return only the first mask (there should be only one)
+        if len(out_mask_logits) > 0:
+            return self.process_mask_logits(out_mask_logits[0])
+        else:
+            return None
     
-    def tensor_to_numpy(self, tensor):
-        """Safely convert tensor to numpy array, handling device and gradient issues."""
-        if isinstance(tensor, torch.Tensor):
-            # Move to CPU if on another device and detach from computation graph
-            return tensor.detach().cpu().numpy()
-        return tensor  # Already a numpy array or other format
+    def show_mask(self, mask, plt_axis, obj_id=None):
+        """Show a mask on the given matplotlib axis, similar to vidPredict_demo.py"""
+        # Ensure mask is properly processed
+        if isinstance(mask, torch.Tensor):
+            mask = self.process_mask_logits(mask)
+            
+        # Choose color based on object ID
+        if obj_id is None:
+            color = np.array([1, 0, 0, 0.6])  # default red with alpha
+        else:
+            cmap = plt.get_cmap("tab10")
+            color = np.array([*cmap(obj_id % 10)[:3], 0.6])
+            
+        # Get mask dimensions
+        h, w = mask.shape
+        
+        # Create colored mask
+        mask_image = mask.reshape(h, w, 1) * color.reshape(1, 1, -1)
+        
+        # Display
+        plt_axis.imshow(mask_image)
     
     def propagate_masks(self, objects_to_track=None):
         """Propagate masks to all frames in the video
@@ -151,7 +194,7 @@ class SAM2VideoWrapper:
                 
                 # Store masks by object ID
                 video_segments[out_frame_idx] = {
-                    obj_id: (self.tensor_to_numpy(mask_logit) > 0.0)
+                    obj_id: self.process_mask_logits(mask_logit)
                     for obj_id, mask_logit in zip(filtered_obj_ids, filtered_mask_logits)
                 }
                 print(f"Processed frame {out_frame_idx}, found {len(filtered_obj_ids)} objects")
@@ -196,39 +239,29 @@ class SAM2VideoWrapper:
             except:
                 raise ValueError("Cannot retrieve frame - no frames directory or getter method available")
         
+        # Create figure and axis
         plt.figure(figsize=(10, 10))
-        plt.imshow(frame)
-        plt.title(f"Frame {frame_idx}")
+        ax = plt.gca()
         
+        # Show the frame
+        ax.imshow(frame)
+        ax.set_title(f"Frame {frame_idx}")
+        
+        # Show masks using the show_mask function
         if mask is not None:
-            colors = [(1, 0, 0, 0.5), (0, 1, 0, 0.5), (0, 0, 1, 0.5), (1, 1, 0, 0.5), (1, 0, 1, 0.5)]
-            
             if obj_ids is None:
-                # Single mask - ensure it's a numpy array
-                if isinstance(mask, torch.Tensor):
-                    mask = self.tensor_to_numpy(mask)
-                # Squeeze if necessary - remove ALL extra dimensions
-                if mask.ndim > 2:
-                    mask = np.squeeze(mask)
-                print(f"Single mask shape: {mask.shape}")
-                plt.imshow(mask, alpha=0.5, cmap="jet")
+                # Single mask case
+                self.show_mask(mask, ax)
             else:
-                # Multiple masks
+                # Multiple masks case
                 for i, (m, obj_id) in enumerate(zip(mask, obj_ids)):
-                    # Ensure mask is a numpy array
-                    if isinstance(m, torch.Tensor):
-                        m = self.tensor_to_numpy(m)
-                    # Squeeze if necessary - remove ALL extra dimensions
-                    if m.ndim > 2:
-                        m = np.squeeze(m)
-                    print(f"Mask {i} shape: {m.shape}")
-                    
-                    color_idx = (obj_id % len(colors))
-                    plt.imshow(m, alpha=0.5, cmap=plt.cm.colors.ListedColormap([colors[color_idx]]))
+                    self.show_mask(m, ax, obj_id=obj_id)
         
+        # Show box
         if box is not None:
             x1, y1, x2, y2 = box
-            plt.plot([x1, x2, x2, x1, x1], [y1, y1, y2, y2, y1], 'b', linewidth=2)
+            ax.add_patch(plt.Rectangle((x1, y1), x2-x1, y2-y1, 
+                                      edgecolor='green', facecolor=(0,0,0,0), lw=2))
         
         plt.axis('off')
         plt.tight_layout()

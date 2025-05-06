@@ -25,11 +25,17 @@ frame_idx = 0
 box = [250, 69, 773, 474]  # Example box
 
 # Add box and get mask
+print("Adding box to frame 0...")
 mask = sam_wrapper.add_box(frame_idx, obj_id=1, box=box)
 
-# if isinstance(mask, torch.Tensor):
-#     mask = mask.cpu().detach().numpy().squeeze(0)
-
+# Debug output to check what mask we got
+if mask is not None:
+    print(f"Mask shape: {mask.shape}")
+    print(f"Mask dtype: {mask.dtype}")
+    print(f"Mask values: min={mask.min()}, max={mask.max()}")
+    print(f"Number of True pixels: {np.sum(mask)}")
+else:
+    print("No mask returned!")
 
 # Visualize and save
 sam_wrapper.visualize_frame(
@@ -43,9 +49,9 @@ sam_wrapper.visualize_frame(
 # Test propagation
 print("Propagating masks...")
 segments = sam_wrapper.propagate_masks(objects_to_track=[1])
-print(f'saving results to {output_dir}')
+print(f'Saving results to {output_dir}')
 
-print('gut check')
+print('Visualizing propagated frames...')
 # Visualize a few propagated frames
 for idx in range(0, min(len(frames), 30), 10):
     if idx in segments:
@@ -56,10 +62,8 @@ for idx in range(0, min(len(frames), 30), 10):
         # Debug print to check the mask shapes
         for obj_id, mask in frame_segments.items():
             print(f"  Object {obj_id} mask shape: {mask.shape}")
-            # Ensure the mask is properly squeezed to 2D
-            if mask.ndim > 2:
-                frame_segments[obj_id] = np.squeeze(mask)
-                print(f"  After squeeze: {frame_segments[obj_id].shape}")
+            print(f"  Object {obj_id} mask type: {mask.dtype}")
+            print(f"  Object {obj_id} number of True pixels: {np.sum(mask)}")
         
         # Extract masks and corresponding object IDs
         obj_ids = list(frame_segments.keys())

@@ -2,6 +2,7 @@
 from src.frame_loader import load_frames_from_directory
 from src.sam2_wrapper import SAM2VideoWrapper
 import os
+import torch
 
 # Create output directory
 output_dir = "./sam2_results"
@@ -21,10 +22,13 @@ sam_wrapper.set_video(frames)
 
 # Test segmentation with a sample box
 frame_idx = 0
-box = [6, 69, 773, 474]  # Example box
+box = [250, 69, 773, 474]  # Example box
 
 # Add box and get mask
 mask = sam_wrapper.add_box(frame_idx, obj_id=1, box=box)
+
+if isinstance(mask, torch.Tensor):
+    mask = mask.cpu().detach().numpy().squeeze(0)
 
 
 # Visualize and save
@@ -36,19 +40,19 @@ sam_wrapper.visualize_frame(
     output_dir=output_dir
 )
 
-# # Test propagation
-# print("Propagating masks...")
-# segments = sam_wrapper.propagate_masks(objects_to_track=[1])
-# print(f"Propagated to {len(segments)} frames")
+# Test propagation
+print("Propagating masks...")
+segments = sam_wrapper.propagate_masks(objects_to_track=[1])
+print(f"Propagated to {len(segments)} frames")
 
-# # Visualize a few propagated frames
-# for idx in range(0, min(len(frames), 30), 10):
-#     if idx in segments:
-#         masks = segments[idx]["masks"]
-#         obj_ids = segments[idx]["obj_ids"]
-#         sam_wrapper.visualize_frame(
-#             idx,
-#             mask=masks,
-#             obj_ids=obj_ids,
-#             output_dir=output_dir
-#         )
+# Visualize a few propagated frames
+for idx in range(0, min(len(frames), 30), 10):
+    if idx in segments:
+        masks = segments[idx]["masks"]
+        obj_ids = segments[idx]["obj_ids"]
+        sam_wrapper.visualize_frame(
+            idx,
+            mask=masks,
+            obj_ids=obj_ids,
+            output_dir=output_dir
+        )

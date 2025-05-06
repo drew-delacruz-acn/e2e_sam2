@@ -24,21 +24,26 @@ def read_csvs_from_subdirs(directory_path: str) -> pd.DataFrame:
                     try:
                         df = pd.read_csv(csv_path)
                         print(f"Successfully read {csv_path} (shape: {df.shape})")
+                        print(f"Columns in {sub_item}: {list(df.columns)}")  # Debug: Print columns
                         all_dataframes.append(df)
                         # Assuming one CSV per subdirectory for this logic
                         break 
                     except Exception as e:
                         print(f"Error reading {csv_path}: {e}")
-            # Removed the "No CSV file found in subdirectory" message here 
-            # as we will check if all_dataframes is empty later.
 
     if not all_dataframes:
         print("No CSV files were successfully read.")
         return pd.DataFrame() # Return an empty DataFrame
     
     try:
+        # Print column names of first DataFrame for reference
+        if all_dataframes:
+            print(f"First DataFrame columns before concat: {list(all_dataframes[0].columns)}")
+        
         combined_df = pd.concat(all_dataframes, ignore_index=True)
         print(f"Successfully combined {len(all_dataframes)} CSV file(s) into a DataFrame with shape: {combined_df.shape}")
+        print(f"Combined DataFrame columns: {list(combined_df.columns)}")  # Debug: Print combined columns
+        
         return combined_df
     except Exception as e:
         print(f"Error concatenating DataFrames: {e}")
@@ -83,15 +88,20 @@ if __name__ == '__main__':
 
     if not os.path.exists(dummy_csv1_path):
         print(f"Creating dummy CSV: {dummy_csv1_path}")
-        pd.DataFrame({'col1': [1, 2], 'col2': [3, 4]}).to_csv(dummy_csv1_path, index=False)
+        # Now using same column names for test data
+        pd.DataFrame({'column1': [1, 2], 'column2': [3, 4]}).to_csv(dummy_csv1_path, index=False)
     if not os.path.exists(dummy_csv2_path):
         print(f"Creating dummy CSV: {dummy_csv2_path}")
-        pd.DataFrame({'colA': ['a', 'b'], 'colB': ['c', 'd']}).to_csv(dummy_csv2_path, index=False)
+        # Now using same column names for test data
+        pd.DataFrame({'column1': [5, 6], 'column2': [7, 8]}).to_csv(dummy_csv2_path, index=False)
     # End of dummy data creation
 
     combined_dataframe = read_csvs_from_subdirs(main_dir_name)
 
     if not combined_dataframe.empty:
+        # Let's check the columns again before saving
+        print(f"Columns before saving to CSV: {list(combined_dataframe.columns)}")
+        
         output_filename = args.output_file
         if not output_filename:
             output_filename = input("Enter the name for the combined CSV file (e.g., combined_output.csv): ")
@@ -99,6 +109,10 @@ if __name__ == '__main__':
         try:
             combined_dataframe.to_csv(output_filename, index=False)
             print(f"Combined data successfully saved to {output_filename}")
+            
+            # Verify the columns in the saved file
+            verification_df = pd.read_csv(output_filename)
+            print(f"Columns in saved file {output_filename}: {list(verification_df.columns)}")
         except Exception as e:
             print(f"Error saving combined data to {output_filename}: {e}")
     else:

@@ -32,7 +32,7 @@ elif device.type == "mps":
 
 from sam2.build_sam import build_sam2_video_predictor
 
-sam2_checkpoint = "../checkpoints/sam2.1_hiera_large.pt"
+sam2_checkpoint = "checkpoints/sam2.1_hiera_large.pt"
 model_cfg = "configs/sam2.1/sam2.1_hiera_l.yaml"
 
 predictor = build_sam2_video_predictor(model_cfg, sam2_checkpoint, device=device)
@@ -64,7 +64,7 @@ def show_box(box, ax):
 
 
 # `video_dir` a directory of JPEG frames with filenames like `<frame_index>.jpg`
-video_dir = "./videos/bedroom"
+video_dir = '/home/ubuntu/code/drew/test_data/frames/Scenes 001-020__220D-2-_20230815190723523/subset/'
 
 # scan all the JPEG frame names in this directory
 frame_names = [
@@ -89,7 +89,7 @@ ann_frame_idx = 0  # the frame index we interact with
 ann_obj_id = 4  # give a unique id to each object we interact with (it can be any integers)
 
 # Let's add a box at (x_min, y_min, x_max, y_max) = (300, 0, 500, 400) to get started
-box = np.array([300, 0, 500, 400], dtype=np.float32)
+box = np.array([250, 69, 773, 474], dtype=np.float32)
 _, out_obj_ids, out_mask_logits = predictor.add_new_points_or_box(
     inference_state=inference_state,
     frame_idx=ann_frame_idx,

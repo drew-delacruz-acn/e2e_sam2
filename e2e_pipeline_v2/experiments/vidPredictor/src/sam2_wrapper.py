@@ -187,6 +187,12 @@ class SAM2VideoWrapper:
             # Try to get from predictor
             try:
                 frame = self.predictor.get_video_frame(frame_idx)
+                # Ensure frame is a numpy array
+                if isinstance(frame, torch.Tensor):
+                    frame = self.tensor_to_numpy(frame)
+                    # Squeeze if necessary
+                    if frame.ndim > 3:
+                        frame = np.squeeze(frame, axis=0)
             except:
                 raise ValueError("Cannot retrieve frame - no frames directory or getter method available")
         
@@ -198,11 +204,23 @@ class SAM2VideoWrapper:
             colors = [(1, 0, 0, 0.5), (0, 1, 0, 0.5), (0, 0, 1, 0.5), (1, 1, 0, 0.5), (1, 0, 1, 0.5)]
             
             if obj_ids is None:
-                # Single mask
+                # Single mask - ensure it's a numpy array
+                if isinstance(mask, torch.Tensor):
+                    mask = self.tensor_to_numpy(mask)
+                    # Squeeze if necessary
+                    if mask.ndim > 2:
+                        mask = np.squeeze(mask, axis=0)
                 plt.imshow(mask, alpha=0.5, cmap="jet")
             else:
                 # Multiple masks
                 for i, (m, obj_id) in enumerate(zip(mask, obj_ids)):
+                    # Ensure mask is a numpy array
+                    if isinstance(m, torch.Tensor):
+                        m = self.tensor_to_numpy(m)
+                        # Squeeze if necessary
+                        if m.ndim > 2:
+                            m = np.squeeze(m, axis=0)
+                    
                     color_idx = (obj_id % len(colors))
                     plt.imshow(m, alpha=0.5, cmap=plt.cm.colors.ListedColormap([colors[color_idx]]))
         

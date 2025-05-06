@@ -9227,3 +9227,9 @@
 2025-05-06 02:56:17,363 - INFO - Processing image frames in directory: /home/ubuntu/code/drew/e2e_sam2/frames/
 2025-05-06 02:56:17,378 - INFO - Using natsort for natural sorting of filenames.
 2025-05-06 02:56:17,378 - ERROR - No supported image files found in directory: /home/ubuntu/code/drew/e2e_sam2/frames/
+2025-05-06 02:59:27,938 - INFO - ========================================
+2025-05-06 02:59:27,938 - INFO - Blur Detection Script started at 20250506_025927
+2025-05-06 02:59:27,938 - INFO - ========================================
+2025-05-06 02:59:27,938 - INFO - Processing image frames in directory: /home/ubuntu/code/drew/e2e_sam2/frames/
+2025-05-06 02:59:27,953 - INFO - Using natsort for natural sorting of filenames.
+2025-05-06 02:59:27,953 - ERROR - No supported image files found in directory: /home/ubuntu/code/drew/e2e_sam2/frames/

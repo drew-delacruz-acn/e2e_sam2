@@ -1652,3 +1652,5 @@ if __name__ == "__main__":
     except Exception as e:
         logger.error(f"Unhandled exception: {e}")
 
+# /home/ubuntu/code/drew/e2e_sam2/frames/Scenes 001-020__101B-1-_20230726152900590
+# /home/ubuntu/code/drew/e2e_sam2/frames/Scenes 001-020__106D-5-_20230815151758589

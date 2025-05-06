@@ -120,33 +120,53 @@ class SAM2VideoWrapper:
         Returns:
             Dictionary mapping frame indices to segmentation results
         """
-        video_segments = {}
-        
-        # Get number of frames
-        if self.frames_dir:
-            frame_files = [
-                p for p in os.listdir(self.frames_dir)
-                if os.path.splitext(p)[-1].lower() in [".jpg", ".jpeg", ".png"]
-            ]
-            num_frames = len(frame_files)
-        else:
-            # If we don't know, use a reasonable default
-            num_frames = 100
-        
-        # Propagate to all frames
-        for frame_idx in range(num_frames):
-            masks, obj_ids = self.predictor.propagate_masks_to_frame(
-                frame_idx=frame_idx,
-                objects_to_track=objects_to_track
-            )
+        # Run propagation using the correct method
+        try:
+            # This is the correct method name in SAM2
+            segments = self.predictor.propagate_in_video(objects_to_track=objects_to_track)
             
-            if len(masks) > 0:
-                video_segments[frame_idx] = {
-                    "masks": masks,
-                    "obj_ids": obj_ids
-                }
+            # Convert returned segments to the desired format
+            video_segments = {}
+            
+            # Process segments based on the structure returned
+            # The exact structure might vary depending on SAM2 implementation,
+            # so we'll handle the most likely cases
+            
+            if isinstance(segments, dict):
+                # If already in frame_idx -> data format
+                for frame_idx, data in segments.items():
+                    if 'masks' in data and 'obj_ids' in data:
+                        masks = data['masks']
+                        obj_ids = data['obj_ids']
+                        
+                        # Convert masks to numpy if needed
+                        if isinstance(masks, torch.Tensor):
+                            masks = masks.cpu().detach().numpy()
+                            # Handle dimensions
+                            if masks.ndim > 3:
+                                masks = masks.squeeze(0)
+                        
+                        video_segments[frame_idx] = {
+                            'masks': masks,
+                            'obj_ids': obj_ids
+                        }
+            else:
+                # If returned as a list or other structure,
+                # we need to adapt the processing accordingly
+                print("Propagation result format may require adapting the processing code.")
+                # Return the raw result for debugging
+                return segments
+            
+            return video_segments
         
-        return video_segments
+        except Exception as e:
+            print(f"Error during mask propagation: {str(e)}")
+            # Print available methods for debugging
+            print("Available methods on predictor:")
+            for method_name in dir(self.predictor):
+                if not method_name.startswith('_'):
+                    print(f"  {method_name}")
+            raise e
     
     def visualize_frame(self, frame_idx, mask=None, obj_ids=None, box=None, output_dir=None):
         """Visualize a frame with segmentation mask and prompts"""

@@ -8,13 +8,13 @@ output_dir = "./owl_detection_results"
 os.makedirs(output_dir, exist_ok=True)
 
 # Load frames
-frames, _ = load_frames_from_directory("./video_frames")
+frames, _ = load_frames_from_directory("/home/ubuntu/code/drew/test_data/frames/Scenes 001-020__220D-2-_20230815190723523/subset")
 detector = OWLv2Detector()
 
 # Process and save visualizations for first few frames
 for i in range(min(5, len(frames))):
     # Detect objects
-    detections = detector.detect(frames[i], ["person", "chair", "table"])
+    detections = detector.detect(frames[i], ["goat"], threshold=0.5)
     
     # Visualize and save
     detector.visualize_detections(

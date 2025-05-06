@@ -1,0 +1,211 @@
+(venv) ubuntu@ip-10-35-126-83:~/code/drew/e2e_sam2$ git pull origin HEAD
+From https://github.com/drew-delacruz-acn/e2e_sam2
+ * branch            HEAD       -> FETCH_HEAD
+Updating 00d399a..915a7d4
+Fast-forward
+ .gitignore                                                                     |    1 +
+ Scenes 001-020__101B-1-_20230726152900590_search_results_resnet50.json         | 1292 ---------------------------
+ Scenes 001-020__106D-5-_20230815151758589_search_results_resnet50.json         |  392 --------
+ Scenes 001-020__106E-1- mos_20230727162142209_search_results_resnet50.json     | 2462 --------------------------------------------------
+ Scenes 001-020__106F-1- mos_20230727161814055_search_results_resnet50.json     |    1 -
+ Scenes 001-020__106H-4- 408FPS_20230727115459941_search_results_resnet50.json  |  322 -------
+ Scenes 001-020__108E-1-_20230727173710924_search_results_resnet50.json         | 2412 -------------------------------------------------
+ Scenes 001-020__110A-1-_20230728125233251_search_results_resnet50.json         |  242 -----
+ Scenes 001-020__110A-2-_20230815160756908_search_results_resnet50.json         |  442 ---------
+ Scenes 001-020__110C-1-_20230728125333457_search_results_resnet50.json         |    1 -
+ Scenes 001-020__110D-1- mos_20230728125258979_search_results_resnet50.json     |    1 -
+ Scenes 001-020__111D-1-_20230728135829842_search_results_resnet50.json         | 2442 --------------------------------------------------
+ Scenes 001-020__112H-4- mos_20230728142940155_search_results_resnet50.json     |   12 -
+ Scenes 001-020__112P-5- mos_20230728143243774_search_results_resnet50.json     | 1422 -----------------------------
+ Scenes 001-020__113-FS1d_20230728151456515_search_results_resnet50.json        |   12 -
+ Scenes 001-020__113M-2-  mos_20230728151659443_search_results_resnet50.json    |    1 -
+ Scenes 001-020__114H-2- mos_20230815163819362_search_results_resnet50.json     |   12 -
+ Scenes 001-020__2000-8- mos_20230815195906019_search_results_resnet50.json     |    1 -
+ Scenes 001-020__201B-1-_20230728112433834_search_results_resnet50.json         |   32 -
+ Scenes 001-020__201C-1-_20230815182005024_search_results_resnet50.json         |  642 --------------
+ Scenes 001-020__201D-2-_20230815184746334_search_results_resnet50.json         | 2792 ---------------------------------------------------------
+ Scenes 001-020__201E-2-_20230728112604212_search_results_resnet50.json         |  452 ----------
+ Scenes 001-020__201K-1-_20230815184646280_search_results_resnet50.json         |   72 --
+ Scenes 001-020__201L-1-_20230728112628503_search_results_resnet50.json         |   42 -
+ Scenes 001-020__205A-1ng_b REH_20230815183433032_search_results_resnet50.json  |   22 -
+ Scenes 001-020__206B-1_20230815190937932_search_results_resnet50.json          |  152 ----
+ Scenes 001-020__207A-1-_20230815182030372_search_results_resnet50.json         |  842 ------------------
+ Scenes 001-020__211-1-_20230815190444533_search_results_resnet50.json          |  222 -----
+ Scenes 001-020__211B-1-_20230815190317386_search_results_resnet50.json         |    1 -
+ Scenes 001-020__211H-2-_20230815190456898_search_results_resnet50.json         |  472 ----------
+ Scenes 001-020__211J-2-_20230815190510721_search_results_resnet50.json         |    1 -
+ Scenes 001-020__213-3-_20230815180738197_search_results_resnet50.json          |  572 ------------
+ Scenes 001-020__216A-4b- only_20230815182553047_search_results_resnet50.json   |  872 ------------------
+ Scenes 001-020__220C-2-_20230815190657799_search_results_resnet50.json         | 1232 -------------------------
+ Scenes 001-020__220D-2-_20230815190723523_search_results_resnet50.json         |  102 ---
+ Scenes 001-020__302-2_20230815200213180_search_results_resnet50.json           |  202 -----
+ Scenes 001-020__302A-FS1_20230815200137702_search_results_resnet50.json        |    1 -
+ Scenes 001-020__303K-3-_20230815223320788_search_results_resnet50.json         |  752 ----------------
+ Scenes 001-020__303L-1-_20230815223024888_search_results_resnet50.json         |  492 ----------
+ Scenes 001-020__303N-2-_20230815223401735_search_results_resnet50.json         |    1 -
+ Scenes 001-020__304E-2-_20230815190846847_search_results_resnet50.json         |  152 ----
+ Scenes 001-020__305C-1_20230815193534665_search_results_resnet50.json          |  702 ---------------
+ Scenes 001-020__306-1-_20230803124944118_search_results_resnet50.json          | 1142 ------------------------
+ Scenes 001-020__306B-5-_20230815201805729_search_results_resnet50.json         | 1402 -----------------------------
+ Scenes 001-020__306C-1-_20230815201919138_search_results_resnet50.json         |  702 ---------------
+ Scenes 001-020__306E-1-_20230815201829547_search_results_resnet50.json         |  512 -----------
+ Scenes 001-020__309-3-_20230815150109755_search_results_resnet50.json          |  352 --------
+ Scenes 001-020__313A-2ng_b_20230815231257818_search_results_resnet50.json      |    1 -
+ Scenes 001-020__314-3_20230815232058756_search_results_resnet50.json           |  572 ------------
+ Scenes 001-020__317-9-_20230815232900331_search_results_resnet50.json          |   52 --
+ Scenes 001-020__317B-2_20230815234008274_search_results_resnet50.json          |   82 --
+ Scenes 001-020__319-9_20230815201611576_search_results_resnet50.json           |   52 --
+ Scenes 001-020__502-2- mos_20230815182925767_search_results_resnet50.json      |    1 -
+ Scenes 001-020__504K-1-_20230816050602143_search_results_resnet50.json         |  892 -------------------
+ Scenes 001-020__504T-3-_20230816050753649_search_results_resnet50.json         | 3302 --------------------------------------------------------------------
+ Scenes 001-020__505-5-_20230815200453259_search_results_resnet50.json          |   12 -
+ Scenes 001-020__506E-1ng_b_20230816043951139_search_results_resnet50.json      |   42 -
+ Scenes 001-020__507-1ng_20230816050923979_search_results_resnet50.json         |   22 -
+ Scenes 001-020__509-3_20230815200533637_search_results_resnet50.json           |  112 ---
+ Scenes 021-040__137E-1-_20230815175038515_search_results_resnet50.json         |    1 -
+ Scenes 021-040__221-4-_20230815180803766_search_results_resnet50.json          |  352 --------
+ Scenes 021-040__222-2-_20230815185458410_search_results_resnet50.json          |  572 ------------
+ Scenes 021-040__226A-1-_20230815185254846_search_results_resnet50.json         |  472 ----------
+ Scenes 021-040__230-1ng_20230815191241114_search_results_resnet50.json         |   22 -
+ Scenes 021-040__234A-2-_20230815192229849_search_results_resnet50.json         | 2112 -------------------------------------------
+ Scenes 021-040__235-1-_20230815192601740_search_results_resnet50.json          |   52 --
+ Scenes 021-040__235C-2- mos_20230815192640043_search_results_resnet50.json     |   12 -
+ Scenes 021-040__235E-1-_20230815192718146_search_results_resnet50.json         |    1 -
+ Scenes 021-040__237B-1-_20230815180326204_search_results_resnet50.json         | 3192 -----------------------------------------------------------------
+ Scenes 021-040__239A-1-_20230815192921019_search_results_resnet50.json         |  672 --------------
+ Scenes 021-040__321-11d only_20230815235100054_search_results_resnet50.json    |   12 -
+ Scenes 021-040__322-6_20230815235506455_search_results_resnet50.json           |  112 ---
+ Scenes 021-040__323A-1_20230816000111901_search_results_resnet50.json          |   62 --
+ Scenes 021-040__440H-2b-_20230816031331933_search_results_resnet50.json        |    1 -
+ Scenes 021-040__528A-2-_20230815195348745_search_results_resnet50.json         |    1 -
+ Scenes 021-040__529C-1- mos_20230816070604261_search_results_resnet50.json     | 1152 ------------------------
+ Scenes 021-040__536A-3-_20230816063724398_search_results_resnet50.json         | 1522 -------------------------------
+ Scenes 021-040__536C-1-_20230816063945052_search_results_resnet50.json         |  272 ------
+ Scenes 021-040__537C-2_20230816070308783_search_results_resnet50.json          |  112 ---
+ Scenes 041-060__156-5a- only pu_20230815181240389_search_results_resnet50.json | 2182 ---------------------------------------------
+ Scenes 041-060__156-6a- only pu_20230815175525189_search_results_resnet50.json |  602 -------------
+ Scenes 041-060__156A-2-_20230815181902814_search_results_resnet50.json         |   92 --
+ Scenes 041-060__156D-1- mos_20230815181940173_search_results_resnet50.json     |   52 --
+ Scenes 041-060__156F-1-_20230815175731629_search_results_resnet50.json         |   22 -
+ Scenes 041-060__157C-2- pu_20230815175939817_search_results_resnet50.json      |  442 ---------
+ Scenes 041-060__238A-2-_20230815193138550_search_results_resnet50.json         |  382 --------
+ Scenes 041-060__238B-1-_20230815193151869_search_results_resnet50.json         |    1 -
+ Scenes 041-060__244A-7- pu_20230815211729392_search_results_resnet50.json      |  312 -------
+ Scenes 041-060__244B-1-_20230815212053650_search_results_resnet50.json         | 1062 ----------------------
+ Scenes 041-060__244C-1- mos_20230815211948647_search_results_resnet50.json     |    1 -
+ Scenes 041-060__244F-1- mos_20230815211755975_search_results_resnet50.json     |  312 -------
+ Scenes 041-060__244G-1-_20230815212159478_search_results_resnet50.json         |   92 --
+ Scenes 041-060__254B-3-_20230815193228103_search_results_resnet50.json         |   12 -
+ Scenes 041-060__411D-1- mos_20230816005120796_search_results_resnet50.json     |    1 -
+ Scenes 061-080__163A-1- mos_20230815180055695_search_results_resnet50.json     |   82 --
+ Scenes 061-080__165A-1-_20230815180241405_search_results_resnet50.json         | 1452 ------------------------------
+ Scenes 061-080__165A-4-_20230815180313546_search_results_resnet50.json         | 2752 --------------------------------------------------------
+ Scenes 061-080__265A-1-_20230815215951493_search_results_resnet50.json         |   82 --
+ Scenes 061-080__265G-3-_20230815215442372_search_results_resnet50.json         |  602 -------------
+ Scenes 061-080__265H-2-_20230815215828529_search_results_resnet50.json         |  162 ----
+ Scenes 061-080__265M-2-_20230815215612783_search_results_resnet50.json         |   72 --
+ Scenes 061-080__265N-1_20230815220141511_search_results_resnet50.json          |  112 ---
+ e2e_pipeline_v2/experiments/vidPredictor/test_embedding_generator.py           |   16 +
+ 103 files changed, 17 insertions(+), 53134 deletions(-)
+ delete mode 100644 Scenes 001-020__101B-1-_20230726152900590_search_results_resnet50.json
+ delete mode 100644 Scenes 001-020__106D-5-_20230815151758589_search_results_resnet50.json
+ delete mode 100644 Scenes 001-020__106E-1- mos_20230727162142209_search_results_resnet50.json
+ delete mode 100644 Scenes 001-020__106F-1- mos_20230727161814055_search_results_resnet50.json
+ delete mode 100644 Scenes 001-020__106H-4- 408FPS_20230727115459941_search_results_resnet50.json
+ delete mode 100644 Scenes 001-020__108E-1-_20230727173710924_search_results_resnet50.json
+ delete mode 100644 Scenes 001-020__110A-1-_20230728125233251_search_results_resnet50.json
+ delete mode 100644 Scenes 001-020__110A-2-_20230815160756908_search_results_resnet50.json
+ delete mode 100644 Scenes 001-020__110C-1-_20230728125333457_search_results_resnet50.json
+ delete mode 100644 Scenes 001-020__110D-1- mos_20230728125258979_search_results_resnet50.json
+ delete mode 100644 Scenes 001-020__111D-1-_20230728135829842_search_results_resnet50.json
+ delete mode 100644 Scenes 001-020__112H-4- mos_20230728142940155_search_results_resnet50.json
+ delete mode 100644 Scenes 001-020__112P-5- mos_20230728143243774_search_results_resnet50.json
+ delete mode 100644 Scenes 001-020__113-FS1d_20230728151456515_search_results_resnet50.json
+ delete mode 100644 Scenes 001-020__113M-2-  mos_20230728151659443_search_results_resnet50.json
+ delete mode 100644 Scenes 001-020__114H-2- mos_20230815163819362_search_results_resnet50.json
+ delete mode 100644 Scenes 001-020__2000-8- mos_20230815195906019_search_results_resnet50.json
+ delete mode 100644 Scenes 001-020__201B-1-_20230728112433834_search_results_resnet50.json
+ delete mode 100644 Scenes 001-020__201C-1-_20230815182005024_search_results_resnet50.json
+ delete mode 100644 Scenes 001-020__201D-2-_20230815184746334_search_results_resnet50.json
+ delete mode 100644 Scenes 001-020__201E-2-_20230728112604212_search_results_resnet50.json
+ delete mode 100644 Scenes 001-020__201K-1-_20230815184646280_search_results_resnet50.json
+ delete mode 100644 Scenes 001-020__201L-1-_20230728112628503_search_results_resnet50.json
+ delete mode 100644 Scenes 001-020__205A-1ng_b REH_20230815183433032_search_results_resnet50.json
+ delete mode 100644 Scenes 001-020__206B-1_20230815190937932_search_results_resnet50.json
+ delete mode 100644 Scenes 001-020__207A-1-_20230815182030372_search_results_resnet50.json
+ delete mode 100644 Scenes 001-020__211-1-_20230815190444533_search_results_resnet50.json
+ delete mode 100644 Scenes 001-020__211B-1-_20230815190317386_search_results_resnet50.json
+ delete mode 100644 Scenes 001-020__211H-2-_20230815190456898_search_results_resnet50.json
+ delete mode 100644 Scenes 001-020__211J-2-_20230815190510721_search_results_resnet50.json
+ delete mode 100644 Scenes 001-020__213-3-_20230815180738197_search_results_resnet50.json
+ delete mode 100644 Scenes 001-020__216A-4b- only_20230815182553047_search_results_resnet50.json
+ delete mode 100644 Scenes 001-020__220C-2-_20230815190657799_search_results_resnet50.json
+ delete mode 100644 Scenes 001-020__220D-2-_20230815190723523_search_results_resnet50.json
+ delete mode 100644 Scenes 001-020__302-2_20230815200213180_search_results_resnet50.json
+ delete mode 100644 Scenes 001-020__302A-FS1_20230815200137702_search_results_resnet50.json
+ delete mode 100644 Scenes 001-020__303K-3-_20230815223320788_search_results_resnet50.json
+ delete mode 100644 Scenes 001-020__303L-1-_20230815223024888_search_results_resnet50.json
+ delete mode 100644 Scenes 001-020__303N-2-_20230815223401735_search_results_resnet50.json
+ delete mode 100644 Scenes 001-020__304E-2-_20230815190846847_search_results_resnet50.json
+ delete mode 100644 Scenes 001-020__305C-1_20230815193534665_search_results_resnet50.json
+ delete mode 100644 Scenes 001-020__306-1-_20230803124944118_search_results_resnet50.json
+ delete mode 100644 Scenes 001-020__306B-5-_20230815201805729_search_results_resnet50.json
+ delete mode 100644 Scenes 001-020__306C-1-_20230815201919138_search_results_resnet50.json
+ delete mode 100644 Scenes 001-020__306E-1-_20230815201829547_search_results_resnet50.json
+ delete mode 100644 Scenes 001-020__309-3-_20230815150109755_search_results_resnet50.json
+ delete mode 100644 Scenes 001-020__313A-2ng_b_20230815231257818_search_results_resnet50.json
+ delete mode 100644 Scenes 001-020__314-3_20230815232058756_search_results_resnet50.json
+ delete mode 100644 Scenes 001-020__317-9-_20230815232900331_search_results_resnet50.json
+ delete mode 100644 Scenes 001-020__317B-2_20230815234008274_search_results_resnet50.json
+ delete mode 100644 Scenes 001-020__319-9_20230815201611576_search_results_resnet50.json
+ delete mode 100644 Scenes 001-020__502-2- mos_20230815182925767_search_results_resnet50.json
+ delete mode 100644 Scenes 001-020__504K-1-_20230816050602143_search_results_resnet50.json
+ delete mode 100644 Scenes 001-020__504T-3-_20230816050753649_search_results_resnet50.json
+ delete mode 100644 Scenes 001-020__505-5-_20230815200453259_search_results_resnet50.json
+ delete mode 100644 Scenes 001-020__506E-1ng_b_20230816043951139_search_results_resnet50.json
+ delete mode 100644 Scenes 001-020__507-1ng_20230816050923979_search_results_resnet50.json
+ delete mode 100644 Scenes 001-020__509-3_20230815200533637_search_results_resnet50.json
+ delete mode 100644 Scenes 021-040__137E-1-_20230815175038515_search_results_resnet50.json
+ delete mode 100644 Scenes 021-040__221-4-_20230815180803766_search_results_resnet50.json
+ delete mode 100644 Scenes 021-040__222-2-_20230815185458410_search_results_resnet50.json
+ delete mode 100644 Scenes 021-040__226A-1-_20230815185254846_search_results_resnet50.json
+ delete mode 100644 Scenes 021-040__230-1ng_20230815191241114_search_results_resnet50.json
+ delete mode 100644 Scenes 021-040__234A-2-_20230815192229849_search_results_resnet50.json
+ delete mode 100644 Scenes 021-040__235-1-_20230815192601740_search_results_resnet50.json
+ delete mode 100644 Scenes 021-040__235C-2- mos_20230815192640043_search_results_resnet50.json
+ delete mode 100644 Scenes 021-040__235E-1-_20230815192718146_search_results_resnet50.json
+ delete mode 100644 Scenes 021-040__237B-1-_20230815180326204_search_results_resnet50.json
+ delete mode 100644 Scenes 021-040__239A-1-_20230815192921019_search_results_resnet50.json
+ delete mode 100644 Scenes 021-040__321-11d only_20230815235100054_search_results_resnet50.json
+ delete mode 100644 Scenes 021-040__322-6_20230815235506455_search_results_resnet50.json
+ delete mode 100644 Scenes 021-040__323A-1_20230816000111901_search_results_resnet50.json
+ delete mode 100644 Scenes 021-040__440H-2b-_20230816031331933_search_results_resnet50.json
+ delete mode 100644 Scenes 021-040__528A-2-_20230815195348745_search_results_resnet50.json
+ delete mode 100644 Scenes 021-040__529C-1- mos_20230816070604261_search_results_resnet50.json
+ delete mode 100644 Scenes 021-040__536A-3-_20230816063724398_search_results_resnet50.json
+ delete mode 100644 Scenes 021-040__536C-1-_20230816063945052_search_results_resnet50.json
+ delete mode 100644 Scenes 021-040__537C-2_20230816070308783_search_results_resnet50.json
+ delete mode 100644 Scenes 041-060__156-5a- only pu_20230815181240389_search_results_resnet50.json
+ delete mode 100644 Scenes 041-060__156-6a- only pu_20230815175525189_search_results_resnet50.json
+ delete mode 100644 Scenes 041-060__156A-2-_20230815181902814_search_results_resnet50.json
+ delete mode 100644 Scenes 041-060__156D-1- mos_20230815181940173_search_results_resnet50.json
+ delete mode 100644 Scenes 041-060__156F-1-_20230815175731629_search_results_resnet50.json
+ delete mode 100644 Scenes 041-060__157C-2- pu_20230815175939817_search_results_resnet50.json
+ delete mode 100644 Scenes 041-060__238A-2-_20230815193138550_search_results_resnet50.json
+ delete mode 100644 Scenes 041-060__238B-1-_20230815193151869_search_results_resnet50.json
+ delete mode 100644 Scenes 041-060__244A-7- pu_20230815211729392_search_results_resnet50.json
+ delete mode 100644 Scenes 041-060__244B-1-_20230815212053650_search_results_resnet50.json
+ delete mode 100644 Scenes 041-060__244C-1- mos_20230815211948647_search_results_resnet50.json
+ delete mode 100644 Scenes 041-060__244F-1- mos_20230815211755975_search_results_resnet50.json
+ delete mode 100644 Scenes 041-060__244G-1-_20230815212159478_search_results_resnet50.json
+ delete mode 100644 Scenes 041-060__254B-3-_20230815193228103_search_results_resnet50.json
+ delete mode 100644 Scenes 041-060__411D-1- mos_20230816005120796_search_results_resnet50.json
+ delete mode 100644 Scenes 061-080__163A-1- mos_20230815180055695_search_results_resnet50.json
+ delete mode 100644 Scenes 061-080__165A-1-_20230815180241405_search_results_resnet50.json
+ delete mode 100644 Scenes 061-080__165A-4-_20230815180313546_search_results_resnet50.json
+ delete mode 100644 Scenes 061-080__265A-1-_20230815215951493_search_results_resnet50.json
+ delete mode 100644 Scenes 061-080__265G-3-_20230815215442372_search_results_resnet50.json
+ delete mode 100644 Scenes 061-080__265H-2-_20230815215828529_search_results_resnet50.json
+ delete mode 100644 Scenes 061-080__265M-2-_20230815215612783_search_results_resnet50.json
+ delete mode 100644 Scenes 061-080__265N-1_20230815220141511_search_results_resnet50.json
+ create mode 100644 e2e_pipeline_v2/experiments/vidPredictor/test_embedding_generator.py

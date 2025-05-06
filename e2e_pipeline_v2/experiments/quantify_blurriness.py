@@ -121,10 +121,10 @@ def extract_foreground_mask(frame, edge_threshold=100, density_threshold=0.3):
             logger.warning(f"Mask shape {mask.shape} differs from gray shape {gray.shape}. Resizing mask.")
             mask = cv2.resize(mask, (gray.shape[1], gray.shape[0]), interpolation=cv2.INTER_NEAREST)
 
-        return mask, edge_density
+        return mask, edge_density, gray, edges # Return intermediate steps
     except Exception as e:
         logger.error(f"Error in extract_foreground_mask: {e}")
-        return None, None
+        return None, None, None, None
 
 # -- PARAMETERS --
 LAPLACIAN_THRESH = 100
@@ -147,12 +147,14 @@ def get_video_info(cap):
     return {"width": width, "height": height, "fps": fps, 
             "frame_count": frame_count, "duration": duration}
 
-def analyze_video(video_path, resize_factor=1.0, skip_frames=1, bg_remove=False):
+def analyze_video(video_path, resize_factor=1.0, skip_frames=1, bg_remove=False, visualize_mask=False, run_dir="."):
     start_time = time.time()
     logger.info(f"Starting video analysis on: {video_path}")
     logger.info(f"Resize factor: {resize_factor}")
     logger.info(f"Processing every {skip_frames} frame(s)")
     logger.info(f"Background removal based on edge density: {'Enabled' if bg_remove else 'Disabled'}")
+    if bg_remove and visualize_mask:
+        logger.info("Foreground mask visualization: Enabled (will save for first valid frame)")
     
     if not os.path.exists(video_path):
         logger.error(f"Video file not found: {video_path}")
@@ -190,6 +192,8 @@ def analyze_video(video_path, resize_factor=1.0, skip_frames=1, bg_remove=False)
         total_frames = video_info["frame_count"]
         last_progress = -1
         progress_update_interval = max(1, total_frames // 20)  # Update progress ~20 times
+
+        mask_visualization_saved = False # Flag to save only one visualization
 
         while True:
             ret, frame = cap.read()
@@ -236,12 +240,46 @@ def analyze_video(video_path, resize_factor=1.0, skip_frames=1, bg_remove=False)
                 # --- Foreground Extraction (if enabled) ---
                 mask = None
                 if bg_remove:
-                    mask, edge_density_map = extract_foreground_mask(frame) # Using default thresholds for now
+                    mask, edge_density_map, gray_for_mask, edges_for_mask = extract_foreground_mask(frame) # Get intermediate steps
                     if mask is None or cv2.countNonZero(mask) == 0:
                         logger.warning(f"Frame {frame_idx}: Foreground mask invalid or empty. Analyzing full frame.")
                         mask = None # Ensure mask is None if invalid
                     else:
-                         logger.debug(f"Frame {frame_idx}: Applied foreground mask.")
+                        logger.debug(f"Frame {frame_idx}: Applied foreground mask.")
+                        # --- Save Mask Visualization (if enabled and not already saved) ---
+                        if visualize_mask and not mask_visualization_saved:
+                             try:
+                                 fig, axes = plt.subplots(2, 2, figsize=(10, 10))
+                                 
+                                 # Original Frame
+                                 axes[0, 0].imshow(cv2.cvtColor(frame, cv2.COLOR_BGR2RGB))
+                                 axes[0, 0].set_title("Original Frame")
+                                 axes[0, 0].axis('off')
+                                 
+                                 # Canny Edges
+                                 axes[0, 1].imshow(edges_for_mask, cmap='gray')
+                                 axes[0, 1].set_title("Canny Edges")
+                                 axes[0, 1].axis('off')
+                                 
+                                 # Edge Density Map
+                                 im = axes[1, 0].imshow(edge_density_map, cmap='hot')
+                                 axes[1, 0].set_title("Edge Density Map")
+                                 axes[1, 0].axis('off')
+                                 fig.colorbar(im, ax=axes[1, 0])
+                                 
+                                 # Final Mask
+                                 axes[1, 1].imshow(mask, cmap='gray')
+                                 axes[1, 1].set_title("Final Foreground Mask")
+                                 axes[1, 1].axis('off')
+                                 
+                                 plt.tight_layout()
+                                 vis_save_path = os.path.join(run_dir, f"foreground_mask_visualization_frame_{frame_idx}.png")
+                                 plt.savefig(vis_save_path)
+                                 plt.close(fig)
+                                 logger.info(f"Saved foreground mask visualization to {vis_save_path}")
+                                 mask_visualization_saved = True # Set flag so we don't save again
+                             except Exception as e:
+                                 logger.error(f"Error saving mask visualization for frame {frame_idx}: {e}")
 
                 # Measure performance of each algorithm (with potential mask)
                 t1 = time.time()
@@ -1115,6 +1153,9 @@ def parse_arguments():
     # Argument for background removal
     parser.add_argument('--bg_remove', action='store_true', help='Enable foreground extraction based on edge density')
     
+    # Argument for visualizing the mask generation
+    parser.add_argument('--visualize_mask', action='store_true', help='Save a visualization of the foreground mask creation steps (requires --bg_remove)')
+    
     return parser.parse_args()
 
 if __name__ == "__main__":
@@ -1174,7 +1215,9 @@ if __name__ == "__main__":
                 video_path,
                 resize_factor=args.resize,
                 skip_frames=args.skip,
-                bg_remove=args.bg_remove 
+                bg_remove=args.bg_remove,
+                visualize_mask=args.visualize_mask,
+                run_dir=run_dir
             )
             
             # Unpack results carefully, checking for None

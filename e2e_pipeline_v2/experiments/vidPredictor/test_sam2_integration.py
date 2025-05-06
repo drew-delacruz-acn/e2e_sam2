@@ -43,17 +43,49 @@ sam_wrapper.visualize_frame(
 print("Propagating masks...")
 segments = sam_wrapper.propagate_masks(objects_to_track=[1])
 print(f'saving results to {output_dir}')
+
+print('gut check')
 # Visualize a few propagated frames
 for idx in range(0, min(len(frames), 30), 10):
     if idx in segments:
-        print(segments[idx])
-        masks = segments[idx][1]
-        obj_ids = segments[idx]["obj_ids"]
+        print(f"Visualizing frame {idx}")
+        # The segments dictionary maps frame_idx -> {obj_id -> mask}
+        frame_segments = segments[idx]
+        
+        # Extract masks and corresponding object IDs
+        obj_ids = list(frame_segments.keys())
+        masks = [frame_segments[obj_id] for obj_id in obj_ids]
+        
+        # Visualize the frame with all masks
         sam_wrapper.visualize_frame(
             idx,
             mask=masks,
             obj_ids=obj_ids,
             output_dir=output_dir
         )
+    else:
+        print(f"No segments found for frame {idx}")
 
-        
+#esults to ./sam2_results
+# gut check
+# Visualizing frame 0
+# Traceback (most recent call last):
+#   File "/home/ubuntu/code/drew/e2e_sam2/e2e_pipeline_v2/experiments/vidPredictor/test_sam2_integration.py", line 60, in <module>
+#     sam_wrapper.visualize_frame(
+#   File "/home/ubuntu/code/drew/e2e_sam2/e2e_pipeline_v2/experiments/vidPredictor/src/sam2_wrapper.py", line 225, in visualize_frame
+#     plt.imshow(m, alpha=0.5, cmap=plt.cm.colors.ListedColormap([colors[color_idx]]))
+#   File "/home/ubuntu/code/drew/e2e_sam2/venv/lib/python3.12/site-packages/matplotlib/pyplot.py", line 3590, in imshow
+#     __ret = gca().imshow(
+#             ^^^^^^^^^^^^^
+#   File "/home/ubuntu/code/drew/e2e_sam2/venv/lib/python3.12/site-packages/matplotlib/__init__.py", line 1521, in inner
+#     return func(
+#            ^^^^^
+#   File "/home/ubuntu/code/drew/e2e_sam2/venv/lib/python3.12/site-packages/matplotlib/axes/_axes.py", line 5976, in imshow
+#     im.set_data(X)
+#   File "/home/ubuntu/code/drew/e2e_sam2/venv/lib/python3.12/site-packages/matplotlib/image.py", line 685, in set_data
+#     self._A = self._normalize_image_array(A)
+#               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+#   File "/home/ubuntu/code/drew/e2e_sam2/venv/lib/python3.12/site-packages/matplotlib/image.py", line 653, in _normalize_image_array
+#     raise TypeError(f"Invalid shape {A.shape} for image data")
+# TypeError: Invalid shape (1, 540, 960) for image data
+# (venv) ubuntu@ip-10-35-126-83:~/code/drew/e2e_sam2$ 

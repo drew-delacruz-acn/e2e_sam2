@@ -37,35 +37,48 @@ A comprehensive tool for detecting and analyzing blur in videos using multiple d
 
 Basic usage (single video):
 ```bash
-python quantify_blurriness.py --input path/to/your/video.mp4
+python quantify_blurriness.py --input path/to/your/video.mp4 --input_type video
 ```
 
 Basic usage (directory of videos):
 ```bash
-python quantify_blurriness.py --input path/to/your/directory/
+python quantify_blurriness.py --input path/to/your/directory/ --input_type video
 ```
 
-With performance optimizations for large videos:
+Basic usage (directory of image frames):
 ```bash
-python quantify_blurriness.py --input path/to/your/video.mp4 --resize 0.25 --skip 5
+python quantify_blurriness.py --input path/to/your/frames_directory/ --input_type frames
 ```
 
-Enable foreground extraction:
+With performance optimizations (works for video and frames):
 ```bash
-python quantify_blurriness.py --input path/to/your/video.mp4 --bg_remove
+python quantify_blurriness.py --input path/to/your/video.mp4 --input_type video --resize 0.25 --skip 5
+python quantify_blurriness.py --input path/to/your/frames_directory/ --input_type frames --resize 0.5 --skip 2
+```
+
+Enable foreground extraction (works for video and frames):
+```bash
+python quantify_blurriness.py --input path/to/your/video.mp4 --input_type video --bg_remove
+python quantify_blurriness.py --input path/to/your/frames_directory/ --input_type frames --bg_remove
+```
+
+Visualize foreground mask generation (first valid frame/image only):
+```bash
+python quantify_blurriness.py --input path/to/your/frames_directory/ --input_type frames --bg_remove --visualize_mask
 ```
 
 All options:
 ```
---input       Path to video file OR directory containing videos (Required)
+--input       Path to video file, directory of videos, OR directory of image frames (Required)
+--input_type  Specify if input is 'video' or 'frames' (Required)
 --resize      Resize factor (e.g., 0.5 for half size) [Default: 1.0]
---skip        Process every N frames [Default: 1]
+--skip        Process every N frames/images [Default: 1]
 --save_path   Custom path to save results plot (only used for single video input)
 --method      Threshold method (percentile, stddev, fixed) [Default: percentile]
 --bg_remove   Enable foreground extraction based on edge density
 --stakeholder Generate stakeholder-friendly visualizations (single video only)
 --confidence  Include confidence scores in output
---visualize_mask Save a visualization of the foreground mask creation steps for one frame (requires --bg_remove)
+--visualize_mask Save a visualization of the foreground mask creation steps for one frame/image (requires --bg_remove)
 ```
 
 ### Output
@@ -86,9 +99,9 @@ Results are saved in a timestamped directory under `blur_results/analysis_{times
 - Optional: `confidence_scores_{video_name}_{timestamp}.csv` if `--confidence` or `--stakeholder` used
 - Optional: Stakeholder summary files in `summary/` if `--stakeholder` used
 
-**When processing a directory:**
+**When processing a directory of videos (`--input_type video`):**
 
-- `aggregated_results.json`: A JSON file containing results for all processed videos. The structure is:
+- `aggregated_results.json`: A JSON file containing results for all processed videos. Keys are video filenames.
   ```json
   {
     "video1.mp4": {
@@ -102,6 +115,36 @@ Results are saved in a timestamped directory under `blur_results/analysis_{times
   ```
 - Individual plots, visualizations, and CSV files are generally *not* generated for each video when processing a directory to avoid clutter.
 - Optional: `foreground_mask_visualization_frame_{frame_idx}.png` if `--bg_remove` and `--visualize_mask` are used (saved once per run for the first frame with a valid mask).
+
+**When processing a directory of frames (`--input_type frames`):**
+
+- `aggregated_results.json`: A JSON file containing results for all processed image frames. Key is the input directory name.
+  ```json
+  {
+    "input_directory_name": {
+      "type": "frames",
+      "settings": { "resize_factor": ..., "skip": ..., "bg_remove": ..., "method": ... },
+      "thresholds": { "percentile": { ... }, "stddev": { ... }, "fixed": { ... } },
+      "results": [
+        { 
+          "index": 0, // Index in the sorted file list
+          "filename": "frame_0001.png",
+          "laplacian": ..., 
+          "tenengrad": ..., 
+          "fft": ..., 
+          "is_blurry": { "percentile": false, "stddev": false, "fixed": false }
+        },
+        ...
+      ],
+      "confidence": [
+        { "index": 0, "filename": "frame_0001.png", "confidence": 85, "leading_metric": "laplacian", "is_blurry": false }, // Optional
+        ...
+      ]
+    }
+  }
+  ```
+- **No individual plots, CSVs, stakeholder reports, or video-specific visualizations** (like time-series plots) are generated in frames mode.
+- Optional: `foreground_mask_visualization_img_{image_index}.png` if `--bg_remove` and `--visualize_mask` are used (saved once per run for the first image with a valid mask).
 
 ### Interpreting Results
 

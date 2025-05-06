@@ -7,6 +7,7 @@ import os
 from datetime import datetime
 import argparse
 import json # Import json module
+import glob # For finding image files
 
 # Configure logging
 logging.basicConfig(
@@ -1137,11 +1138,223 @@ def create_comparison_visualization(ax, blur_scores, confidence_scores, all_fram
         ax.text(0.5, 0.5, "No suitable comparison frames found", ha='center', va='center')
         ax.axis('off')
 
+def analyze_frame_directory(image_paths, resize_factor=1.0, skip=1, bg_remove=False, visualize_mask=False, run_dir=".", method='percentile', confidence=False):
+    """Analyze a directory of individual image frames for blur."""
+    start_time = time.time()
+    logger.info(f"Starting analysis of {len(image_paths)} image frames.")
+    logger.info(f"Resize factor: {resize_factor}")
+    logger.info(f"Processing every {skip} image(s)")
+    logger.info(f"Background removal: {'Enabled' if bg_remove else 'Disabled'}")
+    logger.info(f"Threshold method: {method}")
+    if bg_remove and visualize_mask:
+        logger.info("Foreground mask visualization: Enabled (will save for first valid frame)")
+        
+    all_scores = []
+    processed_files = []
+    processed_indices = []
+    processing_times = {
+        'laplacian': [], 
+        'tenengrad': [], 
+        'fft': []
+    }
+    mask_visualization_saved = False
+    processed_count = 0
+    total_images_to_process = len(range(0, len(image_paths), skip))
+    
+    for i in range(0, len(image_paths), skip):
+        image_path = image_paths[i]
+        frame_idx_for_log = i # Use list index for logging/progress
+        progress = int(((processed_count + 1) / total_images_to_process) * 100) if total_images_to_process > 0 else 0
+        
+        if processed_count % max(1, total_images_to_process // 20) == 0:
+             elapsed = time.time() - start_time
+             estimated_total = (elapsed / max(1, processed_count)) * total_images_to_process if processed_count > 0 else 0
+             remaining = max(0, estimated_total - elapsed)
+             logger.info(f"Progress: {progress}% ({processed_count+1}/{total_images_to_process}) - ETA: {remaining:.1f}s")
+        
+        frame_start = time.time()
+        logger.debug(f"Processing image {frame_idx_for_log}: {os.path.basename(image_path)}")
+        
+        try:
+            frame = cv2.imread(image_path)
+            if frame is None:
+                logger.error(f"Failed to load image: {image_path}")
+                continue
+
+            # Resize if needed
+            if resize_factor != 1.0:
+                h, w = frame.shape[:2]
+                new_h, new_w = int(h * resize_factor), int(w * resize_factor)
+                frame = cv2.resize(frame, (new_w, new_h))
+            
+            gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+            
+            # --- Foreground Extraction (if enabled) ---
+            mask = None
+            if bg_remove:
+                mask, edge_density_map, gray_for_mask, edges_for_mask = extract_foreground_mask(frame)
+                if mask is None or cv2.countNonZero(mask) == 0:
+                    logger.warning(f"Image {frame_idx_for_log}: Foreground mask invalid or empty. Analyzing full image.")
+                    mask = None
+                else:
+                    logger.debug(f"Image {frame_idx_for_log}: Applied foreground mask.")
+                    # --- Save Mask Visualization ---
+                    if visualize_mask and not mask_visualization_saved:
+                        try:
+                            fig, axes = plt.subplots(2, 2, figsize=(10, 10))
+                            axes[0, 0].imshow(cv2.cvtColor(frame, cv2.COLOR_BGR2RGB))
+                            axes[0, 0].set_title("Original Image")
+                            axes[0, 0].axis('off')
+                            axes[0, 1].imshow(edges_for_mask, cmap='gray')
+                            axes[0, 1].set_title("Canny Edges")
+                            axes[0, 1].axis('off')
+                            im = axes[1, 0].imshow(edge_density_map, cmap='hot')
+                            axes[1, 0].set_title("Edge Density Map")
+                            axes[1, 0].axis('off')
+                            fig.colorbar(im, ax=axes[1, 0])
+                            axes[1, 1].imshow(mask, cmap='gray')
+                            axes[1, 1].set_title("Final Foreground Mask")
+                            axes[1, 1].axis('off')
+                            plt.tight_layout()
+                            vis_save_path = os.path.join(run_dir, f"foreground_mask_visualization_img_{frame_idx_for_log}.png")
+                            plt.savefig(vis_save_path)
+                            plt.close(fig)
+                            logger.info(f"Saved foreground mask visualization to {vis_save_path}")
+                            mask_visualization_saved = True
+                        except Exception as e:
+                            logger.error(f"Error saving mask visualization for image {frame_idx_for_log}: {e}")
+
+            # Calculate blur metrics
+            t1 = time.time()
+            lap = laplacian_blur(gray, mask=mask)
+            t2 = time.time()
+            processing_times['laplacian'].append(t2-t1)
+            
+            t1 = time.time()
+            ten = tenengrad_blur(gray, mask=mask)
+            t2 = time.time()
+            processing_times['tenengrad'].append(t2-t1)
+            
+            t1 = time.time()
+            fft = fft_blur(gray, mask=mask)
+            t2 = time.time()
+            processing_times['fft'].append(t2-t1)
+
+            all_scores.append({
+                'index': i, # Store original index in list
+                'filename': os.path.basename(image_path),
+                'laplacian': lap,
+                'tenengrad': ten,
+                'fft': fft
+            })
+            processed_files.append(os.path.basename(image_path))
+            processed_indices.append(i)
+            processed_count += 1
+            
+            if processed_count % 50 == 0:
+                logger.debug(f"Image {frame_idx_for_log} processed in {time.time() - frame_start:.4f} seconds")
+
+        except Exception as e:
+            logger.error(f"Error processing image {frame_idx_for_log} ({os.path.basename(image_path)}): {e}")
+
+    logger.info(f"Finished processing {processed_count} images.")
+    if processing_times['laplacian']:
+        logger.info(f"Average processing times per image:")
+        logger.info(f"  Laplacian: {np.mean(processing_times['laplacian']):.4f} seconds")
+        logger.info(f"  Tenengrad: {np.mean(processing_times['tenengrad']):.4f} seconds")
+        logger.info(f"  FFT: {np.mean(processing_times['fft']):.4f} seconds")
+        
+    if not all_scores:
+        logger.error("No images were successfully processed.")
+        return None
+
+    # -- Calculate dynamic thresholds based on *all* processed images --
+    logger.info("Calculating dynamic thresholds from image statistics")
+    lap_vals = np.array([x['laplacian'] for x in all_scores])
+    ten_vals = np.array([x['tenengrad'] for x in all_scores])
+    fft_vals = np.array([x['fft'] for x in all_scores])
+    
+    thresholds = {
+        'percentile': {
+            'laplacian': np.percentile(lap_vals, 25),
+            'tenengrad': np.percentile(ten_vals, 25),
+            'fft': np.percentile(fft_vals, 25)
+        },
+        'stddev': {
+            'laplacian': max(0, np.mean(lap_vals) - 1.0 * np.std(lap_vals)),
+            'tenengrad': max(0, np.mean(ten_vals) - 1.0 * np.std(ten_vals)),
+            'fft': max(0, np.mean(fft_vals) - 1.0 * np.std(fft_vals))
+        },
+        'fixed': {
+            'laplacian': LAPLACIAN_THRESH,
+            'tenengrad': TENENGRAD_THRESH,
+            'fft': FFT_THRESH
+        }
+    }
+    logger.info("Calculated thresholds:")
+    for m, values in thresholds.items():
+        logger.info(f"  {m.capitalize()} method:")
+        for metric, value in values.items():
+            logger.info(f"    {metric}: {value:.2f}")
+            
+    # -- Classify images based on selected method --
+    blur_flags = {tm: [] for tm in thresholds.keys()}
+    final_results = []
+    confidence_results = []
+    
+    current_thresholds = thresholds[method]
+    
+    for i, score in enumerate(all_scores):
+        lap, ten, fft = score['laplacian'], score['tenengrad'], score['fft']
+        
+        # Classify using all threshold methods for storage
+        flags = {}
+        for tm, thresh in thresholds.items():
+            sharp = (
+                lap > thresh['laplacian'] and
+                ten > thresh['tenengrad'] and
+                fft > thresh['fft']
+            )
+            flags[tm] = not sharp # Store True if blurry
+            blur_flags[tm].append(not sharp)
+            
+        # Add classification flags to the score dict
+        score['is_blurry'] = flags
+        final_results.append(score)
+        
+        # Calculate confidence if requested (using the selected method)
+        if confidence:
+            conf, lead_metric = calculate_blur_confidence(score, all_scores, thresholds, method)
+            confidence_results.append({
+                 'index': score['index'],
+                 'filename': score['filename'],
+                 'confidence': conf,
+                 'leading_metric': lead_metric,
+                 'is_blurry': flags[method] # Blurriness according to selected method
+            })
+
+    total_time = time.time() - start_time
+    logger.info(f"Image analysis completed in {total_time:.2f} seconds")
+    
+    # Log overall blur stats for the selected method
+    if blur_flags[method]:
+         blur_count = sum(blur_flags[method])
+         blur_percentage = (blur_count / len(blur_flags[method])) * 100
+         logger.info(f"Selected method ({method}): Found {blur_count} blurry images out of {len(blur_flags[method])} ({blur_percentage:.1f}%)")
+         
+    return {
+        "results": final_results,
+        "confidence": confidence_results if confidence else [],
+        "thresholds": thresholds,
+        "blur_flags_summary": blur_flags # Summary flags for each method
+    }
+
 def parse_arguments():
-    parser = argparse.ArgumentParser(description='Video blur detection with multiple methods')
-    parser.add_argument('--input', type=str, required=True, help='Path to video file or directory containing videos') # Changed from --video to --input and made required
-    parser.add_argument('--resize', type=float, default=1.0, help='Resize factor for video frames (e.g., 0.5 for half size)')
-    parser.add_argument('--skip', type=int, default=1, help='Process every Nth frame')
+    parser = argparse.ArgumentParser(description='Video/Image blur detection with multiple methods')
+    parser.add_argument('--input', type=str, required=True, help='Path to video file, directory of videos, or directory of image frames')
+    parser.add_argument('--input_type', type=str, required=True, choices=['video', 'frames'], help='Specify if input is video(s) or image frames')
+    parser.add_argument('--resize', type=float, default=1.0, help='Resize factor for frames/images (e.g., 0.5 for half size)')
+    parser.add_argument('--skip', type=int, default=1, help='Process every Nth frame/image')
     parser.add_argument('--save_path', type=str, help='Path to save the results plot (only used for single video input)')
     parser.add_argument('--method', type=str, default='percentile', choices=['percentile', 'stddev', 'fixed'], 
                         help='Threshold method to use for blur detection')
@@ -1169,176 +1382,252 @@ if __name__ == "__main__":
         # --- Input Handling ---
         input_path = args.input
         video_files_to_process = []
-        processing_directory = False
-        valid_extensions = ('.mp4', '.avi', '.mov', '.mkv') # Common video extensions
+        image_files_to_process = []
+        processing_directory_videos = False
+        processing_frames = False
         
         if not os.path.exists(input_path):
             logger.error(f"Input path not found: {input_path}")
-            exit(1) # Exit if input doesn't exist
-            
-        if os.path.isfile(input_path):
-            if input_path.lower().endswith(valid_extensions):
-                video_files_to_process.append(input_path)
-                logger.info(f"Processing single video file: {input_path}")
-            else:
-                logger.error(f"Input file is not a supported video type: {input_path}")
-                exit(1)
-        elif os.path.isdir(input_path):
-            processing_directory = True
-            logger.info(f"Processing video files in directory: {input_path}")
-            for filename in os.listdir(input_path):
-                if filename.lower().endswith(valid_extensions):
-                    video_files_to_process.append(os.path.join(input_path, filename))
-            
-            if not video_files_to_process:
-                logger.error(f"No supported video files found in directory: {input_path}")
-                exit(1)
-            logger.info(f"Found {len(video_files_to_process)} video file(s) to process.")
-        else:
-            logger.error(f"Input path is neither a file nor a directory: {input_path}")
             exit(1)
+        
+        if args.input_type == 'video':
+            valid_extensions = ('.mp4', '.avi', '.mov', '.mkv')
+            if os.path.isfile(input_path):
+                if input_path.lower().endswith(valid_extensions):
+                    video_files_to_process.append(input_path)
+                    logger.info(f"Processing single video file: {input_path}")
+                else:
+                    logger.error(f"Input file is not a supported video type: {input_path}")
+                    exit(1)
+            elif os.path.isdir(input_path):
+                processing_directory_videos = True
+                logger.info(f"Processing video files in directory: {input_path}")
+                for filename in os.listdir(input_path):
+                    if filename.lower().endswith(valid_extensions):
+                        video_files_to_process.append(os.path.join(input_path, filename))
+                
+                if not video_files_to_process:
+                    logger.error(f"No supported video files found in directory: {input_path}")
+                    exit(1)
+                logger.info(f"Found {len(video_files_to_process)} video file(s) to process.")
+            else:
+                logger.error(f"Input path is neither a file nor a directory: {input_path}")
+                exit(1)
+                
+        elif args.input_type == 'frames':
+            if not os.path.isdir(input_path):
+                 logger.error(f"Input path must be a directory when input_type is 'frames': {input_path}")
+                 exit(1)
+                 
+            processing_frames = True
+            logger.info(f"Processing image frames in directory: {input_path}")
+            valid_extensions = ('.png', '.jpg', '.jpeg', '.bmp', '.tiff')
+            # Use glob to find files and sort them
+            all_files = []
+            for ext in valid_extensions:
+                all_files.extend(glob.glob(os.path.join(input_path, f"*{ext}")))
+                all_files.extend(glob.glob(os.path.join(input_path, f"*{ext.upper()}"))) # Handle uppercase extensions
             
+            # Sort files naturally (important for sequences like frame_1, frame_10)
+            try:
+                import natsort
+                image_files_to_process = natsort.natsorted(all_files)
+                logger.info("Using natsort for natural sorting of filenames.")
+            except ImportError:
+                logger.warning("natsort package not found. Using simple alphabetical sort. Install with 'pip install natsort' for better frame sequence sorting.")
+                image_files_to_process = sorted(all_files)
+                
+            if not image_files_to_process:
+                logger.error(f"No supported image files found in directory: {input_path}")
+                exit(1)
+            logger.info(f"Found {len(image_files_to_process)} image file(s) to process.")
+            
+        else:
+            # Should not happen due to argparse choices, but good practice
+            logger.error(f"Invalid input_type specified: {args.input_type}")
+            exit(1)
+
         # --- Result Setup ---
         results_dir = "blur_results"
         os.makedirs(results_dir, exist_ok=True)
         run_dir = os.path.join(results_dir, f"analysis_{timestamp}")
         os.makedirs(run_dir, exist_ok=True)
         
-        all_results = {} # Initialize dictionary for aggregated results
+        aggregated_results = {} # Initialize dictionary for results
+        final_json_output = {} # Structure for the final JSON file
         
-        # --- Processing Loop ---
-        for video_path in video_files_to_process:
-            logger.info(f"--- Analyzing {os.path.basename(video_path)} ---")
-            
-            # Run analysis with options from command line
-            analysis_results = analyze_video(
-                video_path,
-                resize_factor=args.resize,
-                skip_frames=args.skip,
-                bg_remove=args.bg_remove,
-                visualize_mask=args.visualize_mask,
-                run_dir=run_dir
+        # --- Processing ---
+        if processing_frames:
+            # --- Process Directory of Frames ---
+            logger.info("Starting frame directory analysis...")
+            frame_analysis_output = analyze_frame_directory(
+                 image_paths=image_files_to_process,
+                 resize_factor=args.resize,
+                 skip=args.skip,
+                 bg_remove=args.bg_remove,
+                 visualize_mask=args.visualize_mask,
+                 run_dir=run_dir,
+                 method=args.method,
+                 confidence=(args.confidence or args.stakeholder)
             )
             
-            # Unpack results carefully, checking for None
-            if analysis_results is None or len(analysis_results) != 7:
-                 logger.error(f"Analysis failed for {os.path.basename(video_path)}. Skipping.")
-                 all_results[os.path.basename(video_path)] = {"error": "Analysis failed"}
-                 continue
-            
-            blur_scores, blur_flags, thresholds, sample_frames, sample_indices, all_frames, method_classifications = analysis_results
-            
-            video_base_name = os.path.basename(video_path)
-            all_results[video_base_name] = {} # Initialize entry for this video
-            
-            if blur_scores:
-                all_results[video_base_name]['scores'] = blur_scores
-                all_results[video_base_name]['thresholds'] = thresholds
-                all_results[video_base_name]['blur_flags'] = blur_flags
-                
-                # Include confidence scores if requested
-                confidence_data = None
-                if args.confidence or args.stakeholder:
-                    confidence_data = []
-                    for i, score in enumerate(blur_scores):
-                        confidence, metric = calculate_blur_confidence(score, blur_scores, thresholds, args.method)
-                        confidence_data.append({
-                            'frame': score['frame'],
-                            'confidence': confidence,
-                            'leading_metric': metric,
-                            'is_blurry': blur_flags[args.method][i]
-                        })
-                    all_results[video_base_name]['confidence'] = confidence_data
-                    
-                # --- Individual File Saving (Only if NOT processing a directory) ---
-                if not processing_directory:
-                    logger.info(f"Saving individual results for {video_base_name}")
-                    # Save results plot
-                    plot_path = args.save_path if args.save_path else os.path.join(run_dir, f"blur_plot_{video_base_name}_{timestamp}.png")
-                    plot_blur_metrics(blur_scores, thresholds, save_path=plot_path)
-                    
-                    # Save confidence data to CSV (if calculated)
-                    if confidence_data:
-                        confidence_csv = os.path.join(run_dir, f"confidence_scores_{video_base_name}_{timestamp}.csv")
-                        try:
-                            with open(confidence_csv, 'w') as f:
-                                f.write("frame,laplacian,tenengrad,fft,is_blurry,confidence,leading_metric\n")
-                                for i, score in enumerate(blur_scores):
-                                    conf = confidence_data[i]
-                                    f.write(f"{score['frame']}, {score['laplacian']:.2f},{score['tenengrad']:.2f},{score['fft']:.2f},"
-                                          f"{conf['is_blurry']}, {conf['confidence']}, {conf['leading_metric']}\n")
-                            logger.info(f"Confidence scores saved to {confidence_csv}")
-                        except Exception as e:
-                             logger.error(f"Error saving confidence CSV for {video_base_name}: {e}")
-                
-                    # Generate stakeholder report if requested
-                    if args.stakeholder:
-                         logger.info(f"Generating stakeholder summary for {video_base_name}")
-                         summary_path, csv_path, report_path = generate_executive_summary(
-                            blur_scores, blur_flags, thresholds, all_frames, 
-                            method_classifications, args.method, save_dir=run_dir
-                         )
-                         if summary_path:
-                              logger.info(f"Executive summary saved to {summary_path}")
-                              logger.info(f"Confidence scores saved to {csv_path}")
-                              logger.info(f"Summary report saved to {report_path}")
-                         else:
-                              logger.error(f"Failed to generate stakeholder summary for {video_base_name}")
-                    
-                    # Visualize sample frames
-                    visualize_sample_frames(sample_frames, sample_indices, blur_scores, thresholds, save_dir=run_dir)
-                    
-                    # Create method comparison visualization
-                    visualize_method_comparison(all_frames, method_classifications, thresholds, save_dir=run_dir)
-                    
-                    # Save numerical results
-                    results_path = os.path.join(run_dir, f"blur_data_{video_base_name}_{timestamp}.csv")
-                    try:
-                        with open(results_path, 'w') as f:
-                            f.write("frame,laplacian,tenengrad,fft,is_blurry_percentile,is_blurry_stddev,is_blurry_fixed\n")
-                            for i, score in enumerate(blur_scores):
-                                f.write(f"{score['frame']}, {score['laplacian']:.2f},{score['tenengrad']:.2f},{score['fft']:.2f},"
-                                       f"{blur_flags['percentile'][i]},{blur_flags['stddev'][i]},{blur_flags['fixed'][i]}\n")
-                        logger.info(f"Results saved to {results_path}")
-                    except Exception as e:
-                        logger.error(f"Error saving results CSV for {video_base_name}: {e}")
-                    
-                    # Save threshold information
-                    thresh_path = os.path.join(run_dir, f"thresholds_{video_base_name}_{timestamp}.txt")
-                    try:
-                        with open(thresh_path, 'w') as f:
-                            f.write(f"Calculated Thresholds for {video_base_name}:\n")
-                            for method, values in thresholds.items():
-                                f.write(f"{method.capitalize()} method:\n")
-                                for metric, value in values.items():
-                                    f.write(f"  {metric}: {value:.2f}\n")
-                            
-                            # Add stats about blur detection
-                            f.write("\nBlur Detection Results:\n")
-                            for method, flags in blur_flags.items():
-                                if flags:
-                                    blur_count = sum(flags)
-                                    blur_percentage = (blur_count / len(flags)) * 100
-                                    f.write(f"{method.capitalize()} method: Found {blur_count} blurry frames out of {len(flags)} ({blur_percentage:.1f}%)\n")
-                    
-                        logger.info(f"Threshold information saved to {thresh_path}")
-                    except Exception as e:
-                        logger.error(f"Error saving threshold information for {video_base_name}: {e}")
-                # --- End of Individual File Saving Block ---
-                
+            if frame_analysis_output:
+                # Structure the output JSON for frames
+                final_json_output = {
+                    os.path.basename(os.path.normpath(input_path)): {
+                        "type": "frames",
+                        "settings": {
+                            "resize_factor": args.resize,
+                            "skip": args.skip,
+                            "bg_remove": args.bg_remove,
+                            "method": args.method
+                        },
+                        "thresholds": frame_analysis_output["thresholds"],
+                        "results": frame_analysis_output["results"],
+                        "confidence": frame_analysis_output["confidence"] 
+                    }
+                }
+                logger.info("Frame directory analysis complete.")
             else:
-                 logger.warning(f"No blur scores generated for {video_base_name}. Skipping result storage for this video.")
-                 all_results[video_base_name] = {"error": "No blur scores generated"}
-        
-        # --- Aggregated JSON Output (Only if processing a directory) ---
-        if processing_directory:
+                logger.error("Frame directory analysis failed to produce results.")
+                
+        else:
+            # --- Process Single Video or Directory of Videos ---
+            logger.info("Starting video analysis...")
+            for video_path in video_files_to_process:
+                logger.info(f"--- Analyzing {os.path.basename(video_path)} ---")
+                
+                analysis_results = analyze_video(
+                    video_path,
+                    resize_factor=args.resize,
+                    skip_frames=args.skip,
+                    bg_remove=args.bg_remove,
+                    visualize_mask=args.visualize_mask,
+                    run_dir=run_dir
+                )
+                
+                if analysis_results is None or len(analysis_results) != 7:
+                     logger.error(f"Analysis failed for {os.path.basename(video_path)}. Skipping.")
+                     aggregated_results[os.path.basename(video_path)] = {"error": "Analysis failed"}
+                     continue
+                
+                blur_scores, blur_flags, thresholds, sample_frames, sample_indices, all_frames, method_classifications = analysis_results
+                
+                video_base_name = os.path.basename(video_path)
+                aggregated_results[video_base_name] = {} 
+                
+                if blur_scores:
+                    aggregated_results[video_base_name]['scores'] = blur_scores
+                    aggregated_results[video_base_name]['thresholds'] = thresholds
+                    aggregated_results[video_base_name]['blur_flags'] = blur_flags
+                    
+                    confidence_data = None
+                    if args.confidence or args.stakeholder:
+                        confidence_data = []
+                        for i, score in enumerate(blur_scores):
+                            confidence, metric = calculate_blur_confidence(score, blur_scores, thresholds, args.method)
+                            confidence_data.append({
+                                'frame': score['frame'],
+                                'confidence': confidence,
+                                'leading_metric': metric,
+                                'is_blurry': blur_flags[args.method][i]
+                            })
+                        aggregated_results[video_base_name]['confidence'] = confidence_data
+                        
+                    # --- Individual File Saving (Only if NOT processing a directory of videos) ---
+                    if not processing_directory_videos:
+                        logger.info(f"Saving individual results for {video_base_name}")
+                        # Save results plot
+                        plot_path = args.save_path if args.save_path else os.path.join(run_dir, f"blur_plot_{video_base_name}_{timestamp}.png")
+                        plot_blur_metrics(blur_scores, thresholds, save_path=plot_path)
+                        
+                        # Save confidence data to CSV (if calculated)
+                        if confidence_data:
+                            confidence_csv = os.path.join(run_dir, f"confidence_scores_{video_base_name}_{timestamp}.csv")
+                            try:
+                                with open(confidence_csv, 'w') as f:
+                                    f.write("frame,laplacian,tenengrad,fft,is_blurry,confidence,leading_metric\n")
+                                    for i, score in enumerate(blur_scores):
+                                        conf = confidence_data[i]
+                                        f.write(f"{score['frame']}, {score['laplacian']:.2f},{score['tenengrad']:.2f},{score['fft']:.2f},"
+                                              f"{conf['is_blurry']}, {conf['confidence']}, {conf['leading_metric']}\n")
+                                logger.info(f"Confidence scores saved to {confidence_csv}")
+                            except Exception as e:
+                                 logger.error(f"Error saving confidence CSV for {video_base_name}: {e}")
+                    
+                        # Generate stakeholder report if requested
+                        if args.stakeholder:
+                             logger.info(f"Generating stakeholder summary for {video_base_name}")
+                             summary_path, csv_path, report_path = generate_executive_summary(
+                                blur_scores, blur_flags, thresholds, all_frames, 
+                                method_classifications, args.method, save_dir=run_dir
+                             )
+                             if summary_path:
+                                  logger.info(f"Executive summary saved to {summary_path}")
+                                  logger.info(f"Confidence scores saved to {csv_path}")
+                                  logger.info(f"Summary report saved to {report_path}")
+                             else:
+                                  logger.error(f"Failed to generate stakeholder summary for {video_base_name}")
+                        
+                        # Visualize sample frames
+                        visualize_sample_frames(sample_frames, sample_indices, blur_scores, thresholds, save_dir=run_dir)
+                        
+                        # Create method comparison visualization
+                        visualize_method_comparison(all_frames, method_classifications, thresholds, save_dir=run_dir)
+                        
+                        # Save numerical results
+                        results_path = os.path.join(run_dir, f"blur_data_{video_base_name}_{timestamp}.csv")
+                        try:
+                            with open(results_path, 'w') as f:
+                                f.write("frame,laplacian,tenengrad,fft,is_blurry_percentile,is_blurry_stddev,is_blurry_fixed\n")
+                                for i, score in enumerate(blur_scores):
+                                    f.write(f"{score['frame']}, {score['laplacian']:.2f},{score['tenengrad']:.2f},{score['fft']:.2f},"
+                                           f"{blur_flags['percentile'][i]},{blur_flags['stddev'][i]},{blur_flags['fixed'][i]}\n")
+                            logger.info(f"Results saved to {results_path}")
+                        except Exception as e:
+                            logger.error(f"Error saving results CSV for {video_base_name}: {e}")
+                        
+                        # Save threshold information
+                        thresh_path = os.path.join(run_dir, f"thresholds_{video_base_name}_{timestamp}.txt")
+                        try:
+                            with open(thresh_path, 'w') as f:
+                                f.write(f"Calculated Thresholds for {video_base_name}:\n")
+                                for method, values in thresholds.items():
+                                    f.write(f"{method.capitalize()} method:\n")
+                                    for metric, value in values.items():
+                                        f.write(f"  {metric}: {value:.2f}\n")
+                                
+                                # Add stats about blur detection
+                                f.write("\nBlur Detection Results:\n")
+                                for method, flags in blur_flags.items():
+                                    if flags:
+                                        blur_count = sum(flags)
+                                        blur_percentage = (blur_count / len(flags)) * 100
+                                        f.write(f"{method.capitalize()} method: Found {blur_count} blurry frames out of {len(flags)} ({blur_percentage:.1f}%)\n")
+                            
+                            logger.info(f"Threshold information saved to {thresh_path}")
+                        except Exception as e:
+                            logger.error(f"Error saving threshold information for {video_base_name}: {e}")
+                            
+                else:
+                     logger.warning(f"No blur scores generated for {video_base_name}. Skipping result storage for this video.")
+                     aggregated_results[video_base_name] = {"error": "No blur scores generated"}
+            
+            # Assign video results to the final JSON structure if videos were processed
+            if not processing_frames:
+                 final_json_output = aggregated_results
+                 
+        # --- Final JSON Output ---
+        if final_json_output:
             json_output_path = os.path.join(run_dir, "aggregated_results.json")
             try:
                 with open(json_output_path, 'w') as f:
-                    json.dump(all_results, f, indent=4)
-                logger.info(f"Aggregated results for all videos saved to: {json_output_path}")
+                    json.dump(final_json_output, f, indent=4)
+                logger.info(f"Aggregated results saved to: {json_output_path}")
             except Exception as e:
                  logger.error(f"Error saving aggregated JSON results: {e}")
+        else:
+            logger.error("No results were generated to save.")
                  
         logger.info("=" * 40)
         logger.info("Blur Detection Script finished")

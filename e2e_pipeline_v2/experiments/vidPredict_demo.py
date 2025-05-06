@@ -63,6 +63,11 @@ def show_box(box, ax):
     ax.add_patch(plt.Rectangle((x0, y0), w, h, edgecolor='green', facecolor=(0, 0, 0, 0), lw=2))
 
 
+# Create a results directory to save visualizations
+results_dir = "./sam2_results"
+os.makedirs(results_dir, exist_ok=True)
+print(f"Saving results to: {results_dir}")
+
 # `video_dir` a directory of JPEG frames with filenames like `<frame_index>.jpg`
 video_dir = '/home/ubuntu/code/drew/test_data/frames/Scenes 001-020__220D-2-_20230815190723523/subset/'
 
@@ -78,6 +83,8 @@ frame_idx = 0
 plt.figure(figsize=(9, 6))
 plt.title(f"frame {frame_idx}")
 plt.imshow(Image.open(os.path.join(video_dir, frame_names[frame_idx])))
+# Save the figure
+plt.savefig(os.path.join(results_dir, f"frame_{frame_idx}_original.png"))
 
 
 inference_state = predictor.init_state(video_path=video_dir)
@@ -103,3 +110,44 @@ plt.title(f"frame {ann_frame_idx}")
 plt.imshow(Image.open(os.path.join(video_dir, frame_names[ann_frame_idx])))
 show_box(box, plt.gca())
 show_mask((out_mask_logits[0] > 0.0).cpu().numpy(), plt.gca(), obj_id=out_obj_ids[0])
+# Save the figure
+plt.savefig(os.path.join(results_dir, f"frame_{ann_frame_idx}_box_mask.png"))
+
+# Let's also save the raw mask as a separate file
+binary_mask = (out_mask_logits[0] > 0.0).cpu().numpy()
+plt.figure(figsize=(9, 6))
+plt.title(f"Binary mask for frame {ann_frame_idx}")
+plt.imshow(binary_mask, cmap='gray')
+plt.savefig(os.path.join(results_dir, f"frame_{ann_frame_idx}_mask_only.png"))
+
+# Add propagation to other frames and save results
+num_frames_to_process = min(10, len(frame_names))  # Process first 10 frames or all if less
+
+for frame_idx in range(num_frames_to_process):
+    if frame_idx == ann_frame_idx:
+        continue  # Skip the initial frame we already processed
+    
+    # Propagate to this frame
+    obj_ids, mask_logits = predictor.propagate_in_video(
+        inference_state=inference_state,
+        frame_idx=frame_idx,
+    )
+    
+    # Create visualization
+    plt.figure(figsize=(9, 6))
+    plt.title(f"frame {frame_idx} - propagated mask")
+    img = Image.open(os.path.join(video_dir, frame_names[frame_idx]))
+    plt.imshow(img)
+    
+    # Find the index of our object ID in the returned results
+    if len(obj_ids) > 0:
+        for i, obj_id in enumerate(obj_ids):
+            if obj_id == ann_obj_id:
+                mask = (mask_logits[i] > 0.0).cpu().numpy()
+                show_mask(mask, plt.gca(), obj_id=obj_id)
+    
+    # Save the figure
+    plt.savefig(os.path.join(results_dir, f"frame_{frame_idx}_propagated.png"))
+    plt.close()  # Close figure to avoid memory issues
+
+print(f"All results saved to: {results_dir}")

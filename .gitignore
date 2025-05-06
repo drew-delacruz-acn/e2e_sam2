@@ -13,6 +13,7 @@
 *.jpg
 *.png
 *.gif
+*.json
 
 # Data folder
 all_frames/

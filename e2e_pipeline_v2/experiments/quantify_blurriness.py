@@ -1654,3 +1654,11 @@ if __name__ == "__main__":
 
 # /home/ubuntu/code/drew/e2e_sam2/frames/Scenes 001-020__101B-1-_20230726152900590
 # /home/ubuntu/code/drew/e2e_sam2/frames/Scenes 001-020__106D-5-_20230815151758589
+(venv):~/code/drew/e2e_sam2/e2e_pipeline_v2/experiments$ python quantify_blurriness.py --input "/home/ubuntu/code/drew/e2e_sam2/frames/" --input_type frames
+2025-05-06 03:01:13,588 - INFO - ========================================
+2025-05-06 03:01:13,588 - INFO - Blur Detection Script started at 20250506_030113
+2025-05-06 03:01:13,588 - INFO - ========================================
+2025-05-06 03:01:13,588 - INFO - Processing image frames in directory: /home/ubuntu/code/drew/e2e_sam2/frames/
+2025-05-06 03:01:13,602 - INFO - Using natsort for natural sorting of filenames.
+2025-05-06 03:01:13,602 - ERROR - No supported image files found in directory: /home/ubuntu/code/drew/e2e_sam2/frames/
+(venv) :~/code/drew/e2e_sam2/e2e_pipeline_v2/experiments$ 

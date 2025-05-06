@@ -8719,3 +8719,511 @@
 2025-05-06 01:32:01,164 - INFO - ========================================
 2025-05-06 01:32:01,164 - INFO - Blur Detection Script finished
 2025-05-06 01:32:01,164 - INFO - ========================================
+2025-05-06 01:37:54,861 - INFO - ========================================
+2025-05-06 01:37:54,861 - INFO - Blur Detection Script started at 20250506_013754
+2025-05-06 01:37:54,861 - INFO - ========================================
+2025-05-06 01:37:54,862 - INFO - Processing single video file: /home/ubuntu/code/drew/e2e_sam2/data/Scenes 001-020__5B14-5a- only_20230816051800694.mp4
+2025-05-06 01:37:54,862 - INFO - --- Analyzing Scenes 001-020__5B14-5a- only_20230816051800694.mp4 ---
+2025-05-06 01:37:54,862 - INFO - Starting video analysis on: /home/ubuntu/code/drew/e2e_sam2/data/Scenes 001-020__5B14-5a- only_20230816051800694.mp4
+2025-05-06 01:37:54,862 - INFO - Resize factor: 1.0
+2025-05-06 01:37:54,862 - INFO - Processing every 1 frame(s)
+2025-05-06 01:37:54,862 - INFO - Background removal based on edge density: Enabled
+2025-05-06 01:37:54,875 - INFO - Video dimensions: 960x540
+2025-05-06 01:37:54,875 - INFO - FPS: 24.00
+2025-05-06 01:37:54,875 - INFO - Total frames: 848
+2025-05-06 01:37:54,875 - INFO - Duration: 35.33 seconds
+2025-05-06 01:37:54,886 - INFO - Progress: 0% (0/848) - ETA: 0.0s
+2025-05-06 01:37:57,444 - INFO - Progress: 4% (42/848) - ETA: 49.6s
+2025-05-06 01:37:59,982 - INFO - Progress: 9% (84/848) - ETA: 46.6s
+2025-05-06 01:38:02,528 - INFO - Progress: 14% (126/848) - ETA: 43.9s
+2025-05-06 01:38:05,074 - INFO - Progress: 19% (168/848) - ETA: 41.3s
+2025-05-06 01:38:07,654 - INFO - Progress: 24% (210/848) - ETA: 38.9s
+2025-05-06 01:38:10,259 - INFO - Progress: 29% (252/848) - ETA: 36.4s
+2025-05-06 01:38:12,844 - INFO - Progress: 34% (294/848) - ETA: 33.9s
+2025-05-06 01:38:15,450 - INFO - Progress: 39% (336/848) - ETA: 31.4s
+2025-05-06 01:38:18,008 - INFO - Progress: 44% (378/848) - ETA: 28.8s
+2025-05-06 01:38:20,575 - INFO - Progress: 49% (420/848) - ETA: 26.2s
+2025-05-06 01:38:23,137 - INFO - Progress: 54% (462/848) - ETA: 23.6s
+2025-05-06 01:38:25,703 - INFO - Progress: 59% (504/848) - ETA: 21.1s
+2025-05-06 01:38:28,291 - INFO - Progress: 64% (546/848) - ETA: 18.5s
+2025-05-06 01:38:30,877 - INFO - Progress: 69% (588/848) - ETA: 15.9s
+2025-05-06 01:38:33,435 - INFO - Progress: 74% (630/848) - ETA: 13.3s
+2025-05-06 01:38:36,010 - INFO - Progress: 79% (672/848) - ETA: 10.8s
+2025-05-06 01:38:38,566 - INFO - Progress: 84% (714/848) - ETA: 8.2s
+2025-05-06 01:38:41,145 - INFO - Progress: 89% (756/848) - ETA: 5.6s
+2025-05-06 01:38:43,708 - INFO - Progress: 94% (798/848) - ETA: 3.1s
+2025-05-06 01:38:46,270 - INFO - Progress: 99% (840/848) - ETA: 0.5s
+2025-05-06 01:38:46,763 - INFO - Processed 848 frames out of 848 total frames
+2025-05-06 01:38:46,763 - INFO - Average processing times per frame:
+2025-05-06 01:38:46,763 - INFO -   Laplacian: 0.0023 seconds
+2025-05-06 01:38:46,763 - INFO -   Tenengrad: 0.0119 seconds
+2025-05-06 01:38:46,764 - INFO -   FFT: 0.0409 seconds
+2025-05-06 01:38:46,764 - INFO - Calculating dynamic thresholds from statistics
+2025-05-06 01:38:46,765 - INFO - Calculated thresholds:
+2025-05-06 01:38:46,765 - INFO -   Percentile method:
+2025-05-06 01:38:46,765 - INFO -     laplacian: 3145.75
+2025-05-06 01:38:46,765 - INFO -     tenengrad: 58.70
+2025-05-06 01:38:46,765 - INFO -     fft: 11.43
+2025-05-06 01:38:46,765 - INFO -   Stddev method:
+2025-05-06 01:38:46,765 - INFO -     laplacian: 2875.81
+2025-05-06 01:38:46,765 - INFO -     tenengrad: 57.60
+2025-05-06 01:38:46,765 - INFO -     fft: 11.06
+2025-05-06 01:38:46,765 - INFO -   Fixed method:
+2025-05-06 01:38:46,765 - INFO -     laplacian: 100.00
+2025-05-06 01:38:46,765 - INFO -     tenengrad: 20.00
+2025-05-06 01:38:46,765 - INFO -     fft: 10.00
+2025-05-06 01:38:46,765 - INFO - Starting temporal analysis with dynamic thresholds
+2025-05-06 01:38:46,765 - INFO - Frame 0000: Sharp=True | Lap=3485.02 | Ten=59.07 | FFT=11.39
+2025-05-06 01:38:46,765 - INFO - Frame 0010: Sharp=True | Lap=3363.77 | Ten=58.49 | FFT=11.25
+2025-05-06 01:38:46,765 - INFO - Frame 0020: Sharp=True | Lap=3374.31 | Ten=57.87 | FFT=11.15
+2025-05-06 01:38:46,766 - INFO - Frame 0030: Sharp=True | Lap=3402.61 | Ten=57.36 | FFT=10.98
+2025-05-06 01:38:46,766 - INFO - Frame 0040: Sharp=True | Lap=3342.89 | Ten=60.27 | FFT=12.25
+2025-05-06 01:38:46,766 - INFO - Frame 0050: Sharp=True | Lap=2496.24 | Ten=56.41 | FFT=12.32
+2025-05-06 01:38:46,766 - INFO - Frame 0060: Sharp=True | Lap=2154.38 | Ten=65.34 | FFT=14.60
+2025-05-06 01:38:46,766 - INFO - Frame 0070: Sharp=True | Lap=2375.55 | Ten=70.92 | FFT=16.27
+2025-05-06 01:38:46,766 - INFO - Frame 0080: Sharp=True | Lap=2338.33 | Ten=71.72 | FFT=16.63
+2025-05-06 01:38:46,766 - INFO - Frame 0090: Sharp=True | Lap=2236.84 | Ten=69.85 | FFT=16.54
+2025-05-06 01:38:46,766 - INFO - Frame 0100: Sharp=True | Lap=2268.21 | Ten=71.70 | FFT=16.98
+2025-05-06 01:38:46,766 - INFO - Frame 0110: Sharp=True | Lap=2239.76 | Ten=71.82 | FFT=16.94
+2025-05-06 01:38:46,766 - INFO - Frame 0120: Sharp=True | Lap=2294.42 | Ten=73.37 | FFT=17.03
+2025-05-06 01:38:46,766 - INFO - Frame 0130: Sharp=True | Lap=4448.34 | Ten=73.88 | FFT=14.85
+2025-05-06 01:38:46,766 - INFO - Frame 0140: Sharp=True | Lap=9015.32 | Ten=106.44 | FFT=19.69
+2025-05-06 01:38:46,766 - INFO - Frame 0150: Sharp=True | Lap=5938.16 | Ten=78.86 | FFT=15.07
+2025-05-06 01:38:46,766 - INFO - Frame 0160: Sharp=True | Lap=3913.89 | Ten=62.17 | FFT=11.93
+2025-05-06 01:38:46,767 - INFO - Frame 0170: Sharp=True | Lap=3304.03 | Ten=56.74 | FFT=10.94
+2025-05-06 01:38:46,767 - INFO - Frame 0180: Sharp=True | Lap=3235.35 | Ten=55.88 | FFT=10.82
+2025-05-06 01:38:46,767 - INFO - Frame 0190: Sharp=True | Lap=3407.61 | Ten=57.46 | FFT=11.05
+2025-05-06 01:38:46,767 - INFO - Frame 0200: Sharp=True | Lap=2754.52 | Ten=55.05 | FFT=10.83
+2025-05-06 01:38:46,767 - INFO - Frame 0205: Sharp=False | Lap=2482.22 | Ten=50.83 | FFT=9.90
+2025-05-06 01:38:46,767 - INFO - Frame 0210: Sharp=True | Lap=3160.70 | Ten=55.61 | FFT=10.69
+2025-05-06 01:38:46,767 - INFO - Frame 0211: Sharp=False | Lap=2357.36 | Ten=50.75 | FFT=9.86
+2025-05-06 01:38:46,767 - INFO - Frame 0220: Sharp=True | Lap=2597.82 | Ten=54.77 | FFT=10.78
+2025-05-06 01:38:46,767 - INFO - Frame 0230: Sharp=True | Lap=2779.76 | Ten=54.96 | FFT=10.71
+2025-05-06 01:38:46,767 - INFO - Frame 0240: Sharp=True | Lap=2602.50 | Ten=53.16 | FFT=10.39
+2025-05-06 01:38:46,767 - INFO - Frame 0250: Sharp=True | Lap=2132.55 | Ten=53.55 | FFT=10.53
+2025-05-06 01:38:46,767 - INFO - Frame 0260: Sharp=True | Lap=2883.83 | Ten=54.41 | FFT=10.51
+2025-05-06 01:38:46,767 - INFO - Frame 0270: Sharp=True | Lap=3164.17 | Ten=55.84 | FFT=10.94
+2025-05-06 01:38:46,767 - INFO - Frame 0280: Sharp=True | Lap=3798.91 | Ten=61.51 | FFT=11.72
+2025-05-06 01:38:46,767 - INFO - Frame 0290: Sharp=True | Lap=4076.03 | Ten=62.58 | FFT=11.97
+2025-05-06 01:38:46,768 - INFO - Frame 0300: Sharp=True | Lap=3713.53 | Ten=60.16 | FFT=11.52
+2025-05-06 01:38:46,768 - INFO - Frame 0310: Sharp=True | Lap=3519.31 | Ten=58.57 | FFT=11.25
+2025-05-06 01:38:46,768 - INFO - Frame 0320: Sharp=True | Lap=2979.79 | Ten=55.22 | FFT=10.66
+2025-05-06 01:38:46,768 - INFO - Frame 0330: Sharp=True | Lap=2978.32 | Ten=56.26 | FFT=10.88
+2025-05-06 01:38:46,768 - INFO - Frame 0340: Sharp=True | Lap=2928.88 | Ten=58.47 | FFT=11.53
+2025-05-06 01:38:46,768 - INFO - Frame 0350: Sharp=True | Lap=3001.54 | Ten=57.53 | FFT=11.12
+2025-05-06 01:38:46,768 - INFO - Frame 0360: Sharp=True | Lap=2963.11 | Ten=57.37 | FFT=11.22
+2025-05-06 01:38:46,768 - INFO - Frame 0370: Sharp=True | Lap=3306.21 | Ten=60.38 | FFT=11.83
+2025-05-06 01:38:46,768 - INFO - Frame 0380: Sharp=True | Lap=4196.41 | Ten=65.74 | FFT=12.53
+2025-05-06 01:38:46,768 - INFO - Frame 0390: Sharp=True | Lap=4156.80 | Ten=62.45 | FFT=12.07
+2025-05-06 01:38:46,768 - INFO - Frame 0400: Sharp=True | Lap=5673.55 | Ten=78.58 | FFT=15.02
+2025-05-06 01:38:46,768 - INFO - Frame 0410: Sharp=True | Lap=6273.31 | Ten=81.42 | FFT=15.22
+2025-05-06 01:38:46,768 - INFO - Frame 0420: Sharp=True | Lap=5655.04 | Ten=81.44 | FFT=15.53
+2025-05-06 01:38:46,768 - INFO - Frame 0430: Sharp=True | Lap=4931.54 | Ten=74.16 | FFT=14.56
+2025-05-06 01:38:46,768 - INFO - Frame 0440: Sharp=True | Lap=4505.05 | Ten=82.56 | FFT=16.98
+2025-05-06 01:38:46,769 - INFO - Frame 0450: Sharp=True | Lap=4214.20 | Ten=72.25 | FFT=14.44
+2025-05-06 01:38:46,769 - INFO - Frame 0460: Sharp=True | Lap=4621.59 | Ten=76.49 | FFT=15.28
+2025-05-06 01:38:46,769 - INFO - Frame 0470: Sharp=True | Lap=4452.76 | Ten=69.52 | FFT=13.64
+2025-05-06 01:38:46,769 - INFO - Frame 0480: Sharp=True | Lap=4799.34 | Ten=72.95 | FFT=14.39
+2025-05-06 01:38:46,769 - INFO - Frame 0490: Sharp=True | Lap=4805.26 | Ten=68.65 | FFT=13.58
+2025-05-06 01:38:46,769 - INFO - Frame 0500: Sharp=True | Lap=5026.99 | Ten=68.62 | FFT=13.21
+2025-05-06 01:38:46,769 - INFO - Frame 0510: Sharp=True | Lap=5305.23 | Ten=71.97 | FFT=14.01
+2025-05-06 01:38:46,769 - INFO - Frame 0520: Sharp=True | Lap=4118.57 | Ten=62.30 | FFT=12.30
+2025-05-06 01:38:46,769 - INFO - Frame 0530: Sharp=True | Lap=4093.95 | Ten=63.43 | FFT=12.68
+2025-05-06 01:38:46,769 - INFO - Frame 0540: Sharp=True | Lap=3751.39 | Ten=61.60 | FFT=11.62
+2025-05-06 01:38:46,769 - INFO - Frame 0550: Sharp=True | Lap=4411.58 | Ten=67.05 | FFT=12.56
+2025-05-06 01:38:46,769 - INFO - Frame 0560: Sharp=True | Lap=5629.44 | Ten=77.59 | FFT=14.44
+2025-05-06 01:38:46,769 - INFO - Frame 0570: Sharp=True | Lap=5867.99 | Ten=77.60 | FFT=14.37
+2025-05-06 01:38:46,769 - INFO - Frame 0580: Sharp=True | Lap=7247.95 | Ten=89.11 | FFT=16.50
+2025-05-06 01:38:46,770 - INFO - Frame 0590: Sharp=True | Lap=6803.32 | Ten=83.71 | FFT=15.47
+2025-05-06 01:38:46,770 - INFO - Frame 0600: Sharp=True | Lap=6916.94 | Ten=84.93 | FFT=15.64
+2025-05-06 01:38:46,770 - INFO - Frame 0610: Sharp=True | Lap=6648.08 | Ten=82.96 | FFT=15.20
+2025-05-06 01:38:46,770 - INFO - Frame 0620: Sharp=True | Lap=6474.42 | Ten=80.35 | FFT=14.73
+2025-05-06 01:38:46,770 - INFO - Frame 0630: Sharp=True | Lap=6737.78 | Ten=82.25 | FFT=15.08
+2025-05-06 01:38:46,770 - INFO - Frame 0640: Sharp=True | Lap=6029.18 | Ten=77.28 | FFT=14.13
+2025-05-06 01:38:46,770 - INFO - Frame 0647: Sharp=False | Lap=2799.04 | Ten=55.46 | FFT=10.34
+2025-05-06 01:38:46,770 - INFO - Frame 0650: Sharp=True | Lap=5817.24 | Ten=75.47 | FFT=13.82
+2025-05-06 01:38:46,770 - INFO - Frame 0660: Sharp=True | Lap=5617.05 | Ten=73.39 | FFT=13.44
+2025-05-06 01:38:46,770 - INFO - Frame 0670: Sharp=True | Lap=5631.81 | Ten=72.80 | FFT=13.26
+2025-05-06 01:38:46,770 - INFO - Frame 0680: Sharp=True | Lap=5624.60 | Ten=72.77 | FFT=13.23
+2025-05-06 01:38:46,770 - INFO - Frame 0690: Sharp=True | Lap=5976.88 | Ten=76.39 | FFT=13.92
+2025-05-06 01:38:46,770 - INFO - Frame 0700: Sharp=True | Lap=5378.94 | Ten=71.05 | FFT=12.95
+2025-05-06 01:38:46,770 - INFO - Frame 0710: Sharp=True | Lap=5185.67 | Ten=70.01 | FFT=12.76
+2025-05-06 01:38:46,770 - INFO - Frame 0719: Sharp=False | Lap=2656.18 | Ten=54.60 | FFT=9.85
+2025-05-06 01:38:46,770 - INFO - Frame 0720: Sharp=True | Lap=5166.55 | Ten=68.79 | FFT=12.55
+2025-05-06 01:38:46,771 - INFO - Frame 0730: Sharp=True | Lap=5327.48 | Ten=71.48 | FFT=13.02
+2025-05-06 01:38:46,771 - INFO - Frame 0740: Sharp=True | Lap=3292.61 | Ten=59.18 | FFT=10.78
+2025-05-06 01:38:46,771 - INFO - Frame 0745: Sharp=False | Lap=2659.83 | Ten=54.80 | FFT=9.88
+2025-05-06 01:38:46,771 - INFO - Frame 0750: Sharp=True | Lap=6467.04 | Ten=80.92 | FFT=14.78
+2025-05-06 01:38:46,771 - INFO - Frame 0760: Sharp=True | Lap=5872.86 | Ten=76.84 | FFT=14.06
+2025-05-06 01:38:46,771 - INFO - Frame 0770: Sharp=True | Lap=5412.06 | Ten=71.82 | FFT=13.17
+2025-05-06 01:38:46,771 - INFO - Frame 0780: Sharp=True | Lap=5350.23 | Ten=72.30 | FFT=13.28
+2025-05-06 01:38:46,771 - INFO - Frame 0790: Sharp=True | Lap=5053.33 | Ten=68.34 | FFT=12.44
+2025-05-06 01:38:46,771 - INFO - Frame 0800: Sharp=True | Lap=3424.58 | Ten=57.11 | FFT=10.49
+2025-05-06 01:38:46,771 - INFO - Frame 0810: Sharp=True | Lap=4423.59 | Ten=64.47 | FFT=11.77
+2025-05-06 01:38:46,771 - INFO - Frame 0820: Sharp=True | Lap=4431.54 | Ten=63.77 | FFT=11.67
+2025-05-06 01:38:46,771 - INFO - Frame 0830: Sharp=True | Lap=4794.67 | Ten=66.83 | FFT=12.20
+2025-05-06 01:38:46,771 - INFO - Frame 0840: Sharp=True | Lap=4790.01 | Ten=65.86 | FFT=12.01
+2025-05-06 01:38:46,771 - INFO - Video analysis completed in 51.91 seconds
+2025-05-06 01:38:46,771 - INFO - Average time per frame: 0.0612 seconds
+2025-05-06 01:38:46,771 - INFO - Percentile method: Found 299 blurry frames out of 848 (35.3%)
+2025-05-06 01:38:46,772 - INFO - Stddev method: Found 264 blurry frames out of 848 (31.1%)
+2025-05-06 01:38:46,772 - INFO - Fixed method: Found 5 blurry frames out of 848 (0.6%)
+2025-05-06 01:38:46,772 - INFO - Saving individual results for Scenes 001-020__5B14-5a- only_20230816051800694.mp4
+2025-05-06 01:38:46,772 - INFO - Generating blur metrics plot
+2025-05-06 01:38:47,332 - INFO - Plot saved to blur_results/analysis_20250506_013754/blur_plot_Scenes 001-020__5B14-5a- only_20230816051800694.mp4_20250506_013754.png
+2025-05-06 01:38:47,899 - INFO - Histograms saved to blur_results/analysis_20250506_013754/blur_plot_Scenes 001-020__5B14-5a- only_20230816051800694.mp4_20250506_013754_histograms.png
+2025-05-06 01:38:47,899 - INFO - Visualizing 11 sample frames
+2025-05-06 01:38:49,572 - INFO - Sample frames saved to blur_results/analysis_20250506_013754/sample_frames.png
+2025-05-06 01:38:49,608 - INFO - Creating method comparison visualization with 26 frames
+2025-05-06 01:38:53,909 - INFO - Method comparison grid saved to blur_results/analysis_20250506_013754/method_comparison/method_comparison_grid.png
+2025-05-06 01:38:53,912 - INFO - Results saved to blur_results/analysis_20250506_013754/blur_data_Scenes 001-020__5B14-5a- only_20230816051800694.mp4_20250506_013754.csv
+2025-05-06 01:38:53,912 - INFO - Threshold information saved to blur_results/analysis_20250506_013754/thresholds_Scenes 001-020__5B14-5a- only_20230816051800694.mp4_20250506_013754.txt
+2025-05-06 01:38:53,912 - INFO - ========================================
+2025-05-06 01:38:53,912 - INFO - Blur Detection Script finished
+2025-05-06 01:38:53,912 - INFO - ========================================
+2025-05-06 01:40:45,857 - INFO - ========================================
+2025-05-06 01:40:45,857 - INFO - Blur Detection Script started at 20250506_014045
+2025-05-06 01:40:45,857 - INFO - ========================================
+2025-05-06 01:40:45,857 - INFO - Processing single video file: /home/ubuntu/code/drew/e2e_sam2/data/Scenes 001-020__5B14-5a- only_20230816051800694.mp4
+2025-05-06 01:40:45,857 - INFO - --- Analyzing Scenes 001-020__5B14-5a- only_20230816051800694.mp4 ---
+2025-05-06 01:40:45,857 - INFO - Starting video analysis on: /home/ubuntu/code/drew/e2e_sam2/data/Scenes 001-020__5B14-5a- only_20230816051800694.mp4
+2025-05-06 01:40:45,857 - INFO - Resize factor: 1.0
+2025-05-06 01:40:45,858 - INFO - Processing every 1 frame(s)
+2025-05-06 01:40:45,858 - INFO - Background removal based on edge density: Enabled
+2025-05-06 01:40:45,858 - INFO - Foreground mask visualization: Enabled (will save for first valid frame)
+2025-05-06 01:40:45,871 - INFO - Video dimensions: 960x540
+2025-05-06 01:40:45,871 - INFO - FPS: 24.00
+2025-05-06 01:40:45,871 - INFO - Total frames: 848
+2025-05-06 01:40:45,871 - INFO - Duration: 35.33 seconds
+2025-05-06 01:40:45,882 - INFO - Progress: 0% (0/848) - ETA: 0.0s
+2025-05-06 01:40:46,666 - INFO - Saved foreground mask visualization to blur_results/analysis_20250506_014045/foreground_mask_visualization_frame_0.png
+2025-05-06 01:40:51,291 - INFO - ========================================
+2025-05-06 01:40:51,291 - INFO - Blur Detection Script started at 20250506_014051
+2025-05-06 01:40:51,291 - INFO - ========================================
+2025-05-06 01:40:51,291 - INFO - Processing single video file: /home/ubuntu/code/drew/e2e_sam2/data/Scenes 001-020__5B14-5a- only_20230816051800694.mp4
+2025-05-06 01:40:51,291 - INFO - --- Analyzing Scenes 001-020__5B14-5a- only_20230816051800694.mp4 ---
+2025-05-06 01:40:51,291 - INFO - Starting video analysis on: /home/ubuntu/code/drew/e2e_sam2/data/Scenes 001-020__5B14-5a- only_20230816051800694.mp4
+2025-05-06 01:40:51,291 - INFO - Resize factor: 1.0
+2025-05-06 01:40:51,291 - INFO - Processing every 1 frame(s)
+2025-05-06 01:40:51,291 - INFO - Background removal based on edge density: Enabled
+2025-05-06 01:40:51,292 - INFO - Foreground mask visualization: Enabled (will save for first valid frame)
+2025-05-06 01:40:51,305 - INFO - Video dimensions: 960x540
+2025-05-06 01:40:51,305 - INFO - FPS: 24.00
+2025-05-06 01:40:51,305 - INFO - Total frames: 848
+2025-05-06 01:40:51,305 - INFO - Duration: 35.33 seconds
+2025-05-06 01:40:51,317 - INFO - Progress: 0% (0/848) - ETA: 0.0s
+2025-05-06 01:40:52,090 - INFO - Saved foreground mask visualization to blur_results/analysis_20250506_014051/foreground_mask_visualization_frame_0.png
+2025-05-06 01:40:54,557 - INFO - Progress: 4% (42/848) - ETA: 62.7s
+2025-05-06 01:40:57,027 - INFO - Progress: 9% (84/848) - ETA: 52.2s
+2025-05-06 01:40:59,486 - INFO - Progress: 14% (126/848) - ETA: 47.0s
+2025-05-06 01:41:01,912 - INFO - Progress: 19% (168/848) - ETA: 43.0s
+2025-05-06 01:41:04,385 - INFO - Progress: 24% (210/848) - ETA: 39.8s
+2025-05-06 01:41:06,857 - INFO - Progress: 29% (252/848) - ETA: 36.8s
+2025-05-06 01:41:09,349 - INFO - Progress: 34% (294/848) - ETA: 34.0s
+2025-05-06 01:41:11,856 - INFO - Progress: 39% (336/848) - ETA: 31.3s
+2025-05-06 01:41:14,349 - INFO - Progress: 44% (378/848) - ETA: 28.7s
+2025-05-06 01:41:16,784 - INFO - Progress: 49% (420/848) - ETA: 26.0s
+2025-05-06 01:41:19,245 - INFO - Progress: 54% (462/848) - ETA: 23.4s
+2025-05-06 01:41:21,683 - INFO - Progress: 59% (504/848) - ETA: 20.7s
+2025-05-06 01:41:24,145 - INFO - Progress: 64% (546/848) - ETA: 18.2s
+2025-05-06 01:41:26,609 - INFO - Progress: 69% (588/848) - ETA: 15.6s
+2025-05-06 01:41:29,066 - INFO - Progress: 74% (630/848) - ETA: 13.1s
+2025-05-06 01:41:31,540 - INFO - Progress: 79% (672/848) - ETA: 10.5s
+2025-05-06 01:41:33,993 - INFO - Progress: 84% (714/848) - ETA: 8.0s
+2025-05-06 01:41:36,442 - INFO - Progress: 89% (756/848) - ETA: 5.5s
+2025-05-06 01:41:38,907 - INFO - Progress: 94% (798/848) - ETA: 3.0s
+2025-05-06 01:41:41,334 - INFO - Progress: 99% (840/848) - ETA: 0.5s
+2025-05-06 01:41:41,802 - INFO - Processed 848 frames out of 848 total frames
+2025-05-06 01:41:41,802 - INFO - Average processing times per frame:
+2025-05-06 01:41:41,802 - INFO -   Laplacian: 0.0023 seconds
+2025-05-06 01:41:41,802 - INFO -   Tenengrad: 0.0114 seconds
+2025-05-06 01:41:41,802 - INFO -   FFT: 0.0388 seconds
+2025-05-06 01:41:41,802 - INFO - Calculating dynamic thresholds from statistics
+2025-05-06 01:41:41,803 - INFO - Calculated thresholds:
+2025-05-06 01:41:41,803 - INFO -   Percentile method:
+2025-05-06 01:41:41,804 - INFO -     laplacian: 3145.75
+2025-05-06 01:41:41,804 - INFO -     tenengrad: 58.70
+2025-05-06 01:41:41,804 - INFO -     fft: 11.43
+2025-05-06 01:41:41,804 - INFO -   Stddev method:
+2025-05-06 01:41:41,804 - INFO -     laplacian: 2875.81
+2025-05-06 01:41:41,804 - INFO -     tenengrad: 57.60
+2025-05-06 01:41:41,804 - INFO -     fft: 11.06
+2025-05-06 01:41:41,804 - INFO -   Fixed method:
+2025-05-06 01:41:41,804 - INFO -     laplacian: 100.00
+2025-05-06 01:41:41,804 - INFO -     tenengrad: 20.00
+2025-05-06 01:41:41,804 - INFO -     fft: 10.00
+2025-05-06 01:41:41,804 - INFO - Starting temporal analysis with dynamic thresholds
+2025-05-06 01:41:41,804 - INFO - Frame 0000: Sharp=True | Lap=3485.02 | Ten=59.07 | FFT=11.39
+2025-05-06 01:41:41,804 - INFO - Frame 0010: Sharp=True | Lap=3363.77 | Ten=58.49 | FFT=11.25
+2025-05-06 01:41:41,804 - INFO - Frame 0020: Sharp=True | Lap=3374.31 | Ten=57.87 | FFT=11.15
+2025-05-06 01:41:41,804 - INFO - Frame 0030: Sharp=True | Lap=3402.61 | Ten=57.36 | FFT=10.98
+2025-05-06 01:41:41,804 - INFO - Frame 0040: Sharp=True | Lap=3342.89 | Ten=60.27 | FFT=12.25
+2025-05-06 01:41:41,804 - INFO - Frame 0050: Sharp=True | Lap=2496.24 | Ten=56.41 | FFT=12.32
+2025-05-06 01:41:41,805 - INFO - Frame 0060: Sharp=True | Lap=2154.38 | Ten=65.34 | FFT=14.60
+2025-05-06 01:41:41,805 - INFO - Frame 0070: Sharp=True | Lap=2375.55 | Ten=70.92 | FFT=16.27
+2025-05-06 01:41:41,805 - INFO - Frame 0080: Sharp=True | Lap=2338.33 | Ten=71.72 | FFT=16.63
+2025-05-06 01:41:41,805 - INFO - Frame 0090: Sharp=True | Lap=2236.84 | Ten=69.85 | FFT=16.54
+2025-05-06 01:41:41,805 - INFO - Frame 0100: Sharp=True | Lap=2268.21 | Ten=71.70 | FFT=16.98
+2025-05-06 01:41:41,805 - INFO - Frame 0110: Sharp=True | Lap=2239.76 | Ten=71.82 | FFT=16.94
+2025-05-06 01:41:41,805 - INFO - Frame 0120: Sharp=True | Lap=2294.42 | Ten=73.37 | FFT=17.03
+2025-05-06 01:41:41,805 - INFO - Frame 0130: Sharp=True | Lap=4448.34 | Ten=73.88 | FFT=14.85
+2025-05-06 01:41:41,805 - INFO - Frame 0140: Sharp=True | Lap=9015.32 | Ten=106.44 | FFT=19.69
+2025-05-06 01:41:41,805 - INFO - Frame 0150: Sharp=True | Lap=5938.16 | Ten=78.86 | FFT=15.07
+2025-05-06 01:41:41,805 - INFO - Frame 0160: Sharp=True | Lap=3913.89 | Ten=62.17 | FFT=11.93
+2025-05-06 01:41:41,805 - INFO - Frame 0170: Sharp=True | Lap=3304.03 | Ten=56.74 | FFT=10.94
+2025-05-06 01:41:41,805 - INFO - Frame 0180: Sharp=True | Lap=3235.35 | Ten=55.88 | FFT=10.82
+2025-05-06 01:41:41,805 - INFO - Frame 0190: Sharp=True | Lap=3407.61 | Ten=57.46 | FFT=11.05
+2025-05-06 01:41:41,806 - INFO - Frame 0200: Sharp=True | Lap=2754.52 | Ten=55.05 | FFT=10.83
+2025-05-06 01:41:41,806 - INFO - Frame 0205: Sharp=False | Lap=2482.22 | Ten=50.83 | FFT=9.90
+2025-05-06 01:41:41,806 - INFO - Frame 0210: Sharp=True | Lap=3160.70 | Ten=55.61 | FFT=10.69
+2025-05-06 01:41:41,806 - INFO - Frame 0211: Sharp=False | Lap=2357.36 | Ten=50.75 | FFT=9.86
+2025-05-06 01:41:41,806 - INFO - Frame 0220: Sharp=True | Lap=2597.82 | Ten=54.77 | FFT=10.78
+2025-05-06 01:41:41,806 - INFO - Frame 0230: Sharp=True | Lap=2779.76 | Ten=54.96 | FFT=10.71
+2025-05-06 01:41:41,806 - INFO - Frame 0240: Sharp=True | Lap=2602.50 | Ten=53.16 | FFT=10.39
+2025-05-06 01:41:41,806 - INFO - Frame 0250: Sharp=True | Lap=2132.55 | Ten=53.55 | FFT=10.53
+2025-05-06 01:41:41,806 - INFO - Frame 0260: Sharp=True | Lap=2883.83 | Ten=54.41 | FFT=10.51
+2025-05-06 01:41:41,806 - INFO - Frame 0270: Sharp=True | Lap=3164.17 | Ten=55.84 | FFT=10.94
+2025-05-06 01:41:41,806 - INFO - Frame 0280: Sharp=True | Lap=3798.91 | Ten=61.51 | FFT=11.72
+2025-05-06 01:41:41,806 - INFO - Frame 0290: Sharp=True | Lap=4076.03 | Ten=62.58 | FFT=11.97
+2025-05-06 01:41:41,806 - INFO - Frame 0300: Sharp=True | Lap=3713.53 | Ten=60.16 | FFT=11.52
+2025-05-06 01:41:41,806 - INFO - Frame 0310: Sharp=True | Lap=3519.31 | Ten=58.57 | FFT=11.25
+2025-05-06 01:41:41,806 - INFO - Frame 0320: Sharp=True | Lap=2979.79 | Ten=55.22 | FFT=10.66
+2025-05-06 01:41:41,806 - INFO - Frame 0330: Sharp=True | Lap=2978.32 | Ten=56.26 | FFT=10.88
+2025-05-06 01:41:41,807 - INFO - Frame 0340: Sharp=True | Lap=2928.88 | Ten=58.47 | FFT=11.53
+2025-05-06 01:41:41,807 - INFO - Frame 0350: Sharp=True | Lap=3001.54 | Ten=57.53 | FFT=11.12
+2025-05-06 01:41:41,807 - INFO - Frame 0360: Sharp=True | Lap=2963.11 | Ten=57.37 | FFT=11.22
+2025-05-06 01:41:41,807 - INFO - Frame 0370: Sharp=True | Lap=3306.21 | Ten=60.38 | FFT=11.83
+2025-05-06 01:41:41,807 - INFO - Frame 0380: Sharp=True | Lap=4196.41 | Ten=65.74 | FFT=12.53
+2025-05-06 01:41:41,807 - INFO - Frame 0390: Sharp=True | Lap=4156.80 | Ten=62.45 | FFT=12.07
+2025-05-06 01:41:41,807 - INFO - Frame 0400: Sharp=True | Lap=5673.55 | Ten=78.58 | FFT=15.02
+2025-05-06 01:41:41,807 - INFO - Frame 0410: Sharp=True | Lap=6273.31 | Ten=81.42 | FFT=15.22
+2025-05-06 01:41:41,807 - INFO - Frame 0420: Sharp=True | Lap=5655.04 | Ten=81.44 | FFT=15.53
+2025-05-06 01:41:41,807 - INFO - Frame 0430: Sharp=True | Lap=4931.54 | Ten=74.16 | FFT=14.56
+2025-05-06 01:41:41,807 - INFO - Frame 0440: Sharp=True | Lap=4505.05 | Ten=82.56 | FFT=16.98
+2025-05-06 01:41:41,807 - INFO - Frame 0450: Sharp=True | Lap=4214.20 | Ten=72.25 | FFT=14.44
+2025-05-06 01:41:41,807 - INFO - Frame 0460: Sharp=True | Lap=4621.59 | Ten=76.49 | FFT=15.28
+2025-05-06 01:41:41,807 - INFO - Frame 0470: Sharp=True | Lap=4452.76 | Ten=69.52 | FFT=13.64
+2025-05-06 01:41:41,807 - INFO - Frame 0480: Sharp=True | Lap=4799.34 | Ten=72.95 | FFT=14.39
+2025-05-06 01:41:41,808 - INFO - Frame 0490: Sharp=True | Lap=4805.26 | Ten=68.65 | FFT=13.58
+2025-05-06 01:41:41,808 - INFO - Frame 0500: Sharp=True | Lap=5026.99 | Ten=68.62 | FFT=13.21
+2025-05-06 01:41:41,808 - INFO - Frame 0510: Sharp=True | Lap=5305.23 | Ten=71.97 | FFT=14.01
+2025-05-06 01:41:41,808 - INFO - Frame 0520: Sharp=True | Lap=4118.57 | Ten=62.30 | FFT=12.30
+2025-05-06 01:41:41,808 - INFO - Frame 0530: Sharp=True | Lap=4093.95 | Ten=63.43 | FFT=12.68
+2025-05-06 01:41:41,808 - INFO - Frame 0540: Sharp=True | Lap=3751.39 | Ten=61.60 | FFT=11.62
+2025-05-06 01:41:41,808 - INFO - Frame 0550: Sharp=True | Lap=4411.58 | Ten=67.05 | FFT=12.56
+2025-05-06 01:41:41,808 - INFO - Frame 0560: Sharp=True | Lap=5629.44 | Ten=77.59 | FFT=14.44
+2025-05-06 01:41:41,808 - INFO - Frame 0570: Sharp=True | Lap=5867.99 | Ten=77.60 | FFT=14.37
+2025-05-06 01:41:41,808 - INFO - Frame 0580: Sharp=True | Lap=7247.95 | Ten=89.11 | FFT=16.50
+2025-05-06 01:41:41,808 - INFO - Frame 0590: Sharp=True | Lap=6803.32 | Ten=83.71 | FFT=15.47
+2025-05-06 01:41:41,808 - INFO - Frame 0600: Sharp=True | Lap=6916.94 | Ten=84.93 | FFT=15.64
+2025-05-06 01:41:41,808 - INFO - Frame 0610: Sharp=True | Lap=6648.08 | Ten=82.96 | FFT=15.20
+2025-05-06 01:41:41,808 - INFO - Frame 0620: Sharp=True | Lap=6474.42 | Ten=80.35 | FFT=14.73
+2025-05-06 01:41:41,809 - INFO - Frame 0630: Sharp=True | Lap=6737.78 | Ten=82.25 | FFT=15.08
+2025-05-06 01:41:41,809 - INFO - Frame 0640: Sharp=True | Lap=6029.18 | Ten=77.28 | FFT=14.13
+2025-05-06 01:41:41,809 - INFO - Frame 0647: Sharp=False | Lap=2799.04 | Ten=55.46 | FFT=10.34
+2025-05-06 01:41:41,809 - INFO - Frame 0650: Sharp=True | Lap=5817.24 | Ten=75.47 | FFT=13.82
+2025-05-06 01:41:41,809 - INFO - Frame 0660: Sharp=True | Lap=5617.05 | Ten=73.39 | FFT=13.44
+2025-05-06 01:41:41,809 - INFO - Frame 0670: Sharp=True | Lap=5631.81 | Ten=72.80 | FFT=13.26
+2025-05-06 01:41:41,809 - INFO - Frame 0680: Sharp=True | Lap=5624.60 | Ten=72.77 | FFT=13.23
+2025-05-06 01:41:41,809 - INFO - Frame 0690: Sharp=True | Lap=5976.88 | Ten=76.39 | FFT=13.92
+2025-05-06 01:41:41,809 - INFO - Frame 0700: Sharp=True | Lap=5378.94 | Ten=71.05 | FFT=12.95
+2025-05-06 01:41:41,809 - INFO - Frame 0710: Sharp=True | Lap=5185.67 | Ten=70.01 | FFT=12.76
+2025-05-06 01:41:41,809 - INFO - Frame 0719: Sharp=False | Lap=2656.18 | Ten=54.60 | FFT=9.85
+2025-05-06 01:41:41,809 - INFO - Frame 0720: Sharp=True | Lap=5166.55 | Ten=68.79 | FFT=12.55
+2025-05-06 01:41:41,809 - INFO - Frame 0730: Sharp=True | Lap=5327.48 | Ten=71.48 | FFT=13.02
+2025-05-06 01:41:41,809 - INFO - Frame 0740: Sharp=True | Lap=3292.61 | Ten=59.18 | FFT=10.78
+2025-05-06 01:41:41,809 - INFO - Frame 0745: Sharp=False | Lap=2659.83 | Ten=54.80 | FFT=9.88
+2025-05-06 01:41:41,809 - INFO - Frame 0750: Sharp=True | Lap=6467.04 | Ten=80.92 | FFT=14.78
+2025-05-06 01:41:41,810 - INFO - Frame 0760: Sharp=True | Lap=5872.86 | Ten=76.84 | FFT=14.06
+2025-05-06 01:41:41,810 - INFO - Frame 0770: Sharp=True | Lap=5412.06 | Ten=71.82 | FFT=13.17
+2025-05-06 01:41:41,810 - INFO - Frame 0780: Sharp=True | Lap=5350.23 | Ten=72.30 | FFT=13.28
+2025-05-06 01:41:41,810 - INFO - Frame 0790: Sharp=True | Lap=5053.33 | Ten=68.34 | FFT=12.44
+2025-05-06 01:41:41,810 - INFO - Frame 0800: Sharp=True | Lap=3424.58 | Ten=57.11 | FFT=10.49
+2025-05-06 01:41:41,810 - INFO - Frame 0810: Sharp=True | Lap=4423.59 | Ten=64.47 | FFT=11.77
+2025-05-06 01:41:41,810 - INFO - Frame 0820: Sharp=True | Lap=4431.54 | Ten=63.77 | FFT=11.67
+2025-05-06 01:41:41,810 - INFO - Frame 0830: Sharp=True | Lap=4794.67 | Ten=66.83 | FFT=12.20
+2025-05-06 01:41:41,810 - INFO - Frame 0840: Sharp=True | Lap=4790.01 | Ten=65.86 | FFT=12.01
+2025-05-06 01:41:41,810 - INFO - Video analysis completed in 50.52 seconds
+2025-05-06 01:41:41,810 - INFO - Average time per frame: 0.0596 seconds
+2025-05-06 01:41:41,810 - INFO - Percentile method: Found 299 blurry frames out of 848 (35.3%)
+2025-05-06 01:41:41,810 - INFO - Stddev method: Found 264 blurry frames out of 848 (31.1%)
+2025-05-06 01:41:41,810 - INFO - Fixed method: Found 5 blurry frames out of 848 (0.6%)
+2025-05-06 01:41:41,810 - INFO - Saving individual results for Scenes 001-020__5B14-5a- only_20230816051800694.mp4
+2025-05-06 01:41:41,810 - INFO - Generating blur metrics plot
+2025-05-06 01:41:42,352 - INFO - Plot saved to blur_results/analysis_20250506_014051/blur_plot_Scenes 001-020__5B14-5a- only_20230816051800694.mp4_20250506_014051.png
+2025-05-06 01:41:42,905 - INFO - Histograms saved to blur_results/analysis_20250506_014051/blur_plot_Scenes 001-020__5B14-5a- only_20230816051800694.mp4_20250506_014051_histograms.png
+2025-05-06 01:41:42,905 - INFO - Visualizing 11 sample frames
+2025-05-06 01:41:44,562 - INFO - Sample frames saved to blur_results/analysis_20250506_014051/sample_frames.png
+2025-05-06 01:41:44,598 - INFO - Creating method comparison visualization with 26 frames
+2025-05-06 01:41:48,858 - INFO - Method comparison grid saved to blur_results/analysis_20250506_014051/method_comparison/method_comparison_grid.png
+2025-05-06 01:41:48,860 - INFO - Results saved to blur_results/analysis_20250506_014051/blur_data_Scenes 001-020__5B14-5a- only_20230816051800694.mp4_20250506_014051.csv
+2025-05-06 01:41:48,861 - INFO - Threshold information saved to blur_results/analysis_20250506_014051/thresholds_Scenes 001-020__5B14-5a- only_20230816051800694.mp4_20250506_014051.txt
+2025-05-06 01:41:48,861 - INFO - ========================================
+2025-05-06 01:41:48,861 - INFO - Blur Detection Script finished
+2025-05-06 01:41:48,861 - INFO - ========================================
+2025-05-06 01:54:35,027 - INFO - ========================================
+2025-05-06 01:54:35,027 - INFO - Blur Detection Script started at 20250506_015435
+2025-05-06 01:54:35,027 - INFO - ========================================
+2025-05-06 01:54:35,027 - ERROR - Input path not found: /home/ubuntu/code/drew/test_data/frames/Scenes 001-020__10
+2025-05-06 01:55:11,029 - INFO - ========================================
+2025-05-06 01:55:11,029 - INFO - Blur Detection Script started at 20250506_015511
+2025-05-06 01:55:11,029 - INFO - ========================================
+2025-05-06 01:55:11,029 - INFO - Processing image frames in directory: /home/ubuntu/code/drew/test_data/frames/Scenes 001-020__101B-1-_20230726152900590
+2025-05-06 01:55:11,031 - WARNING - natsort package not found. Using simple alphabetical sort. Install with 'pip install natsort' for better frame sequence sorting.
+2025-05-06 01:55:11,031 - INFO - Found 114 image file(s) to process.
+2025-05-06 01:55:11,032 - INFO - Starting frame directory analysis...
+2025-05-06 01:55:11,032 - INFO - Starting analysis of 114 image frames.
+2025-05-06 01:55:11,032 - INFO - Resize factor: 1.0
+2025-05-06 01:55:11,032 - INFO - Processing every 1 image(s)
+2025-05-06 01:55:11,032 - INFO - Background removal: Disabled
+2025-05-06 01:55:11,032 - INFO - Threshold method: percentile
+2025-05-06 01:55:11,032 - INFO - Progress: 0% (1/114) - ETA: 0.0s
+2025-05-06 01:55:11,344 - INFO - Progress: 5% (6/114) - ETA: 6.8s
+2025-05-06 01:55:11,638 - INFO - Progress: 9% (11/114) - ETA: 6.3s
+2025-05-06 01:55:11,947 - INFO - Progress: 14% (16/114) - ETA: 6.0s
+2025-05-06 01:55:12,270 - INFO - Progress: 18% (21/114) - ETA: 5.8s
+2025-05-06 01:55:12,563 - INFO - Progress: 22% (26/114) - ETA: 5.5s
+2025-05-06 01:55:12,864 - INFO - Progress: 27% (31/114) - ETA: 5.1s
+2025-05-06 01:55:13,156 - INFO - Progress: 31% (36/114) - ETA: 4.8s
+2025-05-06 01:55:13,471 - INFO - Progress: 35% (41/114) - ETA: 4.5s
+2025-05-06 01:55:13,785 - INFO - Progress: 40% (46/114) - ETA: 4.2s
+2025-05-06 01:55:14,085 - INFO - Progress: 44% (51/114) - ETA: 3.9s
+2025-05-06 01:55:14,398 - INFO - Progress: 49% (56/114) - ETA: 3.6s
+2025-05-06 01:55:14,712 - INFO - Progress: 53% (61/114) - ETA: 3.3s
+2025-05-06 01:55:15,007 - INFO - Progress: 57% (66/114) - ETA: 3.0s
+2025-05-06 01:55:15,306 - INFO - Progress: 62% (71/114) - ETA: 2.7s
+2025-05-06 01:55:15,595 - INFO - Progress: 66% (76/114) - ETA: 2.4s
+2025-05-06 01:55:15,904 - INFO - Progress: 71% (81/114) - ETA: 2.1s
+2025-05-06 01:55:16,207 - INFO - Progress: 75% (86/114) - ETA: 1.8s
+2025-05-06 01:55:16,526 - INFO - Progress: 79% (91/114) - ETA: 1.5s
+2025-05-06 01:55:16,834 - INFO - Progress: 84% (96/114) - ETA: 1.2s
+2025-05-06 01:55:17,135 - INFO - Progress: 88% (101/114) - ETA: 0.9s
+2025-05-06 01:55:17,434 - INFO - Progress: 92% (106/114) - ETA: 0.5s
+2025-05-06 01:55:17,732 - INFO - Progress: 97% (111/114) - ETA: 0.2s
+2025-05-06 01:55:17,965 - INFO - Finished processing 114 images.
+2025-05-06 01:55:17,965 - INFO - Average processing times per image:
+2025-05-06 01:55:17,965 - INFO -   Laplacian: 0.0059 seconds
+2025-05-06 01:55:17,965 - INFO -   Tenengrad: 0.0098 seconds
+2025-05-06 01:55:17,965 - INFO -   FFT: 0.0409 seconds
+2025-05-06 01:55:17,965 - INFO - Calculating dynamic thresholds from image statistics
+2025-05-06 01:55:17,966 - INFO - Calculated thresholds:
+2025-05-06 01:55:17,966 - INFO -   Percentile method:
+2025-05-06 01:55:17,966 - INFO -     laplacian: 556.60
+2025-05-06 01:55:17,966 - INFO -     tenengrad: 15.51
+2025-05-06 01:55:17,966 - INFO -     fft: 4.09
+2025-05-06 01:55:17,966 - INFO -   Stddev method:
+2025-05-06 01:55:17,966 - INFO -     laplacian: 569.61
+2025-05-06 01:55:17,966 - INFO -     tenengrad: 14.83
+2025-05-06 01:55:17,966 - INFO -     fft: 3.85
+2025-05-06 01:55:17,967 - INFO -   Fixed method:
+2025-05-06 01:55:17,967 - INFO -     laplacian: 100.00
+2025-05-06 01:55:17,967 - INFO -     tenengrad: 20.00
+2025-05-06 01:55:17,967 - INFO -     fft: 10.00
+2025-05-06 01:55:17,967 - INFO - Image analysis completed in 6.94 seconds
+2025-05-06 01:55:17,967 - INFO - Selected method (percentile): Found 30 blurry images out of 114 (26.3%)
+2025-05-06 01:55:17,967 - INFO - Frame directory analysis complete.
+2025-05-06 01:55:17,969 - INFO - Aggregated results saved to: blur_results/analysis_20250506_015511/aggregated_results.json
+2025-05-06 01:55:17,969 - INFO - ========================================
+2025-05-06 01:55:17,969 - INFO - Blur Detection Script finished
+2025-05-06 01:55:17,969 - INFO - ========================================
+2025-05-06 01:59:29,036 - INFO - ========================================
+2025-05-06 01:59:29,036 - INFO - Blur Detection Script started at 20250506_015929
+2025-05-06 01:59:29,036 - INFO - ========================================
+2025-05-06 01:59:29,036 - INFO - Processing image frames in directory: /home/ubuntu/code/drew/test_data/frames/Scenes 001-020__101B-1-_20230726152900590
+2025-05-06 01:59:29,039 - WARNING - natsort package not found. Using simple alphabetical sort. Install with 'pip install natsort' for better frame sequence sorting.
+2025-05-06 01:59:29,039 - INFO - Found 114 image file(s) to process.
+2025-05-06 01:59:29,039 - INFO - Starting frame directory analysis...
+2025-05-06 01:59:29,039 - INFO - Starting analysis of 114 image frames.
+2025-05-06 01:59:29,039 - INFO - Resize factor: 1.0
+2025-05-06 01:59:29,039 - INFO - Processing every 1 image(s)
+2025-05-06 01:59:29,039 - INFO - Background removal: Disabled
+2025-05-06 01:59:29,039 - INFO - Threshold method: percentile
+2025-05-06 01:59:29,039 - INFO - Progress: 0% (1/114) - ETA: 0.0s
+2025-05-06 01:59:29,349 - INFO - Progress: 5% (6/114) - ETA: 6.7s
+2025-05-06 01:59:29,639 - INFO - Progress: 9% (11/114) - ETA: 6.2s
+2025-05-06 01:59:29,951 - INFO - Progress: 14% (16/114) - ETA: 6.0s
+2025-05-06 01:59:30,270 - INFO - Progress: 18% (21/114) - ETA: 5.8s
+2025-05-06 01:59:30,566 - INFO - Progress: 22% (26/114) - ETA: 5.4s
+2025-05-06 01:59:30,863 - INFO - Progress: 27% (31/114) - ETA: 5.1s
+2025-05-06 01:59:31,162 - INFO - Progress: 31% (36/114) - ETA: 4.8s
+2025-05-06 01:59:31,457 - INFO - Progress: 35% (41/114) - ETA: 4.5s
+2025-05-06 01:59:31,765 - INFO - Progress: 40% (46/114) - ETA: 4.2s
+2025-05-06 01:59:32,073 - INFO - Progress: 44% (51/114) - ETA: 3.9s
+2025-05-06 01:59:32,366 - INFO - Progress: 49% (56/114) - ETA: 3.6s
+2025-05-06 01:59:32,657 - INFO - Progress: 53% (61/114) - ETA: 3.3s
+2025-05-06 01:59:32,939 - INFO - Progress: 57% (66/114) - ETA: 2.9s
+2025-05-06 01:59:33,260 - INFO - Progress: 62% (71/114) - ETA: 2.7s
+2025-05-06 01:59:33,589 - INFO - Progress: 66% (76/114) - ETA: 2.4s
+2025-05-06 01:59:33,889 - INFO - Progress: 71% (81/114) - ETA: 2.1s
+2025-05-06 01:59:34,199 - INFO - Progress: 75% (86/114) - ETA: 1.8s
+2025-05-06 01:59:34,499 - INFO - Progress: 79% (91/114) - ETA: 1.5s
+2025-05-06 01:59:34,789 - INFO - Progress: 84% (96/114) - ETA: 1.1s
+2025-05-06 01:59:35,080 - INFO - Progress: 88% (101/114) - ETA: 0.8s
+2025-05-06 01:59:35,370 - INFO - Progress: 92% (106/114) - ETA: 0.5s
+2025-05-06 01:59:35,676 - INFO - Progress: 97% (111/114) - ETA: 0.2s
+2025-05-06 01:59:35,925 - INFO - Finished processing 114 images.
+2025-05-06 01:59:35,925 - INFO - Average processing times per image:
+2025-05-06 01:59:35,925 - INFO -   Laplacian: 0.0059 seconds
+2025-05-06 01:59:35,925 - INFO -   Tenengrad: 0.0099 seconds
+2025-05-06 01:59:35,925 - INFO -   FFT: 0.0412 seconds
+2025-05-06 01:59:35,925 - INFO - Calculating dynamic thresholds from image statistics
+2025-05-06 01:59:35,926 - INFO - Calculated thresholds:
+2025-05-06 01:59:35,926 - INFO -   Percentile method:
+2025-05-06 01:59:35,926 - INFO -     laplacian: 556.60
+2025-05-06 01:59:35,926 - INFO -     tenengrad: 15.51
+2025-05-06 01:59:35,926 - INFO -     fft: 4.09
+2025-05-06 01:59:35,926 - INFO -   Stddev method:
+2025-05-06 01:59:35,926 - INFO -     laplacian: 569.61
+2025-05-06 01:59:35,926 - INFO -     tenengrad: 14.83
+2025-05-06 01:59:35,926 - INFO -     fft: 3.85
+2025-05-06 01:59:35,927 - INFO -   Fixed method:
+2025-05-06 01:59:35,927 - INFO -     laplacian: 100.00
+2025-05-06 01:59:35,927 - INFO -     tenengrad: 20.00
+2025-05-06 01:59:35,927 - INFO -     fft: 10.00
+2025-05-06 01:59:35,927 - INFO - Image analysis completed in 6.89 seconds
+2025-05-06 01:59:35,927 - INFO - Selected method (percentile): Found 30 blurry images out of 114 (26.3%)
+2025-05-06 01:59:35,927 - INFO - Frame directory analysis complete.
+2025-05-06 01:59:35,927 - INFO - Generating score plots for frame analysis...
+2025-05-06 01:59:35,927 - INFO - Generating blur metrics plot
+2025-05-06 01:59:36,538 - INFO - Plot saved to blur_results/analysis_20250506_015929/blur_plot_frames_Scenes 001-020__101B-1-_20230726152900590_20250506_015929.png
+2025-05-06 01:59:37,150 - INFO - Histograms saved to blur_results/analysis_20250506_015929/blur_plot_frames_Scenes 001-020__101B-1-_20230726152900590_20250506_015929_histograms.png
+2025-05-06 01:59:37,152 - INFO - Aggregated results saved to: blur_results/analysis_20250506_015929/aggregated_results.json
+2025-05-06 01:59:37,152 - INFO - ========================================
+2025-05-06 01:59:37,152 - INFO - Blur Detection Script finished
+2025-05-06 01:59:37,153 - INFO - ========================================
+2025-05-06 02:03:29,108 - INFO - ========================================
+2025-05-06 02:03:29,108 - INFO - Blur Detection Script started at 20250506_020329
+2025-05-06 02:03:29,108 - INFO - ========================================
+2025-05-06 02:03:29,108 - INFO - Processing image frames in directory: /home/ubuntu/code/drew/e2e_sam2/frames/
+2025-05-06 02:03:29,110 - WARNING - natsort package not found. Using simple alphabetical sort. Install with 'pip install natsort' for better frame sequence sorting.
+2025-05-06 02:03:29,110 - ERROR - No supported image files found in directory: /home/ubuntu/code/drew/e2e_sam2/frames/
+2025-05-06 02:03:41,113 - INFO - ========================================
+2025-05-06 02:03:41,113 - INFO - Blur Detection Script started at 20250506_020341
+2025-05-06 02:03:41,113 - INFO - ========================================
+2025-05-06 02:03:41,113 - INFO - Processing image frames in directory: /home/ubuntu/code/drew/e2e_sam2/frames/
+2025-05-06 02:03:41,128 - INFO - Using natsort for natural sorting of filenames.
+2025-05-06 02:03:41,129 - ERROR - No supported image files found in directory: /home/ubuntu/code/drew/e2e_sam2/frames/
+2025-05-06 02:04:22,809 - INFO - ========================================
+2025-05-06 02:04:22,809 - INFO - Blur Detection Script started at 20250506_020422
+2025-05-06 02:04:22,809 - INFO - ========================================
+2025-05-06 02:04:22,809 - INFO - Processing image frames in directory: /home/ubuntu/code/drew/e2e_sam2/frames/
+2025-05-06 02:04:22,824 - INFO - Using natsort for natural sorting of filenames.
+2025-05-06 02:04:22,824 - ERROR - No supported image files found in directory: /home/ubuntu/code/drew/e2e_sam2/frames/
+2025-05-06 02:07:37,125 - INFO - ========================================
+2025-05-06 02:07:37,125 - INFO - Blur Detection Script started at 20250506_020737
+2025-05-06 02:07:37,125 - INFO - ========================================
+2025-05-06 02:07:37,125 - INFO - Processing image frames in directory: /home/ubuntu/code/drew/e2e_sam2/frames
+2025-05-06 02:07:37,140 - INFO - Using natsort for natural sorting of filenames.
+2025-05-06 02:07:37,140 - ERROR - No supported image files found in directory: /home/ubuntu/code/drew/e2e_sam2/frames
+2025-05-06 02:56:13,236 - INFO - ========================================
+2025-05-06 02:56:13,236 - INFO - Blur Detection Script started at 20250506_025613
+2025-05-06 02:56:13,236 - INFO - ========================================
+2025-05-06 02:56:13,236 - INFO - Processing image frames in directory: /home/ubuntu/code/drew/e2e_sam2/frames
+2025-05-06 02:56:13,251 - INFO - Using natsort for natural sorting of filenames.
+2025-05-06 02:56:13,251 - ERROR - No supported image files found in directory: /home/ubuntu/code/drew/e2e_sam2/frames
+2025-05-06 02:56:17,363 - INFO - ========================================
+2025-05-06 02:56:17,363 - INFO - Blur Detection Script started at 20250506_025617
+2025-05-06 02:56:17,363 - INFO - ========================================
+2025-05-06 02:56:17,363 - INFO - Processing image frames in directory: /home/ubuntu/code/drew/e2e_sam2/frames/
+2025-05-06 02:56:17,378 - INFO - Using natsort for natural sorting of filenames.
+2025-05-06 02:56:17,378 - ERROR - No supported image files found in directory: /home/ubuntu/code/drew/e2e_sam2/frames/

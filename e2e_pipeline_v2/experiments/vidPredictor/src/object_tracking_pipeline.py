@@ -10,7 +10,6 @@ from pathlib import Path
 import json
 from typing import Dict, List, Tuple, Union, Optional
 import time
-import matplotlib.colormaps as colormaps
 
 # Import our components
 from owlv2_detector import OWLv2Detector
@@ -519,9 +518,8 @@ class ObjectTrackingPipeline:
             detection_box = obj_data["boxes"][0]
             x1, y1, x2, y2 = map(int, detection_box)
             
-            # Get color for this object
-            cmap = colormaps["tab10"]
-            color = cmap(obj_id % 10)[:3]
+            # Get color for this object - use plt.cm which works across matplotlib versions
+            color = plt.cm.tab10(obj_id % 10)[:3]
             color_rgb = (int(color[0]*255), int(color[1]*255), int(color[2]*255))
             
             # Draw rectangle
@@ -603,8 +601,8 @@ class ObjectTrackingPipeline:
                 vis_frame = frame.copy()
                 
                 # Get a color for this object (consistent with pipeline visualization)
-                cmap = colormaps["tab10"]
-                color = cmap(obj_id % 10)[:3]
+                # Use plt.cm which works across matplotlib versions
+                color = plt.cm.tab10(obj_id % 10)[:3]
                 color_rgb = (int(color[0]*255), int(color[1]*255), int(color[2]*255))
                 
                 # Apply mask overlay

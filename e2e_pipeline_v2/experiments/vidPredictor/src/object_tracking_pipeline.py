@@ -562,9 +562,21 @@ class ObjectTrackingPipeline:
             obj_dir = object_masks_dir / f"object_{obj_id}_{obj_data['class']}"
             obj_dir.mkdir(exist_ok=True)
             
-            # Process each frame for this object
-            for frame_idx in range(len(frame_files)):
-                # Check if this object has a mask for this frame
+            # Get the object's visible frame range
+            first_frame = obj_data["first_detected"]
+            last_frame = obj_data["last_seen"]
+            print(f"Processing object {obj_id} visible from frame {first_frame} to {last_frame}")
+            
+            # Track how many frames we've saved
+            saved_frame_count = 0
+            
+            # Process each frame where this object should be visible
+            for frame_idx in range(first_frame, last_frame + 1):
+                # Skip if frame is out of range
+                if frame_idx >= len(frame_files):
+                    continue
+                
+                # Check if this object has a mask for this frame in the propagation results
                 if frame_idx in self.propagation_results and obj_id in self.propagation_results[frame_idx]:
                     # Load the original frame
                     frame_path = frame_files[frame_idx]
@@ -593,7 +605,7 @@ class ObjectTrackingPipeline:
                         
                         # Check if mask is valid
                         if mask.size == 0 or mask.ndim != 2:
-                            print(f"Warning: Invalid mask for object {obj_id}, shape: {mask.shape}")
+                            print(f"Warning: Invalid mask for object {obj_id} on frame {frame_idx}, shape: {mask.shape}")
                             continue
                         
                         # Convert to bool and ensure shape is compatible
@@ -619,8 +631,9 @@ class ObjectTrackingPipeline:
                     # Save visualization
                     output_path = obj_dir / f"frame_{frame_idx:04d}.jpg"
                     cv2.imwrite(str(output_path), cv2.cvtColor(vis_frame, cv2.COLOR_RGB2BGR))
+                    saved_frame_count += 1
             
-            print(f"  Saved visualizations for object #{obj_id} ({obj_data['class']})")
+            print(f"  Saved {saved_frame_count} visualizations for object #{obj_id} ({obj_data['class']})")
         
         print(f"All per-object mask visualizations saved to {object_masks_dir}")
 

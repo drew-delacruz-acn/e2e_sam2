@@ -21,6 +21,9 @@ sam_wrapper = SAM2VideoWrapper(
 # Set video
 sam_wrapper.set_video(frames_dir='/home/ubuntu/code/drew/test_data/frames/Scenes 001-020__220D-2-_20230815190723523/subset/')
 
+#TODO: IDEA
+# write test that only calls sam2 reset/load states 
+
 # Test segmentation with a sample box
 frame_idx = 0
 box = [250, 69, 773, 474]  # Example box

@@ -1,0 +1,142 @@
+{
+  "object_frame_mapping": {
+    "1": {
+      "class": "goat",
+      "frames": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ]
+    },
+    "2": {
+      "class": "goat",
+      "frames": [
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ]
+    },
+    "3": {
+      "class": "goat",
+      "frames": [
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ]
+    },
+    "4": {
+      "class": "goat",
+      "frames": [
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ]
+    }
+  },
+  "object_list": [
+    {
+      "id": 1,
+      "class": "goat",
+      "frames": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "frame_count": 12,
+      "first_frame": 1,
+      "last_frame": 12
+    },
+    {
+      "id": 2,
+      "class": "goat",
+      "frames": [
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "frame_count": 9,
+      "first_frame": 4,
+      "last_frame": 12
+    },
+    {
+      "id": 3,
+      "class": "goat",
+      "frames": [
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "frame_count": 9,
+      "first_frame": 4,
+      "last_frame": 12
+    },
+    {
+      "id": 4,
+      "class": "goat",
+      "frames": [
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "frame_count": 9,
+      "first_frame": 4,
+      "last_frame": 12
+    }
+  ],
+  "total_objects": 4,
+  "total_frames": 12
+}

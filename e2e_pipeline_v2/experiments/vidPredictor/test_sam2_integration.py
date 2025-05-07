@@ -14,7 +14,8 @@ frames, _ = load_frames_from_directory("/home/ubuntu/code/drew/test_data/frames/
 # Initialize SAM2
 sam_wrapper = SAM2VideoWrapper(
     checkpoint_path="checkpoints/sam2.1_hiera_large.pt",
-    config_path="configs/sam2.1/sam2.1_hiera_l.yaml"
+    config_path="configs/sam2.1/sam2.1_hiera_l.yaml",
+    device=torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 )
 
 # Set video
@@ -53,7 +54,7 @@ print(f'Saving results to {output_dir}')
 
 print('Visualizing propagated frames...')
 # Visualize a few propagated frames
-for idx in range(0, min(len(frames), 30), 10):
+for idx in range(0, min(len(frames), 30), 1):
     if idx in segments:
         print(f"Visualizing frame {idx}")
         # The segments dictionary maps frame_idx -> {obj_id -> mask}

@@ -195,10 +195,19 @@ class ObjectTrackingPipeline:
             )
             
             # Track objects across frames
+            # Convert detections to the format expected by the tracker
+            tracker_detections = []
+            for i in range(len(detections["boxes"])):
+                tracker_detections.append({
+                    "box": detections["boxes"][i].tolist() if isinstance(detections["boxes"][i], torch.Tensor) else detections["boxes"][i],
+                    "score": detections["scores"][i].item() if isinstance(detections["scores"][i], torch.Tensor) else detections["scores"][i],
+                    "text": detections["labels"][i]
+                })
+
             tracked_in_frame = self.tracker.update_tracks(
                 frame=frame_np,
                 frame_idx=frame_idx,
-                detections=detections,
+                detections=tracker_detections,
                 embedding_extractor=self.embedding_extractor,
                 output_dir=None
             )

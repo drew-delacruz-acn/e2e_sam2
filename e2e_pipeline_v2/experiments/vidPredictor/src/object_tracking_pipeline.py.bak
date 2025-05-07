@@ -54,7 +54,6 @@ class ObjectTrackingPipeline:
         # Tracking state
         self.tracked_objects = {}  # id -> object data
         self.next_id = 1
-        self.propagation_results = {}  # Store SAM2 propagation results
         
     def process_video(self, frames_dir: str, text_queries: List[str]):
         # Get all frames sorted
@@ -64,10 +63,6 @@ class ObjectTrackingPipeline:
             raise ValueError(f"No frames found in {frames_dir}")
         
         print(f"Processing {len(frame_files)} frames with queries: {text_queries}")
-        
-        # Initialize SAM2 with the video frames directory
-        print(f"Setting up SAM2 with frames directory: {frames_dir}")
-        self.sam_wrapper.set_video(frames_dir=frames_dir)
         
         # Results storage
         results = {
@@ -122,26 +117,20 @@ class ObjectTrackingPipeline:
                 print(f"Error extracting embedding: {e}")
                 continue
             
-            # Create a unique object ID first
+            # Add box to SAM2 to get mask
+            self.sam_wrapper.initialize_video_frames([first_frame_np])
+            self.sam_wrapper.add_box(box)
+            mask_logits = self.sam_wrapper.get_mask_for_frame(0)
+            
+            # Store this object with a new ID
             object_id = self.next_id
             self.next_id += 1
             
-            # Add box to SAM2 to get mask - match test pattern
-            box_coords = [x1, y1, x2, y2]
-            print(f"Adding box for object {object_id} at frame 0: {box_coords}")
-            mask_logits = self.sam_wrapper.add_box(frame_idx=0, obj_id=object_id, box=box_coords)
-            
-            # Skip if mask generation failed
-            if mask_logits is None:
-                print(f"Failed to generate mask for object {object_id}")
-                continue
-            
-            # Store this object with the ID
             self.tracked_objects[object_id] = {
                 "id": object_id,
                 "class": label,
                 "first_detected": 0,  # frame 0
-                "boxes": [box_coords],
+                "boxes": [box.tolist() if isinstance(box, torch.Tensor) else box],
                 "embeddings": [embedding.cpu().numpy() if isinstance(embedding, torch.Tensor) else embedding],
                 "masks": [mask_logits.cpu().numpy() if isinstance(mask_logits, torch.Tensor) else mask_logits],
                 "last_seen": 0,  # frame 0
@@ -150,16 +139,6 @@ class ObjectTrackingPipeline:
             
             # Store in results
             results["object_tracks"][object_id] = self.tracked_objects[object_id]
-        
-        # Run mask propagation for all tracked objects
-        if self.tracked_objects:
-            print("Running mask propagation for all tracked objects...")
-            object_ids = list(self.tracked_objects.keys())
-            segments = self.sam_wrapper.propagate_masks(objects_to_track=object_ids)
-            self.propagation_results = segments
-            print(f"Propagated masks for {len(object_ids)} objects across {len(segments)} frames")
-        else:
-            print("No objects to propagate")
         
         # Visualize first frame results
         first_frame_vis = self._visualize_frame(
@@ -180,7 +159,7 @@ class ObjectTrackingPipeline:
             "tracked_objects": [obj_id for obj_id in self.tracked_objects.keys()]
         }
         
-        # Process remaining frames - use propagation results where available
+        # Process remaining frames
         for frame_idx in range(1, len(frame_files)):
             print(f"Processing frame {frame_idx}/{len(frame_files)}")
             frame_path = frame_files[frame_idx]
@@ -207,35 +186,36 @@ class ObjectTrackingPipeline:
                 frame_idx=frame_idx
             )
             
-            # Process each tracked object - use propagated masks if available
+            # Initialize SAM2 with the current frame
+            self.sam_wrapper.initialize_video_frames([frame_np])
+            
+            # Process each tracked object
             for obj_id, obj_data in tracked_in_frame.items():
-                # If this is a new object, we need to initialize it in SAM2
+                # If this is a new object, initialize SAM2 with its box
                 if obj_data["first_detected"] == frame_idx:
                     box = obj_data["boxes"][-1]
-                    print(f"Adding new object {obj_id} at frame {frame_idx}")
-                    mask_logits = self.sam_wrapper.add_box(frame_idx=frame_idx, obj_id=obj_id, box=box)
-                    
-                    if mask_logits is None:
-                        print(f"Failed to generate mask for new object {obj_id}")
-                        # Use a fallback empty mask
-                        mask_logits = np.zeros((frame_np.shape[0], frame_np.shape[1]), dtype=bool)
-                    
+                    self.sam_wrapper.add_box(box)
+                    mask_logits = self.sam_wrapper.get_mask_for_frame(0)
                     obj_data["masks"].append(
                         mask_logits.cpu().numpy() if isinstance(mask_logits, torch.Tensor) else mask_logits
                     )
-                # For existing objects, use propagated masks if available
+                
+                # If this is a continuing object, propagate mask from previous frame
                 else:
-                    # Check if we have a propagated mask for this object at this frame
-                    if frame_idx in self.propagation_results and obj_id in self.propagation_results[frame_idx]:
-                        propagated_mask = self.propagation_results[frame_idx][obj_id]
-                        obj_data["masks"].append(
-                            propagated_mask.cpu().numpy() if isinstance(propagated_mask, torch.Tensor) else propagated_mask
-                        )
-                    else:
-                        # Fallback: use the previous mask if propagation didn't yield a result
-                        prev_mask = obj_data["masks"][-1]
-                        print(f"Warning: No propagated mask for object {obj_id} at frame {frame_idx}, using previous mask")
-                        obj_data["masks"].append(prev_mask)
+                    prev_mask = obj_data["masks"][-1]
+                    prev_box = obj_data["boxes"][-2]  # Second-to-last box
+                    curr_box = obj_data["boxes"][-1]  # Latest box
+                    
+                    # Prepare mask from previous frame
+                    prev_mask_tensor = torch.tensor(prev_mask).to(self.device)
+                    
+                    # Process the propagation - simplified for demo
+                    self.sam_wrapper.add_mask(prev_mask_tensor)
+                    propagated_mask = self.sam_wrapper.get_mask_for_frame(0)
+                    
+                    obj_data["masks"].append(
+                        propagated_mask.cpu().numpy() if isinstance(propagated_mask, torch.Tensor) else propagated_mask
+                    )
                 
                 # Update tracked objects
                 self.tracked_objects[obj_id] = obj_data

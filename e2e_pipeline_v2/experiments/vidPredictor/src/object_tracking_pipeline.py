@@ -658,11 +658,37 @@ class ObjectTrackingPipeline:
                 "frames": []
             }
         
-        # Go through frame_results and collect frames for each object
+        # Go through propagation_results and collect frames for each object
         for frame_idx, frame_data in sorted(self.propagation_results.items()):
             for obj_id in frame_data.keys():
                 if obj_id in object_frames:
                     object_frames[obj_id]["frames"].append(frame_idx)
+        
+        # For verification, compare frame range with frame list
+        for obj_id, obj_data in self.tracked_objects.items():
+            # Expected range based on first_detected and last_seen
+            first_frame = obj_data["first_detected"]
+            last_frame = obj_data["last_seen"]
+            
+            # Actual frames from propagation results
+            if obj_id in object_frames:
+                actual_frames = set(object_frames[obj_id]["frames"])
+                
+                # Find any frames in range without masks
+                missing_frames = []
+                for frame_idx in range(first_frame, last_frame + 1):
+                    if frame_idx not in actual_frames:
+                        # Verify if object actually has a mask in this frame
+                        has_mask_in_propagation = (
+                            frame_idx in self.propagation_results and 
+                            obj_id in self.propagation_results[frame_idx]
+                        )
+                        
+                        if not has_mask_in_propagation:
+                            missing_frames.append(frame_idx)
+                
+                if missing_frames:
+                    print(f"Warning: Object {obj_id} missing masks for frames {missing_frames}")
         
         # Convert to a list format if preferred
         object_list = []
@@ -676,7 +702,9 @@ class ObjectTrackingPipeline:
                 "frames": obj_data["frames"],
                 "frame_count": len(obj_data["frames"]),
                 "first_frame": obj_data["frames"][0] if obj_data["frames"] else None,
-                "last_frame": obj_data["frames"][-1] if obj_data["frames"] else None
+                "last_frame": obj_data["frames"][-1] if obj_data["frames"] else None,
+                "expected_first_frame": self.tracked_objects[obj_id]["first_detected"],
+                "expected_last_frame": self.tracked_objects[obj_id]["last_seen"]
             })
         
         # Create the final structure
@@ -686,6 +714,38 @@ class ObjectTrackingPipeline:
             "total_objects": len(object_frames),
             "total_frames": len(self.propagation_results)
         }
+        
+        # Verify if the mapping matches actual saved images
+        object_masks_dir = self.output_dir / "object_masks"
+        if object_masks_dir.exists():
+            print("Verifying consistency with saved mask images...")
+            for obj_id in object_frames:
+                obj_dir = object_masks_dir / f"object_{obj_id}_{object_frames[obj_id]['class']}"
+                if obj_dir.exists():
+                    # Get list of saved frame images
+                    saved_frames = []
+                    for file_path in obj_dir.glob("frame_*.jpg"):
+                        try:
+                            # Extract frame number from filename
+                            frame_num = int(file_path.stem.split("_")[1])
+                            saved_frames.append(frame_num)
+                        except (IndexError, ValueError):
+                            continue
+                    
+                    # Compare with mapping
+                    saved_frames_set = set(saved_frames)
+                    mapped_frames_set = set(object_frames[obj_id]["frames"])
+                    
+                    if saved_frames_set != mapped_frames_set:
+                        missing_in_files = mapped_frames_set - saved_frames_set
+                        missing_in_mapping = saved_frames_set - mapped_frames_set
+                        
+                        if missing_in_files:
+                            print(f"Warning: Object {obj_id} has frames in mapping but no image files: {sorted(missing_in_files)}")
+                        if missing_in_mapping:
+                            print(f"Warning: Object {obj_id} has image files but no frames in mapping: {sorted(missing_in_mapping)}")
+                else:
+                    print(f"Warning: Object {obj_id} has no saved mask directory at {obj_dir}")
         
         # Save the result
         if output_path is None:

@@ -217,6 +217,35 @@ class ObjectTrackingPipeline:
                 output_dir=None
             )
 
+            # First, identify objects that are brand new in this frame by checking the tracker's output
+            # and cross-referencing with objects we're already tracking in our pipeline
+            new_objects_in_this_frame = []
+            for obj_id, box in current_boxes.items():
+                # Check if this object ID already exists in our pipeline tracking but was just updated
+                # or if it's completely new to the pipeline
+                if obj_id not in self.tracked_objects:
+                    # Brand new object - get info from tracker
+                    tracker_obj_data = self.tracker.tracked_objects[obj_id]
+                    
+                    # Create a new entry in our pipeline's tracking
+                    embedding = tracker_obj_data["embedding"]
+                    
+                    # Initialize with empty data structures that will be populated
+                    self.tracked_objects[obj_id] = {
+                        "id": obj_id,
+                        "class": tracker_obj_data["class"],
+                        "first_detected": frame_idx,  # Mark as detected in current frame
+                        "boxes": [box],  # Start with current box
+                        "embeddings": [embedding.copy() if isinstance(embedding, np.ndarray) else embedding],
+                        "masks": [],  # Will be filled below
+                        "last_seen": frame_idx,
+                        "confidence": [0.0]  # We don't have the original confidence, use placeholder
+                    }
+                    
+                    # Add to list of new objects
+                    new_objects_in_this_frame.append(obj_id)
+                    print(f"Created new pipeline-tracked object {obj_id} at frame {frame_idx}")
+            
             # Process each tracked object - use propagated masks if available
             # First, find objects that were updated in this frame
             tracked_in_this_frame = []
@@ -226,8 +255,13 @@ class ObjectTrackingPipeline:
 
             for obj_id in tracked_in_this_frame:
                 obj_data = self.tracked_objects[obj_id]
+                
+                # Check if this is a new object by checking if it's in our new objects list
+                # or by checking the first_detected field matches the current frame
+                is_new_object = (obj_id in new_objects_in_this_frame) or (obj_data["first_detected"] == frame_idx)
+                
                 # If this is a new object, we need to initialize it in SAM2
-                if obj_data["first_detected"] == frame_idx:
+                if is_new_object:
                     box = obj_data["boxes"][-1]
                     print(f"Adding new object {obj_id} at frame {frame_idx}")
                     mask_logits = self.sam_wrapper.add_box(frame_idx=frame_idx, obj_id=obj_id, box=box)
@@ -256,6 +290,23 @@ class ObjectTrackingPipeline:
                 
                 # Update results
                 results["object_tracks"][obj_id] = obj_data
+            
+            # Run mask propagation if we found new objects in this frame
+            if new_objects_in_this_frame:
+                print(f"Found {len(new_objects_in_this_frame)} new objects in frame {frame_idx}, running propagation...")
+                # Propagate only the new objects
+                segments = self.sam_wrapper.propagate_masks(objects_to_track=new_objects_in_this_frame)
+                
+                # Update the propagation results with the new segments
+                for f_idx, frame_segments in segments.items():
+                    if f_idx not in self.propagation_results:
+                        self.propagation_results[f_idx] = {}
+                    
+                    # Add new object segments to existing propagation results
+                    for obj_id, mask in frame_segments.items():
+                        self.propagation_results[f_idx][obj_id] = mask
+                
+                print(f"Propagated masks for {len(new_objects_in_this_frame)} new objects")
             
             # Visualize this frame
             frame_vis = self._visualize_frame(

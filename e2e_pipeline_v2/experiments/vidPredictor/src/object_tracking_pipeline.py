@@ -387,6 +387,9 @@ class ObjectTrackingPipeline:
         # Save per-object visualizations (each object in its own folder)
         self.save_per_object_visualizations(frames_dir)
         
+        # Save first detection frames (each object with its initial detection box)
+        self.save_first_detections(frames_dir)
+        
         # Save final results
         with open(self.output_dir / "tracking_results.json", "w") as f:
             # Convert numpy arrays and tensors to lists
@@ -481,6 +484,65 @@ class ObjectTrackingPipeline:
             return data
         else:
             return str(data)
+
+    def save_first_detections(self, frames_dir):
+        """Save the first frame each object appears in with its detection box
+        
+        Creates a folder for each object containing only the first frame it was detected in,
+        with the detection box drawn (without segmentation mask).
+        """
+        print("Saving first detection frames for each object...")
+        
+        # Create base directory for first detections
+        first_detections_dir = self.output_dir / "first_detections"
+        first_detections_dir.mkdir(exist_ok=True, parents=True)
+        
+        # Get frame paths
+        frames_path = Path(frames_dir)
+        frame_files = sorted([f for f in frames_path.glob("*.jpg") or frames_path.glob("*.png")])
+        
+        # For each object
+        for obj_id, obj_data in self.tracked_objects.items():
+            # Create directory for this object
+            obj_dir = first_detections_dir / f"object_{obj_id}_{obj_data['class']}"
+            obj_dir.mkdir(exist_ok=True)
+            
+            # Get first frame index and box
+            first_frame_idx = obj_data["first_detected"]
+            first_box = obj_data["boxes"][0]
+            
+            # Ensure the frame exists
+            if first_frame_idx < len(frame_files):
+                # Load the first frame
+                frame_path = frame_files[first_frame_idx]
+                frame = np.array(Image.open(frame_path).convert("RGB"))
+                
+                # Create visualization with just the detection box
+                vis_frame = frame.copy()
+                
+                # Get a color for this object (consistent with pipeline visualization)
+                cmap = plt.cm.get_cmap("tab10")
+                color = cmap(obj_id % 10)[:3]
+                color_rgb = (int(color[0]*255), int(color[1]*255), int(color[2]*255))
+                
+                # Draw bounding box
+                x1, y1, x2, y2 = [int(coord) for coord in first_box]
+                cv2.rectangle(vis_frame, (x1, y1), (x2, y2), color_rgb, 3)  # Thicker line for visibility
+                
+                # Add title with object info
+                title_text = f"Object #{obj_id}: {obj_data['class']} (First detected at frame {first_frame_idx})"
+                cv2.putText(vis_frame, title_text, (10, 30), 
+                           cv2.FONT_HERSHEY_SIMPLEX, 0.8, color_rgb, 2)
+                
+                # Save visualization
+                output_path = obj_dir / f"first_detection_frame_{first_frame_idx:04d}.jpg"
+                cv2.imwrite(str(output_path), cv2.cvtColor(vis_frame, cv2.COLOR_RGB2BGR))
+                
+                print(f"  Saved first detection frame for object #{obj_id} ({obj_data['class']})")
+            else:
+                print(f"  Error: First frame index {first_frame_idx} out of range for object #{obj_id}")
+        
+        print(f"All first detection frames saved to {first_detections_dir}")
 
     def save_per_object_visualizations(self, frames_dir):
         """Save per-object visualizations with masks overlaid on original frames"""

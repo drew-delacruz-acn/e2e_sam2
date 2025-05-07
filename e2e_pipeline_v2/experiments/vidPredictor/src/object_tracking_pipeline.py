@@ -10,6 +10,7 @@ from pathlib import Path
 import json
 from typing import Dict, List, Tuple, Union, Optional
 import time
+import matplotlib.colormaps as colormaps
 
 # Import our components
 from owlv2_detector import OWLv2Detector
@@ -489,14 +490,10 @@ class ObjectTrackingPipeline:
             return str(data)
 
     def save_first_detections(self, frames_dir):
-        """Save the first frame each object appears in with its detection box
-        
-        Creates a folder for each object containing only the first frame it was detected in,
-        with the detection box drawn (without segmentation mask).
-        """
+        """Save the first detection frame for each tracked object with bounding box"""
         print("Saving first detection frames for each object...")
         
-        # Create base directory for first detections
+        # Create directory for first detections
         first_detections_dir = self.output_dir / "first_detections"
         first_detections_dir.mkdir(exist_ok=True, parents=True)
         
@@ -504,46 +501,40 @@ class ObjectTrackingPipeline:
         frames_path = Path(frames_dir)
         frame_files = sorted([f for f in frames_path.glob("*.jpg") or frames_path.glob("*.png")])
         
-        # For each object
+        # For each tracked object
         for obj_id, obj_data in self.tracked_objects.items():
-            # Create directory for this object
-            obj_dir = first_detections_dir / f"object_{obj_id}_{obj_data['class']}"
-            obj_dir.mkdir(exist_ok=True)
-            
-            # Get first frame index and box
+            # Get frame where object was first detected
             first_frame_idx = obj_data["first_detected"]
-            first_box = obj_data["boxes"][0]
             
-            # Ensure the frame exists
-            if first_frame_idx < len(frame_files):
-                # Load the first frame
-                frame_path = frame_files[first_frame_idx]
-                frame = np.array(Image.open(frame_path).convert("RGB"))
-                
-                # Create visualization with just the detection box
-                vis_frame = frame.copy()
-                
-                # Get a color for this object (consistent with pipeline visualization)
-                cmap = plt.cm.get_cmap("tab10")
-                color = cmap(obj_id % 10)[:3]
-                color_rgb = (int(color[0]*255), int(color[1]*255), int(color[2]*255))
-                
-                # Draw bounding box
-                x1, y1, x2, y2 = [int(coord) for coord in first_box]
-                cv2.rectangle(vis_frame, (x1, y1), (x2, y2), color_rgb, 3)  # Thicker line for visibility
-                
-                # Add title with object info
-                title_text = f"Object #{obj_id}: {obj_data['class']} (First detected at frame {first_frame_idx})"
-                cv2.putText(vis_frame, title_text, (10, 30), 
-                           cv2.FONT_HERSHEY_SIMPLEX, 0.8, color_rgb, 2)
-                
-                # Save visualization
-                output_path = obj_dir / f"first_detection_frame_{first_frame_idx:04d}.jpg"
-                cv2.imwrite(str(output_path), cv2.cvtColor(vis_frame, cv2.COLOR_RGB2BGR))
-                
-                print(f"  Saved first detection frame for object #{obj_id} ({obj_data['class']})")
-            else:
-                print(f"  Error: First frame index {first_frame_idx} out of range for object #{obj_id}")
+            # Skip if index is out of range
+            if first_frame_idx >= len(frame_files):
+                print(f"Warning: First frame index {first_frame_idx} for object {obj_id} is out of range")
+                continue
+            
+            # Load the frame
+            frame_path = frame_files[first_frame_idx]
+            frame = np.array(Image.open(frame_path).convert("RGB"))
+            
+            # Draw bounding box
+            detection_box = obj_data["boxes"][0]
+            x1, y1, x2, y2 = map(int, detection_box)
+            
+            # Get color for this object
+            cmap = colormaps["tab10"]
+            color = cmap(obj_id % 10)[:3]
+            color_rgb = (int(color[0]*255), int(color[1]*255), int(color[2]*255))
+            
+            # Draw rectangle
+            cv2.rectangle(frame, (x1, y1), (x2, y2), color_rgb, 2)
+            
+            # Add label
+            label = f"Object #{obj_id}: {obj_data['class']}"
+            cv2.putText(frame, label, (x1, y1-10), cv2.FONT_HERSHEY_SIMPLEX, 0.9, color_rgb, 2)
+            
+            # Save the annotated frame
+            output_path = first_detections_dir / f"object_{obj_id}_{obj_data['class']}_first_detection.jpg"
+            cv2.imwrite(str(output_path), cv2.cvtColor(frame, cv2.COLOR_RGB2BGR))
+            print(f"  Saved first detection frame for object #{obj_id} ({obj_data['class']})")
         
         print(f"All first detection frames saved to {first_detections_dir}")
 
@@ -565,197 +556,175 @@ class ObjectTrackingPipeline:
             obj_dir = object_masks_dir / f"object_{obj_id}_{obj_data['class']}"
             obj_dir.mkdir(exist_ok=True)
             
-            # Get the object's visible frame range
-            first_frame = obj_data["first_detected"]
-            last_frame = obj_data["last_seen"]
-            print(f"Processing object {obj_id} visible from frame {first_frame} to {last_frame}")
+            # Instead of using first_detected and last_seen, gather all frames where this object 
+            # appears in the propagation results
+            object_frames = []
+            for frame_idx, frame_data in sorted(self.propagation_results.items()):
+                if obj_id in frame_data:
+                    object_frames.append(frame_idx)
+            
+            if not object_frames:
+                print(f"Warning: No frames found for object {obj_id} in propagation results")
+                # Fallback to using first_detected and last_seen
+                first_frame = obj_data["first_detected"]
+                last_frame = obj_data["last_seen"]
+                print(f"Using range from first_detected ({first_frame}) to last_seen ({last_frame})")
+                object_frames = list(range(first_frame, last_frame + 1))
+            else:
+                print(f"Processing object {obj_id} visible in {len(object_frames)} frames from propagation results")
             
             # Track how many frames we've saved
             saved_frame_count = 0
             
             # Process each frame where this object should be visible
-            for frame_idx in range(first_frame, last_frame + 1):
+            for frame_idx in object_frames:
                 # Skip if frame is out of range
                 if frame_idx >= len(frame_files):
                     continue
                 
-                # Check if this object has a mask for this frame in the propagation results
-                if frame_idx in self.propagation_results and obj_id in self.propagation_results[frame_idx]:
-                    # Load the original frame
-                    frame_path = frame_files[frame_idx]
-                    frame = np.array(Image.open(frame_path).convert("RGB"))
+                # Skip if frame doesn't have a mask for this object in propagation results
+                if frame_idx not in self.propagation_results or obj_id not in self.propagation_results[frame_idx]:
+                    print(f"  Skipping frame {frame_idx} for object {obj_id} - no mask in propagation results")
+                    continue
+                
+                # Load the original frame
+                frame_path = frame_files[frame_idx]
+                frame = np.array(Image.open(frame_path).convert("RGB"))
+                
+                # Get the mask for this object in this frame
+                mask = self.propagation_results[frame_idx][obj_id]
+                
+                # Skip if mask is None or empty
+                if mask is None or (isinstance(mask, np.ndarray) and mask.size == 0):
+                    print(f"  Skipping frame {frame_idx} for object {obj_id} - empty mask")
+                    continue
+                
+                # Create visualization with just this object's mask
+                vis_frame = frame.copy()
+                
+                # Get a color for this object (consistent with pipeline visualization)
+                cmap = colormaps["tab10"]
+                color = cmap(obj_id % 10)[:3]
+                color_rgb = (int(color[0]*255), int(color[1]*255), int(color[2]*255))
+                
+                # Apply mask overlay
+                if isinstance(mask, np.ndarray):
+                    # Convert to binary mask if needed
+                    if mask.dtype == np.float32 or mask.dtype == np.float64:
+                        mask = mask > 0
                     
-                    # Get the mask for this object in this frame
-                    mask = self.propagation_results[frame_idx][obj_id]
+                    # Ensure mask is 2D
+                    if len(mask.shape) > 2:
+                        mask = np.squeeze(mask)
                     
-                    # Create visualization with just this object's mask
-                    vis_frame = frame.copy()
+                    # Check if mask is valid
+                    if mask.size == 0 or mask.ndim != 2:
+                        print(f"Warning: Invalid mask for object {obj_id} on frame {frame_idx}, shape: {mask.shape}")
+                        continue
                     
-                    # Get a color for this object (consistent with pipeline visualization)
-                    cmap = plt.cm.get_cmap("tab10")
-                    color = cmap(obj_id % 10)[:3]
-                    color_rgb = (int(color[0]*255), int(color[1]*255), int(color[2]*255))
+                    # Convert to bool and ensure shape is compatible
+                    mask_bool = mask.astype(bool)
                     
-                    # Apply mask overlay
-                    if isinstance(mask, np.ndarray):
-                        # Convert to binary mask if needed
-                        if mask.dtype == np.float32 or mask.dtype == np.float64:
-                            mask = mask > 0
+                    try:
+                        # Create a colored mask image
+                        colored_mask = np.zeros_like(vis_frame)
+                        colored_mask[mask_bool] = color_rgb  # Use RGB without alpha
                         
-                        # Ensure mask is 2D
-                        if len(mask.shape) > 2:
-                            mask = np.squeeze(mask)
-                        
-                        # Check if mask is valid
-                        if mask.size == 0 or mask.ndim != 2:
-                            print(f"Warning: Invalid mask for object {obj_id} on frame {frame_idx}, shape: {mask.shape}")
-                            continue
-                        
-                        # Convert to bool and ensure shape is compatible
-                        mask_bool = mask.astype(bool)
-                        
-                        try:
-                            # Create a colored mask image
-                            colored_mask = np.zeros_like(vis_frame)
-                            colored_mask[mask_bool] = color_rgb  # Use RGB without alpha
-                            
-                            # Blend the mask with the original frame
-                            alpha = 0.5
-                            vis_frame = cv2.addWeighted(colored_mask, alpha, vis_frame, 1.0, 0)
-                        except Exception as e:
-                            print(f"Error applying mask for object {obj_id} on frame {frame_idx}: {e}")
-                            continue
-                    
-                    # Add title with object info
-                    title_text = f"Object #{obj_id}: {obj_data['class']}"
-                    cv2.putText(vis_frame, title_text, (10, 30), 
-                               cv2.FONT_HERSHEY_SIMPLEX, 0.8, color_rgb, 2)
-                    
-                    # Save visualization
-                    output_path = obj_dir / f"frame_{frame_idx:04d}.jpg"
-                    cv2.imwrite(str(output_path), cv2.cvtColor(vis_frame, cv2.COLOR_RGB2BGR))
-                    saved_frame_count += 1
+                        # Blend the mask with the original frame
+                        alpha = 0.5
+                        vis_frame = cv2.addWeighted(colored_mask, alpha, vis_frame, 1.0, 0)
+                    except Exception as e:
+                        print(f"Error applying mask for object {obj_id} on frame {frame_idx}: {e}")
+                        continue
+                
+                # Add title with object info
+                title_text = f"Object #{obj_id}: {obj_data['class']}"
+                cv2.putText(vis_frame, title_text, (10, 30), 
+                           cv2.FONT_HERSHEY_SIMPLEX, 0.8, color_rgb, 2)
+                
+                # Save visualization
+                output_path = obj_dir / f"frame_{frame_idx:04d}.jpg"
+                cv2.imwrite(str(output_path), cv2.cvtColor(vis_frame, cv2.COLOR_RGB2BGR))
+                saved_frame_count += 1
             
             print(f"  Saved {saved_frame_count} visualizations for object #{obj_id} ({obj_data['class']})")
         
         print(f"All per-object mask visualizations saved to {object_masks_dir}")
 
-    def save_object_frame_mapping(self, output_path=None):
-        """Create and save a mapping of each object ID to the exact frames it appears in.
+    def save_object_frame_mapping(self):
+        """Save a mapping of object IDs to the frames they appear in."""
+        print("Creating object-to-frame mapping...")
         
-        Args:
-            output_path: Optional specific path for the JSON file. If None, will use output_dir.
+        mapping = {}
         
-        Returns:
-            A dictionary mapping object IDs to their frame appearances
-        """
-        object_frames = {}
-        
-        # Initialize with empty lists for each object
-        for obj_id in self.tracked_objects.keys():
-            object_frames[obj_id] = {
-                "class": self.tracked_objects[obj_id]["class"],
-                "frames": []
+        # For each object
+        for obj_id, obj_data in self.tracked_objects.items():
+            # Find all frames where this object has a mask in the propagation results
+            frame_indices = []
+            for frame_idx, frame_data in sorted(self.propagation_results.items()):
+                if obj_id in frame_data:
+                    frame_indices.append(frame_idx)
+            
+            # Store in the mapping
+            mapping[str(obj_id)] = {
+                "class": obj_data["class"],
+                "first_detected": obj_data["first_detected"],
+                "last_seen": obj_data["last_seen"],
+                "frames": frame_indices
             }
         
-        # Go through propagation_results and collect frames for each object
-        for frame_idx, frame_data in sorted(self.propagation_results.items()):
-            for obj_id in frame_data.keys():
-                if obj_id in object_frames:
-                    object_frames[obj_id]["frames"].append(frame_idx)
+        # Write the mapping to a JSON file
+        mapping_path = self.output_dir / "object_frame_mapping.json"
+        with open(mapping_path, 'w') as f:
+            json.dump(mapping, f, indent=2)
         
-        # For verification, compare frame range with frame list
-        for obj_id, obj_data in self.tracked_objects.items():
-            # Expected range based on first_detected and last_seen
-            first_frame = obj_data["first_detected"]
-            last_frame = obj_data["last_seen"]
+        # Verify consistency with saved mask images
+        print("Verifying consistency with saved mask images...")
+        consistent = True
+        
+        for obj_id, obj_data in mapping.items():
+            obj_mask_dir = self.output_dir / "object_masks" / f"object_{obj_id}_{obj_data['class']}"
             
-            # Actual frames from propagation results
-            if obj_id in object_frames:
-                actual_frames = set(object_frames[obj_id]["frames"])
-                
-                # Find any frames in range without masks
-                missing_frames = []
-                for frame_idx in range(first_frame, last_frame + 1):
-                    if frame_idx not in actual_frames:
-                        # Verify if object actually has a mask in this frame
-                        has_mask_in_propagation = (
-                            frame_idx in self.propagation_results and 
-                            obj_id in self.propagation_results[frame_idx]
-                        )
-                        
-                        if not has_mask_in_propagation:
-                            missing_frames.append(frame_idx)
-                
-                if missing_frames:
-                    print(f"Warning: Object {obj_id} missing masks for frames {missing_frames}")
-        
-        # Convert to a list format if preferred
-        object_list = []
-        for obj_id, obj_data in object_frames.items():
-            # Sort frames to ensure they're in order
-            obj_data["frames"].sort()
+            if not obj_mask_dir.exists():
+                print(f"Warning: No mask directory for object {obj_id}")
+                consistent = False
+                continue
             
-            object_list.append({
-                "id": obj_id,
-                "class": obj_data["class"],
-                "frames": obj_data["frames"],
-                "frame_count": len(obj_data["frames"]),
-                "first_frame": obj_data["frames"][0] if obj_data["frames"] else None,
-                "last_frame": obj_data["frames"][-1] if obj_data["frames"] else None,
-                "expected_first_frame": self.tracked_objects[obj_id]["first_detected"],
-                "expected_last_frame": self.tracked_objects[obj_id]["last_seen"]
-            })
+            # Check for each frame
+            missing_frame_files = []
+            extra_frame_files = []
+            
+            # Check for frames in mapping but missing image files
+            for frame_idx in obj_data["frames"]:
+                expected_file = obj_mask_dir / f"frame_{frame_idx:04d}.jpg"
+                if not expected_file.exists():
+                    missing_frame_files.append(frame_idx)
+            
+            # Check for image files not in mapping
+            existing_files = list(obj_mask_dir.glob("frame_*.jpg"))
+            for file_path in existing_files:
+                # Extract frame number from filename
+                frame_str = file_path.stem.split("_")[1]
+                frame_idx = int(frame_str)
+                
+                if frame_idx not in obj_data["frames"]:
+                    extra_frame_files.append(frame_idx)
+            
+            if missing_frame_files:
+                print(f"Warning: Object {obj_id} has frames in mapping but no image files: {missing_frame_files}")
+                consistent = False
+            
+            if extra_frame_files:
+                print(f"Warning: Object {obj_id} has image files but frames not in mapping: {extra_frame_files}")
+                consistent = False
         
-        # Create the final structure
-        result = {
-            "object_frame_mapping": object_frames,
-            "object_list": object_list,
-            "total_objects": len(object_frames),
-            "total_frames": len(self.propagation_results)
-        }
+        if consistent:
+            print("Verification successful: All objects' masks are consistent with the mapping")
+        else:
+            print("Warning: Inconsistencies found between object mapping and mask images")
         
-        # Verify if the mapping matches actual saved images
-        object_masks_dir = self.output_dir / "object_masks"
-        if object_masks_dir.exists():
-            print("Verifying consistency with saved mask images...")
-            for obj_id in object_frames:
-                obj_dir = object_masks_dir / f"object_{obj_id}_{object_frames[obj_id]['class']}"
-                if obj_dir.exists():
-                    # Get list of saved frame images
-                    saved_frames = []
-                    for file_path in obj_dir.glob("frame_*.jpg"):
-                        try:
-                            # Extract frame number from filename
-                            frame_num = int(file_path.stem.split("_")[1])
-                            saved_frames.append(frame_num)
-                        except (IndexError, ValueError):
-                            continue
-                    
-                    # Compare with mapping
-                    saved_frames_set = set(saved_frames)
-                    mapped_frames_set = set(object_frames[obj_id]["frames"])
-                    
-                    if saved_frames_set != mapped_frames_set:
-                        missing_in_files = mapped_frames_set - saved_frames_set
-                        missing_in_mapping = saved_frames_set - mapped_frames_set
-                        
-                        if missing_in_files:
-                            print(f"Warning: Object {obj_id} has frames in mapping but no image files: {sorted(missing_in_files)}")
-                        if missing_in_mapping:
-                            print(f"Warning: Object {obj_id} has image files but no frames in mapping: {sorted(missing_in_mapping)}")
-                else:
-                    print(f"Warning: Object {obj_id} has no saved mask directory at {obj_dir}")
-        
-        # Save the result
-        if output_path is None:
-            output_path = self.output_dir / "object_frame_mapping.json"
-        
-        with open(output_path, "w") as f:
-            json.dump(result, f, indent=2)
-        
-        print(f"Saved object-to-frame mapping to {output_path}")
-        return result
+        print(f"Saved object-to-frame mapping to {mapping_path}")
+        return mapping_path
 
     def _detect_and_track_all_objects(self, frames_dir, frame_files, text_queries, results):
         """Detect and track all objects without running SAM2"""
@@ -992,172 +961,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
-#     python e2e_pipeline_v2/experiments/vidPredictor/src/object_tracking_pipeline.py   --frames-dir "/home/ubuntu/code/drew/test_data/frames/Scenes 001-020__220D-2-_20230815190723523/subset"   --text-queries "goat"   --output-dir ./tracking_results   --sam2-checkpoint checkpoints/sam2.1_hiera_large.pt   --sam2-config configs/sam2.1/sam2.1_hiera_l.yaml  --confidence 0.5 --separate-objects
-# Using device: cuda
-# OWLv2 using device: cuda
-# SAM2 using device: cuda
-# /home/ubuntu/code/drew/e2e_sam2/venv/lib/python3.12/site-packages/torchvision/models/_utils.py:208: UserWarning: The parameter 'pretrained' is deprecated since 0.13 and may be removed in the future, please use 'weights' instead.
-#   warnings.warn(
-# /home/ubuntu/code/drew/e2e_sam2/venv/lib/python3.12/site-packages/torchvision/models/_utils.py:223: UserWarning: Arguments other than a weight enum or `None` for 'weights' are deprecated since 0.13 and may be removed in the future. The current behavior is equivalent to passing `weights=ResNet50_Weights.IMAGENET1K_V1`. You can also use `weights=ResNet50_Weights.DEFAULT` to get the most up-to-date weights.
-#   warnings.warn(msg)
-# Processing 13 frames with queries: ['goat']
-# Phase 1: Detecting and tracking objects...
-# /home/ubuntu/code/drew/e2e_sam2/venv/lib/python3.12/site-packages/transformers/models/owlv2/processing_owlv2.py:213: FutureWarning: `post_process_object_detection` method is deprecated for OwlVitProcessor and will be removed in v5. Use `post_process_grounded_object_detection` instead.
-#   warnings.warn(
-# -----Initializing new objects-----
-# detections: []
-# Detected goat with confidence 0.551 at [292.1, 145.3, 658.3, 483.1]
-# -----Initializing new objects-----
-# detections: [{'box': [292.1224670410156, 145.3485870361328, 658.2644653320312, 483.1181640625], 'score': 0.5508526563644409, 'text': 'goat'}]
-# -----Initializing [{'box': [292.1224670410156, 145.3485870361328, 658.2644653320312, 483.1181640625], 'score': 0.5508526563644409, 'text': 'goat'}]-----
-# Initialized object 1 (goat)
-# Created new object 1 (goat) at frame 1
-# Detected goat with confidence 0.588 at [313.3, 95.5, 611.6, 482.3]
-# Updated object 1 (goat) with score 0.76 (IoU: 0.73, Emb: 0.80)
-# /home/ubuntu/code/drew/e2e_sam2/venv/lib/python3.12/site-packages/transformers/models/owlv2/processing_owlv2.py:213: FutureWarning: `post_process_object_detection` method is deprecated for OwlVitProcessor and will be removed in v5. Use `post_process_grounded_object_detection` instead.
-#   warnings.warn(
-# Detected goat with confidence 0.507 at [6.2, 69.2, 773.3, 474.5]
-# Updated object 1 (goat) with score 0.60 (IoU: 0.36, Emb: 0.85)
-# /home/ubuntu/code/drew/e2e_sam2/venv/lib/python3.12/site-packages/transformers/models/owlv2/processing_owlv2.py:213: FutureWarning: `post_process_object_detection` method is deprecated for OwlVitProcessor and will be removed in v5. Use `post_process_grounded_object_detection` instead.
-#   warnings.warn(
-# Detected goat with confidence 0.646 at [223.9, 146.1, 398.5, 480.4]
-# Detected goat with confidence 0.572 at [313.8, 133.9, 619.9, 480.0]
-# Detected goat with confidence 0.599 at [445.3, 131.2, 793.5, 481.9]
-# Detected goat with confidence 0.536 at [448.4, 135.3, 952.0, 486.6]
-# Updated object 1 (goat) with score 0.58 (IoU: 0.33, Emb: 0.82)
-# Created new object 2 (goat)
-# Created new object 3 (goat)
-# Created new object 4 (goat)
-# Created new object 2 (goat) at frame 4
-# Created new object 3 (goat) at frame 4
-# Created new object 4 (goat) at frame 4
-# /home/ubuntu/code/drew/e2e_sam2/venv/lib/python3.12/site-packages/transformers/models/owlv2/processing_owlv2.py:213: FutureWarning: `post_process_object_detection` method is deprecated for OwlVitProcessor and will be removed in v5. Use `post_process_grounded_object_detection` instead.
-#   warnings.warn(
-# Detected goat with confidence 0.701 at [84.1, 170.8, 405.1, 414.4]
-# Updated object 2 (goat) with score 0.63 (IoU: 0.45, Emb: 0.80)
-# /home/ubuntu/code/drew/e2e_sam2/venv/lib/python3.12/site-packages/transformers/models/owlv2/processing_owlv2.py:213: FutureWarning: `post_process_object_detection` method is deprecated for OwlVitProcessor and will be removed in v5. Use `post_process_grounded_object_detection` instead.
-#   warnings.warn(
-# Detected goat with confidence 0.676 at [119.9, 168.8, 436.5, 403.1]
-# Updated object 2 (goat) with score 0.82 (IoU: 0.77, Emb: 0.87)
-# /home/ubuntu/code/drew/e2e_sam2/venv/lib/python3.12/site-packages/transformers/models/owlv2/processing_owlv2.py:213: FutureWarning: `post_process_object_detection` method is deprecated for OwlVitProcessor and will be removed in v5. Use `post_process_grounded_object_detection` instead.
-#   warnings.warn(
-# Detected goat with confidence 0.670 at [122.8, 162.9, 402.2, 397.2]
-# Updated object 2 (goat) with score 0.87 (IoU: 0.84, Emb: 0.90)
-# /home/ubuntu/code/drew/e2e_sam2/venv/lib/python3.12/site-packages/transformers/models/owlv2/processing_owlv2.py:213: FutureWarning: `post_process_object_detection` method is deprecated for OwlVitProcessor and will be removed in v5. Use `post_process_grounded_object_detection` instead.
-#   warnings.warn(
-# Detected goat with confidence 0.549 at [127.9, 158.2, 394.6, 390.9]
-# Updated object 2 (goat) with score 0.92 (IoU: 0.91, Emb: 0.93)
-# /home/ubuntu/code/drew/e2e_sam2/venv/lib/python3.12/site-packages/transformers/models/owlv2/processing_owlv2.py:213: FutureWarning: `post_process_object_detection` method is deprecated for OwlVitProcessor and will be removed in v5. Use `post_process_grounded_object_detection` instead.
-#   warnings.warn(
-# Detected goat with confidence 0.665 at [136.4, 149.4, 375.7, 391.0]
-# Updated object 2 (goat) with score 0.90 (IoU: 0.87, Emb: 0.93)
-# /home/ubuntu/code/drew/e2e_sam2/venv/lib/python3.12/site-packages/transformers/models/owlv2/processing_owlv2.py:213: FutureWarning: `post_process_object_detection` method is deprecated for OwlVitProcessor and will be removed in v5. Use `post_process_grounded_object_detection` instead.
-#   warnings.warn(
-# Found 4 unique objects to process with SAM2
-
-# ==== Processing object 1 (goat) separately ====
-# Resetting SAM2 state for object 1...
-# frame loading (JPEG): 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 13/13 [00:00<00:00, 36.04it/s]
-# Set video from directory: /home/ubuntu/code/drew/test_data/frames/Scenes 001-020__220D-2-_20230815190723523/subset
-# Adding box for object 1 at frame 1
-# /home/ubuntu/code/drew/sam2/sam2/sam2_video_predictor.py:786: UserWarning: cannot import name '_C' from 'sam2' (/home/ubuntu/code/drew/sam2/sam2/__init__.py)
-
-# Skipping the post-processing step due to the error above. You can still use SAM 2 and it's OK to ignore the error above, although some post-processing functionality may be limited (which doesn't affect the results in most cases; see https://github.com/facebookresearch/sam2/blob/main/INSTALL.md).
-#   pred_masks_gpu = fill_holes_in_mask_scores(
-# Running propagation for object 1...
-# propagate in video:   0%|                                                                                                                                    | 0/12 [00:00<?, ?it/s]Processed frame 1, found 1 objects
-# Processed frame 2, found 1 objects
-# propagate in video:  17%|████████████████████▋                                                                                                       | 2/12 [00:00<00:03,  3.07it/s]Processed frame 3, found 1 objects
-# propagate in video:  25%|███████████████████████████████                                                                                             | 3/12 [00:01<00:04,  2.10it/s]Processed frame 4, found 1 objects
-# propagate in video:  33%|█████████████████████████████████████████▎                                                                                  | 4/12 [00:02<00:04,  1.78it/s]Processed frame 5, found 1 objects
-# propagate in video:  42%|███████████████████████████████████████████████████▋                                                                        | 5/12 [00:02<00:04,  1.60it/s]Processed frame 6, found 1 objects
-# propagate in video:  50%|██████████████████████████████████████████████████████████████                                                              | 6/12 [00:03<00:04,  1.49it/s]Processed frame 7, found 1 objects
-# propagate in video:  58%|████████████████████████████████████████████████████████████████████████▎                                                   | 7/12 [00:04<00:03,  1.41it/s]Processed frame 8, found 1 objects
-# propagate in video:  67%|██████████████████████████████████████████████████████████████████████████████████▋                                         | 8/12 [00:05<00:02,  1.34it/s]Processed frame 9, found 1 objects
-# propagate in video:  75%|█████████████████████████████████████████████████████████████████████████████████████████████                               | 9/12 [00:05<00:02,  1.30it/s]Processed frame 10, found 1 objects
-# propagate in video:  83%|██████████████████████████████████████████████████████████████████████████████████████████████████████▌                    | 10/12 [00:06<00:01,  1.27it/s]Processed frame 11, found 1 objects
-# propagate in video:  92%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████▊          | 11/12 [00:07<00:00,  1.25it/s]Processed frame 12, found 1 objects
-# propagate in video: 100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 12/12 [00:08<00:00,  1.42it/s]
-# Successfully propagated masks for object 1
-
-# ==== Processing object 2 (goat) separately ====
-# Resetting SAM2 state for object 2...
-# frame loading (JPEG): 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 13/13 [00:00<00:00, 37.80it/s]
-# Set video from directory: /home/ubuntu/code/drew/test_data/frames/Scenes 001-020__220D-2-_20230815190723523/subset
-# Adding box for object 2 at frame 4
-# Running propagation for object 2...
-# propagate in video:   0%|                                                                                                                                     | 0/9 [00:00<?, ?it/s]Processed frame 4, found 1 objects
-# Processed frame 5, found 1 objects
-# propagate in video:  22%|███████████████████████████▊                                                                                                 | 2/9 [00:00<00:02,  3.03it/s]Processed frame 6, found 1 objects
-# propagate in video:  33%|█████████████████████████████████████████▋                                                                                   | 3/9 [00:01<00:02,  2.08it/s]Processed frame 7, found 1 objects
-# propagate in video:  44%|███████████████████████████████████████████████████████▌                                                                     | 4/9 [00:02<00:02,  1.76it/s]Processed frame 8, found 1 objects
-# propagate in video:  56%|█████████████████████████████████████████████████████████████████████▍                                                       | 5/9 [00:02<00:02,  1.59it/s]Processed frame 9, found 1 objects
-# propagate in video:  67%|███████████████████████████████████████████████████████████████████████████████████▎                                         | 6/9 [00:03<00:02,  1.48it/s]Processed frame 10, found 1 objects
-# propagate in video:  78%|█████████████████████████████████████████████████████████████████████████████████████████████████▏                           | 7/9 [00:04<00:01,  1.40it/s]Processed frame 11, found 1 objects
-# propagate in video:  89%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████              | 8/9 [00:05<00:00,  1.33it/s]Processed frame 12, found 1 objects
-# propagate in video: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 9/9 [00:06<00:00,  1.49it/s]
-# Successfully propagated masks for object 2
-
-# ==== Processing object 3 (goat) separately ====
-# Resetting SAM2 state for object 3...
-# frame loading (JPEG): 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 13/13 [00:00<00:00, 38.65it/s]
-# Set video from directory: /home/ubuntu/code/drew/test_data/frames/Scenes 001-020__220D-2-_20230815190723523/subset
-# Adding box for object 3 at frame 4
-# Running propagation for object 3...
-# propagate in video:   0%|                                                                                                                                     | 0/9 [00:00<?, ?it/s]Processed frame 4, found 1 objects
-# Processed frame 5, found 1 objects
-# propagate in video:  22%|███████████████████████████▊                                                                                                 | 2/9 [00:00<00:02,  3.00it/s]Processed frame 6, found 1 objects
-# propagate in video:  33%|█████████████████████████████████████████▋                                                                                   | 3/9 [00:01<00:02,  2.09it/s]Processed frame 7, found 1 objects
-# propagate in video:  44%|███████████████████████████████████████████████████████▌                                                                     | 4/9 [00:02<00:02,  1.76it/s]Processed frame 8, found 1 objects
-# propagate in video:  56%|█████████████████████████████████████████████████████████████████████▍                                                       | 5/9 [00:02<00:02,  1.58it/s]Processed frame 9, found 1 objects
-# propagate in video:  67%|███████████████████████████████████████████████████████████████████████████████████▎                                         | 6/9 [00:03<00:02,  1.47it/s]Processed frame 10, found 1 objects
-# propagate in video:  78%|█████████████████████████████████████████████████████████████████████████████████████████████████▏                           | 7/9 [00:04<00:01,  1.39it/s]Processed frame 11, found 1 objects
-# propagate in video:  89%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████              | 8/9 [00:05<00:00,  1.33it/s]Processed frame 12, found 1 objects
-# propagate in video: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 9/9 [00:06<00:00,  1.49it/s]
-# Successfully propagated masks for object 3
-
-# ==== Processing object 4 (goat) separately ====
-# Resetting SAM2 state for object 4...
-# frame loading (JPEG): 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 13/13 [00:00<00:00, 37.83it/s]
-# Set video from directory: /home/ubuntu/code/drew/test_data/frames/Scenes 001-020__220D-2-_20230815190723523/subset
-# Adding box for object 4 at frame 4
-# Running propagation for object 4...
-# propagate in video:   0%|                                                                                                                                     | 0/9 [00:00<?, ?it/s]Processed frame 4, found 1 objects
-# Processed frame 5, found 1 objects
-# propagate in video:  22%|███████████████████████████▊                                                                                                 | 2/9 [00:00<00:02,  3.00it/s]Processed frame 6, found 1 objects
-# propagate in video:  33%|█████████████████████████████████████████▋                                                                                   | 3/9 [00:01<00:02,  2.08it/s]Processed frame 7, found 1 objects
-# propagate in video:  44%|███████████████████████████████████████████████████████▌                                                                     | 4/9 [00:02<00:02,  1.75it/s]Processed frame 8, found 1 objects
-# propagate in video:  56%|█████████████████████████████████████████████████████████████████████▍                                                       | 5/9 [00:02<00:02,  1.58it/s]Processed frame 9, found 1 objects
-# propagate in video:  67%|███████████████████████████████████████████████████████████████████████████████████▎                                         | 6/9 [00:03<00:02,  1.47it/s]Processed frame 10, found 1 objects
-# propagate in video:  78%|█████████████████████████████████████████████████████████████████████████████████████████████████▏                           | 7/9 [00:04<00:01,  1.39it/s]Processed frame 11, found 1 objects
-# propagate in video:  89%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████              | 8/9 [00:05<00:00,  1.33it/s]Processed frame 12, found 1 objects
-# propagate in video: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 9/9 [00:06<00:00,  1.48it/s]
-# Successfully propagated masks for object 4
-# Saving per-object segmentation visualizations...
-# Processing object 1 visible from frame 1 to 4
-# /home/ubuntu/code/drew/e2e_sam2/e2e_pipeline_v2/experiments/vidPredictor/src/object_tracking_pipeline.py:595: MatplotlibDeprecationWarning: The get_cmap function was deprecated in Matplotlib 3.7 and will be removed in 3.11. Use ``matplotlib.colormaps[name]`` or ``matplotlib.colormaps.get_cmap()`` or ``pyplot.get_cmap()`` instead.
-#   cmap = plt.cm.get_cmap("tab10")
-#   Saved 4 visualizations for object #1 (goat)
-# Processing object 2 visible from frame 4 to 11
-#   Saved 8 visualizations for object #2 (goat)
-# Processing object 3 visible from frame 4 to 4
-#   Saved 1 visualizations for object #3 (goat)
-# Processing object 4 visible from frame 4 to 4
-#   Saved 1 visualizations for object #4 (goat)
-# All per-object mask visualizations saved to tracking_results/object_masks
-# Saving first detection frames for each object...
-# /home/ubuntu/code/drew/e2e_sam2/e2e_pipeline_v2/experiments/vidPredictor/src/object_tracking_pipeline.py:527: MatplotlibDeprecationWarning: The get_cmap function was deprecated in Matplotlib 3.7 and will be removed in 3.11. Use ``matplotlib.colormaps[name]`` or ``matplotlib.colormaps.get_cmap()`` or ``pyplot.get_cmap()`` instead.
-#   cmap = plt.cm.get_cmap("tab10")
-#   Saved first detection frame for object #1 (goat)
-#   Saved first detection frame for object #2 (goat)
-#   Saved first detection frame for object #3 (goat)
-#   Saved first detection frame for object #4 (goat)
-# All first detection frames saved to tracking_results/first_detections
-# Verifying consistency with saved mask images...
-# Warning: Object 1 has frames in mapping but no image files: [5, 6, 7, 8, 9, 10, 11, 12]
-# Warning: Object 2 has frames in mapping but no image files: [12]
-# Warning: Object 3 has frames in mapping but no image files: [5, 6, 7, 8, 9, 10, 11, 12]
-# Warning: Object 4 has frames in mapping but no image files: [5, 6, 7, 8, 9, 10, 11, 12]
-# Saved object-to-frame mapping to tracking_results/object_frame_mapping.json
-# All results saved to: tracking_results

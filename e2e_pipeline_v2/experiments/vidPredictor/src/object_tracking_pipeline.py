@@ -280,6 +280,9 @@ class ObjectTrackingPipeline:
                 ]
             }
         
+        # Save per-object visualizations (each object in its own folder)
+        self.save_per_object_visualizations(frames_dir)
+        
         # Save final results
         with open(self.output_dir / "tracking_results.json", "w") as f:
             # Convert numpy arrays and tensors to lists
@@ -374,6 +377,86 @@ class ObjectTrackingPipeline:
             return data
         else:
             return str(data)
+
+    def save_per_object_visualizations(self, frames_dir):
+        """Save per-object visualizations with masks overlaid on original frames"""
+        print("Saving per-object segmentation visualizations...")
+        
+        # Create base directory for object masks
+        object_masks_dir = self.output_dir / "object_masks"
+        object_masks_dir.mkdir(exist_ok=True, parents=True)
+        
+        # Get frame paths
+        frames_path = Path(frames_dir)
+        frame_files = sorted([f for f in frames_path.glob("*.jpg") or frames_path.glob("*.png")])
+        
+        # For each object
+        for obj_id, obj_data in self.tracked_objects.items():
+            # Create directory for this object
+            obj_dir = object_masks_dir / f"object_{obj_id}_{obj_data['class']}"
+            obj_dir.mkdir(exist_ok=True)
+            
+            # Process each frame for this object
+            for frame_idx in range(len(frame_files)):
+                # Check if this object has a mask for this frame
+                if frame_idx in self.propagation_results and obj_id in self.propagation_results[frame_idx]:
+                    # Load the original frame
+                    frame_path = frame_files[frame_idx]
+                    frame = np.array(Image.open(frame_path).convert("RGB"))
+                    
+                    # Get the mask for this object in this frame
+                    mask = self.propagation_results[frame_idx][obj_id]
+                    
+                    # Create visualization with just this object's mask
+                    vis_frame = frame.copy()
+                    
+                    # Get a color for this object (consistent with pipeline visualization)
+                    cmap = plt.cm.get_cmap("tab10")
+                    color = cmap(obj_id % 10)[:3]
+                    color_rgb = (int(color[0]*255), int(color[1]*255), int(color[2]*255))
+                    
+                    # Apply mask overlay
+                    if isinstance(mask, np.ndarray):
+                        # Convert to binary mask if needed
+                        if mask.dtype == np.float32 or mask.dtype == np.float64:
+                            mask = mask > 0
+                        
+                        # Ensure mask is 2D
+                        if len(mask.shape) > 2:
+                            mask = np.squeeze(mask)
+                        
+                        # Check if mask is valid
+                        if mask.size == 0 or mask.ndim != 2:
+                            print(f"Warning: Invalid mask for object {obj_id}, shape: {mask.shape}")
+                            continue
+                        
+                        # Convert to bool and ensure shape is compatible
+                        mask_bool = mask.astype(bool)
+                        
+                        try:
+                            # Create a colored mask image
+                            colored_mask = np.zeros_like(vis_frame)
+                            colored_mask[mask_bool] = color_rgb  # Use RGB without alpha
+                            
+                            # Blend the mask with the original frame
+                            alpha = 0.5
+                            vis_frame = cv2.addWeighted(colored_mask, alpha, vis_frame, 1.0, 0)
+                        except Exception as e:
+                            print(f"Error applying mask for object {obj_id} on frame {frame_idx}: {e}")
+                            continue
+                    
+                    # Add title with object info
+                    title_text = f"Object #{obj_id}: {obj_data['class']}"
+                    cv2.putText(vis_frame, title_text, (10, 30), 
+                               cv2.FONT_HERSHEY_SIMPLEX, 0.8, color_rgb, 2)
+                    
+                    # Save visualization
+                    output_path = obj_dir / f"frame_{frame_idx:04d}.jpg"
+                    cv2.imwrite(str(output_path), cv2.cvtColor(vis_frame, cv2.COLOR_RGB2BGR))
+            
+            print(f"  Saved visualizations for object #{obj_id} ({obj_data['class']})")
+        
+        print(f"All per-object mask visualizations saved to {object_masks_dir}")
 
 def main():
     parser = argparse.ArgumentParser(description="Object Tracking Pipeline with OWLv2 and SAM2")

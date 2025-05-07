@@ -38,7 +38,7 @@ class OWLv2Detector:
             threshold: Detection confidence threshold
             
         Returns:
-            List of detection dictionaries with box, score, label, and text
+            Dictionary with boxes, scores, and labels lists
         """
         # Convert numpy array to PIL Image if needed
         if isinstance(image, np.ndarray):
@@ -61,28 +61,32 @@ class OWLv2Detector:
             threshold=threshold
         )
         
-        # Extract and format results
-        detections = []
+        # Prepare results in the format expected by the pipeline
         if len(results[0]["boxes"]) > 0:
             boxes = results[0]["boxes"]
             scores = results[0]["scores"]
             labels = results[0]["labels"]
             
+            # For individual logging and debugging
             for box, score, label in zip(boxes, scores, labels):
                 box_coords = box.tolist()
                 label_idx = label.item()
                 score_val = score.item()
-                
-                detections.append({
-                    "box": box_coords,
-                    "score": score_val,
-                    "label": label_idx,
-                    "text": text_queries[label_idx]
-                })
-                
                 print(f"Detected {text_queries[label_idx]} with confidence {score_val:.3f} at {[round(c, 1) for c in box_coords]}")
-        
-        return detections
+            
+            # Return in the format expected by the pipeline
+            return {
+                "boxes": boxes,
+                "scores": scores,
+                "labels": [text_queries[label.item()] for label in labels]
+            }
+        else:
+            # Return empty results in expected format
+            return {
+                "boxes": [],
+                "scores": [],
+                "labels": []
+            }
     
     def visualize_detections(self, image, detections, output_dir=None, frame_idx=None, show=True):
         """

@@ -289,12 +289,12 @@ class ObjectTrackingPipeline:
                 
             # Get color for this object
             color = colors[i % len(colors)]
-            color = (int(color[0]*255), int(color[1]*255), int(color[2]*255))
+            color_rgb = (int(color[0]*255), int(color[1]*255), int(color[2]*255))
             
             # Draw bounding box
             box = obj_data["boxes"][-1]
             x1, y1, x2, y2 = [int(coord) for coord in box]
-            cv2.rectangle(vis_frame, (x1, y1), (x2, y2), color, 2)
+            cv2.rectangle(vis_frame, (x1, y1), (x2, y2), color_rgb, 2)
             
             # Draw mask overlay
             mask = obj_data["masks"][-1]
@@ -303,23 +303,38 @@ class ObjectTrackingPipeline:
                 if mask.dtype == np.float32 or mask.dtype == np.float64:
                     mask = mask > 0
                 
-                # Create mask overlay
-                mask_overlay = vis_frame.copy()
-                mask_color = (*color, 128)  # Add alpha
+                # Create binary mask (ensure it's 2D)
+                if len(mask.shape) > 2:
+                    mask = np.squeeze(mask)
                 
-                # Apply mask
+                # Check if mask is valid
+                if mask.size == 0 or mask.ndim != 2:
+                    print(f"Warning: Invalid mask for object {obj_id}, shape: {mask.shape}")
+                    continue
+                
+                # Convert to bool and ensure shape is compatible
                 mask_bool = mask.astype(bool)
-                mask_overlay[mask_bool] = mask_color
                 
-                # Blend
-                alpha = 0.5
-                vis_frame = cv2.addWeighted(mask_overlay, alpha, vis_frame, 1-alpha, 0)
+                try:
+                    # Create a colored mask image
+                    colored_mask = np.zeros_like(vis_frame)
+                    colored_mask[mask_bool] = color_rgb  # Use RGB without alpha
+                    
+                    # Blend the mask with the original frame
+                    alpha = 0.5
+                    vis_frame = cv2.addWeighted(colored_mask, alpha, vis_frame, 1.0, 0)
+                except Exception as e:
+                    print(f"Error applying mask for object {obj_id}: {e}")
+                    print(f"Mask shape: {mask.shape}, Mask dtype: {mask.dtype}")
+                    print(f"Vis frame shape: {vis_frame.shape}")
+                    print(f"Colored mask shape: {colored_mask.shape}")
+                    continue
             
             # Draw label
             label = f"{obj_data['class']} #{obj_id}"
             conf = obj_data["confidence"][-1]
             text = f"{label} ({conf:.2f})"
-            cv2.putText(vis_frame, text, (x1, y1-10), cv2.FONT_HERSHEY_SIMPLEX, 0.5, color, 2)
+            cv2.putText(vis_frame, text, (x1, y1-10), cv2.FONT_HERSHEY_SIMPLEX, 0.5, color_rgb, 2)
         
         # Save visualization
         output_path = self.output_dir / f"frame_{frame_idx:04d}.jpg"

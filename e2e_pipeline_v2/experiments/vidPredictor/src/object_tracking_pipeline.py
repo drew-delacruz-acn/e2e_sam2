@@ -294,19 +294,72 @@ class ObjectTrackingPipeline:
             # Run mask propagation if we found new objects in this frame
             if new_objects_in_this_frame:
                 print(f"Found {len(new_objects_in_this_frame)} new objects in frame {frame_idx}, running propagation...")
-                # Propagate only the new objects
-                segments = self.sam_wrapper.propagate_masks(objects_to_track=new_objects_in_this_frame)
-                
-                # Update the propagation results with the new segments
-                for f_idx, frame_segments in segments.items():
-                    if f_idx not in self.propagation_results:
-                        self.propagation_results[f_idx] = {}
+                try:
+                    # First attempt: Try to propagate only the new objects
+                    segments = self.sam_wrapper.propagate_masks(objects_to_track=new_objects_in_this_frame)
                     
-                    # Add new object segments to existing propagation results
-                    for obj_id, mask in frame_segments.items():
-                        self.propagation_results[f_idx][obj_id] = mask
-                
-                print(f"Propagated masks for {len(new_objects_in_this_frame)} new objects")
+                    # Update the propagation results with the new segments
+                    for f_idx, frame_segments in segments.items():
+                        if f_idx not in self.propagation_results:
+                            self.propagation_results[f_idx] = {}
+                        
+                        # Add new object segments to existing propagation results
+                        for obj_id, mask in frame_segments.items():
+                            self.propagation_results[f_idx][obj_id] = mask
+                    
+                    print(f"Propagated masks for {len(new_objects_in_this_frame)} new objects")
+                except Exception as e:
+                    print(f"Error during mask propagation for new objects: {e}")
+                    
+                    # Second attempt: Try resetting SAM2 state and re-adding all objects
+                    print("Attempting to reset SAM2 state and re-add objects...")
+                    try:
+                        # Reset the SAM2 state completely
+                        self.sam_wrapper.reset_state()
+                        
+                        # Re-add all objects in frame order
+                        objects_by_frame = {}
+                        for obj_id, obj_data in self.tracked_objects.items():
+                            frame_first_detected = obj_data["first_detected"]
+                            if frame_first_detected not in objects_by_frame:
+                                objects_by_frame[frame_first_detected] = []
+                            objects_by_frame[frame_first_detected].append((obj_id, obj_data["boxes"][0]))
+                        
+                        # Process each frame in order
+                        for frame_to_process in sorted(objects_by_frame.keys()):
+                            for obj_id, box in objects_by_frame[frame_to_process]:
+                                print(f"Re-adding object {obj_id} at frame {frame_to_process}")
+                                mask = self.sam_wrapper.add_box(frame_idx=frame_to_process, obj_id=obj_id, box=box)
+                                
+                                # Update the object's first mask if needed
+                                if mask is not None and len(self.tracked_objects[obj_id]["masks"]) > 0:
+                                    self.tracked_objects[obj_id]["masks"][0] = mask
+                        
+                        # Run propagation for ALL objects
+                        print("Running propagation for all objects after reset")
+                        all_object_ids = list(self.tracked_objects.keys())
+                        segments = self.sam_wrapper.propagate_masks(objects_to_track=all_object_ids)
+                        
+                        # Replace all propagation results
+                        self.propagation_results = segments
+                        print(f"Successfully propagated all objects after reset")
+                    except Exception as reset_error:
+                        print(f"Error after SAM2 reset: {reset_error}")
+                        print("Using fallback approach: applying initial masks to all frames for new objects")
+                        
+                        # Third attempt (fallback): Use initial masks for all frames
+                        for obj_id in new_objects_in_this_frame:
+                            if obj_id in self.tracked_objects and len(self.tracked_objects[obj_id]["masks"]) > 0:
+                                # Get the initial mask for this object
+                                initial_mask = self.tracked_objects[obj_id]["masks"][0]
+                                
+                                # Apply to all subsequent frames (from current frame to end)
+                                for future_frame_idx in range(frame_idx, len(frame_files)):
+                                    if future_frame_idx not in self.propagation_results:
+                                        self.propagation_results[future_frame_idx] = {}
+                                    self.propagation_results[future_frame_idx][obj_id] = initial_mask
+                                
+                                print(f"Applied initial mask for object {obj_id} to all future frames")
             
             # Visualize this frame
             frame_vis = self._visualize_frame(

@@ -92,6 +92,25 @@ class SAM2VideoWrapper:
         else:
             raise ValueError("Either frames or frames_dir must be provided")
     
+    def reset_state(self, frames_dir=None):
+        """Reset SAM2 state to ensure consistent data types
+        
+        Args:
+            frames_dir: Optional new frames directory to use
+        """
+        # Update frames_dir if provided
+        if frames_dir is not None:
+            self.frames_dir = frames_dir
+            
+        # Ensure we have a frames directory
+        if self.frames_dir is None:
+            raise ValueError("Cannot reset state without frames_dir. Call set_video first or provide frames_dir.")
+            
+        # Reinitialize state completely from scratch
+        print(f"Resetting SAM2 state with frames directory: {self.frames_dir}")
+        self.inference_state = self.predictor.init_state(video_path=self.frames_dir)
+        self.predictor.reset_state(self.inference_state)
+    
     def tensor_to_numpy(self, tensor):
         """Safely convert tensor to numpy array, handling device and gradient issues."""
         if isinstance(tensor, torch.Tensor):

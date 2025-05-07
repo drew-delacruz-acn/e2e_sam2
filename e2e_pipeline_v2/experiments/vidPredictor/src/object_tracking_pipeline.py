@@ -204,16 +204,28 @@ class ObjectTrackingPipeline:
                     "text": detections["labels"][i]
                 })
 
-            tracked_in_frame = self.tracker.update_tracks(
+            print(f"-----Initializing new objects-----")
+            print(f"detections: {tracker_detections}")
+            print(f"-----Initializing {tracker_detections}-----")
+
+            # Get boxes for current frame from tracker
+            current_boxes = self.tracker.update_tracks(
                 frame=frame_np,
                 frame_idx=frame_idx,
                 detections=tracker_detections,
                 embedding_extractor=self.embedding_extractor,
                 output_dir=None
             )
-            
+
             # Process each tracked object - use propagated masks if available
-            for obj_id, obj_data in tracked_in_frame.items():
+            # First, find objects that were updated in this frame
+            tracked_in_this_frame = []
+            for obj_id, obj_data in self.tracked_objects.items():
+                if obj_data["last_seen"] == frame_idx:
+                    tracked_in_this_frame.append(obj_id)
+
+            for obj_id in tracked_in_this_frame:
+                obj_data = self.tracked_objects[obj_id]
                 # If this is a new object, we need to initialize it in SAM2
                 if obj_data["first_detected"] == frame_idx:
                     box = obj_data["boxes"][-1]
@@ -242,8 +254,7 @@ class ObjectTrackingPipeline:
                         print(f"Warning: No propagated mask for object {obj_id} at frame {frame_idx}, using previous mask")
                         obj_data["masks"].append(prev_mask)
                 
-                # Update tracked objects
-                self.tracked_objects[obj_id] = obj_data
+                # Update results
                 results["object_tracks"][obj_id] = obj_data
             
             # Visualize this frame

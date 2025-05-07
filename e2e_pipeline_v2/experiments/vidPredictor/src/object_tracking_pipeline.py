@@ -191,7 +191,7 @@ class ObjectTrackingPipeline:
             detections = self.detector.detect(
                 image=frame,
                 text_queries=text_queries,
-                confidence_threshold=self.confidence_threshold
+                threshold=self.confidence_threshold
             )
             
             # Track objects across frames

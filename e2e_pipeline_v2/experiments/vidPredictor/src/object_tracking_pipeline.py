@@ -514,7 +514,11 @@ class ObjectTrackingPipeline:
             frame_path = frame_files[first_frame_idx]
             frame = np.array(Image.open(frame_path).convert("RGB"))
             
-            # Draw bounding box
+            # Draw bounding box (get the first box from the boxes list)
+            if not obj_data["boxes"]:
+                print(f"Warning: No boxes available for object {obj_id}")
+                continue
+                
             detection_box = obj_data["boxes"][0]
             x1, y1, x2, y2 = map(int, detection_box)
             
@@ -554,28 +558,16 @@ class ObjectTrackingPipeline:
             obj_dir = object_masks_dir / f"object_{obj_id}_{obj_data['class']}"
             obj_dir.mkdir(exist_ok=True)
             
-            # Instead of using first_detected and last_seen, gather all frames where this object 
-            # appears in the propagation results
-            object_frames = []
-            for frame_idx, frame_data in sorted(self.propagation_results.items()):
-                if obj_id in frame_data:
-                    object_frames.append(frame_idx)
-            
-            if not object_frames:
-                print(f"Warning: No frames found for object {obj_id} in propagation results")
-                # Fallback to using first_detected and last_seen
-                first_frame = obj_data["first_detected"]
-                last_frame = obj_data["last_seen"]
-                print(f"Using range from first_detected ({first_frame}) to last_seen ({last_frame})")
-                object_frames = list(range(first_frame, last_frame + 1))
-            else:
-                print(f"Processing object {obj_id} visible in {len(object_frames)} frames from propagation results")
+            # Get the object's visible frame range
+            first_frame = obj_data["first_detected"]
+            last_frame = obj_data["last_seen"]
+            print(f"Processing object {obj_id} visible from frame {first_frame} to {last_frame}")
             
             # Track how many frames we've saved
             saved_frame_count = 0
             
             # Process each frame where this object should be visible
-            for frame_idx in object_frames:
+            for frame_idx in range(first_frame, last_frame + 1):
                 # Skip if frame is out of range
                 if frame_idx >= len(frame_files):
                     continue
@@ -657,18 +649,28 @@ class ObjectTrackingPipeline:
         
         # For each object
         for obj_id, obj_data in self.tracked_objects.items():
-            # Find all frames where this object has a mask in the propagation results
-            frame_indices = []
-            for frame_idx, frame_data in sorted(self.propagation_results.items()):
-                if obj_id in frame_data:
-                    frame_indices.append(frame_idx)
+            # Get the object's visible frame range
+            first_frame = obj_data["first_detected"]
+            last_frame = obj_data["last_seen"]
+            
+            # Find which frames in this range actually have masks in propagation results
+            valid_frames = []
+            for frame_idx in range(first_frame, last_frame + 1):
+                if (frame_idx in self.propagation_results and 
+                    obj_id in self.propagation_results[frame_idx] and
+                    self.propagation_results[frame_idx][obj_id] is not None):
+                    # Check if mask is not empty
+                    mask = self.propagation_results[frame_idx][obj_id]
+                    if isinstance(mask, np.ndarray) and mask.size > 0:
+                        valid_frames.append(frame_idx)
             
             # Store in the mapping
             mapping[str(obj_id)] = {
                 "class": obj_data["class"],
-                "first_detected": obj_data["first_detected"],
-                "last_seen": obj_data["last_seen"],
-                "frames": frame_indices
+                "first_detected": first_frame,
+                "last_seen": last_frame,
+                "valid_frames": valid_frames,
+                "total_valid_frames": len(valid_frames)
             }
         
         # Write the mapping to a JSON file
@@ -693,7 +695,7 @@ class ObjectTrackingPipeline:
             extra_frame_files = []
             
             # Check for frames in mapping but missing image files
-            for frame_idx in obj_data["frames"]:
+            for frame_idx in obj_data["valid_frames"]:
                 expected_file = obj_mask_dir / f"frame_{frame_idx:04d}.jpg"
                 if not expected_file.exists():
                     missing_frame_files.append(frame_idx)
@@ -705,7 +707,7 @@ class ObjectTrackingPipeline:
                 frame_str = file_path.stem.split("_")[1]
                 frame_idx = int(frame_str)
                 
-                if frame_idx not in obj_data["frames"]:
+                if frame_idx not in obj_data["valid_frames"]:
                     extra_frame_files.append(frame_idx)
             
             if missing_frame_files:

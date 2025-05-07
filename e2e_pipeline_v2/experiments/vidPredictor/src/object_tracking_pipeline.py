@@ -624,6 +624,202 @@ class ObjectTrackingPipeline:
         
         print(f"All per-object mask visualizations saved to {object_masks_dir}")
 
+    def _detect_and_track_all_objects(self, frames_dir, frame_files, text_queries, results):
+        """Detect and track all objects without running SAM2"""
+        print("Phase 1: Detecting and tracking objects...")
+        
+        # Reset tracker and tracked objects
+        self.tracker = ObjectTracker()
+        all_objects = {}
+        
+        # Process all frames
+        for frame_idx, frame_path in enumerate(frame_files):
+            # Load frame
+            frame = Image.open(frame_path).convert("RGB")
+            frame_np = np.array(frame)
+            
+            # Detect objects
+            detections = self.detector.detect(
+                image=frame,
+                text_queries=text_queries,
+                threshold=self.confidence_threshold
+            )
+            
+            # Convert to tracker format
+            tracker_detections = []
+            for i in range(len(detections["boxes"])):
+                if detections["scores"][i] >= self.confidence_threshold:
+                    tracker_detections.append({
+                        "box": detections["boxes"][i].tolist() if isinstance(detections["boxes"][i], torch.Tensor) else detections["boxes"][i],
+                        "score": detections["scores"][i].item() if isinstance(detections["scores"][i], torch.Tensor) else detections["scores"][i],
+                        "text": detections["labels"][i]
+                    })
+            
+            # Update tracker
+            current_boxes = self.tracker.update_tracks(
+                frame=frame_np,
+                frame_idx=frame_idx,
+                detections=tracker_detections,
+                embedding_extractor=self.embedding_extractor,
+                output_dir=None
+            )
+            
+            # Store frame detections
+            results["frame_results"][frame_idx]["detections"] = [
+                {"box": box.tolist() if isinstance(box, torch.Tensor) else box, 
+                 "label": label, 
+                 "confidence": conf}
+                for box, label, conf in zip(detections["boxes"], detections["labels"], detections["scores"])
+                if conf >= self.confidence_threshold
+            ]
+            
+            # Update tracked objects
+            for obj_id, box in current_boxes.items():
+                tracker_obj = self.tracker.tracked_objects[obj_id]
+                
+                # Get embedding
+                x1, y1, x2, y2 = [int(c) for c in box]
+                crop = frame_np[y1:y2, x1:x2]
+                embedding = self.embedding_extractor.extract(crop)
+                
+                # Check if object exists in our all_objects dict
+                if obj_id not in all_objects:
+                    # New object
+                    all_objects[obj_id] = {
+                        "id": obj_id,
+                        "class": tracker_obj["class"],
+                        "first_detected": frame_idx,
+                        "boxes": [box],
+                        "embeddings": [embedding.cpu().numpy() if isinstance(embedding, torch.Tensor) else embedding],
+                        "masks": [],  # Will be filled during SAM2 phase
+                        "last_seen": frame_idx,
+                        "confidence": [0.0]  # Placeholder
+                    }
+                    
+                    print(f"Created new object {obj_id} ({tracker_obj['class']}) at frame {frame_idx}")
+                else:
+                    # Update existing object
+                    all_objects[obj_id]["boxes"].append(box)
+                    all_objects[obj_id]["embeddings"].append(
+                        embedding.cpu().numpy() if isinstance(embedding, torch.Tensor) else embedding
+                    )
+                    all_objects[obj_id]["last_seen"] = frame_idx
+                    all_objects[obj_id]["confidence"].append(0.0)  # Placeholder
+                
+                # Add to frame results
+                results["frame_results"][frame_idx]["tracked_objects"].append(obj_id)
+        
+        print(f"Found {len(all_objects)} unique objects to process with SAM2")
+        return all_objects
+
+    def process_video_separate_objects(self, frames_dir: str, text_queries: List[str]):
+        """Process video with separate SAM2 initialization for each object"""
+        # Get all frames sorted
+        frames_path = Path(frames_dir)
+        frame_files = sorted([f for f in frames_path.glob("*.jpg") or frames_path.glob("*.png")])
+        if not frame_files:
+            raise ValueError(f"No frames found in {frames_dir}")
+        
+        print(f"Processing {len(frame_files)} frames with queries: {text_queries}")
+        
+        # Results storage
+        results = {
+            "object_tracks": {},
+            "frame_results": {i: {"detections": [], "tracked_objects": []} for i in range(len(frame_files))},
+            "metadata": {
+                "queries": text_queries,
+                "frame_count": len(frame_files),
+                "timestamp": time.strftime("%Y-%m-%d %H:%M:%S")
+            }
+        }
+        
+        # First detect and track all objects without SAM2
+        all_objects = self._detect_and_track_all_objects(frames_dir, frame_files, text_queries, results)
+        
+        # Now process each object separately with SAM2
+        self.tracked_objects = {}  # Clear existing tracked objects
+        self.propagation_results = {}  # Will store all propagation results
+        
+        for obj_id, obj_data in all_objects.items():
+            print(f"\n==== Processing object {obj_id} ({obj_data['class']}) separately ====")
+            
+            # Reset SAM2 completely for this object
+            print(f"Resetting SAM2 state for object {obj_id}...")
+            self.sam_wrapper.set_video(frames_dir=frames_dir)
+            
+            # Get the first frame this object appears in
+            first_frame_idx = obj_data["first_detected"]
+            first_box = obj_data["boxes"][0]
+            
+            # Add box to SAM2
+            print(f"Adding box for object {obj_id} at frame {first_frame_idx}")
+            mask_logits = self.sam_wrapper.add_box(frame_idx=first_frame_idx, obj_id=obj_id, box=first_box)
+            
+            if mask_logits is None:
+                print(f"Failed to generate mask for object {obj_id}")
+                continue
+                
+            # Update mask in the object data
+            obj_data["masks"] = [mask_logits.cpu().numpy() if isinstance(mask_logits, torch.Tensor) else mask_logits]
+            
+            # Run propagation just for this object
+            try:
+                print(f"Running propagation for object {obj_id}...")
+                segments = self.sam_wrapper.propagate_masks(objects_to_track=[obj_id])
+                
+                # Store the propagation results
+                for f_idx, frame_segments in segments.items():
+                    if f_idx not in self.propagation_results:
+                        self.propagation_results[f_idx] = {}
+                    
+                    if obj_id in frame_segments:
+                        self.propagation_results[f_idx][obj_id] = frame_segments[obj_id]
+                
+                print(f"Successfully propagated masks for object {obj_id}")
+            except Exception as e:
+                print(f"Error during propagation for object {obj_id}: {e}")
+                print("Using fallback approach: copying initial mask to other frames")
+                
+                # Use the initial mask for all frames where this object is present
+                last_frame = obj_data["last_seen"]
+                for f_idx in range(first_frame_idx, last_frame + 1):
+                    if f_idx not in self.propagation_results:
+                        self.propagation_results[f_idx] = {}
+                    self.propagation_results[f_idx][obj_id] = obj_data["masks"][0]
+            
+            # Store updated object data
+            self.tracked_objects[obj_id] = obj_data
+            results["object_tracks"][obj_id] = obj_data
+        
+        # Generate visualizations for all frames
+        for frame_idx in range(len(frame_files)):
+            # Get visible objects for this frame
+            visible_objects = {
+                obj_id: data for obj_id, data in self.tracked_objects.items()
+                if data["first_detected"] <= frame_idx <= data["last_seen"]
+            }
+            
+            # Load the frame
+            frame_path = frame_files[frame_idx]
+            frame = np.array(Image.open(frame_path).convert("RGB"))
+            
+            # Visualize
+            self._visualize_frame(frame=frame, frame_idx=frame_idx, objects=visible_objects)
+        
+        # Save per-object visualizations
+        self.save_per_object_visualizations(frames_dir)
+        
+        # Save first detection frames
+        self.save_first_detections(frames_dir)
+        
+        # Save final results
+        with open(self.output_dir / "tracking_results.json", "w") as f:
+            json_results = self._prepare_for_json(results)
+            json.dump(json_results, f, indent=2)
+        
+        print(f"All results saved to: {self.output_dir}")
+        return results
+
 def main():
     parser = argparse.ArgumentParser(description="Object Tracking Pipeline with OWLv2 and SAM2")
     parser.add_argument("--frames-dir", required=True, help="Directory containing video frames")
@@ -633,6 +829,7 @@ def main():
     parser.add_argument("--sam2-checkpoint", required=True, help="Path to SAM2 checkpoint")
     parser.add_argument("--sam2-config", required=True, help="Path to SAM2 config file")
     parser.add_argument("--confidence", type=float, default=0.1, help="Confidence threshold for detections")
+    parser.add_argument("--separate-objects", action="store_true", help="Process each object separately to avoid dtype issues")
     
     args = parser.parse_args()
     
@@ -645,235 +842,17 @@ def main():
         confidence_threshold=args.confidence
     )
     
-    # Process video
-    pipeline.process_video(
-        frames_dir=args.frames_dir,
-        text_queries=args.text_queries
-    )
+    # Process video using the appropriate method
+    if args.separate_objects:
+        pipeline.process_video_separate_objects(
+            frames_dir=args.frames_dir,
+            text_queries=args.text_queries
+        )
+    else:
+        pipeline.process_video(
+            frames_dir=args.frames_dir,
+            text_queries=args.text_queries
+        )
 
 if __name__ == "__main__":
     main()
-
-# goat'}]-----
-# Updated object 1 (goat) with score 0.74 (IoU: 0.71, Emb: 0.77)
-# Updated object 3 (goat) with score 0.63 (IoU: 0.39, Emb: 0.87)
-# Updated object 4 (goat) with score 0.53 (IoU: 0.36, Emb: 0.69)
-# Updated object 2 (goat) with score 0.42 (IoU: 0.12, Emb: 0.72)
-# Created new object 5 (goat)
-# Created new object 6 (goat)
-# Created new object 7 (goat)
-# Created new object 8 (goat)
-# Created new object 9 (goat)
-# Created new object 10 (goat)
-# Created new object 11 (goat)
-# Created new pipeline-tracked object 5 at frame 4
-# Created new pipeline-tracked object 6 at frame 4
-# Created new pipeline-tracked object 7 at frame 4
-# Created new pipeline-tracked object 8 at frame 4
-# Created new pipeline-tracked object 9 at frame 4
-# Created new pipeline-tracked object 10 at frame 4
-# Created new pipeline-tracked object 11 at frame 4
-# Adding new object 5 at frame 4
-# /home/ubuntu/code/drew/sam2/sam2/sam2_video_predictor.py:786: UserWarning: cannot import name '_C' from 'sam2' (/home/ubuntu/code/drew/sam2/sam2/__init__.py)
-
-# Skipping the post-processing step due to the error above. You can still use SAM 2 and it's OK to ignore the error above, although some post-processing functionality may be limited (which doesn't affect the results in most cases; see https://github.com/facebookresearch/sam2/blob/main/INSTALL.md).
-#   pred_masks_gpu = fill_holes_in_mask_scores(
-# Adding new object 6 at frame 4
-# Adding new object 7 at frame 4
-# Adding new object 8 at frame 4
-# Adding new object 9 at frame 4
-# Adding new object 10 at frame 4
-# Adding new object 11 at frame 4
-# Found 7 new objects in frame 4, running propagation...
-# propagate in video:   0%|                                                                                                                                        | 0/13 [00:00<?, ?it/s]
-# Error during mask propagation: mat1 and mat2 must have the same dtype, but got BFloat16 and Float
-# Available methods on predictor:
-#   T_destination
-#   add_all_frames_to_correct_as_cond
-#   add_module
-#   add_new_mask
-#   add_new_points
-#   add_new_points_or_box
-#   add_tpos_enc_to_obj_ptrs
-#   apply
-#   backbone_stride
-#   bfloat16
-#   binarize_mask_from_pts_for_mem_enc
-#   buffers
-#   call_super_init
-#   children
-#   clear_all_prompts_in_frame
-#   clear_non_cond_mem_around_input
-#   compile
-#   cpu
-#   cuda
-#   device
-#   directly_add_no_mem_embed
-#   double
-#   dump_patches
-#   eval
-#   extra_repr
-#   fill_hole_area
-#   fixed_no_obj_ptr
-#   float
-#   forward
-#   forward_image
-#   from_pretrained
-#   get_buffer
-#   get_extra_state
-#   get_parameter
-#   get_submodule
-#   half
-#   hidden_dim
-#   image_encoder
-#   image_size
-#   init_state
-#   iou_prediction_use_sigmoid
-#   ipu
-#   load_state_dict
-#   mask_downsample
-#   maskmem_tpos_enc
-#   max_cond_frames_in_attn
-#   max_obj_ptrs_in_encoder
-#   mem_dim
-#   memory_attention
-#   memory_encoder
-#   memory_temporal_stride_for_eval
-#   modules
-#   mtia
-#   multimask_max_pt_num
-#   multimask_min_pt_num
-#   multimask_output_for_tracking
-#   multimask_output_in_sam
-#   named_buffers
-#   named_children
-#   named_modules
-#   named_parameters
-#   no_mem_embed
-#   no_mem_pos_enc
-#   no_obj_embed_spatial
-#   no_obj_ptr
-#   non_overlap_masks
-#   non_overlap_masks_for_mem_enc
-#   num_feature_levels
-#   num_maskmem
-#   obj_ptr_proj
-#   obj_ptr_tpos_proj
-#   only_obj_ptrs_in_the_past_for_eval
-#   parameters
-#   pred_obj_scores
-#   pred_obj_scores_mlp
-#   proj_tpos_enc_in_obj_ptrs
-#   propagate_in_video
-#   propagate_in_video_preflight
-#   register_backward_hook
-#   register_buffer
-#   register_forward_hook
-#   register_forward_pre_hook
-#   register_full_backward_hook
-#   register_full_backward_pre_hook
-#   register_load_state_dict_post_hook
-#   register_load_state_dict_pre_hook
-#   register_module
-#   register_parameter
-#   register_state_dict_post_hook
-#   register_state_dict_pre_hook
-#   remove_object
-#   requires_grad_
-#   reset_state
-#   sam_image_embedding_size
-#   sam_mask_decoder
-#   sam_mask_decoder_extra_args
-#   sam_prompt_embed_dim
-#   sam_prompt_encoder
-#   set_extra_state
-#   set_submodule
-#   share_memory
-#   sigmoid_bias_for_mem_enc
-#   sigmoid_scale_for_mem_enc
-#   soft_no_obj_ptr
-#   state_dict
-#   to
-#   to_empty
-#   track_step
-#   train
-#   training
-#   type
-#   use_high_res_features_in_sam
-#   use_mask_input_as_output_without_sam
-#   use_mlp_for_obj_ptr_proj
-#   use_multimask_token_for_obj_ptr
-#   use_obj_ptrs_in_encoder
-#   use_signed_tpos_enc_to_obj_ptrs
-#   xpu
-#   zero_grad
-# Traceback (most recent call last):
-#   File "/home/ubuntu/code/drew/e2e_sam2/e2e_pipeline_v2/experiments/vidPredictor/src/object_tracking_pipeline.py", line 540, in <module>
-#     main()
-#   File "/home/ubuntu/code/drew/e2e_sam2/e2e_pipeline_v2/experiments/vidPredictor/src/object_tracking_pipeline.py", line 534, in main
-#     pipeline.process_video(
-#   File "/home/ubuntu/code/drew/e2e_sam2/e2e_pipeline_v2/experiments/vidPredictor/src/object_tracking_pipeline.py", line 298, in process_video
-#     segments = self.sam_wrapper.propagate_masks(objects_to_track=new_objects_in_this_frame)
-#                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-#   File "/home/ubuntu/code/drew/e2e_sam2/e2e_pipeline_v2/experiments/vidPredictor/src/sam2_wrapper.py", line 222, in propagate_masks
-#     raise e
-#   File "/home/ubuntu/code/drew/e2e_sam2/e2e_pipeline_v2/experiments/vidPredictor/src/sam2_wrapper.py", line 194, in propagate_masks
-#     for out_frame_idx, out_obj_ids, out_mask_logits in self.predictor.propagate_in_video(self.inference_state):
-#   File "/home/ubuntu/code/drew/e2e_sam2/venv/lib/python3.12/site-packages/torch/utils/_contextlib.py", line 36, in generator_context
-#     response = gen.send(None)
-#                ^^^^^^^^^^^^^^
-#   File "/home/ubuntu/code/drew/sam2/sam2/sam2_video_predictor.py", line 603, in propagate_in_video
-#     current_out, pred_masks = self._run_single_frame_inference(
-#                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-#   File "/home/ubuntu/code/drew/sam2/sam2/sam2_video_predictor.py", line 762, in _run_single_frame_inference
-#     current_out = self.track_step(
-#                   ^^^^^^^^^^^^^^^^
-#   File "/home/ubuntu/code/drew/sam2/sam2/modeling/sam2_base.py", line 835, in track_step
-#     current_out, sam_outputs, _, _ = self._track_step(
-#                                      ^^^^^^^^^^^^^^^^^
-#   File "/home/ubuntu/code/drew/sam2/sam2/modeling/sam2_base.py", line 761, in _track_step
-#     pix_feat = self._prepare_memory_conditioned_features(
-#                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-#   File "/home/ubuntu/code/drew/sam2/sam2/modeling/sam2_base.py", line 667, in _prepare_memory_conditioned_features
-#     pix_feat_with_mem = self.memory_attention(
-#                         ^^^^^^^^^^^^^^^^^^^^^^
-#   File "/home/ubuntu/code/drew/e2e_sam2/venv/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1739, in _wrapped_call_impl
-#     return self._call_impl(*args, **kwargs)
-#            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-#   File "/home/ubuntu/code/drew/e2e_sam2/venv/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1750, in _call_impl
-#     return forward_call(*args, **kwargs)
-#            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-#   File "/home/ubuntu/code/drew/sam2/sam2/modeling/memory_attention.py", line 155, in forward
-#     output = layer(
-#              ^^^^^^
-#   File "/home/ubuntu/code/drew/e2e_sam2/venv/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1739, in _wrapped_call_impl
-#     return self._call_impl(*args, **kwargs)
-#            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-#   File "/home/ubuntu/code/drew/e2e_sam2/venv/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1750, in _call_impl
-#     return forward_call(*args, **kwargs)
-#            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-#   File "/home/ubuntu/code/drew/sam2/sam2/modeling/memory_attention.py", line 94, in forward
-#     tgt = self._forward_ca(tgt, memory, query_pos, pos, num_k_exclude_rope)
-#           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-#   File "/home/ubuntu/code/drew/sam2/sam2/modeling/memory_attention.py", line 74, in _forward_ca
-#     tgt2 = self.cross_attn_image(
-#            ^^^^^^^^^^^^^^^^^^^^^^
-#   File "/home/ubuntu/code/drew/e2e_sam2/venv/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1739, in _wrapped_call_impl
-#     return self._call_impl(*args, **kwargs)
-#            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-#   File "/home/ubuntu/code/drew/e2e_sam2/venv/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1750, in _call_impl
-#     return forward_call(*args, **kwargs)
-#            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-#   File "/home/ubuntu/code/drew/sam2/sam2/modeling/sam/transformer.py", line 281, in forward
-#     v = self.v_proj(v)
-#         ^^^^^^^^^^^^^^
-#   File "/home/ubuntu/code/drew/e2e_sam2/venv/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1739, in _wrapped_call_impl
-#     return self._call_impl(*args, **kwargs)
-#            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-#   File "/home/ubuntu/code/drew/e2e_sam2/venv/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1750, in _call_impl
-#     return forward_call(*args, **kwargs)
-#            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-#   File "/home/ubuntu/code/drew/e2e_sam2/venv/lib/python3.12/site-packages/torch/nn/modules/linear.py", line 125, in forward
-#     return F.linear(input, self.weight, self.bias)
-#            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-# RuntimeError: mat1 and mat2 must have the same dtype, but got BFloat16 and Float

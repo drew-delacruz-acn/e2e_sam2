@@ -195,16 +195,12 @@ class ObjectTrackingPipeline:
             )
             
             # Track objects across frames
-            tracked_in_frame = self.tracker.track_objects(
-                previous_objects=self.tracked_objects,
-                new_detections={
-                    "boxes": detections["boxes"],
-                    "labels": detections["labels"],
-                    "scores": detections["scores"],
-                },
-                current_frame=frame,
+            tracked_in_frame = self.tracker.update_tracks(
+                frame=frame_np,
+                frame_idx=frame_idx,
+                detections=detections,
                 embedding_extractor=self.embedding_extractor,
-                frame_idx=frame_idx
+                output_dir=None
             )
             
             # Process each tracked object - use propagated masks if available

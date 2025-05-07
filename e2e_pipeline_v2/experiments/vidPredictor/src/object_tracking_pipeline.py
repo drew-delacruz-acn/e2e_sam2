@@ -15,6 +15,7 @@ import time
 from owlv2_detector import OWLv2Detector
 from sam2_wrapper import SAM2VideoWrapper
 from object_tracker import ObjectTracker
+from embedding_extractor import EmbeddingExtractor
 
 class ObjectTrackingPipeline:
     def __init__(
@@ -38,9 +39,10 @@ class ObjectTrackingPipeline:
         print(f"Using device: {device}")
         
         # Initialize components
-        self.detector = OWLv2Detector( device=device)
+        self.detector = OWLv2Detector(device=device)
         self.sam_wrapper = SAM2VideoWrapper(sam2_checkpoint, sam2_config, device=device)
         self.tracker = ObjectTracker()
+        self.embedding_extractor = EmbeddingExtractor(device=device)
         
         # Setup output directory
         self.output_dir = Path(output_dir)
@@ -93,10 +95,27 @@ class ObjectTrackingPipeline:
                 
             # Convert box to XYXY format if needed
             x1, y1, x2, y2 = box
-            box_area = first_frame_np[int(y1):int(y2), int(x1):int(x2)]
+            x1, y1, x2, y2 = int(x1), int(y1), int(x2), int(y2)
+            
+            # Ensure box coordinates are valid
+            x1 = max(0, x1)
+            y1 = max(0, y1)
+            x2 = min(first_frame_np.shape[1], x2)
+            y2 = min(first_frame_np.shape[0], y2)
+            
+            # Skip invalid boxes
+            if x1 >= x2 or y1 >= y2:
+                print(f"Skipping invalid box: {[x1, y1, x2, y2]}")
+                continue
+                
+            box_area = first_frame_np[y1:y2, x1:x2]
             
             # Extract embedding for this object
-            embedding = self.detector.extract_embedding(first_frame, box)
+            try:
+                embedding = self.embedding_extractor.extract(box_area)
+            except Exception as e:
+                print(f"Error extracting embedding: {e}")
+                continue
             
             # Add box to SAM2 to get mask
             self.sam_wrapper.initialize_video_frames([first_frame_np])
@@ -163,7 +182,7 @@ class ObjectTrackingPipeline:
                     "scores": detections["scores"],
                 },
                 current_frame=frame,
-                detector=self.detector,
+                embedding_extractor=self.embedding_extractor,
                 frame_idx=frame_idx
             )
             

@@ -85,10 +85,12 @@ class ObjectTracker:
         match_scores = []
         
         for i, detection in enumerate(detections):
-            det_box = detection["box"]
+            box = detection["box"]
+            label = detection["text"]
+            conf = detection["score"]
             
             # Extract crop and embedding
-            x1, y1, x2, y2 = [int(c) for c in det_box]
+            x1, y1, x2, y2 = [int(c) for c in box]
             if x1 >= x2 or y1 >= y2 or x1 < 0 or y1 < 0 or x2 >= frame.shape[1] or y2 >= frame.shape[0]:
                 # Skip invalid boxes
                 continue
@@ -104,7 +106,7 @@ class ObjectTracker:
                     
                 # Calculate IoU with last known position
                 last_box = obj_data["trajectory"][-1][1]
-                iou = self.calculate_iou(det_box, last_box)
+                iou = self.calculate_iou(box, last_box)
                 
                 # Calculate embedding similarity
                 emb_sim = cosine_similarity([det_embedding], [obj_data["embedding"]])[0][0]

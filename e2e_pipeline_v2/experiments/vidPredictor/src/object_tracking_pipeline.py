@@ -394,7 +394,6 @@ def main():
 if __name__ == "__main__":
     main()
 
-
 # python e2e_pipeline_v2/experiments/vidPredictor/src/object_tracking_pipeline.py   --frames-dir "/home/ubuntu/code/drew/test_data/frames/Scenes 001-020__220D-2-_20230815190723523/subset"   --text-queries "goat"   --output-dir ./tracking_results   --sam2-checkpoint checkpoints/sam2.1_hiera_large.pt   --sam2-config configs/sam2.1/sam2.1_hiera_l.yaml  --confidence 0.3
 # Using device: cuda
 # OWLv2 using device: cuda
@@ -405,7 +404,7 @@ if __name__ == "__main__":
 #   warnings.warn(msg)
 # Processing 13 frames with queries: ['goat']
 # Setting up SAM2 with frames directory: /home/ubuntu/code/drew/test_data/frames/Scenes 001-020__220D-2-_20230815190723523/subset
-# frame loading (JPEG): 100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 13/13 [00:00<00:00, 37.47it/s]
+# frame loading (JPEG): 100%|██████████████████████████████████████████████████████████████████████████████████████████| 13/13 [00:00<00:00, 36.96it/s]
 # Set video from directory: /home/ubuntu/code/drew/test_data/frames/Scenes 001-020__220D-2-_20230815190723523/subset
 # /home/ubuntu/code/drew/e2e_sam2/venv/lib/python3.12/site-packages/transformers/models/owlv2/processing_owlv2.py:213: FutureWarning: `post_process_object_detection` method is deprecated for OwlVitProcessor and will be removed in v5. Use `post_process_grounded_object_detection` instead.
 #   warnings.warn(
@@ -426,20 +425,20 @@ if __name__ == "__main__":
 # Adding box for object 3 at frame 0: [62, 140, 662, 482]
 # Adding box for object 4 at frame 0: [260, 143, 670, 486]
 # Running mask propagation for all tracked objects...
-# propagate in video:   0%|                                                                                                                                                  | 0/13 [00:00<?, ?it/s]Processed frame 0, found 4 objects
+# propagate in video:   0%|                                                                                                     | 0/13 [00:00<?, ?it/s]Processed frame 0, found 4 objects
 # Processed frame 1, found 4 objects
-# propagate in video:  15%|█████████████████████▏                                                                                                                    | 2/13 [00:00<00:04,  2.24it/s]Processed frame 2, found 4 objects
-# propagate in video:  23%|███████████████████████████████▊                                                                                                          | 3/13 [00:01<00:06,  1.49it/s]Processed frame 3, found 4 objects
-# propagate in video:  31%|██████████████████████████████████████████▍                                                                                               | 4/13 [00:02<00:07,  1.20it/s]Processed frame 4, found 4 objects
-# propagate in video:  38%|█████████████████████████████████████████████████████                                                                                     | 5/13 [00:04<00:07,  1.04it/s]Processed frame 5, found 4 objects
-# propagate in video:  46%|███████████████████████████████████████████████████████████████▋                                                                          | 6/13 [00:05<00:07,  1.08s/it]Processed frame 6, found 4 objects
-# propagate in video:  54%|██████████████████████████████████████████████████████████████████████████▎                                                               | 7/13 [00:06<00:07,  1.19s/it]Processed frame 7, found 4 objects
-# propagate in video:  62%|████████████████████████████████████████████████████████████████████████████████████▉                                                     | 8/13 [00:08<00:06,  1.30s/it]Processed frame 8, found 4 objects
-# propagate in video:  69%|███████████████████████████████████████████████████████████████████████████████████████████████▌                                          | 9/13 [00:10<00:05,  1.38s/it]Processed frame 9, found 4 objects
-# propagate in video:  77%|█████████████████████████████████████████████████████████████████████████████████████████████████████████▍                               | 10/13 [00:11<00:04,  1.43s/it]Processed frame 10, found 4 objects
-# propagate in video:  85%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████▉                     | 11/13 [00:13<00:02,  1.47s/it]Processed frame 11, found 4 objects
-# propagate in video:  92%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████▍          | 12/13 [00:14<00:01,  1.50s/it]Processed frame 12, found 4 objects
-# propagate in video: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 13/13 [00:16<00:00,  1.25s/it]
+# propagate in video:  15%|██████████████▎                                                                              | 2/13 [00:00<00:04,  2.22it/s]Processed frame 2, found 4 objects
+# propagate in video:  23%|█████████████████████▍                                                                       | 3/13 [00:01<00:06,  1.48it/s]Processed frame 3, found 4 objects
+# propagate in video:  31%|████████████████████████████▌                                                                | 4/13 [00:02<00:07,  1.20it/s]Processed frame 4, found 4 objects
+# propagate in video:  38%|███████████████████████████████████▊                                                         | 5/13 [00:04<00:07,  1.03it/s]Processed frame 5, found 4 objects
+# propagate in video:  46%|██████████████████████████████████████████▉                                                  | 6/13 [00:05<00:07,  1.09s/it]Processed frame 6, found 4 objects
+# propagate in video:  54%|██████████████████████████████████████████████████                                           | 7/13 [00:06<00:07,  1.20s/it]Processed frame 7, found 4 objects
+# propagate in video:  62%|█████████████████████████████████████████████████████████▏                                   | 8/13 [00:08<00:06,  1.31s/it]Processed frame 8, found 4 objects
+# propagate in video:  69%|████████████████████████████████████████████████████████████████▍                            | 9/13 [00:10<00:05,  1.39s/it]Processed frame 9, found 4 objects
+# propagate in video:  77%|██████████████████████████████████████████████████████████████████████▊                     | 10/13 [00:11<00:04,  1.44s/it]Processed frame 10, found 4 objects
+# propagate in video:  85%|█████████████████████████████████████████████████████████████████████████████▊              | 11/13 [00:13<00:02,  1.48s/it]Processed frame 11, found 4 objects
+# propagate in video:  92%|████████████████████████████████████████████████████████████████████████████████████▉       | 12/13 [00:14<00:01,  1.51s/it]Processed frame 12, found 4 objects
+# propagate in video: 100%|████████████████████████████████████████████████████████████████████████████████████████████| 13/13 [00:16<00:00,  1.26s/it]
 # Propagated masks for 4 objects across 13 frames
 # Processing frame 1/13
 # Detected goat with confidence 0.551 at [292.1, 145.3, 658.3, 483.1]
@@ -447,23 +446,21 @@ if __name__ == "__main__":
 # Detected goat with confidence 0.333 at [72.5, 143.8, 638.6, 474.4]
 # Detected goat with confidence 0.334 at [811.2, 169.6, 940.2, 470.8]
 # -----Initializing new objects-----
-# detections: {'boxes': tensor([[292.1225, 145.3486, 658.2645, 483.1182],
-#         [631.3438, 114.4909, 943.1325, 476.1766],
-#         [ 72.4825, 143.8104, 638.5889, 474.4100],
-#         [811.1805, 169.5599, 940.1515, 470.7923]], device='cuda:0'), 'scores': tensor([0.5509, 0.3017, 0.3331, 0.3339], device='cuda:0'), 'labels': ['goat', 'goat', 'goat', 'goat']}
-# -----Initializing {'boxes': tensor([[292.1225, 145.3486, 658.2645, 483.1182],
-#         [631.3438, 114.4909, 943.1325, 476.1766],
-#         [ 72.4825, 143.8104, 638.5889, 474.4100],
-#         [811.1805, 169.5599, 940.1515, 470.7923]], device='cuda:0'), 'scores': tensor([0.5509, 0.3017, 0.3331, 0.3339], device='cuda:0'), 'labels': ['goat', 'goat', 'goat', 'goat']}-----
+# detections: [{'box': [292.1224670410156, 145.3485870361328, 658.2644653320312, 483.1181640625], 'score': 0.5508526563644409, 'text': 'goat'}, {'box': [631.3438110351562, 114.49091339111328, 943.1325073242188, 476.17657470703125], 'score': 0.30174025893211365, 'text': 'goat'}, {'box': [72.48252868652344, 143.81036376953125, 638.5888671875, 474.4100341796875], 'score': 0.33306947350502014, 'text': 'goat'}, {'box': [811.1805419921875, 169.5598907470703, 940.1514892578125, 470.7922668457031], 'score': 0.3338971734046936, 'text': 'goat'}]
+# -----Initializing [{'box': [292.1224670410156, 145.3485870361328, 658.2644653320312, 483.1181640625], 'score': 0.5508526563644409, 'text': 'goat'}, {'box': [631.3438110351562, 114.49091339111328, 943.1325073242188, 476.17657470703125], 'score': 0.30174025893211365, 'text': 'goat'}, {'box': [72.48252868652344, 143.81036376953125, 638.5888671875, 474.4100341796875], 'score': 0.33306947350502014, 'text': 'goat'}, {'box': [811.1805419921875, 169.5598907470703, 940.1514892578125, 470.7922668457031], 'score': 0.3338971734046936, 'text': 'goat'}]-----
+# Initialized object 1 (goat)
+# -----Initializing [{'box': [292.1224670410156, 145.3485870361328, 658.2644653320312, 483.1181640625], 'score': 0.5508526563644409, 'text': 'goat'}, {'box': [631.3438110351562, 114.49091339111328, 943.1325073242188, 476.17657470703125], 'score': 0.30174025893211365, 'text': 'goat'}, {'box': [72.48252868652344, 143.81036376953125, 638.5888671875, 474.4100341796875], 'score': 0.33306947350502014, 'text': 'goat'}, {'box': [811.1805419921875, 169.5598907470703, 940.1514892578125, 470.7922668457031], 'score': 0.3338971734046936, 'text': 'goat'}]-----
+# Initialized object 2 (goat)
+# -----Initializing [{'box': [292.1224670410156, 145.3485870361328, 658.2644653320312, 483.1181640625], 'score': 0.5508526563644409, 'text': 'goat'}, {'box': [631.3438110351562, 114.49091339111328, 943.1325073242188, 476.17657470703125], 'score': 0.30174025893211365, 'text': 'goat'}, {'box': [72.48252868652344, 143.81036376953125, 638.5888671875, 474.4100341796875], 'score': 0.33306947350502014, 'text': 'goat'}, {'box': [811.1805419921875, 169.5598907470703, 940.1514892578125, 470.7922668457031], 'score': 0.3338971734046936, 'text': 'goat'}]-----
+# Initialized object 3 (goat)
+# -----Initializing [{'box': [292.1224670410156, 145.3485870361328, 658.2644653320312, 483.1181640625], 'score': 0.5508526563644409, 'text': 'goat'}, {'box': [631.3438110351562, 114.49091339111328, 943.1325073242188, 476.17657470703125], 'score': 0.30174025893211365, 'text': 'goat'}, {'box': [72.48252868652344, 143.81036376953125, 638.5888671875, 474.4100341796875], 'score': 0.33306947350502014, 'text': 'goat'}, {'box': [811.1805419921875, 169.5598907470703, 940.1514892578125, 470.7922668457031], 'score': 0.3338971734046936, 'text': 'goat'}]-----
+# Initialized object 4 (goat)
 # Traceback (most recent call last):
-#   File "/home/ubuntu/code/drew/e2e_sam2/e2e_pipeline_v2/experiments/vidPredictor/src/object_tracking_pipeline.py", line 386, in <module>
+#   File "/home/ubuntu/code/drew/e2e_sam2/e2e_pipeline_v2/experiments/vidPredictor/src/object_tracking_pipeline.py", line 395, in <module>
 #     main()
-#   File "/home/ubuntu/code/drew/e2e_sam2/e2e_pipeline_v2/experiments/vidPredictor/src/object_tracking_pipeline.py", line 380, in main
+#   File "/home/ubuntu/code/drew/e2e_sam2/e2e_pipeline_v2/experiments/vidPredictor/src/object_tracking_pipeline.py", line 389, in main
 #     pipeline.process_video(
-#   File "/home/ubuntu/code/drew/e2e_sam2/e2e_pipeline_v2/experiments/vidPredictor/src/object_tracking_pipeline.py", line 198, in process_video
-#     tracked_in_frame = self.tracker.update_tracks(
-#                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
-#   File "/home/ubuntu/code/drew/e2e_sam2/e2e_pipeline_v2/experiments/vidPredictor/src/object_tracker.py", line 62, in update_tracks
-#     box = detection["box"]
-#           ~~~~~~~~~^^^^^^^
-# TypeError: string indices must be integers, not 'str'
+#   File "/home/ubuntu/code/drew/e2e_sam2/e2e_pipeline_v2/experiments/vidPredictor/src/object_tracking_pipeline.py", line 218, in process_video
+#     if obj_data["first_detected"] == frame_idx:
+#        ~~~~~~~~^^^^^^^^^^^^^^^^^^
+# TypeError: list indices must be integers or slices, not str

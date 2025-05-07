@@ -53,10 +53,12 @@ class ObjectTracker:
         
         # First frame initialization
         if not self.tracked_objects:
+            print(f'-----Initializing new objects-----')
+            print(f'detections: {detections}')
             for detection in detections:
                 obj_id = self.next_obj_id
                 self.next_obj_id += 1
-                
+                print(f'-----Initializing {detections}-----')
                 box = detection["box"]
                 
                 # Extract crop and embedding

@@ -2,6 +2,7 @@
 # Ignore PyTorch model files
 *.pt
 *.pth
+*.deb
 
 # Ignore video files
 *.mp4

@@ -386,30 +386,75 @@ if __name__ == "__main__":
     main()
 
 
+# python e2e_pipeline_v2/experiments/vidPredictor/src/object_tracking_pipeline.py   --frames-dir "/home/ubuntu/code/drew/test_data/frames/Scenes 001-020__220D-2-_20230815190723523/subset"   --text-queries "goat"   --output-dir ./tracking_results   --sam2-checkpoint checkpoints/sam2.1_hiera_large.pt   --sam2-config configs/sam2.1/sam2.1_hiera_l.yaml  --confidence 0.3
+# Using device: cuda
+# OWLv2 using device: cuda
+# SAM2 using device: cuda
+# /home/ubuntu/code/drew/e2e_sam2/venv/lib/python3.12/site-packages/torchvision/models/_utils.py:208: UserWarning: The parameter 'pretrained' is deprecated since 0.13 and may be removed in the future, please use 'weights' instead.
+#   warnings.warn(
+# /home/ubuntu/code/drew/e2e_sam2/venv/lib/python3.12/site-packages/torchvision/models/_utils.py:223: UserWarning: Arguments other than a weight enum or `None` for 'weights' are deprecated since 0.13 and may be removed in the future. The current behavior is equivalent to passing `weights=ResNet50_Weights.IMAGENET1K_V1`. You can also use `weights=ResNet50_Weights.DEFAULT` to get the most up-to-date weights.
+#   warnings.warn(msg)
+# Processing 13 frames with queries: ['goat']
+# Setting up SAM2 with frames directory: /home/ubuntu/code/drew/test_data/frames/Scenes 001-020__220D-2-_20230815190723523/subset
+# frame loading (JPEG): 100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 13/13 [00:00<00:00, 37.47it/s]
+# Set video from directory: /home/ubuntu/code/drew/test_data/frames/Scenes 001-020__220D-2-_20230815190723523/subset
+# /home/ubuntu/code/drew/e2e_sam2/venv/lib/python3.12/site-packages/transformers/models/owlv2/processing_owlv2.py:213: FutureWarning: `post_process_object_detection` method is deprecated for OwlVitProcessor and will be removed in v5. Use `post_process_grounded_object_detection` instead.
+#   warnings.warn(
+# Detected goat with confidence 0.334 at [647.4, 88.0, 780.2, 234.6]
+# Detected goat with confidence 0.327 at [741.8, 135.0, 783.2, 221.3]
+# Detected goat with confidence 0.360 at [62.6, 140.2, 662.0, 482.4]
+# Detected goat with confidence 0.486 at [260.3, 143.4, 670.4, 486.2]
+#  Detections {'boxes': tensor([[647.4100,  88.0470, 780.1903, 234.6174],
+#         [741.7838, 135.0038, 783.1549, 221.3380],
+#         [ 62.5728, 140.2188, 662.0476, 482.3569],
+#         [260.2548, 143.4311, 670.4420, 486.1872]], device='cuda:0'), 'scores': tensor([0.3343, 0.3275, 0.3599, 0.4860], device='cuda:0'), 'labels': ['goat', 'goat', 'goat', 'goat']}
+# Adding box for object 1 at frame 0: [647, 88, 780, 234]
+# /home/ubuntu/code/drew/sam2/sam2/sam2_video_predictor.py:786: UserWarning: cannot import name '_C' from 'sam2' (/home/ubuntu/code/drew/sam2/sam2/__init__.py)
 
-# python object_tracking_pipeline.py \
-#   --frames-dir /path/to/video/frames \
-#   --text-queries "car,person,bicycle" \
-#   --output-dir ./tracking_results \
-#   --owlv2-checkpoint /path/to/owlv2/model \
-#   --sam2-checkpoint /path/to/sam2/model \
-#   --sam2-config /path/to/sam2/config \
-#   --confidence 0.2
-
-# tected goat with confidence 0.102 at [259.6, 142.9, 405.1, 475.4]
-# Detected goat with confidence 0.119 at [372.4, 85.9, 857.8, 473.5]
-# Detected goat with confidence 0.137 at [648.6, 102.1, 781.8, 454.4]
-# Detected goat with confidence 0.140 at [267.1, 89.3, 458.9, 478.5]
-# Detected goat with confidence 0.175 at [368.9, 369.0, 471.7, 479.3]
-# Detected goat with confidence 0.104 at [348.0, 356.5, 409.6, 478.5]
-# Detected goat with confidence 0.155 at [70.1, 430.9, 177.0, 480.4]
-#  Detections [{'box': [647.4099731445312, 88.04713439941406, 780.1903686523438, 234.6172332763672], 'score': 0.33430543541908264, 'label': 0, 'text': 'goat'}, {'box': [338.20086669921875, 91.2125015258789, 379.37939453125, 163.16427612304688], 'score': 0.14112025499343872, 'label': 0, 'text': 'goat'}, {'box': [266.2550964355469, 96.26411437988281, 368.3487548828125, 182.85906982421875], 'score': 0.11737194657325745, 'label': 0, 'text': 'goat'}, {'box': [613.8699340820312, 150.54696655273438, 662.9747314453125, 217.56640625], 'score': 0.11062438040971756, 'label': 0, 'text': 'goat'}, {'box': [741.7838745117188, 135.00384521484375, 783.1548461914062, 221.33778381347656], 'score': 0.32746225595474243, 'label': 0, 'text': 'goat'}, {'box': [646.8192749023438, 112.86333465576172, 766.5968017578125, 234.1778564453125], 'score': 0.14156973361968994, 'label': 0, 'text': 'goat'}, {'box': [731.4899291992188, 124.2536849975586, 848.8386840820312, 362.7610778808594], 'score': 0.21958966553211212, 'label': 0, 'text': 'goat'}, {'box': [62.57223129272461, 140.21884155273438, 662.048095703125, 482.3572998046875], 'score': 0.35990920662879944, 'label': 0, 'text': 'goat'}, {'box': [260.2547302246094, 143.4312286376953, 670.4420166015625, 486.187255859375], 'score': 0.485964298248291, 'label': 0, 'text': 'goat'}, {'box': [45.00772476196289, 248.51048278808594, 63.05266189575195, 286.515869140625], 'score': 0.1412220597267151, 'label': 0, 'text': 'goat'}, {'box': [42.06721496582031, 246.10081481933594, 73.11885833740234, 408.2206115722656], 'score': 0.10995682328939438, 'label': 0, 'text': 'goat'}, {'box': [656.430908203125, 93.86257934570312, 860.3806762695312, 452.3819580078125], 'score': 0.20164254307746887, 'label': 0, 'text': 'goat'}, {'box': [713.7269897460938, 103.97442626953125, 855.4326171875, 455.4469909667969], 'score': 0.13221421837806702, 'label': 0, 'text': 'goat'}, {'box': [259.5897216796875, 142.90858459472656, 405.1321105957031, 475.4350891113281], 'score': 0.10194676369428635, 'label': 0, 'text': 'goat'}, {'box': [372.4270935058594, 85.86034393310547, 857.8440551757812, 473.54547119140625], 'score': 0.11945652216672897, 'label': 0, 'text': 'goat'}, {'box': [648.5542602539062, 102.0804672241211, 781.7900390625, 454.4112548828125], 'score': 0.1372501105070114, 'label': 0, 'text': 'goat'}, {'box': [267.06689453125, 89.34765625, 458.937255859375, 478.5168762207031], 'score': 0.13998572528362274, 'label': 0, 'text': 'goat'}, {'box': [368.91650390625, 369.0050964355469, 471.6726989746094, 479.3065185546875], 'score': 0.1745559275150299, 'label': 0, 'text': 'goat'}, {'box': [348.00006103515625, 356.5211181640625, 409.606689453125, 478.4908752441406], 'score': 0.10445903986692429, 'label': 0, 'text': 'goat'}, {'box': [70.08139038085938, 430.9385986328125, 176.95315551757812, 480.38909912109375], 'score': 0.1554412841796875, 'label': 0, 'text': 'goat'}]
+# Skipping the post-processing step due to the error above. You can still use SAM 2 and it's OK to ignore the error above, although some post-processing functionality may be limited (which doesn't affect the results in most cases; see https://github.com/facebookresearch/sam2/blob/main/INSTALL.md).
+#   pred_masks_gpu = fill_holes_in_mask_scores(
+# Adding box for object 2 at frame 0: [741, 135, 783, 221]
+# Adding box for object 3 at frame 0: [62, 140, 662, 482]
+# Adding box for object 4 at frame 0: [260, 143, 670, 486]
+# Running mask propagation for all tracked objects...
+# propagate in video:   0%|                                                                                                                                                  | 0/13 [00:00<?, ?it/s]Processed frame 0, found 4 objects
+# Processed frame 1, found 4 objects
+# propagate in video:  15%|█████████████████████▏                                                                                                                    | 2/13 [00:00<00:04,  2.24it/s]Processed frame 2, found 4 objects
+# propagate in video:  23%|███████████████████████████████▊                                                                                                          | 3/13 [00:01<00:06,  1.49it/s]Processed frame 3, found 4 objects
+# propagate in video:  31%|██████████████████████████████████████████▍                                                                                               | 4/13 [00:02<00:07,  1.20it/s]Processed frame 4, found 4 objects
+# propagate in video:  38%|█████████████████████████████████████████████████████                                                                                     | 5/13 [00:04<00:07,  1.04it/s]Processed frame 5, found 4 objects
+# propagate in video:  46%|███████████████████████████████████████████████████████████████▋                                                                          | 6/13 [00:05<00:07,  1.08s/it]Processed frame 6, found 4 objects
+# propagate in video:  54%|██████████████████████████████████████████████████████████████████████████▎                                                               | 7/13 [00:06<00:07,  1.19s/it]Processed frame 7, found 4 objects
+# propagate in video:  62%|████████████████████████████████████████████████████████████████████████████████████▉                                                     | 8/13 [00:08<00:06,  1.30s/it]Processed frame 8, found 4 objects
+# propagate in video:  69%|███████████████████████████████████████████████████████████████████████████████████████████████▌                                          | 9/13 [00:10<00:05,  1.38s/it]Processed frame 9, found 4 objects
+# propagate in video:  77%|█████████████████████████████████████████████████████████████████████████████████████████████████████████▍                               | 10/13 [00:11<00:04,  1.43s/it]Processed frame 10, found 4 objects
+# propagate in video:  85%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████▉                     | 11/13 [00:13<00:02,  1.47s/it]Processed frame 11, found 4 objects
+# propagate in video:  92%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████▍          | 12/13 [00:14<00:01,  1.50s/it]Processed frame 12, found 4 objects
+# propagate in video: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 13/13 [00:16<00:00,  1.25s/it]
+# Propagated masks for 4 objects across 13 frames
+# Processing frame 1/13
+# Detected goat with confidence 0.551 at [292.1, 145.3, 658.3, 483.1]
+# Detected goat with confidence 0.302 at [631.3, 114.5, 943.1, 476.2]
+# Detected goat with confidence 0.333 at [72.5, 143.8, 638.6, 474.4]
+# Detected goat with confidence 0.334 at [811.2, 169.6, 940.2, 470.8]
+# -----Initializing new objects-----
+# detections: {'boxes': tensor([[292.1225, 145.3486, 658.2645, 483.1182],
+#         [631.3438, 114.4909, 943.1325, 476.1766],
+#         [ 72.4825, 143.8104, 638.5889, 474.4100],
+#         [811.1805, 169.5599, 940.1515, 470.7923]], device='cuda:0'), 'scores': tensor([0.5509, 0.3017, 0.3331, 0.3339], device='cuda:0'), 'labels': ['goat', 'goat', 'goat', 'goat']}
+# -----Initializing {'boxes': tensor([[292.1225, 145.3486, 658.2645, 483.1182],
+#         [631.3438, 114.4909, 943.1325, 476.1766],
+#         [ 72.4825, 143.8104, 638.5889, 474.4100],
+#         [811.1805, 169.5599, 940.1515, 470.7923]], device='cuda:0'), 'scores': tensor([0.5509, 0.3017, 0.3331, 0.3339], device='cuda:0'), 'labels': ['goat', 'goat', 'goat', 'goat']}-----
 # Traceback (most recent call last):
-#   File "/home/ubuntu/code/drew/e2e_sam2/e2e_pipeline_v2/experiments/vidPredictor/src/object_tracking_pipeline.py", line 337, in <module>
+#   File "/home/ubuntu/code/drew/e2e_sam2/e2e_pipeline_v2/experiments/vidPredictor/src/object_tracking_pipeline.py", line 386, in <module>
 #     main()
-#   File "/home/ubuntu/code/drew/e2e_sam2/e2e_pipeline_v2/experiments/vidPredictor/src/object_tracking_pipeline.py", line 331, in main
+#   File "/home/ubuntu/code/drew/e2e_sam2/e2e_pipeline_v2/experiments/vidPredictor/src/object_tracking_pipeline.py", line 380, in main
 #     pipeline.process_video(
-#   File "/home/ubuntu/code/drew/e2e_sam2/e2e_pipeline_v2/experiments/vidPredictor/src/object_tracking_pipeline.py", line 91, in process_video
-#     for i, (box, label, conf) in enumerate(zip(detections["boxes"], detections["labels"], detections["scores"])):
-#                                                ~~~~~~~~~~^^^^^^^^^
-# TypeError: list indices must be integers or slices, not str
+#   File "/home/ubuntu/code/drew/e2e_sam2/e2e_pipeline_v2/experiments/vidPredictor/src/object_tracking_pipeline.py", line 198, in process_video
+#     tracked_in_frame = self.tracker.update_tracks(
+#                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+#   File "/home/ubuntu/code/drew/e2e_sam2/e2e_pipeline_v2/experiments/vidPredictor/src/object_tracker.py", line 62, in update_tracks
+#     box = detection["box"]
+#           ~~~~~~~~~^^^^^^^
+# TypeError: string indices must be integers, not 'str'

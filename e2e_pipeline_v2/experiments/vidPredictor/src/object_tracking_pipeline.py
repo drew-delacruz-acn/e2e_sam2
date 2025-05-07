@@ -396,6 +396,9 @@ class ObjectTrackingPipeline:
             json_results = self._prepare_for_json(results)
             json.dump(json_results, f, indent=2)
         
+        # Save mapping of objects to frames they appear in
+        self.save_object_frame_mapping()
+        
         print(f"All results saved to: {self.output_dir}")
         return results
     
@@ -637,6 +640,63 @@ class ObjectTrackingPipeline:
         
         print(f"All per-object mask visualizations saved to {object_masks_dir}")
 
+    def save_object_frame_mapping(self, output_path=None):
+        """Create and save a mapping of each object ID to the exact frames it appears in.
+        
+        Args:
+            output_path: Optional specific path for the JSON file. If None, will use output_dir.
+        
+        Returns:
+            A dictionary mapping object IDs to their frame appearances
+        """
+        object_frames = {}
+        
+        # Initialize with empty lists for each object
+        for obj_id in self.tracked_objects.keys():
+            object_frames[obj_id] = {
+                "class": self.tracked_objects[obj_id]["class"],
+                "frames": []
+            }
+        
+        # Go through frame_results and collect frames for each object
+        for frame_idx, frame_data in sorted(self.propagation_results.items()):
+            for obj_id in frame_data.keys():
+                if obj_id in object_frames:
+                    object_frames[obj_id]["frames"].append(frame_idx)
+        
+        # Convert to a list format if preferred
+        object_list = []
+        for obj_id, obj_data in object_frames.items():
+            # Sort frames to ensure they're in order
+            obj_data["frames"].sort()
+            
+            object_list.append({
+                "id": obj_id,
+                "class": obj_data["class"],
+                "frames": obj_data["frames"],
+                "frame_count": len(obj_data["frames"]),
+                "first_frame": obj_data["frames"][0] if obj_data["frames"] else None,
+                "last_frame": obj_data["frames"][-1] if obj_data["frames"] else None
+            })
+        
+        # Create the final structure
+        result = {
+            "object_frame_mapping": object_frames,
+            "object_list": object_list,
+            "total_objects": len(object_frames),
+            "total_frames": len(self.propagation_results)
+        }
+        
+        # Save the result
+        if output_path is None:
+            output_path = self.output_dir / "object_frame_mapping.json"
+        
+        with open(output_path, "w") as f:
+            json.dump(result, f, indent=2)
+        
+        print(f"Saved object-to-frame mapping to {output_path}")
+        return result
+
     def _detect_and_track_all_objects(self, frames_dir, frame_files, text_queries, results):
         """Detect and track all objects without running SAM2"""
         print("Phase 1: Detecting and tracking objects...")
@@ -829,6 +889,9 @@ class ObjectTrackingPipeline:
         with open(self.output_dir / "tracking_results.json", "w") as f:
             json_results = self._prepare_for_json(results)
             json.dump(json_results, f, indent=2)
+        
+        # Save mapping of objects to frames they appear in
+        self.save_object_frame_mapping()
         
         print(f"All results saved to: {self.output_dir}")
         return results

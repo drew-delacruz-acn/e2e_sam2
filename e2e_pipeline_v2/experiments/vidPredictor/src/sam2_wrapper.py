@@ -144,21 +144,13 @@ class SAM2VideoWrapper:
         Returns:
             Binary mask on the current frame
         """
-        box_coords_np = np.array(box, dtype=np.float32)
+        box_coords = np.array(box, dtype=np.float32)
         
-        # Convert to PyTorch tensor and move to the correct device
-        box_coords_tensor = torch.from_numpy(box_coords_np).to(self.device)
-        
-        # Explicitly cast to bfloat16 if CUDA autocast is enabled and set to bfloat16
-        # This is to ensure dtype consistency with SAM2's internal operations under autocast
-        if self.device == "cuda" and torch.is_autocast_enabled() and torch.get_autocast_gpu_dtype() == torch.bfloat16:
-            box_coords_tensor = box_coords_tensor.to(torch.bfloat16)
-            
         _, out_obj_ids, out_mask_logits = self.predictor.add_new_points_or_box(
             inference_state=self.inference_state,
             frame_idx=frame_idx,
             obj_id=obj_id,
-            box=box_coords_tensor # Pass the processed tensor
+            box=box_coords
         )
         
         # Match vidPredict_demo.py by thresholding the logits

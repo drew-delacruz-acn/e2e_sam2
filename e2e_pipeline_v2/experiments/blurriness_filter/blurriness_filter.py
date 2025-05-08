@@ -2,6 +2,7 @@ import pandas as pd
 import json
 import numpy as np
 import os
+import argparse
 
 def blurriness_filter(json_path, csv_path, output_path,
                      metric='laplacian', 
@@ -120,6 +121,46 @@ def blurriness_filter(json_path, csv_path, output_path,
     
     print(description)
     return description
+
+
+# Command-line interface
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description='Filter object detections based on image blurriness metrics')
+    
+    # Required arguments
+    parser.add_argument('--json_path', type=str, required=True,
+                       help='Path to the combined_search_results_resnet50.json file')
+    parser.add_argument('--csv_path', type=str, required=True,
+                       help='Path to the agg_results.csv file')
+    parser.add_argument('--output_path', type=str, required=True,
+                       help='Path for the filtered JSON output')
+    
+    # Optional arguments with defaults
+    parser.add_argument('--metric', type=str, default='laplacian',
+                       help='The blurriness metric to filter by (e.g., laplacian, tenengrad, fft, is_blurry_fixed)')
+    parser.add_argument('--method', type=str, default='percentile', choices=['percentile', 'std_dev', 'threshold'],
+                       help='Method to use - percentile, std_dev, or threshold')
+    parser.add_argument('--threshold', type=float, default=75,
+                       help='The threshold value appropriate to the selected method')
+    parser.add_argument('--boolean_threshold', action='store_true', 
+                       help='Set threshold to True instead of False for boolean metrics')
+    
+    args = parser.parse_args()
+    
+    # Handle boolean threshold if needed
+    threshold = args.threshold
+    if args.metric.startswith('is_blurry_') and args.method == 'threshold':
+        threshold = args.boolean_threshold
+    
+    # Call the filter function with parsed arguments
+    blurriness_filter(
+        args.json_path,
+        args.csv_path,
+        args.output_path,
+        metric=args.metric,
+        method=args.method,
+        threshold=threshold
+    )
 
 
 # Example usage

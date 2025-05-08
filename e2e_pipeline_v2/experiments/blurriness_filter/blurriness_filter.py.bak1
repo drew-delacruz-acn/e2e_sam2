@@ -4,7 +4,7 @@ import numpy as np
 import os
 import argparse
 
-def blurriness_filter(json_path, csv_path, output_path=None,
+def blurriness_filter(json_path, csv_path, output_path,
                      metric='laplacian', 
                      method='percentile', 
                      threshold=75):
@@ -14,7 +14,7 @@ def blurriness_filter(json_path, csv_path, output_path=None,
     Parameters:
     json_path (str): Path to the combined_search_results_resnet50.json file
     csv_path (str): Path to the agg_results.csv file
-    output_path (str, optional): Path for the filtered JSON output. If None, will generate a name based on parameters.
+    output_path (str): Path for the filtered JSON output
     metric (str): The blurriness metric to filter by (e.g., 'laplacian', 'tenengrad', 'fft', 'is_blurry_fixed')
     method (str): Method to use - 'percentile', 'std_dev', or 'threshold'
     threshold (float): The threshold value appropriate to the selected method
@@ -22,18 +22,6 @@ def blurriness_filter(json_path, csv_path, output_path=None,
     Returns:
     str: Description of the filtering applied and results
     """
-    # Generate output path if not provided
-    if output_path is None:
-        # Format threshold for filename
-        if isinstance(threshold, bool):
-            threshold_str = str(threshold).lower()
-        else:
-            threshold_str = str(threshold).replace('.', 'p')
-        
-        # Generate a descriptive filename
-        output_path = f"filtered_{metric}_{method}_{threshold_str}.json"
-        print(f"No output path provided, using auto-generated filename: {output_path}")
-    
     # Read the CSV metrics
     metrics_df = pd.read_csv(csv_path)
     
@@ -144,10 +132,10 @@ if __name__ == "__main__":
                        help='Path to the combined_search_results_resnet50.json file')
     parser.add_argument('--csv_path', type=str, required=True,
                        help='Path to the agg_results.csv file')
+    parser.add_argument('--output_path', type=str, required=True,
+                       help='Path for the filtered JSON output')
     
     # Optional arguments with defaults
-    parser.add_argument('--output_path', type=str, required=False, default=None,
-                       help='Path for the filtered JSON output (optional, will auto-generate if not provided)')
     parser.add_argument('--metric', type=str, default='laplacian',
                        help='The blurriness metric to filter by (e.g., laplacian, tenengrad, fft, is_blurry_fixed)')
     parser.add_argument('--method', type=str, default='percentile', choices=['percentile', 'std_dev', 'threshold'],

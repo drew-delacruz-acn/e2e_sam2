@@ -96,26 +96,3 @@ for idx in range(0, min(len(frames), 30), 1):
     else:
         print(f"No segments found for frame {idx}")
 
-#esults to ./sam2_results
-# gut check
-# Visualizing frame 0
-# Traceback (most recent call last):
-#   File "/home/ubuntu/code/drew/e2e_sam2/e2e_pipeline_v2/experiments/vidPredictor/test_sam2_integration.py", line 60, in <module>
-#     sam_wrapper.visualize_frame(
-#   File "/home/ubuntu/code/drew/e2e_sam2/e2e_pipeline_v2/experiments/vidPredictor/src/sam2_wrapper.py", line 225, in visualize_frame
-#     plt.imshow(m, alpha=0.5, cmap=plt.cm.colors.ListedColormap([colors[color_idx]]))
-#   File "/home/ubuntu/code/drew/e2e_sam2/venv/lib/python3.12/site-packages/matplotlib/pyplot.py", line 3590, in imshow
-#     __ret = gca().imshow(
-#             ^^^^^^^^^^^^^
-#   File "/home/ubuntu/code/drew/e2e_sam2/venv/lib/python3.12/site-packages/matplotlib/__init__.py", line 1521, in inner
-#     return func(
-#            ^^^^^
-#   File "/home/ubuntu/code/drew/e2e_sam2/venv/lib/python3.12/site-packages/matplotlib/axes/_axes.py", line 5976, in imshow
-#     im.set_data(X)
-#   File "/home/ubuntu/code/drew/e2e_sam2/venv/lib/python3.12/site-packages/matplotlib/image.py", line 685, in set_data
-#     self._A = self._normalize_image_array(A)
-#               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-#   File "/home/ubuntu/code/drew/e2e_sam2/venv/lib/python3.12/site-packages/matplotlib/image.py", line 653, in _normalize_image_array
-#     raise TypeError(f"Invalid shape {A.shape} for image data")
-# TypeError: Invalid shape (1, 540, 960) for image data
-# (venv) ubuntu@ip-10-35-126-83:~/code/drew/e2e_sam2$ 

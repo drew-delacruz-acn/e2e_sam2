@@ -38,19 +38,8 @@ blurriness_filter(
     threshold=False
 )
 
-# 4. Test auto-generated output filename (no output_path provided)
-print("\nTest 4: Auto-generated output filename")
-blurriness_filter(
-    'combined_search_results_resnet50.json',
-    'e2e_pipeline_v2/experiments/agg_results.csv',
-    None,  # No output_path provided
-    metric='fft',
-    method='std_dev',
-    threshold=1.5
-)
-
-# 5. Demonstrate command line usage
-print("\nTest 5: Demonstrating command line usage")
+# 4. Demonstrate command line usage
+print("\nTest 4: Demonstrating command line usage")
 print("The following commands can be used to run the same tests from the command line:")
 
 cmd1 = [
@@ -91,19 +80,5 @@ cmd3 = [
 ]
 print("\nCommand for Test 3:")
 print(" ".join(cmd3))
-
-# Command for auto-generated output filename
-cmd4 = [
-    sys.executable,
-    "-m", "e2e_pipeline_v2.experiments.blurriness_filter.blurriness_filter",
-    "--json_path", "combined_search_results_resnet50.json",
-    "--csv_path", "e2e_pipeline_v2/experiments/agg_results.csv",
-    # No output_path specified
-    "--metric", "fft",
-    "--method", "std_dev",
-    "--threshold", "1.5"
-]
-print("\nCommand for Test 4 (auto-generated filename):")
-print(" ".join(cmd4))
 
 print("\nAll tests completed. Check the output JSON files.") 

@@ -1,0 +1,892 @@
+[
+    {
+        "coordinates": [
+            699,
+            226,
+            699,
+            226
+        ],
+        "label": "TVA Monitor",
+        "confidence": 0.0010498211486265063
+    },
+    {
+        "coordinates": [
+            680,
+            223,
+            681,
+            223
+        ],
+        "label": "TVA Monitor",
+        "confidence": 0.0006068884977139533
+    },
+    {
+        "coordinates": [
+            762,
+            247,
+            763,
+            247
+        ],
+        "label": "TVA Monitor",
+        "confidence": 0.0005534629453904927
+    },
+    {
+        "coordinates": [
+            687,
+            221,
+            687,
+            221
+        ],
+        "label": "TVA Monitor",
+        "confidence": 0.0005419612280093133
+    },
+    {
+        "coordinates": [
+            701,
+            228,
+            701,
+            229
+        ],
+        "label": "TVA Monitor",
+        "confidence": 0.0005206669447943568
+    },
+    {
+        "coordinates": [
+            676,
+            218,
+            676,
+            218
+        ],
+        "label": "TVA Monitor",
+        "confidence": 0.0004177527443971485
+    },
+    {
+        "coordinates": [
+            664,
+            211,
+            664,
+            211
+        ],
+        "label": "TVA Monitor",
+        "confidence": 0.0002867586736101657
+    },
+    {
+        "coordinates": [
+            691,
+            227,
+            691,
+            228
+        ],
+        "label": "TVA Monitor",
+        "confidence": 0.00026683200849220157
+    },
+    {
+        "coordinates": [
+            748,
+            245,
+            749,
+            245
+        ],
+        "label": "TVA Monitor",
+        "confidence": 0.00023281160974875093
+    },
+    {
+        "coordinates": [
+            707,
+            231,
+            708,
+            231
+        ],
+        "label": "TVA Monitor",
+        "confidence": 0.00019860222528222948
+    },
+    {
+        "coordinates": [
+            675,
+            216,
+            677,
+            217
+        ],
+        "label": "TVA Monitor",
+        "confidence": 0.00018541855388320982
+    },
+    {
+        "coordinates": [
+            746,
+            245,
+            746,
+            246
+        ],
+        "label": "TVA Monitor",
+        "confidence": 0.00015755952335894108
+    },
+    {
+        "coordinates": [
+            648,
+            209,
+            648,
+            209
+        ],
+        "label": "TVA Monitor",
+        "confidence": 0.00015692594752181321
+    },
+    {
+        "coordinates": [
+            720,
+            230,
+            720,
+            231
+        ],
+        "label": "TVA Monitor",
+        "confidence": 0.00011174132669111714
+    },
+    {
+        "coordinates": [
+            769,
+            253,
+            769,
+            253
+        ],
+        "label": "TVA Monitor",
+        "confidence": 0.00010647050658008084
+    },
+    {
+        "coordinates": [
+            722,
+            235,
+            723,
+            235
+        ],
+        "label": "TVA Monitor",
+        "confidence": 0.0001054984240909107
+    },
+    {
+        "coordinates": [
+            713,
+            229,
+            713,
+            229
+        ],
+        "label": "TVA Monitor",
+        "confidence": 9.115135617321357e-05
+    },
+    {
+        "coordinates": [
+            705,
+            227,
+            705,
+            227
+        ],
+        "label": "TVA Monitor",
+        "confidence": 8.101804996840656e-05
+    },
+    {
+        "coordinates": [
+            723,
+            242,
+            723,
+            242
+        ],
+        "label": "TVA Monitor",
+        "confidence": 7.832110713934526e-05
+    },
+    {
+        "coordinates": [
+            723,
+            233,
+            724,
+            233
+        ],
+        "label": "TVA Monitor",
+        "confidence": 7.653692591702566e-05
+    },
+    {
+        "coordinates": [
+            793,
+            262,
+            793,
+            262
+        ],
+        "label": "TVA Monitor",
+        "confidence": 6.650610885117203e-05
+    },
+    {
+        "coordinates": [
+            712,
+            218,
+            713,
+            218
+        ],
+        "label": "TVA Monitor",
+        "confidence": 5.671257895301096e-05
+    },
+    {
+        "coordinates": [
+            765,
+            255,
+            766,
+            256
+        ],
+        "label": "TVA Monitor",
+        "confidence": 5.434266495285556e-05
+    },
+    {
+        "coordinates": [
+            676,
+            206,
+            678,
+            207
+        ],
+        "label": "TVA Monitor",
+        "confidence": 5.073627835372463e-05
+    },
+    {
+        "coordinates": [
+            818,
+            269,
+            818,
+            270
+        ],
+        "label": "TVA Monitor",
+        "confidence": 5.040104588260874e-05
+    },
+    {
+        "coordinates": [
+            753,
+            251,
+            753,
+            251
+        ],
+        "label": "TVA Monitor",
+        "confidence": 4.179434108664282e-05
+    },
+    {
+        "coordinates": [
+            735,
+            240,
+            736,
+            240
+        ],
+        "label": "TVA Monitor",
+        "confidence": 3.748220478883013e-05
+    },
+    {
+        "coordinates": [
+            725,
+            237,
+            725,
+            237
+        ],
+        "label": "TVA Monitor",
+        "confidence": 3.728201045305468e-05
+    },
+    {
+        "coordinates": [
+            689,
+            216,
+            689,
+            217
+        ],
+        "label": "TVA Monitor",
+        "confidence": 3.6757191992364824e-05
+    },
+    {
+        "coordinates": [
+            783,
+            261,
+            783,
+            262
+        ],
+        "label": "TVA Monitor",
+        "confidence": 3.550844849087298e-05
+    },
+    {
+        "coordinates": [
+            763,
+            259,
+            764,
+            259
+        ],
+        "label": "TVA Monitor",
+        "confidence": 3.535180076141842e-05
+    },
+    {
+        "coordinates": [
+            771,
+            261,
+            771,
+            262
+        ],
+        "label": "TVA Monitor",
+        "confidence": 3.5332388506503776e-05
+    },
+    {
+        "coordinates": [
+            785,
+            258,
+            785,
+            259
+        ],
+        "label": "TVA Monitor",
+        "confidence": 3.386522439541295e-05
+    },
+    {
+        "coordinates": [
+            736,
+            228,
+            736,
+            228
+        ],
+        "label": "TVA Monitor",
+        "confidence": 3.2714076951378956e-05
+    },
+    {
+        "coordinates": [
+            768,
+            258,
+            769,
+            259
+        ],
+        "label": "TVA Monitor",
+        "confidence": 3.16315345116891e-05
+    },
+    {
+        "coordinates": [
+            775,
+            255,
+            775,
+            256
+        ],
+        "label": "TVA Monitor",
+        "confidence": 2.8907577870995738e-05
+    },
+    {
+        "coordinates": [
+            696,
+            218,
+            696,
+            218
+        ],
+        "label": "TVA Monitor",
+        "confidence": 2.8482696507126093e-05
+    },
+    {
+        "coordinates": [
+            716,
+            228,
+            716,
+            228
+        ],
+        "label": "TVA Monitor",
+        "confidence": 2.8308639230090193e-05
+    },
+    {
+        "coordinates": [
+            726,
+            235,
+            727,
+            235
+        ],
+        "label": "TVA Monitor",
+        "confidence": 2.5468914827797562e-05
+    },
+    {
+        "coordinates": [
+            722,
+            221,
+            722,
+            221
+        ],
+        "label": "TVA Monitor",
+        "confidence": 2.4902441509766504e-05
+    },
+    {
+        "coordinates": [
+            502,
+            148,
+            503,
+            148
+        ],
+        "label": "Loki's dagger",
+        "confidence": 0.00035597861278802156
+    },
+    {
+        "coordinates": [
+            543,
+            161,
+            543,
+            162
+        ],
+        "label": "Loki's dagger",
+        "confidence": 0.0001671741483733058
+    },
+    {
+        "coordinates": [
+            475,
+            153,
+            476,
+            154
+        ],
+        "label": "Loki's dagger",
+        "confidence": 0.0001483086816733703
+    },
+    {
+        "coordinates": [
+            494,
+            147,
+            495,
+            147
+        ],
+        "label": "Loki's dagger",
+        "confidence": 0.000145361089380458
+    },
+    {
+        "coordinates": [
+            524,
+            145,
+            524,
+            145
+        ],
+        "label": "Loki's dagger",
+        "confidence": 7.128997822292149e-05
+    },
+    {
+        "coordinates": [
+            437,
+            124,
+            437,
+            124
+        ],
+        "label": "Loki's dagger",
+        "confidence": 6.443264283007011e-05
+    },
+    {
+        "coordinates": [
+            572,
+            150,
+            572,
+            150
+        ],
+        "label": "Loki's dagger",
+        "confidence": 6.23740124865435e-05
+    },
+    {
+        "coordinates": [
+            504,
+            141,
+            504,
+            141
+        ],
+        "label": "Loki's dagger",
+        "confidence": 6.226330151548609e-05
+    },
+    {
+        "coordinates": [
+            547,
+            138,
+            547,
+            139
+        ],
+        "label": "Loki's dagger",
+        "confidence": 6.187970575410873e-05
+    },
+    {
+        "coordinates": [
+            508,
+            150,
+            508,
+            150
+        ],
+        "label": "Loki's dagger",
+        "confidence": 5.686219810741022e-05
+    },
+    {
+        "coordinates": [
+            452,
+            138,
+            454,
+            141
+        ],
+        "label": "Loki's dagger",
+        "confidence": 5.5342701671179384e-05
+    },
+    {
+        "coordinates": [
+            538,
+            145,
+            538,
+            145
+        ],
+        "label": "Loki's dagger",
+        "confidence": 5.311436689225957e-05
+    },
+    {
+        "coordinates": [
+            562,
+            144,
+            562,
+            144
+        ],
+        "label": "Loki's dagger",
+        "confidence": 5.086381861474365e-05
+    },
+    {
+        "coordinates": [
+            574,
+            169,
+            574,
+            169
+        ],
+        "label": "Loki's dagger",
+        "confidence": 4.9665384722175077e-05
+    },
+    {
+        "coordinates": [
+            594,
+            147,
+            594,
+            147
+        ],
+        "label": "Loki's dagger",
+        "confidence": 3.968186865677126e-05
+    },
+    {
+        "coordinates": [
+            527,
+            140,
+            527,
+            140
+        ],
+        "label": "Loki's dagger",
+        "confidence": 2.9591597922262736e-05
+    },
+    {
+        "coordinates": [
+            534,
+            144,
+            534,
+            144
+        ],
+        "label": "Loki's dagger",
+        "confidence": 2.7712052542483434e-05
+    },
+    {
+        "coordinates": [
+            593,
+            149,
+            593,
+            150
+        ],
+        "label": "Loki's dagger",
+        "confidence": 2.557165498728864e-05
+    },
+    {
+        "coordinates": [
+            598,
+            148,
+            598,
+            148
+        ],
+        "label": "TimeSpear",
+        "confidence": 0.00024015271628741175
+    },
+    {
+        "coordinates": [
+            507,
+            144,
+            507,
+            144
+        ],
+        "label": "TimeSpear",
+        "confidence": 0.00019781569426413625
+    },
+    {
+        "coordinates": [
+            549,
+            161,
+            550,
+            162
+        ],
+        "label": "TimeSpear",
+        "confidence": 0.00016482110368087888
+    },
+    {
+        "coordinates": [
+            579,
+            148,
+            579,
+            148
+        ],
+        "label": "TimeSpear",
+        "confidence": 0.000160634343046695
+    },
+    {
+        "coordinates": [
+            570,
+            168,
+            582,
+            173
+        ],
+        "label": "TimeSpear",
+        "confidence": 0.0001462286018067971
+    },
+    {
+        "coordinates": [
+            603,
+            159,
+            603,
+            159
+        ],
+        "label": "TimeSpear",
+        "confidence": 0.00014020279922988266
+    },
+    {
+        "coordinates": [
+            498,
+            145,
+            498,
+            145
+        ],
+        "label": "TimeSpear",
+        "confidence": 0.0001214115836773999
+    },
+    {
+        "coordinates": [
+            566,
+            145,
+            566,
+            145
+        ],
+        "label": "TimeSpear",
+        "confidence": 8.764925587456673e-05
+    },
+    {
+        "coordinates": [
+            601,
+            161,
+            601,
+            162
+        ],
+        "label": "TimeSpear",
+        "confidence": 6.85484628775157e-05
+    },
+    {
+        "coordinates": [
+            548,
+            140,
+            548,
+            140
+        ],
+        "label": "TimeSpear",
+        "confidence": 6.77061834721826e-05
+    },
+    {
+        "coordinates": [
+            623,
+            179,
+            623,
+            179
+        ],
+        "label": "TimeSpear",
+        "confidence": 6.742659752489999e-05
+    },
+    {
+        "coordinates": [
+            560,
+            138,
+            560,
+            139
+        ],
+        "label": "TimeSpear",
+        "confidence": 6.383570871548727e-05
+    },
+    {
+        "coordinates": [
+            604,
+            169,
+            605,
+            170
+        ],
+        "label": "TimeSpear",
+        "confidence": 6.299651431618258e-05
+    },
+    {
+        "coordinates": [
+            513,
+            140,
+            514,
+            140
+        ],
+        "label": "TimeSpear",
+        "confidence": 6.055549602024257e-05
+    },
+    {
+        "coordinates": [
+            557,
+            143,
+            557,
+            143
+        ],
+        "label": "TimeSpear",
+        "confidence": 4.462271317606792e-05
+    },
+    {
+        "coordinates": [
+            514,
+            146,
+            514,
+            146
+        ],
+        "label": "TimeSpear",
+        "confidence": 4.246148819220252e-05
+    },
+    {
+        "coordinates": [
+            554,
+            137,
+            554,
+            137
+        ],
+        "label": "TimeSpear",
+        "confidence": 4.201453702989966e-05
+    },
+    {
+        "coordinates": [
+            534,
+            147,
+            534,
+            147
+        ],
+        "label": "TimeSpear",
+        "confidence": 4.1966766730183735e-05
+    },
+    {
+        "coordinates": [
+            455,
+            119,
+            469,
+            124
+        ],
+        "label": "TimeSpear",
+        "confidence": 4.03854064643383e-05
+    },
+    {
+        "coordinates": [
+            580,
+            156,
+            580,
+            156
+        ],
+        "label": "TimeSpear",
+        "confidence": 3.9599737647222355e-05
+    },
+    {
+        "coordinates": [
+            595,
+            153,
+            595,
+            153
+        ],
+        "label": "TimeSpear",
+        "confidence": 3.819735502474941e-05
+    },
+    {
+        "coordinates": [
+            606,
+            174,
+            606,
+            175
+        ],
+        "label": "TimeSpear",
+        "confidence": 3.5945970012107864e-05
+    },
+    {
+        "coordinates": [
+            547,
+            139,
+            547,
+            139
+        ],
+        "label": "TimeSpear",
+        "confidence": 3.562944402801804e-05
+    },
+    {
+        "coordinates": [
+            596,
+            164,
+            598,
+            167
+        ],
+        "label": "TimeSpear",
+        "confidence": 3.410427234484814e-05
+    },
+    {
+        "coordinates": [
+            607,
+            168,
+            608,
+            168
+        ],
+        "label": "TimeSpear",
+        "confidence": 3.368789475644007e-05
+    },
+    {
+        "coordinates": [
+            615,
+            161,
+            616,
+            162
+        ],
+        "label": "TimeSpear",
+        "confidence": 3.2781888876343146e-05
+    },
+    {
+        "coordinates": [
+            433,
+            118,
+            433,
+            118
+        ],
+        "label": "TimeSpear",
+        "confidence": 3.10548311972525e-05
+    },
+    {
+        "coordinates": [
+            605,
+            161,
+            606,
+            163
+        ],
+        "label": "TimeSpear",
+        "confidence": 3.057654976146296e-05
+    },
+    {
+        "coordinates": [
+            535,
+            137,
+            535,
+            137
+        ],
+        "label": "TimeSpear",
+        "confidence": 2.8968477636226453e-05
+    },
+    {
+        "coordinates": [
+            628,
+            173,
+            629,
+            173
+        ],
+        "label": "TimeSpear",
+        "confidence": 2.7608122763922438e-05
+    },
+    {
+        "coordinates": [
+            622,
+            190,
+            623,
+            190
+        ],
+        "label": "TimeSpear",
+        "confidence": 2.593907447590027e-05
+    }
+]

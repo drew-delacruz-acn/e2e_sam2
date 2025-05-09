@@ -1,0 +1,642 @@
+[
+    {
+        "coordinates": [
+            244,
+            266,
+            244,
+            267
+        ],
+        "label": "TemPad",
+        "confidence": 1.9610831714089727e-06
+    },
+    {
+        "coordinates": [
+            256,
+            80,
+            322,
+            131
+        ],
+        "label": "TVA Monitor",
+        "confidence": 0.00292807980440557
+    },
+    {
+        "coordinates": [
+            684,
+            69,
+            715,
+            143
+        ],
+        "label": "TVA Monitor",
+        "confidence": 0.0014543855795636773
+    },
+    {
+        "coordinates": [
+            581,
+            70,
+            815,
+            199
+        ],
+        "label": "TVA Monitor",
+        "confidence": 0.0008629435324110091
+    },
+    {
+        "coordinates": [
+            296,
+            103,
+            312,
+            118
+        ],
+        "label": "TVA Monitor",
+        "confidence": 0.0006257821223698556
+    },
+    {
+        "coordinates": [
+            179,
+            77,
+            272,
+            283
+        ],
+        "label": "TVA Monitor",
+        "confidence": 0.0002580030122771859
+    },
+    {
+        "coordinates": [
+            266,
+            110,
+            266,
+            111
+        ],
+        "label": "TVA Monitor",
+        "confidence": 0.00017647264758124948
+    },
+    {
+        "coordinates": [
+            221,
+            212,
+            225,
+            218
+        ],
+        "label": "TVA Monitor",
+        "confidence": 0.00013831371325068176
+    },
+    {
+        "coordinates": [
+            738,
+            141,
+            849,
+            222
+        ],
+        "label": "TVA Monitor",
+        "confidence": 7.164943963289261e-05
+    },
+    {
+        "coordinates": [
+            206,
+            123,
+            253,
+            189
+        ],
+        "label": "TVA Monitor",
+        "confidence": 4.556240310193971e-05
+    },
+    {
+        "coordinates": [
+            721,
+            164,
+            777,
+            210
+        ],
+        "label": "TVA Monitor",
+        "confidence": 3.4058382880175486e-05
+    },
+    {
+        "coordinates": [
+            773,
+            285,
+            773,
+            285
+        ],
+        "label": "TVA Monitor",
+        "confidence": 2.9088932933518663e-05
+    },
+    {
+        "coordinates": [
+            798,
+            258,
+            798,
+            258
+        ],
+        "label": "TVA Monitor",
+        "confidence": 2.8271206247154623e-05
+    },
+    {
+        "coordinates": [
+            551,
+            80,
+            665,
+            125
+        ],
+        "label": "TVA Monitor",
+        "confidence": 2.5680490580270998e-05
+    },
+    {
+        "coordinates": [
+            315,
+            106,
+            337,
+            128
+        ],
+        "label": "TVA Monitor",
+        "confidence": 2.440002208459191e-05
+    },
+    {
+        "coordinates": [
+            737,
+            71,
+            761,
+            145
+        ],
+        "label": "TVA Monitor",
+        "confidence": 2.3489768864237703e-05
+    },
+    {
+        "coordinates": [
+            773,
+            214,
+            773,
+            214
+        ],
+        "label": "TVA Monitor",
+        "confidence": 2.0142482753726654e-05
+    },
+    {
+        "coordinates": [
+            804,
+            267,
+            804,
+            267
+        ],
+        "label": "TVA Monitor",
+        "confidence": 1.7742593627190217e-05
+    },
+    {
+        "coordinates": [
+            622,
+            141,
+            623,
+            141
+        ],
+        "label": "TVA Monitor",
+        "confidence": 1.427562256139936e-05
+    },
+    {
+        "coordinates": [
+            539,
+            133,
+            540,
+            134
+        ],
+        "label": "TVA Monitor",
+        "confidence": 1.1253163393121213e-05
+    },
+    {
+        "coordinates": [
+            228,
+            186,
+            234,
+            191
+        ],
+        "label": "TVA Monitor",
+        "confidence": 1.0729196219472215e-05
+    },
+    {
+        "coordinates": [
+            227,
+            196,
+            230,
+            199
+        ],
+        "label": "TVA Monitor",
+        "confidence": 8.974997399491258e-06
+    },
+    {
+        "coordinates": [
+            559,
+            121,
+            560,
+            122
+        ],
+        "label": "TVA Monitor",
+        "confidence": 8.140381396515295e-06
+    },
+    {
+        "coordinates": [
+            529,
+            124,
+            529,
+            124
+        ],
+        "label": "TVA Monitor",
+        "confidence": 6.923394721525256e-06
+    },
+    {
+        "coordinates": [
+            221,
+            207,
+            223,
+            212
+        ],
+        "label": "TVA Monitor",
+        "confidence": 5.892667104490101e-06
+    },
+    {
+        "coordinates": [
+            560,
+            134,
+            560,
+            134
+        ],
+        "label": "TVA Monitor",
+        "confidence": 5.0432704483682755e-06
+    },
+    {
+        "coordinates": [
+            331,
+            117,
+            334,
+            123
+        ],
+        "label": "TVA Monitor",
+        "confidence": 4.3959871618426405e-06
+    },
+    {
+        "coordinates": [
+            640,
+            159,
+            640,
+            159
+        ],
+        "label": "TVA Monitor",
+        "confidence": 3.3774738312786212e-06
+    },
+    {
+        "coordinates": [
+            587,
+            115,
+            588,
+            116
+        ],
+        "label": "TVA Monitor",
+        "confidence": 3.2473849387315568e-06
+    },
+    {
+        "coordinates": [
+            695,
+            134,
+            695,
+            135
+        ],
+        "label": "TVA Monitor",
+        "confidence": 3.234758878534194e-06
+    },
+    {
+        "coordinates": [
+            638,
+            225,
+            638,
+            225
+        ],
+        "label": "TVA Monitor",
+        "confidence": 3.1078900519787567e-06
+    },
+    {
+        "coordinates": [
+            760,
+            146,
+            790,
+            168
+        ],
+        "label": "TVA Monitor",
+        "confidence": 2.2812848783360096e-06
+    },
+    {
+        "coordinates": [
+            640,
+            121,
+            641,
+            123
+        ],
+        "label": "TVA Monitor",
+        "confidence": 2.052693616860779e-06
+    },
+    {
+        "coordinates": [
+            335,
+            98,
+            335,
+            99
+        ],
+        "label": "TVA Monitor",
+        "confidence": 1.940142510648002e-06
+    },
+    {
+        "coordinates": [
+            587,
+            106,
+            683,
+            164
+        ],
+        "label": "TVA Monitor",
+        "confidence": 1.7047062783603906e-06
+    },
+    {
+        "coordinates": [
+            644,
+            218,
+            644,
+            218
+        ],
+        "label": "TVA Monitor",
+        "confidence": 1.6660590063111158e-06
+    },
+    {
+        "coordinates": [
+            593,
+            125,
+            593,
+            125
+        ],
+        "label": "TVA Monitor",
+        "confidence": 1.6163419331860496e-06
+    },
+    {
+        "coordinates": [
+            616,
+            132,
+            650,
+            160
+        ],
+        "label": "TVA Monitor",
+        "confidence": 1.3992453204991762e-06
+    },
+    {
+        "coordinates": [
+            506,
+            65,
+            804,
+            155
+        ],
+        "label": "Loki's dagger",
+        "confidence": 0.0003310624451842159
+    },
+    {
+        "coordinates": [
+            499,
+            66,
+            618,
+            99
+        ],
+        "label": "Loki's dagger",
+        "confidence": 4.381934923003428e-05
+    },
+    {
+        "coordinates": [
+            539,
+            73,
+            587,
+            84
+        ],
+        "label": "Loki's dagger",
+        "confidence": 7.5955276770400815e-06
+    },
+    {
+        "coordinates": [
+            809,
+            129,
+            809,
+            130
+        ],
+        "label": "Loki's dagger",
+        "confidence": 6.810211743868422e-06
+    },
+    {
+        "coordinates": [
+            508,
+            77,
+            512,
+            80
+        ],
+        "label": "Loki's dagger",
+        "confidence": 5.489921477419557e-06
+    },
+    {
+        "coordinates": [
+            656,
+            103,
+            665,
+            113
+        ],
+        "label": "Loki's dagger",
+        "confidence": 5.342316399037372e-06
+    },
+    {
+        "coordinates": [
+            572,
+            65,
+            599,
+            93
+        ],
+        "label": "Loki's dagger",
+        "confidence": 3.5984130590804853e-06
+    },
+    {
+        "coordinates": [
+            603,
+            64,
+            633,
+            93
+        ],
+        "label": "TimeSpear",
+        "confidence": 2.710555691010086e-06
+    },
+    {
+        "coordinates": [
+            618,
+            86,
+            642,
+            99
+        ],
+        "label": "TimeSpear",
+        "confidence": 1.6147301948876702e-06
+    },
+    {
+        "coordinates": [
+            82,
+            190,
+            82,
+            190
+        ],
+        "label": "Boastful Loki Armor",
+        "confidence": 7.4154645517410245e-06
+    },
+    {
+        "coordinates": [
+            177,
+            239,
+            177,
+            239
+        ],
+        "label": "Boastful Loki Armor",
+        "confidence": 2.94245501208934e-06
+    },
+    {
+        "coordinates": [
+            197,
+            221,
+            197,
+            221
+        ],
+        "label": "Boastful Loki Armor",
+        "confidence": 2.42187002186256e-06
+    },
+    {
+        "coordinates": [
+            236,
+            310,
+            236,
+            310
+        ],
+        "label": "Classic Loki Armor",
+        "confidence": 7.62815307098208e-06
+    },
+    {
+        "coordinates": [
+            209,
+            355,
+            209,
+            355
+        ],
+        "label": "Classic Loki Armor",
+        "confidence": 2.2558995169674745e-06
+    },
+    {
+        "coordinates": [
+            218,
+            370,
+            219,
+            370
+        ],
+        "label": "Classic Loki Armor",
+        "confidence": 1.6287269772874424e-06
+    },
+    {
+        "coordinates": [
+            234,
+            262,
+            235,
+            262
+        ],
+        "label": "Aligator Loki Plushie",
+        "confidence": 2.391367706877645e-05
+    },
+    {
+        "coordinates": [
+            257,
+            280,
+            257,
+            281
+        ],
+        "label": "Aligator Loki Plushie",
+        "confidence": 2.2359361537382938e-05
+    },
+    {
+        "coordinates": [
+            244,
+            272,
+            244,
+            272
+        ],
+        "label": "Aligator Loki Plushie",
+        "confidence": 1.4645836927229539e-05
+    },
+    {
+        "coordinates": [
+            218,
+            204,
+            218,
+            204
+        ],
+        "label": "Aligator Loki Plushie",
+        "confidence": 7.398976777039934e-06
+    },
+    {
+        "coordinates": [
+            251,
+            289,
+            251,
+            289
+        ],
+        "label": "Aligator Loki Plushie",
+        "confidence": 3.4293582302780123e-06
+    },
+    {
+        "coordinates": [
+            232,
+            271,
+            232,
+            271
+        ],
+        "label": "Aligator Loki Plushie",
+        "confidence": 2.519152985769324e-06
+    },
+    {
+        "coordinates": [
+            220,
+            230,
+            221,
+            230
+        ],
+        "label": "Aligator Loki Plushie",
+        "confidence": 2.3615637019247515e-06
+    },
+    {
+        "coordinates": [
+            230,
+            222,
+            231,
+            222
+        ],
+        "label": "Aligator Loki Plushie",
+        "confidence": 1.9029236000278615e-06
+    },
+    {
+        "coordinates": [
+            213,
+            225,
+            214,
+            225
+        ],
+        "label": "Aligator Loki Plushie",
+        "confidence": 1.6947471976891393e-06
+    },
+    {
+        "coordinates": [
+            249,
+            286,
+            249,
+            287
+        ],
+        "label": "Aligator Loki Plushie",
+        "confidence": 1.4365332390298136e-06
+    },
+    {
+        "coordinates": [
+            343,
+            281,
+            343,
+            281
+        ],
+        "label": "Aligator Loki Plushie",
+        "confidence": 1.3999660950503312e-06
+    }
+]

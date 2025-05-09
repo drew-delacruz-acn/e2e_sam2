@@ -1,0 +1,402 @@
+[
+    {
+        "coordinates": [
+            589,
+            275,
+            858,
+            374
+        ],
+        "label": "Loki's Armor",
+        "confidence": 0.0005812868475914001
+    },
+    {
+        "coordinates": [
+            727,
+            274,
+            781,
+            350
+        ],
+        "label": "Loki's Armor",
+        "confidence": 0.00015738459478598088
+    },
+    {
+        "coordinates": [
+            645,
+            270,
+            713,
+            343
+        ],
+        "label": "Loki's Armor",
+        "confidence": 1.835732109611854e-05
+    },
+    {
+        "coordinates": [
+            614,
+            290,
+            638,
+            326
+        ],
+        "label": "Loki's Armor",
+        "confidence": 9.648851118981838e-06
+    },
+    {
+        "coordinates": [
+            382,
+            403,
+            382,
+            403
+        ],
+        "label": "Loki's Armor",
+        "confidence": 5.569786480918992e-06
+    },
+    {
+        "coordinates": [
+            598,
+            315,
+            598,
+            316
+        ],
+        "label": "Loki's Armor",
+        "confidence": 3.950373411498731e-06
+    },
+    {
+        "coordinates": [
+            566,
+            274,
+            863,
+            370
+        ],
+        "label": "Loki's Variant uniform",
+        "confidence": 0.00013126870908308774
+    },
+    {
+        "coordinates": [
+            753,
+            282,
+            780,
+            343
+        ],
+        "label": "Loki's Variant uniform",
+        "confidence": 0.00010734856914496049
+    },
+    {
+        "coordinates": [
+            638,
+            279,
+            659,
+            332
+        ],
+        "label": "Loki's Variant uniform",
+        "confidence": 8.750758570386097e-05
+    },
+    {
+        "coordinates": [
+            598,
+            287,
+            648,
+            344
+        ],
+        "label": "Loki's Variant uniform",
+        "confidence": 4.676730168284848e-05
+    },
+    {
+        "coordinates": [
+            605,
+            305,
+            605,
+            320
+        ],
+        "label": "Loki's Variant uniform",
+        "confidence": 1.1845262633869424e-05
+    },
+    {
+        "coordinates": [
+            536,
+            82,
+            721,
+            177
+        ],
+        "label": "Sylvie's horned headpiece",
+        "confidence": 0.9779087901115417
+    },
+    {
+        "coordinates": [
+            467,
+            272,
+            832,
+            435
+        ],
+        "label": "Sylvie's Armor",
+        "confidence": 0.13088269531726837
+    },
+    {
+        "coordinates": [
+            613,
+            266,
+            715,
+            368
+        ],
+        "label": "Sylvie's Armor",
+        "confidence": 0.003361095441505313
+    },
+    {
+        "coordinates": [
+            553,
+            285,
+            612,
+            374
+        ],
+        "label": "Sylvie's Armor",
+        "confidence": 6.846964424767066e-06
+    },
+    {
+        "coordinates": [
+            506,
+            244,
+            506,
+            244
+        ],
+        "label": "Sylvie's machete",
+        "confidence": 2.1427673345897347e-05
+    },
+    {
+        "coordinates": [
+            428,
+            237,
+            428,
+            237
+        ],
+        "label": "Sylvie's machete",
+        "confidence": 7.307723535632249e-06
+    },
+    {
+        "coordinates": [
+            731,
+            276,
+            731,
+            276
+        ],
+        "label": "Sylvie's machete",
+        "confidence": 5.953460458840709e-06
+    },
+    {
+        "coordinates": [
+            592,
+            275,
+            863,
+            381
+        ],
+        "label": "Ravonna Renslayer's Uniform",
+        "confidence": 0.00030987116042524576
+    },
+    {
+        "coordinates": [
+            754,
+            275,
+            813,
+            362
+        ],
+        "label": "Ravonna Renslayer's Uniform",
+        "confidence": 4.260770947439596e-05
+    },
+    {
+        "coordinates": [
+            803,
+            296,
+            816,
+            341
+        ],
+        "label": "Ravonna Renslayer's Uniform",
+        "confidence": 9.14508018468041e-06
+    },
+    {
+        "coordinates": [
+            214,
+            331,
+            214,
+            331
+        ],
+        "label": "Boastful Loki Armor",
+        "confidence": 1.6185204003704712e-05
+    },
+    {
+        "coordinates": [
+            214,
+            320,
+            214,
+            320
+        ],
+        "label": "Boastful Loki Armor",
+        "confidence": 9.258633326680865e-06
+    },
+    {
+        "coordinates": [
+            240,
+            377,
+            240,
+            377
+        ],
+        "label": "Boastful Loki Armor",
+        "confidence": 8.507111488142982e-06
+    },
+    {
+        "coordinates": [
+            237,
+            364,
+            237,
+            364
+        ],
+        "label": "Boastful Loki Armor",
+        "confidence": 8.215863999794237e-06
+    },
+    {
+        "coordinates": [
+            223,
+            333,
+            223,
+            333
+        ],
+        "label": "Boastful Loki Armor",
+        "confidence": 5.747959676227765e-06
+    },
+    {
+        "coordinates": [
+            210,
+            347,
+            210,
+            347
+        ],
+        "label": "Boastful Loki Armor",
+        "confidence": 5.46306273463415e-06
+    },
+    {
+        "coordinates": [
+            256,
+            385,
+            256,
+            385
+        ],
+        "label": "Boastful Loki Armor",
+        "confidence": 4.352884388936218e-06
+    },
+    {
+        "coordinates": [
+            375,
+            404,
+            375,
+            404
+        ],
+        "label": "Classic Loki Armor",
+        "confidence": 3.467244459898211e-05
+    },
+    {
+        "coordinates": [
+            569,
+            105,
+            599,
+            172
+        ],
+        "label": "Classic Loki Armor",
+        "confidence": 2.355093602091074e-05
+    },
+    {
+        "coordinates": [
+            393,
+            363,
+            393,
+            363
+        ],
+        "label": "Classic Loki Armor",
+        "confidence": 2.2104492018115707e-05
+    },
+    {
+        "coordinates": [
+            435,
+            355,
+            435,
+            355
+        ],
+        "label": "Classic Loki Armor",
+        "confidence": 1.1958168215642218e-05
+    },
+    {
+        "coordinates": [
+            564,
+            178,
+            566,
+            180
+        ],
+        "label": "Classic Loki Armor",
+        "confidence": 9.91893102764152e-06
+    },
+    {
+        "coordinates": [
+            610,
+            121,
+            618,
+            179
+        ],
+        "label": "Classic Loki Armor",
+        "confidence": 9.160457011603285e-06
+    },
+    {
+        "coordinates": [
+            403,
+            361,
+            403,
+            361
+        ],
+        "label": "Classic Loki Armor",
+        "confidence": 8.7658218035358e-06
+    },
+    {
+        "coordinates": [
+            565,
+            175,
+            565,
+            176
+        ],
+        "label": "Classic Loki Armor",
+        "confidence": 7.460664164682385e-06
+    },
+    {
+        "coordinates": [
+            400,
+            359,
+            400,
+            359
+        ],
+        "label": "Classic Loki Armor",
+        "confidence": 6.91564582666615e-06
+    },
+    {
+        "coordinates": [
+            614,
+            150,
+            615,
+            151
+        ],
+        "label": "Classic Loki Armor",
+        "confidence": 5.157860869076103e-06
+    },
+    {
+        "coordinates": [
+            596,
+            204,
+            596,
+            204
+        ],
+        "label": "Classic Loki Armor",
+        "confidence": 4.155925125814974e-06
+    },
+    {
+        "coordinates": [
+            646,
+            281,
+            851,
+            352
+        ],
+        "label": "Kid Loki Armor",
+        "confidence": 1.9093438822892494e-05
+    }
+]

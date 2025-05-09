@@ -1,0 +1,532 @@
+[
+    {
+        "coordinates": [
+            220,
+            201,
+            221,
+            201
+        ],
+        "label": "TVA Monitor",
+        "confidence": 0.0002589868090581149
+    },
+    {
+        "coordinates": [
+            727,
+            225,
+            727,
+            225
+        ],
+        "label": "TVA Monitor",
+        "confidence": 0.00012048601638525724
+    },
+    {
+        "coordinates": [
+            758,
+            235,
+            759,
+            235
+        ],
+        "label": "TVA Monitor",
+        "confidence": 2.6896997951553203e-05
+    },
+    {
+        "coordinates": [
+            777,
+            228,
+            777,
+            228
+        ],
+        "label": "TVA Monitor",
+        "confidence": 1.9293858713353984e-05
+    },
+    {
+        "coordinates": [
+            847,
+            238,
+            847,
+            238
+        ],
+        "label": "TVA Monitor",
+        "confidence": 1.24851030705031e-05
+    },
+    {
+        "coordinates": [
+            747,
+            230,
+            747,
+            230
+        ],
+        "label": "TVA Monitor",
+        "confidence": 7.617716164531885e-06
+    },
+    {
+        "coordinates": [
+            778,
+            227,
+            778,
+            227
+        ],
+        "label": "TVA Monitor",
+        "confidence": 7.53576887291274e-06
+    },
+    {
+        "coordinates": [
+            821,
+            240,
+            821,
+            240
+        ],
+        "label": "TVA Monitor",
+        "confidence": 5.966950539004756e-06
+    },
+    {
+        "coordinates": [
+            715,
+            224,
+            715,
+            224
+        ],
+        "label": "TVA Monitor",
+        "confidence": 4.967955192114459e-06
+    },
+    {
+        "coordinates": [
+            711,
+            232,
+            711,
+            232
+        ],
+        "label": "TVA Monitor",
+        "confidence": 3.778868403969682e-06
+    },
+    {
+        "coordinates": [
+            728,
+            221,
+            729,
+            221
+        ],
+        "label": "TVA Monitor",
+        "confidence": 3.4014558423223207e-06
+    },
+    {
+        "coordinates": [
+            277,
+            204,
+            277,
+            204
+        ],
+        "label": "TVA Monitor",
+        "confidence": 2.875855443562614e-06
+    },
+    {
+        "coordinates": [
+            584,
+            202,
+            584,
+            203
+        ],
+        "label": "Loki's dagger",
+        "confidence": 1.1258151971560437e-05
+    },
+    {
+        "coordinates": [
+            518,
+            171,
+            591,
+            231
+        ],
+        "label": "Sylvie's horned headpiece",
+        "confidence": 0.0018995972350239754
+    },
+    {
+        "coordinates": [
+            616,
+            450,
+            616,
+            450
+        ],
+        "label": "Sylvie's Armor",
+        "confidence": 5.229151611274574e-06
+    },
+    {
+        "coordinates": [
+            511,
+            318,
+            511,
+            318
+        ],
+        "label": "Sylvie's Armor",
+        "confidence": 3.218366828150465e-06
+    },
+    {
+        "coordinates": [
+            455,
+            304,
+            455,
+            304
+        ],
+        "label": "Sylvie's Armor",
+        "confidence": 2.9229170195321785e-06
+    },
+    {
+        "coordinates": [
+            462,
+            331,
+            462,
+            331
+        ],
+        "label": "Sylvie's Armor",
+        "confidence": 2.817767153828754e-06
+    },
+    {
+        "coordinates": [
+            614,
+            218,
+            614,
+            218
+        ],
+        "label": "Sylvie's machete",
+        "confidence": 2.0846609913860448e-05
+    },
+    {
+        "coordinates": [
+            669,
+            190,
+            669,
+            190
+        ],
+        "label": "Sylvie's machete",
+        "confidence": 1.633748433960136e-05
+    },
+    {
+        "coordinates": [
+            679,
+            223,
+            680,
+            223
+        ],
+        "label": "Sylvie's machete",
+        "confidence": 1.4369847121997736e-05
+    },
+    {
+        "coordinates": [
+            231,
+            194,
+            231,
+            194
+        ],
+        "label": "Sylvie's machete",
+        "confidence": 1.3533252968045417e-05
+    },
+    {
+        "coordinates": [
+            199,
+            197,
+            201,
+            197
+        ],
+        "label": "Sylvie's machete",
+        "confidence": 1.207700915983878e-05
+    },
+    {
+        "coordinates": [
+            210,
+            199,
+            210,
+            200
+        ],
+        "label": "Sylvie's machete",
+        "confidence": 1.191430328617571e-05
+    },
+    {
+        "coordinates": [
+            99,
+            187,
+            99,
+            187
+        ],
+        "label": "Sylvie's machete",
+        "confidence": 1.1417965652071871e-05
+    },
+    {
+        "coordinates": [
+            839,
+            226,
+            839,
+            226
+        ],
+        "label": "Sylvie's machete",
+        "confidence": 1.0130105692951474e-05
+    },
+    {
+        "coordinates": [
+            211,
+            185,
+            212,
+            185
+        ],
+        "label": "Sylvie's machete",
+        "confidence": 9.779275387700181e-06
+    },
+    {
+        "coordinates": [
+            77,
+            162,
+            77,
+            162
+        ],
+        "label": "Sylvie's machete",
+        "confidence": 9.312367183156312e-06
+    },
+    {
+        "coordinates": [
+            86,
+            167,
+            86,
+            167
+        ],
+        "label": "Sylvie's machete",
+        "confidence": 8.683612577442545e-06
+    },
+    {
+        "coordinates": [
+            227,
+            180,
+            227,
+            180
+        ],
+        "label": "Sylvie's machete",
+        "confidence": 8.053705641941633e-06
+    },
+    {
+        "coordinates": [
+            654,
+            199,
+            654,
+            199
+        ],
+        "label": "Sylvie's machete",
+        "confidence": 7.381264822470257e-06
+    },
+    {
+        "coordinates": [
+            211,
+            186,
+            211,
+            186
+        ],
+        "label": "Sylvie's machete",
+        "confidence": 6.697926892229589e-06
+    },
+    {
+        "coordinates": [
+            193,
+            194,
+            193,
+            195
+        ],
+        "label": "Sylvie's machete",
+        "confidence": 6.623782610404305e-06
+    },
+    {
+        "coordinates": [
+            789,
+            215,
+            789,
+            215
+        ],
+        "label": "Sylvie's machete",
+        "confidence": 6.423537342925556e-06
+    },
+    {
+        "coordinates": [
+            664,
+            220,
+            664,
+            220
+        ],
+        "label": "Sylvie's machete",
+        "confidence": 5.808427431475138e-06
+    },
+    {
+        "coordinates": [
+            216,
+            193,
+            216,
+            193
+        ],
+        "label": "Sylvie's machete",
+        "confidence": 5.691882961400552e-06
+    },
+    {
+        "coordinates": [
+            678,
+            215,
+            679,
+            215
+        ],
+        "label": "Sylvie's machete",
+        "confidence": 5.527118901227368e-06
+    },
+    {
+        "coordinates": [
+            670,
+            216,
+            670,
+            216
+        ],
+        "label": "Sylvie's machete",
+        "confidence": 5.184413112147013e-06
+    },
+    {
+        "coordinates": [
+            256,
+            197,
+            256,
+            197
+        ],
+        "label": "Sylvie's machete",
+        "confidence": 4.868077667197213e-06
+    },
+    {
+        "coordinates": [
+            668,
+            219,
+            668,
+            219
+        ],
+        "label": "Sylvie's machete",
+        "confidence": 4.780663402925711e-06
+    },
+    {
+        "coordinates": [
+            855,
+            170,
+            855,
+            170
+        ],
+        "label": "Sylvie's machete",
+        "confidence": 4.480693405639613e-06
+    },
+    {
+        "coordinates": [
+            615,
+            216,
+            615,
+            217
+        ],
+        "label": "Sylvie's machete",
+        "confidence": 4.117711341677932e-06
+    },
+    {
+        "coordinates": [
+            681,
+            219,
+            681,
+            219
+        ],
+        "label": "Sylvie's machete",
+        "confidence": 4.04351158067584e-06
+    },
+    {
+        "coordinates": [
+            245,
+            205,
+            245,
+            205
+        ],
+        "label": "Sylvie's machete",
+        "confidence": 3.7081545087858103e-06
+    },
+    {
+        "coordinates": [
+            233,
+            189,
+            233,
+            189
+        ],
+        "label": "Sylvie's machete",
+        "confidence": 3.349330654600635e-06
+    },
+    {
+        "coordinates": [
+            94,
+            167,
+            94,
+            168
+        ],
+        "label": "Sylvie's machete",
+        "confidence": 3.1866898098087404e-06
+    },
+    {
+        "coordinates": [
+            628,
+            208,
+            629,
+            208
+        ],
+        "label": "Sylvie's machete",
+        "confidence": 3.1564422897645272e-06
+    },
+    {
+        "coordinates": [
+            237,
+            185,
+            237,
+            185
+        ],
+        "label": "Sylvie's machete",
+        "confidence": 3.0386563594220206e-06
+    },
+    {
+        "coordinates": [
+            309,
+            211,
+            309,
+            211
+        ],
+        "label": "Sylvie's machete",
+        "confidence": 2.832123755069915e-06
+    },
+    {
+        "coordinates": [
+            672,
+            216,
+            672,
+            216
+        ],
+        "label": "Sylvie's machete",
+        "confidence": 2.638851128722308e-06
+    },
+    {
+        "coordinates": [
+            877,
+            223,
+            877,
+            223
+        ],
+        "label": "Sylvie's machete",
+        "confidence": 2.4825646960380254e-06
+    },
+    {
+        "coordinates": [
+            575,
+            225,
+            575,
+            225
+        ],
+        "label": "Classic Loki Armor",
+        "confidence": 6.253392712096684e-06
+    },
+    {
+        "coordinates": [
+            587,
+            313,
+            587,
+            313
+        ],
+        "label": "Classic Loki Armor",
+        "confidence": 3.7756517485831864e-06
+    }
+]

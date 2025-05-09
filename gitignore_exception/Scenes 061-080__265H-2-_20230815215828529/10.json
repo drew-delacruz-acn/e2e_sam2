@@ -1,0 +1,412 @@
+[
+    {
+        "coordinates": [
+            423,
+            241,
+            587,
+            438
+        ],
+        "label": "Loki's Armor",
+        "confidence": 6.934845441719517e-05
+    },
+    {
+        "coordinates": [
+            414,
+            120,
+            586,
+            446
+        ],
+        "label": "TVA Uniform",
+        "confidence": 0.33872100710868835
+    },
+    {
+        "coordinates": [
+            535,
+            459,
+            563,
+            473
+        ],
+        "label": "TVA Uniform",
+        "confidence": 6.626555841648951e-05
+    },
+    {
+        "coordinates": [
+            464,
+            433,
+            553,
+            468
+        ],
+        "label": "TVA Uniform",
+        "confidence": 1.37420311148162e-05
+    },
+    {
+        "coordinates": [
+            374,
+            457,
+            399,
+            478
+        ],
+        "label": "TVA Uniform",
+        "confidence": 4.455164798855549e-06
+    },
+    {
+        "coordinates": [
+            474,
+            472,
+            482,
+            478
+        ],
+        "label": "TVA Uniform",
+        "confidence": 3.450432814133819e-06
+    },
+    {
+        "coordinates": [
+            320,
+            287,
+            496,
+            484
+        ],
+        "label": "Time Stick",
+        "confidence": 0.9531021118164062
+    },
+    {
+        "coordinates": [
+            653,
+            365,
+            696,
+            471
+        ],
+        "label": "Time Stick",
+        "confidence": 0.05424508452415466
+    },
+    {
+        "coordinates": [
+            418,
+            305,
+            502,
+            363
+        ],
+        "label": "Time Stick",
+        "confidence": 0.010055044665932655
+    },
+    {
+        "coordinates": [
+            385,
+            396,
+            528,
+            445
+        ],
+        "label": "Time Stick",
+        "confidence": 0.0033309641294181347
+    },
+    {
+        "coordinates": [
+            680,
+            397,
+            695,
+            451
+        ],
+        "label": "Time Stick",
+        "confidence": 0.0016544545069336891
+    },
+    {
+        "coordinates": [
+            671,
+            379,
+            691,
+            400
+        ],
+        "label": "Time Stick",
+        "confidence": 0.0005740478518418968
+    },
+    {
+        "coordinates": [
+            295,
+            442,
+            450,
+            481
+        ],
+        "label": "Time Stick",
+        "confidence": 0.00030912671354599297
+    },
+    {
+        "coordinates": [
+            364,
+            339,
+            480,
+            393
+        ],
+        "label": "Time Stick",
+        "confidence": 6.465772457886487e-05
+    },
+    {
+        "coordinates": [
+            437,
+            336,
+            462,
+            363
+        ],
+        "label": "Time Stick",
+        "confidence": 6.45292893750593e-05
+    },
+    {
+        "coordinates": [
+            458,
+            356,
+            477,
+            402
+        ],
+        "label": "Time Stick",
+        "confidence": 5.790751674794592e-05
+    },
+    {
+        "coordinates": [
+            506,
+            454,
+            506,
+            454
+        ],
+        "label": "Time Stick",
+        "confidence": 5.651134415529668e-06
+    },
+    {
+        "coordinates": [
+            618,
+            465,
+            619,
+            465
+        ],
+        "label": "Time Stick",
+        "confidence": 3.5869186376658035e-06
+    },
+    {
+        "coordinates": [
+            658,
+            373,
+            694,
+            419
+        ],
+        "label": "Loki's dagger",
+        "confidence": 6.222105730557814e-05
+    },
+    {
+        "coordinates": [
+            679,
+            384,
+            692,
+            398
+        ],
+        "label": "Loki's dagger",
+        "confidence": 2.0245490304660052e-05
+    },
+    {
+        "coordinates": [
+            679,
+            393,
+            692,
+            412
+        ],
+        "label": "Loki's dagger",
+        "confidence": 6.449643478845246e-06
+    },
+    {
+        "coordinates": [
+            514,
+            456,
+            514,
+            456
+        ],
+        "label": "Sylvie's Armor",
+        "confidence": 3.7513273127842695e-05
+    },
+    {
+        "coordinates": [
+            312,
+            301,
+            553,
+            479
+        ],
+        "label": "Sylvie's Armor",
+        "confidence": 2.5780767828109674e-05
+    },
+    {
+        "coordinates": [
+            555,
+            468,
+            555,
+            468
+        ],
+        "label": "Sylvie's Armor",
+        "confidence": 1.3070846762275323e-05
+    },
+    {
+        "coordinates": [
+            375,
+            438,
+            461,
+            469
+        ],
+        "label": "Sylvie's Armor",
+        "confidence": 3.396520014575799e-06
+    },
+    {
+        "coordinates": [
+            311,
+            385,
+            462,
+            481
+        ],
+        "label": "TimeSpear",
+        "confidence": 0.0017302868654951453
+    },
+    {
+        "coordinates": [
+            358,
+            442,
+            405,
+            482
+        ],
+        "label": "TimeSpear",
+        "confidence": 0.0001544565602671355
+    },
+    {
+        "coordinates": [
+            556,
+            463,
+            556,
+            463
+        ],
+        "label": "TimeSpear",
+        "confidence": 3.687628486659378e-05
+    },
+    {
+        "coordinates": [
+            620,
+            469,
+            620,
+            469
+        ],
+        "label": "TimeSpear",
+        "confidence": 2.1153166017029434e-05
+    },
+    {
+        "coordinates": [
+            473,
+            463,
+            473,
+            463
+        ],
+        "label": "TimeSpear",
+        "confidence": 8.731119123694953e-06
+    },
+    {
+        "coordinates": [
+            667,
+            443,
+            669,
+            447
+        ],
+        "label": "TimeSpear",
+        "confidence": 7.379464022960747e-06
+    },
+    {
+        "coordinates": [
+            668,
+            438,
+            671,
+            445
+        ],
+        "label": "TimeSpear",
+        "confidence": 5.795147444587201e-06
+    },
+    {
+        "coordinates": [
+            462,
+            447,
+            463,
+            448
+        ],
+        "label": "TimeSpear",
+        "confidence": 3.0226376566133695e-06
+    },
+    {
+        "coordinates": [
+            101,
+            64,
+            126,
+            145
+        ],
+        "label": "Boastful Loki Armor",
+        "confidence": 2.0876201233477332e-05
+    },
+    {
+        "coordinates": [
+            50,
+            64,
+            181,
+            254
+        ],
+        "label": "Boastful Loki Armor",
+        "confidence": 1.5762620023451746e-05
+    },
+    {
+        "coordinates": [
+            376,
+            134,
+            540,
+            318
+        ],
+        "label": "Classic Loki Armor",
+        "confidence": 0.0010254780063405633
+    },
+    {
+        "coordinates": [
+            441,
+            196,
+            484,
+            228
+        ],
+        "label": "Classic Loki Armor",
+        "confidence": 4.836342213820899e-06
+    },
+    {
+        "coordinates": [
+            630,
+            468,
+            630,
+            468
+        ],
+        "label": "Classic Loki Armor",
+        "confidence": 2.9517063921957742e-06
+    },
+    {
+        "coordinates": [
+            429,
+            121,
+            587,
+            435
+        ],
+        "label": "Kid Loki Armor",
+        "confidence": 0.003961316309869289
+    },
+    {
+        "coordinates": [
+            64,
+            63,
+            175,
+            198
+        ],
+        "label": "Kid Loki Armor",
+        "confidence": 9.399976261192933e-05
+    },
+    {
+        "coordinates": [
+            131,
+            61,
+            145,
+            117
+        ],
+        "label": "Kid Loki Armor",
+        "confidence": 1.615853216208052e-05
+    }
+]

@@ -1,0 +1,642 @@
+[
+    {
+        "coordinates": [
+            712,
+            227,
+            712,
+            228
+        ],
+        "label": "Loki's Armor",
+        "confidence": 7.370215371338418e-06
+    },
+    {
+        "coordinates": [
+            694,
+            399,
+            694,
+            399
+        ],
+        "label": "Loki's Armor",
+        "confidence": 3.2009247661335394e-06
+    },
+    {
+        "coordinates": [
+            607,
+            440,
+            607,
+            440
+        ],
+        "label": "TVA Uniform",
+        "confidence": 5.6140565902751405e-06
+    },
+    {
+        "coordinates": [
+            667,
+            462,
+            667,
+            462
+        ],
+        "label": "TVA Uniform",
+        "confidence": 3.0842975320410915e-06
+    },
+    {
+        "coordinates": [
+            624,
+            409,
+            624,
+            409
+        ],
+        "label": "TVA Uniform",
+        "confidence": 2.253704678878421e-06
+    },
+    {
+        "coordinates": [
+            565,
+            158,
+            643,
+            327
+        ],
+        "label": "Time Stick",
+        "confidence": 0.1984974443912506
+    },
+    {
+        "coordinates": [
+            610,
+            234,
+            610,
+            234
+        ],
+        "label": "Time Stick",
+        "confidence": 0.0008624907350167632
+    },
+    {
+        "coordinates": [
+            612,
+            237,
+            612,
+            238
+        ],
+        "label": "Time Stick",
+        "confidence": 8.989020716398954e-05
+    },
+    {
+        "coordinates": [
+            636,
+            260,
+            636,
+            260
+        ],
+        "label": "Time Stick",
+        "confidence": 8.74778997967951e-05
+    },
+    {
+        "coordinates": [
+            616,
+            255,
+            616,
+            255
+        ],
+        "label": "Time Stick",
+        "confidence": 2.8858001314802095e-05
+    },
+    {
+        "coordinates": [
+            608,
+            232,
+            608,
+            232
+        ],
+        "label": "Time Stick",
+        "confidence": 1.895366767712403e-05
+    },
+    {
+        "coordinates": [
+            603,
+            203,
+            603,
+            203
+        ],
+        "label": "Time Stick",
+        "confidence": 1.0672886674001347e-05
+    },
+    {
+        "coordinates": [
+            644,
+            293,
+            644,
+            293
+        ],
+        "label": "Time Stick",
+        "confidence": 8.569262718083337e-06
+    },
+    {
+        "coordinates": [
+            641,
+            281,
+            641,
+            281
+        ],
+        "label": "Time Stick",
+        "confidence": 4.724494374386268e-06
+    },
+    {
+        "coordinates": [
+            562,
+            155,
+            642,
+            318
+        ],
+        "label": "Loki's dagger",
+        "confidence": 0.6136872172355652
+    },
+    {
+        "coordinates": [
+            576,
+            147,
+            576,
+            149
+        ],
+        "label": "Loki's dagger",
+        "confidence": 0.03264344483613968
+    },
+    {
+        "coordinates": [
+            593,
+            188,
+            613,
+            209
+        ],
+        "label": "Loki's dagger",
+        "confidence": 0.0019070585258305073
+    },
+    {
+        "coordinates": [
+            589,
+            169,
+            589,
+            169
+        ],
+        "label": "Loki's dagger",
+        "confidence": 0.000806654803454876
+    },
+    {
+        "coordinates": [
+            575,
+            138,
+            576,
+            138
+        ],
+        "label": "Loki's dagger",
+        "confidence": 0.00025772000662982464
+    },
+    {
+        "coordinates": [
+            579,
+            147,
+            579,
+            147
+        ],
+        "label": "Loki's dagger",
+        "confidence": 7.4348181442474015e-06
+    },
+    {
+        "coordinates": [
+            567,
+            168,
+            567,
+            168
+        ],
+        "label": "Loki's dagger",
+        "confidence": 5.0204403123643715e-06
+    },
+    {
+        "coordinates": [
+            594,
+            171,
+            595,
+            172
+        ],
+        "label": "Sylvie's machete",
+        "confidence": 0.003585255006328225
+    },
+    {
+        "coordinates": [
+            568,
+            154,
+            639,
+            307
+        ],
+        "label": "Sylvie's machete",
+        "confidence": 0.00292282085865736
+    },
+    {
+        "coordinates": [
+            600,
+            152,
+            600,
+            152
+        ],
+        "label": "Sylvie's machete",
+        "confidence": 0.001781574683263898
+    },
+    {
+        "coordinates": [
+            609,
+            170,
+            609,
+            170
+        ],
+        "label": "Sylvie's machete",
+        "confidence": 0.0006695404881611466
+    },
+    {
+        "coordinates": [
+            592,
+            149,
+            625,
+            206
+        ],
+        "label": "Sylvie's machete",
+        "confidence": 0.0006268210127018392
+    },
+    {
+        "coordinates": [
+            592,
+            165,
+            593,
+            165
+        ],
+        "label": "Sylvie's machete",
+        "confidence": 0.00036112620728090405
+    },
+    {
+        "coordinates": [
+            596,
+            139,
+            596,
+            139
+        ],
+        "label": "Sylvie's machete",
+        "confidence": 0.00014904346608091146
+    },
+    {
+        "coordinates": [
+            603,
+            180,
+            603,
+            181
+        ],
+        "label": "Sylvie's machete",
+        "confidence": 9.366539597976953e-05
+    },
+    {
+        "coordinates": [
+            208,
+            176,
+            208,
+            176
+        ],
+        "label": "Sylvie's machete",
+        "confidence": 5.80283158342354e-05
+    },
+    {
+        "coordinates": [
+            599,
+            141,
+            599,
+            141
+        ],
+        "label": "Sylvie's machete",
+        "confidence": 4.6901121095288545e-05
+    },
+    {
+        "coordinates": [
+            600,
+            155,
+            600,
+            155
+        ],
+        "label": "Sylvie's machete",
+        "confidence": 3.135442966595292e-05
+    },
+    {
+        "coordinates": [
+            596,
+            161,
+            596,
+            161
+        ],
+        "label": "Sylvie's machete",
+        "confidence": 3.1100214982870966e-05
+    },
+    {
+        "coordinates": [
+            619,
+            167,
+            619,
+            167
+        ],
+        "label": "Sylvie's machete",
+        "confidence": 2.9102830012561753e-05
+    },
+    {
+        "coordinates": [
+            625,
+            146,
+            626,
+            146
+        ],
+        "label": "Sylvie's machete",
+        "confidence": 2.063085230474826e-05
+    },
+    {
+        "coordinates": [
+            609,
+            164,
+            609,
+            164
+        ],
+        "label": "Sylvie's machete",
+        "confidence": 1.885220808617305e-05
+    },
+    {
+        "coordinates": [
+            614,
+            171,
+            614,
+            171
+        ],
+        "label": "Sylvie's machete",
+        "confidence": 1.832666566770058e-05
+    },
+    {
+        "coordinates": [
+            626,
+            185,
+            626,
+            186
+        ],
+        "label": "Sylvie's machete",
+        "confidence": 1.628537029318977e-05
+    },
+    {
+        "coordinates": [
+            598,
+            137,
+            598,
+            137
+        ],
+        "label": "Sylvie's machete",
+        "confidence": 1.4516893315885682e-05
+    },
+    {
+        "coordinates": [
+            578,
+            168,
+            578,
+            168
+        ],
+        "label": "Sylvie's machete",
+        "confidence": 7.930375431897119e-06
+    },
+    {
+        "coordinates": [
+            625,
+            143,
+            625,
+            144
+        ],
+        "label": "Sylvie's machete",
+        "confidence": 3.2383352390752407e-06
+    },
+    {
+        "coordinates": [
+            452,
+            227,
+            452,
+            227
+        ],
+        "label": "Sylvie's machete",
+        "confidence": 2.882489980038372e-06
+    },
+    {
+        "coordinates": [
+            567,
+            158,
+            639,
+            316
+        ],
+        "label": "TimeSpear",
+        "confidence": 0.002791905077174306
+    },
+    {
+        "coordinates": [
+            608,
+            217,
+            608,
+            217
+        ],
+        "label": "TimeSpear",
+        "confidence": 0.0003609709092415869
+    },
+    {
+        "coordinates": [
+            630,
+            232,
+            630,
+            232
+        ],
+        "label": "TimeSpear",
+        "confidence": 0.00010190673492616042
+    },
+    {
+        "coordinates": [
+            607,
+            217,
+            608,
+            218
+        ],
+        "label": "TimeSpear",
+        "confidence": 4.2380939703434706e-05
+    },
+    {
+        "coordinates": [
+            606,
+            227,
+            606,
+            227
+        ],
+        "label": "TimeSpear",
+        "confidence": 3.383318107808009e-05
+    },
+    {
+        "coordinates": [
+            616,
+            256,
+            616,
+            256
+        ],
+        "label": "TimeSpear",
+        "confidence": 2.2665788492304273e-05
+    },
+    {
+        "coordinates": [
+            595,
+            168,
+            595,
+            168
+        ],
+        "label": "TimeSpear",
+        "confidence": 1.8491215087124147e-05
+    },
+    {
+        "coordinates": [
+            624,
+            260,
+            624,
+            260
+        ],
+        "label": "TimeSpear",
+        "confidence": 1.4493359230982605e-05
+    },
+    {
+        "coordinates": [
+            629,
+            243,
+            629,
+            243
+        ],
+        "label": "TimeSpear",
+        "confidence": 1.1778215593949426e-05
+    },
+    {
+        "coordinates": [
+            608,
+            208,
+            608,
+            208
+        ],
+        "label": "TimeSpear",
+        "confidence": 6.192852197273169e-06
+    },
+    {
+        "coordinates": [
+            640,
+            273,
+            640,
+            274
+        ],
+        "label": "TimeSpear",
+        "confidence": 2.7010614758182783e-06
+    },
+    {
+        "coordinates": [
+            630,
+            383,
+            655,
+            491
+        ],
+        "label": "Boastful Loki Armor",
+        "confidence": 8.976085155154578e-06
+    },
+    {
+        "coordinates": [
+            674,
+            248,
+            674,
+            248
+        ],
+        "label": "Boastful Loki Armor",
+        "confidence": 7.701090908085462e-06
+    },
+    {
+        "coordinates": [
+            583,
+            345,
+            647,
+            474
+        ],
+        "label": "Classic Loki Armor",
+        "confidence": 5.0497161282692105e-05
+    },
+    {
+        "coordinates": [
+            616,
+            415,
+            616,
+            415
+        ],
+        "label": "Classic Loki Armor",
+        "confidence": 1.7202610251842998e-05
+    },
+    {
+        "coordinates": [
+            617,
+            410,
+            618,
+            410
+        ],
+        "label": "Classic Loki Armor",
+        "confidence": 1.49871611938579e-05
+    },
+    {
+        "coordinates": [
+            619,
+            432,
+            619,
+            432
+        ],
+        "label": "Classic Loki Armor",
+        "confidence": 5.557148597290507e-06
+    },
+    {
+        "coordinates": [
+            640,
+            440,
+            647,
+            469
+        ],
+        "label": "Classic Loki Armor",
+        "confidence": 2.4669620870554354e-06
+    },
+    {
+        "coordinates": [
+            661,
+            64,
+            795,
+            259
+        ],
+        "label": "Kid Loki Armor",
+        "confidence": 0.00019884279754478484
+    },
+    {
+        "coordinates": [
+            662,
+            206,
+            688,
+            302
+        ],
+        "label": "Kid Loki Armor",
+        "confidence": 4.417292075231671e-05
+    },
+    {
+        "coordinates": [
+            587,
+            348,
+            649,
+            473
+        ],
+        "label": "Kid Loki Armor",
+        "confidence": 7.130464382498758e-06
+    },
+    {
+        "coordinates": [
+            647,
+            433,
+            648,
+            435
+        ],
+        "label": "Kid Loki Armor",
+        "confidence": 3.912004103767686e-06
+    }
+]

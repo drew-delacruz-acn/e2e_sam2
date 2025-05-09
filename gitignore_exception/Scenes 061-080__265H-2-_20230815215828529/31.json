@@ -1,0 +1,532 @@
+[
+    {
+        "coordinates": [
+            428,
+            393,
+            436,
+            400
+        ],
+        "label": "Loki's Armor",
+        "confidence": 0.0004886430688202381
+    },
+    {
+        "coordinates": [
+            522,
+            375,
+            523,
+            376
+        ],
+        "label": "Loki's Armor",
+        "confidence": 0.0003804122097790241
+    },
+    {
+        "coordinates": [
+            369,
+            378,
+            527,
+            446
+        ],
+        "label": "Loki's Armor",
+        "confidence": 0.0003511417598929256
+    },
+    {
+        "coordinates": [
+            476,
+            406,
+            476,
+            406
+        ],
+        "label": "Loki's Armor",
+        "confidence": 0.00024845823645591736
+    },
+    {
+        "coordinates": [
+            481,
+            397,
+            482,
+            397
+        ],
+        "label": "Loki's Armor",
+        "confidence": 0.00014669059601146728
+    },
+    {
+        "coordinates": [
+            599,
+            347,
+            599,
+            347
+        ],
+        "label": "Loki's Armor",
+        "confidence": 0.00012990538380108774
+    },
+    {
+        "coordinates": [
+            664,
+            356,
+            664,
+            356
+        ],
+        "label": "Loki's Armor",
+        "confidence": 6.57250639051199e-05
+    },
+    {
+        "coordinates": [
+            639,
+            364,
+            639,
+            364
+        ],
+        "label": "Loki's Armor",
+        "confidence": 5.922242417000234e-05
+    },
+    {
+        "coordinates": [
+            525,
+            376,
+            526,
+            376
+        ],
+        "label": "Loki's Armor",
+        "confidence": 5.803615931654349e-05
+    },
+    {
+        "coordinates": [
+            464,
+            393,
+            464,
+            395
+        ],
+        "label": "Loki's Armor",
+        "confidence": 4.95864478580188e-05
+    },
+    {
+        "coordinates": [
+            669,
+            346,
+            669,
+            347
+        ],
+        "label": "Loki's Armor",
+        "confidence": 4.350518065621145e-05
+    },
+    {
+        "coordinates": [
+            524,
+            376,
+            525,
+            376
+        ],
+        "label": "Loki's Armor",
+        "confidence": 3.983248461736366e-05
+    },
+    {
+        "coordinates": [
+            329,
+            416,
+            412,
+            448
+        ],
+        "label": "Loki's Armor",
+        "confidence": 3.9270198612939566e-05
+    },
+    {
+        "coordinates": [
+            399,
+            353,
+            619,
+            467
+        ],
+        "label": "Sylvie's Armor",
+        "confidence": 0.001179940882138908
+    },
+    {
+        "coordinates": [
+            494,
+            403,
+            494,
+            404
+        ],
+        "label": "Sylvie's Armor",
+        "confidence": 0.00041244435124099255
+    },
+    {
+        "coordinates": [
+            577,
+            364,
+            628,
+            406
+        ],
+        "label": "Sylvie's Armor",
+        "confidence": 0.0003913831023965031
+    },
+    {
+        "coordinates": [
+            492,
+            404,
+            494,
+            405
+        ],
+        "label": "Sylvie's Armor",
+        "confidence": 0.00022600402007810771
+    },
+    {
+        "coordinates": [
+            470,
+            425,
+            496,
+            432
+        ],
+        "label": "Sylvie's Armor",
+        "confidence": 0.0002167380735045299
+    },
+    {
+        "coordinates": [
+            488,
+            401,
+            489,
+            402
+        ],
+        "label": "Sylvie's Armor",
+        "confidence": 0.00016510524437762797
+    },
+    {
+        "coordinates": [
+            477,
+            405,
+            478,
+            405
+        ],
+        "label": "Sylvie's Armor",
+        "confidence": 0.00011812038428615779
+    },
+    {
+        "coordinates": [
+            343,
+            414,
+            453,
+            463
+        ],
+        "label": "Sylvie's Armor",
+        "confidence": 0.0001072781888069585
+    },
+    {
+        "coordinates": [
+            478,
+            396,
+            488,
+            396
+        ],
+        "label": "Sylvie's Armor",
+        "confidence": 0.00010190372267970815
+    },
+    {
+        "coordinates": [
+            495,
+            378,
+            517,
+            399
+        ],
+        "label": "Sylvie's Armor",
+        "confidence": 7.301622827071697e-05
+    },
+    {
+        "coordinates": [
+            552,
+            372,
+            554,
+            373
+        ],
+        "label": "Sylvie's Armor",
+        "confidence": 6.367015885189176e-05
+    },
+    {
+        "coordinates": [
+            417,
+            406,
+            497,
+            449
+        ],
+        "label": "Sylvie's Armor",
+        "confidence": 4.466603058972396e-05
+    },
+    {
+        "coordinates": [
+            798,
+            126,
+            815,
+            187
+        ],
+        "label": "Sylvie's machete",
+        "confidence": 0.01732449047267437
+    },
+    {
+        "coordinates": [
+            806,
+            182,
+            806,
+            183
+        ],
+        "label": "Sylvie's machete",
+        "confidence": 0.009703247807919979
+    },
+    {
+        "coordinates": [
+            430,
+            283,
+            661,
+            449
+        ],
+        "label": "Classic Loki Armor",
+        "confidence": 0.6285839676856995
+    },
+    {
+        "coordinates": [
+            509,
+            290,
+            547,
+            374
+        ],
+        "label": "Classic Loki Armor",
+        "confidence": 0.007681725081056356
+    },
+    {
+        "coordinates": [
+            569,
+            329,
+            570,
+            329
+        ],
+        "label": "Classic Loki Armor",
+        "confidence": 0.0012931625824421644
+    },
+    {
+        "coordinates": [
+            580,
+            326,
+            580,
+            327
+        ],
+        "label": "Classic Loki Armor",
+        "confidence": 0.000791961036156863
+    },
+    {
+        "coordinates": [
+            518,
+            299,
+            530,
+            348
+        ],
+        "label": "Classic Loki Armor",
+        "confidence": 0.0006798909744247794
+    },
+    {
+        "coordinates": [
+            550,
+            283,
+            636,
+            326
+        ],
+        "label": "Classic Loki Armor",
+        "confidence": 0.0005345909157767892
+    },
+    {
+        "coordinates": [
+            544,
+            339,
+            545,
+            339
+        ],
+        "label": "Classic Loki Armor",
+        "confidence": 0.00047898764023557305
+    },
+    {
+        "coordinates": [
+            615,
+            311,
+            647,
+            343
+        ],
+        "label": "Classic Loki Armor",
+        "confidence": 0.0004073426534887403
+    },
+    {
+        "coordinates": [
+            601,
+            319,
+            612,
+            323
+        ],
+        "label": "Classic Loki Armor",
+        "confidence": 0.0002942105056717992
+    },
+    {
+        "coordinates": [
+            540,
+            339,
+            542,
+            340
+        ],
+        "label": "Classic Loki Armor",
+        "confidence": 0.00019125037943013012
+    },
+    {
+        "coordinates": [
+            430,
+            368,
+            502,
+            443
+        ],
+        "label": "Classic Loki Armor",
+        "confidence": 0.00011655974230961874
+    },
+    {
+        "coordinates": [
+            631,
+            319,
+            632,
+            325
+        ],
+        "label": "Classic Loki Armor",
+        "confidence": 7.095462206052616e-05
+    },
+    {
+        "coordinates": [
+            560,
+            314,
+            625,
+            369
+        ],
+        "label": "Classic Loki Armor",
+        "confidence": 7.047792314551771e-05
+    },
+    {
+        "coordinates": [
+            632,
+            311,
+            638,
+            329
+        ],
+        "label": "Classic Loki Armor",
+        "confidence": 6.832803774159402e-05
+    },
+    {
+        "coordinates": [
+            580,
+            334,
+            580,
+            335
+        ],
+        "label": "Classic Loki Armor",
+        "confidence": 6.348132592393085e-05
+    },
+    {
+        "coordinates": [
+            601,
+            272,
+            620,
+            309
+        ],
+        "label": "Classic Loki Armor",
+        "confidence": 6.157396273920313e-05
+    },
+    {
+        "coordinates": [
+            568,
+            404,
+            570,
+            405
+        ],
+        "label": "Classic Loki Armor",
+        "confidence": 5.571572182816453e-05
+    },
+    {
+        "coordinates": [
+            652,
+            346,
+            652,
+            347
+        ],
+        "label": "Classic Loki Armor",
+        "confidence": 4.579830419970676e-05
+    },
+    {
+        "coordinates": [
+            544,
+            303,
+            560,
+            338
+        ],
+        "label": "Classic Loki Armor",
+        "confidence": 4.550534868030809e-05
+    },
+    {
+        "coordinates": [
+            533,
+            331,
+            533,
+            331
+        ],
+        "label": "Classic Loki Armor",
+        "confidence": 4.266956966603175e-05
+    },
+    {
+        "coordinates": [
+            620,
+            272,
+            635,
+            304
+        ],
+        "label": "Classic Loki Armor",
+        "confidence": 3.911040403181687e-05
+    },
+    {
+        "coordinates": [
+            571,
+            254,
+            572,
+            254
+        ],
+        "label": "Aligator Loki Plushie",
+        "confidence": 0.00016704823065083474
+    },
+    {
+        "coordinates": [
+            548,
+            214,
+            606,
+            281
+        ],
+        "label": "Aligator Loki Plushie",
+        "confidence": 7.020681368885562e-05
+    },
+    {
+        "coordinates": [
+            594,
+            233,
+            642,
+            292
+        ],
+        "label": "Aligator Loki Plushie",
+        "confidence": 6.356555968523026e-05
+    },
+    {
+        "coordinates": [
+            552,
+            189,
+            582,
+            236
+        ],
+        "label": "Aligator Loki Plushie",
+        "confidence": 5.795379911432974e-05
+    },
+    {
+        "coordinates": [
+            562,
+            249,
+            562,
+            249
+        ],
+        "label": "Aligator Loki Plushie",
+        "confidence": 4.3865860789082944e-05
+    }
+]

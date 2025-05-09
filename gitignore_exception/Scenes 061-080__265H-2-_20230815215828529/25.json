@@ -1,0 +1,552 @@
+[
+    {
+        "coordinates": [
+            366,
+            388,
+            369,
+            409
+        ],
+        "label": "TVA Uniform",
+        "confidence": 0.011183367110788822
+    },
+    {
+        "coordinates": [
+            325,
+            386,
+            395,
+            436
+        ],
+        "label": "TVA Uniform",
+        "confidence": 0.0029995504301041365
+    },
+    {
+        "coordinates": [
+            349,
+            395,
+            361,
+            407
+        ],
+        "label": "TVA Uniform",
+        "confidence": 0.0009549721726216376
+    },
+    {
+        "coordinates": [
+            367,
+            397,
+            367,
+            397
+        ],
+        "label": "TVA Uniform",
+        "confidence": 0.0002595088444650173
+    },
+    {
+        "coordinates": [
+            407,
+            400,
+            408,
+            400
+        ],
+        "label": "TVA Uniform",
+        "confidence": 0.00022002078185323626
+    },
+    {
+        "coordinates": [
+            388,
+            399,
+            388,
+            400
+        ],
+        "label": "TVA Uniform",
+        "confidence": 0.0002126900217263028
+    },
+    {
+        "coordinates": [
+            362,
+            394,
+            364,
+            395
+        ],
+        "label": "TVA Uniform",
+        "confidence": 0.0001710774376988411
+    },
+    {
+        "coordinates": [
+            397,
+            401,
+            397,
+            401
+        ],
+        "label": "TVA Uniform",
+        "confidence": 0.0001031485153362155
+    },
+    {
+        "coordinates": [
+            401,
+            400,
+            402,
+            400
+        ],
+        "label": "TVA Uniform",
+        "confidence": 9.473416866967455e-05
+    },
+    {
+        "coordinates": [
+            412,
+            397,
+            412,
+            397
+        ],
+        "label": "TVA Uniform",
+        "confidence": 9.213387966156006e-05
+    },
+    {
+        "coordinates": [
+            388,
+            386,
+            388,
+            386
+        ],
+        "label": "TVA Uniform",
+        "confidence": 8.204736514016986e-05
+    },
+    {
+        "coordinates": [
+            412,
+            399,
+            412,
+            399
+        ],
+        "label": "TVA Uniform",
+        "confidence": 3.9892111090011895e-05
+    },
+    {
+        "coordinates": [
+            418,
+            401,
+            418,
+            401
+        ],
+        "label": "TVA Uniform",
+        "confidence": 1.978480941033922e-05
+    },
+    {
+        "coordinates": [
+            382,
+            400,
+            382,
+            400
+        ],
+        "label": "TVA Uniform",
+        "confidence": 1.431884720659582e-05
+    },
+    {
+        "coordinates": [
+            273,
+            413,
+            273,
+            413
+        ],
+        "label": "Sylvie's Armor",
+        "confidence": 0.0013600821839645505
+    },
+    {
+        "coordinates": [
+            275,
+            412,
+            275,
+            412
+        ],
+        "label": "Sylvie's Armor",
+        "confidence": 0.0007234012009575963
+    },
+    {
+        "coordinates": [
+            293,
+            416,
+            293,
+            416
+        ],
+        "label": "Sylvie's Armor",
+        "confidence": 0.0005203860928304493
+    },
+    {
+        "coordinates": [
+            289,
+            420,
+            289,
+            420
+        ],
+        "label": "Sylvie's Armor",
+        "confidence": 0.0004393461567815393
+    },
+    {
+        "coordinates": [
+            277,
+            423,
+            277,
+            423
+        ],
+        "label": "Sylvie's Armor",
+        "confidence": 0.00029359114705584943
+    },
+    {
+        "coordinates": [
+            373,
+            425,
+            374,
+            425
+        ],
+        "label": "Sylvie's Armor",
+        "confidence": 0.00026221515145152807
+    },
+    {
+        "coordinates": [
+            279,
+            423,
+            279,
+            423
+        ],
+        "label": "Sylvie's Armor",
+        "confidence": 0.0002310229028807953
+    },
+    {
+        "coordinates": [
+            306,
+            415,
+            307,
+            416
+        ],
+        "label": "Sylvie's Armor",
+        "confidence": 0.00022992811864241958
+    },
+    {
+        "coordinates": [
+            333,
+            434,
+            334,
+            434
+        ],
+        "label": "Sylvie's Armor",
+        "confidence": 0.00022701809939462692
+    },
+    {
+        "coordinates": [
+            328,
+            421,
+            328,
+            421
+        ],
+        "label": "Sylvie's Armor",
+        "confidence": 0.0002202924806624651
+    },
+    {
+        "coordinates": [
+            303,
+            420,
+            303,
+            420
+        ],
+        "label": "Sylvie's Armor",
+        "confidence": 0.0002104593877447769
+    },
+    {
+        "coordinates": [
+            363,
+            427,
+            363,
+            427
+        ],
+        "label": "Sylvie's Armor",
+        "confidence": 0.00019446402438916266
+    },
+    {
+        "coordinates": [
+            400,
+            423,
+            400,
+            423
+        ],
+        "label": "Sylvie's Armor",
+        "confidence": 0.0001734943361952901
+    },
+    {
+        "coordinates": [
+            269,
+            414,
+            269,
+            414
+        ],
+        "label": "Sylvie's Armor",
+        "confidence": 0.00015084956248756498
+    },
+    {
+        "coordinates": [
+            369,
+            430,
+            369,
+            430
+        ],
+        "label": "Sylvie's Armor",
+        "confidence": 0.00014823622768744826
+    },
+    {
+        "coordinates": [
+            274,
+            439,
+            275,
+            439
+        ],
+        "label": "Sylvie's Armor",
+        "confidence": 0.0001478890044381842
+    },
+    {
+        "coordinates": [
+            279,
+            424,
+            280,
+            424
+        ],
+        "label": "Sylvie's Armor",
+        "confidence": 0.00014766008825972676
+    },
+    {
+        "coordinates": [
+            263,
+            421,
+            264,
+            421
+        ],
+        "label": "Sylvie's Armor",
+        "confidence": 0.00012830640480387956
+    },
+    {
+        "coordinates": [
+            335,
+            422,
+            335,
+            422
+        ],
+        "label": "Sylvie's Armor",
+        "confidence": 0.00012183111539343372
+    },
+    {
+        "coordinates": [
+            375,
+            433,
+            375,
+            433
+        ],
+        "label": "Sylvie's Armor",
+        "confidence": 0.00012012638035230339
+    },
+    {
+        "coordinates": [
+            394,
+            423,
+            394,
+            423
+        ],
+        "label": "Sylvie's Armor",
+        "confidence": 0.00011976833775406703
+    },
+    {
+        "coordinates": [
+            375,
+            426,
+            375,
+            426
+        ],
+        "label": "Sylvie's Armor",
+        "confidence": 0.00011799905769294128
+    },
+    {
+        "coordinates": [
+            328,
+            419,
+            329,
+            420
+        ],
+        "label": "Sylvie's Armor",
+        "confidence": 9.04024054761976e-05
+    },
+    {
+        "coordinates": [
+            344,
+            418,
+            345,
+            419
+        ],
+        "label": "Sylvie's Armor",
+        "confidence": 8.700192120159045e-05
+    },
+    {
+        "coordinates": [
+            366,
+            424,
+            366,
+            424
+        ],
+        "label": "Sylvie's Armor",
+        "confidence": 6.880691944388673e-05
+    },
+    {
+        "coordinates": [
+            375,
+            423,
+            375,
+            423
+        ],
+        "label": "Sylvie's Armor",
+        "confidence": 5.019393938709982e-05
+    },
+    {
+        "coordinates": [
+            400,
+            427,
+            400,
+            427
+        ],
+        "label": "Sylvie's Armor",
+        "confidence": 4.764024924952537e-05
+    },
+    {
+        "coordinates": [
+            360,
+            424,
+            360,
+            424
+        ],
+        "label": "Sylvie's Armor",
+        "confidence": 4.522029485087842e-05
+    },
+    {
+        "coordinates": [
+            284,
+            445,
+            284,
+            445
+        ],
+        "label": "Sylvie's Armor",
+        "confidence": 4.346780042396858e-05
+    },
+    {
+        "coordinates": [
+            313,
+            431,
+            313,
+            431
+        ],
+        "label": "Sylvie's Armor",
+        "confidence": 3.797329918597825e-05
+    },
+    {
+        "coordinates": [
+            250,
+            422,
+            250,
+            422
+        ],
+        "label": "Sylvie's Armor",
+        "confidence": 3.17745580105111e-05
+    },
+    {
+        "coordinates": [
+            496,
+            395,
+            496,
+            395
+        ],
+        "label": "Sylvie's Armor",
+        "confidence": 3.147310053464025e-05
+    },
+    {
+        "coordinates": [
+            525,
+            390,
+            525,
+            390
+        ],
+        "label": "Sylvie's Armor",
+        "confidence": 2.9030463338131085e-05
+    },
+    {
+        "coordinates": [
+            433,
+            406,
+            433,
+            407
+        ],
+        "label": "Sylvie's Armor",
+        "confidence": 2.3416987460223027e-05
+    },
+    {
+        "coordinates": [
+            363,
+            423,
+            363,
+            423
+        ],
+        "label": "Sylvie's Armor",
+        "confidence": 2.0443199900910258e-05
+    },
+    {
+        "coordinates": [
+            293,
+            442,
+            293,
+            443
+        ],
+        "label": "Sylvie's Armor",
+        "confidence": 1.706369948806241e-05
+    },
+    {
+        "coordinates": [
+            484,
+            407,
+            484,
+            407
+        ],
+        "label": "Sylvie's Armor",
+        "confidence": 1.7003061657305807e-05
+    },
+    {
+        "coordinates": [
+            445,
+            399,
+            445,
+            399
+        ],
+        "label": "Sylvie's Armor",
+        "confidence": 1.4523193385684863e-05
+    },
+    {
+        "coordinates": [
+            260,
+            415,
+            260,
+            415
+        ],
+        "label": "Boastful Loki Armor",
+        "confidence": 6.21635263087228e-05
+    },
+    {
+        "coordinates": [
+            255,
+            410,
+            255,
+            410
+        ],
+        "label": "Boastful Loki Armor",
+        "confidence": 2.765710996754933e-05
+    },
+    {
+        "coordinates": [
+            640,
+            248,
+            640,
+            248
+        ],
+        "label": "Kid Loki Armor",
+        "confidence": 1.4147301044431515e-05
+    }
+]

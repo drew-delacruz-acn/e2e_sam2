@@ -149,11 +149,10 @@ def main():
 if __name__ == "__main__":
     main() 
 
-
-# python run_cd_fsod.py --json_dir "/home/ubuntu/code/drew/e2e_sam2/e2e_pipeline_v2/experiments/vidPredictor/data/detections/Scenes 061-080__265H-2-_20230815215828529" --frames_dir "data/frames//Scenes 061-080__265H-2-_20230815215828529" --visualize --min_gap 15 --confidence 0.9
+# python run_cd_fsod.py --json_dir "/home/ubuntu/code/drew/e2e_sam2/e2e_pipeline_v2/experiments/vidPredictor/data/detections/Scenes 061-080__265H-2-_20230815215828529" --frames_dir "data/frames//Scenes 061-080__265H-2-_20230815215828529" --visualize --min_gap 10 --confidence 0.9
 # Loaded detector with 54 frames
 # Available classes: ["Sylvie's horned headpiece", 'TVA Uniform', 'Time Stick']
-# Detecting classes: ['TVA Uniform', "Sylvie's horned headpiece", 'Time Stick']
+# Detecting classes: ["Sylvie's horned headpiece", 'TVA Uniform', 'Time Stick']
 # Processing frames 0 to 53
 # Frame 0 (0.jpg):
 #   No detections

@@ -18,8 +18,7 @@ class CDFSODDetector:
         json_dir: str, 
         confidence_threshold: float = 0.2,
         iou_threshold: float = 0.5,  # Kept for backward compatibility but not used
-        min_gap_frames: int = 10,
-        label_mapping: Optional[Dict[str, str]] = None
+        min_gap_frames: int = 10
     ):
         """
         Initialize the CD-FSOD detector.
@@ -29,12 +28,10 @@ class CDFSODDetector:
             confidence_threshold: Minimum confidence score for detections
             iou_threshold: No longer used - kept for backward compatibility
             min_gap_frames: Minimum number of frames an object must be absent to count as reappearance
-            label_mapping: Optional mapping from CD-FSOD labels to pipeline labels
         """
         self.json_dir = json_dir
         self.confidence_threshold = confidence_threshold
         self.min_gap_frames = min_gap_frames
-        self.label_mapping = label_mapping or {}
         
         # Load all JSON files and process them
         self.detections_by_frame = self._load_detections()
@@ -242,18 +239,13 @@ class CDFSODDetector:
         # as those would include continuing objects which we want to ignore
         
         # Apply label filtering using text queries
-        # Map CD-FSOD labels to pipeline labels if mapping is provided
         filtered_detections = []
         for detection in frame_detections:
-            original_label = detection["label"]
-            mapped_label = self.label_mapping.get(original_label, original_label)
+            label = detection["label"]
             
-            # Check if this label matches any of the text queries
-            if any(query.lower() in mapped_label.lower() for query in text_queries):
-                # Clone the detection and update the label to the mapped version
-                mapped_detection = detection.copy()
-                mapped_detection["label"] = mapped_label
-                filtered_detections.append(mapped_detection)
+            # Check if this label matches any of the requested queries
+            if not text_queries or "all" in text_queries or label in text_queries:
+                filtered_detections.append(detection)
         
         # Prepare output in the format expected by the pipeline
         if filtered_detections:

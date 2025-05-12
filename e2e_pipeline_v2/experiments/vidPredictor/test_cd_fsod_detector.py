@@ -329,51 +329,6 @@ class TestCDFSODDetector(unittest.TestCase):
             self.assertEqual(len(no_match_results["boxes"]), 0)
     
     @patch('os.listdir')
-    def test_integration_with_label_mapping(self, mock_listdir):
-        json_files = ["0.json"]
-        mock_listdir.return_value = json_files
-        
-        # Create a dictionary mapping file paths to their contents
-        mock_file_data = {}
-        for json_file in json_files:
-            file_path = os.path.join(self.json_dir, json_file)
-            mock_file_data[file_path] = json.dumps(self.mock_detections[json_file])
-        
-        # Create a context manager for the patched open function
-        m = mock_open()
-        
-        # Define a custom side effect function for the mock
-        def side_effect(filename, *args, **kwargs):
-            if filename in mock_file_data:
-                file_mock = m.return_value
-                file_mock.read.return_value = mock_file_data[filename]
-                return file_mock
-            raise FileNotFoundError(f"Mock file not found: {filename}")
-        
-        # Patch both open and json.load
-        with patch('builtins.open', side_effect=side_effect), \
-             patch('json.load', side_effect=lambda f: json.loads(f.read())):
-            
-            # Create a label mapping
-            label_mapping = {
-                "monitor": "screen",
-                "uniform": "clothing"
-            }
-            
-            detector = CDFSODDetector(self.json_dir, label_mapping=label_mapping)
-            
-            # Create mock image with frame index
-            frame0_image = self.MockImage(np.zeros((100, 100, 3)), 0)
-            
-            # Get results with mapped queries
-            mapped_results = detector.detect(frame0_image, ["screen", "clothing"])
-            
-            # Should detect both objects with mapped labels
-            self.assertEqual(len(mapped_results["boxes"]), 2)
-            self.assertIn("screen", mapped_results["labels"])
-            self.assertIn("clothing", mapped_results["labels"])
-
-    @patch('os.listdir')
     def test_continuous_detection_exclusion(self, mock_listdir):
         """Test that objects are only detected on first appearance and reappearance, not in continuous frames."""
         # Create test data with an object that appears in consecutive frames

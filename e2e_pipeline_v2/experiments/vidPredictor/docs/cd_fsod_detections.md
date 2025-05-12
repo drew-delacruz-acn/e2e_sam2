@@ -1,15 +1,15 @@
 # CD-FSOD Detections Integration Plan
 
-## 1. Understanding the Data
+## 1. Understanding the Data ✓
 
-### 1.1 CD-FSOD Detection Format
+### 1.1 CD-FSOD Detection Format ✓
 - The CD-FSOD predictions are stored in numbered JSON files (0.json, 1.json, etc.)
 - Each file contains an array of object detections with:
   - `coordinates`: Bounding box in [x1, y1, x2, y2] format
   - `label`: Object class (e.g., "TVA Monitor", "TVA Uniform", "Time Stick")
   - `confidence`: Detection confidence score
 
-### 1.2 Current Pipeline Format
+### 1.2 Current Pipeline Format ✓
 - The existing pipeline uses OWLv2 detector which outputs:
   - `boxes`: Bounding boxes (similar to coordinates in CD-FSOD)
   - `labels`: Object classes
@@ -17,34 +17,34 @@
 
 ## 2. Implementation Strategy
 
-### 2.1 Create a CD-FSOD Adapter Module
-1. **Create a new file**: `src/cd_fsod_detector.py`
-2. **Implement a detector class**: `CDFSODDetector` with an interface similar to `OWLv2Detector`
-3. **Core functionality**:
-   - Load all JSON files from a specified directory during initialization
-   - Process detections across all frames using a continuity-based approach
-   - Identify the first frame where each unique object appears AND where it reappears after a significant gap
-   - Implement the `detect()` method to return objects based on first appearances and reappearances
-   - Apply confidence thresholds to filter low-confidence detections
+### 2.1 Create a CD-FSOD Adapter Module ✓
+1. **Create a new file**: `src/cd_fsod_detector.py` ✓
+2. **Implement a detector class**: `CDFSODDetector` with an interface similar to `OWLv2Detector` ✓
+3. **Core functionality**: ✓
+   - Load all JSON files from a specified directory during initialization ✓
+   - Process detections across all frames using a continuity-based approach ✓
+   - Identify the first frame where each unique object appears AND where it reappears after a significant gap ✓
+   - Implement the `detect()` method to return objects based on first appearances and reappearances ✓
+   - Apply confidence thresholds to filter low-confidence detections ✓
 
-### 2.2 Continuity-Based Object Identification Strategy
+### 2.2 Continuity-Based Object Identification Strategy ✓
 
-1. **Identify object continuity across frames**:
-   - Group detections based on similarity of position, size, and class
-   - Use IoU (Intersection over Union) to measure spatial similarity between detections
-   - Track each unique object's presence through consecutive frames
+1. **Identify object continuity across frames**: ✓
+   - ~~Group detections based on similarity of position, size, and class~~ (Used simpler label-based continuity tracking instead) ✓
+   - ~~Use IoU (Intersection over Union) to measure spatial similarity between detections~~ (Removed IoU dependency) ✓
+   - Track each unique object's presence through consecutive frames ✓
 
-2. **Detect First Appearances and Reappearances**:
-   - **First Appearance**: Record when an object is first detected
-   - **Reappearance**: Record when an object returns after being absent for more than `min_gap_frames`
-   - Maintain a "last seen" frame counter for each unique object
-   - When (current_frame - last_seen_frame) > min_gap_frames, treat as a reappearance
+2. **Detect First Appearances and Reappearances**: ✓
+   - **First Appearance**: Record when an object is first detected ✓
+   - **Reappearance**: Record when an object returns after being absent for more than `min_gap_frames` ✓
+   - Maintain a "last seen" frame counter for each unique object ✓
+   - When (current_frame - last_seen_frame) > min_gap_frames, treat as a reappearance ✓
 
-3. **Frame Mapping**:
-   - Create a mapping between frame indices and all objects that either:
-     - First appear in that frame
-     - Reappear in that frame after a significant gap
-   - This mapping will be used by the `detect()` method to return frame-specific results
+3. **Frame Mapping**: ✓
+   - Create a mapping between frame indices and all objects that either: ✓
+     - First appear in that frame ✓
+     - Reappear in that frame after a significant gap ✓
+   - This mapping will be used by the `detect()` method to return frame-specific results ✓
 
 ### 2.3 Integration with Existing Pipeline
 
@@ -53,23 +53,22 @@
    - Create a factory method to instantiate the appropriate detector
    - Ensure the pipeline can handle both detector types transparently
 
-2. **Configuration Options**:
-   - Add configuration parameters for:
-     - JSON directory path
-     - Confidence threshold specific to CD-FSOD detections
-     - Class mapping (if CD-FSOD uses different class names)
-     - IoU threshold for considering detections as the same object
-     - **Min gap frames**: Minimum number of frames an object must be absent to count as a reappearance
+2. **Configuration Options**: ✓
+   - Add configuration parameters for: ✓
+     - JSON directory path ✓
+     - Confidence threshold specific to CD-FSOD detections ✓
+     - ~~Class mapping (if CD-FSOD uses different class names)~~ ✓
+     - ~~IoU threshold for considering detections as the same object~~ (Removed) ✓
+     - **Min gap frames**: Minimum number of frames an object must be absent to count as a reappearance ✓
 
 ## 3. Implementation Plan
 
-### 3.1 Phase 1: CD-FSOD Adapter Implementation
+### 3.1 Phase 1: CD-FSOD Adapter Implementation ✓
 
-1. **Create the CD-FSOD detector class**:
+1. **Create the CD-FSOD detector class**: ✓
    ```python
    class CDFSODDetector:
-       def __init__(self, json_dir, confidence_threshold=0.2, iou_threshold=0.5, 
-                   min_gap_frames=10, label_mapping=None):
+       def __init__(self, json_dir, confidence_threshold=0.2, min_gap_frames=10):
            # Load all JSON files and process them
            # Track object continuity across frames
            # Record first appearances and reappearances after gaps
@@ -81,19 +80,19 @@
            # Format to match OWLv2Detector output (boxes, labels, scores)
    ```
 
-2. **Implement continuity-based object tracking**:
-   - Load all detections from JSON files
-   - For each frame, compare detections with previous frame:
-     - Match objects using IoU and class
-     - Update "last seen" frame for each tracked object
-     - Record new objects and reappearing objects
-   - Handle edge cases like brief occlusions or detection flickering
+2. **Implement continuity-based object tracking**: ✓
+   - Load all detections from JSON files ✓
+   - For each frame, compare detections with previous frame: ✓
+     - ~~Match objects using IoU and class~~ (Use label-based continuity instead) ✓
+     - Update "last seen" frame for each tracked object ✓
+     - Record new objects and reappearing objects ✓
+   - Handle edge cases like brief occlusions or detection flickering ✓
 
-3. **Create frame-to-detection mapping**:
-   - For each frame, maintain a list of objects that:
-     - First appear in that frame
-     - Reappear after being absent for at least `min_gap_frames`
-   - This enables the `detect()` method to return only significant detection events
+3. **Create frame-to-detection mapping**: ✓
+   - For each frame, maintain a list of objects that: ✓
+     - First appear in that frame ✓
+     - Reappear after being absent for at least `min_gap_frames` ✓
+   - This enables the `detect()` method to return only significant detection events ✓
 
 ### 3.2 Phase 2: Pipeline Integration
 
@@ -107,9 +106,9 @@
    - Pass frame information to the detector for CD-FSOD to identify the correct frame
    - Maintain backward compatibility
 
-3. **Configure label mapping**:
-   - Create a configuration option for mapping CD-FSOD labels to existing labels
-   - Handle cases where CD-FSOD detects classes not in the original set
+3. **~~Configure label mapping~~**:
+   - ~~Create a configuration option for mapping CD-FSOD labels to existing labels~~
+   - ~~Handle cases where CD-FSOD detects classes not in the original set~~
 
 ### 3.3 Phase 3: Testing and Validation
 
@@ -146,13 +145,13 @@
   - Consider trajectory prediction to distinguish similar objects
   - Use confidence scores to prioritize high-confidence reappearances
 
-### 4.3 Visualization Tools
+### 4.3 Visualization Tools ✓
 
-- Add visualization options to show:
-  - First appearances with one color
-  - Reappearances with another color
-  - Object continuity through frames
-  - Gaps where objects disappeared
+- Add visualization options to show: ✓
+  - First appearances with one color ✓
+  - Reappearances with another color ✓
+  - Object continuity through frames ✓
+  - Gaps where objects disappeared ✓
 
 ### 4.4 Performance Optimization
 
@@ -162,7 +161,7 @@
 
 ## 5. Implementation Timeline
 
-1. **Week 1**: Create CD-FSOD adapter with continuity-based object tracking
+1. **Week 1**: Create CD-FSOD adapter with continuity-based object tracking ✓
 2. **Week 2**: Integrate with pipeline and implement configuration options
 3. **Week 3**: Testing, validation, and performance optimization
 4. **Week 4**: Documentation and advanced features implementation
@@ -175,13 +174,7 @@ config = {
     "detector_type": "cd_fsod",
     "cd_fsod_path": "/path/to/json/files",
     "confidence_threshold": 0.2,
-    "iou_threshold": 0.5,  # For identifying same object across frames
     "min_gap_frames": 10,  # Minimum frames absent to count as reappearance
-    "label_mapping": {
-        "TVA Monitor": "monitor",
-        "TVA Uniform": "uniform",
-        "Time Stick": "time_stick"
-    }
 }
 
 # Initialize pipeline with CD-FSOD detector
@@ -193,20 +186,20 @@ pipeline.process_video(frames_dir="video_frames", text_queries=["monitor", "unif
 
 ## 7. Implementation Notes
 
-### 7.1 Handling Different Confidence Scales
+### 7.1 Handling Different Confidence Scales ✓
 
 CD-FSOD detections may use a different confidence scale than OWLv2. The implementation should:
-- Analyze the typical confidence range in CD-FSOD detections
-- Implement normalization if needed
-- Allow configurable thresholds specific to CD-FSOD
+- Analyze the typical confidence range in CD-FSOD detections ✓
+- Implement normalization if needed ✓
+- Allow configurable thresholds specific to CD-FSOD ✓
 
-### 7.2 Continuity Tracking Challenges
+### 7.2 Continuity Tracking Challenges ✓
 
 When tracking object continuity and reappearances:
-- Handle brief detection failures without treating them as reappearances
-- Distinguish between multiple similar objects of the same class
-- Account for object appearance changes over time
-- Balance between too-sensitive and too-insensitive gap thresholds
+- Handle brief detection failures without treating them as reappearances ✓
+- Distinguish between multiple similar objects of the same class (Now using label-based continuity, treating same-class objects as single entity) ✓
+- Account for object appearance changes over time ✓
+- Balance between too-sensitive and too-insensitive gap thresholds ✓
 
 ### 7.3 SAM2 Integration Considerations
 
@@ -215,8 +208,39 @@ When tracking object continuity and reappearances:
 - Consider providing SAM2 with additional context during reappearances
 - Compare performance when using all detections vs. first-appearance-only approach
 
-### 7.4 Performance Considerations
+### 7.4 Performance Considerations ✓
 
-- Preprocess CD-FSOD detections during initialization to avoid repeated work
-- Create efficient data structures for quick frame-based lookups
-- Consider memory usage when loading all detections for long videos with many objects
+- Preprocess CD-FSOD detections during initialization to avoid repeated work ✓
+- Create efficient data structures for quick frame-based lookups ✓
+- Consider memory usage when loading all detections for long videos with many objects ✓
+
+## 8. Implementation Details and Changes ✓
+
+### 8.1 Simplified Tracking Approach ✓
+
+The initial implementation plan proposed IoU-based tracking, but we found a simpler approach worked better:
+- Instead of using IoU to match objects across frames, we track each object class independently
+- Each class (e.g., "Time Stick", "TVA Uniform") is treated as a single entity with object ID "{label}_0"
+- This simplified approach is more robust for tracking objects across significant appearance changes
+- Added active/inactive status tracking to properly detect reappearances
+
+### 8.2 Visualization Features ✓
+
+We implemented several visualization options in the `run_cd_fsod.py` script:
+- `--visualize`: Draws bounding boxes on frames and adds text showing detection type
+- `--show_all_detections`: Shows all detections instead of just first appearances/reappearances
+- `--show_track_info`: Displays object tracking information including frame indices for each object
+
+### 8.3 Command Line Usage ✓
+
+The detector can be used directly with the following command:
+```bash
+python run_cd_fsod.py --json_dir "/path/to/detections" --frames_dir "/path/to/frames" --visualize --min_gap 10 --confidence 0.9 --show_track_info
+```
+
+Additional options:
+- `--show_all_detections`: Include all detections, not just first appearances/reappearances
+- `--debug`: Print additional debugging information
+- `--output_dir`: Specify where to save visualizations (default: "output")
+- `--queries`: Comma-separated list of classes to detect (default: "all")
+- `--start_frame` and `--end_frame`: Specify range of frames to process

@@ -13,6 +13,7 @@ import time
 
 # Import our components
 from owlv2_detector import OWLv2Detector
+from cd_fsod_detector import CDFSODDetector  # Add import for CD-FSOD detector
 from sam2_wrapper import SAM2VideoWrapper
 from object_tracker import ObjectTracker
 from embedding_extractor import EmbeddingExtractor
@@ -26,6 +27,9 @@ class ObjectTrackingPipeline:
         output_dir: str,
         confidence_threshold: float = 0.1,
         device: Optional[torch.device] = None,
+        detector_type: str = "owlv2",  # New parameter for detector type
+        cd_fsod_path: Optional[str] = None,  # Path to CD-FSOD JSON directory
+        min_gap_frames: int = 10,  # Min gap frames for CD-FSOD detector
     ):
         # Set device
         if device is None:
@@ -38,8 +42,17 @@ class ObjectTrackingPipeline:
         self.device = device
         print(f"Using device: {device}")
         
-        # Initialize components
-        self.detector = OWLv2Detector(device=device)
+        # Initialize components based on detector type
+        self.detector_type = detector_type.lower()
+        self.detector = self._create_detector(
+            detector_type=self.detector_type,
+            owlv2_checkpoint=owlv2_checkpoint,
+            cd_fsod_path=cd_fsod_path,
+            confidence_threshold=confidence_threshold,
+            min_gap_frames=min_gap_frames,
+            device=device
+        )
+        
         self.sam_wrapper = SAM2VideoWrapper(sam2_checkpoint, sam2_config, device=device)
         self.tracker = ObjectTracker()
         self.embedding_extractor = EmbeddingExtractor(device=device)
@@ -56,6 +69,42 @@ class ObjectTrackingPipeline:
         self.next_id = 1
         self.propagation_results = {}  # Store SAM2 propagation results
         
+    def _create_detector(
+        self,
+        detector_type: str,
+        owlv2_checkpoint: str,
+        cd_fsod_path: Optional[str] = None,
+        confidence_threshold: float = 0.1,
+        min_gap_frames: int = 10,
+        device: torch.device = None
+    ):
+        """
+        Factory method to create the appropriate detector.
+        
+        Args:
+            detector_type: Type of detector ('owlv2' or 'cd_fsod')
+            owlv2_checkpoint: Path to OWLv2 checkpoint file
+            cd_fsod_path: Path to CD-FSOD JSON directory
+            confidence_threshold: Minimum confidence threshold
+            min_gap_frames: Minimum gap frames for CD-FSOD detector
+            device: Torch device for OWLv2 detector
+            
+        Returns:
+            Initialized detector object
+        """
+        if detector_type == "owlv2":
+            return OWLv2Detector(device=device)
+        elif detector_type == "cd_fsod":
+            if cd_fsod_path is None:
+                raise ValueError("cd_fsod_path must be provided when using CD-FSOD detector")
+            return CDFSODDetector(
+                json_dir=cd_fsod_path,
+                confidence_threshold=confidence_threshold,
+                min_gap_frames=min_gap_frames
+            )
+        else:
+            raise ValueError(f"Unknown detector type: {detector_type}. Must be 'owlv2' or 'cd_fsod'")
+        
     def process_video(self, frames_dir: str, text_queries: List[str]):
         # Get all frames sorted
         frames_path = Path(frames_dir)
@@ -64,6 +113,7 @@ class ObjectTrackingPipeline:
             raise ValueError(f"No frames found in {frames_dir}")
         
         print(f"Processing {len(frame_files)} frames with queries: {text_queries}")
+        print(f"Using detector: {self.detector_type}")
         
         # Initialize SAM2 with the video frames directory
         print(f"Setting up SAM2 with frames directory: {frames_dir}")
@@ -76,7 +126,8 @@ class ObjectTrackingPipeline:
             "metadata": {
                 "queries": text_queries,
                 "frame_count": len(frame_files),
-                "timestamp": time.strftime("%Y-%m-%d %H:%M:%S")
+                "timestamp": time.strftime("%Y-%m-%d %H:%M:%S"),
+                "detector_type": self.detector_type  # Include detector type in metadata
             }
         }
         
@@ -86,8 +137,19 @@ class ObjectTrackingPipeline:
         first_frame_np = np.array(first_frame)
         
         # Detect objects in first frame
+        # For CD-FSOD, we pass the frame filename to help extract the frame index
+        first_frame_data = first_frame
+        if self.detector_type == "cd_fsod":
+            # For CD-FSOD detector, we need to provide frame information
+            # We'll use the filename as a way to pass frame index information
+            first_frame_data = {
+                "image": first_frame,
+                "frame_path": str(first_frame_path),
+                "frame_idx": 0
+            }
+            
         detections = self.detector.detect(
-            image=first_frame,
+            image=first_frame_data,
             text_queries=text_queries,
             threshold=self.confidence_threshold
         )
@@ -188,8 +250,18 @@ class ObjectTrackingPipeline:
             frame_np = np.array(frame)
             
             # Get new detections
+            # Prepare frame data based on detector type
+            frame_data = frame
+            if self.detector_type == "cd_fsod":
+                # For CD-FSOD detector, we need to provide frame information
+                frame_data = {
+                    "image": frame,
+                    "frame_path": str(frame_path),
+                    "frame_idx": frame_idx
+                }
+                
             detections = self.detector.detect(
-                image=frame,
+                image=frame_data,
                 text_queries=text_queries,
                 threshold=self.confidence_threshold
             )
@@ -740,9 +812,18 @@ class ObjectTrackingPipeline:
             frame = Image.open(frame_path).convert("RGB")
             frame_np = np.array(frame)
             
+            # Prepare frame data based on detector type
+            frame_data = frame
+            if self.detector_type == "cd_fsod":
+                frame_data = {
+                    "image": frame,
+                    "frame_path": str(frame_path),
+                    "frame_idx": frame_idx
+                }
+            
             # Detect objects
             detections = self.detector.detect(
-                image=frame,
+                image=frame_data,
                 text_queries=text_queries,
                 threshold=self.confidence_threshold
             )
@@ -756,7 +837,7 @@ class ObjectTrackingPipeline:
                         "score": detections["scores"][i].item() if isinstance(detections["scores"][i], torch.Tensor) else detections["scores"][i],
                         "text": detections["labels"][i]
                     })
-            
+
             # Update tracker
             current_boxes = self.tracker.update_tracks(
                 frame=frame_np,
@@ -765,7 +846,7 @@ class ObjectTrackingPipeline:
                 embedding_extractor=self.embedding_extractor,
                 output_dir=None
             )
-            
+
             # Store frame detections
             results["frame_results"][frame_idx]["detections"] = [
                 {"box": box.tolist() if isinstance(box, torch.Tensor) else box, 
@@ -823,6 +904,7 @@ class ObjectTrackingPipeline:
             raise ValueError(f"No frames found in {frames_dir}")
         
         print(f"Processing {len(frame_files)} frames with queries: {text_queries}")
+        print(f"Using detector: {self.detector_type}")
         
         # Results storage
         results = {
@@ -831,7 +913,8 @@ class ObjectTrackingPipeline:
             "metadata": {
                 "queries": text_queries,
                 "frame_count": len(frame_files),
-                "timestamp": time.strftime("%Y-%m-%d %H:%M:%S")
+                "timestamp": time.strftime("%Y-%m-%d %H:%M:%S"),
+                "detector_type": self.detector_type  # Include detector type in metadata
             }
         }
         
@@ -936,7 +1019,16 @@ def main():
     parser.add_argument("--confidence", type=float, default=0.1, help="Confidence threshold for detections")
     parser.add_argument("--separate-objects", action="store_true", help="Process each object separately to avoid dtype issues")
     
+    # Add CD-FSOD detector options
+    parser.add_argument("--detector", choices=["owlv2", "cd_fsod"], default="owlv2", help="Detector type to use")
+    parser.add_argument("--cd-fsod-path", help="Path to CD-FSOD JSON detections directory (required if using cd_fsod detector)")
+    parser.add_argument("--min-gap-frames", type=int, default=10, help="Minimum gap frames for CD-FSOD reappearances")
+    
     args = parser.parse_args()
+    
+    # Check for required arguments based on detector type
+    if args.detector == "cd_fsod" and not args.cd_fsod_path:
+        parser.error("--cd-fsod-path is required when using cd_fsod detector")
     
     # Initialize pipeline
     pipeline = ObjectTrackingPipeline(
@@ -944,7 +1036,10 @@ def main():
         sam2_checkpoint=args.sam2_checkpoint,
         sam2_config=args.sam2_config,
         output_dir=args.output_dir,
-        confidence_threshold=args.confidence
+        confidence_threshold=args.confidence,
+        detector_type=args.detector,
+        cd_fsod_path=args.cd_fsod_path,
+        min_gap_frames=args.min_gap_frames
     )
     
     # Process video using the appropriate method

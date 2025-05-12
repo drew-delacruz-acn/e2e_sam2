@@ -136,16 +136,20 @@ class ObjectTrackingPipeline:
         first_frame = Image.open(first_frame_path).convert("RGB")
         first_frame_np = np.array(first_frame)
         
+        # Extract actual frame index from filename
+        first_frame_idx = self._extract_frame_idx_from_path(first_frame_path)
+        print(f"Processing first frame with extracted index: {first_frame_idx}")
+        
         # Detect objects in first frame
         # For CD-FSOD, we pass the frame filename to help extract the frame index
         first_frame_data = first_frame
         if self.detector_type == "cd_fsod":
             # For CD-FSOD detector, we need to provide frame information
-            # We'll use the filename as a way to pass frame index information
+            # We'll use the extracted frame index to ensure proper JSON matching
             first_frame_data = {
                 "image": first_frame,
                 "frame_path": str(first_frame_path),
-                "frame_idx": 0
+                "frame_idx": first_frame_idx
             }
             
         detections = self.detector.detect(
@@ -190,8 +194,8 @@ class ObjectTrackingPipeline:
             
             # Add box to SAM2 to get mask - match test pattern
             box_coords = [x1, y1, x2, y2]
-            print(f"Adding box for object {object_id} at frame 0: {box_coords}")
-            mask_logits = self.sam_wrapper.add_box(frame_idx=0, obj_id=object_id, box=box_coords)
+            print(f"Adding box for object {object_id} at frame {first_frame_idx}: {box_coords}")
+            mask_logits = self.sam_wrapper.add_box(frame_idx=first_frame_idx, obj_id=object_id, box=box_coords)
             
             # Skip if mask generation failed
             if mask_logits is None:
@@ -202,11 +206,11 @@ class ObjectTrackingPipeline:
             self.tracked_objects[object_id] = {
                 "id": object_id,
                 "class": label,
-                "first_detected": 0,  # frame 0
+                "first_detected": first_frame_idx,  # Use extracted frame index
                 "boxes": [box_coords],
                 "embeddings": [embedding.cpu().numpy() if isinstance(embedding, torch.Tensor) else embedding],
                 "masks": [mask_logits.cpu().numpy() if isinstance(mask_logits, torch.Tensor) else mask_logits],
-                "last_seen": 0,  # frame 0
+                "last_seen": first_frame_idx,  # Use extracted frame index
                 "confidence": [conf]
             }
             
@@ -226,12 +230,12 @@ class ObjectTrackingPipeline:
         # Visualize first frame results
         first_frame_vis = self._visualize_frame(
             frame=first_frame_np,
-            frame_idx=0,
+            frame_idx=first_frame_idx,  # Use extracted frame index
             objects=self.tracked_objects
         )
         
         # Save first frame results
-        results["frame_results"][0] = {
+        results["frame_results"][first_frame_idx] = {  # Use extracted frame index
             "detections": [
                 {"box": box.tolist() if isinstance(box, torch.Tensor) else box, 
                  "label": label, 
@@ -243,9 +247,12 @@ class ObjectTrackingPipeline:
         }
         
         # Process remaining frames - use propagation results where available
-        for frame_idx in range(1, len(frame_files)):
-            print(f"Processing frame {frame_idx}/{len(frame_files)}")
-            frame_path = frame_files[frame_idx]
+        for i in range(1, len(frame_files)):
+            frame_path = frame_files[i]
+            # Extract actual frame index from filename
+            frame_idx = self._extract_frame_idx_from_path(frame_path)
+            print(f"Processing frame {i}/{len(frame_files)} with extracted index: {frame_idx}")
+            
             frame = Image.open(frame_path).convert("RGB")
             frame_np = np.array(frame)
             
@@ -283,7 +290,7 @@ class ObjectTrackingPipeline:
             # Get boxes for current frame from tracker
             current_boxes = self.tracker.update_tracks(
                 frame=frame_np,
-                frame_idx=frame_idx,
+                frame_idx=frame_idx,  # Use extracted frame index
                 detections=tracker_detections,
                 embedding_extractor=self.embedding_extractor,
                 output_dir=None
@@ -572,6 +579,12 @@ class ObjectTrackingPipeline:
         frames_path = Path(frames_dir)
         frame_files = sorted([f for f in frames_path.glob("*.jpg") or frames_path.glob("*.png")])
         
+        # Create mapping from frame indices to frame files
+        frame_map = {}
+        for frame_path in frame_files:
+            idx = self._extract_frame_idx_from_path(frame_path)
+            frame_map[idx] = frame_path
+        
         # Get detection files if using CD-FSOD detector
         detection_files = None
         if hasattr(self, 'detector') and hasattr(self.detector, 'json_dir'):
@@ -584,9 +597,9 @@ class ObjectTrackingPipeline:
             # Get frame where object was first detected
             first_frame_idx = obj_data["first_detected"]
             
-            # Skip if index is out of range
-            if first_frame_idx >= len(frame_files):
-                print(f"Warning: First frame index {first_frame_idx} for object {obj_id} is out of range")
+            # Skip if index is not in our frame map
+            if first_frame_idx not in frame_map:
+                print(f"Warning: First frame index {first_frame_idx} for object {obj_id} not found in frame map")
                 continue
             
             # Log the detection source JSON file
@@ -618,7 +631,7 @@ class ObjectTrackingPipeline:
                         print(f"    Error reading JSON file: {e}")
             
             # Load the frame
-            frame_path = frame_files[first_frame_idx]
+            frame_path = frame_map[first_frame_idx]
             frame = np.array(Image.open(frame_path).convert("RGB"))
             
             # Draw bounding box (get the first box from the boxes list)
@@ -659,6 +672,12 @@ class ObjectTrackingPipeline:
         frames_path = Path(frames_dir)
         frame_files = sorted([f for f in frames_path.glob("*.jpg") or frames_path.glob("*.png")])
         
+        # Create mapping from frame indices to frame files
+        frame_map = {}
+        for frame_path in frame_files:
+            idx = self._extract_frame_idx_from_path(frame_path)
+            frame_map[idx] = frame_path
+        
         # For each object
         for obj_id, obj_data in self.tracked_objects.items():
             # Create directory for this object
@@ -675,8 +694,8 @@ class ObjectTrackingPipeline:
             
             # Process each frame where this object should be visible
             for frame_idx in range(first_frame, last_frame + 1):
-                # Skip if frame is out of range
-                if frame_idx >= len(frame_files):
+                # Skip if frame is not in our frame map
+                if frame_idx not in frame_map:
                     continue
                 
                 # Skip if frame doesn't have a mask for this object in propagation results
@@ -685,7 +704,7 @@ class ObjectTrackingPipeline:
                     continue
                 
                 # Load the original frame
-                frame_path = frame_files[frame_idx]
+                frame_path = frame_map[frame_idx]
                 frame = np.array(Image.open(frame_path).convert("RGB"))
                 
                 # Get the mask for this object in this frame
@@ -842,7 +861,10 @@ class ObjectTrackingPipeline:
         all_objects = {}
         
         # Process all frames
-        for frame_idx, frame_path in enumerate(frame_files):
+        for i, frame_path in enumerate(frame_files):
+            # Extract the actual frame index from the filename
+            frame_idx = self._extract_frame_idx_from_path(frame_path)
+            
             # Load frame
             frame = Image.open(frame_path).convert("RGB")
             frame_np = np.array(frame)
@@ -853,7 +875,7 @@ class ObjectTrackingPipeline:
                 frame_data = {
                     "image": frame,
                     "frame_path": str(frame_path),
-                    "frame_idx": frame_idx
+                    "frame_idx": frame_idx  # Use extracted frame index
                 }
             
             # Detect objects
@@ -876,13 +898,16 @@ class ObjectTrackingPipeline:
             # Update tracker
             current_boxes = self.tracker.update_tracks(
                 frame=frame_np,
-                frame_idx=frame_idx,
+                frame_idx=frame_idx,  # Use extracted frame index
                 detections=tracker_detections,
                 embedding_extractor=self.embedding_extractor,
                 output_dir=None
             )
 
             # Store frame detections
+            if frame_idx not in results["frame_results"]:
+                results["frame_results"][frame_idx] = {"detections": [], "tracked_objects": []}
+                
             results["frame_results"][frame_idx]["detections"] = [
                 {"box": box.tolist() if isinstance(box, torch.Tensor) else box, 
                  "label": label, 
@@ -906,11 +931,11 @@ class ObjectTrackingPipeline:
                     all_objects[obj_id] = {
                         "id": obj_id,
                         "class": tracker_obj["class"],
-                        "first_detected": frame_idx,
+                        "first_detected": frame_idx,  # Use extracted frame index
                         "boxes": [box],
                         "embeddings": [embedding.cpu().numpy() if isinstance(embedding, torch.Tensor) else embedding],
                         "masks": [],  # Will be filled during SAM2 phase
-                        "last_seen": frame_idx,
+                        "last_seen": frame_idx,  # Use extracted frame index
                         "confidence": [0.0]  # Placeholder
                     }
                     
@@ -921,7 +946,7 @@ class ObjectTrackingPipeline:
                     all_objects[obj_id]["embeddings"].append(
                         embedding.cpu().numpy() if isinstance(embedding, torch.Tensor) else embedding
                     )
-                    all_objects[obj_id]["last_seen"] = frame_idx
+                    all_objects[obj_id]["last_seen"] = frame_idx  # Use extracted frame index
                     all_objects[obj_id]["confidence"].append(0.0)  # Placeholder
                 
                 # Add to frame results
@@ -941,10 +966,17 @@ class ObjectTrackingPipeline:
         print(f"Processing {len(frame_files)} frames with queries: {text_queries}")
         print(f"Using detector: {self.detector_type}")
         
+        # Create a mapping of loop indices to actual frame indices
+        frame_indices = []
+        for i, frame_path in enumerate(frame_files):
+            frame_idx = self._extract_frame_idx_from_path(frame_path)
+            frame_indices.append(frame_idx)
+            print(f"Frame {i} in sequence maps to frame index {frame_idx}")
+        
         # Results storage
         results = {
             "object_tracks": {},
-            "frame_results": {i: {"detections": [], "tracked_objects": []} for i in range(len(frame_files))},
+            "frame_results": {idx: {"detections": [], "tracked_objects": []} for idx in frame_indices},
             "metadata": {
                 "queries": text_queries,
                 "frame_count": len(frame_files),
@@ -1012,7 +1044,10 @@ class ObjectTrackingPipeline:
             results["object_tracks"][obj_id] = obj_data
         
         # Generate visualizations for all frames
-        for frame_idx in range(len(frame_files)):
+        for i, frame_path in enumerate(frame_files):
+            # Extract the actual frame index
+            frame_idx = frame_indices[i]
+            
             # Get visible objects for this frame
             visible_objects = {
                 obj_id: data for obj_id, data in self.tracked_objects.items()
@@ -1020,7 +1055,6 @@ class ObjectTrackingPipeline:
             }
             
             # Load the frame
-            frame_path = frame_files[frame_idx]
             frame = np.array(Image.open(frame_path).convert("RGB"))
             
             # Visualize
@@ -1042,6 +1076,22 @@ class ObjectTrackingPipeline:
         
         print(f"All results saved to: {self.output_dir}")
         return results
+
+    def _extract_frame_idx_from_path(self, frame_path):
+        """
+        Extract frame index from filename (e.g., '10.jpg' -> 10)
+        """
+        # Extract frame index from filename (assuming filenames like '0.jpg', '1.jpg', '10.jpg', etc.)
+        try:
+            # Get just the filename without extension
+            filename = Path(frame_path).stem
+            # Try to convert to integer directly (handles filenames like '0', '1', '10', etc.)
+            frame_idx = int(filename)
+            return frame_idx
+        except ValueError:
+            # If we can't extract a number directly, use a fallback index
+            print(f"Warning: Could not extract frame index from {frame_path}, using fallback index.")
+            return 0
 
 def main():
     parser = argparse.ArgumentParser(description="Object Tracking Pipeline with OWLv2 and SAM2")

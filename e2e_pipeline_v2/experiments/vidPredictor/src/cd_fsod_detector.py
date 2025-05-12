@@ -87,6 +87,9 @@ class CDFSODDetector:
         # Maps object_id -> (frame_idx, detection)
         object_last_seen = {}
         
+        # Additional tracking: Maps object_id -> list of frame indices where the object was seen
+        object_frames = {}
+        
         # Generate unique object ID based on label
         next_object_id = {}  # Maps label -> next ID for that label
         
@@ -130,15 +133,22 @@ class CDFSODDetector:
                 
                 # If we found a matching object
                 if best_match is not None:
+                    # Get frame history for this object
+                    if best_match not in object_frames:
+                        object_frames[best_match] = []
+                    
                     last_frame, _ = object_last_seen[best_match]
                     frame_gap = frame_idx - last_frame
+                    
+                    # Update the object history
+                    object_frames[best_match].append(frame_idx)
                     
                     # Update the last seen record
                     object_last_seen[best_match] = (frame_idx, detection)
                     matched_detections.add(id(detection))
                     
-                    # If the gap exceeds our threshold, record a reappearance
-                    if frame_gap > self.min_gap_frames:
+                    # If this is a reappearance after a gap (not a continuous detection)
+                    if frame_gap > 1 and frame_gap > self.min_gap_frames:
                         self.reappearances[frame_idx].append(detection)
                 
                 # If no match, this is a new object
@@ -149,6 +159,9 @@ class CDFSODDetector:
                     
                     obj_id = f"{label}_{next_object_id[label]}"
                     next_object_id[label] += 1
+                    
+                    # Initialize object history
+                    object_frames[obj_id] = [frame_idx]
                     
                     # Record first appearance
                     object_last_seen[obj_id] = (frame_idx, detection)

@@ -53,6 +53,8 @@ def main():
                         help='Last frame to process (-1 for all frames)')
     parser.add_argument('--visualize', action='store_true',
                         help='Generate visualization of detections')
+    parser.add_argument('--debug', action='store_true',
+                        help='Print additional debug information')
     
     args = parser.parse_args()
     
@@ -82,6 +84,25 @@ def main():
     print(f"Loaded detector with {len(detector.detections_by_frame)} frames")
     print(f"Available classes: {sorted(list(all_classes))}")
     print(f"Detecting classes: {text_queries}")
+    
+    # Print object tracking information if debugging
+    if args.debug:
+        print("\nObject tracking information:")
+        print(f"First appearances:")
+        for frame_idx in sorted(detector.first_appearances.keys()):
+            if detector.first_appearances[frame_idx]:
+                print(f"  Frame {frame_idx}: {len(detector.first_appearances[frame_idx])} objects")
+                for detection in detector.first_appearances[frame_idx]:
+                    print(f"    {detection['label']}: {detection['confidence']:.2f} at {detection['coordinates']}")
+        
+        print(f"\nReappearances:")
+        for frame_idx in sorted(detector.reappearances.keys()):
+            if detector.reappearances[frame_idx]:
+                print(f"  Frame {frame_idx}: {len(detector.reappearances[frame_idx])} objects")
+                for detection in detector.reappearances[frame_idx]:
+                    print(f"    {detection['label']}: {detection['confidence']:.2f} at {detection['coordinates']}")
+        
+        print()
     
     # Get list of frame files and sort them naturally
     frame_files = [f for f in os.listdir(args.frames_dir) 
@@ -127,6 +148,15 @@ def main():
         if args.visualize:
             # Create a copy for visualization
             vis_frame = frame.copy()
+            
+            # Draw detection status text
+            if frame_idx in detector.first_appearances and detector.first_appearances[frame_idx]:
+                cv2.putText(vis_frame, "FIRST APPEARANCE", (20, 50), 
+                          cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 0, 255), 2)
+            
+            if frame_idx in detector.reappearances and detector.reappearances[frame_idx]:
+                cv2.putText(vis_frame, "REAPPEARANCE", (20, 80), 
+                          cv2.FONT_HERSHEY_SIMPLEX, 0.7, (255, 0, 0), 2)
             
             # Draw each detection
             for box, label, score in zip(results['boxes'], results['labels'], results['scores']):

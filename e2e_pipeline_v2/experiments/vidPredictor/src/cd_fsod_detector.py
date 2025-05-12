@@ -212,8 +212,6 @@ class CDFSODDetector:
             Dictionary containing 'boxes', 'labels', and 'scores' for detected objects
         """
         # Extract frame index from filename or metadata
-        # For testing purposes, we'll extract from filename pattern like "frame_00001.jpg"
-        # In real implementation, this could come from metadata or other sources
         frame_idx = self._extract_frame_idx(image)
         
         if frame_idx is None:
@@ -224,14 +222,20 @@ class CDFSODDetector:
                 "scores": np.zeros(0, dtype=np.float32)
             }
         
-        # Get all detections for this frame (first appearances and reappearances)
+        # IMPORTANT: Only include first appearances and reappearances, not all detections in the frame
+        # This ensures we're only detecting objects when they first appear or reappear after a gap
         frame_detections = []
         
+        # Add first appearances for this frame
         if frame_idx in self.first_appearances:
             frame_detections.extend(self.first_appearances[frame_idx])
             
+        # Add reappearances for this frame
         if frame_idx in self.reappearances:
             frame_detections.extend(self.reappearances[frame_idx])
+        
+        # We deliberately DO NOT include other detections from self.detections_by_frame[frame_idx]
+        # as those would include continuing objects which we want to ignore
         
         # Apply label filtering using text queries
         # Map CD-FSOD labels to pipeline labels if mapping is provided

@@ -4,7 +4,14 @@ import numpy as np
 import argparse
 import cv2
 from pathlib import Path
+import re
 from src.cd_fsod_detector import CDFSODDetector
+
+# Add natural sorting function
+def natural_sort_key(s):
+    """Key function for natural sorting"""
+    return [int(text) if text.isdigit() else text.lower()
+            for text in re.split(r'(\d+)', s)]
 
 # Add the MockImage class for frame_idx handling
 class MockImage(np.ndarray):
@@ -76,9 +83,12 @@ def main():
     print(f"Available classes: {sorted(list(all_classes))}")
     print(f"Detecting classes: {text_queries}")
     
-    # Get list of frame files
-    frame_files = sorted([f for f in os.listdir(args.frames_dir) 
-                         if f.endswith(('.jpg', '.jpeg', '.png'))])
+    # Get list of frame files and sort them naturally
+    frame_files = [f for f in os.listdir(args.frames_dir) 
+                  if f.endswith(('.jpg', '.jpeg', '.png'))]
+    
+    # Use natural sorting instead of alphabetical
+    frame_files.sort(key=natural_sort_key)
     
     if args.end_frame == -1:
         args.end_frame = len(frame_files) - 1

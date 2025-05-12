@@ -17,7 +17,7 @@ class CDFSODDetector:
         self, 
         json_dir: str, 
         confidence_threshold: float = 0.2,
-        iou_threshold: float = 0.5,
+        iou_threshold: float = 0.5,  # Kept for backward compatibility but not used
         min_gap_frames: int = 10,
         label_mapping: Optional[Dict[str, str]] = None
     ):
@@ -27,13 +27,12 @@ class CDFSODDetector:
         Args:
             json_dir: Directory containing JSON files with CD-FSOD detections
             confidence_threshold: Minimum confidence score for detections
-            iou_threshold: IoU threshold for considering detections as the same object
+            iou_threshold: No longer used - kept for backward compatibility
             min_gap_frames: Minimum number of frames an object must be absent to count as reappearance
             label_mapping: Optional mapping from CD-FSOD labels to pipeline labels
         """
         self.json_dir = json_dir
         self.confidence_threshold = confidence_threshold
-        self.iou_threshold = iou_threshold
         self.min_gap_frames = min_gap_frames
         self.label_mapping = label_mapping or {}
         
@@ -43,6 +42,7 @@ class CDFSODDetector:
         # Track objects and their appearances
         self.first_appearances = {}    # Maps frame_idx -> list of first appearances
         self.reappearances = {}        # Maps frame_idx -> list of reappearances
+        self.object_tracks = {}        # Maps object_id -> list of (frame_idx, detection) tuples
         
         # Process detections to identify first appearances and reappearances
         self._process_detections()
@@ -82,95 +82,86 @@ class CDFSODDetector:
     
     def _process_detections(self):
         """
-        Process all detections to identify first appearances and reappearances.
+        Process all detections to identify first appearances and reappearances using continuity tracking.
         """
-        # Maps object_id -> (frame_idx, detection)
-        object_last_seen = {}
+        # Initialize data structures for all frames
+        frames = sorted(self.detections_by_frame.keys())
+        for frame_idx in frames:
+            self.first_appearances[frame_idx] = []
+            self.reappearances[frame_idx] = []
         
-        # Additional tracking: Maps object_id -> list of frame indices where the object was seen
-        object_frames = {}
+        # Track when we last saw each label class
+        # Maps label -> (last_frame_idx, is_active)
+        last_seen = {}
         
-        # Generate unique object ID based on label
-        next_object_id = {}  # Maps label -> next ID for that label
+        # Assign a single object_id for each label class
+        # We're using simple continuity tracking now, not trying to differentiate 
+        # between multiple instances of the same class
+        label_to_id = {}
         
         # Process frames in order
-        frames = sorted(self.detections_by_frame.keys())
-        
         for frame_idx in frames:
             frame_detections = self.detections_by_frame[frame_idx]
             
-            # Initialize lists for this frame if not already present
-            if frame_idx not in self.first_appearances:
-                self.first_appearances[frame_idx] = []
-            if frame_idx not in self.reappearances:
-                self.reappearances[frame_idx] = []
-                
-            # Track matched detections in current frame
-            matched_detections = set()
+            # Collect all object labels in this frame
+            current_labels = set(d['label'] for d in frame_detections)
             
-            # For each detection in the current frame
+            # Check each detection to see if it's a first appearance or reappearance
             for detection in frame_detections:
                 label = detection['label']
-                box = detection['coordinates']
                 
-                # Check if this detection matches any existing object
-                best_match = None
-                best_iou = -1
-                
-                for obj_id, (last_frame, last_detection) in object_last_seen.items():
-                    # Check if this is the same object class
-                    if last_detection['label'] != label:
-                        continue
+                # If we've never seen this label before
+                if label not in last_seen:
+                    # Assign an object_id for this label
+                    label_to_id[label] = f"{label}_0"
                     
-                    # Calculate IoU
-                    last_box = last_detection['coordinates']
-                    iou = self._calculate_iou(box, last_box)
-                    
-                    # If IoU exceeds threshold, consider this a match
-                    if iou > self.iou_threshold and iou > best_iou:
-                        best_match = obj_id
-                        best_iou = iou
-                
-                # If we found a matching object
-                if best_match is not None:
-                    # Get frame history for this object
-                    if best_match not in object_frames:
-                        object_frames[best_match] = []
-                    
-                    last_frame, _ = object_last_seen[best_match]
-                    frame_gap = frame_idx - last_frame
-                    
-                    # Update the object history
-                    object_frames[best_match].append(frame_idx)
-                    
-                    # Update the last seen record
-                    object_last_seen[best_match] = (frame_idx, detection)
-                    matched_detections.add(id(detection))
-                    
-                    # If this is a reappearance after a gap (not a continuous detection)
-                    if frame_gap > 1 and frame_gap > self.min_gap_frames:
-                        self.reappearances[frame_idx].append(detection)
-                
-                # If no match, this is a new object
-                else:
-                    # Generate a new object ID
-                    if label not in next_object_id:
-                        next_object_id[label] = 0
-                    
-                    obj_id = f"{label}_{next_object_id[label]}"
-                    next_object_id[label] += 1
-                    
-                    # Initialize object history
-                    object_frames[obj_id] = [frame_idx]
-                    
-                    # Record first appearance
-                    object_last_seen[obj_id] = (frame_idx, detection)
+                    # Mark as a first appearance
+                    detection['object_id'] = label_to_id[label]
                     self.first_appearances[frame_idx].append(detection)
-                    matched_detections.add(id(detection))
+                    
+                    # Initialize the object track
+                    self.object_tracks[label_to_id[label]] = [(frame_idx, detection)]
+                    
+                    # Record that we've seen this label
+                    last_seen[label] = (frame_idx, True)  # Active status
+                
+                # If we've seen this label before
+                else:
+                    last_frame_idx, is_active = last_seen[label]
+                    frame_gap = frame_idx - last_frame_idx
+                    
+                    # If the object is currently inactive and it's been gone for at least min_gap_frames
+                    if not is_active and frame_gap >= self.min_gap_frames:
+                        # Mark as a reappearance
+                        detection['object_id'] = label_to_id[label]
+                        self.reappearances[frame_idx].append(detection)
+                        
+                        # Update the object track
+                        self.object_tracks[label_to_id[label]].append((frame_idx, detection))
+                        
+                        # Mark as active again
+                        last_seen[label] = (frame_idx, True)
+                    
+                    # If the object is active or it hasn't been gone long enough
+                    else:
+                        # Just update the object track if it's the same object
+                        if label in label_to_id:
+                            detection['object_id'] = label_to_id[label]
+                            self.object_tracks[label_to_id[label]].append((frame_idx, detection))
+                        
+                        # Update the last seen info
+                        last_seen[label] = (frame_idx, True)
+            
+            # Update active status for objects not seen in this frame
+            for label in last_seen:
+                if label not in current_labels:
+                    last_frame_idx, _ = last_seen[label]
+                    last_seen[label] = (last_frame_idx, False)
     
     def _calculate_iou(self, box1: List[float], box2: List[float]) -> float:
         """
         Calculate Intersection over Union (IoU) between two bounding boxes.
+        Note: This method is kept for backward compatibility but is no longer used.
         
         Args:
             box1: First box coordinates [x1, y1, x2, y2]

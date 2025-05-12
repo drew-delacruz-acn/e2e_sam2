@@ -35,8 +35,8 @@ def main():
     parser = argparse.ArgumentParser(description='Run CD-FSOD Detector with custom JSON files')
     parser.add_argument('--json_dir', type=str, required=True, 
                         help='Directory containing CD-FSOD JSON files (0.json, 1.json, etc.)')
-    parser.add_argument('--frames_dir', type=str, required=True,
-                        help='Directory containing video frames')
+    parser.add_argument('--frames_dir', type=str, required=False,
+                        help='Directory containing video frames (required if --visualize is used)')
     parser.add_argument('--output_dir', type=str, default='output',
                         help='Directory to save output visualizations')
     parser.add_argument('--confidence', type=float, default=0.2,
@@ -55,8 +55,16 @@ def main():
                         help='Generate visualization of detections')
     parser.add_argument('--debug', action='store_true',
                         help='Print additional debug information')
+    parser.add_argument('--show_all_detections', action='store_true',
+                        help='Show all detections instead of just first appearances and reappearances')
+    parser.add_argument('--show_track_info', action='store_true',
+                        help='Show detailed object tracking information')
     
     args = parser.parse_args()
+    
+    # Check if frames_dir is provided when visualize is True
+    if args.visualize and not args.frames_dir:
+        parser.error("--frames_dir is required when --visualize is set")
     
     # Create output directory if it doesn't exist
     os.makedirs(args.output_dir, exist_ok=True)
@@ -84,6 +92,7 @@ def main():
     print(f"Loaded detector with {len(detector.detections_by_frame)} frames")
     print(f"Available classes: {sorted(list(all_classes))}")
     print(f"Detecting classes: {text_queries}")
+    print(f"Minimum gap frames: {args.min_gap}")
     
     # Print object tracking information if debugging
     if args.debug:
@@ -93,70 +102,136 @@ def main():
             if detector.first_appearances[frame_idx]:
                 print(f"  Frame {frame_idx}: {len(detector.first_appearances[frame_idx])} objects")
                 for detection in detector.first_appearances[frame_idx]:
-                    print(f"    {detection['label']}: {detection['confidence']:.2f} at {detection['coordinates']}")
+                    print(f"    {detection['label']} (ID: {detection.get('object_id', 'unknown')}): {detection['confidence']:.2f} at {detection['coordinates']}")
         
         print(f"\nReappearances:")
         for frame_idx in sorted(detector.reappearances.keys()):
             if detector.reappearances[frame_idx]:
                 print(f"  Frame {frame_idx}: {len(detector.reappearances[frame_idx])} objects")
                 for detection in detector.reappearances[frame_idx]:
-                    print(f"    {detection['label']}: {detection['confidence']:.2f} at {detection['coordinates']}")
+                    print(f"    {detection['label']} (ID: {detection.get('object_id', 'unknown')}): {detection['confidence']:.2f} at {detection['coordinates']}")
         
         print()
     
-    # Get list of frame files and sort them naturally
-    frame_files = [f for f in os.listdir(args.frames_dir) 
-                  if f.endswith(('.jpg', '.jpeg', '.png'))]
-    
-    # Use natural sorting instead of alphabetical
-    frame_files.sort(key=natural_sort_key)
+    # Get frame indices from detector data
+    frame_indices = sorted(list(detector.detections_by_frame.keys()))
     
     if args.end_frame == -1:
-        args.end_frame = len(frame_files) - 1
+        args.end_frame = max(frame_indices) if frame_indices else 0
     
-    print(f"Processing frames {args.start_frame} to {args.end_frame}")
+    start_frame = args.start_frame
+    end_frame = args.end_frame
     
-    # Process each frame
-    for i, frame_file in enumerate(frame_files[args.start_frame:args.end_frame+1]):
-        frame_idx = args.start_frame + i
-        frame_path = os.path.join(args.frames_dir, frame_file)
+    print(f"Processing frames {start_frame} to {end_frame}")
+    print("-" * 50)
+    
+    # Display tracking summary information
+    print("\nTracking summary:")
+    print("First Appearances:")
+    for frame_idx in sorted(detector.first_appearances.keys()):
+        if detector.first_appearances[frame_idx]:
+            for detection in detector.first_appearances[frame_idx]:
+                obj_id = detection.get('object_id', 'unknown')
+                print(f"  Frame {frame_idx}: {detection['label']} ({detection['confidence']:.2f}) ID: {obj_id}")
+                
+    print(f"\nReappearances (after gap of > {args.min_gap} frames):")
+    for frame_idx in sorted(detector.reappearances.keys()):
+        if detector.reappearances[frame_idx]:
+            for detection in detector.reappearances[frame_idx]:
+                obj_id = detection.get('object_id', 'unknown')
+                print(f"  Frame {frame_idx}: {detection['label']} ({detection['confidence']:.2f}) ID: {obj_id}")
+    
+    # Display object track information if requested
+    if args.show_track_info and hasattr(detector, 'object_tracks'):
+        print("\nObject Tracks:")
+        for obj_id, track in detector.object_tracks.items():
+            frame_indices = [frame_idx for frame_idx, _ in track]
+            print(f"  {obj_id}: {len(track)} appearances in frames {frame_indices}")
+    
+    print("-" * 50)
+    
+    # Determine frame processing approach based on visualize flag
+    if args.visualize:
+        # Get list of frame files and sort them naturally
+        frame_files = [f for f in os.listdir(args.frames_dir) 
+                      if f.endswith(('.jpg', '.jpeg', '.png'))]
         
-        # Load frame
-        frame = cv2.imread(frame_path)
-        if frame is None:
-            print(f"Error loading frame: {frame_path}")
-            continue
+        # Use natural sorting instead of alphabetical
+        frame_files.sort(key=natural_sort_key)
         
-        # Convert BGR to RGB
-        frame_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
-        
-        # Use MockImage to properly handle frame_idx
-        frame_rgb = MockImage(frame_rgb, frame_idx)
-        
-        # Detect objects
-        results = detector.detect(frame_rgb, text_queries)
-        
-        # Print detection results
-        print(f"Frame {frame_idx} ({frame_file}):")
-        if len(results['boxes']) == 0:
-            print("  No detections")
-        else:
-            for box, label, score in zip(results['boxes'], results['labels'], results['scores']):
-                print(f"  {label}: {score:.2f} at {box}")
-        
-        # Visualize if requested
-        if args.visualize:
+        # Process each frame with visualization
+        for i, frame_file in enumerate(frame_files[start_frame:end_frame+1]):
+            frame_idx = start_frame + i
+            frame_path = os.path.join(args.frames_dir, frame_file)
+            
+            # Load frame
+            frame = cv2.imread(frame_path)
+            if frame is None:
+                print(f"Error loading frame: {frame_path}")
+                continue
+            
+            # Convert BGR to RGB
+            frame_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+            
+            # Use MockImage to properly handle frame_idx
+            frame_rgb = MockImage(frame_rgb, frame_idx)
+            
+            # Get all detections if requested
+            if args.show_all_detections and frame_idx in detector.detections_by_frame:
+                all_detections = []
+                for detection in detector.detections_by_frame[frame_idx]:
+                    if detection['label'] in text_queries:
+                        all_detections.append({
+                            'coordinates': detection['coordinates'],
+                            'label': detection['label'],
+                            'confidence': detection['confidence']
+                        })
+                
+                results = {
+                    'boxes': np.array([d['coordinates'] for d in all_detections]) if all_detections else np.zeros((0, 4)),
+                    'labels': [d['label'] for d in all_detections],
+                    'scores': np.array([d['confidence'] for d in all_detections]) if all_detections else np.zeros(0)
+                }
+                
+                detection_type = "ALL DETECTIONS"
+            else:
+                # Detect objects (first appearances and reappearances only)
+                results = detector.detect(frame_rgb, text_queries)
+                
+                # Determine detection type for this frame
+                if frame_idx in detector.first_appearances and detector.first_appearances[frame_idx]:
+                    if frame_idx in detector.reappearances and detector.reappearances[frame_idx]:
+                        detection_type = "FIRST APPEARANCE + REAPPEARANCE"
+                    else:
+                        detection_type = "FIRST APPEARANCE"
+                elif frame_idx in detector.reappearances and detector.reappearances[frame_idx]:
+                    detection_type = "REAPPEARANCE"
+                else:
+                    detection_type = "NONE"
+            
+            # Print detection results
+            print(f"Frame {frame_idx} ({frame_file}) - {detection_type}:")
+            if len(results['boxes']) == 0:
+                print("  No detections")
+            else:
+                for box, label, score in zip(results['boxes'], results['labels'], results['scores']):
+                    print(f"  {label}: {score:.2f} at {box}")
+            
             # Create a copy for visualization
             vis_frame = frame.copy()
             
             # Draw detection status text
-            if frame_idx in detector.first_appearances and detector.first_appearances[frame_idx]:
-                cv2.putText(vis_frame, "FIRST APPEARANCE", (20, 50), 
-                          cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 0, 255), 2)
-            
-            if frame_idx in detector.reappearances and detector.reappearances[frame_idx]:
-                cv2.putText(vis_frame, "REAPPEARANCE", (20, 80), 
-                          cv2.FONT_HERSHEY_SIMPLEX, 0.7, (255, 0, 0), 2)
+            if args.show_all_detections:
+                cv2.putText(vis_frame, "ALL DETECTIONS", (20, 30), 
+                          cv2.FONT_HERSHEY_SIMPLEX, 0.7, (255, 255, 0), 2)
+            else:
+                if frame_idx in detector.first_appearances and detector.first_appearances[frame_idx]:
+                    cv2.putText(vis_frame, "FIRST APPEARANCE", (20, 30), 
+                              cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 0, 255), 2)
+                
+                if frame_idx in detector.reappearances and detector.reappearances[frame_idx]:
+                    cv2.putText(vis_frame, "REAPPEARANCE", (20, 60), 
+                              cv2.FONT_HERSHEY_SIMPLEX, 0.7, (255, 0, 0), 2)
             
             # Draw each detection
             for box, label, score in zip(results['boxes'], results['labels'], results['scores']):
@@ -173,124 +248,70 @@ def main():
             # Save visualization
             output_path = os.path.join(args.output_dir, f"frame_{frame_idx:04d}.jpg")
             cv2.imwrite(output_path, vis_frame)
+    else:
+        # Process frames without visualization (JSON-only mode)
+        for frame_idx in range(start_frame, end_frame + 1):
+            if frame_idx in detector.detections_by_frame:
+                # Create a mock frame with just the index (no image data needed)
+                mock_frame = MockImage(np.zeros((1, 1, 3), dtype=np.uint8), frame_idx)
+                
+                # Get all detections if requested
+                if args.show_all_detections:
+                    all_detections = []
+                    for detection in detector.detections_by_frame[frame_idx]:
+                        if detection['label'] in text_queries:
+                            all_detections.append({
+                                'coordinates': detection['coordinates'],
+                                'label': detection['label'],
+                                'confidence': detection['confidence']
+                            })
+                    
+                    results = {
+                        'boxes': np.array([d['coordinates'] for d in all_detections]) if all_detections else np.zeros((0, 4)),
+                        'labels': [d['label'] for d in all_detections],
+                        'scores': np.array([d['confidence'] for d in all_detections]) if all_detections else np.zeros(0)
+                    }
+                    
+                    detection_type = "ALL DETECTIONS"
+                else:
+                    # Detect objects (first appearances and reappearances only)
+                    results = detector.detect(mock_frame, text_queries)
+                    
+                    # Determine detection type for this frame
+                    if frame_idx in detector.first_appearances and detector.first_appearances[frame_idx]:
+                        if frame_idx in detector.reappearances and detector.reappearances[frame_idx]:
+                            detection_type = "FIRST APPEARANCE + REAPPEARANCE"
+                        else:
+                            detection_type = "FIRST APPEARANCE"
+                    elif frame_idx in detector.reappearances and detector.reappearances[frame_idx]:
+                        detection_type = "REAPPEARANCE"
+                    else:
+                        detection_type = "NONE"
+                
+                # Print detection results
+                print(f"Frame {frame_idx} - {detection_type}:")
+                if len(results['boxes']) == 0:
+                    print("  No detections")
+                else:
+                    for box, label, score in zip(results['boxes'], results['labels'], results['scores']):
+                        print(f"  {label}: {score:.2f} at {box}")
     
-    print(f"Processing complete. Visualizations saved to {args.output_dir}")
+    if args.visualize:
+        print(f"Processing complete. Visualizations saved to {args.output_dir}")
+    else:
+        print(f"Processing complete.")
 
 if __name__ == "__main__":
     main() 
 
+# Example usage with visualization:
 # python run_cd_fsod.py --json_dir "/home/ubuntu/code/drew/e2e_sam2/e2e_pipeline_v2/experiments/vidPredictor/data/detections/Scenes 061-080__265H-2-_20230815215828529" --frames_dir "data/frames//Scenes 061-080__265H-2-_20230815215828529" --visualize --min_gap 10 --confidence 0.9
-# Loaded detector with 54 frames
-# Available classes: ["Sylvie's horned headpiece", 'TVA Uniform', 'Time Stick']
-# Detecting classes: ["Sylvie's horned headpiece", 'TVA Uniform', 'Time Stick']
-# Processing frames 0 to 53
-# Frame 0 (0.jpg):
-#   No detections
-# Frame 1 (1.jpg):
-#   No detections
-# Frame 2 (2.jpg):
-#   No detections
-# Frame 3 (3.jpg):
-#   Time Stick: 0.99 at [453 224 643 473]
-# Frame 4 (4.jpg):
-#   Time Stick: 1.00 at [385 252 587 476]
-# Frame 5 (5.jpg):
-#   Time Stick: 0.97 at [313 262 524 477]
-# Frame 6 (6.jpg):
-#   No detections
-# Frame 7 (7.jpg):
-#   No detections
-# Frame 8 (8.jpg):
-#   No detections
-# Frame 9 (9.jpg):
-#   No detections
-# Frame 10 (10.jpg):
-#   No detections
-# Frame 11 (11.jpg):
-#   No detections
-# Frame 12 (12.jpg):
-#   No detections
-# Frame 13 (13.jpg):
-#   TVA Uniform: 0.97 at [374 115 604 490]
-#   Time Stick: 0.92 at [591 346 655 481]
-# Frame 14 (14.jpg):
-#   No detections
-# Frame 15 (15.jpg):
-#   No detections
-# Frame 16 (16.jpg):
-#   No detections
-# Frame 17 (17.jpg):
-#   No detections
-# Frame 18 (18.jpg):
-#   Sylvie's horned headpiece: 0.99 at [322 128 481 202]
-# Frame 19 (19.jpg):
-#   Time Stick: 0.94 at [240 156 417 412]
-# Frame 20 (20.jpg):
-#   Sylvie's horned headpiece: 0.98 at [536  82 721 177]
-# Frame 21 (21.jpg):
-#   No detections
-# Frame 22 (22.jpg):
-#   No detections
-# Frame 23 (23.jpg):
-#   No detections
-# Frame 24 (24.jpg):
-#   No detections
-# Frame 25 (25.jpg):
-#   No detections
-# Frame 26 (26.jpg):
-#   No detections
-# Frame 27 (27.jpg):
-#   No detections
-# Frame 28 (28.jpg):
-#   No detections
-# Frame 29 (29.jpg):
-#   No detections
-# Frame 30 (30.jpg):
-#   No detections
-# Frame 31 (31.jpg):
-#   No detections
-# Frame 32 (32.jpg):
-#   No detections
-# Frame 33 (33.jpg):
-#   Sylvie's horned headpiece: 0.96 at [582 104 671 201]
-# Frame 34 (34.jpg):
-#   No detections
-# Frame 35 (35.jpg):
-#   No detections
-# Frame 36 (36.jpg):
-#   No detections
-# Frame 37 (37.jpg):
-#   No detections
-# Frame 38 (38.jpg):
-#   No detections
-# Frame 39 (39.jpg):
-#   No detections
-# Frame 40 (40.jpg):
-#   No detections
-# Frame 41 (41.jpg):
-#   No detections
-# Frame 42 (42.jpg):
-#   No detections
-# Frame 43 (43.jpg):
-#   Sylvie's horned headpiece: 0.91 at [442 160 541 219]
-# Frame 44 (44.jpg):
-#   No detections
-# Frame 45 (45.jpg):
-#   No detections
-# Frame 46 (46.jpg):
-#   No detections
-# Frame 47 (47.jpg):
-#   No detections
-# Frame 48 (48.jpg):
-#   No detections
-# Frame 49 (49.jpg):
-#   No detections
-# Frame 50 (50.jpg):
-#   No detections
-# Frame 51 (51.jpg):
-#   No detections
-# Frame 52 (52.jpg):
-#   No detections
-# Frame 53 (53.jpg):
-#   No detections
-# Processing complete. Visualizations saved to output
+
+# Example usage with JSON only (no visualization):
+# python run_cd_fsod.py --json_dir "/home/ubuntu/code/drew/e2e_sam2/e2e_pipeline_v2/experiments/vidPredictor/data/detections/Scenes 061-080__265H-2-_20230815215828529" --min_gap 10 --confidence 0.9
+
+# Example usage to show all detections (including continuous tracks):
+# python run_cd_fsod.py --json_dir "/home/ubuntu/code/drew/e2e_sam2/e2e_pipeline_v2/experiments/vidPredictor/data/detections/Scenes 061-080__265H-2-_20230815215828529" --min_gap 10 --confidence 0.9 --show_all_detections
+
+# Example usage with detailed track info:
+# python run_cd_fsod.py --json_dir "/home/ubuntu/code/drew/e2e_sam2/e2e_pipeline_v2/experiments/vidPredictor/data/detections/Scenes 061-080__265H-2-_20230815215828529" --min_gap 10 --confidence 0.9 --show_track_info

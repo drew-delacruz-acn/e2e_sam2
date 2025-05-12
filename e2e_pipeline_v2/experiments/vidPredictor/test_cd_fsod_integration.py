@@ -6,15 +6,201 @@ Test script for CD-FSOD detector integration with the object tracking pipeline.
 import argparse
 import os
 import sys
+import logging
+import time
+import json
 from pathlib import Path
+from datetime import datetime
+from functools import wraps
 
 # Add the src directory to the Python path
 sys.path.append(os.path.join(os.path.dirname(__file__), 'src'))
 
 # Import our modules
 from object_tracking_pipeline import ObjectTrackingPipeline
+import cd_fsod_detector
+
+# Store the original methods
+original_load_detections = cd_fsod_detector.CDFSODDetector._load_detections
+original_process_detections = cd_fsod_detector.CDFSODDetector._process_detections
+original_detect = cd_fsod_detector.CDFSODDetector.detect
+
+# Configure logging
+def setup_logger(log_level=logging.INFO, output_dir=None):
+    """Set up a logger with console and file handlers."""
+    # Create logger
+    logger = logging.getLogger("cd_fsod_test")
+    logger.setLevel(log_level)
+    logger.handlers = []  # Clear existing handlers
+    
+    # Create console handler with formatting
+    console_handler = logging.StreamHandler()
+    console_handler.setLevel(log_level)
+    
+    # Create formatter
+    formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
+    console_handler.setFormatter(formatter)
+    
+    # Add console handler to logger
+    logger.addHandler(console_handler)
+    
+    # Add file handler if output directory is provided
+    if output_dir:
+        os.makedirs(output_dir, exist_ok=True)
+        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+        log_file = os.path.join(output_dir, f"cd_fsod_test_{timestamp}.log")
+        file_handler = logging.FileHandler(log_file)
+        file_handler.setLevel(log_level)
+        file_handler.setFormatter(formatter)
+        logger.addHandler(file_handler)
+        logger.info(f"Logging to file: {log_file}")
+    
+    return logger
+
+# Enhanced version of _load_detections with logging
+def enhanced_load_detections(self):
+    logger = logging.getLogger("cd_fsod_test")
+    logger.info(f"Loading CD-FSOD detections from {self.json_dir}...")
+    
+    start_time = time.time()
+    detections_by_frame = original_load_detections(self)
+    
+    total_detections = sum(len(dets) for dets in detections_by_frame.values())
+    unique_classes = set()
+    for frame_dets in detections_by_frame.values():
+        for det in frame_dets:
+            unique_classes.add(det.get('label', ''))
+    
+    logger.info(f"Loaded {len(detections_by_frame)} frames with {total_detections} total detections")
+    logger.info(f"Found {len(unique_classes)} unique object classes: {sorted(list(unique_classes))}")
+    logger.info(f"Detection loading took {time.time() - start_time:.2f} seconds")
+    
+    # Log detailed stats in debug mode
+    if logger.level <= logging.DEBUG:
+        logger.debug("Detections per frame:")
+        for frame_idx in sorted(detections_by_frame.keys())[:10]:  # Show first 10 frames only
+            logger.debug(f"  Frame {frame_idx}: {len(detections_by_frame[frame_idx])} detections")
+    
+    return detections_by_frame
+
+# Enhanced version of _process_detections with logging
+def enhanced_process_detections(self):
+    logger = logging.getLogger("cd_fsod_test")
+    logger.info("Processing detections to identify first appearances and reappearances...")
+    
+    start_time = time.time()
+    original_process_detections(self)
+    
+    # Log stats after processing
+    total_first_appearances = sum(len(apps) for apps in self.first_appearances.values())
+    total_reappearances = sum(len(reapps) for reapps in self.reappearances.values())
+    
+    logger.info(f"Processed detections in {time.time() - start_time:.2f} seconds")
+    logger.info(f"Found {total_first_appearances} first appearances and {total_reappearances} reappearances")
+    logger.info(f"Using minimum gap of {self.min_gap_frames} frames for reappearance detection")
+    
+    # Log more detailed stats in debug mode
+    if logger.level <= logging.DEBUG:
+        logger.debug("First appearances per frame:")
+        for frame_idx in sorted(self.first_appearances.keys())[:10]:  # Show first 10 frames
+            if len(self.first_appearances[frame_idx]) > 0:
+                logger.debug(f"  Frame {frame_idx}: {len(self.first_appearances[frame_idx])} " + 
+                             f"objects: {[d.get('label') for d in self.first_appearances[frame_idx]]}")
+        
+        logger.debug("Reappearances per frame:")
+        for frame_idx in sorted(self.reappearances.keys())[:10]:  # Show first 10 frames
+            if len(self.reappearances[frame_idx]) > 0:
+                logger.debug(f"  Frame {frame_idx}: {len(self.reappearances[frame_idx])} " + 
+                             f"objects: {[d.get('label') for d in self.reappearances[frame_idx]]}")
+    
+    return
+
+# Enhanced version of detect with logging
+def enhanced_detect(self, image, text_queries, threshold=None):
+    logger = logging.getLogger("cd_fsod_test")
+    
+    # Extract frame info
+    frame_idx = None
+    if isinstance(image, dict) and 'frame_idx' in image:
+        frame_idx = image['frame_idx']
+    else:
+        frame_idx = self._extract_frame_idx(image)
+    
+    if frame_idx is not None:
+        logger.debug(f"Detecting objects in frame {frame_idx}")
+    
+    # Call original method
+    start_time = time.time()
+    result = original_detect(self, image, text_queries, threshold)
+    
+    # Log results
+    num_detections = len(result["boxes"])
+    if num_detections > 0:
+        logger.debug(f"Frame {frame_idx}: Detected {num_detections} objects " +
+                    f"{result['labels']} with scores {[f'{s:.2f}' for s in result['scores']]}")
+    else:
+        logger.debug(f"Frame {frame_idx}: No objects detected")
+    
+    logger.debug(f"Detection took {(time.time() - start_time)*1000:.1f}ms")
+    
+    return result
+
+def apply_detector_patches():
+    """Apply monkey patches to the CD-FSOD detector class to enhance logging."""
+    logger = logging.getLogger("cd_fsod_test")
+    logger.info("Applying enhanced logging patches to CD-FSOD detector...")
+    
+    # Patch the detector methods
+    cd_fsod_detector.CDFSODDetector._load_detections = enhanced_load_detections
+    cd_fsod_detector.CDFSODDetector._process_detections = enhanced_process_detections
+    cd_fsod_detector.CDFSODDetector.detect = enhanced_detect
+    
+    logger.info("CD-FSOD detector patched with enhanced logging")
+
+def log_pipeline_progress(pipeline, total_frames, frame_idx, interval=5):
+    """Log progress of the pipeline processing with object statistics."""
+    if frame_idx % interval != 0 and frame_idx != total_frames - 1:
+        return
+        
+    logger = logging.getLogger("cd_fsod_test")
+    progress_pct = (frame_idx + 1) / total_frames * 100
+    
+    # Get object statistics
+    total_objects = len(pipeline.tracked_objects) if hasattr(pipeline, 'tracked_objects') else 0
+    
+    logger.info(f"Progress: {progress_pct:.1f}% ({frame_idx+1}/{total_frames} frames) - Tracking {total_objects} objects")
+    
+    # Log more detailed object info in debug mode
+    if logger.level <= logging.DEBUG and total_objects > 0:
+        # Get object classes
+        object_classes = {}
+        for obj_id, obj_data in pipeline.tracked_objects.items():
+            obj_class = obj_data.get('class', 'unknown')
+            if obj_class not in object_classes:
+                object_classes[obj_class] = 0
+            object_classes[obj_class] += 1
+            
+        # Log object class distribution
+        class_info = ", ".join([f"{cls}: {count}" for cls, count in object_classes.items()])
+        logger.debug(f"Object distribution: {class_info}")
+        
+        # Log some example object details
+        if frame_idx > 0:
+            # Find objects visible in current frame
+            visible_objects = [
+                obj_id for obj_id, data in pipeline.tracked_objects.items()
+                if data.get('last_seen') == frame_idx
+            ]
+            
+            if visible_objects:
+                sample_obj_id = visible_objects[0]
+                obj_data = pipeline.tracked_objects[sample_obj_id]
+                logger.debug(f"Sample object {sample_obj_id} ({obj_data.get('class')}): "
+                           f"first seen at frame {obj_data.get('first_detected')}, "
+                           f"last seen at frame {obj_data.get('last_seen')}")
 
 def main():
+    # Parse arguments
     parser = argparse.ArgumentParser(description="Test CD-FSOD detector integration with the object tracking pipeline")
     
     # Data paths
@@ -33,6 +219,8 @@ def main():
     
     # Processing options
     parser.add_argument("--separate-objects", action="store_true", help="Process each object separately to avoid dtype issues")
+    parser.add_argument("--debug", action="store_true", help="Enable debug logging")
+    parser.add_argument("--no-enhanced-logging", action="store_true", help="Disable enhanced detector logging")
     
     args = parser.parse_args()
     
@@ -40,41 +228,209 @@ def main():
     output_dir = Path(args.output_dir)
     output_dir.mkdir(exist_ok=True, parents=True)
     
-    print(f"Testing CD-FSOD integration with the following settings:")
-    print(f"  - Frames directory: {args.frames_dir}")
-    print(f"  - CD-FSOD detections directory: {args.cd_fsod_path}")
-    print(f"  - Confidence threshold: {args.confidence}")
-    print(f"  - Minimum gap frames: {args.min_gap_frames}")
-    print(f"  - Text queries: {args.text_queries}")
-    print(f"  - Using separate objects: {args.separate_objects}")
+    # Set up logger
+    log_level = logging.DEBUG if args.debug else logging.INFO
+    logger = setup_logger(log_level=log_level, output_dir=args.output_dir)
     
-    # Initialize pipeline with CD-FSOD detector
-    pipeline = ObjectTrackingPipeline(
-        owlv2_checkpoint=None,  # Not used with CD-FSOD detector
-        sam2_checkpoint=args.sam2_checkpoint,
-        sam2_config=args.sam2_config,
-        output_dir=args.output_dir,
-        confidence_threshold=args.confidence,
-        detector_type="cd_fsod",  # Use CD-FSOD detector
-        cd_fsod_path=args.cd_fsod_path,
-        min_gap_frames=args.min_gap_frames
-    )
+    # Log script start and configuration
+    logger.info("=" * 80)
+    logger.info("CD-FSOD Integration Test Started")
+    logger.info("=" * 80)
+    logger.info("Test configuration:")
+    logger.info(f"  - Frames directory: {args.frames_dir}")
+    logger.info(f"  - CD-FSOD detections directory: {args.cd_fsod_path}")
+    logger.info(f"  - SAM2 checkpoint: {args.sam2_checkpoint}")
+    logger.info(f"  - SAM2 config: {args.sam2_config}")
+    logger.info(f"  - Output directory: {args.output_dir}")
+    logger.info(f"  - Confidence threshold: {args.confidence}")
+    logger.info(f"  - Minimum gap frames: {args.min_gap_frames}")
+    logger.info(f"  - Text queries: {args.text_queries}")
+    logger.info(f"  - Using separate objects: {args.separate_objects}")
+    logger.info(f"  - Debug mode: {args.debug}")
+    logger.info(f"  - Enhanced logging: {not args.no_enhanced_logging}")
     
-    # Process video using the appropriate method
-    if args.separate_objects:
-        print("Processing video with separate object initialization...")
-        pipeline.process_video_separate_objects(
-            frames_dir=args.frames_dir,
-            text_queries=args.text_queries
+    # Check for files in the frames directory
+    try:
+        frames_path = Path(args.frames_dir)
+        frame_files = sorted([f for f in frames_path.glob("*.jpg") or frames_path.glob("*.png")])
+        logger.info(f"Found {len(frame_files)} frames in {args.frames_dir}")
+        if len(frame_files) == 0:
+            logger.error(f"No frames found in {args.frames_dir}. Exiting.")
+            return
+        logger.debug(f"First 5 frames: {[f.name for f in frame_files[:5]]}")
+    except Exception as e:
+        logger.error(f"Error accessing frames directory: {e}")
+        return
+    
+    # Check for CD-FSOD JSON files
+    try:
+        cd_fsod_path = Path(args.cd_fsod_path)
+        json_files = sorted([f for f in cd_fsod_path.glob("*.json")])
+        logger.info(f"Found {len(json_files)} JSON detection files in {args.cd_fsod_path}")
+        if len(json_files) == 0:
+            logger.error(f"No JSON files found in {args.cd_fsod_path}. Exiting.")
+            return
+        logger.debug(f"First 5 JSON files: {[f.name for f in json_files[:5]]}")
+        
+        # Sample the first JSON file to show format
+        if logger.level <= logging.DEBUG and len(json_files) > 0:
+            try:
+                with open(json_files[0], 'r') as f:
+                    sample_data = json.load(f)
+                logger.debug(f"Sample JSON format (first file, up to 3 detections):")
+                for i, det in enumerate(sample_data[:3]):
+                    logger.debug(f"  Detection {i+1}: {det}")
+                if len(sample_data) > 3:
+                    logger.debug(f"  ... and {len(sample_data)-3} more detections")
+            except Exception as e:
+                logger.error(f"Error reading sample JSON file: {e}")
+    except Exception as e:
+        logger.error(f"Error accessing CD-FSOD directory: {e}")
+        return
+    
+    # Apply detector patches for enhanced logging if requested
+    if not args.no_enhanced_logging:
+        try:
+            apply_detector_patches()
+        except Exception as e:
+            logger.error(f"Error applying detector patches: {e}")
+            logger.warning("Continuing without enhanced detector logging")
+    
+    # Initialize timer
+    start_time = time.time()
+    logger.info("Initializing pipeline with CD-FSOD detector...")
+    
+    try:
+        # Initialize pipeline with CD-FSOD detector
+        pipeline = ObjectTrackingPipeline(
+            owlv2_checkpoint=None,  # Not used with CD-FSOD detector
+            sam2_checkpoint=args.sam2_checkpoint,
+            sam2_config=args.sam2_config,
+            output_dir=args.output_dir,
+            confidence_threshold=args.confidence,
+            detector_type="cd_fsod",  # Use CD-FSOD detector
+            cd_fsod_path=args.cd_fsod_path,
+            min_gap_frames=args.min_gap_frames
         )
-    else:
-        print("Processing video with standard method...")
-        pipeline.process_video(
-            frames_dir=args.frames_dir,
-            text_queries=args.text_queries
-        )
+        logger.info("Pipeline initialized successfully")
+        logger.info(f"Pipeline initialization took {time.time() - start_time:.2f} seconds")
+    except Exception as e:
+        logger.error(f"Error initializing pipeline: {e}")
+        import traceback
+        logger.error(traceback.format_exc())
+        return
     
-    print(f"Processing complete. Results saved to: {args.output_dir}")
+    # Process video
+    processing_start = time.time()
+    logger.info("Starting video processing...")
+    
+    try:
+        # Process video using the appropriate method
+        if args.separate_objects:
+            logger.info("Using separate object initialization method...")
+            
+            # Define a progress monitoring callback
+            def progress_callback(frame_idx, total_frames):
+                log_pipeline_progress(pipeline, total_frames, frame_idx)
+            
+            # Store the original method
+            original_process_video = pipeline.process_video_separate_objects
+            
+            # Create a wrapped version with progress monitoring
+            @wraps(original_process_video)
+            def wrapped_process_video(frames_dir, text_queries):
+                # Get total frame count
+                frames_path = Path(frames_dir)
+                frame_files = sorted([f for f in frames_path.glob("*.jpg") or frames_path.glob("*.png")])
+                total_frames = len(frame_files)
+                
+                # Add hooks for progress logging
+                original_process_frame = pipeline._process_frame if hasattr(pipeline, '_process_frame') else None
+                
+                if original_process_frame:
+                    @wraps(original_process_frame)
+                    def wrapped_process_frame(frame_idx, *args, **kwargs):
+                        result = original_process_frame(frame_idx, *args, **kwargs)
+                        # Log progress
+                        log_pipeline_progress(pipeline, total_frames, frame_idx)
+                        return result
+                    
+                    pipeline._process_frame = wrapped_process_frame
+                
+                logger.info(f"Starting processing of {total_frames} frames...")
+                return original_process_video(frames_dir, text_queries)
+            
+            # Replace the method with our wrapped version
+            pipeline.process_video_separate_objects = wrapped_process_video
+            
+            # Call the wrapped method
+            pipeline.process_video_separate_objects(
+                frames_dir=args.frames_dir,
+                text_queries=args.text_queries
+            )
+        else:
+            logger.info("Using standard processing method...")
+            
+            # Store the original method
+            original_process_video = pipeline.process_video
+            
+            # Create a wrapped version with progress monitoring
+            @wraps(original_process_video)
+            def wrapped_process_video(frames_dir, text_queries):
+                # Get total frame count
+                frames_path = Path(frames_dir)
+                frame_files = sorted([f for f in frames_path.glob("*.jpg") or frames_path.glob("*.png")])
+                total_frames = len(frame_files)
+                
+                # Add hooks for progress logging
+                original_process_frame = pipeline._process_frame if hasattr(pipeline, '_process_frame') else None
+                
+                if original_process_frame:
+                    @wraps(original_process_frame)
+                    def wrapped_process_frame(frame_idx, *args, **kwargs):
+                        result = original_process_frame(frame_idx, *args, **kwargs)
+                        # Log progress
+                        log_pipeline_progress(pipeline, total_frames, frame_idx)
+                        return result
+                    
+                    pipeline._process_frame = wrapped_process_frame
+                
+                logger.info(f"Starting processing of {total_frames} frames...")
+                return original_process_video(frames_dir, text_queries)
+            
+            # Replace the method with our wrapped version
+            pipeline.process_video = wrapped_process_video
+            
+            # Call the wrapped method
+            pipeline.process_video(
+                frames_dir=args.frames_dir,
+                text_queries=args.text_queries
+            )
+        
+        processing_time = time.time() - processing_start
+        logger.info(f"Video processing completed in {processing_time:.2f} seconds")
+        
+        # Check if results were generated
+        results_files = list(Path(args.output_dir).glob("*"))
+        logger.info(f"Generated {len(results_files)} output files")
+        if args.debug:
+            logger.debug(f"Output files: {[f.name for f in results_files[:10]]}")
+        
+        # Log completion
+        total_time = time.time() - start_time
+        logger.info("=" * 80)
+        logger.info(f"CD-FSOD Integration Test Completed Successfully")
+        logger.info(f"Total processing time: {total_time:.2f} seconds")
+        logger.info(f"Results saved to: {args.output_dir}")
+        logger.info("=" * 80)
+        
+    except Exception as e:
+        logger.error(f"Error during video processing: {e}")
+        import traceback
+        logger.error(traceback.format_exc())
+        logger.info("=" * 80)
+        logger.info("CD-FSOD Integration Test Failed")
+        logger.info("=" * 80)
 
 if __name__ == "__main__":
     main() 

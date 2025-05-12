@@ -197,7 +197,7 @@ class CDFSODDetector:
     
     def detect(
         self, 
-        image: np.ndarray, 
+        image: Union[np.ndarray, Dict], 
         text_queries: List[str], 
         threshold: Optional[float] = None
     ) -> Dict[str, Union[np.ndarray, List[str]]]:
@@ -205,7 +205,7 @@ class CDFSODDetector:
         Detect objects in the given frame that either first appear or reappear after a gap.
         
         Args:
-            image: The image/frame to detect objects in
+            image: The image/frame to detect objects in or a dictionary with frame data
             text_queries: List of object classes to detect
             threshold: Optional confidence threshold (overrides the default)
             
@@ -263,7 +263,7 @@ class CDFSODDetector:
             "scores": scores
         }
     
-    def _extract_frame_idx(self, image: np.ndarray) -> Optional[int]:
+    def _extract_frame_idx(self, image: Union[np.ndarray, Dict]) -> Optional[int]:
         """
         Extract frame index from image metadata or filename.
         
@@ -272,13 +272,16 @@ class CDFSODDetector:
         that works with the expected test images.
         
         Args:
-            image: The input image
+            image: The input image or image data dictionary
             
         Returns:
             Frame index or None if it cannot be determined
         """
-        # For simplicity in tests, we'll store frame index as a property of the image array
-        # In a real implementation, this would use proper metadata or filename parsing
+        # Handle dictionary input format (used by the pipeline)
+        if isinstance(image, dict) and 'frame_idx' in image:
+            return image['frame_idx']
+        
+        # Handle MockImage format with frame_idx property
         if hasattr(image, 'frame_idx'):
             return image.frame_idx
         

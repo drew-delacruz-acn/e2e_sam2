@@ -105,6 +105,10 @@ class ObjectTracker:
                 # Skip if not seen recently (within 30 frames)
                 if frame_idx - obj_data["last_seen"] > 30:
                     continue
+                
+                # Skip if class labels don't match
+                if obj_data["class"] != label:
+                    continue
                     
                 # Calculate IoU with last known position
                 last_box = obj_data["trajectory"][-1][1]

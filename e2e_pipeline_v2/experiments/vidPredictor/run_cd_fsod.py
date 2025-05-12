@@ -150,121 +150,118 @@ if __name__ == "__main__":
     main() 
 
 
-
-#  python run_cd_fsod.py --json_dir "/home/ubuntu/code/drew/e2e_sam2/e2e_pipeline_v2/experiments/vidPredictor/data/detections/Scenes 061-080__265H-2-_20230815215828529" --frames_dir "data/frames//Scenes 061-080__265H-2-_20230815215828529" --visualize --min_gap 0 --confidence 0.9
+# python run_cd_fsod.py --json_dir "/home/ubuntu/code/drew/e2e_sam2/e2e_pipeline_v2/experiments/vidPredictor/data/detections/Scenes 061-080__265H-2-_20230815215828529" --frames_dir "data/frames//Scenes 061-080__265H-2-_20230815215828529" --visualize --min_gap 15 --confidence 0.9
 # Loaded detector with 54 frames
 # Available classes: ["Sylvie's horned headpiece", 'TVA Uniform', 'Time Stick']
-# Detecting classes: ['TVA Uniform', 'Time Stick', "Sylvie's horned headpiece"]
+# Detecting classes: ['TVA Uniform', "Sylvie's horned headpiece", 'Time Stick']
 # Processing frames 0 to 53
 # Frame 0 (0.jpg):
 #   No detections
 # Frame 1 (1.jpg):
 #   No detections
-# Frame 2 (10.jpg):
+# Frame 2 (2.jpg):
 #   No detections
-# Frame 3 (11.jpg):
+# Frame 3 (3.jpg):
 #   Time Stick: 0.99 at [453 224 643 473]
-# Frame 4 (12.jpg):
+# Frame 4 (4.jpg):
 #   Time Stick: 1.00 at [385 252 587 476]
-# Frame 5 (13.jpg):
+# Frame 5 (5.jpg):
 #   Time Stick: 0.97 at [313 262 524 477]
-# Frame 6 (14.jpg):
-#   Time Stick: 0.98 at [264 223 511 481]
-# Frame 7 (15.jpg):
-#   Time Stick: 0.99 at [245 269 463 478]
-# Frame 8 (16.jpg):
-#   Time Stick: 0.96 at [320 282 497 477]
-# Frame 9 (17.jpg):
-#   Time Stick: 0.97 at [326 298 508 482]
-# Frame 10 (18.jpg):
-#   Time Stick: 0.95 at [320 287 496 484]
-# Frame 11 (19.jpg):
-#   Time Stick: 0.95 at [320 258 505 486]
-# Frame 12 (2.jpg):
-#   Time Stick: 0.96 at [322 250 505 485]
-# Frame 13 (20.jpg):
+# Frame 6 (6.jpg):
+#   No detections
+# Frame 7 (7.jpg):
+#   No detections
+# Frame 8 (8.jpg):
+#   No detections
+# Frame 9 (9.jpg):
+#   No detections
+# Frame 10 (10.jpg):
+#   No detections
+# Frame 11 (11.jpg):
+#   No detections
+# Frame 12 (12.jpg):
+#   No detections
+# Frame 13 (13.jpg):
 #   TVA Uniform: 0.97 at [374 115 604 490]
 #   Time Stick: 0.92 at [591 346 655 481]
-#   Time Stick: 0.94 at [331 265 514 487]
-# Frame 14 (21.jpg):
-#   TVA Uniform: 0.98 at [353  87 606 464]
-# Frame 15 (22.jpg):
-#   TVA Uniform: 0.99 at [347 114 616 494]
-# Frame 16 (23.jpg):
-#   TVA Uniform: 0.99 at [314  80 549 486]
-# Frame 17 (24.jpg):
+# Frame 14 (14.jpg):
 #   No detections
-# Frame 18 (25.jpg):
+# Frame 15 (15.jpg):
+#   No detections
+# Frame 16 (16.jpg):
+#   No detections
+# Frame 17 (17.jpg):
+#   No detections
+# Frame 18 (18.jpg):
 #   Sylvie's horned headpiece: 0.99 at [322 128 481 202]
-# Frame 19 (26.jpg):
+# Frame 19 (19.jpg):
 #   Time Stick: 0.94 at [240 156 417 412]
-# Frame 20 (27.jpg):
+# Frame 20 (20.jpg):
 #   Sylvie's horned headpiece: 0.98 at [536  82 721 177]
-# Frame 21 (28.jpg):
+# Frame 21 (21.jpg):
 #   No detections
-# Frame 22 (29.jpg):
+# Frame 22 (22.jpg):
 #   No detections
-# Frame 23 (3.jpg):
+# Frame 23 (23.jpg):
 #   No detections
-# Frame 24 (30.jpg):
+# Frame 24 (24.jpg):
 #   No detections
-# Frame 25 (31.jpg):
+# Frame 25 (25.jpg):
 #   No detections
-# Frame 26 (32.jpg):
+# Frame 26 (26.jpg):
 #   No detections
-# Frame 27 (33.jpg):
+# Frame 27 (27.jpg):
 #   No detections
-# Frame 28 (34.jpg):
+# Frame 28 (28.jpg):
 #   No detections
-# Frame 29 (35.jpg):
+# Frame 29 (29.jpg):
 #   No detections
-# Frame 30 (36.jpg):
+# Frame 30 (30.jpg):
 #   No detections
-# Frame 31 (37.jpg):
+# Frame 31 (31.jpg):
 #   No detections
-# Frame 32 (38.jpg):
+# Frame 32 (32.jpg):
 #   No detections
-# Frame 33 (39.jpg):
+# Frame 33 (33.jpg):
 #   Sylvie's horned headpiece: 0.96 at [582 104 671 201]
-# Frame 34 (4.jpg):
+# Frame 34 (34.jpg):
 #   No detections
-# Frame 35 (40.jpg):
+# Frame 35 (35.jpg):
 #   No detections
-# Frame 36 (41.jpg):
+# Frame 36 (36.jpg):
 #   No detections
-# Frame 37 (42.jpg):
+# Frame 37 (37.jpg):
 #   No detections
-# Frame 38 (43.jpg):
+# Frame 38 (38.jpg):
 #   No detections
-# Frame 39 (44.jpg):
+# Frame 39 (39.jpg):
 #   No detections
-# Frame 40 (45.jpg):
+# Frame 40 (40.jpg):
 #   No detections
-# Frame 41 (46.jpg):
+# Frame 41 (41.jpg):
 #   No detections
-# Frame 42 (47.jpg):
+# Frame 42 (42.jpg):
 #   No detections
-# Frame 43 (48.jpg):
+# Frame 43 (43.jpg):
 #   Sylvie's horned headpiece: 0.91 at [442 160 541 219]
-# Frame 44 (49.jpg):
+# Frame 44 (44.jpg):
 #   No detections
-# Frame 45 (5.jpg):
+# Frame 45 (45.jpg):
 #   No detections
-# Frame 46 (50.jpg):
+# Frame 46 (46.jpg):
 #   No detections
-# Frame 47 (51.jpg):
+# Frame 47 (47.jpg):
 #   No detections
-# Frame 48 (52.jpg):
+# Frame 48 (48.jpg):
 #   No detections
-# Frame 49 (53.jpg):
+# Frame 49 (49.jpg):
 #   No detections
-# Frame 50 (6.jpg):
+# Frame 50 (50.jpg):
 #   No detections
-# Frame 51 (7.jpg):
+# Frame 51 (51.jpg):
 #   No detections
-# Frame 52 (8.jpg):
+# Frame 52 (52.jpg):
 #   No detections
-# Frame 53 (9.jpg):
+# Frame 53 (53.jpg):
 #   No detections
 # Processing complete. Visualizations saved to output
-#hi im drew

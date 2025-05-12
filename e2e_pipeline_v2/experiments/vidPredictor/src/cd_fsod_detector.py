@@ -1,8 +1,14 @@
 import os
 import json
 import numpy as np
+import re
 from typing import Dict, List, Tuple, Any, Optional, Union
 
+# Add natural sorting function
+def natural_sort_key(s):
+    """Key function for natural sorting"""
+    return [int(text) if text.isdigit() else text.lower() 
+            for text in re.split(r'(\d+)', str(s))]
 
 class CDFSODDetector:
     """
@@ -56,8 +62,8 @@ class CDFSODDetector:
         # List JSON files in the directory
         json_files = [f for f in os.listdir(self.json_dir) if f.endswith('.json')]
         
-        # Sort files by frame index
-        json_files.sort(key=lambda f: int(os.path.splitext(f)[0]))
+        # Sort files by frame index using natural sorting
+        json_files.sort(key=natural_sort_key)
         
         # Load each file
         for json_file in json_files:

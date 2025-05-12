@@ -10,6 +10,13 @@ from pathlib import Path
 import json
 from typing import Dict, List, Tuple, Union, Optional
 import time
+import re
+
+# Add natural sorting function
+def natural_sort_key(s):
+    """Key function for natural sorting"""
+    return [int(text) if text.isdigit() else text.lower() 
+            for text in re.split(r'(\d+)', str(s))]
 
 # Import our components
 from owlv2_detector import OWLv2Detector
@@ -106,9 +113,9 @@ class ObjectTrackingPipeline:
             raise ValueError(f"Unknown detector type: {detector_type}. Must be 'owlv2' or 'cd_fsod'")
         
     def process_video(self, frames_dir: str, text_queries: List[str]):
-        # Get all frames sorted
+        # Get all frames sorted using natural sort
         frames_path = Path(frames_dir)
-        frame_files = sorted([f for f in frames_path.glob("*.jpg") or frames_path.glob("*.png")])
+        frame_files = sorted([f for f in frames_path.glob("*.jpg") or frames_path.glob("*.png")], key=natural_sort_key)
         if not frame_files:
             raise ValueError(f"No frames found in {frames_dir}")
         
@@ -575,9 +582,9 @@ class ObjectTrackingPipeline:
         first_detections_dir = self.output_dir / "first_detections"
         first_detections_dir.mkdir(exist_ok=True, parents=True)
         
-        # Get frame paths
+        # Get frame paths with natural sorting
         frames_path = Path(frames_dir)
-        frame_files = sorted([f for f in frames_path.glob("*.jpg") or frames_path.glob("*.png")])
+        frame_files = sorted([f for f in frames_path.glob("*.jpg") or frames_path.glob("*.png")], key=natural_sort_key)
         
         # Create mapping from frame indices to frame files
         frame_map = {}
@@ -589,7 +596,7 @@ class ObjectTrackingPipeline:
         detection_files = None
         if hasattr(self, 'detector') and hasattr(self.detector, 'json_dir'):
             detector_json_dir = Path(self.detector.json_dir)
-            detection_files = sorted([f for f in detector_json_dir.glob("*.json")])
+            detection_files = sorted([f for f in detector_json_dir.glob("*.json")], key=natural_sort_key)
             print(f"Using detection files from: {detector_json_dir}")
         
         # For each tracked object
@@ -668,9 +675,9 @@ class ObjectTrackingPipeline:
         object_masks_dir = self.output_dir / "object_masks"
         object_masks_dir.mkdir(exist_ok=True, parents=True)
         
-        # Get frame paths
+        # Get frame paths with natural sorting
         frames_path = Path(frames_dir)
-        frame_files = sorted([f for f in frames_path.glob("*.jpg") or frames_path.glob("*.png")])
+        frame_files = sorted([f for f in frames_path.glob("*.jpg") or frames_path.glob("*.png")], key=natural_sort_key)
         
         # Create mapping from frame indices to frame files
         frame_map = {}
@@ -860,7 +867,7 @@ class ObjectTrackingPipeline:
         self.tracker = ObjectTracker()
         all_objects = {}
         
-        # Process all frames
+        # Process all frames - frame_files should already be naturally sorted
         for i, frame_path in enumerate(frame_files):
             # Extract the actual frame index from the filename
             frame_idx = self._extract_frame_idx_from_path(frame_path)
@@ -957,9 +964,9 @@ class ObjectTrackingPipeline:
 
     def process_video_separate_objects(self, frames_dir: str, text_queries: List[str]):
         """Process video with separate SAM2 initialization for each object"""
-        # Get all frames sorted
+        # Get all frames sorted with natural sorting
         frames_path = Path(frames_dir)
-        frame_files = sorted([f for f in frames_path.glob("*.jpg") or frames_path.glob("*.png")])
+        frame_files = sorted([f for f in frames_path.glob("*.jpg") or frames_path.glob("*.png")], key=natural_sort_key)
         if not frame_files:
             raise ValueError(f"No frames found in {frames_dir}")
         

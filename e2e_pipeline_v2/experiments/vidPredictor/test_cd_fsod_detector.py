@@ -373,6 +373,97 @@ class TestCDFSODDetector(unittest.TestCase):
             self.assertIn("screen", mapped_results["labels"])
             self.assertIn("clothing", mapped_results["labels"])
 
+    @patch('os.listdir')
+    def test_continuous_detection_exclusion(self, mock_listdir):
+        """Test that objects are only detected on first appearance and reappearance, not in continuous frames."""
+        # Create test data with an object that appears in consecutive frames
+        continuous_test_detections = {
+            "0.json": [
+                {"coordinates": [10, 10, 50, 50], "label": "monitor", "confidence": 0.9}
+            ],
+            "1.json": [
+                {"coordinates": [12, 12, 52, 52], "label": "monitor", "confidence": 0.85}
+            ],
+            "2.json": [
+                {"coordinates": [14, 14, 54, 54], "label": "monitor", "confidence": 0.88}
+            ],
+            # Gap of 11 frames (3-14)
+            "15.json": [
+                {"coordinates": [20, 20, 60, 60], "label": "monitor", "confidence": 0.82}
+            ],
+            "16.json": [
+                {"coordinates": [22, 22, 62, 62], "label": "monitor", "confidence": 0.80}
+            ],
+            # Another gap of 15 frames (17-31)
+            "32.json": [
+                {"coordinates": [30, 30, 70, 70], "label": "monitor", "confidence": 0.85}
+            ],
+            "33.json": [
+                {"coordinates": [32, 32, 72, 72], "label": "monitor", "confidence": 0.83}
+            ]
+        }
+        
+        json_files = list(continuous_test_detections.keys())
+        mock_listdir.return_value = json_files
+        
+        # Create a dictionary mapping file paths to their contents
+        mock_file_data = {}
+        for json_file in json_files:
+            file_path = os.path.join(self.json_dir, json_file)
+            mock_file_data[file_path] = json.dumps(continuous_test_detections[json_file])
+        
+        # Create a context manager for the patched open function
+        m = mock_open()
+        
+        # Define a custom side effect function for the mock
+        def side_effect(filename, *args, **kwargs):
+            if filename in mock_file_data:
+                file_mock = m.return_value
+                file_mock.read.return_value = mock_file_data[filename]
+                return file_mock
+            raise FileNotFoundError(f"Mock file not found: {filename}")
+        
+        # Patch both open and json.load
+        with patch('builtins.open', side_effect=side_effect), \
+             patch('json.load', side_effect=lambda f: json.loads(f.read())):
+            
+            # Create detector with a min_gap_frames of 10
+            detector = CDFSODDetector(self.json_dir, min_gap_frames=10, iou_threshold=0.3)
+            
+            # Create mock images with frame indices
+            frame0_image = self.MockImage(np.zeros((100, 100, 3)), 0)
+            frame1_image = self.MockImage(np.zeros((100, 100, 3)), 1)
+            frame2_image = self.MockImage(np.zeros((100, 100, 3)), 2)
+            frame15_image = self.MockImage(np.zeros((100, 100, 3)), 15)
+            frame16_image = self.MockImage(np.zeros((100, 100, 3)), 16)
+            frame32_image = self.MockImage(np.zeros((100, 100, 3)), 32)
+            frame33_image = self.MockImage(np.zeros((100, 100, 3)), 33)
+            
+            # Get results for each frame
+            frame0_results = detector.detect(frame0_image, ["monitor"])
+            frame1_results = detector.detect(frame1_image, ["monitor"])
+            frame2_results = detector.detect(frame2_image, ["monitor"])
+            frame15_results = detector.detect(frame15_image, ["monitor"])
+            frame16_results = detector.detect(frame16_image, ["monitor"])
+            frame32_results = detector.detect(frame32_image, ["monitor"])
+            frame33_results = detector.detect(frame33_image, ["monitor"])
+            
+            # Verify that monitor is only detected in frame 0 (first appearance),
+            # frame 15 (reappearance after gap > 10 frames), and
+            # frame 32 (reappearance after gap > 10 frames)
+            self.assertEqual(len(frame0_results["boxes"]), 1, "Monitor should be detected on first appearance")
+            self.assertEqual(len(frame1_results["boxes"]), 0, "Monitor should not be detected in consecutive frame")
+            self.assertEqual(len(frame2_results["boxes"]), 0, "Monitor should not be detected in consecutive frame")
+            self.assertEqual(len(frame15_results["boxes"]), 1, "Monitor should be detected on reappearance after gap")
+            self.assertEqual(len(frame16_results["boxes"]), 0, "Monitor should not be detected in consecutive frame after reappearance")
+            self.assertEqual(len(frame32_results["boxes"]), 1, "Monitor should be detected on second reappearance after gap")
+            self.assertEqual(len(frame33_results["boxes"]), 0, "Monitor should not be detected in consecutive frame after second reappearance")
+            
+            # Verify labels when detections are present
+            self.assertIn("monitor", frame0_results["labels"], "Monitor should be in frame 0 labels")
+            self.assertIn("monitor", frame15_results["labels"], "Monitor should be in frame 15 labels")
+            self.assertIn("monitor", frame32_results["labels"], "Monitor should be in frame 32 labels")
+
 
 if __name__ == "__main__":
     unittest.main() 

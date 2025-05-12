@@ -67,9 +67,41 @@ def enhanced_load_detections(self):
     
     total_detections = sum(len(dets) for dets in detections_by_frame.values())
     unique_classes = set()
-    for frame_dets in detections_by_frame.values():
+    confidence_stats = {"min": float('inf'), "max": float('-inf'), "sum": 0, "count": 0}
+    confidence_by_class = {}
+    
+    for frame_idx, frame_dets in detections_by_frame.items():
         for det in frame_dets:
-            unique_classes.add(det.get('label', ''))
+            label = det.get('label', '')
+            unique_classes.add(label)
+            
+            # Track confidence statistics
+            confidence = det.get('confidence', 0)
+            confidence_stats["min"] = min(confidence_stats["min"], confidence)
+            confidence_stats["max"] = max(confidence_stats["max"], confidence)
+            confidence_stats["sum"] += confidence
+            confidence_stats["count"] += 1
+            
+            # Track confidence by class
+            if label not in confidence_by_class:
+                confidence_by_class[label] = {"min": float('inf'), "max": float('-inf'), "sum": 0, "count": 0}
+            
+            confidence_by_class[label]["min"] = min(confidence_by_class[label]["min"], confidence)
+            confidence_by_class[label]["max"] = max(confidence_by_class[label]["max"], confidence)
+            confidence_by_class[label]["sum"] += confidence
+            confidence_by_class[label]["count"] += 1
+    
+    # Log the confidence statistics
+    if confidence_stats["count"] > 0:
+        avg_confidence = confidence_stats["sum"] / confidence_stats["count"]
+        logger.info(f"Detection confidence: min={confidence_stats['min']:.6f}, max={confidence_stats['max']:.6f}, avg={avg_confidence:.6f}")
+        
+        # Log confidence by class
+        logger.info("Confidence by class:")
+        for label, stats in confidence_by_class.items():
+            if stats["count"] > 0:
+                class_avg = stats["sum"] / stats["count"]
+                logger.info(f"  {label}: min={stats['min']:.6f}, max={stats['max']:.6f}, avg={class_avg:.6f}, count={stats['count']}")
     
     logger.info(f"Loaded {len(detections_by_frame)} frames with {total_detections} total detections")
     logger.info(f"Found {len(unique_classes)} unique object classes: {sorted(list(unique_classes))}")
@@ -79,7 +111,15 @@ def enhanced_load_detections(self):
     if logger.level <= logging.DEBUG:
         logger.debug("Detections per frame:")
         for frame_idx in sorted(detections_by_frame.keys())[:10]:  # Show first 10 frames only
-            logger.debug(f"  Frame {frame_idx}: {len(detections_by_frame[frame_idx])} detections")
+            frame_dets = detections_by_frame[frame_idx]
+            if frame_dets:
+                confidences = [f"{det.get('confidence', 0):.6f}" for det in frame_dets[:3]]
+                labels = [det.get('label', '') for det in frame_dets[:3]]
+                logger.debug(f"  Frame {frame_idx}: {len(frame_dets)} detections - Labels: {labels[:3]}, Confidences: {confidences[:3]}")
+                if len(frame_dets) > 3:
+                    logger.debug(f"    ... and {len(frame_dets) - 3} more")
+            else:
+                logger.debug(f"  Frame {frame_idx}: {len(frame_dets)} detections")
     
     return detections_by_frame
 

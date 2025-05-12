@@ -434,3 +434,534 @@ def main():
 
 if __name__ == "__main__":
     main() 
+
+
+
+# python e2e_pipeline_v2/experiments/vidPredictor/test_cd_fsod_integration.py  --frames-dir "/home/ubuntu/code/drew/e2e_sam2/e2e_pipeline_v2/experiments/vidPredictor/data/frames/Scenes 061-080__265H-2-_20230815215828529" --cd-fsod-path "/home/ubuntu/code/drew/e2e_sam2/e2e_pipeline_v2/experiments/vidPredictor/data/detections/Scenes 061-080__265H-2-_20230815215828529" --sam2-checkpoint checkpoints/sam2.1_hiera_large.pt --sam2-config configs/sam2.1/sam2.1_hiera_l.yaml --confidence 0.9 --min-gap-frames 10 --separate-objects --text-queries "TVA Monitor" "Time Stick" --debug
+# 2025-05-12 19:06:08,559 - INFO - Logging to file: ./cd_fsod_results/cd_fsod_test_20250512_190608.log
+# 2025-05-12 19:06:08,560 - INFO - ================================================================================
+# 2025-05-12 19:06:08,560 - INFO - CD-FSOD Integration Test Started
+# 2025-05-12 19:06:08,560 - INFO - ================================================================================
+# 2025-05-12 19:06:08,560 - INFO - Test configuration:
+# 2025-05-12 19:06:08,560 - INFO -   - Frames directory: /home/ubuntu/code/drew/e2e_sam2/e2e_pipeline_v2/experiments/vidPredictor/data/frames/Scenes 061-080__265H-2-_20230815215828529
+# 2025-05-12 19:06:08,560 - INFO -   - CD-FSOD detections directory: /home/ubuntu/code/drew/e2e_sam2/e2e_pipeline_v2/experiments/vidPredictor/data/detections/Scenes 061-080__265H-2-_20230815215828529
+# 2025-05-12 19:06:08,560 - INFO -   - SAM2 checkpoint: checkpoints/sam2.1_hiera_large.pt
+# 2025-05-12 19:06:08,560 - INFO -   - SAM2 config: configs/sam2.1/sam2.1_hiera_l.yaml
+# 2025-05-12 19:06:08,560 - INFO -   - Output directory: ./cd_fsod_results
+# 2025-05-12 19:06:08,560 - INFO -   - Confidence threshold: 0.9
+# 2025-05-12 19:06:08,560 - INFO -   - Minimum gap frames: 10
+# 2025-05-12 19:06:08,560 - INFO -   - Text queries: ['TVA Monitor', 'Time Stick']
+# 2025-05-12 19:06:08,560 - INFO -   - Using separate objects: True
+# 2025-05-12 19:06:08,560 - INFO -   - Debug mode: True
+# 2025-05-12 19:06:08,560 - INFO -   - Enhanced logging: True
+# 2025-05-12 19:06:08,561 - INFO - Found 54 frames in /home/ubuntu/code/drew/e2e_sam2/e2e_pipeline_v2/experiments/vidPredictor/data/frames/Scenes 061-080__265H-2-_20230815215828529
+# 2025-05-12 19:06:08,561 - DEBUG - First 5 frames: ['0.jpg', '1.jpg', '10.jpg', '11.jpg', '12.jpg']
+# 2025-05-12 19:06:08,562 - INFO - Found 54 JSON detection files in /home/ubuntu/code/drew/e2e_sam2/e2e_pipeline_v2/experiments/vidPredictor/data/detections/Scenes 061-080__265H-2-_20230815215828529
+# 2025-05-12 19:06:08,562 - DEBUG - First 5 JSON files: ['0.json', '1.json', '10.json', '11.json', '12.json']
+# 2025-05-12 19:06:08,562 - DEBUG - Sample JSON format (first file, up to 3 detections):
+# 2025-05-12 19:06:08,562 - DEBUG -   Detection 1: {'coordinates': [321, 145, 456, 239], 'label': 'TVA Monitor', 'confidence': 0.0064104781486094}
+# 2025-05-12 19:06:08,562 - DEBUG -   Detection 2: {'coordinates': [232, 143, 301, 223], 'label': 'TVA Monitor', 'confidence': 0.0029197395779192448}
+# 2025-05-12 19:06:08,562 - DEBUG -   Detection 3: {'coordinates': [234, 151, 246, 219], 'label': 'TVA Monitor', 'confidence': 0.0007871381822042167}
+# 2025-05-12 19:06:08,562 - DEBUG -   ... and 39 more detections
+# 2025-05-12 19:06:08,562 - INFO - Applying enhanced logging patches to CD-FSOD detector...
+# 2025-05-12 19:06:08,562 - INFO - CD-FSOD detector patched with enhanced logging
+# 2025-05-12 19:06:08,562 - INFO - Initializing pipeline with CD-FSOD detector...
+# Using device: cuda
+# 2025-05-12 19:06:08,692 - INFO - Loading CD-FSOD detections from /home/ubuntu/code/drew/e2e_sam2/e2e_pipeline_v2/experiments/vidPredictor/data/detections/Scenes 061-080__265H-2-_20230815215828529...
+# 2025-05-12 19:06:08,699 - INFO - Loaded 54 frames with 21 total detections
+# 2025-05-12 19:06:08,699 - INFO - Found 3 unique object classes: ["Sylvie's horned headpiece", 'TVA Uniform', 'Time Stick']
+# 2025-05-12 19:06:08,699 - INFO - Detection loading took 0.01 seconds
+# 2025-05-12 19:06:08,699 - DEBUG - Detections per frame:
+# 2025-05-12 19:06:08,699 - DEBUG -   Frame 0: 0 detections
+# 2025-05-12 19:06:08,699 - DEBUG -   Frame 1: 0 detections
+# 2025-05-12 19:06:08,699 - DEBUG -   Frame 2: 0 detections
+# 2025-05-12 19:06:08,699 - DEBUG -   Frame 3: 1 detections
+# 2025-05-12 19:06:08,699 - DEBUG -   Frame 4: 1 detections
+# 2025-05-12 19:06:08,699 - DEBUG -   Frame 5: 1 detections
+# 2025-05-12 19:06:08,699 - DEBUG -   Frame 6: 1 detections
+# 2025-05-12 19:06:08,699 - DEBUG -   Frame 7: 1 detections
+# 2025-05-12 19:06:08,699 - DEBUG -   Frame 8: 1 detections
+# 2025-05-12 19:06:08,699 - DEBUG -   Frame 9: 1 detections
+# 2025-05-12 19:06:08,699 - INFO - Processing detections to identify first appearances and reappearances...
+# 2025-05-12 19:06:08,699 - INFO - Processed detections in 0.00 seconds
+# 2025-05-12 19:06:08,699 - INFO - Found 3 first appearances and 2 reappearances
+# 2025-05-12 19:06:08,700 - INFO - Using minimum gap of 10 frames for reappearance detection
+# 2025-05-12 19:06:08,700 - DEBUG - First appearances per frame:
+# 2025-05-12 19:06:08,700 - DEBUG -   Frame 3: 1 objects: ['Time Stick']
+# 2025-05-12 19:06:08,700 - DEBUG - Reappearances per frame:
+# SAM2 using device: cuda
+# /home/ubuntu/code/drew/e2e_sam2/venv/lib/python3.12/site-packages/torchvision/models/_utils.py:208: UserWarning: The parameter 'pretrained' is deprecated since 0.13 and may be removed in the future, please use 'weights' instead.
+#   warnings.warn(
+# /home/ubuntu/code/drew/e2e_sam2/venv/lib/python3.12/site-packages/torchvision/models/_utils.py:223: UserWarning: Arguments other than a weight enum or `None` for 'weights' are deprecated since 0.13 and may be removed in the future. The current behavior is equivalent to passing `weights=ResNet50_Weights.IMAGENET1K_V1`. You can also use `weights=ResNet50_Weights.DEFAULT` to get the most up-to-date weights.
+#   warnings.warn(msg)
+# 2025-05-12 19:06:12,323 - INFO - Pipeline initialized successfully
+# INFO:cd_fsod_test:Pipeline initialized successfully
+# 2025-05-12 19:06:12,323 - INFO - Pipeline initialization took 3.76 seconds
+# INFO:cd_fsod_test:Pipeline initialization took 3.76 seconds
+# 2025-05-12 19:06:12,323 - INFO - Starting video processing...
+# INFO:cd_fsod_test:Starting video processing...
+# 2025-05-12 19:06:12,323 - INFO - Using separate object initialization method...
+# INFO:cd_fsod_test:Using separate object initialization method...
+# 2025-05-12 19:06:12,324 - INFO - Starting processing of 54 frames...
+# INFO:cd_fsod_test:Starting processing of 54 frames...
+# Processing 54 frames with queries: ['TVA Monitor', 'Time Stick']
+# Using detector: cd_fsod
+# Phase 1: Detecting and tracking objects...
+# 2025-05-12 19:06:12,331 - DEBUG - Detecting objects in frame 0
+# DEBUG:cd_fsod_test:Detecting objects in frame 0
+# 2025-05-12 19:06:12,331 - DEBUG - Frame 0: No objects detected
+# DEBUG:cd_fsod_test:Frame 0: No objects detected
+# 2025-05-12 19:06:12,331 - DEBUG - Detection took 0.1ms
+# DEBUG:cd_fsod_test:Detection took 0.1ms
+# -----Initializing new objects-----
+# detections: []
+# 2025-05-12 19:06:12,335 - DEBUG - Detecting objects in frame 1
+# DEBUG:cd_fsod_test:Detecting objects in frame 1
+# 2025-05-12 19:06:12,335 - DEBUG - Frame 1: No objects detected
+# DEBUG:cd_fsod_test:Frame 1: No objects detected
+# 2025-05-12 19:06:12,335 - DEBUG - Detection took 0.1ms
+# DEBUG:cd_fsod_test:Detection took 0.1ms
+# -----Initializing new objects-----
+# detections: []
+# 2025-05-12 19:06:12,338 - DEBUG - Detecting objects in frame 2
+# DEBUG:cd_fsod_test:Detecting objects in frame 2
+# 2025-05-12 19:06:12,338 - DEBUG - Frame 2: No objects detected
+# DEBUG:cd_fsod_test:Frame 2: No objects detected
+# 2025-05-12 19:06:12,338 - DEBUG - Detection took 0.1ms
+# DEBUG:cd_fsod_test:Detection took 0.1ms
+# -----Initializing new objects-----
+# detections: []
+# 2025-05-12 19:06:12,341 - DEBUG - Detecting objects in frame 3
+# DEBUG:cd_fsod_test:Detecting objects in frame 3
+# 2025-05-12 19:06:12,341 - DEBUG - Frame 3: No objects detected
+# DEBUG:cd_fsod_test:Frame 3: No objects detected
+# 2025-05-12 19:06:12,341 - DEBUG - Detection took 0.1ms
+# DEBUG:cd_fsod_test:Detection took 0.1ms
+# -----Initializing new objects-----
+# detections: []
+# 2025-05-12 19:06:12,345 - DEBUG - Detecting objects in frame 4
+# DEBUG:cd_fsod_test:Detecting objects in frame 4
+# 2025-05-12 19:06:12,345 - DEBUG - Frame 4: No objects detected
+# DEBUG:cd_fsod_test:Frame 4: No objects detected
+# 2025-05-12 19:06:12,345 - DEBUG - Detection took 0.1ms
+# DEBUG:cd_fsod_test:Detection took 0.1ms
+# -----Initializing new objects-----
+# detections: []
+# 2025-05-12 19:06:12,348 - DEBUG - Detecting objects in frame 5
+# DEBUG:cd_fsod_test:Detecting objects in frame 5
+# 2025-05-12 19:06:12,348 - DEBUG - Frame 5: No objects detected
+# DEBUG:cd_fsod_test:Frame 5: No objects detected
+# 2025-05-12 19:06:12,348 - DEBUG - Detection took 0.1ms
+# DEBUG:cd_fsod_test:Detection took 0.1ms
+# -----Initializing new objects-----
+# detections: []
+# 2025-05-12 19:06:12,351 - DEBUG - Detecting objects in frame 6
+# DEBUG:cd_fsod_test:Detecting objects in frame 6
+# 2025-05-12 19:06:12,351 - DEBUG - Frame 6: No objects detected
+# DEBUG:cd_fsod_test:Frame 6: No objects detected
+# 2025-05-12 19:06:12,351 - DEBUG - Detection took 0.1ms
+# DEBUG:cd_fsod_test:Detection took 0.1ms
+# -----Initializing new objects-----
+# detections: []
+# 2025-05-12 19:06:12,354 - DEBUG - Detecting objects in frame 7
+# DEBUG:cd_fsod_test:Detecting objects in frame 7
+# 2025-05-12 19:06:12,355 - DEBUG - Frame 7: No objects detected
+# DEBUG:cd_fsod_test:Frame 7: No objects detected
+# 2025-05-12 19:06:12,355 - DEBUG - Detection took 0.1ms
+# DEBUG:cd_fsod_test:Detection took 0.1ms
+# -----Initializing new objects-----
+# detections: []
+# 2025-05-12 19:06:12,358 - DEBUG - Detecting objects in frame 8
+# DEBUG:cd_fsod_test:Detecting objects in frame 8
+# 2025-05-12 19:06:12,358 - DEBUG - Frame 8: No objects detected
+# DEBUG:cd_fsod_test:Frame 8: No objects detected
+# 2025-05-12 19:06:12,358 - DEBUG - Detection took 0.1ms
+# DEBUG:cd_fsod_test:Detection took 0.1ms
+# -----Initializing new objects-----
+# detections: []
+# 2025-05-12 19:06:12,361 - DEBUG - Detecting objects in frame 9
+# DEBUG:cd_fsod_test:Detecting objects in frame 9
+# 2025-05-12 19:06:12,361 - DEBUG - Frame 9: No objects detected
+# DEBUG:cd_fsod_test:Frame 9: No objects detected
+# 2025-05-12 19:06:12,361 - DEBUG - Detection took 0.1ms
+# DEBUG:cd_fsod_test:Detection took 0.1ms
+# -----Initializing new objects-----
+# detections: []
+# 2025-05-12 19:06:12,364 - DEBUG - Detecting objects in frame 10
+# DEBUG:cd_fsod_test:Detecting objects in frame 10
+# 2025-05-12 19:06:12,364 - DEBUG - Frame 10: No objects detected
+# DEBUG:cd_fsod_test:Frame 10: No objects detected
+# 2025-05-12 19:06:12,364 - DEBUG - Detection took 0.1ms
+# DEBUG:cd_fsod_test:Detection took 0.1ms
+# -----Initializing new objects-----
+# detections: []
+# 2025-05-12 19:06:12,368 - DEBUG - Detecting objects in frame 11
+# DEBUG:cd_fsod_test:Detecting objects in frame 11
+# 2025-05-12 19:06:12,368 - DEBUG - Frame 11: No objects detected
+# DEBUG:cd_fsod_test:Frame 11: No objects detected
+# 2025-05-12 19:06:12,368 - DEBUG - Detection took 0.1ms
+# DEBUG:cd_fsod_test:Detection took 0.1ms
+# -----Initializing new objects-----
+# detections: []
+# 2025-05-12 19:06:12,371 - DEBUG - Detecting objects in frame 12
+# DEBUG:cd_fsod_test:Detecting objects in frame 12
+# 2025-05-12 19:06:12,371 - DEBUG - Frame 12: No objects detected
+# DEBUG:cd_fsod_test:Frame 12: No objects detected
+# 2025-05-12 19:06:12,371 - DEBUG - Detection took 0.1ms
+# DEBUG:cd_fsod_test:Detection took 0.1ms
+# -----Initializing new objects-----
+# detections: []
+# 2025-05-12 19:06:12,374 - DEBUG - Detecting objects in frame 13
+# DEBUG:cd_fsod_test:Detecting objects in frame 13
+# 2025-05-12 19:06:12,374 - DEBUG - Frame 13: No objects detected
+# DEBUG:cd_fsod_test:Frame 13: No objects detected
+# 2025-05-12 19:06:12,374 - DEBUG - Detection took 0.1ms
+# DEBUG:cd_fsod_test:Detection took 0.1ms
+# -----Initializing new objects-----
+# detections: []
+# 2025-05-12 19:06:12,377 - DEBUG - Detecting objects in frame 14
+# DEBUG:cd_fsod_test:Detecting objects in frame 14
+# 2025-05-12 19:06:12,378 - DEBUG - Frame 14: No objects detected
+# DEBUG:cd_fsod_test:Frame 14: No objects detected
+# 2025-05-12 19:06:12,378 - DEBUG - Detection took 0.1ms
+# DEBUG:cd_fsod_test:Detection took 0.1ms
+# -----Initializing new objects-----
+# detections: []
+# 2025-05-12 19:06:12,381 - DEBUG - Detecting objects in frame 15
+# DEBUG:cd_fsod_test:Detecting objects in frame 15
+# 2025-05-12 19:06:12,381 - DEBUG - Frame 15: No objects detected
+# DEBUG:cd_fsod_test:Frame 15: No objects detected
+# 2025-05-12 19:06:12,381 - DEBUG - Detection took 0.1ms
+# DEBUG:cd_fsod_test:Detection took 0.1ms
+# -----Initializing new objects-----
+# detections: []
+# 2025-05-12 19:06:12,384 - DEBUG - Detecting objects in frame 16
+# DEBUG:cd_fsod_test:Detecting objects in frame 16
+# 2025-05-12 19:06:12,384 - DEBUG - Frame 16: No objects detected
+# DEBUG:cd_fsod_test:Frame 16: No objects detected
+# 2025-05-12 19:06:12,384 - DEBUG - Detection took 0.1ms
+# DEBUG:cd_fsod_test:Detection took 0.1ms
+# -----Initializing new objects-----
+# detections: []
+# 2025-05-12 19:06:12,387 - DEBUG - Detecting objects in frame 17
+# DEBUG:cd_fsod_test:Detecting objects in frame 17
+# 2025-05-12 19:06:12,387 - DEBUG - Frame 17: No objects detected
+# DEBUG:cd_fsod_test:Frame 17: No objects detected
+# 2025-05-12 19:06:12,387 - DEBUG - Detection took 0.1ms
+# DEBUG:cd_fsod_test:Detection took 0.1ms
+# -----Initializing new objects-----
+# detections: []
+# 2025-05-12 19:06:12,390 - DEBUG - Detecting objects in frame 18
+# DEBUG:cd_fsod_test:Detecting objects in frame 18
+# 2025-05-12 19:06:12,390 - DEBUG - Frame 18: No objects detected
+# DEBUG:cd_fsod_test:Frame 18: No objects detected
+# 2025-05-12 19:06:12,390 - DEBUG - Detection took 0.1ms
+# DEBUG:cd_fsod_test:Detection took 0.1ms
+# -----Initializing new objects-----
+# detections: []
+# 2025-05-12 19:06:12,394 - DEBUG - Detecting objects in frame 19
+# DEBUG:cd_fsod_test:Detecting objects in frame 19
+# 2025-05-12 19:06:12,394 - DEBUG - Frame 19: No objects detected
+# DEBUG:cd_fsod_test:Frame 19: No objects detected
+# 2025-05-12 19:06:12,394 - DEBUG - Detection took 0.1ms
+# DEBUG:cd_fsod_test:Detection took 0.1ms
+# -----Initializing new objects-----
+# detections: []
+# 2025-05-12 19:06:12,397 - DEBUG - Detecting objects in frame 20
+# DEBUG:cd_fsod_test:Detecting objects in frame 20
+# 2025-05-12 19:06:12,397 - DEBUG - Frame 20: No objects detected
+# DEBUG:cd_fsod_test:Frame 20: No objects detected
+# 2025-05-12 19:06:12,397 - DEBUG - Detection took 0.1ms
+# DEBUG:cd_fsod_test:Detection took 0.1ms
+# -----Initializing new objects-----
+# detections: []
+# 2025-05-12 19:06:12,400 - DEBUG - Detecting objects in frame 21
+# DEBUG:cd_fsod_test:Detecting objects in frame 21
+# 2025-05-12 19:06:12,400 - DEBUG - Frame 21: No objects detected
+# DEBUG:cd_fsod_test:Frame 21: No objects detected
+# 2025-05-12 19:06:12,400 - DEBUG - Detection took 0.1ms
+# DEBUG:cd_fsod_test:Detection took 0.1ms
+# -----Initializing new objects-----
+# detections: []
+# 2025-05-12 19:06:12,404 - DEBUG - Detecting objects in frame 22
+# DEBUG:cd_fsod_test:Detecting objects in frame 22
+# 2025-05-12 19:06:12,404 - DEBUG - Frame 22: No objects detected
+# DEBUG:cd_fsod_test:Frame 22: No objects detected
+# 2025-05-12 19:06:12,404 - DEBUG - Detection took 0.1ms
+# DEBUG:cd_fsod_test:Detection took 0.1ms
+# -----Initializing new objects-----
+# detections: []
+# 2025-05-12 19:06:12,407 - DEBUG - Detecting objects in frame 23
+# DEBUG:cd_fsod_test:Detecting objects in frame 23
+# 2025-05-12 19:06:12,407 - DEBUG - Frame 23: No objects detected
+# DEBUG:cd_fsod_test:Frame 23: No objects detected
+# 2025-05-12 19:06:12,407 - DEBUG - Detection took 0.1ms
+# DEBUG:cd_fsod_test:Detection took 0.1ms
+# -----Initializing new objects-----
+# detections: []
+# 2025-05-12 19:06:12,410 - DEBUG - Detecting objects in frame 24
+# DEBUG:cd_fsod_test:Detecting objects in frame 24
+# 2025-05-12 19:06:12,410 - DEBUG - Frame 24: No objects detected
+# DEBUG:cd_fsod_test:Frame 24: No objects detected
+# 2025-05-12 19:06:12,410 - DEBUG - Detection took 0.1ms
+# DEBUG:cd_fsod_test:Detection took 0.1ms
+# -----Initializing new objects-----
+# detections: []
+# 2025-05-12 19:06:12,413 - DEBUG - Detecting objects in frame 25
+# DEBUG:cd_fsod_test:Detecting objects in frame 25
+# 2025-05-12 19:06:12,413 - DEBUG - Frame 25: No objects detected
+# DEBUG:cd_fsod_test:Frame 25: No objects detected
+# 2025-05-12 19:06:12,413 - DEBUG - Detection took 0.1ms
+# DEBUG:cd_fsod_test:Detection took 0.1ms
+# -----Initializing new objects-----
+# detections: []
+# 2025-05-12 19:06:12,417 - DEBUG - Detecting objects in frame 26
+# DEBUG:cd_fsod_test:Detecting objects in frame 26
+# 2025-05-12 19:06:12,417 - DEBUG - Frame 26: No objects detected
+# DEBUG:cd_fsod_test:Frame 26: No objects detected
+# 2025-05-12 19:06:12,417 - DEBUG - Detection took 0.1ms
+# DEBUG:cd_fsod_test:Detection took 0.1ms
+# -----Initializing new objects-----
+# detections: []
+# 2025-05-12 19:06:12,420 - DEBUG - Detecting objects in frame 27
+# DEBUG:cd_fsod_test:Detecting objects in frame 27
+# 2025-05-12 19:06:12,420 - DEBUG - Frame 27: No objects detected
+# DEBUG:cd_fsod_test:Frame 27: No objects detected
+# 2025-05-12 19:06:12,420 - DEBUG - Detection took 0.1ms
+# DEBUG:cd_fsod_test:Detection took 0.1ms
+# -----Initializing new objects-----
+# detections: []
+# 2025-05-12 19:06:12,424 - DEBUG - Detecting objects in frame 28
+# DEBUG:cd_fsod_test:Detecting objects in frame 28
+# 2025-05-12 19:06:12,424 - DEBUG - Frame 28: No objects detected
+# DEBUG:cd_fsod_test:Frame 28: No objects detected
+# 2025-05-12 19:06:12,424 - DEBUG - Detection took 0.1ms
+# DEBUG:cd_fsod_test:Detection took 0.1ms
+# -----Initializing new objects-----
+# detections: []
+# 2025-05-12 19:06:12,427 - DEBUG - Detecting objects in frame 29
+# DEBUG:cd_fsod_test:Detecting objects in frame 29
+# 2025-05-12 19:06:12,427 - DEBUG - Frame 29: No objects detected
+# DEBUG:cd_fsod_test:Frame 29: No objects detected
+# 2025-05-12 19:06:12,427 - DEBUG - Detection took 0.1ms
+# DEBUG:cd_fsod_test:Detection took 0.1ms
+# -----Initializing new objects-----
+# detections: []
+# 2025-05-12 19:06:12,431 - DEBUG - Detecting objects in frame 30
+# DEBUG:cd_fsod_test:Detecting objects in frame 30
+# 2025-05-12 19:06:12,431 - DEBUG - Frame 30: No objects detected
+# DEBUG:cd_fsod_test:Frame 30: No objects detected
+# 2025-05-12 19:06:12,431 - DEBUG - Detection took 0.1ms
+# DEBUG:cd_fsod_test:Detection took 0.1ms
+# -----Initializing new objects-----
+# detections: []
+# 2025-05-12 19:06:12,434 - DEBUG - Detecting objects in frame 31
+# DEBUG:cd_fsod_test:Detecting objects in frame 31
+# 2025-05-12 19:06:12,434 - DEBUG - Frame 31: No objects detected
+# DEBUG:cd_fsod_test:Frame 31: No objects detected
+# 2025-05-12 19:06:12,434 - DEBUG - Detection took 0.1ms
+# DEBUG:cd_fsod_test:Detection took 0.1ms
+# -----Initializing new objects-----
+# detections: []
+# 2025-05-12 19:06:12,438 - DEBUG - Detecting objects in frame 32
+# DEBUG:cd_fsod_test:Detecting objects in frame 32
+# 2025-05-12 19:06:12,438 - DEBUG - Frame 32: No objects detected
+# DEBUG:cd_fsod_test:Frame 32: No objects detected
+# 2025-05-12 19:06:12,438 - DEBUG - Detection took 0.1ms
+# DEBUG:cd_fsod_test:Detection took 0.1ms
+# -----Initializing new objects-----
+# detections: []
+# 2025-05-12 19:06:12,442 - DEBUG - Detecting objects in frame 33
+# DEBUG:cd_fsod_test:Detecting objects in frame 33
+# 2025-05-12 19:06:12,442 - DEBUG - Frame 33: No objects detected
+# DEBUG:cd_fsod_test:Frame 33: No objects detected
+# 2025-05-12 19:06:12,442 - DEBUG - Detection took 0.1ms
+# DEBUG:cd_fsod_test:Detection took 0.1ms
+# -----Initializing new objects-----
+# detections: []
+# 2025-05-12 19:06:12,445 - DEBUG - Detecting objects in frame 34
+# DEBUG:cd_fsod_test:Detecting objects in frame 34
+# 2025-05-12 19:06:12,445 - DEBUG - Frame 34: No objects detected
+# DEBUG:cd_fsod_test:Frame 34: No objects detected
+# 2025-05-12 19:06:12,445 - DEBUG - Detection took 0.1ms
+# DEBUG:cd_fsod_test:Detection took 0.1ms
+# -----Initializing new objects-----
+# detections: []
+# 2025-05-12 19:06:12,448 - DEBUG - Detecting objects in frame 35
+# DEBUG:cd_fsod_test:Detecting objects in frame 35
+# 2025-05-12 19:06:12,448 - DEBUG - Frame 35: No objects detected
+# DEBUG:cd_fsod_test:Frame 35: No objects detected
+# 2025-05-12 19:06:12,448 - DEBUG - Detection took 0.1ms
+# DEBUG:cd_fsod_test:Detection took 0.1ms
+# -----Initializing new objects-----
+# detections: []
+# 2025-05-12 19:06:12,452 - DEBUG - Detecting objects in frame 36
+# DEBUG:cd_fsod_test:Detecting objects in frame 36
+# 2025-05-12 19:06:12,452 - DEBUG - Frame 36: No objects detected
+# DEBUG:cd_fsod_test:Frame 36: No objects detected
+# 2025-05-12 19:06:12,452 - DEBUG - Detection took 0.1ms
+# DEBUG:cd_fsod_test:Detection took 0.1ms
+# -----Initializing new objects-----
+# detections: []
+# 2025-05-12 19:06:12,455 - DEBUG - Detecting objects in frame 37
+# DEBUG:cd_fsod_test:Detecting objects in frame 37
+# 2025-05-12 19:06:12,455 - DEBUG - Frame 37: No objects detected
+# DEBUG:cd_fsod_test:Frame 37: No objects detected
+# 2025-05-12 19:06:12,455 - DEBUG - Detection took 0.1ms
+# DEBUG:cd_fsod_test:Detection took 0.1ms
+# -----Initializing new objects-----
+# detections: []
+# 2025-05-12 19:06:12,459 - DEBUG - Detecting objects in frame 38
+# DEBUG:cd_fsod_test:Detecting objects in frame 38
+# 2025-05-12 19:06:12,459 - DEBUG - Frame 38: No objects detected
+# DEBUG:cd_fsod_test:Frame 38: No objects detected
+# 2025-05-12 19:06:12,459 - DEBUG - Detection took 0.1ms
+# DEBUG:cd_fsod_test:Detection took 0.1ms
+# -----Initializing new objects-----
+# detections: []
+# 2025-05-12 19:06:12,462 - DEBUG - Detecting objects in frame 39
+# DEBUG:cd_fsod_test:Detecting objects in frame 39
+# 2025-05-12 19:06:12,462 - DEBUG - Frame 39: No objects detected
+# DEBUG:cd_fsod_test:Frame 39: No objects detected
+# 2025-05-12 19:06:12,462 - DEBUG - Detection took 0.1ms
+# DEBUG:cd_fsod_test:Detection took 0.1ms
+# -----Initializing new objects-----
+# detections: []
+# 2025-05-12 19:06:12,465 - DEBUG - Detecting objects in frame 40
+# DEBUG:cd_fsod_test:Detecting objects in frame 40
+# 2025-05-12 19:06:12,466 - DEBUG - Frame 40: No objects detected
+# DEBUG:cd_fsod_test:Frame 40: No objects detected
+# 2025-05-12 19:06:12,466 - DEBUG - Detection took 0.1ms
+# DEBUG:cd_fsod_test:Detection took 0.1ms
+# -----Initializing new objects-----
+# detections: []
+# 2025-05-12 19:06:12,469 - DEBUG - Detecting objects in frame 41
+# DEBUG:cd_fsod_test:Detecting objects in frame 41
+# 2025-05-12 19:06:12,469 - DEBUG - Frame 41: No objects detected
+# DEBUG:cd_fsod_test:Frame 41: No objects detected
+# 2025-05-12 19:06:12,469 - DEBUG - Detection took 0.1ms
+# DEBUG:cd_fsod_test:Detection took 0.1ms
+# -----Initializing new objects-----
+# detections: []
+# 2025-05-12 19:06:12,472 - DEBUG - Detecting objects in frame 42
+# DEBUG:cd_fsod_test:Detecting objects in frame 42
+# 2025-05-12 19:06:12,472 - DEBUG - Frame 42: No objects detected
+# DEBUG:cd_fsod_test:Frame 42: No objects detected
+# 2025-05-12 19:06:12,472 - DEBUG - Detection took 0.1ms
+# DEBUG:cd_fsod_test:Detection took 0.1ms
+# -----Initializing new objects-----
+# detections: []
+# 2025-05-12 19:06:12,475 - DEBUG - Detecting objects in frame 43
+# DEBUG:cd_fsod_test:Detecting objects in frame 43
+# 2025-05-12 19:06:12,475 - DEBUG - Frame 43: No objects detected
+# DEBUG:cd_fsod_test:Frame 43: No objects detected
+# 2025-05-12 19:06:12,476 - DEBUG - Detection took 0.1ms
+# DEBUG:cd_fsod_test:Detection took 0.1ms
+# -----Initializing new objects-----
+# detections: []
+# 2025-05-12 19:06:12,479 - DEBUG - Detecting objects in frame 44
+# DEBUG:cd_fsod_test:Detecting objects in frame 44
+# 2025-05-12 19:06:12,479 - DEBUG - Frame 44: No objects detected
+# DEBUG:cd_fsod_test:Frame 44: No objects detected
+# 2025-05-12 19:06:12,479 - DEBUG - Detection took 0.1ms
+# DEBUG:cd_fsod_test:Detection took 0.1ms
+# -----Initializing new objects-----
+# detections: []
+# 2025-05-12 19:06:12,482 - DEBUG - Detecting objects in frame 45
+# DEBUG:cd_fsod_test:Detecting objects in frame 45
+# 2025-05-12 19:06:12,482 - DEBUG - Frame 45: No objects detected
+# DEBUG:cd_fsod_test:Frame 45: No objects detected
+# 2025-05-12 19:06:12,482 - DEBUG - Detection took 0.1ms
+# DEBUG:cd_fsod_test:Detection took 0.1ms
+# -----Initializing new objects-----
+# detections: []
+# 2025-05-12 19:06:12,485 - DEBUG - Detecting objects in frame 46
+# DEBUG:cd_fsod_test:Detecting objects in frame 46
+# 2025-05-12 19:06:12,485 - DEBUG - Frame 46: No objects detected
+# DEBUG:cd_fsod_test:Frame 46: No objects detected
+# 2025-05-12 19:06:12,485 - DEBUG - Detection took 0.1ms
+# DEBUG:cd_fsod_test:Detection took 0.1ms
+# -----Initializing new objects-----
+# detections: []
+# 2025-05-12 19:06:12,488 - DEBUG - Detecting objects in frame 47
+# DEBUG:cd_fsod_test:Detecting objects in frame 47
+# 2025-05-12 19:06:12,488 - DEBUG - Frame 47: No objects detected
+# DEBUG:cd_fsod_test:Frame 47: No objects detected
+# 2025-05-12 19:06:12,488 - DEBUG - Detection took 0.1ms
+# DEBUG:cd_fsod_test:Detection took 0.1ms
+# -----Initializing new objects-----
+# detections: []
+# 2025-05-12 19:06:12,491 - DEBUG - Detecting objects in frame 48
+# DEBUG:cd_fsod_test:Detecting objects in frame 48
+# 2025-05-12 19:06:12,491 - DEBUG - Frame 48: No objects detected
+# DEBUG:cd_fsod_test:Frame 48: No objects detected
+# 2025-05-12 19:06:12,491 - DEBUG - Detection took 0.1ms
+# DEBUG:cd_fsod_test:Detection took 0.1ms
+# -----Initializing new objects-----
+# detections: []
+# 2025-05-12 19:06:12,494 - DEBUG - Detecting objects in frame 49
+# DEBUG:cd_fsod_test:Detecting objects in frame 49
+# 2025-05-12 19:06:12,494 - DEBUG - Frame 49: No objects detected
+# DEBUG:cd_fsod_test:Frame 49: No objects detected
+# 2025-05-12 19:06:12,495 - DEBUG - Detection took 0.1ms
+# DEBUG:cd_fsod_test:Detection took 0.1ms
+# -----Initializing new objects-----
+# detections: []
+# 2025-05-12 19:06:12,498 - DEBUG - Detecting objects in frame 50
+# DEBUG:cd_fsod_test:Detecting objects in frame 50
+# 2025-05-12 19:06:12,498 - DEBUG - Frame 50: No objects detected
+# DEBUG:cd_fsod_test:Frame 50: No objects detected
+# 2025-05-12 19:06:12,498 - DEBUG - Detection took 0.1ms
+# DEBUG:cd_fsod_test:Detection took 0.1ms
+# -----Initializing new objects-----
+# detections: []
+# 2025-05-12 19:06:12,501 - DEBUG - Detecting objects in frame 51
+# DEBUG:cd_fsod_test:Detecting objects in frame 51
+# 2025-05-12 19:06:12,501 - DEBUG - Frame 51: No objects detected
+# DEBUG:cd_fsod_test:Frame 51: No objects detected
+# 2025-05-12 19:06:12,501 - DEBUG - Detection took 0.1ms
+# DEBUG:cd_fsod_test:Detection took 0.1ms
+# -----Initializing new objects-----
+# detections: []
+# 2025-05-12 19:06:12,504 - DEBUG - Detecting objects in frame 52
+# DEBUG:cd_fsod_test:Detecting objects in frame 52
+# 2025-05-12 19:06:12,504 - DEBUG - Frame 52: No objects detected
+# DEBUG:cd_fsod_test:Frame 52: No objects detected
+# 2025-05-12 19:06:12,504 - DEBUG - Detection took 0.1ms
+# DEBUG:cd_fsod_test:Detection took 0.1ms
+# -----Initializing new objects-----
+# detections: []
+# 2025-05-12 19:06:12,507 - DEBUG - Detecting objects in frame 53
+# DEBUG:cd_fsod_test:Detecting objects in frame 53
+# 2025-05-12 19:06:12,507 - DEBUG - Frame 53: No objects detected
+# DEBUG:cd_fsod_test:Frame 53: No objects detected
+# 2025-05-12 19:06:12,507 - DEBUG - Detection took 0.1ms
+# DEBUG:cd_fsod_test:Detection took 0.1ms
+# -----Initializing new objects-----
+# detections: []
+# Found 0 unique objects to process with SAM2
+# Saving per-object segmentation visualizations...
+# All per-object mask visualizations saved to cd_fsod_results/object_masks
+# Saving first detection frames for each object...
+# All first detection frames saved to cd_fsod_results/first_detections
+# Creating object-to-frame mapping...
+# Verifying consistency with saved mask images...
+# Verification successful: All objects' masks are consistent with the mapping
+# Saved object-to-frame mapping to cd_fsod_results/object_frame_mapping.json
+# All results saved to: cd_fsod_results
+# 2025-05-12 19:06:12,825 - INFO - Video processing completed in 0.50 seconds
+# INFO:cd_fsod_test:Video processing completed in 0.50 seconds
+# 2025-05-12 19:06:12,825 - INFO - Generated 59 output files
+# INFO:cd_fsod_test:Generated 59 output files
+# 2025-05-12 19:06:12,825 - DEBUG - Output files: ['frame_0049.jpg', 'frame_0045.jpg', 'frame_0014.jpg', 'frame_0025.jpg', 'frame_0051.jpg', 'frame_0039.jpg', 'frame_0030.jpg', 'frame_0008.jpg', 'frame_0002.jpg', 'frame_0042.jpg']
+# DEBUG:cd_fsod_test:Output files: ['frame_0049.jpg', 'frame_0045.jpg', 'frame_0014.jpg', 'frame_0025.jpg', 'frame_0051.jpg', 'frame_0039.jpg', 'frame_0030.jpg', 'frame_0008.jpg', 'frame_0002.jpg', 'frame_0042.jpg']
+# 2025-05-12 19:06:12,825 - INFO - ================================================================================
+# INFO:cd_fsod_test:================================================================================
+# 2025-05-12 19:06:12,826 - INFO - CD-FSOD Integration Test Completed Successfully
+# INFO:cd_fsod_test:CD-FSOD Integration Test Completed Successfully
+# 2025-05-12 19:06:12,826 - INFO - Total processing time: 4.26 seconds
+# INFO:cd_fsod_test:Total processing time: 4.26 seconds
+# 2025-05-12 19:06:12,826 - INFO - Results saved to: ./cd_fsod_results
+# INFO:cd_fsod_test:Results saved to: ./cd_fsod_results
+# 2025-05-12 19:06:12,826 - INFO - ================================================================================
+# INFO:cd_fsod_test:================================================================================

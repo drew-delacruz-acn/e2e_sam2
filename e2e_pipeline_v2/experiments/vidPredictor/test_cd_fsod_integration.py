@@ -9,6 +9,7 @@ import sys
 import logging
 import time
 import json
+import re
 from pathlib import Path
 from datetime import datetime
 from functools import wraps
@@ -19,6 +20,12 @@ sys.path.append(os.path.join(os.path.dirname(__file__), 'src'))
 # Import our modules
 from object_tracking_pipeline import ObjectTrackingPipeline
 import cd_fsod_detector
+
+# Add natural sorting function
+def natural_sort_key(s):
+    """Key function for natural sorting"""
+    return [int(text) if text.isdigit() else text.lower() 
+            for text in re.split(r'(\d+)', str(s))]
 
 # Store the original methods
 original_load_detections = cd_fsod_detector.CDFSODDetector._load_detections
@@ -292,7 +299,7 @@ def main():
     # Check for files in the frames directory
     try:
         frames_path = Path(args.frames_dir)
-        frame_files = sorted([f for f in frames_path.glob("*.jpg") or frames_path.glob("*.png")])
+        frame_files = sorted([f for f in frames_path.glob("*.jpg") or frames_path.glob("*.png")], key=natural_sort_key)
         logger.info(f"Found {len(frame_files)} frames in {args.frames_dir}")
         if len(frame_files) == 0:
             logger.error(f"No frames found in {args.frames_dir}. Exiting.")
@@ -305,7 +312,7 @@ def main():
     # Check for CD-FSOD JSON files
     try:
         cd_fsod_path = Path(args.cd_fsod_path)
-        json_files = sorted([f for f in cd_fsod_path.glob("*.json")])
+        json_files = sorted([f for f in cd_fsod_path.glob("*.json")], key=natural_sort_key)
         logger.info(f"Found {len(json_files)} JSON detection files in {args.cd_fsod_path}")
         if len(json_files) == 0:
             logger.error(f"No JSON files found in {args.cd_fsod_path}. Exiting.")
@@ -381,7 +388,7 @@ def main():
             def wrapped_process_video(frames_dir, text_queries):
                 # Get total frame count
                 frames_path = Path(frames_dir)
-                frame_files = sorted([f for f in frames_path.glob("*.jpg") or frames_path.glob("*.png")])
+                frame_files = sorted([f for f in frames_path.glob("*.jpg") or frames_path.glob("*.png")], key=natural_sort_key)
                 total_frames = len(frame_files)
                 
                 # Add hooks for progress logging
@@ -419,7 +426,7 @@ def main():
             def wrapped_process_video(frames_dir, text_queries):
                 # Get total frame count
                 frames_path = Path(frames_dir)
-                frame_files = sorted([f for f in frames_path.glob("*.jpg") or frames_path.glob("*.png")])
+                frame_files = sorted([f for f in frames_path.glob("*.jpg") or frames_path.glob("*.png")], key=natural_sort_key)
                 total_frames = len(frame_files)
                 
                 # Add hooks for progress logging

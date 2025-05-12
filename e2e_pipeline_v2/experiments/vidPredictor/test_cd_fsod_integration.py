@@ -457,6 +457,29 @@ def main():
         processing_time = time.time() - processing_start
         logger.info(f"Video processing completed in {processing_time:.2f} seconds")
         
+        # Log first detection information if in debug mode
+        if args.debug:
+            logger.debug("First detection details:")
+            for obj_id, obj_data in pipeline.tracked_objects.items():
+                first_frame_idx = obj_data.get("first_detected")
+                obj_class = obj_data.get("class", "unknown")
+                logger.debug(f"  Object #{obj_id} ({obj_class}) first detected at frame {first_frame_idx}")
+                
+                # Add detection info if using CD-FSOD detector
+                if hasattr(pipeline.detector, 'json_dir'):
+                    json_dir = Path(pipeline.detector.json_dir)
+                    json_file = json_dir / f"{first_frame_idx}.json"
+                    if json_file.exists():
+                        try:
+                            with open(json_file, 'r') as f:
+                                json_data = json.load(f)
+                                relevant_detections = [d for d in json_data if d.get('label') == obj_class]
+                                if relevant_detections:
+                                    sample = relevant_detections[0]
+                                    logger.debug(f"    From {json_file.name}: {sample}")
+                        except Exception as e:
+                            logger.error(f"    Error reading JSON file {json_file}: {e}")
+        
         # Check if results were generated
         results_files = list(Path(args.output_dir).glob("*"))
         logger.info(f"Generated {len(results_files)} output files")

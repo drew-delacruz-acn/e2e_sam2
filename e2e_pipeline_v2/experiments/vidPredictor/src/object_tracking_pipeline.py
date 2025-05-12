@@ -572,6 +572,13 @@ class ObjectTrackingPipeline:
         frames_path = Path(frames_dir)
         frame_files = sorted([f for f in frames_path.glob("*.jpg") or frames_path.glob("*.png")])
         
+        # Get detection files if using CD-FSOD detector
+        detection_files = None
+        if hasattr(self, 'detector') and hasattr(self.detector, 'json_dir'):
+            detector_json_dir = Path(self.detector.json_dir)
+            detection_files = sorted([f for f in detector_json_dir.glob("*.json")])
+            print(f"Using detection files from: {detector_json_dir}")
+        
         # For each tracked object
         for obj_id, obj_data in self.tracked_objects.items():
             # Get frame where object was first detected
@@ -581,6 +588,34 @@ class ObjectTrackingPipeline:
             if first_frame_idx >= len(frame_files):
                 print(f"Warning: First frame index {first_frame_idx} for object {obj_id} is out of range")
                 continue
+            
+            # Log the detection source JSON file
+            if detection_files is not None:
+                matching_json = None
+                for json_file in detection_files:
+                    if int(json_file.stem) == first_frame_idx:
+                        matching_json = json_file
+                        break
+                
+                if matching_json:
+                    print(f"  Object #{obj_id} ({obj_data['class']}) first detected in frame {first_frame_idx}, using {matching_json.name}")
+                    # Log the JSON content for the first few detections in that file
+                    try:
+                        with open(matching_json, 'r') as f:
+                            json_data = json.load(f)
+                            print(f"    JSON file contains {len(json_data)} detections")
+                            # Show the first detection for each class to avoid too much output
+                            classes_shown = set()
+                            for detection in json_data:
+                                label = detection.get('label', 'unknown')
+                                if label not in classes_shown and label == obj_data['class']:
+                                    confidence = detection.get('confidence', 0)
+                                    coords = detection.get('coordinates', [])
+                                    print(f"    Sample detection for {label}: confidence={confidence:.4f}, coordinates={coords}")
+                                    classes_shown.add(label)
+                                    break
+                    except Exception as e:
+                        print(f"    Error reading JSON file: {e}")
             
             # Load the frame
             frame_path = frame_files[first_frame_idx]

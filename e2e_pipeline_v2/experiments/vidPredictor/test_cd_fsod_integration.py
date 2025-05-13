@@ -515,933 +515,702 @@ def main():
 
 if __name__ == "__main__":
     main() 
-# Frame 40 in sequence maps to frame index 40
-# Frame 41 in sequence maps to frame index 41
-# Frame 42 in sequence maps to frame index 42
-# Frame 43 in sequence maps to frame index 43
-# Frame 44 in sequence maps to frame index 44
-# Frame 45 in sequence maps to frame index 45
-# Frame 46 in sequence maps to frame index 46
-# Frame 47 in sequence maps to frame index 47
-# Frame 48 in sequence maps to frame index 48
-# Frame 49 in sequence maps to frame index 49
-# Frame 50 in sequence maps to frame index 50
-# Frame 51 in sequence maps to frame index 51
-# Frame 52 in sequence maps to frame index 52
-# Frame 53 in sequence maps to frame index 53
-# Phase 1: Detecting and tracking objects...
-# 2025-05-13 20:17:21,768 - DEBUG - Detecting objects in frame 0
-# DEBUG:cd_fsod_test:Detecting objects in frame 0
-# 2025-05-13 20:17:21,768 - DEBUG - Frame 0: No objects detected
-# DEBUG:cd_fsod_test:Frame 0: No objects detected
-# 2025-05-13 20:17:21,768 - DEBUG - Detection took 0.1ms
-# DEBUG:cd_fsod_test:Detection took 0.1ms
-# -----Initializing new objects-----
-# detections: []
-# 2025-05-13 20:17:21,772 - DEBUG - Detecting objects in frame 1
-# DEBUG:cd_fsod_test:Detecting objects in frame 1
-# 2025-05-13 20:17:21,772 - DEBUG - Frame 1: No objects detected
-# DEBUG:cd_fsod_test:Frame 1: No objects detected
-# 2025-05-13 20:17:21,772 - DEBUG - Detection took 0.1ms
-# DEBUG:cd_fsod_test:Detection took 0.1ms
-# -----Initializing new objects-----
-# detections: []
-# 2025-05-13 20:17:21,775 - DEBUG - Detecting objects in frame 2
-# DEBUG:cd_fsod_test:Detecting objects in frame 2
-# 2025-05-13 20:17:21,775 - DEBUG - Frame 2: No objects detected
-# DEBUG:cd_fsod_test:Frame 2: No objects detected
-# 2025-05-13 20:17:21,775 - DEBUG - Detection took 0.1ms
-# DEBUG:cd_fsod_test:Detection took 0.1ms
-# -----Initializing new objects-----
-# detections: []
-# 2025-05-13 20:17:21,778 - DEBUG - Detecting objects in frame 3
-# DEBUG:cd_fsod_test:Detecting objects in frame 3
-# 2025-05-13 20:17:21,778 - DEBUG - Frame 3: Detected 1 objects ['Time Stick'] with scores ['0.99']
-# DEBUG:cd_fsod_test:Frame 3: Detected 1 objects ['Time Stick'] with scores ['0.99']
-# 2025-05-13 20:17:21,778 - DEBUG - Detection took 0.1ms
-# DEBUG:cd_fsod_test:Detection took 0.1ms
-# -----Initializing new objects-----
-# detections: [{'box': array([453, 224, 643, 473]), 'score': np.float64(0.9931594133377075), 'text': 'Time Stick'}]
-# -----Initializing [{'box': array([453, 224, 643, 473]), 'score': np.float64(0.9931594133377075), 'text': 'Time Stick'}]-----
-# Initialized object 1 (Time Stick)
-# Created new object 1 (Time Stick) at frame 3
-# 2025-05-13 20:17:21,965 - DEBUG - Detecting objects in frame 4
-# DEBUG:cd_fsod_test:Detecting objects in frame 4
-# 2025-05-13 20:17:21,965 - DEBUG - Frame 4: No objects detected
-# DEBUG:cd_fsod_test:Frame 4: No objects detected
-# 2025-05-13 20:17:21,965 - DEBUG - Detection took 0.1ms
-# DEBUG:cd_fsod_test:Detection took 0.1ms
-# 2025-05-13 20:17:21,969 - DEBUG - Detecting objects in frame 5
-# DEBUG:cd_fsod_test:Detecting objects in frame 5
-# 2025-05-13 20:17:21,969 - DEBUG - Frame 5: No objects detected
-# DEBUG:cd_fsod_test:Frame 5: No objects detected
-# 2025-05-13 20:17:21,969 - DEBUG - Detection took 0.1ms
-# DEBUG:cd_fsod_test:Detection took 0.1ms
-# 2025-05-13 20:17:21,972 - DEBUG - Detecting objects in frame 6
-# DEBUG:cd_fsod_test:Detecting objects in frame 6
-# 2025-05-13 20:17:21,972 - DEBUG - Frame 6: No objects detected
-# DEBUG:cd_fsod_test:Frame 6: No objects detected
-# 2025-05-13 20:17:21,972 - DEBUG - Detection took 0.1ms
-# DEBUG:cd_fsod_test:Detection took 0.1ms
-# 2025-05-13 20:17:21,975 - DEBUG - Detecting objects in frame 7
-# DEBUG:cd_fsod_test:Detecting objects in frame 7
-# 2025-05-13 20:17:21,975 - DEBUG - Frame 7: No objects detected
-# DEBUG:cd_fsod_test:Frame 7: No objects detected
-# 2025-05-13 20:17:21,975 - DEBUG - Detection took 0.1ms
-# DEBUG:cd_fsod_test:Detection took 0.1ms
-# 2025-05-13 20:17:21,978 - DEBUG - Detecting objects in frame 8
-# DEBUG:cd_fsod_test:Detecting objects in frame 8
-# 2025-05-13 20:17:21,978 - DEBUG - Frame 8: No objects detected
-# DEBUG:cd_fsod_test:Frame 8: No objects detected
-# 2025-05-13 20:17:21,978 - DEBUG - Detection took 0.1ms
-# DEBUG:cd_fsod_test:Detection took 0.1ms
-# 2025-05-13 20:17:21,981 - DEBUG - Detecting objects in frame 9
-# DEBUG:cd_fsod_test:Detecting objects in frame 9
-# 2025-05-13 20:17:21,981 - DEBUG - Frame 9: No objects detected
-# DEBUG:cd_fsod_test:Frame 9: No objects detected
-# 2025-05-13 20:17:21,981 - DEBUG - Detection took 0.1ms
-# DEBUG:cd_fsod_test:Detection took 0.1ms
-# 2025-05-13 20:17:21,984 - DEBUG - Detecting objects in frame 10
-# DEBUG:cd_fsod_test:Detecting objects in frame 10
-# 2025-05-13 20:17:21,984 - DEBUG - Frame 10: No objects detected
-# DEBUG:cd_fsod_test:Frame 10: No objects detected
-# 2025-05-13 20:17:21,984 - DEBUG - Detection took 0.1ms
-# DEBUG:cd_fsod_test:Detection took 0.1ms
-# 2025-05-13 20:17:21,987 - DEBUG - Detecting objects in frame 11
-# DEBUG:cd_fsod_test:Detecting objects in frame 11
-# 2025-05-13 20:17:21,987 - DEBUG - Frame 11: No objects detected
-# DEBUG:cd_fsod_test:Frame 11: No objects detected
-# 2025-05-13 20:17:21,987 - DEBUG - Detection took 0.1ms
-# DEBUG:cd_fsod_test:Detection took 0.1ms
-# 2025-05-13 20:17:21,990 - DEBUG - Detecting objects in frame 12
-# DEBUG:cd_fsod_test:Detecting objects in frame 12
-# 2025-05-13 20:17:21,990 - DEBUG - Frame 12: No objects detected
-# DEBUG:cd_fsod_test:Frame 12: No objects detected
-# 2025-05-13 20:17:21,990 - DEBUG - Detection took 0.1ms
-# DEBUG:cd_fsod_test:Detection took 0.1ms
-# 2025-05-13 20:17:21,993 - DEBUG - Detecting objects in frame 13
-# DEBUG:cd_fsod_test:Detecting objects in frame 13
-# 2025-05-13 20:17:21,993 - DEBUG - Frame 13: No objects detected
-# DEBUG:cd_fsod_test:Frame 13: No objects detected
-# 2025-05-13 20:17:21,993 - DEBUG - Detection took 0.1ms
-# DEBUG:cd_fsod_test:Detection took 0.1ms
-# 2025-05-13 20:17:21,996 - DEBUG - Detecting objects in frame 14
-# DEBUG:cd_fsod_test:Detecting objects in frame 14
-# 2025-05-13 20:17:21,996 - DEBUG - Frame 14: No objects detected
-# DEBUG:cd_fsod_test:Frame 14: No objects detected
-# 2025-05-13 20:17:21,996 - DEBUG - Detection took 0.1ms
-# DEBUG:cd_fsod_test:Detection took 0.1ms
-# 2025-05-13 20:17:21,999 - DEBUG - Detecting objects in frame 15
-# DEBUG:cd_fsod_test:Detecting objects in frame 15
-# 2025-05-13 20:17:21,999 - DEBUG - Frame 15: No objects detected
-# DEBUG:cd_fsod_test:Frame 15: No objects detected
-# 2025-05-13 20:17:21,999 - DEBUG - Detection took 0.1ms
-# DEBUG:cd_fsod_test:Detection took 0.1ms
-# 2025-05-13 20:17:22,001 - DEBUG - Detecting objects in frame 16
-# DEBUG:cd_fsod_test:Detecting objects in frame 16
-# 2025-05-13 20:17:22,002 - DEBUG - Frame 16: No objects detected
-# DEBUG:cd_fsod_test:Frame 16: No objects detected
-# 2025-05-13 20:17:22,002 - DEBUG - Detection took 0.1ms
-# DEBUG:cd_fsod_test:Detection took 0.1ms
-# 2025-05-13 20:17:22,005 - DEBUG - Detecting objects in frame 17
-# DEBUG:cd_fsod_test:Detecting objects in frame 17
-# 2025-05-13 20:17:22,005 - DEBUG - Frame 17: No objects detected
-# DEBUG:cd_fsod_test:Frame 17: No objects detected
-# 2025-05-13 20:17:22,005 - DEBUG - Detection took 0.1ms
-# DEBUG:cd_fsod_test:Detection took 0.1ms
-# 2025-05-13 20:17:22,007 - DEBUG - Detecting objects in frame 18
-# DEBUG:cd_fsod_test:Detecting objects in frame 18
-# 2025-05-13 20:17:22,008 - DEBUG - Frame 18: No objects detected
-# DEBUG:cd_fsod_test:Frame 18: No objects detected
-# 2025-05-13 20:17:22,008 - DEBUG - Detection took 0.1ms
-# DEBUG:cd_fsod_test:Detection took 0.1ms
-# 2025-05-13 20:17:22,010 - DEBUG - Detecting objects in frame 19
-# DEBUG:cd_fsod_test:Detecting objects in frame 19
-# 2025-05-13 20:17:22,011 - DEBUG - Frame 19: No objects detected
-# DEBUG:cd_fsod_test:Frame 19: No objects detected
-# 2025-05-13 20:17:22,011 - DEBUG - Detection took 0.1ms
-# DEBUG:cd_fsod_test:Detection took 0.1ms
-# 2025-05-13 20:17:22,013 - DEBUG - Detecting objects in frame 20
-# DEBUG:cd_fsod_test:Detecting objects in frame 20
-# 2025-05-13 20:17:22,014 - DEBUG - Frame 20: No objects detected
-# DEBUG:cd_fsod_test:Frame 20: No objects detected
-# 2025-05-13 20:17:22,014 - DEBUG - Detection took 0.1ms
-# DEBUG:cd_fsod_test:Detection took 0.1ms
-# 2025-05-13 20:17:22,016 - DEBUG - Detecting objects in frame 21
-# DEBUG:cd_fsod_test:Detecting objects in frame 21
-# 2025-05-13 20:17:22,016 - DEBUG - Frame 21: No objects detected
-# DEBUG:cd_fsod_test:Frame 21: No objects detected
-# 2025-05-13 20:17:22,016 - DEBUG - Detection took 0.1ms
-# DEBUG:cd_fsod_test:Detection took 0.1ms
-# 2025-05-13 20:17:22,019 - DEBUG - Detecting objects in frame 22
-# DEBUG:cd_fsod_test:Detecting objects in frame 22
-# 2025-05-13 20:17:22,019 - DEBUG - Frame 22: No objects detected
-# DEBUG:cd_fsod_test:Frame 22: No objects detected
-# 2025-05-13 20:17:22,020 - DEBUG - Detection took 0.1ms
-# DEBUG:cd_fsod_test:Detection took 0.1ms
-# 2025-05-13 20:17:22,022 - DEBUG - Detecting objects in frame 23
-# DEBUG:cd_fsod_test:Detecting objects in frame 23
-# 2025-05-13 20:17:22,023 - DEBUG - Frame 23: No objects detected
-# DEBUG:cd_fsod_test:Frame 23: No objects detected
-# 2025-05-13 20:17:22,023 - DEBUG - Detection took 0.1ms
-# DEBUG:cd_fsod_test:Detection took 0.1ms
-# 2025-05-13 20:17:22,025 - DEBUG - Detecting objects in frame 24
-# DEBUG:cd_fsod_test:Detecting objects in frame 24
-# 2025-05-13 20:17:22,025 - DEBUG - Frame 24: No objects detected
-# DEBUG:cd_fsod_test:Frame 24: No objects detected
-# 2025-05-13 20:17:22,026 - DEBUG - Detection took 0.1ms
-# DEBUG:cd_fsod_test:Detection took 0.1ms
-# 2025-05-13 20:17:22,028 - DEBUG - Detecting objects in frame 25
-# DEBUG:cd_fsod_test:Detecting objects in frame 25
-# 2025-05-13 20:17:22,028 - DEBUG - Frame 25: No objects detected
-# DEBUG:cd_fsod_test:Frame 25: No objects detected
-# 2025-05-13 20:17:22,029 - DEBUG - Detection took 0.1ms
-# DEBUG:cd_fsod_test:Detection took 0.1ms
-# 2025-05-13 20:17:22,031 - DEBUG - Detecting objects in frame 26
-# DEBUG:cd_fsod_test:Detecting objects in frame 26
-# 2025-05-13 20:17:22,031 - DEBUG - Frame 26: No objects detected
-# DEBUG:cd_fsod_test:Frame 26: No objects detected
-# 2025-05-13 20:17:22,032 - DEBUG - Detection took 0.1ms
-# DEBUG:cd_fsod_test:Detection took 0.1ms
-# 2025-05-13 20:17:22,034 - DEBUG - Detecting objects in frame 27
-# DEBUG:cd_fsod_test:Detecting objects in frame 27
-# 2025-05-13 20:17:22,034 - DEBUG - Frame 27: No objects detected
-# DEBUG:cd_fsod_test:Frame 27: No objects detected
-# 2025-05-13 20:17:22,035 - DEBUG - Detection took 0.1ms
-# DEBUG:cd_fsod_test:Detection took 0.1ms
-# 2025-05-13 20:17:22,038 - DEBUG - Detecting objects in frame 28
-# DEBUG:cd_fsod_test:Detecting objects in frame 28
-# 2025-05-13 20:17:22,038 - DEBUG - Frame 28: No objects detected
-# DEBUG:cd_fsod_test:Frame 28: No objects detected
-# 2025-05-13 20:17:22,038 - DEBUG - Detection took 0.1ms
-# DEBUG:cd_fsod_test:Detection took 0.1ms
-# 2025-05-13 20:17:22,041 - DEBUG - Detecting objects in frame 29
-# DEBUG:cd_fsod_test:Detecting objects in frame 29
-# 2025-05-13 20:17:22,041 - DEBUG - Frame 29: No objects detected
-# DEBUG:cd_fsod_test:Frame 29: No objects detected
-# 2025-05-13 20:17:22,041 - DEBUG - Detection took 0.1ms
-# DEBUG:cd_fsod_test:Detection took 0.1ms
-# 2025-05-13 20:17:22,044 - DEBUG - Detecting objects in frame 30
-# DEBUG:cd_fsod_test:Detecting objects in frame 30
-# 2025-05-13 20:17:22,044 - DEBUG - Frame 30: No objects detected
-# DEBUG:cd_fsod_test:Frame 30: No objects detected
-# 2025-05-13 20:17:22,044 - DEBUG - Detection took 0.1ms
-# DEBUG:cd_fsod_test:Detection took 0.1ms
-# 2025-05-13 20:17:22,046 - DEBUG - Detecting objects in frame 31
-# DEBUG:cd_fsod_test:Detecting objects in frame 31
-# 2025-05-13 20:17:22,046 - DEBUG - Frame 31: No objects detected
-# DEBUG:cd_fsod_test:Frame 31: No objects detected
-# 2025-05-13 20:17:22,047 - DEBUG - Detection took 0.1ms
-# DEBUG:cd_fsod_test:Detection took 0.1ms
-# 2025-05-13 20:17:22,050 - DEBUG - Detecting objects in frame 32
-# DEBUG:cd_fsod_test:Detecting objects in frame 32
-# 2025-05-13 20:17:22,050 - DEBUG - Frame 32: No objects detected
-# DEBUG:cd_fsod_test:Frame 32: No objects detected
-# 2025-05-13 20:17:22,050 - DEBUG - Detection took 0.1ms
-# DEBUG:cd_fsod_test:Detection took 0.1ms
-# 2025-05-13 20:17:22,053 - DEBUG - Detecting objects in frame 33
-# DEBUG:cd_fsod_test:Detecting objects in frame 33
-# 2025-05-13 20:17:22,053 - DEBUG - Frame 33: No objects detected
-# DEBUG:cd_fsod_test:Frame 33: No objects detected
-# 2025-05-13 20:17:22,053 - DEBUG - Detection took 0.1ms
-# DEBUG:cd_fsod_test:Detection took 0.1ms
-# 2025-05-13 20:17:22,056 - DEBUG - Detecting objects in frame 34
-# DEBUG:cd_fsod_test:Detecting objects in frame 34
-# 2025-05-13 20:17:22,056 - DEBUG - Frame 34: No objects detected
-# DEBUG:cd_fsod_test:Frame 34: No objects detected
-# 2025-05-13 20:17:22,056 - DEBUG - Detection took 0.1ms
-# DEBUG:cd_fsod_test:Detection took 0.1ms
-# 2025-05-13 20:17:22,059 - DEBUG - Detecting objects in frame 35
-# DEBUG:cd_fsod_test:Detecting objects in frame 35
-# 2025-05-13 20:17:22,059 - DEBUG - Frame 35: No objects detected
-# DEBUG:cd_fsod_test:Frame 35: No objects detected
-# 2025-05-13 20:17:22,059 - DEBUG - Detection took 0.1ms
-# DEBUG:cd_fsod_test:Detection took 0.1ms
-# 2025-05-13 20:17:22,062 - DEBUG - Detecting objects in frame 36
-# DEBUG:cd_fsod_test:Detecting objects in frame 36
-# 2025-05-13 20:17:22,062 - DEBUG - Frame 36: No objects detected
-# DEBUG:cd_fsod_test:Frame 36: No objects detected
-# 2025-05-13 20:17:22,062 - DEBUG - Detection took 0.1ms
-# DEBUG:cd_fsod_test:Detection took 0.1ms
-# 2025-05-13 20:17:22,065 - DEBUG - Detecting objects in frame 37
-# DEBUG:cd_fsod_test:Detecting objects in frame 37
-# 2025-05-13 20:17:22,066 - DEBUG - Frame 37: No objects detected
-# DEBUG:cd_fsod_test:Frame 37: No objects detected
-# 2025-05-13 20:17:22,066 - DEBUG - Detection took 0.1ms
-# DEBUG:cd_fsod_test:Detection took 0.1ms
-# 2025-05-13 20:17:22,069 - DEBUG - Detecting objects in frame 38
-# DEBUG:cd_fsod_test:Detecting objects in frame 38
-# 2025-05-13 20:17:22,069 - DEBUG - Frame 38: No objects detected
-# DEBUG:cd_fsod_test:Frame 38: No objects detected
-# 2025-05-13 20:17:22,069 - DEBUG - Detection took 0.1ms
-# DEBUG:cd_fsod_test:Detection took 0.1ms
-# 2025-05-13 20:17:22,072 - DEBUG - Detecting objects in frame 39
-# DEBUG:cd_fsod_test:Detecting objects in frame 39
-# 2025-05-13 20:17:22,073 - DEBUG - Frame 39: No objects detected
-# DEBUG:cd_fsod_test:Frame 39: No objects detected
-# 2025-05-13 20:17:22,073 - DEBUG - Detection took 0.1ms
-# DEBUG:cd_fsod_test:Detection took 0.1ms
-# 2025-05-13 20:17:22,076 - DEBUG - Detecting objects in frame 40
-# DEBUG:cd_fsod_test:Detecting objects in frame 40
-# 2025-05-13 20:17:22,076 - DEBUG - Frame 40: No objects detected
-# DEBUG:cd_fsod_test:Frame 40: No objects detected
-# 2025-05-13 20:17:22,076 - DEBUG - Detection took 0.1ms
-# DEBUG:cd_fsod_test:Detection took 0.1ms
-# 2025-05-13 20:17:22,079 - DEBUG - Detecting objects in frame 41
-# DEBUG:cd_fsod_test:Detecting objects in frame 41
-# 2025-05-13 20:17:22,079 - DEBUG - Frame 41: No objects detected
-# DEBUG:cd_fsod_test:Frame 41: No objects detected
-# 2025-05-13 20:17:22,079 - DEBUG - Detection took 0.1ms
-# DEBUG:cd_fsod_test:Detection took 0.1ms
-# 2025-05-13 20:17:22,082 - DEBUG - Detecting objects in frame 42
-# DEBUG:cd_fsod_test:Detecting objects in frame 42
-# 2025-05-13 20:17:22,082 - DEBUG - Frame 42: No objects detected
-# DEBUG:cd_fsod_test:Frame 42: No objects detected
-# 2025-05-13 20:17:22,082 - DEBUG - Detection took 0.1ms
-# DEBUG:cd_fsod_test:Detection took 0.1ms
-# 2025-05-13 20:17:22,085 - DEBUG - Detecting objects in frame 43
-# DEBUG:cd_fsod_test:Detecting objects in frame 43
-# 2025-05-13 20:17:22,086 - DEBUG - Frame 43: No objects detected
-# DEBUG:cd_fsod_test:Frame 43: No objects detected
-# 2025-05-13 20:17:22,086 - DEBUG - Detection took 0.1ms
-# DEBUG:cd_fsod_test:Detection took 0.1ms
-# 2025-05-13 20:17:22,089 - DEBUG - Detecting objects in frame 44
-# DEBUG:cd_fsod_test:Detecting objects in frame 44
-# 2025-05-13 20:17:22,089 - DEBUG - Frame 44: No objects detected
-# DEBUG:cd_fsod_test:Frame 44: No objects detected
-# 2025-05-13 20:17:22,089 - DEBUG - Detection took 0.1ms
-# DEBUG:cd_fsod_test:Detection took 0.1ms
-# 2025-05-13 20:17:22,092 - DEBUG - Detecting objects in frame 45
-# DEBUG:cd_fsod_test:Detecting objects in frame 45
-# 2025-05-13 20:17:22,092 - DEBUG - Frame 45: No objects detected
-# DEBUG:cd_fsod_test:Frame 45: No objects detected
-# 2025-05-13 20:17:22,092 - DEBUG - Detection took 0.1ms
-# DEBUG:cd_fsod_test:Detection took 0.1ms
-# 2025-05-13 20:17:22,095 - DEBUG - Detecting objects in frame 46
-# DEBUG:cd_fsod_test:Detecting objects in frame 46
-# 2025-05-13 20:17:22,095 - DEBUG - Frame 46: No objects detected
-# DEBUG:cd_fsod_test:Frame 46: No objects detected
-# 2025-05-13 20:17:22,095 - DEBUG - Detection took 0.1ms
-# DEBUG:cd_fsod_test:Detection took 0.1ms
-# 2025-05-13 20:17:22,098 - DEBUG - Detecting objects in frame 47
-# DEBUG:cd_fsod_test:Detecting objects in frame 47
-# 2025-05-13 20:17:22,098 - DEBUG - Frame 47: No objects detected
-# DEBUG:cd_fsod_test:Frame 47: No objects detected
-# 2025-05-13 20:17:22,098 - DEBUG - Detection took 0.1ms
-# DEBUG:cd_fsod_test:Detection took 0.1ms
-# 2025-05-13 20:17:22,101 - DEBUG - Detecting objects in frame 48
-# DEBUG:cd_fsod_test:Detecting objects in frame 48
-# 2025-05-13 20:17:22,101 - DEBUG - Frame 48: No objects detected
-# DEBUG:cd_fsod_test:Frame 48: No objects detected
-# 2025-05-13 20:17:22,101 - DEBUG - Detection took 0.1ms
-# DEBUG:cd_fsod_test:Detection took 0.1ms
-# 2025-05-13 20:17:22,104 - DEBUG - Detecting objects in frame 49
-# DEBUG:cd_fsod_test:Detecting objects in frame 49
-# 2025-05-13 20:17:22,104 - DEBUG - Frame 49: No objects detected
-# DEBUG:cd_fsod_test:Frame 49: No objects detected
-# 2025-05-13 20:17:22,104 - DEBUG - Detection took 0.1ms
-# DEBUG:cd_fsod_test:Detection took 0.1ms
-# 2025-05-13 20:17:22,107 - DEBUG - Detecting objects in frame 50
-# DEBUG:cd_fsod_test:Detecting objects in frame 50
-# 2025-05-13 20:17:22,107 - DEBUG - Frame 50: No objects detected
-# DEBUG:cd_fsod_test:Frame 50: No objects detected
-# 2025-05-13 20:17:22,107 - DEBUG - Detection took 0.1ms
-# DEBUG:cd_fsod_test:Detection took 0.1ms
-# 2025-05-13 20:17:22,110 - DEBUG - Detecting objects in frame 51
-# DEBUG:cd_fsod_test:Detecting objects in frame 51
-# 2025-05-13 20:17:22,110 - DEBUG - Frame 51: No objects detected
-# DEBUG:cd_fsod_test:Frame 51: No objects detected
-# 2025-05-13 20:17:22,110 - DEBUG - Detection took 0.1ms
-# DEBUG:cd_fsod_test:Detection took 0.1ms
-# 2025-05-13 20:17:22,113 - DEBUG - Detecting objects in frame 52
-# DEBUG:cd_fsod_test:Detecting objects in frame 52
-# 2025-05-13 20:17:22,113 - DEBUG - Frame 52: No objects detected
-# DEBUG:cd_fsod_test:Frame 52: No objects detected
-# 2025-05-13 20:17:22,113 - DEBUG - Detection took 0.1ms
-# DEBUG:cd_fsod_test:Detection took 0.1ms
-# 2025-05-13 20:17:22,116 - DEBUG - Detecting objects in frame 53
-# DEBUG:cd_fsod_test:Detecting objects in frame 53
-# 2025-05-13 20:17:22,116 - DEBUG - Frame 53: No objects detected
-# DEBUG:cd_fsod_test:Frame 53: No objects detected
-# 2025-05-13 20:17:22,116 - DEBUG - Detection took 0.1ms
-# DEBUG:cd_fsod_test:Detection took 0.1ms
-# Found 1 unique objects to process with SAM2
+# g objects to track: [2]
+# After filtering: 1 objects remain
+# Processing object 2 in frame 50
+# Mask logit type: Tensor, shape: torch.Size([1, 540, 960])
+# Converted tensor mask, shape: torch.Size([1, 540, 960])
+# Mask statistics - sum: 0, shape: torch.Size([1, 540, 960])
+# Empty mask detected for object 2 in frame 50 (no true pixels)
+# Using fallback box from previous frame: [0.0, 367.0, 467.0, 480.0]
+# Processed frame 50, found 1 objects
+# propagate in video:  93%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████▋         | 38/41 [00:30<00:02,  1.21it/s]Processing item 39: frame=51, objects=[2]
+# Filtering objects to track: [2]
+# After filtering: 1 objects remain
+# Processing object 2 in frame 51
+# Mask logit type: Tensor, shape: torch.Size([1, 540, 960])
+# Converted tensor mask, shape: torch.Size([1, 540, 960])
+# Mask statistics - sum: 0, shape: torch.Size([1, 540, 960])
+# Empty mask detected for object 2 in frame 51 (no true pixels)
+# Using fallback box from previous frame: [0.0, 367.0, 467.0, 480.0]
+# Processed frame 51, found 1 objects
+# propagate in video:  95%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████▊      | 39/41 [00:30<00:01,  1.21it/s]Processing item 40: frame=52, objects=[2]
+# Filtering objects to track: [2]
+# After filtering: 1 objects remain
+# Processing object 2 in frame 52
+# Mask logit type: Tensor, shape: torch.Size([1, 540, 960])
+# Converted tensor mask, shape: torch.Size([1, 540, 960])
+# Mask statistics - sum: 0, shape: torch.Size([1, 540, 960])
+# Empty mask detected for object 2 in frame 52 (no true pixels)
+# Using fallback box from previous frame: [0.0, 367.0, 467.0, 480.0]
+# Processed frame 52, found 1 objects
+# propagate in video:  98%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████▉   | 40/41 [00:31<00:00,  1.21it/s]Processing item 41: frame=53, objects=[2]
+# Filtering objects to track: [2]
+# After filtering: 1 objects remain
+# Processing object 2 in frame 53
+# Mask logit type: Tensor, shape: torch.Size([1, 540, 960])
+# Converted tensor mask, shape: torch.Size([1, 540, 960])
+# Mask statistics - sum: 0, shape: torch.Size([1, 540, 960])
+# Empty mask detected for object 2 in frame 53 (no true pixels)
+# Using fallback box from previous frame: [0.0, 367.0, 467.0, 480.0]
+# Processed frame 53, found 1 objects
+# propagate in video: 100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 41/41 [00:32<00:00,  1.26it/s]
+# Finished propagation, processed 41 frames, found 41 frames with objects
+# Mask statistics: 10 valid masks, 31 empty masks
+# DEBUG: propagate_masks(objects_to_track=2) returned type: <class 'tuple'>
+# DEBUG: propagate_masks(objects_to_track=2) tuple length: 2
+#   Frame 13: Object #2 mask statistics - sum: 45434 pixels - HIGH QUALITY
+#   Frame 14: Object #2 mask statistics - sum: 46901 pixels - HIGH QUALITY
+#   Frame 15: Object #2 mask statistics - sum: 48741 pixels - HIGH QUALITY
+#   Frame 16: Object #2 mask statistics - sum: 58284 pixels - HIGH QUALITY
+#   Frame 17: Object #2 mask statistics - sum: 80564 pixels - HIGH QUALITY
+#   Frame 18: Object #2 mask statistics - sum: 98649 pixels - HIGH QUALITY
+#   Frame 19: Object #2 mask statistics - sum: 80948 pixels - HIGH QUALITY
+#   Frame 20: Object #2 mask statistics - sum: 63661 pixels - HIGH QUALITY
+#   Frame 21: Object #2 mask statistics - sum: 151589 pixels - HIGH QUALITY
+#   Frame 22: Object #2 mask statistics - sum: 0 pixels - HIGH QUALITY
+#   Frame 23: Object #2 mask statistics - sum: 0 pixels - HIGH QUALITY
+#   Frame 24: Object #2 mask statistics - sum: 0 pixels - HIGH QUALITY
+#   Frame 25: Object #2 mask statistics - sum: 30608 pixels - HIGH QUALITY
+#   Frame 26: Object #2 mask statistics - sum: 0 pixels - HIGH QUALITY
+#   Frame 27: Object #2 mask statistics - sum: 0 pixels - HIGH QUALITY
+#   Frame 28: Object #2 mask statistics - sum: 0 pixels - HIGH QUALITY
+#   Frame 29: Object #2 mask statistics - sum: 0 pixels - HIGH QUALITY
+#   Frame 30: Object #2 mask statistics - sum: 0 pixels - HIGH QUALITY
+#   Frame 31: Object #2 mask statistics - sum: 0 pixels - HIGH QUALITY
+#   Frame 32: Object #2 mask statistics - sum: 0 pixels - HIGH QUALITY
+#   Frame 33: Object #2 mask statistics - sum: 0 pixels - HIGH QUALITY
+#   Frame 34: Object #2 mask statistics - sum: 0 pixels - HIGH QUALITY
+#   Frame 35: Object #2 mask statistics - sum: 0 pixels - HIGH QUALITY
+#   Frame 36: Object #2 mask statistics - sum: 0 pixels - HIGH QUALITY
+#   Frame 37: Object #2 mask statistics - sum: 0 pixels - HIGH QUALITY
+#   Frame 38: Object #2 mask statistics - sum: 0 pixels - HIGH QUALITY
+#   Frame 39: Object #2 mask statistics - sum: 0 pixels - HIGH QUALITY
+#   Frame 40: Object #2 mask statistics - sum: 0 pixels - HIGH QUALITY
+#   Frame 41: Object #2 mask statistics - sum: 0 pixels - HIGH QUALITY
+#   Frame 42: Object #2 mask statistics - sum: 0 pixels - HIGH QUALITY
+#   Frame 43: Object #2 mask statistics - sum: 0 pixels - HIGH QUALITY
+#   Frame 44: Object #2 mask statistics - sum: 0 pixels - HIGH QUALITY
+#   Frame 45: Object #2 mask statistics - sum: 0 pixels - HIGH QUALITY
+#   Frame 46: Object #2 mask statistics - sum: 0 pixels - HIGH QUALITY
+#   Frame 47: Object #2 mask statistics - sum: 0 pixels - HIGH QUALITY
+#   Frame 48: Object #2 mask statistics - sum: 0 pixels - HIGH QUALITY
+#   Frame 49: Object #2 mask statistics - sum: 0 pixels - HIGH QUALITY
+#   Frame 50: Object #2 mask statistics - sum: 0 pixels - HIGH QUALITY
+#   Frame 51: Object #2 mask statistics - sum: 0 pixels - HIGH QUALITY
+#   Frame 52: Object #2 mask statistics - sum: 0 pixels - HIGH QUALITY
+#   Frame 53: Object #2 mask statistics - sum: 0 pixels - HIGH QUALITY
+#   Frame 22: Object #2 using FALLBACK BOX
+#   Frame 23: Object #2 using FALLBACK BOX
+#   Frame 24: Object #2 using FALLBACK BOX
+#   Frame 26: Object #2 using FALLBACK BOX
+#   Frame 27: Object #2 using FALLBACK BOX
+#   Frame 28: Object #2 using FALLBACK BOX
+#   Frame 29: Object #2 using FALLBACK BOX
+#   Frame 30: Object #2 using FALLBACK BOX
+#   Frame 31: Object #2 using FALLBACK BOX
+#   Frame 32: Object #2 using FALLBACK BOX
+#   Frame 33: Object #2 using FALLBACK BOX
+#   Frame 34: Object #2 using FALLBACK BOX
+#   Frame 35: Object #2 using FALLBACK BOX
+#   Frame 36: Object #2 using FALLBACK BOX
+#   Frame 37: Object #2 using FALLBACK BOX
+#   Frame 38: Object #2 using FALLBACK BOX
+#   Frame 39: Object #2 using FALLBACK BOX
+#   Frame 40: Object #2 using FALLBACK BOX
+#   Frame 41: Object #2 using FALLBACK BOX
+#   Frame 42: Object #2 using FALLBACK BOX
+#   Frame 43: Object #2 using FALLBACK BOX
+#   Frame 44: Object #2 using FALLBACK BOX
+#   Frame 45: Object #2 using FALLBACK BOX
+#   Frame 46: Object #2 using FALLBACK BOX
+#   Frame 47: Object #2 using FALLBACK BOX
+#   Frame 48: Object #2 using FALLBACK BOX
+#   Frame 49: Object #2 using FALLBACK BOX
+#   Frame 50: Object #2 using FALLBACK BOX
+#   Frame 51: Object #2 using FALLBACK BOX
+#   Frame 52: Object #2 using FALLBACK BOX
+#   Frame 53: Object #2 using FALLBACK BOX
+# Adding box for frame 13 to object 2: [379.0, 110.0, 602.0, 479.0]
+# Adding box for frame 14 to object 2: [369.0, 101.0, 590.0, 478.0]
+# Adding box for frame 15 to object 2: [365.0, 115.0, 622.0, 478.0]
+# Adding box for frame 16 to object 2: [293.0, 101.0, 579.0, 480.0]
+# Adding box for frame 17 to object 2: [480.0, 103.0, 827.0, 474.0]
+# Adding box for frame 18 to object 2: [159.0, 123.0, 611.0, 477.0]
+# Adding box for frame 19 to object 2: [0.0, 59.0, 213.0, 477.0]
+# Adding box for frame 20 to object 2: [0.0, 227.0, 331.0, 479.0]
+# Adding box for frame 21 to object 2: [199.0, 60.0, 804.0, 479.0]
+# Adding box for frame 22 to object 2: [199.0, 60.0, 804.0, 479.0]
+# Adding box for frame 23 to object 2: [199.0, 60.0, 804.0, 479.0]
+# Adding box for frame 24 to object 2: [199.0, 60.0, 804.0, 479.0]
+# Adding box for frame 25 to object 2: [0.0, 367.0, 467.0, 480.0]
+# Adding box for frame 26 to object 2: [0.0, 367.0, 467.0, 480.0]
+# Adding box for frame 27 to object 2: [0.0, 367.0, 467.0, 480.0]
+# Adding box for frame 28 to object 2: [0.0, 367.0, 467.0, 480.0]
+# Adding box for frame 29 to object 2: [0.0, 367.0, 467.0, 480.0]
+# Adding box for frame 30 to object 2: [0.0, 367.0, 467.0, 480.0]
+# Adding box for frame 31 to object 2: [0.0, 367.0, 467.0, 480.0]
+# Adding box for frame 32 to object 2: [0.0, 367.0, 467.0, 480.0]
+# Adding box for frame 33 to object 2: [0.0, 367.0, 467.0, 480.0]
+# Adding box for frame 34 to object 2: [0.0, 367.0, 467.0, 480.0]
+# Adding box for frame 35 to object 2: [0.0, 367.0, 467.0, 480.0]
+# Adding box for frame 36 to object 2: [0.0, 367.0, 467.0, 480.0]
+# Adding box for frame 37 to object 2: [0.0, 367.0, 467.0, 480.0]
+# Adding box for frame 38 to object 2: [0.0, 367.0, 467.0, 480.0]
+# Adding box for frame 39 to object 2: [0.0, 367.0, 467.0, 480.0]
+# Adding box for frame 40 to object 2: [0.0, 367.0, 467.0, 480.0]
+# Adding box for frame 41 to object 2: [0.0, 367.0, 467.0, 480.0]
+# Adding box for frame 42 to object 2: [0.0, 367.0, 467.0, 480.0]
+# Adding box for frame 43 to object 2: [0.0, 367.0, 467.0, 480.0]
+# Adding box for frame 44 to object 2: [0.0, 367.0, 467.0, 480.0]
+# Adding box for frame 45 to object 2: [0.0, 367.0, 467.0, 480.0]
+# Adding box for frame 46 to object 2: [0.0, 367.0, 467.0, 480.0]
+# Adding box for frame 47 to object 2: [0.0, 367.0, 467.0, 480.0]
+# Adding box for frame 48 to object 2: [0.0, 367.0, 467.0, 480.0]
+# Adding box for frame 49 to object 2: [0.0, 367.0, 467.0, 480.0]
+# Adding box for frame 50 to object 2: [0.0, 367.0, 467.0, 480.0]
+# Adding box for frame 51 to object 2: [0.0, 367.0, 467.0, 480.0]
+# Adding box for frame 52 to object 2: [0.0, 367.0, 467.0, 480.0]
+# Adding box for frame 53 to object 2: [0.0, 367.0, 467.0, 480.0]
+# Updating object 2 with 41 boxes from mask propagation
+# Error during propagation for object 2: 2
+# Propagation error traceback: Traceback (most recent call last):
+#   File "/home/ubuntu/code/drew/e2e_sam2/e2e_pipeline_v2/experiments/vidPredictor/src/object_tracking_pipeline.py", line 1240, in process_video_separate_objects
+#     self.tracked_objects[obj_id]["boxes"] = all_boxes
+#     ~~~~~~~~~~~~~~~~~~~~^^^^^^^^
+# KeyError: 2
 
-# ==== Processing object 1 (Time Stick) separately ====
-# Resetting SAM2 state for object 1...
-# frame loading (JPEG): 100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 54/54 [00:01<00:00, 38.51it/s]
+
+# ==== Processing object 3 (Sylvie's horned headpiece) separately ====
+# Resetting SAM2 state for object 3...
+# frame loading (JPEG): 100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 54/54 [00:01<00:00, 38.76it/s]
 # Set video from directory: /home/ubuntu/code/drew/e2e_sam2/e2e_pipeline_v2/experiments/vidPredictor/data/frames/Scenes 061-080__265H-2-_20230815215828529
-# Adding box for object 1 at frame 3
-# /home/ubuntu/code/drew/sam2/sam2/sam2_video_predictor.py:786: UserWarning: cannot import name '_C' from 'sam2' (/home/ubuntu/code/drew/sam2/sam2/__init__.py)
-
-# Skipping the post-processing step due to the error above. You can still use SAM 2 and it's OK to ignore the error above, although some post-processing functionality may be limited (which doesn't affect the results in most cases; see https://github.com/facebookresearch/sam2/blob/main/INSTALL.md).
-#   pred_masks_gpu = fill_holes_in_mask_scores(
-# Running propagation for object 1...
-# Starting propagate_masks with objects_to_track=[1]
+# Adding box for object 3 at frame 18
+# Running propagation for object 3...
+# Starting propagate_masks with objects_to_track=[3]
 # Using predictor type: SAM2VideoPredictor
 # Propagate method: propagate_in_video from sam2.sam2_video_predictor
 # Iterator type: generator
-# propagate in video:   0%|                                                                                                                                         | 0/51 [00:00<?, ?it/s]First item type: tuple
-# First item value: (3, [1], tensor([[[[-12.1376, -12.1376, -12.0080,  ..., -11.5534, -11.4969, -11.4969],
-#           [-12.1437, -12.1437, -11.9905,  ..., -11.3386, -11.1093, -11.1093],
-#           [-12.1573, -12.1573, -11.9513,  ..., -10.8564, -10.2387, -10.2387],
+# propagate in video:   0%|                                                                                                                                         | 0/36 [00:00<?, ?it/s]First item type: tuple
+# First item value: (18, [3], tensor([[[[-17.3911, -17.3911, -18.4886,  ..., -25.1047, -26.5941, -26.5941],
+#           [-18.9784, -18.9784, -19.5686,  ..., -23.6122, -24.2996, -24.2996],
+#           [-22.5428, -22.5428, -21.9941,  ..., -20.2604, -19.1469, -19.1469],
 #           ...,
-#           [-11.8437, -11.8437, -11.5942,  ..., -10.7574, -10.2548, -10.2548],
-#           [-10.7387, -10.7387, -10.7928,  ..., -11.0382, -10.5994, -10.5994],
-#           [-10.2466, -10.2466, -10.4359,  ..., -11.1633, -10.7529, -10.7529]]]],
+#           [-20.9912, -20.9912, -21.0111,  ..., -23.9965, -23.5670, -23.5670],
+#           [-21.3911, -21.3911, -21.2431,  ..., -22.0893, -20.7484, -20.7484],
+#           [-21.5692, -21.5692, -21.3463,  ..., -21.2400, -19.4932, -19.4932]]]],
 #        device='cuda:0'))
 # First item tuple length: 3
-#   Element 0: type=int, value=3
-#   Element 1: type=list, value=[1]
-#   Element 2: type=Tensor, value=tensor([[[[-12.1376, -12.1376, -12.0080,  ..., -11.5534, -11.4969, -11.4969],
-#           [-12.1437, -12.1437, -11.9905,  ..., -11.3386, -11.1093, -11.1093],
-#           [-12.1573, -12.1573, -11.9513,  ..., -10.8564, -10.2387, -10.2387],
+#   Element 0: type=int, value=18
+#   Element 1: type=list, value=[3]
+#   Element 2: type=Tensor, value=tensor([[[[-17.3911, -17.3911, -18.4886,  ..., -25.1047, -26.5941, -26.5941],
+#           [-18.9784, -18.9784, -19.5686,  ..., -23.6122, -24.2996, -24.2996],
+#           [-22.5428, -22.5428, -21.9941,  ..., -20.2604, -19.1469, -19.1469],
 #           ...,
-#           [-11.8437, -11.8437, -11.5942,  ..., -10.7574, -10.2548, -10.2548],
-#           [-10.7387, -10.7387, -10.7928,  ..., -11.0382, -10.5994, -10.5994],
-#           [-10.2466, -10.2466, -10.4359,  ..., -11.1633, -10.7529, -10.7529]]]],
+#           [-20.9912, -20.9912, -21.0111,  ..., -23.9965, -23.5670, -23.5670],
+#           [-21.3911, -21.3911, -21.2431,  ..., -22.0893, -20.7484, -20.7484],
+#           [-21.5692, -21.5692, -21.3463,  ..., -21.2400, -19.4932, -19.4932]]]],
 #        device='cuda:0')
-# Processing item 1: frame=3, objects=[1]
-# Filtering objects to track: [1]
+# Processing item 1: frame=18, objects=[3]
+# Filtering objects to track: [3]
 # After filtering: 1 objects remain
-# Processing object 1 in frame 3
+# Processing object 3 in frame 18
 # Mask logit type: Tensor, shape: torch.Size([1, 540, 960])
 # Converted tensor mask, shape: torch.Size([1, 540, 960])
-# Mask statistics - sum: 29970, shape: torch.Size([1, 540, 960])
-# Creating bounding box from mask with 29970 true pixels
+# Mask statistics - sum: 4329, shape: torch.Size([1, 540, 960])
+# Creating bounding box from mask with 4329 true pixels
 # Expanded mask shape: torch.Size([1, 540, 960])
-# Generated box: [459.0, 232.0, 633.0, 480.0]
-# Processed frame 3, found 1 objects
-# Processing item 2: frame=4, objects=[1]
-# Filtering objects to track: [1]
-# After filtering: 1 objects remain
-# Processing object 1 in frame 4
-# Mask logit type: Tensor, shape: torch.Size([1, 540, 960])
-# Converted tensor mask, shape: torch.Size([1, 540, 960])
-# Mask statistics - sum: 27617, shape: torch.Size([1, 540, 960])
-# Creating bounding box from mask with 27617 true pixels
-# Expanded mask shape: torch.Size([1, 540, 960])
-# Generated box: [386.0, 265.0, 576.0, 480.0]
-# Processed frame 4, found 1 objects
-# propagate in video:   4%|█████                                                                                                                            | 2/51 [00:00<00:17,  2.86it/s]Processing item 3: frame=5, objects=[1]
-# Filtering objects to track: [1]
-# After filtering: 1 objects remain
-# Processing object 1 in frame 5
-# Mask logit type: Tensor, shape: torch.Size([1, 540, 960])
-# Converted tensor mask, shape: torch.Size([1, 540, 960])
-# Mask statistics - sum: 27160, shape: torch.Size([1, 540, 960])
-# Creating bounding box from mask with 27160 true pixels
-# Expanded mask shape: torch.Size([1, 540, 960])
-# Generated box: [296.0, 270.0, 513.0, 481.0]
-# Processed frame 5, found 1 objects
-# propagate in video:   6%|███████▌                                                                                                                         | 3/51 [00:01<00:23,  2.05it/s]Processing item 4: frame=6, objects=[1]
-# Filtering objects to track: [1]
-# After filtering: 1 objects remain
-# Processing object 1 in frame 6
-# Mask logit type: Tensor, shape: torch.Size([1, 540, 960])
-# Converted tensor mask, shape: torch.Size([1, 540, 960])
-# Mask statistics - sum: 28683, shape: torch.Size([1, 540, 960])
-# Creating bounding box from mask with 28683 true pixels
-# Expanded mask shape: torch.Size([1, 540, 960])
-# Generated box: [234.0, 231.0, 495.0, 481.0]
-# Processed frame 6, found 1 objects
-# propagate in video:   8%|██████████                                                                                                                       | 4/51 [00:02<00:26,  1.77it/s]Processing item 5: frame=7, objects=[1]
-# Filtering objects to track: [1]
-# After filtering: 1 objects remain
-# Processing object 1 in frame 7
-# Mask logit type: Tensor, shape: torch.Size([1, 540, 960])
-# Converted tensor mask, shape: torch.Size([1, 540, 960])
-# Mask statistics - sum: 23273, shape: torch.Size([1, 540, 960])
-# Creating bounding box from mask with 23273 true pixels
-# Expanded mask shape: torch.Size([1, 540, 960])
-# Generated box: [231.0, 273.0, 452.0, 481.0]
-# Processed frame 7, found 1 objects
-# propagate in video:  10%|████████████▋                                                                                                                    | 5/51 [00:02<00:28,  1.60it/s]Processing item 6: frame=8, objects=[1]
-# Filtering objects to track: [1]
-# After filtering: 1 objects remain
-# Processing object 1 in frame 8
-# Mask logit type: Tensor, shape: torch.Size([1, 540, 960])
-# Converted tensor mask, shape: torch.Size([1, 540, 960])
-# Mask statistics - sum: 21370, shape: torch.Size([1, 540, 960])
-# Creating bounding box from mask with 21370 true pixels
-# Expanded mask shape: torch.Size([1, 540, 960])
-# Generated box: [309.0, 289.0, 492.0, 481.0]
-# Processed frame 8, found 1 objects
-# propagate in video:  12%|███████████████▏                                                                                                                 | 6/51 [00:03<00:30,  1.50it/s]Processing item 7: frame=9, objects=[1]
-# Filtering objects to track: [1]
-# After filtering: 1 objects remain
-# Processing object 1 in frame 9
-# Mask logit type: Tensor, shape: torch.Size([1, 540, 960])
-# Converted tensor mask, shape: torch.Size([1, 540, 960])
-# Mask statistics - sum: 20164, shape: torch.Size([1, 540, 960])
-# Creating bounding box from mask with 20164 true pixels
-# Expanded mask shape: torch.Size([1, 540, 960])
-# Generated box: [320.0, 304.0, 496.0, 481.0]
-# Processed frame 9, found 1 objects
-# propagate in video:  14%|█████████████████▋                                                                                                               | 7/51 [00:04<00:31,  1.42it/s]Processing item 8: frame=10, objects=[1]
-# Filtering objects to track: [1]
-# After filtering: 1 objects remain
-# Processing object 1 in frame 10
-# Mask logit type: Tensor, shape: torch.Size([1, 540, 960])
-# Converted tensor mask, shape: torch.Size([1, 540, 960])
-# Mask statistics - sum: 19455, shape: torch.Size([1, 540, 960])
-# Creating bounding box from mask with 19455 true pixels
-# Expanded mask shape: torch.Size([1, 540, 960])
-# Generated box: [314.0, 312.0, 487.0, 481.0]
-# Processed frame 10, found 1 objects
-# propagate in video:  16%|████████████████████▏                                                                                                            | 8/51 [00:05<00:31,  1.35it/s]Processing item 9: frame=11, objects=[1]
-# Filtering objects to track: [1]
-# After filtering: 1 objects remain
-# Processing object 1 in frame 11
-# Mask logit type: Tensor, shape: torch.Size([1, 540, 960])
-# Converted tensor mask, shape: torch.Size([1, 540, 960])
-# Mask statistics - sum: 20962, shape: torch.Size([1, 540, 960])
-# Creating bounding box from mask with 20962 true pixels
-# Expanded mask shape: torch.Size([1, 540, 960])
-# Generated box: [309.0, 298.0, 493.0, 481.0]
-# Processed frame 11, found 1 objects
-# propagate in video:  18%|██████████████████████▊                                                                                                          | 9/51 [00:05<00:31,  1.31it/s]Processing item 10: frame=12, objects=[1]
-# Filtering objects to track: [1]
-# After filtering: 1 objects remain
-# Processing object 1 in frame 12
-# Mask logit type: Tensor, shape: torch.Size([1, 540, 960])
-# Converted tensor mask, shape: torch.Size([1, 540, 960])
-# Mask statistics - sum: 22393, shape: torch.Size([1, 540, 960])
-# Creating bounding box from mask with 22393 true pixels
-# Expanded mask shape: torch.Size([1, 540, 960])
-# Generated box: [306.0, 287.0, 495.0, 481.0]
-# Processed frame 12, found 1 objects
-# propagate in video:  20%|█████████████████████████                                                                                                       | 10/51 [00:06<00:31,  1.29it/s]Processing item 11: frame=13, objects=[1]
-# Filtering objects to track: [1]
-# After filtering: 1 objects remain
-# Processing object 1 in frame 13
-# Mask logit type: Tensor, shape: torch.Size([1, 540, 960])
-# Converted tensor mask, shape: torch.Size([1, 540, 960])
-# Mask statistics - sum: 23139, shape: torch.Size([1, 540, 960])
-# Creating bounding box from mask with 23139 true pixels
-# Expanded mask shape: torch.Size([1, 540, 960])
-# Generated box: [312.0, 281.0, 527.0, 481.0]
-# Processed frame 13, found 1 objects
-# propagate in video:  22%|███████████████████████████▌                                                                                                    | 11/51 [00:07<00:31,  1.27it/s]Processing item 12: frame=14, objects=[1]
-# Filtering objects to track: [1]
-# After filtering: 1 objects remain
-# Processing object 1 in frame 14
-# Mask logit type: Tensor, shape: torch.Size([1, 540, 960])
-# Converted tensor mask, shape: torch.Size([1, 540, 960])
-# Mask statistics - sum: 23049, shape: torch.Size([1, 540, 960])
-# Creating bounding box from mask with 23049 true pixels
-# Expanded mask shape: torch.Size([1, 540, 960])
-# Generated box: [302.0, 294.0, 505.0, 481.0]
-# Processed frame 14, found 1 objects
-# propagate in video:  24%|██████████████████████████████                                                                                                  | 12/51 [00:08<00:31,  1.26it/s]Processing item 13: frame=15, objects=[1]
-# Filtering objects to track: [1]
-# After filtering: 1 objects remain
-# Processing object 1 in frame 15
-# Mask logit type: Tensor, shape: torch.Size([1, 540, 960])
-# Converted tensor mask, shape: torch.Size([1, 540, 960])
-# Mask statistics - sum: 22082, shape: torch.Size([1, 540, 960])
-# Creating bounding box from mask with 22082 true pixels
-# Expanded mask shape: torch.Size([1, 540, 960])
-# Generated box: [302.0, 293.0, 491.0, 481.0]
-# Processed frame 15, found 1 objects
-# propagate in video:  25%|████████████████████████████████▋                                                                                               | 13/51 [00:09<00:30,  1.25it/s]Processing item 14: frame=16, objects=[1]
-# Filtering objects to track: [1]
-# After filtering: 1 objects remain
-# Processing object 1 in frame 16
-# Mask logit type: Tensor, shape: torch.Size([1, 540, 960])
-# Converted tensor mask, shape: torch.Size([1, 540, 960])
-# Mask statistics - sum: 6671, shape: torch.Size([1, 540, 960])
-# Creating bounding box from mask with 6671 true pixels
-# Expanded mask shape: torch.Size([1, 540, 960])
-# Generated box: [286.0, 419.0, 594.0, 480.0]
-# Processed frame 16, found 1 objects
-# propagate in video:  27%|███████████████████████████████████▏                                                                                            | 14/51 [00:10<00:29,  1.24it/s]Processing item 15: frame=17, objects=[1]
-# Filtering objects to track: [1]
-# After filtering: 1 objects remain
-# Processing object 1 in frame 17
-# Mask logit type: Tensor, shape: torch.Size([1, 540, 960])
-# Converted tensor mask, shape: torch.Size([1, 540, 960])
-# Mask statistics - sum: 0, shape: torch.Size([1, 540, 960])
-# Empty mask detected for object 1 in frame 17 (no true pixels)
-# Using fallback box from previous frame: [286.0, 419.0, 594.0, 480.0]
-# Processed frame 17, found 1 objects
-# propagate in video:  29%|█████████████████████████████████████▋                                                                                          | 15/51 [00:10<00:29,  1.24it/s]Processing item 16: frame=18, objects=[1]
-# Filtering objects to track: [1]
-# After filtering: 1 objects remain
-# Processing object 1 in frame 18
-# Mask logit type: Tensor, shape: torch.Size([1, 540, 960])
-# Converted tensor mask, shape: torch.Size([1, 540, 960])
-# Mask statistics - sum: 0, shape: torch.Size([1, 540, 960])
-# Empty mask detected for object 1 in frame 18 (no true pixels)
-# Using fallback box from previous frame: [286.0, 419.0, 594.0, 480.0]
+# Generated box: [324.0, 124.0, 468.0, 197.0]
 # Processed frame 18, found 1 objects
-# propagate in video:  31%|████████████████████████████████████████▏                                                                                       | 16/51 [00:11<00:28,  1.23it/s]Processing item 17: frame=19, objects=[1]
-# Filtering objects to track: [1]
+# Processing item 2: frame=19, objects=[3]
+# Filtering objects to track: [3]
 # After filtering: 1 objects remain
-# Processing object 1 in frame 19
+# Processing object 3 in frame 19
 # Mask logit type: Tensor, shape: torch.Size([1, 540, 960])
 # Converted tensor mask, shape: torch.Size([1, 540, 960])
-# Mask statistics - sum: 17444, shape: torch.Size([1, 540, 960])
-# Creating bounding box from mask with 17444 true pixels
+# Mask statistics - sum: 3911, shape: torch.Size([1, 540, 960])
+# Creating bounding box from mask with 3911 true pixels
 # Expanded mask shape: torch.Size([1, 540, 960])
-# Generated box: [187.0, 370.0, 460.0, 481.0]
+# Generated box: [541.0, 161.0, 656.0, 251.0]
 # Processed frame 19, found 1 objects
-# propagate in video:  33%|██████████████████████████████████████████▋                                                                                     | 17/51 [00:12<00:27,  1.23it/s]Processing item 18: frame=20, objects=[1]
-# Filtering objects to track: [1]
+# propagate in video:   6%|███████▏                                                                                                                         | 2/36 [00:00<00:11,  2.99it/s]Processing item 3: frame=20, objects=[3]
+# Filtering objects to track: [3]
 # After filtering: 1 objects remain
-# Processing object 1 in frame 20
+# Processing object 3 in frame 20
 # Mask logit type: Tensor, shape: torch.Size([1, 540, 960])
 # Converted tensor mask, shape: torch.Size([1, 540, 960])
-# Mask statistics - sum: 0, shape: torch.Size([1, 540, 960])
-# Empty mask detected for object 1 in frame 20 (no true pixels)
-# Using fallback box from previous frame: [187.0, 370.0, 460.0, 481.0]
-# Processed frame 20, found 1 objects
-# propagate in video:  35%|█████████████████████████████████████████████▏                                                                                  | 18/51 [00:13<00:26,  1.23it/s]Processing item 19: frame=21, objects=[1]
-# Filtering objects to track: [1]
-# After filtering: 1 objects remain
-# Processing object 1 in frame 21
-# Mask logit type: Tensor, shape: torch.Size([1, 540, 960])
-# Converted tensor mask, shape: torch.Size([1, 540, 960])
-# Mask statistics - sum: 21810, shape: torch.Size([1, 540, 960])
-# Creating bounding box from mask with 21810 true pixels
+# Mask statistics - sum: 6453, shape: torch.Size([1, 540, 960])
+# Creating bounding box from mask with 6453 true pixels
 # Expanded mask shape: torch.Size([1, 540, 960])
-# Generated box: [662.0, 235.0, 838.0, 480.0]
+# Generated box: [545.0, 68.0, 712.0, 159.0]
+# Processed frame 20, found 1 objects
+# propagate in video:   8%|██████████▊                                                                                                                      | 3/36 [00:01<00:15,  2.07it/s]Processing item 4: frame=21, objects=[3]
+# Filtering objects to track: [3]
+# After filtering: 1 objects remain
+# Processing object 3 in frame 21
+# Mask logit type: Tensor, shape: torch.Size([1, 540, 960])
+# Converted tensor mask, shape: torch.Size([1, 540, 960])
+# Mask statistics - sum: 0, shape: torch.Size([1, 540, 960])
+# Empty mask detected for object 3 in frame 21 (no true pixels)
+# Using fallback box from previous frame: [545.0, 68.0, 712.0, 159.0]
 # Processed frame 21, found 1 objects
-# propagate in video:  37%|███████████████████████████████████████████████▋                                                                                | 19/51 [00:14<00:26,  1.23it/s]Processing item 20: frame=22, objects=[1]
-# Filtering objects to track: [1]
+# propagate in video:  11%|██████████████▎                                                                                                                  | 4/36 [00:02<00:18,  1.75it/s]Processing item 5: frame=22, objects=[3]
+# Filtering objects to track: [3]
 # After filtering: 1 objects remain
-# Processing object 1 in frame 22
+# Processing object 3 in frame 22
 # Mask logit type: Tensor, shape: torch.Size([1, 540, 960])
 # Converted tensor mask, shape: torch.Size([1, 540, 960])
-# Mask statistics - sum: 0, shape: torch.Size([1, 540, 960])
-# Empty mask detected for object 1 in frame 22 (no true pixels)
-# Using fallback box from previous frame: [662.0, 235.0, 838.0, 480.0]
+# Mask statistics - sum: 3614, shape: torch.Size([1, 540, 960])
+# Creating bounding box from mask with 3614 true pixels
+# Expanded mask shape: torch.Size([1, 540, 960])
+# Generated box: [394.0, 188.0, 495.0, 276.0]
 # Processed frame 22, found 1 objects
-# propagate in video:  39%|██████████████████████████████████████████████████▏                                                                             | 20/51 [00:14<00:25,  1.23it/s]Processing item 21: frame=23, objects=[1]
-# Filtering objects to track: [1]
+# propagate in video:  14%|█████████████████▉                                                                                                               | 5/36 [00:02<00:19,  1.58it/s]Processing item 6: frame=23, objects=[3]
+# Filtering objects to track: [3]
 # After filtering: 1 objects remain
-# Processing object 1 in frame 23
+# Processing object 3 in frame 23
 # Mask logit type: Tensor, shape: torch.Size([1, 540, 960])
 # Converted tensor mask, shape: torch.Size([1, 540, 960])
-# Mask statistics - sum: 0, shape: torch.Size([1, 540, 960])
-# Empty mask detected for object 1 in frame 23 (no true pixels)
-# Using fallback box from previous frame: [662.0, 235.0, 838.0, 480.0]
+# Mask statistics - sum: 4035, shape: torch.Size([1, 540, 960])
+# Creating bounding box from mask with 4035 true pixels
+# Expanded mask shape: torch.Size([1, 540, 960])
+# Generated box: [364.0, 77.0, 506.0, 150.0]
 # Processed frame 23, found 1 objects
-# propagate in video:  41%|████████████████████████████████████████████████████▋                                                                           | 21/51 [00:15<00:24,  1.23it/s]Processing item 22: frame=24, objects=[1]
-# Filtering objects to track: [1]
+# propagate in video:  17%|█████████████████████▌                                                                                                           | 6/36 [00:03<00:20,  1.47it/s]Processing item 7: frame=24, objects=[3]
+# Filtering objects to track: [3]
 # After filtering: 1 objects remain
-# Processing object 1 in frame 24
+# Processing object 3 in frame 24
 # Mask logit type: Tensor, shape: torch.Size([1, 540, 960])
 # Converted tensor mask, shape: torch.Size([1, 540, 960])
 # Mask statistics - sum: 0, shape: torch.Size([1, 540, 960])
-# Empty mask detected for object 1 in frame 24 (no true pixels)
-# Using fallback box from previous frame: [662.0, 235.0, 838.0, 480.0]
+# Empty mask detected for object 3 in frame 24 (no true pixels)
+# Using fallback box from previous frame: [364.0, 77.0, 506.0, 150.0]
 # Processed frame 24, found 1 objects
-# propagate in video:  43%|███████████████████████████████████████████████████████▏                                                                        | 22/51 [00:16<00:23,  1.22it/s]Processing item 23: frame=25, objects=[1]
-# Filtering objects to track: [1]
+# propagate in video:  19%|█████████████████████████                                                                                                        | 7/36 [00:04<00:20,  1.39it/s]Processing item 8: frame=25, objects=[3]
+# Filtering objects to track: [3]
 # After filtering: 1 objects remain
-# Processing object 1 in frame 25
+# Processing object 3 in frame 25
 # Mask logit type: Tensor, shape: torch.Size([1, 540, 960])
 # Converted tensor mask, shape: torch.Size([1, 540, 960])
 # Mask statistics - sum: 0, shape: torch.Size([1, 540, 960])
-# Empty mask detected for object 1 in frame 25 (no true pixels)
-# Using fallback box from previous frame: [662.0, 235.0, 838.0, 480.0]
+# Empty mask detected for object 3 in frame 25 (no true pixels)
+# Using fallback box from previous frame: [364.0, 77.0, 506.0, 150.0]
 # Processed frame 25, found 1 objects
-# propagate in video:  45%|█████████████████████████████████████████████████████████▋                                                                      | 23/51 [00:17<00:22,  1.22it/s]Processing item 24: frame=26, objects=[1]
-# Filtering objects to track: [1]
+# propagate in video:  22%|████████████████████████████▋                                                                                                    | 8/36 [00:05<00:21,  1.32it/s]Processing item 9: frame=26, objects=[3]
+# Filtering objects to track: [3]
 # After filtering: 1 objects remain
-# Processing object 1 in frame 26
+# Processing object 3 in frame 26
 # Mask logit type: Tensor, shape: torch.Size([1, 540, 960])
 # Converted tensor mask, shape: torch.Size([1, 540, 960])
 # Mask statistics - sum: 0, shape: torch.Size([1, 540, 960])
-# Empty mask detected for object 1 in frame 26 (no true pixels)
-# Using fallback box from previous frame: [662.0, 235.0, 838.0, 480.0]
+# Empty mask detected for object 3 in frame 26 (no true pixels)
+# Using fallback box from previous frame: [364.0, 77.0, 506.0, 150.0]
 # Processed frame 26, found 1 objects
-# propagate in video:  47%|████████████████████████████████████████████████████████████▏                                                                   | 24/51 [00:18<00:22,  1.22it/s]Processing item 25: frame=27, objects=[1]
-# Filtering objects to track: [1]
+# propagate in video:  25%|████████████████████████████████▎                                                                                                | 9/36 [00:06<00:21,  1.28it/s]Processing item 10: frame=27, objects=[3]
+# Filtering objects to track: [3]
 # After filtering: 1 objects remain
-# Processing object 1 in frame 27
+# Processing object 3 in frame 27
 # Mask logit type: Tensor, shape: torch.Size([1, 540, 960])
 # Converted tensor mask, shape: torch.Size([1, 540, 960])
 # Mask statistics - sum: 0, shape: torch.Size([1, 540, 960])
-# Empty mask detected for object 1 in frame 27 (no true pixels)
-# Using fallback box from previous frame: [662.0, 235.0, 838.0, 480.0]
+# Empty mask detected for object 3 in frame 27 (no true pixels)
+# Using fallback box from previous frame: [364.0, 77.0, 506.0, 150.0]
 # Processed frame 27, found 1 objects
-# propagate in video:  49%|██████████████████████████████████████████████████████████████▋                                                                 | 25/51 [00:19<00:21,  1.22it/s]Processing item 26: frame=28, objects=[1]
-# Filtering objects to track: [1]
+# propagate in video:  28%|███████████████████████████████████▌                                                                                            | 10/36 [00:06<00:20,  1.26it/s]Processing item 11: frame=28, objects=[3]
+# Filtering objects to track: [3]
 # After filtering: 1 objects remain
-# Processing object 1 in frame 28
+# Processing object 3 in frame 28
 # Mask logit type: Tensor, shape: torch.Size([1, 540, 960])
 # Converted tensor mask, shape: torch.Size([1, 540, 960])
 # Mask statistics - sum: 0, shape: torch.Size([1, 540, 960])
-# Empty mask detected for object 1 in frame 28 (no true pixels)
-# Using fallback box from previous frame: [662.0, 235.0, 838.0, 480.0]
+# Empty mask detected for object 3 in frame 28 (no true pixels)
+# Using fallback box from previous frame: [364.0, 77.0, 506.0, 150.0]
 # Processed frame 28, found 1 objects
-# propagate in video:  51%|█████████████████████████████████████████████████████████████████▎                                                              | 26/51 [00:19<00:20,  1.22it/s]Processing item 27: frame=29, objects=[1]
-# Filtering objects to track: [1]
+# propagate in video:  31%|███████████████████████████████████████                                                                                         | 11/36 [00:07<00:20,  1.24it/s]Processing item 12: frame=29, objects=[3]
+# Filtering objects to track: [3]
 # After filtering: 1 objects remain
-# Processing object 1 in frame 29
+# Processing object 3 in frame 29
 # Mask logit type: Tensor, shape: torch.Size([1, 540, 960])
 # Converted tensor mask, shape: torch.Size([1, 540, 960])
 # Mask statistics - sum: 0, shape: torch.Size([1, 540, 960])
-# Empty mask detected for object 1 in frame 29 (no true pixels)
-# Using fallback box from previous frame: [662.0, 235.0, 838.0, 480.0]
+# Empty mask detected for object 3 in frame 29 (no true pixels)
+# Using fallback box from previous frame: [364.0, 77.0, 506.0, 150.0]
 # Processed frame 29, found 1 objects
-# propagate in video:  53%|███████████████████████████████████████████████████████████████████▊                                                            | 27/51 [00:20<00:19,  1.22it/s]Processing item 28: frame=30, objects=[1]
-# Filtering objects to track: [1]
+# propagate in video:  33%|██████████████████████████████████████████▋                                                                                     | 12/36 [00:08<00:19,  1.23it/s]Processing item 13: frame=30, objects=[3]
+# Filtering objects to track: [3]
 # After filtering: 1 objects remain
-# Processing object 1 in frame 30
+# Processing object 3 in frame 30
 # Mask logit type: Tensor, shape: torch.Size([1, 540, 960])
 # Converted tensor mask, shape: torch.Size([1, 540, 960])
 # Mask statistics - sum: 0, shape: torch.Size([1, 540, 960])
-# Empty mask detected for object 1 in frame 30 (no true pixels)
-# Using fallback box from previous frame: [662.0, 235.0, 838.0, 480.0]
+# Empty mask detected for object 3 in frame 30 (no true pixels)
+# Using fallback box from previous frame: [364.0, 77.0, 506.0, 150.0]
 # Processed frame 30, found 1 objects
-# propagate in video:  55%|██████████████████████████████████████████████████████████████████████▎                                                         | 28/51 [00:21<00:18,  1.22it/s]Processing item 29: frame=31, objects=[1]
-# Filtering objects to track: [1]
+# propagate in video:  36%|██████████████████████████████████████████████▏                                                                                 | 13/36 [00:09<00:18,  1.22it/s]Processing item 14: frame=31, objects=[3]
+# Filtering objects to track: [3]
 # After filtering: 1 objects remain
-# Processing object 1 in frame 31
+# Processing object 3 in frame 31
 # Mask logit type: Tensor, shape: torch.Size([1, 540, 960])
 # Converted tensor mask, shape: torch.Size([1, 540, 960])
-# Mask statistics - sum: 0, shape: torch.Size([1, 540, 960])
-# Empty mask detected for object 1 in frame 31 (no true pixels)
-# Using fallback box from previous frame: [662.0, 235.0, 838.0, 480.0]
+# Mask statistics - sum: 3498, shape: torch.Size([1, 540, 960])
+# Creating bounding box from mask with 3498 true pixels
+# Expanded mask shape: torch.Size([1, 540, 960])
+# Generated box: [515.0, 281.0, 725.0, 336.0]
 # Processed frame 31, found 1 objects
-# propagate in video:  57%|████████████████████████████████████████████████████████████████████████▊                                                       | 29/51 [00:22<00:18,  1.22it/s]Processing item 30: frame=32, objects=[1]
-# Filtering objects to track: [1]
+# propagate in video:  39%|█████████████████████████████████████████████████▊                                                                              | 14/36 [00:10<00:18,  1.22it/s]Processing item 15: frame=32, objects=[3]
+# Filtering objects to track: [3]
 # After filtering: 1 objects remain
-# Processing object 1 in frame 32
+# Processing object 3 in frame 32
 # Mask logit type: Tensor, shape: torch.Size([1, 540, 960])
 # Converted tensor mask, shape: torch.Size([1, 540, 960])
 # Mask statistics - sum: 0, shape: torch.Size([1, 540, 960])
-# Empty mask detected for object 1 in frame 32 (no true pixels)
-# Using fallback box from previous frame: [662.0, 235.0, 838.0, 480.0]
+# Empty mask detected for object 3 in frame 32 (no true pixels)
+# Using fallback box from previous frame: [515.0, 281.0, 725.0, 336.0]
 # Processed frame 32, found 1 objects
-# propagate in video:  59%|███████████████████████████████████████████████████████████████████████████▎                                                    | 30/51 [00:23<00:17,  1.22it/s]Processing item 31: frame=33, objects=[1]
-# Filtering objects to track: [1]
+# propagate in video:  42%|█████████████████████████████████████████████████████▎                                                                          | 15/36 [00:11<00:17,  1.21it/s]Processing item 16: frame=33, objects=[3]
+# Filtering objects to track: [3]
 # After filtering: 1 objects remain
-# Processing object 1 in frame 33
+# Processing object 3 in frame 33
 # Mask logit type: Tensor, shape: torch.Size([1, 540, 960])
 # Converted tensor mask, shape: torch.Size([1, 540, 960])
-# Mask statistics - sum: 0, shape: torch.Size([1, 540, 960])
-# Empty mask detected for object 1 in frame 33 (no true pixels)
-# Using fallback box from previous frame: [662.0, 235.0, 838.0, 480.0]
+# Mask statistics - sum: 1530, shape: torch.Size([1, 540, 960])
+# Creating bounding box from mask with 1530 true pixels
+# Expanded mask shape: torch.Size([1, 540, 960])
+# Generated box: [600.0, 102.0, 650.0, 186.0]
 # Processed frame 33, found 1 objects
-# propagate in video:  61%|█████████████████████████████████████████████████████████████████████████████▊                                                  | 31/51 [00:23<00:16,  1.22it/s]Processing item 32: frame=34, objects=[1]
-# Filtering objects to track: [1]
+# propagate in video:  44%|████████████████████████████████████████████████████████▉                                                                       | 16/36 [00:11<00:16,  1.21it/s]Processing item 17: frame=34, objects=[3]
+# Filtering objects to track: [3]
 # After filtering: 1 objects remain
-# Processing object 1 in frame 34
+# Processing object 3 in frame 34
 # Mask logit type: Tensor, shape: torch.Size([1, 540, 960])
 # Converted tensor mask, shape: torch.Size([1, 540, 960])
-# Mask statistics - sum: 0, shape: torch.Size([1, 540, 960])
-# Empty mask detected for object 1 in frame 34 (no true pixels)
-# Using fallback box from previous frame: [662.0, 235.0, 838.0, 480.0]
+# Mask statistics - sum: 2419, shape: torch.Size([1, 540, 960])
+# Creating bounding box from mask with 2419 true pixels
+# Expanded mask shape: torch.Size([1, 540, 960])
+# Generated box: [323.0, 181.0, 408.0, 271.0]
 # Processed frame 34, found 1 objects
-# propagate in video:  63%|████████████████████████████████████████████████████████████████████████████████▎                                               | 32/51 [00:24<00:15,  1.22it/s]Processing item 33: frame=35, objects=[1]
-# Filtering objects to track: [1]
+# propagate in video:  47%|████████████████████████████████████████████████████████████▍                                                                   | 17/36 [00:12<00:15,  1.21it/s]Processing item 18: frame=35, objects=[3]
+# Filtering objects to track: [3]
 # After filtering: 1 objects remain
-# Processing object 1 in frame 35
+# Processing object 3 in frame 35
 # Mask logit type: Tensor, shape: torch.Size([1, 540, 960])
 # Converted tensor mask, shape: torch.Size([1, 540, 960])
-# Mask statistics - sum: 0, shape: torch.Size([1, 540, 960])
-# Empty mask detected for object 1 in frame 35 (no true pixels)
-# Using fallback box from previous frame: [662.0, 235.0, 838.0, 480.0]
+# Mask statistics - sum: 1422, shape: torch.Size([1, 540, 960])
+# Creating bounding box from mask with 1422 true pixels
+# Expanded mask shape: torch.Size([1, 540, 960])
+# Generated box: [579.0, 145.0, 641.0, 201.0]
 # Processed frame 35, found 1 objects
-# propagate in video:  65%|██████████████████████████████████████████████████████████████████████████████████▊                                             | 33/51 [00:25<00:14,  1.22it/s]Processing item 34: frame=36, objects=[1]
-# Filtering objects to track: [1]
+# propagate in video:  50%|████████████████████████████████████████████████████████████████                                                                | 18/36 [00:13<00:14,  1.21it/s]Processing item 19: frame=36, objects=[3]
+# Filtering objects to track: [3]
 # After filtering: 1 objects remain
-# Processing object 1 in frame 36
+# Processing object 3 in frame 36
 # Mask logit type: Tensor, shape: torch.Size([1, 540, 960])
 # Converted tensor mask, shape: torch.Size([1, 540, 960])
-# Mask statistics - sum: 0, shape: torch.Size([1, 540, 960])
-# Empty mask detected for object 1 in frame 36 (no true pixels)
-# Using fallback box from previous frame: [662.0, 235.0, 838.0, 480.0]
+# Mask statistics - sum: 1157, shape: torch.Size([1, 540, 960])
+# Creating bounding box from mask with 1157 true pixels
+# Expanded mask shape: torch.Size([1, 540, 960])
+# Generated box: [488.0, 181.0, 527.0, 239.0]
 # Processed frame 36, found 1 objects
-# propagate in video:  67%|█████████████████████████████████████████████████████████████████████████████████████▎                                          | 34/51 [00:26<00:13,  1.22it/s]Processing item 35: frame=37, objects=[1]
-# Filtering objects to track: [1]
+# propagate in video:  53%|███████████████████████████████████████████████████████████████████▌                                                            | 19/36 [00:14<00:14,  1.20it/s]Processing item 20: frame=37, objects=[3]
+# Filtering objects to track: [3]
 # After filtering: 1 objects remain
-# Processing object 1 in frame 37
+# Processing object 3 in frame 37
 # Mask logit type: Tensor, shape: torch.Size([1, 540, 960])
 # Converted tensor mask, shape: torch.Size([1, 540, 960])
-# Mask statistics - sum: 0, shape: torch.Size([1, 540, 960])
-# Empty mask detected for object 1 in frame 37 (no true pixels)
-# Using fallback box from previous frame: [662.0, 235.0, 838.0, 480.0]
+# Mask statistics - sum: 1118, shape: torch.Size([1, 540, 960])
+# Creating bounding box from mask with 1118 true pixels
+# Expanded mask shape: torch.Size([1, 540, 960])
+# Generated box: [494.0, 202.0, 531.0, 253.0]
 # Processed frame 37, found 1 objects
-# propagate in video:  69%|███████████████████████████████████████████████████████████████████████████████████████▊                                        | 35/51 [00:27<00:13,  1.22it/s]Processing item 36: frame=38, objects=[1]
-# Filtering objects to track: [1]
+# propagate in video:  56%|███████████████████████████████████████████████████████████████████████                                                         | 20/36 [00:15<00:13,  1.20it/s]Processing item 21: frame=38, objects=[3]
+# Filtering objects to track: [3]
 # After filtering: 1 objects remain
-# Processing object 1 in frame 38
+# Processing object 3 in frame 38
 # Mask logit type: Tensor, shape: torch.Size([1, 540, 960])
 # Converted tensor mask, shape: torch.Size([1, 540, 960])
-# Mask statistics - sum: 0, shape: torch.Size([1, 540, 960])
-# Empty mask detected for object 1 in frame 38 (no true pixels)
-# Using fallback box from previous frame: [662.0, 235.0, 838.0, 480.0]
+# Mask statistics - sum: 1208, shape: torch.Size([1, 540, 960])
+# Creating bounding box from mask with 1208 true pixels
+# Expanded mask shape: torch.Size([1, 540, 960])
+# Generated box: [533.0, 176.0, 576.0, 225.0]
 # Processed frame 38, found 1 objects
-# propagate in video:  71%|██████████████████████████████████████████████████████████████████████████████████████████▎                                     | 36/51 [00:28<00:12,  1.22it/s]Processing item 37: frame=39, objects=[1]
-# Filtering objects to track: [1]
+# propagate in video:  58%|██████████████████████████████████████████████████████████████████████████▋                                                     | 21/36 [00:16<00:12,  1.20it/s]Processing item 22: frame=39, objects=[3]
+# Filtering objects to track: [3]
 # After filtering: 1 objects remain
-# Processing object 1 in frame 39
+# Processing object 3 in frame 39
 # Mask logit type: Tensor, shape: torch.Size([1, 540, 960])
 # Converted tensor mask, shape: torch.Size([1, 540, 960])
-# Mask statistics - sum: 0, shape: torch.Size([1, 540, 960])
-# Empty mask detected for object 1 in frame 39 (no true pixels)
-# Using fallback box from previous frame: [662.0, 235.0, 838.0, 480.0]
+# Mask statistics - sum: 1013, shape: torch.Size([1, 540, 960])
+# Creating bounding box from mask with 1013 true pixels
+# Expanded mask shape: torch.Size([1, 540, 960])
+# Generated box: [469.0, 163.0, 504.0, 215.0]
 # Processed frame 39, found 1 objects
-# propagate in video:  73%|████████████████████████████████████████████████████████████████████████████████████████████▊                                   | 37/51 [00:28<00:11,  1.22it/s]Processing item 38: frame=40, objects=[1]
-# Filtering objects to track: [1]
+# propagate in video:  61%|██████████████████████████████████████████████████████████████████████████████▏                                                 | 22/36 [00:16<00:11,  1.20it/s]Processing item 23: frame=40, objects=[3]
+# Filtering objects to track: [3]
 # After filtering: 1 objects remain
-# Processing object 1 in frame 40
+# Processing object 3 in frame 40
 # Mask logit type: Tensor, shape: torch.Size([1, 540, 960])
 # Converted tensor mask, shape: torch.Size([1, 540, 960])
 # Mask statistics - sum: 0, shape: torch.Size([1, 540, 960])
-# Empty mask detected for object 1 in frame 40 (no true pixels)
-# Using fallback box from previous frame: [662.0, 235.0, 838.0, 480.0]
+# Empty mask detected for object 3 in frame 40 (no true pixels)
+# Using fallback box from previous frame: [469.0, 163.0, 504.0, 215.0]
 # Processed frame 40, found 1 objects
-# propagate in video:  75%|███████████████████████████████████████████████████████████████████████████████████████████████▎                                | 38/51 [00:29<00:10,  1.22it/s]Processing item 39: frame=41, objects=[1]
-# Filtering objects to track: [1]
+# propagate in video:  64%|█████████████████████████████████████████████████████████████████████████████████▊                                              | 23/36 [00:17<00:10,  1.20it/s]Processing item 24: frame=41, objects=[3]
+# Filtering objects to track: [3]
 # After filtering: 1 objects remain
-# Processing object 1 in frame 41
+# Processing object 3 in frame 41
 # Mask logit type: Tensor, shape: torch.Size([1, 540, 960])
 # Converted tensor mask, shape: torch.Size([1, 540, 960])
-# Mask statistics - sum: 0, shape: torch.Size([1, 540, 960])
-# Empty mask detected for object 1 in frame 41 (no true pixels)
-# Using fallback box from previous frame: [662.0, 235.0, 838.0, 480.0]
+# Mask statistics - sum: 466, shape: torch.Size([1, 540, 960])
+# Creating bounding box from mask with 466 true pixels
+# Expanded mask shape: torch.Size([1, 540, 960])
+# Generated box: [496.0, 182.0, 512.0, 219.0]
 # Processed frame 41, found 1 objects
-# propagate in video:  76%|█████████████████████████████████████████████████████████████████████████████████████████████████▉                              | 39/51 [00:30<00:09,  1.22it/s]Processing item 40: frame=42, objects=[1]
-# Filtering objects to track: [1]
+# propagate in video:  67%|█████████████████████████████████████████████████████████████████████████████████████▎                                          | 24/36 [00:18<00:09,  1.20it/s]Processing item 25: frame=42, objects=[3]
+# Filtering objects to track: [3]
 # After filtering: 1 objects remain
-# Processing object 1 in frame 42
+# Processing object 3 in frame 42
 # Mask logit type: Tensor, shape: torch.Size([1, 540, 960])
 # Converted tensor mask, shape: torch.Size([1, 540, 960])
-# Mask statistics - sum: 0, shape: torch.Size([1, 540, 960])
-# Empty mask detected for object 1 in frame 42 (no true pixels)
-# Using fallback box from previous frame: [662.0, 235.0, 838.0, 480.0]
+# Mask statistics - sum: 1116, shape: torch.Size([1, 540, 960])
+# Creating bounding box from mask with 1116 true pixels
+# Expanded mask shape: torch.Size([1, 540, 960])
+# Generated box: [395.0, 119.0, 422.0, 176.0]
 # Processed frame 42, found 1 objects
-# propagate in video:  78%|████████████████████████████████████████████████████████████████████████████████████████████████████▍                           | 40/51 [00:31<00:09,  1.22it/s]Processing item 41: frame=43, objects=[1]
-# Filtering objects to track: [1]
+# propagate in video:  69%|████████████████████████████████████████████████████████████████████████████████████████▉                                       | 25/36 [00:19<00:09,  1.20it/s]Processing item 26: frame=43, objects=[3]
+# Filtering objects to track: [3]
 # After filtering: 1 objects remain
-# Processing object 1 in frame 43
+# Processing object 3 in frame 43
 # Mask logit type: Tensor, shape: torch.Size([1, 540, 960])
 # Converted tensor mask, shape: torch.Size([1, 540, 960])
-# Mask statistics - sum: 0, shape: torch.Size([1, 540, 960])
-# Empty mask detected for object 1 in frame 43 (no true pixels)
-# Using fallback box from previous frame: [662.0, 235.0, 838.0, 480.0]
+# Mask statistics - sum: 953, shape: torch.Size([1, 540, 960])
+# Creating bounding box from mask with 953 true pixels
+# Expanded mask shape: torch.Size([1, 540, 960])
+# Generated box: [495.0, 159.0, 525.0, 207.0]
 # Processed frame 43, found 1 objects
-# propagate in video:  80%|██████████████████████████████████████████████████████████████████████████████████████████████████████▉                         | 41/51 [00:32<00:08,  1.22it/s]Processing item 42: frame=44, objects=[1]
-# Filtering objects to track: [1]
+# propagate in video:  72%|████████████████████████████████████████████████████████████████████████████████████████████▍                                   | 26/36 [00:20<00:08,  1.20it/s]Processing item 27: frame=44, objects=[3]
+# Filtering objects to track: [3]
 # After filtering: 1 objects remain
-# Processing object 1 in frame 44
+# Processing object 3 in frame 44
 # Mask logit type: Tensor, shape: torch.Size([1, 540, 960])
 # Converted tensor mask, shape: torch.Size([1, 540, 960])
-# Mask statistics - sum: 0, shape: torch.Size([1, 540, 960])
-# Empty mask detected for object 1 in frame 44 (no true pixels)
-# Using fallback box from previous frame: [662.0, 235.0, 838.0, 480.0]
+# Mask statistics - sum: 1017, shape: torch.Size([1, 540, 960])
+# Creating bounding box from mask with 1017 true pixels
+# Expanded mask shape: torch.Size([1, 540, 960])
+# Generated box: [485.0, 143.0, 519.0, 188.0]
 # Processed frame 44, found 1 objects
-# propagate in video:  82%|█████████████████████████████████████████████████████████████████████████████████████████████████████████▍                      | 42/51 [00:32<00:07,  1.22it/s]Processing item 43: frame=45, objects=[1]
-# Filtering objects to track: [1]
+# propagate in video:  75%|████████████████████████████████████████████████████████████████████████████████████████████████                                | 27/36 [00:21<00:07,  1.20it/s]Processing item 28: frame=45, objects=[3]
+# Filtering objects to track: [3]
 # After filtering: 1 objects remain
-# Processing object 1 in frame 45
+# Processing object 3 in frame 45
 # Mask logit type: Tensor, shape: torch.Size([1, 540, 960])
 # Converted tensor mask, shape: torch.Size([1, 540, 960])
-# Mask statistics - sum: 0, shape: torch.Size([1, 540, 960])
-# Empty mask detected for object 1 in frame 45 (no true pixels)
-# Using fallback box from previous frame: [662.0, 235.0, 838.0, 480.0]
+# Mask statistics - sum: 849, shape: torch.Size([1, 540, 960])
+# Creating bounding box from mask with 849 true pixels
+# Expanded mask shape: torch.Size([1, 540, 960])
+# Generated box: [608.0, 242.0, 640.0, 283.0]
 # Processed frame 45, found 1 objects
-# propagate in video:  84%|███████████████████████████████████████████████████████████████████████████████████████████████████████████▉                    | 43/51 [00:33<00:06,  1.22it/s]Processing item 44: frame=46, objects=[1]
-# Filtering objects to track: [1]
+# propagate in video:  78%|███████████████████████████████████████████████████████████████████████████████████████████████████▌                            | 28/36 [00:21<00:06,  1.20it/s]Processing item 29: frame=46, objects=[3]
+# Filtering objects to track: [3]
 # After filtering: 1 objects remain
-# Processing object 1 in frame 46
+# Processing object 3 in frame 46
 # Mask logit type: Tensor, shape: torch.Size([1, 540, 960])
 # Converted tensor mask, shape: torch.Size([1, 540, 960])
 # Mask statistics - sum: 0, shape: torch.Size([1, 540, 960])
-# Empty mask detected for object 1 in frame 46 (no true pixels)
-# Using fallback box from previous frame: [662.0, 235.0, 838.0, 480.0]
+# Empty mask detected for object 3 in frame 46 (no true pixels)
+# Using fallback box from previous frame: [608.0, 242.0, 640.0, 283.0]
 # Processed frame 46, found 1 objects
-# propagate in video:  86%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████▍                 | 44/51 [00:34<00:05,  1.22it/s]Processing item 45: frame=47, objects=[1]
-# Filtering objects to track: [1]
+# propagate in video:  81%|███████████████████████████████████████████████████████████████████████████████████████████████████████                         | 29/36 [00:22<00:05,  1.20it/s]Processing item 30: frame=47, objects=[3]
+# Filtering objects to track: [3]
 # After filtering: 1 objects remain
-# Processing object 1 in frame 47
+# Processing object 3 in frame 47
 # Mask logit type: Tensor, shape: torch.Size([1, 540, 960])
 # Converted tensor mask, shape: torch.Size([1, 540, 960])
 # Mask statistics - sum: 0, shape: torch.Size([1, 540, 960])
-# Empty mask detected for object 1 in frame 47 (no true pixels)
-# Using fallback box from previous frame: [662.0, 235.0, 838.0, 480.0]
+# Empty mask detected for object 3 in frame 47 (no true pixels)
+# Using fallback box from previous frame: [608.0, 242.0, 640.0, 283.0]
 # Processed frame 47, found 1 objects
-# propagate in video:  88%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████▉               | 45/51 [00:35<00:04,  1.22it/s]Processing item 46: frame=48, objects=[1]
-# Filtering objects to track: [1]
+# propagate in video:  83%|██████████████████████████████████████████████████████████████████████████████████████████████████████████▋                     | 30/36 [00:23<00:04,  1.20it/s]Processing item 31: frame=48, objects=[3]
+# Filtering objects to track: [3]
 # After filtering: 1 objects remain
-# Processing object 1 in frame 48
+# Processing object 3 in frame 48
 # Mask logit type: Tensor, shape: torch.Size([1, 540, 960])
 # Converted tensor mask, shape: torch.Size([1, 540, 960])
 # Mask statistics - sum: 0, shape: torch.Size([1, 540, 960])
-# Empty mask detected for object 1 in frame 48 (no true pixels)
-# Using fallback box from previous frame: [662.0, 235.0, 838.0, 480.0]
+# Empty mask detected for object 3 in frame 48 (no true pixels)
+# Using fallback box from previous frame: [608.0, 242.0, 640.0, 283.0]
 # Processed frame 48, found 1 objects
-# propagate in video:  90%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████▍            | 46/51 [00:36<00:04,  1.22it/s]Processing item 47: frame=49, objects=[1]
-# Filtering objects to track: [1]
+# propagate in video:  86%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████▏                 | 31/36 [00:24<00:04,  1.20it/s]Processing item 32: frame=49, objects=[3]
+# Filtering objects to track: [3]
 # After filtering: 1 objects remain
-# Processing object 1 in frame 49
+# Processing object 3 in frame 49
 # Mask logit type: Tensor, shape: torch.Size([1, 540, 960])
 # Converted tensor mask, shape: torch.Size([1, 540, 960])
 # Mask statistics - sum: 0, shape: torch.Size([1, 540, 960])
-# Empty mask detected for object 1 in frame 49 (no true pixels)
-# Using fallback box from previous frame: [662.0, 235.0, 838.0, 480.0]
+# Empty mask detected for object 3 in frame 49 (no true pixels)
+# Using fallback box from previous frame: [608.0, 242.0, 640.0, 283.0]
 # Processed frame 49, found 1 objects
-# propagate in video:  92%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████▉          | 47/51 [00:37<00:03,  1.22it/s]Processing item 48: frame=50, objects=[1]
-# Filtering objects to track: [1]
+# propagate in video:  89%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████▊              | 32/36 [00:25<00:03,  1.20it/s]Processing item 33: frame=50, objects=[3]
+# Filtering objects to track: [3]
 # After filtering: 1 objects remain
-# Processing object 1 in frame 50
+# Processing object 3 in frame 50
 # Mask logit type: Tensor, shape: torch.Size([1, 540, 960])
 # Converted tensor mask, shape: torch.Size([1, 540, 960])
 # Mask statistics - sum: 0, shape: torch.Size([1, 540, 960])
-# Empty mask detected for object 1 in frame 50 (no true pixels)
-# Using fallback box from previous frame: [662.0, 235.0, 838.0, 480.0]
+# Empty mask detected for object 3 in frame 50 (no true pixels)
+# Using fallback box from previous frame: [608.0, 242.0, 640.0, 283.0]
 # Processed frame 50, found 1 objects
-# propagate in video:  94%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████▍       | 48/51 [00:37<00:02,  1.22it/s]Processing item 49: frame=51, objects=[1]
-# Filtering objects to track: [1]
+# propagate in video:  92%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████▎          | 33/36 [00:26<00:02,  1.20it/s]Processing item 34: frame=51, objects=[3]
+# Filtering objects to track: [3]
 # After filtering: 1 objects remain
-# Processing object 1 in frame 51
+# Processing object 3 in frame 51
 # Mask logit type: Tensor, shape: torch.Size([1, 540, 960])
 # Converted tensor mask, shape: torch.Size([1, 540, 960])
 # Mask statistics - sum: 0, shape: torch.Size([1, 540, 960])
-# Empty mask detected for object 1 in frame 51 (no true pixels)
-# Using fallback box from previous frame: [662.0, 235.0, 838.0, 480.0]
+# Empty mask detected for object 3 in frame 51 (no true pixels)
+# Using fallback box from previous frame: [608.0, 242.0, 640.0, 283.0]
 # Processed frame 51, found 1 objects
-# propagate in video:  96%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████▉     | 49/51 [00:38<00:01,  1.22it/s]Processing item 50: frame=52, objects=[1]
-# Filtering objects to track: [1]
+# propagate in video:  94%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████▉       | 34/36 [00:26<00:01,  1.20it/s]Processing item 35: frame=52, objects=[3]
+# Filtering objects to track: [3]
 # After filtering: 1 objects remain
-# Processing object 1 in frame 52
+# Processing object 3 in frame 52
 # Mask logit type: Tensor, shape: torch.Size([1, 540, 960])
 # Converted tensor mask, shape: torch.Size([1, 540, 960])
 # Mask statistics - sum: 0, shape: torch.Size([1, 540, 960])
-# Empty mask detected for object 1 in frame 52 (no true pixels)
-# Using fallback box from previous frame: [662.0, 235.0, 838.0, 480.0]
+# Empty mask detected for object 3 in frame 52 (no true pixels)
+# Using fallback box from previous frame: [608.0, 242.0, 640.0, 283.0]
 # Processed frame 52, found 1 objects
-# propagate in video:  98%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████▍  | 50/51 [00:39<00:00,  1.22it/s]Processing item 51: frame=53, objects=[1]
-# Filtering objects to track: [1]
+# propagate in video:  97%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████▍   | 35/36 [00:27<00:00,  1.20it/s]Processing item 36: frame=53, objects=[3]
+# Filtering objects to track: [3]
 # After filtering: 1 objects remain
-# Processing object 1 in frame 53
+# Processing object 3 in frame 53
 # Mask logit type: Tensor, shape: torch.Size([1, 540, 960])
 # Converted tensor mask, shape: torch.Size([1, 540, 960])
 # Mask statistics - sum: 0, shape: torch.Size([1, 540, 960])
-# Empty mask detected for object 1 in frame 53 (no true pixels)
-# Using fallback box from previous frame: [662.0, 235.0, 838.0, 480.0]
+# Empty mask detected for object 3 in frame 53 (no true pixels)
+# Using fallback box from previous frame: [608.0, 242.0, 640.0, 283.0]
 # Processed frame 53, found 1 objects
-# propagate in video: 100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 51/51 [00:40<00:00,  1.26it/s]
-# Finished propagation, processed 51 frames, found 51 frames with objects
-# Mask statistics: 16 valid masks, 35 empty masks
-# DEBUG: propagate_masks returned type: <class 'tuple'>
-# DEBUG: propagate_masks tuple length: 2
-# DEBUG: Unpacked 2-element tuple - segments (51 frames) and boxes (51 frames)
-# DEBUG: Box statistics - 16 valid boxes, 35 fallback boxes
-# DEBUG: Segments contains 51 frames
-# DEBUG: Frame 3 has 1 objects
-# DEBUG: Frame 4 has 1 objects
-# DEBUG: Frame 5 has 1 objects
-# Successfully propagated masks for object 1, available in 51 frames
-# Saving per-object segmentation visualizations...
-# Processing object 1 visible from frame 3 to 3
-#   Saved 1 visualizations for object #1 (Time Stick)
+# propagate in video: 100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 36/36 [00:28<00:00,  1.26it/s]
+# Finished propagation, processed 36 frames, found 36 frames with objects
+# Mask statistics: 18 valid masks, 18 empty masks
+# DEBUG: propagate_masks(objects_to_track=3) returned type: <class 'tuple'>
+# DEBUG: propagate_masks(objects_to_track=3) tuple length: 2
+#   Frame 18: Object #3 mask statistics - sum: 4329 pixels - HIGH QUALITY
+#   Frame 19: Object #3 mask statistics - sum: 3911 pixels - HIGH QUALITY
+#   Frame 20: Object #3 mask statistics - sum: 6453 pixels - HIGH QUALITY
+#   Frame 21: Object #3 mask statistics - sum: 0 pixels - HIGH QUALITY
+#   Frame 22: Object #3 mask statistics - sum: 3614 pixels - HIGH QUALITY
+#   Frame 23: Object #3 mask statistics - sum: 4035 pixels - HIGH QUALITY
+#   Frame 24: Object #3 mask statistics - sum: 0 pixels - HIGH QUALITY
+#   Frame 25: Object #3 mask statistics - sum: 0 pixels - HIGH QUALITY
+#   Frame 26: Object #3 mask statistics - sum: 0 pixels - HIGH QUALITY
+#   Frame 27: Object #3 mask statistics - sum: 0 pixels - HIGH QUALITY
+#   Frame 28: Object #3 mask statistics - sum: 0 pixels - HIGH QUALITY
+#   Frame 29: Object #3 mask statistics - sum: 0 pixels - HIGH QUALITY
+#   Frame 30: Object #3 mask statistics - sum: 0 pixels - HIGH QUALITY
+#   Frame 31: Object #3 mask statistics - sum: 3498 pixels - HIGH QUALITY
+#   Frame 32: Object #3 mask statistics - sum: 0 pixels - HIGH QUALITY
+#   Frame 33: Object #3 mask statistics - sum: 1530 pixels - HIGH QUALITY
+#   Frame 34: Object #3 mask statistics - sum: 2419 pixels - HIGH QUALITY
+#   Frame 35: Object #3 mask statistics - sum: 1422 pixels - HIGH QUALITY
+#   Frame 36: Object #3 mask statistics - sum: 1157 pixels - HIGH QUALITY
+#   Frame 37: Object #3 mask statistics - sum: 1118 pixels - HIGH QUALITY
+#   Frame 38: Object #3 mask statistics - sum: 1208 pixels - HIGH QUALITY
+#   Frame 39: Object #3 mask statistics - sum: 1013 pixels - HIGH QUALITY
+#   Frame 40: Object #3 mask statistics - sum: 0 pixels - HIGH QUALITY
+#   Frame 41: Object #3 mask statistics - sum: 466 pixels - HIGH QUALITY
+#   Frame 42: Object #3 mask statistics - sum: 1116 pixels - HIGH QUALITY
+#   Frame 43: Object #3 mask statistics - sum: 953 pixels - HIGH QUALITY
+#   Frame 44: Object #3 mask statistics - sum: 1017 pixels - HIGH QUALITY
+#   Frame 45: Object #3 mask statistics - sum: 849 pixels - HIGH QUALITY
+#   Frame 46: Object #3 mask statistics - sum: 0 pixels - HIGH QUALITY
+#   Frame 47: Object #3 mask statistics - sum: 0 pixels - HIGH QUALITY
+#   Frame 48: Object #3 mask statistics - sum: 0 pixels - HIGH QUALITY
+#   Frame 49: Object #3 mask statistics - sum: 0 pixels - HIGH QUALITY
+#   Frame 50: Object #3 mask statistics - sum: 0 pixels - HIGH QUALITY
+#   Frame 51: Object #3 mask statistics - sum: 0 pixels - HIGH QUALITY
+#   Frame 52: Object #3 mask statistics - sum: 0 pixels - HIGH QUALITY
+#   Frame 53: Object #3 mask statistics - sum: 0 pixels - HIGH QUALITY
+#   Frame 21: Object #3 using FALLBACK BOX
+#   Frame 24: Object #3 using FALLBACK BOX
+#   Frame 25: Object #3 using FALLBACK BOX
+#   Frame 26: Object #3 using FALLBACK BOX
+#   Frame 27: Object #3 using FALLBACK BOX
+#   Frame 28: Object #3 using FALLBACK BOX
+#   Frame 29: Object #3 using FALLBACK BOX
+#   Frame 30: Object #3 using FALLBACK BOX
+#   Frame 32: Object #3 using FALLBACK BOX
+#   Frame 40: Object #3 using FALLBACK BOX
+#   Frame 46: Object #3 using FALLBACK BOX
+#   Frame 47: Object #3 using FALLBACK BOX
+#   Frame 48: Object #3 using FALLBACK BOX
+#   Frame 49: Object #3 using FALLBACK BOX
+#   Frame 50: Object #3 using FALLBACK BOX
+#   Frame 51: Object #3 using FALLBACK BOX
+#   Frame 52: Object #3 using FALLBACK BOX
+#   Frame 53: Object #3 using FALLBACK BOX
+# Adding box for frame 18 to object 3: [324.0, 124.0, 468.0, 197.0]
+# Adding box for frame 19 to object 3: [541.0, 161.0, 656.0, 251.0]
+# Adding box for frame 20 to object 3: [545.0, 68.0, 712.0, 159.0]
+# Adding box for frame 21 to object 3: [545.0, 68.0, 712.0, 159.0]
+# Adding box for frame 22 to object 3: [394.0, 188.0, 495.0, 276.0]
+# Adding box for frame 23 to object 3: [364.0, 77.0, 506.0, 150.0]
+# Adding box for frame 24 to object 3: [364.0, 77.0, 506.0, 150.0]
+# Adding box for frame 25 to object 3: [364.0, 77.0, 506.0, 150.0]
+# Adding box for frame 26 to object 3: [364.0, 77.0, 506.0, 150.0]
+# Adding box for frame 27 to object 3: [364.0, 77.0, 506.0, 150.0]
+# Adding box for frame 28 to object 3: [364.0, 77.0, 506.0, 150.0]
+# Adding box for frame 29 to object 3: [364.0, 77.0, 506.0, 150.0]
+# Adding box for frame 30 to object 3: [364.0, 77.0, 506.0, 150.0]
+# Adding box for frame 31 to object 3: [515.0, 281.0, 725.0, 336.0]
+# Adding box for frame 32 to object 3: [515.0, 281.0, 725.0, 336.0]
+# Adding box for frame 33 to object 3: [600.0, 102.0, 650.0, 186.0]
+# Adding box for frame 34 to object 3: [323.0, 181.0, 408.0, 271.0]
+# Adding box for frame 35 to object 3: [579.0, 145.0, 641.0, 201.0]
+# Adding box for frame 36 to object 3: [488.0, 181.0, 527.0, 239.0]
+# Adding box for frame 37 to object 3: [494.0, 202.0, 531.0, 253.0]
+# Adding box for frame 38 to object 3: [533.0, 176.0, 576.0, 225.0]
+# Adding box for frame 39 to object 3: [469.0, 163.0, 504.0, 215.0]
+# Adding box for frame 40 to object 3: [469.0, 163.0, 504.0, 215.0]
+# Adding box for frame 41 to object 3: [496.0, 182.0, 512.0, 219.0]
+# Adding box for frame 42 to object 3: [395.0, 119.0, 422.0, 176.0]
+# Adding box for frame 43 to object 3: [495.0, 159.0, 525.0, 207.0]
+# Adding box for frame 44 to object 3: [485.0, 143.0, 519.0, 188.0]
+# Adding box for frame 45 to object 3: [608.0, 242.0, 640.0, 283.0]
+# Adding box for frame 46 to object 3: [608.0, 242.0, 640.0, 283.0]
+# Adding box for frame 47 to object 3: [608.0, 242.0, 640.0, 283.0]
+# Adding box for frame 48 to object 3: [608.0, 242.0, 640.0, 283.0]
+# Adding box for frame 49 to object 3: [608.0, 242.0, 640.0, 283.0]
+# Adding box for frame 50 to object 3: [608.0, 242.0, 640.0, 283.0]
+# Adding box for frame 51 to object 3: [608.0, 242.0, 640.0, 283.0]
+# Adding box for frame 52 to object 3: [608.0, 242.0, 640.0, 283.0]
+# Adding box for frame 53 to object 3: [608.0, 242.0, 640.0, 283.0]
+# Updating object 3 with 36 boxes from mask propagation
+# Error during propagation for object 3: 3
+# Propagation error traceback: Traceback (most recent call last):
+#   File "/home/ubuntu/code/drew/e2e_sam2/e2e_pipeline_v2/experiments/vidPredictor/src/object_tracking_pipeline.py", line 1240, in process_video_separate_objects
+#     self.tracked_objects[obj_id]["boxes"] = all_boxes
+#     ~~~~~~~~~~~~~~~~~~~~^^^^^^^^
+# KeyError: 3
+
+# Saving per-object segmentation visualizations based on mask quality...
+#   Object #1 (Time Stick) mask quality statistics:
+#     Frames processed: 51
+#     Frames saved: 16
+#     High quality masks (>0 pixels): 16
+#     Low quality masks (1-0 pixels): 0
+#     Empty masks (0 pixels): 35 (not saved)
+#   Object #2 (TVA Uniform) mask quality statistics:
+#     Frames processed: 41
+#     Frames saved: 10
+#     High quality masks (>0 pixels): 10
+#     Low quality masks (1-0 pixels): 0
+#     Empty masks (0 pixels): 31 (not saved)
+#   Object #3 (Sylvie's horned headpiece) mask quality statistics:
+#     Frames processed: 36
+#     Frames saved: 18
+#     High quality masks (>0 pixels): 18
+#     Low quality masks (1-0 pixels): 0
+#     Empty masks (0 pixels): 18 (not saved)
 # All per-object mask visualizations saved to cd_fsod_results/object_masks
 # Saving first detection frames for each object...
 # Using detection files from: /home/ubuntu/code/drew/e2e_sam2/e2e_pipeline_v2/experiments/vidPredictor/data/detections/Scenes 061-080__265H-2-_20230815215828529
@@ -1449,37 +1218,54 @@ if __name__ == "__main__":
 #     JSON file contains 51 detections
 #     Sample detection for Time Stick: confidence=0.9932, coordinates=[453, 224, 643, 473]
 #   Saved first detection frame for object #1 (Time Stick)
+#   Object #2 (TVA Uniform) first detected in frame 13, using 13.json
+#     JSON file contains 36 detections
+#     Sample detection for TVA Uniform: confidence=0.9669, coordinates=[374, 115, 604, 490]
+#   Saved first detection frame for object #2 (TVA Uniform)
+#   Object #3 (Sylvie's horned headpiece) first detected in frame 18, using 18.json
+#     JSON file contains 51 detections
+#     Sample detection for Sylvie's horned headpiece: confidence=0.9856, coordinates=[322, 128, 481, 202]
+#   Saved first detection frame for object #3 (Sylvie's horned headpiece)
 # All first detection frames saved to cd_fsod_results/first_detections
-# Creating object-to-frame mapping...
-# Object tracking statistics:
-#   Total valid frames across all objects: 1
-#   Total empty mask frames: 0
-#   Total fallback box frames: 0
-#   Valid frame percentage: 100.0%
+# Creating object-to-frame mapping with quality metrics...
+# Object tracking quality statistics:
+#   Total objects tracked: 3
+#   Total high quality frames (>0 pixels): 44
+#   Total low quality frames (1-0 pixels): 0
+#   Total empty mask frames (0 pixels): 84 (not saved)
+#   Total saved frames (non-empty masks): 44
+# Saved tracking summary to cd_fsod_results/tracking_summary.json
 # Verifying consistency with saved mask images...
 # Verification successful: All objects' masks are consistent with the mapping
 # Saved object-to-frame mapping to cd_fsod_results/object_frame_mapping.json
 # All results saved to: cd_fsod_results
-# 2025-05-13 20:18:05,988 - INFO - Video processing completed in 44.23 seconds
-# INFO:cd_fsod_test:Video processing completed in 44.23 seconds
-# 2025-05-13 20:18:05,988 - DEBUG - First detection details:
+# 2025-05-13 22:33:56,950 - INFO - Video processing completed in 111.39 seconds
+# INFO:cd_fsod_test:Video processing completed in 111.39 seconds
+# 2025-05-13 22:33:56,950 - DEBUG - First detection details:
 # DEBUG:cd_fsod_test:First detection details:
-# 2025-05-13 20:18:05,988 - DEBUG -   Object #1 (Time Stick) first detected at frame 3
+# 2025-05-13 22:33:56,950 - DEBUG -   Object #1 (Time Stick) first detected at frame 3
 # DEBUG:cd_fsod_test:  Object #1 (Time Stick) first detected at frame 3
-# 2025-05-13 20:18:05,988 - DEBUG -     From 3.json: {'coordinates': [453, 224, 643, 473], 'label': 'Time Stick', 'confidence': 0.9931594133377075}
+# 2025-05-13 22:33:56,950 - DEBUG -     From 3.json: {'coordinates': [453, 224, 643, 473], 'label': 'Time Stick', 'confidence': 0.9931594133377075}
 # DEBUG:cd_fsod_test:    From 3.json: {'coordinates': [453, 224, 643, 473], 'label': 'Time Stick', 'confidence': 0.9931594133377075}
-# 2025-05-13 20:18:05,989 - INFO - Generated 62 output files
-# INFO:cd_fsod_test:Generated 62 output files
-# 2025-05-13 20:18:05,989 - DEBUG - Output files: ['frame_0049.jpg', 'frame_0045.jpg', 'frame_0014.jpg', 'frame_0025.jpg', 'frame_0051.jpg', 'frame_0039.jpg', 'frame_0030.jpg', 'frame_0008.jpg', 'frame_0002.jpg', 'frame_0042.jpg']
-# DEBUG:cd_fsod_test:Output files: ['frame_0049.jpg', 'frame_0045.jpg', 'frame_0014.jpg', 'frame_0025.jpg', 'frame_0051.jpg', 'frame_0039.jpg', 'frame_0030.jpg', 'frame_0008.jpg', 'frame_0002.jpg', 'frame_0042.jpg']
-# 2025-05-13 20:18:05,989 - INFO - ================================================================================
+# 2025-05-13 22:33:56,950 - DEBUG -   Object #2 (TVA Uniform) first detected at frame 13
+# DEBUG:cd_fsod_test:  Object #2 (TVA Uniform) first detected at frame 13
+# 2025-05-13 22:33:56,951 - DEBUG -     From 13.json: {'coordinates': [374, 115, 604, 490], 'label': 'TVA Uniform', 'confidence': 0.966902494430542}
+# DEBUG:cd_fsod_test:    From 13.json: {'coordinates': [374, 115, 604, 490], 'label': 'TVA Uniform', 'confidence': 0.966902494430542}
+# 2025-05-13 22:33:56,951 - DEBUG -   Object #3 (Sylvie's horned headpiece) first detected at frame 18
+# DEBUG:cd_fsod_test:  Object #3 (Sylvie's horned headpiece) first detected at frame 18
+# 2025-05-13 22:33:56,951 - DEBUG -     From 18.json: {'coordinates': [322, 128, 481, 202], 'label': "Sylvie's horned headpiece", 'confidence': 0.9855985045433044}
+# DEBUG:cd_fsod_test:    From 18.json: {'coordinates': [322, 128, 481, 202], 'label': "Sylvie's horned headpiece", 'confidence': 0.9855985045433044}
+# 2025-05-13 22:33:56,951 - INFO - Generated 6 output files
+# INFO:cd_fsod_test:Generated 6 output files
+# 2025-05-13 22:33:56,951 - DEBUG - Output files: ['object_frame_mapping.json', 'tracking_summary.json', 'first_detections', 'cd_fsod_test_20250513_223201.log', 'tracking_results.json', 'object_masks']
+# DEBUG:cd_fsod_test:Output files: ['object_frame_mapping.json', 'tracking_summary.json', 'first_detections', 'cd_fsod_test_20250513_223201.log', 'tracking_results.json', 'object_masks']
+# 2025-05-13 22:33:56,951 - INFO - ================================================================================
 # INFO:cd_fsod_test:================================================================================
-# 2025-05-13 20:18:05,989 - INFO - CD-FSOD Integration Test Completed Successfully
+# 2025-05-13 22:33:56,951 - INFO - CD-FSOD Integration Test Completed Successfully
 # INFO:cd_fsod_test:CD-FSOD Integration Test Completed Successfully
-# 2025-05-13 20:18:05,989 - INFO - Total processing time: 48.00 seconds
-# INFO:cd_fsod_test:Total processing time: 48.00 seconds
-# 2025-05-13 20:18:05,989 - INFO - Results saved to: ./cd_fsod_results
+# 2025-05-13 22:33:56,951 - INFO - Total processing time: 115.18 seconds
+# INFO:cd_fsod_test:Total processing time: 115.18 seconds
+# 2025-05-13 22:33:56,952 - INFO - Results saved to: ./cd_fsod_results
 # INFO:cd_fsod_test:Results saved to: ./cd_fsod_results
-# 2025-05-13 20:18:05,989 - INFO - ================================================================================
+# 2025-05-13 22:33:56,952 - INFO - ================================================================================
 # INFO:cd_fsod_test:================================================================================
-# ^C

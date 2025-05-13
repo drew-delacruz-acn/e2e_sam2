@@ -387,14 +387,17 @@ class ObjectTrackingPipeline:
             if new_objects_in_this_frame:
                 print(f"Found {len(new_objects_in_this_frame)} new objects in frame {frame_idx}, running propagation...")
                 try:
-                    result = self.sam_wrapper.propagate_masks(objects_to_track=new_objects_in_this_frame)
-                    print(f"DEBUG: propagate_masks(objects_to_track={new_objects_in_this_frame}) returned type: {type(result)}")
+                    print(f"Running propagation for object {obj_id}...")
+                    result = self.sam_wrapper.propagate_masks(objects_to_track=[obj_id])
+                    print(f"DEBUG: propagate_masks(objects_to_track={obj_id}) returned type: {type(result)}")
                     if isinstance(result, tuple):
-                        print(f"DEBUG: propagate_masks(objects_to_track={new_objects_in_this_frame}) tuple length: {len(result)}")
-                        segments = result[0]
+                        print(f"DEBUG: propagate_masks(objects_to_track={obj_id}) tuple length: {len(result)}")
+                        segments, boxes_by_frame = result
                     else:
-                        print(f"DEBUG: propagate_masks(objects_to_track={new_objects_in_this_frame}) value: {result}")
+                        print(f"DEBUG: propagate_masks(objects_to_track={obj_id}) value: {result}")
                         segments = result
+                        boxes_by_frame = {}  # Initialize empty dict if no boxes returned
+                    
                     # Store all propagation results
                     for frame_idx, masks in segments.items():
                         if frame_idx not in self.propagation_results:
@@ -409,9 +412,9 @@ class ObjectTrackingPipeline:
                             pixel_count = self._count_mask_pixels(mask)
                             quality_status = "HIGH QUALITY" if pixel_count >= self.mask_quality_threshold else "LOW QUALITY" if pixel_count > 0 else "EMPTY"
                             print(f"  Frame {frame_idx}: Object #{obj_id} mask statistics - sum: {pixel_count} pixels - {quality_status}")
-                        
+                    
                     # If we also have boxes_by_frame, store those too
-                    if 'boxes_by_frame' in locals():
+                    if isinstance(boxes_by_frame, dict) and boxes_by_frame:
                         for frame_idx, boxes in boxes_by_frame.items():
                             if frame_idx not in self.boxes_by_frame:
                                 self.boxes_by_frame[frame_idx] = {}
@@ -424,12 +427,30 @@ class ObjectTrackingPipeline:
                                 if isinstance(boxes[obj_id], dict) and boxes[obj_id].get("is_fallback", False):
                                     print(f"  Frame {frame_idx}: Object #{obj_id} using FALLBACK BOX")
                     
+                    # NEW CODE: Update tracked_objects with all boxes from propagation
+                    all_boxes = []
+                    for frame_idx in sorted(boxes_by_frame.keys()):
+                        if obj_id in boxes_by_frame[frame_idx]:
+                            box_data = boxes_by_frame[frame_idx][obj_id]
+                            if isinstance(box_data, dict):
+                                box = box_data["box"]
+                                all_boxes.append(box)
+                                print(f"Adding box for frame {frame_idx} to object {obj_id}: {box}")
+                            else:
+                                all_boxes.append(box_data)
+                                print(f"Adding raw box for frame {frame_idx} to object {obj_id}: {box_data}")
+                    
+                    # Store all boxes in the tracked_objects entry for this object
+                    if all_boxes:
+                        print(f"Updating object {obj_id} with {len(all_boxes)} boxes from mask propagation")
+                        # Replace the initial detection boxes with the full set of propagated boxes
+                        self.tracked_objects[obj_id]["boxes"] = all_boxes
+                
                     print(f"Successfully propagated masks for object {obj_id}, available in {len(segments)} frames")
-                except Exception as propagate_error:
-                    print(f"ERROR in propagate_masks call: {propagate_error}")
+                except Exception as e:
+                    print(f"Error during propagation for object {obj_id}: {e}")
                     import traceback
                     print(f"Propagation error traceback: {traceback.format_exc()}")
-                    raise propagate_error  # Re-raise to outer exception handler
                     
             # Store updated object data
             self.tracked_objects[obj_id] = obj_data
@@ -477,11 +498,8 @@ class ObjectTrackingPipeline:
             streamlined_results["objects"][str(obj_id)] = {
                 "id": obj_id,
                 "class": obj_data["class"],
-                "first_detected": obj_data["first_detected"],
-                "last_seen": obj_data["last_seen"],
-                "boxes": obj_data["boxes"],  # Keep bounding boxes (needed for analysis)
-                "confidence": obj_data["confidence"]
-                # Exclude: masks, embeddings, quality_stats (in mapping file)
+                "boxes": obj_data["boxes"]  # Keep only the ID, class, and boxes
+                # Removed: first_detected, last_seen, confidence
             }
         
         # Save streamlined tracking results
@@ -1163,101 +1181,69 @@ class ObjectTrackingPipeline:
             # Run propagation just for this object
             try:
                 print(f"Running propagation for object {obj_id}...")
+                result = self.sam_wrapper.propagate_masks(objects_to_track=[obj_id])
+                print(f"DEBUG: propagate_masks(objects_to_track={obj_id}) returned type: {type(result)}")
+                if isinstance(result, tuple):
+                    print(f"DEBUG: propagate_masks(objects_to_track={obj_id}) tuple length: {len(result)}")
+                    segments, boxes_by_frame = result
+                else:
+                    print(f"DEBUG: propagate_masks(objects_to_track={obj_id}) value: {result}")
+                    segments = result
+                    boxes_by_frame = {}  # Initialize empty dict if no boxes returned
                 
-                try:
-                    # Call propagate_masks with detailed debug logging
-                    result = self.sam_wrapper.propagate_masks(objects_to_track=[obj_id])
+                # Store all propagation results
+                for frame_idx, masks in segments.items():
+                    if frame_idx not in self.propagation_results:
+                        self.propagation_results[frame_idx] = {}
                     
-                    # Detailed logging of return value
-                    print(f"DEBUG: propagate_masks returned type: {type(result)}")
+                    # Only copy if the propagation returned masks for this object
+                    if obj_id in masks:
+                        self.propagation_results[frame_idx][obj_id] = masks[obj_id]
+                        
+                        # Analyze mask quality
+                        mask = masks[obj_id]
+                        pixel_count = self._count_mask_pixels(mask)
+                        quality_status = "HIGH QUALITY" if pixel_count >= self.mask_quality_threshold else "LOW QUALITY" if pixel_count > 0 else "EMPTY"
+                        print(f"  Frame {frame_idx}: Object #{obj_id} mask statistics - sum: {pixel_count} pixels - {quality_status}")
                     
-                    if isinstance(result, tuple):
-                        print(f"DEBUG: propagate_masks tuple length: {len(result)}")
-                        # Handle both 2-element and 3-element tuples
-                        if len(result) == 2:
-                            segments, boxes_by_frame = result
-                            print(f"DEBUG: Unpacked 2-element tuple - segments ({len(segments)} frames) and boxes ({len(boxes_by_frame)} frames)")
-                            # Log empty mask statistics if available
-                            valid_count = 0
-                            empty_count = 0
-                            fallback_count = 0
+                # If we also have boxes_by_frame, store those too
+                if isinstance(boxes_by_frame, dict) and boxes_by_frame:
+                    for frame_idx, boxes in boxes_by_frame.items():
+                        if frame_idx not in self.boxes_by_frame:
+                            self.boxes_by_frame[frame_idx] = {}
+                        
+                        # Only copy if boxes exist for this object
+                        if obj_id in boxes:
+                            self.boxes_by_frame[frame_idx][obj_id] = boxes[obj_id]
                             
-                            # Count valid vs empty frames
-                            for frame_idx, frame_boxes in boxes_by_frame.items():
-                                for box_obj_id, box_data in frame_boxes.items():
-                                    if isinstance(box_data, dict) and box_data.get("is_fallback", False):
-                                        fallback_count += 1
-                                    else:
-                                        valid_count += 1
-                            
-                            print(f"DEBUG: Box statistics - {valid_count} valid boxes, {fallback_count} fallback boxes")
+                            # Check and log if it's a fallback box
+                            if isinstance(boxes[obj_id], dict) and boxes[obj_id].get("is_fallback", False):
+                                print(f"  Frame {frame_idx}: Object #{obj_id} using FALLBACK BOX")
+                
+                # NEW CODE: Update tracked_objects with all boxes from propagation
+                all_boxes = []
+                for frame_idx in sorted(boxes_by_frame.keys()):
+                    if obj_id in boxes_by_frame[frame_idx]:
+                        box_data = boxes_by_frame[frame_idx][obj_id]
+                        if isinstance(box_data, dict):
+                            box = box_data["box"]
+                            all_boxes.append(box)
+                            print(f"Adding box for frame {frame_idx} to object {obj_id}: {box}")
                         else:
-                            print(f"DEBUG: Unexpected tuple length: {len(result)}, attempting to use first element")
-                            segments = result[0]
-                    else:
-                        print(f"DEBUG: Result is not a tuple, trying to use directly as segments dictionary")
-                        segments = result
-                    
-                    # Extra checking to make sure 'segments' is something we can work with
-                    if not isinstance(segments, dict):
-                        print(f"ERROR: segments is not a dictionary but a {type(segments).__name__}")
-                        raise TypeError(f"Expected dictionary for segments but got {type(segments).__name__}")
-                        
-                    print(f"DEBUG: Segments contains {len(segments)} frames")
-                    for frame_idx in list(segments.keys())[:3]:  # Just show first 3 frames
-                        print(f"DEBUG: Frame {frame_idx} has {len(segments[frame_idx])} objects")
-                        # Check for empty masks
-                        for seg_obj_id, mask in segments[frame_idx].items():
-                            if isinstance(mask, np.ndarray):
-                                if np.sum(mask) == 0:
-                                    print(f"DEBUG: Empty mask detected in frame {frame_idx} for object {seg_obj_id}")
+                            all_boxes.append(box_data)
+                            print(f"Adding raw box for frame {frame_idx} to object {obj_id}: {box_data}")
                 
-                    # Store all propagation results
-                    for frame_idx, masks in segments.items():
-                        if frame_idx not in self.propagation_results:
-                            self.propagation_results[frame_idx] = {}
-                        
-                        # Only copy if the propagation returned masks for this object
-                        if obj_id in masks:
-                            self.propagation_results[frame_idx][obj_id] = masks[obj_id]
+                # Store all boxes in the tracked_objects entry for this object
+                if all_boxes:
+                    print(f"Updating object {obj_id} with {len(all_boxes)} boxes from mask propagation")
+                    # Replace the initial detection boxes with the full set of propagated boxes
+                    self.tracked_objects[obj_id]["boxes"] = all_boxes
                 
-                            # Analyze mask quality
-                            mask = masks[obj_id]
-                            pixel_count = self._count_mask_pixels(mask)
-                            quality_status = "HIGH QUALITY" if pixel_count >= self.mask_quality_threshold else "LOW QUALITY" if pixel_count > 0 else "EMPTY"
-                            print(f"  Frame {frame_idx}: Object #{obj_id} mask statistics - sum: {pixel_count} pixels - {quality_status}")
-                    
-                    # If we also have boxes_by_frame, store those too
-                    if 'boxes_by_frame' in locals():
-                        for frame_idx, boxes in boxes_by_frame.items():
-                            if frame_idx not in self.boxes_by_frame:
-                                self.boxes_by_frame[frame_idx] = {}
-                            
-                            # Only copy if boxes exist for this object
-                            if obj_id in boxes:
-                                self.boxes_by_frame[frame_idx][obj_id] = boxes[obj_id]
-                                
-                                # Check and log if it's a fallback box
-                                if isinstance(boxes[obj_id], dict) and boxes[obj_id].get("is_fallback", False):
-                                    print(f"  Frame {frame_idx}: Object #{obj_id} using FALLBACK BOX")
-                    
-                    print(f"Successfully propagated masks for object {obj_id}, available in {len(segments)} frames")
-                except Exception as propagate_error:
-                    print(f"ERROR in propagate_masks call: {propagate_error}")
-                    import traceback
-                    print(f"Propagation error traceback: {traceback.format_exc()}")
-                    raise propagate_error  # Re-raise to outer exception handler
+                print(f"Successfully propagated masks for object {obj_id}, available in {len(segments)} frames")
             except Exception as e:
                 print(f"Error during propagation for object {obj_id}: {e}")
-                print("Using fallback approach: copying initial mask to other frames")
-                
-                # Use the initial mask for all frames where this object is present
-                last_frame = obj_data["last_seen"]
-                for f_idx in range(first_frame_idx, last_frame + 1):
-                    if f_idx not in self.propagation_results:
-                        self.propagation_results[f_idx] = {}
-                    self.propagation_results[f_idx][obj_id] = obj_data["masks"][0]
-                print(f"Applied initial mask for object {obj_id} to frames {first_frame_idx} through {last_frame}")
+                import traceback
+                print(f"Propagation error traceback: {traceback.format_exc()}")
 
             # Store updated object data
             self.tracked_objects[obj_id] = obj_data
@@ -1305,11 +1291,8 @@ class ObjectTrackingPipeline:
             streamlined_results["objects"][str(obj_id)] = {
                 "id": obj_id,
                 "class": obj_data["class"],
-                "first_detected": obj_data["first_detected"],
-                "last_seen": obj_data["last_seen"],
-                "boxes": obj_data["boxes"],  # Keep bounding boxes (needed for analysis)
-                "confidence": obj_data["confidence"]
-                # Exclude: masks, embeddings, quality_stats (in mapping file)
+                "boxes": obj_data["boxes"]  # Keep only the ID, class, and boxes
+                # Removed: first_detected, last_seen, confidence
             }
         
         # Save streamlined tracking results

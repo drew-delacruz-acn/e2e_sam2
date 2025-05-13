@@ -440,11 +440,32 @@ class ObjectTrackingPipeline:
                                 all_boxes.append(box_data)
                                 print(f"Adding raw box for frame {frame_idx} to object {obj_id}: {box_data}")
                     
-                    # Store all boxes in the tracked_objects entry for this object
-                    if all_boxes:
-                        print(f"Updating object {obj_id} with {len(all_boxes)} boxes from mask propagation")
-                        # Replace the initial detection boxes with the full set of propagated boxes
+                    # Add logging to debug the tracked_objects dictionary
+                    print(f"DEBUG: tracked_objects keys before update: {list(self.tracked_objects.keys())}")
+                    print(f"DEBUG: Is object {obj_id} in tracked_objects? {obj_id in self.tracked_objects}")
+                    print(f"DEBUG: Number of boxes collected for object {obj_id}: {len(all_boxes)}")
+                    
+                    # Only update if we have boxes
+                    if not all_boxes:
+                        print(f"WARNING: No boxes collected for object {obj_id}, skipping tracked_objects update")
+                        continue
+                    
+                    # Update tracked_objects with the new boxes, with proper error handling
+                    if obj_id in self.tracked_objects:
                         self.tracked_objects[obj_id]["boxes"] = all_boxes
+                        print(f"Successfully updated boxes for object {obj_id}")
+                    else:
+                        # Create the object entry if it doesn't exist
+                        print(f"Object {obj_id} not found in tracked_objects. Creating entry.")
+                        self.tracked_objects[obj_id] = {
+                            "id": obj_id,
+                            "class": obj_data["class"],  # Use the class from the original detected object
+                            "first_detected": obj_data["first_detected"],  # Use the original detection frame
+                            "last_seen": frame_idx,
+                            "confidence": obj_data.get("confidence", [1.0])[0] if isinstance(obj_data.get("confidence"), list) else obj_data.get("confidence", 1.0),
+                            "boxes": all_boxes
+                        }
+                        print(f"Created new entry for object {obj_id}")
                 
                     print(f"Successfully propagated masks for object {obj_id}, available in {len(segments)} frames")
                 except Exception as e:
@@ -452,8 +473,15 @@ class ObjectTrackingPipeline:
                     import traceback
                     print(f"Propagation error traceback: {traceback.format_exc()}")
                     
-            # Store updated object data
-            self.tracked_objects[obj_id] = obj_data
+            # Store updated object data only if it doesn't exist yet
+            print(f"DEBUG: After propagation - Is object {obj_id} in tracked_objects? {obj_id in self.tracked_objects}")
+            if obj_id not in self.tracked_objects:
+                print(f"Adding object {obj_id} to tracked_objects after propagation")
+                self.tracked_objects[obj_id] = obj_data
+            else:
+                print(f"Object {obj_id} already exists in tracked_objects, keeping existing entry")
+                
+            # Always update the results dict
             results["object_tracks"][obj_id] = obj_data
         
         # Generate visualizations for all frames
@@ -1233,11 +1261,32 @@ class ObjectTrackingPipeline:
                             all_boxes.append(box_data)
                             print(f"Adding raw box for frame {frame_idx} to object {obj_id}: {box_data}")
                 
-                # Store all boxes in the tracked_objects entry for this object
-                if all_boxes:
-                    print(f"Updating object {obj_id} with {len(all_boxes)} boxes from mask propagation")
-                    # Replace the initial detection boxes with the full set of propagated boxes
+                # Add logging to debug the tracked_objects dictionary
+                print(f"DEBUG: tracked_objects keys before update: {list(self.tracked_objects.keys())}")
+                print(f"DEBUG: Is object {obj_id} in tracked_objects? {obj_id in self.tracked_objects}")
+                print(f"DEBUG: Number of boxes collected for object {obj_id}: {len(all_boxes)}")
+                
+                # Only update if we have boxes
+                if not all_boxes:
+                    print(f"WARNING: No boxes collected for object {obj_id}, skipping tracked_objects update")
+                    continue
+                
+                # Update tracked_objects with the new boxes, with proper error handling
+                if obj_id in self.tracked_objects:
                     self.tracked_objects[obj_id]["boxes"] = all_boxes
+                    print(f"Successfully updated boxes for object {obj_id}")
+                else:
+                    # Create the object entry if it doesn't exist
+                    print(f"Object {obj_id} not found in tracked_objects. Creating entry.")
+                    self.tracked_objects[obj_id] = {
+                        "id": obj_id,
+                        "class": obj_data["class"],  # Use the class from the original detected object
+                        "first_detected": obj_data["first_detected"],  # Use the original detection frame
+                        "last_seen": frame_idx,
+                        "confidence": obj_data.get("confidence", [1.0])[0] if isinstance(obj_data.get("confidence"), list) else obj_data.get("confidence", 1.0),
+                        "boxes": all_boxes
+                    }
+                    print(f"Created new entry for object {obj_id}")
                 
                 print(f"Successfully propagated masks for object {obj_id}, available in {len(segments)} frames")
             except Exception as e:
@@ -1245,8 +1294,15 @@ class ObjectTrackingPipeline:
                 import traceback
                 print(f"Propagation error traceback: {traceback.format_exc()}")
 
-            # Store updated object data
-            self.tracked_objects[obj_id] = obj_data
+            # Store updated object data only if it doesn't exist yet
+            print(f"DEBUG: After propagation - Is object {obj_id} in tracked_objects? {obj_id in self.tracked_objects}")
+            if obj_id not in self.tracked_objects:
+                print(f"Adding object {obj_id} to tracked_objects after propagation")
+                self.tracked_objects[obj_id] = obj_data
+            else:
+                print(f"Object {obj_id} already exists in tracked_objects, keeping existing entry")
+                
+            # Always update the results dict
             results["object_tracks"][obj_id] = obj_data
         
         # Generate visualizations for all frames

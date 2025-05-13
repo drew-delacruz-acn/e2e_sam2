@@ -423,25 +423,14 @@ class ObjectTrackingPipeline:
                                 # Check and log if it's a fallback box
                                 if isinstance(boxes[obj_id], dict) and boxes[obj_id].get("is_fallback", False):
                                     print(f"  Frame {frame_idx}: Object #{obj_id} using FALLBACK BOX")
+                    
+                    print(f"Successfully propagated masks for object {obj_id}, available in {len(segments)} frames")
                 except Exception as e:
                     print(f"Error in propagation: {str(e)}")
                     import traceback
                     traceback.print_exc()
                     continue
                     
-                print(f"Successfully propagated masks for object {obj_id}, available in {len(segments)} frames")
-            except Exception as e:
-                print(f"Error during propagation for object {obj_id}: {e}")
-                print("Using fallback approach: copying initial mask to other frames")
-                
-                # Use the initial mask for all frames where this object is present
-                last_frame = obj_data["last_seen"]
-                for f_idx in range(frame_idx, last_frame + 1):
-                    if f_idx not in self.propagation_results:
-                        self.propagation_results[f_idx] = {}
-                    self.propagation_results[f_idx][obj_id] = obj_data["masks"][0]
-                print(f"Applied initial mask for object {obj_id} to frames {frame_idx} through {last_frame}")
-
             # Store updated object data
             self.tracked_objects[obj_id] = obj_data
             results["object_tracks"][obj_id] = obj_data
@@ -1234,13 +1223,13 @@ class ObjectTrackingPipeline:
                                 # Check and log if it's a fallback box
                                 if isinstance(boxes[obj_id], dict) and boxes[obj_id].get("is_fallback", False):
                                     print(f"  Frame {frame_idx}: Object #{obj_id} using FALLBACK BOX")
+                    
+                    print(f"Successfully propagated masks for object {obj_id}, available in {len(segments)} frames")
                 except Exception as propagate_error:
                     print(f"ERROR in propagate_masks call: {propagate_error}")
                     import traceback
                     print(f"Propagation error traceback: {traceback.format_exc()}")
                     raise propagate_error  # Re-raise to outer exception handler
-                
-                print(f"Successfully propagated masks for object {obj_id}, available in {len(segments)} frames")
             except Exception as e:
                 print(f"Error during propagation for object {obj_id}: {e}")
                 print("Using fallback approach: copying initial mask to other frames")

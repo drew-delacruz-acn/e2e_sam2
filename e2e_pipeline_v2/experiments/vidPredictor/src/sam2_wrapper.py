@@ -212,7 +212,9 @@ class SAM2VideoWrapper:
         boxes_by_frame = {}
         
         try:
-            for out_frame_idx, out_obj_ids, out_mask_logits in self.predictor.propagate_in_video(self.inference_state):
+            for item in self.predictor.propagate_in_video(self.inference_state):
+                print(f"DEBUG: propagate_in_video yielded: type={type(item)}, value={item}")
+                out_frame_idx, out_obj_ids, out_mask_logits = item
                 # Filter objects if needed
                 if objects_to_track is not None:
                     indices = [i for i, obj_id in enumerate(out_obj_ids) if obj_id in objects_to_track]
@@ -223,10 +225,8 @@ class SAM2VideoWrapper:
                 else:
                     filtered_obj_ids = out_obj_ids
                     filtered_mask_logits = out_mask_logits
-                
                 video_segments[out_frame_idx] = {}
                 boxes_by_frame[out_frame_idx] = {}
-                
                 for obj_id, mask_logit in zip(filtered_obj_ids, filtered_mask_logits):
                     # Convert logits to binary mask (torch tensor)
                     if isinstance(mask_logit, torch.Tensor):

@@ -473,7 +473,7 @@ class ObjectTrackingPipeline:
                             "class": obj_data["class"],  # Use the class from the original detected object
                             "first_detected": obj_data["first_detected"],  # Use the original detection frame
                             "last_seen": frame_idx,
-                            "confidence": obj_data.get("confidence", [1.0])[0] if isinstance(obj_data.get("confidence"), list) else obj_data.get("confidence", 1.0),
+                            "confidence": [obj_data.get("confidence", [1.0])[0] if isinstance(obj_data.get("confidence"), list) else obj_data.get("confidence", 1.0)],
                             "boxes": all_boxes,
                             "masks": obj_data.get("masks", [])  # Add masks with empty list as default
                         }
@@ -535,12 +535,17 @@ class ObjectTrackingPipeline:
         
         # Only include essential tracking data without masks
         for obj_id, obj_data in self.tracked_objects.items():
+            # Ensure masks are always a list
+            masks = obj_data.get("masks", [])
+            if not isinstance(masks, list):
+                masks = [masks]
+                
             streamlined_results["objects"][str(obj_id)] = {
                 "id": obj_id,
                 "class": obj_data["class"],
                 "boxes": obj_data["boxes"],  # Keep only the ID, class, and boxes
                 # Make sure we keep masks for visualization
-                "masks": obj_data.get("masks", [])  # Add masks back, with empty list as default
+                "masks": masks  # Always store masks as a list
                 # Removed: first_detected, last_seen, confidence
             }
         
@@ -576,43 +581,54 @@ class ObjectTrackingPipeline:
             cv2.rectangle(vis_frame, (x1, y1), (x2, y2), color_rgb, 2)
             
             # Draw mask overlay
-            mask = obj_data["masks"][-1]
-            if isinstance(mask, np.ndarray):
-                # Convert logits to binary mask if needed
-                if mask.dtype == np.float32 or mask.dtype == np.float64:
-                    mask = mask > 0
+            if "masks" in obj_data:
+                if isinstance(obj_data["masks"], list) and obj_data["masks"]:
+                    mask = obj_data["masks"][-1]
+                else:
+                    mask = obj_data["masks"]
                 
-                # Create binary mask (ensure it's 2D)
-                if len(mask.shape) > 2:
-                    mask = np.squeeze(mask)
-                
-                # Check if mask is valid
-                if mask.size == 0 or mask.ndim != 2:
-                    print(f"Warning: Invalid mask for object {obj_id}, shape: {mask.shape}")
-                    continue
-                
-                # Convert to bool and ensure shape is compatible
-                mask_bool = mask.astype(bool)
-                
-                try:
-                    # Create a colored mask image
-                    colored_mask = np.zeros_like(vis_frame)
-                    colored_mask[mask_bool] = color_rgb  # Use RGB without alpha
+                if isinstance(mask, np.ndarray):
+                    # Convert logits to binary mask if needed
+                    if mask.dtype == np.float32 or mask.dtype == np.float64:
+                        mask = mask > 0
                     
-                    # Blend the mask with the original frame
-                    alpha = 0.5
-                    vis_frame = cv2.addWeighted(colored_mask, alpha, vis_frame, 1.0, 0)
-                except Exception as e:
-                    print(f"Error applying mask for object {obj_id}: {e}")
-                    print(f"Mask shape: {mask.shape}, Mask dtype: {mask.dtype}")
-                    print(f"Vis frame shape: {vis_frame.shape}")
-                    print(f"Colored mask shape: {colored_mask.shape}")
-                    continue
+                    # Create binary mask (ensure it's 2D)
+                    if len(mask.shape) > 2:
+                        mask = np.squeeze(mask)
+                    
+                    # Check if mask is valid
+                    if mask.size == 0 or mask.ndim != 2:
+                        print(f"Warning: Invalid mask for object {obj_id}, shape: {mask.shape}")
+                        continue
+                    
+                    # Convert to bool and ensure shape is compatible
+                    mask_bool = mask.astype(bool)
+                    
+                    try:
+                        # Create a colored mask image
+                        colored_mask = np.zeros_like(vis_frame)
+                        colored_mask[mask_bool] = color_rgb  # Use RGB without alpha
+                        
+                        # Blend the mask with the original frame
+                        alpha = 0.5
+                        vis_frame = cv2.addWeighted(colored_mask, alpha, vis_frame, 1.0, 0)
+                    except Exception as e:
+                        print(f"Error applying mask for object {obj_id}: {e}")
+                        print(f"Mask shape: {mask.shape}, Mask dtype: {mask.dtype}")
+                        print(f"Vis frame shape: {vis_frame.shape}")
+                        print(f"Colored mask shape: {colored_mask.shape}")
+                        continue
             
             # Draw label
             label = f"{obj_data['class']} #{obj_id}"
-            conf = obj_data["confidence"][-1]
-            text = f"{label} ({conf:.2f})"
+            if "confidence" in obj_data:
+                if isinstance(obj_data["confidence"], list) and obj_data["confidence"]:
+                    conf = obj_data["confidence"][-1]
+                else:
+                    conf = obj_data["confidence"]
+                text = f"{label} ({conf:.2f})"
+            else:
+                text = label
             cv2.putText(vis_frame, text, (x1, y1-10), cv2.FONT_HERSHEY_SIMPLEX, 0.5, color_rgb, 2)
         
         # Return visualization (removed saving to disk)
@@ -1308,7 +1324,7 @@ class ObjectTrackingPipeline:
                         "class": obj_data["class"],  # Use the class from the original detected object
                         "first_detected": obj_data["first_detected"],  # Use the original detection frame
                         "last_seen": frame_idx,
-                        "confidence": obj_data.get("confidence", [1.0])[0] if isinstance(obj_data.get("confidence"), list) else obj_data.get("confidence", 1.0),
+                        "confidence": [obj_data.get("confidence", [1.0])[0] if isinstance(obj_data.get("confidence"), list) else obj_data.get("confidence", 1.0)],
                         "boxes": all_boxes,
                         "masks": obj_data.get("masks", [])  # Add masks with empty list as default
                     }
@@ -1370,12 +1386,17 @@ class ObjectTrackingPipeline:
         
         # Only include essential tracking data without masks
         for obj_id, obj_data in self.tracked_objects.items():
+            # Ensure masks are always a list
+            masks = obj_data.get("masks", [])
+            if not isinstance(masks, list):
+                masks = [masks]
+                
             streamlined_results["objects"][str(obj_id)] = {
                 "id": obj_id,
                 "class": obj_data["class"],
                 "boxes": obj_data["boxes"],  # Keep only the ID, class, and boxes
                 # Make sure we keep masks for visualization
-                "masks": obj_data.get("masks", [])  # Add masks back, with empty list as default
+                "masks": masks  # Always store masks as a list
                 # Removed: first_detected, last_seen, confidence
             }
         

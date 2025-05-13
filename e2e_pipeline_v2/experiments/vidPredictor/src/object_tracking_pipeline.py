@@ -754,7 +754,7 @@ class ObjectTrackingPipeline:
                 color_rgb = (int(color[0]*255), int(color[1]*255), int(color[2]*255))
                 
                 # Categorize mask quality
-                is_high_quality = pixel_count >= self.mask_quality_threshold
+                is_high_quality = pixel_count > self.mask_quality_threshold
                 
                 # Update statistics based on quality
                 if is_high_quality:
@@ -808,7 +808,7 @@ class ObjectTrackingPipeline:
                 
                 # Add quality indicators to the title
                 if not is_high_quality:
-                    title_text += f" [LOW QUALITY < {self.mask_quality_threshold}]"
+                    title_text += f" [LOW QUALITY ≤ {self.mask_quality_threshold}]"
                 if is_fallback:
                     title_text += " [FALLBACK BOX]"
                 
@@ -839,8 +839,8 @@ class ObjectTrackingPipeline:
             print(f"  Object #{obj_id} ({obj_class}) mask quality statistics:")
             print(f"    Frames processed: {stats['frames_processed']}")
             print(f"    Frames saved: {stats['frames_saved']}")
-            print(f"    High quality masks (>={self.mask_quality_threshold} pixels): {stats['high_quality_count']}")
-            print(f"    Low quality masks (1-{self.mask_quality_threshold-1} pixels): {stats['low_quality_count']}")
+            print(f"    High quality masks (>{self.mask_quality_threshold} pixels): {stats['high_quality_count']}")
+            print(f"    Low quality masks (1-{self.mask_quality_threshold} pixels): {stats['low_quality_count']}")
             print(f"    Empty masks (0 pixels): {stats['empty_mask_count']} (not saved)")
             print(f"    Fallback boxes: {stats['fallback_count']}")
             
@@ -898,7 +898,7 @@ class ObjectTrackingPipeline:
                     pixel_count = self._count_mask_pixels(mask)
                     
                     # Categorize by quality
-                    if pixel_count >= self.mask_quality_threshold:
+                    if pixel_count > self.mask_quality_threshold:
                         high_quality_frames.append(frame_idx)
                     elif pixel_count > 0:
                         low_quality_frames.append(frame_idx)
@@ -942,8 +942,8 @@ class ObjectTrackingPipeline:
         
         print(f"Object tracking quality statistics:")
         print(f"  Total objects tracked: {total_objects}")
-        print(f"  Total high quality frames (>={self.mask_quality_threshold} pixels): {total_high_quality}")
-        print(f"  Total low quality frames (1-{self.mask_quality_threshold-1} pixels): {total_low_quality}")
+        print(f"  Total high quality frames (>{self.mask_quality_threshold} pixels): {total_high_quality}")
+        print(f"  Total low quality frames (1-{self.mask_quality_threshold} pixels): {total_low_quality}")
         print(f"  Total empty mask frames (0 pixels): {total_empty} (not saved)")
         print(f"  Total fallback box frames: {total_fallback}")
         print(f"  Total saved frames (non-empty masks): {total_saved}")

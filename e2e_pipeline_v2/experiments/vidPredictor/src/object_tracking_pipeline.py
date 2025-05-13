@@ -458,16 +458,39 @@ class ObjectTrackingPipeline:
         # Save first detection frames
         self.save_first_detections(frames_dir)
         
-        # Save final results
-        with open(self.output_dir / "tracking_results.json", "w") as f:
-            json_results = self._prepare_for_json(results)
-            json.dump(json_results, f, indent=2)
-        
         # Save mapping of objects to frames they appear in
         self.save_object_frame_mapping()
         
+        # Prepare a streamlined version of tracking results without redundant data
+        streamlined_results = {
+            "metadata": {
+                "queries": text_queries,
+                "frame_count": len(frame_files),
+                "timestamp": time.strftime("%Y-%m-%d %H:%M:%S"),
+                "detector_type": self.detector_type
+            },
+            "objects": {}
+        }
+        
+        # Only include essential tracking data without masks
+        for obj_id, obj_data in self.tracked_objects.items():
+            streamlined_results["objects"][str(obj_id)] = {
+                "id": obj_id,
+                "class": obj_data["class"],
+                "first_detected": obj_data["first_detected"],
+                "last_seen": obj_data["last_seen"],
+                "boxes": obj_data["boxes"],  # Keep bounding boxes (needed for analysis)
+                "confidence": obj_data["confidence"]
+                # Exclude: masks, embeddings, quality_stats (in mapping file)
+            }
+        
+        # Save streamlined tracking results
+        with open(self.output_dir / "tracking_results.json", "w") as f:
+            json_results = self._prepare_for_json(streamlined_results)
+            json.dump(json_results, f, indent=2)
+        
         print(f"All results saved to: {self.output_dir}")
-        return results
+        return streamlined_results
     
     def _visualize_frame(self, frame, frame_idx, objects):
         """Visualize objects on frame and save to output directory"""
@@ -895,28 +918,16 @@ class ObjectTrackingPipeline:
             first_frame = obj_data.get("first_detected")
             last_frame = obj_data.get("last_seen")
             
-            # Find actual min/max frame based on all quality frames
-            all_frames = high_quality_frames + low_quality_frames + empty_mask_frames
-            actual_first_frame = min(all_frames) if all_frames else first_frame
-            actual_last_frame = max(all_frames) if all_frames else last_frame
-            
-            # Store in the mapping
+            # Store in the mapping - streamlined version with only essential data
             mapping[str(obj_id)] = {
                 "class": obj_data["class"],
                 "first_detected": first_frame,
-                "actual_first_frame": actual_first_frame,
                 "last_seen": last_frame,
-                "actual_last_frame": actual_last_frame,
                 "high_quality_frames": high_quality_frames,
                 "low_quality_frames": low_quality_frames,
                 "empty_mask_frames": empty_mask_frames,
                 "fallback_box_frames": fallback_frames,
-                "total_high_quality_frames": len(high_quality_frames),
-                "total_low_quality_frames": len(low_quality_frames),
-                "total_empty_frames": len(empty_mask_frames),
-                "total_fallback_frames": len(fallback_frames),
-                "mask_quality_threshold": self.mask_quality_threshold,
-                "saved_frames": high_quality_frames + low_quality_frames  # Only non-empty masks are saved
+                "mask_quality_threshold": self.mask_quality_threshold
             }
         
         # Write the mapping to a JSON file
@@ -924,20 +935,54 @@ class ObjectTrackingPipeline:
         with open(mapping_path, 'w') as f:
             json.dump(mapping, f, indent=2)
         
-        # Log statistics
-        total_high_quality = sum(int(data["total_high_quality_frames"]) for data in mapping.values())
-        total_low_quality = sum(int(data["total_low_quality_frames"]) for data in mapping.values())
-        total_empty = sum(int(data["total_empty_frames"]) for data in mapping.values())
-        total_fallback = sum(int(data["total_fallback_frames"]) for data in mapping.values())
+        # Log statistics - calculate on the fly from lists
+        total_objects = len(mapping)
+        total_high_quality = sum(len(data["high_quality_frames"]) for data in mapping.values())
+        total_low_quality = sum(len(data["low_quality_frames"]) for data in mapping.values())
+        total_empty = sum(len(data["empty_mask_frames"]) for data in mapping.values())
+        total_fallback = sum(len(data["fallback_box_frames"]) for data in mapping.values())
         total_saved = total_high_quality + total_low_quality
+        
         print(f"Object tracking quality statistics:")
+        print(f"  Total objects tracked: {total_objects}")
         print(f"  Total high quality frames (>={self.mask_quality_threshold} pixels): {total_high_quality}")
         print(f"  Total low quality frames (1-{self.mask_quality_threshold-1} pixels): {total_low_quality}")
         print(f"  Total empty mask frames (0 pixels): {total_empty} (not saved)")
         print(f"  Total fallback box frames: {total_fallback}")
         print(f"  Total saved frames (non-empty masks): {total_saved}")
         
-        # Verify consistency with saved mask visualizations
+        # Generate a separate summary JSON with overall statistics
+        summary = {
+            "total_objects": total_objects,
+            "total_frames_processed": len(self.propagation_results),
+            "quality_metrics": {
+                "high_quality_frames": total_high_quality,
+                "low_quality_frames": total_low_quality,
+                "empty_mask_frames": total_empty,
+                "fallback_box_frames": total_fallback,
+                "mask_quality_threshold": self.mask_quality_threshold
+            },
+            "objects": {
+                obj_id: {
+                    "class": data["class"],
+                    "frame_range": [data["first_detected"], data["last_seen"]],
+                    "quality_counts": {
+                        "high_quality": len(data["high_quality_frames"]),
+                        "low_quality": len(data["low_quality_frames"]),
+                        "empty": len(data["empty_mask_frames"]),
+                        "fallback": len(data["fallback_box_frames"])
+                    }
+                } for obj_id, data in mapping.items()
+            }
+        }
+        
+        # Save the summary
+        summary_path = self.output_dir / "tracking_summary.json"
+        with open(summary_path, 'w') as f:
+            json.dump(summary, f, indent=2)
+        print(f"Saved tracking summary to {summary_path}")
+        
+        # Verify consistency with saved mask images
         try:
             print("Verifying consistency with saved mask images...")
             consistent = True
@@ -951,8 +996,8 @@ class ObjectTrackingPipeline:
                     consistent = False
                     continue
                 
-                # Check that all quality frames have corresponding images
-                saved_frames = obj_data.get("saved_frames", [])  # Use the new saved_frames field
+                # Check that all non-empty frames have corresponding images
+                saved_frames = obj_data["high_quality_frames"] + obj_data["low_quality_frames"]
                 for frame_idx in saved_frames:
                     mask_path = mask_dir / f"frame_{frame_idx:04d}.jpg"
                     if not mask_path.exists():
@@ -1264,16 +1309,39 @@ class ObjectTrackingPipeline:
         # Save first detection frames
         self.save_first_detections(frames_dir)
         
-        # Save final results
-        with open(self.output_dir / "tracking_results.json", "w") as f:
-            json_results = self._prepare_for_json(results)
-            json.dump(json_results, f, indent=2)
-        
         # Save mapping of objects to frames they appear in
         self.save_object_frame_mapping()
         
+        # Prepare a streamlined version of tracking results without redundant data
+        streamlined_results = {
+            "metadata": {
+                "queries": text_queries,
+                "frame_count": len(frame_files),
+                "timestamp": time.strftime("%Y-%m-%d %H:%M:%S"),
+                "detector_type": self.detector_type
+            },
+            "objects": {}
+        }
+        
+        # Only include essential tracking data without masks
+        for obj_id, obj_data in self.tracked_objects.items():
+            streamlined_results["objects"][str(obj_id)] = {
+                "id": obj_id,
+                "class": obj_data["class"],
+                "first_detected": obj_data["first_detected"],
+                "last_seen": obj_data["last_seen"],
+                "boxes": obj_data["boxes"],  # Keep bounding boxes (needed for analysis)
+                "confidence": obj_data["confidence"]
+                # Exclude: masks, embeddings, quality_stats (in mapping file)
+            }
+        
+        # Save streamlined tracking results
+        with open(self.output_dir / "tracking_results.json", "w") as f:
+            json_results = self._prepare_for_json(streamlined_results)
+            json.dump(json_results, f, indent=2)
+        
         print(f"All results saved to: {self.output_dir}")
-        return results
+        return streamlined_results
 
     def _extract_frame_idx_from_path(self, frame_path):
         """

@@ -1,0 +1,27 @@
+#!/usr/bin/env python3
+import os
+import argparse
+import numpy as np
+import torch
+import matplotlib.pyplot as plt
+from PIL import Image
+import cv2
+from pathlib import Path
+import json
+from typing import Dict, List, Tuple, Union, Optional
+import time
+import re
+
+# Add natural sorting function
+def natural_sort_key(s):
+    """Key function for natural sorting"""
+    return [int(text) if text.isdigit() else text.lower() 
+            for text in re.split(r'(\d+)', str(s))]
+
+# Import our components
+from owlv2_detector import OWLv2Detector
+from cd_fsod_detector import CDFSODDetector  # Add import for CD-FSOD detector
+from sam2_wrapper import SAM2VideoWrapper
+from object_tracker import ObjectTracker
+from embedding_extractor import EmbeddingExtractor
+

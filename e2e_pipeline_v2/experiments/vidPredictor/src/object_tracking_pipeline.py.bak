@@ -39,7 +39,7 @@ class ObjectTrackingPipeline:
         min_gap_frames: int = 10,  # Min gap frames for CD-FSOD detector
         mask_quality_threshold: int = 0,  # Minimum pixel count for mask quality assessment
     ):
-        # Set device
+                # Set device
         if device is None:
             self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
         else:
@@ -425,32 +425,18 @@ class ObjectTrackingPipeline:
                                     print(f"  Frame {frame_idx}: Object #{obj_id} using FALLBACK BOX")
                     
                     print(f"Successfully propagated masks for object {obj_id}, available in {len(segments)} frames")
-                except Exception as propagate_error:
-                    print(f"ERROR in propagate_masks call: {propagate_error}")
+                except Exception as e:
+                    print(f"Error in propagation: {str(e)}")
                     import traceback
-                    print(f"Propagation error traceback: {traceback.format_exc()}")
-                    raise propagate_error  # Re-raise to outer exception handler
+                    traceback.print_exc()
+                    continue
                     
             # Store updated object data
             self.tracked_objects[obj_id] = obj_data
             results["object_tracks"][obj_id] = obj_data
         
-        # Generate visualizations for all frames
-        for i, frame_path in enumerate(frame_files):
-            # Extract the actual frame index
-            frame_idx = self._extract_frame_idx_from_path(frame_path)
-            
-            # Get visible objects for this frame
-            visible_objects = {
-                obj_id: data for obj_id, data in self.tracked_objects.items()
-                if data["first_detected"] <= frame_idx <= data["last_seen"]
-            }
-            
-            # Load the frame
-            frame = np.array(Image.open(frame_path).convert("RGB"))
-            
-            # Visualize
-            self._visualize_frame(frame=frame, frame_idx=frame_idx, objects=visible_objects)
+        # Skip generating per-frame visualizations with detection overlays
+        # This reduces the output size and keeps only the most useful information
         
         # Save per-object visualizations
         self.save_per_object_visualizations(frames_dir)
@@ -493,7 +479,7 @@ class ObjectTrackingPipeline:
         return streamlined_results
     
     def _visualize_frame(self, frame, frame_idx, objects):
-        """Visualize objects on frame and save to output directory"""
+        """Visualize objects on frame and return visualization without saving to disk"""
         # Create a copy of the frame
         vis_frame = frame.copy()
         
@@ -535,18 +521,16 @@ class ObjectTrackingPipeline:
                 mask_bool = mask.astype(bool)
                 
                 try:
-                    # Create a colored mask image
+                    # Use different visualization styles based on quality
+                    # Use normal overlay for non-empty masks
                     colored_mask = np.zeros_like(vis_frame)
                     colored_mask[mask_bool] = color_rgb  # Use RGB without alpha
                     
-                    # Blend the mask with the original frame
-                    alpha = 0.5
+                    # Blend the mask with the original frame - higher alpha for high quality
+                    alpha = 0.6 if mask.size > 0 else 0.3
                     vis_frame = cv2.addWeighted(colored_mask, alpha, vis_frame, 1.0, 0)
                 except Exception as e:
-                    print(f"Error applying mask for object {obj_id}: {e}")
-                    print(f"Mask shape: {mask.shape}, Mask dtype: {mask.dtype}")
-                    print(f"Vis frame shape: {vis_frame.shape}")
-                    print(f"Colored mask shape: {colored_mask.shape}")
+                    print(f"Error applying mask for object {obj_id} on frame {frame_idx}: {e}")
                     continue
             
             # Draw label
@@ -555,10 +539,7 @@ class ObjectTrackingPipeline:
             text = f"{label} ({conf:.2f})"
             cv2.putText(vis_frame, text, (x1, y1-10), cv2.FONT_HERSHEY_SIMPLEX, 0.5, color_rgb, 2)
         
-        # Save visualization
-        output_path = self.output_dir / f"frame_{frame_idx:04d}.jpg"
-        cv2.imwrite(str(output_path), cv2.cvtColor(vis_frame, cv2.COLOR_RGB2BGR))
-        
+        # Return visualization without saving to disk
         return vis_frame
     
     def _prepare_for_json(self, data):
@@ -710,10 +691,10 @@ class ObjectTrackingPipeline:
             
         # Process all frames in propagation results
         for frame_idx in sorted(self.propagation_results.keys()):
-            # Skip if frame is not in our frame map
-            if frame_idx not in frame_map:
-                continue
-            
+                # Skip if frame is not in our frame map
+                if frame_idx not in frame_map:
+                    continue
+                
             # Get objects that have masks in this frame
             frame_objects = self.propagation_results[frame_idx]
             
@@ -990,12 +971,12 @@ class ObjectTrackingPipeline:
             for obj_id, obj_data in mapping.items():
                 obj_class = obj_data["class"]
                 mask_dir = self.output_dir / "object_masks" / f"object_{obj_id}_{obj_class}"
-            
+                
                 if not mask_dir.exists():
                     print(f"  Warning: No mask directory for object {obj_id}")
                     consistent = False
                     continue
-            
+                
                 # Check that all non-empty frames have corresponding images
                 saved_frames = obj_data["high_quality_frames"] + obj_data["low_quality_frames"]
                 for frame_idx in saved_frames:
@@ -1003,7 +984,7 @@ class ObjectTrackingPipeline:
                     if not mask_path.exists():
                         print(f"  Warning: Missing mask image for object {obj_id} frame {frame_idx}")
                         consistent = False
-            
+                
                 # Check that empty mask frames do NOT have images
                 for frame_idx in obj_data["empty_mask_frames"]:
                     mask_path = mask_dir / f"frame_{frame_idx:04d}.jpg"
@@ -1016,7 +997,7 @@ class ObjectTrackingPipeline:
             else:
                 print("Warning: Inconsistencies found between object mapping and mask images")
         except Exception as e:
-            print(f"Error during verification: {e}")
+            print(f"Error verifying mask consistency: {e}")
         
         print(f"Saved object-to-frame mapping to {mapping_path}")
         return mapping_path
@@ -1263,8 +1244,8 @@ class ObjectTrackingPipeline:
                                 # Check and log if it's a fallback box
                                 if isinstance(boxes[obj_id], dict) and boxes[obj_id].get("is_fallback", False):
                                     print(f"  Frame {frame_idx}: Object #{obj_id} using FALLBACK BOX")
-                    
-                    print(f"Successfully propagated masks for object {obj_id}, available in {len(segments)} frames")
+                
+                print(f"Successfully propagated masks for object {obj_id}, available in {len(segments)} frames")
                 except Exception as propagate_error:
                     print(f"ERROR in propagate_masks call: {propagate_error}")
                     import traceback
@@ -1286,22 +1267,8 @@ class ObjectTrackingPipeline:
             self.tracked_objects[obj_id] = obj_data
             results["object_tracks"][obj_id] = obj_data
         
-        # Generate visualizations for all frames
-        for i, frame_path in enumerate(frame_files):
-            # Extract the actual frame index
-            frame_idx = frame_indices[i]
-            
-            # Get visible objects for this frame
-            visible_objects = {
-                obj_id: data for obj_id, data in self.tracked_objects.items()
-                if data["first_detected"] <= frame_idx <= data["last_seen"]
-            }
-            
-            # Load the frame
-            frame = np.array(Image.open(frame_path).convert("RGB"))
-            
-            # Visualize
-            self._visualize_frame(frame=frame, frame_idx=frame_idx, objects=visible_objects)
+        # Skip generating per-frame visualizations with detection overlays
+        # This reduces the output size and keeps only the most useful information
         
         # Save per-object visualizations
         self.save_per_object_visualizations(frames_dir)

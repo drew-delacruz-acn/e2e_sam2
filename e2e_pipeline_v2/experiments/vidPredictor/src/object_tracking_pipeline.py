@@ -75,6 +75,7 @@ class ObjectTrackingPipeline:
         self.tracked_objects = {}  # id -> object data
         self.next_id = 1
         self.propagation_results = {}  # Store SAM2 propagation results
+        self.boxes_by_frame = {}  # Store boxes by frame including fallbacks
         
     def _create_detector(
         self,
@@ -707,6 +708,8 @@ class ObjectTrackingPipeline:
             
             # Track how many frames we've saved
             saved_frame_count = 0
+            empty_mask_count = 0
+            fallback_count = 0
             
             # Process each frame where this object should be visible
             for frame_idx in range(first_frame, last_frame + 1):
@@ -739,6 +742,20 @@ class ObjectTrackingPipeline:
                 color = plt.cm.tab10(obj_id % 10)[:3]
                 color_rgb = (int(color[0]*255), int(color[1]*255), int(color[2]*255))
                 
+                # Check if mask is empty (all zeros)
+                is_empty_mask = False
+                if isinstance(mask, np.ndarray) and not np.any(mask):
+                    is_empty_mask = True
+                    empty_mask_count += 1
+                
+                # Check if we're using a fallback box
+                is_fallback = False
+                if hasattr(self, 'boxes_by_frame') and frame_idx in self.boxes_by_frame and obj_id in self.boxes_by_frame[frame_idx]:
+                    box_data = self.boxes_by_frame[frame_idx][obj_id]
+                    if isinstance(box_data, dict) and box_data.get("is_fallback", False):
+                        is_fallback = True
+                        fallback_count += 1
+                
                 # Apply mask overlay
                 if isinstance(mask, np.ndarray):
                     # Convert to binary mask if needed
@@ -758,21 +775,58 @@ class ObjectTrackingPipeline:
                     mask_bool = mask.astype(bool)
                     
                     try:
-                        # Create a colored mask image
-                        colored_mask = np.zeros_like(vis_frame)
-                        colored_mask[mask_bool] = color_rgb  # Use RGB without alpha
-                        
-                        # Blend the mask with the original frame
-                        alpha = 0.5
-                        vis_frame = cv2.addWeighted(colored_mask, alpha, vis_frame, 1.0, 0)
+                        # For empty masks, still show an overlay but with a different color
+                        if is_empty_mask:
+                            # Use a red color for empty masks
+                            empty_color_rgb = (255, 50, 50)  # Reddish
+                            # Create a colored mask image - use entire frame with reduced opacity
+                            colored_mask = np.zeros_like(vis_frame)
+                            # Add a red border around the frame to indicate empty mask
+                            border_size = 20
+                            colored_mask[:border_size, :] = empty_color_rgb  # Top
+                            colored_mask[-border_size:, :] = empty_color_rgb  # Bottom
+                            colored_mask[:, :border_size] = empty_color_rgb  # Left
+                            colored_mask[:, -border_size:] = empty_color_rgb  # Right
+                            
+                            # Blend the mask with the original frame
+                            alpha = 0.3
+                            vis_frame = cv2.addWeighted(colored_mask, alpha, vis_frame, 1.0, 0)
+                        else:
+                            # Normal mask visualization
+                            # Create a colored mask image
+                            colored_mask = np.zeros_like(vis_frame)
+                            colored_mask[mask_bool] = color_rgb  # Use RGB without alpha
+                            
+                            # Blend the mask with the original frame
+                            alpha = 0.5
+                            vis_frame = cv2.addWeighted(colored_mask, alpha, vis_frame, 1.0, 0)
                     except Exception as e:
                         print(f"Error applying mask for object {obj_id} on frame {frame_idx}: {e}")
                         continue
                 
                 # Add title with object info
                 title_text = f"Object #{obj_id}: {obj_data['class']}"
+                
+                # Add status indicators to the title
+                if is_empty_mask:
+                    title_text += " [EMPTY MASK]"
+                if is_fallback:
+                    title_text += " [FALLBACK BOX]"
+                
                 cv2.putText(vis_frame, title_text, (10, 30), 
                            cv2.FONT_HERSHEY_SIMPLEX, 0.8, color_rgb, 2)
+                
+                # If using fallback box, draw it
+                if is_fallback and hasattr(self, 'boxes_by_frame') and frame_idx in self.boxes_by_frame and obj_id in self.boxes_by_frame[frame_idx]:
+                    box_data = self.boxes_by_frame[frame_idx][obj_id]
+                    if isinstance(box_data, dict) and "box" in box_data:
+                        box = box_data["box"]
+                        x1, y1, x2, y2 = map(int, box)
+                        # Draw with a different color for fallback boxes
+                        fallback_color = (50, 50, 255)  # Blue for fallback
+                        cv2.rectangle(vis_frame, (x1, y1), (x2, y2), fallback_color, 3)
+                        cv2.putText(vis_frame, "FALLBACK BOX", (x1, y1-10), 
+                                   cv2.FONT_HERSHEY_SIMPLEX, 0.6, fallback_color, 2)
                 
                 # Save visualization
                 output_path = obj_dir / f"frame_{frame_idx:04d}.jpg"
@@ -780,6 +834,10 @@ class ObjectTrackingPipeline:
                 saved_frame_count += 1
             
             print(f"  Saved {saved_frame_count} visualizations for object #{obj_id} ({obj_data['class']})")
+            if empty_mask_count > 0:
+                print(f"  - Including {empty_mask_count} frames with empty masks")
+            if fallback_count > 0:
+                print(f"  - Including {fallback_count} frames with fallback boxes")
         
         print(f"All per-object mask visualizations saved to {object_masks_dir}")
 
@@ -797,14 +855,35 @@ class ObjectTrackingPipeline:
             
             # Find which frames in this range actually have masks in propagation results
             valid_frames = []
+            empty_mask_frames = []
+            fallback_frames = []
+            
             for frame_idx in range(first_frame, last_frame + 1):
-                if (frame_idx in self.propagation_results and 
-                    obj_id in self.propagation_results[frame_idx] and
-                    self.propagation_results[frame_idx][obj_id] is not None):
-                    # Check if mask is not empty
+                # Check if frame has mask
+                has_mask = (frame_idx in self.propagation_results and 
+                          obj_id in self.propagation_results[frame_idx] and
+                          self.propagation_results[frame_idx][obj_id] is not None)
+                
+                # Check if frame has box (including fallbacks)
+                has_box = False
+                is_fallback = False
+                if hasattr(self, 'boxes_by_frame') and frame_idx in self.boxes_by_frame and obj_id in self.boxes_by_frame[frame_idx]:
+                    has_box = True
+                    box_data = self.boxes_by_frame[frame_idx][obj_id]
+                    if isinstance(box_data, dict) and box_data.get("is_fallback", False):
+                        is_fallback = True
+                        fallback_frames.append(frame_idx)
+                
+                if has_mask:
+                    # Check if mask is empty (all zeros)
                     mask = self.propagation_results[frame_idx][obj_id]
                     if isinstance(mask, np.ndarray) and mask.size > 0:
-                        valid_frames.append(frame_idx)
+                        if np.any(mask):
+                            valid_frames.append(frame_idx)
+                        else:
+                            empty_mask_frames.append(frame_idx)
+                    else:
+                        empty_mask_frames.append(frame_idx)
             
             # Store in the mapping
             mapping[str(obj_id)] = {
@@ -812,13 +891,28 @@ class ObjectTrackingPipeline:
                 "first_detected": first_frame,
                 "last_seen": last_frame,
                 "valid_frames": valid_frames,
-                "total_valid_frames": len(valid_frames)
+                "empty_mask_frames": empty_mask_frames,
+                "fallback_box_frames": fallback_frames,
+                "total_valid_frames": len(valid_frames),
+                "total_empty_frames": len(empty_mask_frames),
+                "total_fallback_frames": len(fallback_frames)
             }
         
         # Write the mapping to a JSON file
         mapping_path = self.output_dir / "object_frame_mapping.json"
         with open(mapping_path, 'w') as f:
             json.dump(mapping, f, indent=2)
+        
+        # Log statistics
+        total_valid = sum(int(data["total_valid_frames"]) for data in mapping.values())
+        total_empty = sum(int(data["total_empty_frames"]) for data in mapping.values())
+        total_fallback = sum(int(data["total_fallback_frames"]) for data in mapping.values())
+        print(f"Object tracking statistics:")
+        print(f"  Total valid frames across all objects: {total_valid}")
+        print(f"  Total empty mask frames: {total_empty}")
+        print(f"  Total fallback box frames: {total_fallback}")
+        if total_valid + total_empty > 0:  # Avoid division by zero
+            print(f"  Valid frame percentage: {total_valid/(total_valid+total_empty)*100:.1f}%")
         
         # Verify consistency with saved mask images
         print("Verifying consistency with saved mask images...")
@@ -1046,7 +1140,21 @@ class ObjectTrackingPipeline:
                         # Handle both 2-element and 3-element tuples
                         if len(result) == 2:
                             segments, boxes_by_frame = result
-                            print(f"DEBUG: Unpacked 2-element tuple - segments ({len(segments)} frames) and boxes")
+                            print(f"DEBUG: Unpacked 2-element tuple - segments ({len(segments)} frames) and boxes ({len(boxes_by_frame)} frames)")
+                            # Log empty mask statistics if available
+                            valid_count = 0
+                            empty_count = 0
+                            fallback_count = 0
+                            
+                            # Count valid vs empty frames
+                            for frame_idx, frame_boxes in boxes_by_frame.items():
+                                for box_obj_id, box_data in frame_boxes.items():
+                                    if isinstance(box_data, dict) and box_data.get("is_fallback", False):
+                                        fallback_count += 1
+                                    else:
+                                        valid_count += 1
+                            
+                            print(f"DEBUG: Box statistics - {valid_count} valid boxes, {fallback_count} fallback boxes")
                         else:
                             print(f"DEBUG: Unexpected tuple length: {len(result)}, attempting to use first element")
                             segments = result[0]
@@ -1062,6 +1170,11 @@ class ObjectTrackingPipeline:
                     print(f"DEBUG: Segments contains {len(segments)} frames")
                     for frame_idx in list(segments.keys())[:3]:  # Just show first 3 frames
                         print(f"DEBUG: Frame {frame_idx} has {len(segments[frame_idx])} objects")
+                        # Check for empty masks
+                        for seg_obj_id, mask in segments[frame_idx].items():
+                            if isinstance(mask, np.ndarray):
+                                if np.sum(mask) == 0:
+                                    print(f"DEBUG: Empty mask detected in frame {frame_idx} for object {seg_obj_id}")
                 
                 except Exception as propagate_error:
                     print(f"ERROR in propagate_masks call: {propagate_error}")
@@ -1075,6 +1188,15 @@ class ObjectTrackingPipeline:
                         self.propagation_results[f_idx] = {}
                     if obj_id in frame_segments:
                         self.propagation_results[f_idx][obj_id] = frame_segments[obj_id]
+                
+                # Store the box data if available
+                if 'boxes_by_frame' in locals():
+                    for f_idx, frame_boxes in boxes_by_frame.items():
+                        if obj_id in frame_boxes:
+                            if f_idx not in self.boxes_by_frame:
+                                self.boxes_by_frame[f_idx] = {}
+                            self.boxes_by_frame[f_idx][obj_id] = frame_boxes[obj_id]
+                
                 print(f"Successfully propagated masks for object {obj_id}, available in {len(segments)} frames")
             except Exception as e:
                 print(f"Error during propagation for object {obj_id}: {e}")

@@ -283,6 +283,13 @@ class SAM2VideoWrapper:
                             print(f"Constructed reasonable default 3-element tuple from unexpected tuple length {len(item)}")
                             yield (frame_idx, obj_ids, mask_logits)
             
+            # Track stats about empty masks for logging
+            empty_mask_count = 0
+            valid_mask_count = 0
+            
+            # Store last valid boxes for each object as fallback
+            last_valid_boxes = {}
+            
             # Use our robust iterator wrapper
             frame_count = 0
             for out_frame_idx, out_obj_ids, out_mask_logits in robust_iterator_wrapper(iterator):
@@ -325,28 +332,77 @@ class SAM2VideoWrapper:
                     video_segments[out_frame_idx][obj_id] = mask.cpu().numpy()
                     
                     try:
-                        # Use torchvision.ops.masks_to_boxes (expects (N, H, W))
-                        print(f"Creating bounding box from mask shape: {mask.shape}")
-                        expanded_mask = mask[None] if mask.ndim < 3 else mask
-                        print(f"Expanded mask shape: {expanded_mask.shape}")
+                        # Check if mask has any True values (non-empty)
+                        mask_sum = mask.sum().item()
+                        print(f"Mask statistics - sum: {mask_sum}, shape: {mask.shape}")
                         
-                        box = torchvision.ops.masks_to_boxes(expanded_mask)[0].cpu().tolist()
-                        print(f"Generated box: {box}")
-                        
-                        # Only save if the box is valid (non-zero area)
-                        if box[0] < box[2] and box[1] < box[3]:
-                            boxes_by_frame[out_frame_idx][obj_id] = {
-                                "box": box,
-                                "class": obj_id
-                            }
+                        if mask_sum > 0:
+                            # Only create box if mask contains some True values
+                            print(f"Creating bounding box from mask with {mask_sum} true pixels")
+                            
+                            # Use torchvision.ops.masks_to_boxes (expects (N, H, W))
+                            expanded_mask = mask[None] if mask.ndim < 3 else mask
+                            print(f"Expanded mask shape: {expanded_mask.shape}")
+                            
+                            box = torchvision.ops.masks_to_boxes(expanded_mask)[0].cpu().tolist()
+                            print(f"Generated box: {box}")
+                            
+                            # Only save if the box is valid (non-zero area)
+                            if box[0] < box[2] and box[1] < box[3]:
+                                boxes_by_frame[out_frame_idx][obj_id] = {
+                                    "box": box,
+                                    "class": obj_id
+                                }
+                                # Update last valid box for this object
+                                last_valid_boxes[obj_id] = box
+                                valid_mask_count += 1
+                            else:
+                                print(f"Warning: Empty or invalid box for object {obj_id} in frame {out_frame_idx}, box: {box}")
+                                empty_mask_count += 1
                         else:
-                            print(f"Warning: Empty or invalid box for object {obj_id} in frame {out_frame_idx}, box: {box}")
+                            # Empty mask - use fallback
+                            empty_mask_count += 1
+                            print(f"Empty mask detected for object {obj_id} in frame {out_frame_idx} (no true pixels)")
+                            
+                            # Use fallback: last valid box if available
+                            if obj_id in last_valid_boxes:
+                                fallback_box = last_valid_boxes[obj_id]
+                                print(f"Using fallback box from previous frame: {fallback_box}")
+                                boxes_by_frame[out_frame_idx][obj_id] = {
+                                    "box": fallback_box,
+                                    "class": obj_id,
+                                    "is_fallback": True
+                                }
+                            else:
+                                # No previous valid box - create a default centered box
+                                if mask.ndim >= 2:
+                                    h, w = mask.shape[-2], mask.shape[-1]
+                                    # Create a small default box in the center (10% of frame dimensions)
+                                    center_x, center_y = w // 2, h // 2
+                                    box_w, box_h = w // 10, h // 10
+                                    default_box = [
+                                        center_x - box_w//2, 
+                                        center_y - box_h//2,
+                                        center_x + box_w//2, 
+                                        center_y + box_h//2
+                                    ]
+                                    print(f"No previous valid box, using centered default: {default_box}")
+                                    boxes_by_frame[out_frame_idx][obj_id] = {
+                                        "box": default_box,
+                                        "class": obj_id,
+                                        "is_fallback": True,
+                                        "is_default": True
+                                    }
+                
                     except Exception as box_error:
                         print(f"Error creating box for object {obj_id}: {box_error}")
+                        # Track the error
+                        empty_mask_count += 1
                     
                 print(f"Processed frame {out_frame_idx}, found {len(filtered_obj_ids)} objects")
             
             print(f"Finished propagation, processed {frame_count} frames, found {len(video_segments)} frames with objects")
+            print(f"Mask statistics: {valid_mask_count} valid masks, {empty_mask_count} empty masks")
             return video_segments, boxes_by_frame
         
         except Exception as e:

@@ -382,18 +382,14 @@ class ObjectTrackingPipeline:
             if new_objects_in_this_frame:
                 print(f"Found {len(new_objects_in_this_frame)} new objects in frame {frame_idx}, running propagation...")
                 try:
-                    # First attempt: Try to propagate only the new objects
-                    segments = self.sam_wrapper.propagate_masks(objects_to_track=new_objects_in_this_frame)
-                    
+                    segments, _ = self.sam_wrapper.propagate_masks(objects_to_track=new_objects_in_this_frame)
                     # Update the propagation results with the new segments
                     for f_idx, frame_segments in segments.items():
                         if f_idx not in self.propagation_results:
                             self.propagation_results[f_idx] = {}
-                        
                         # Add new object segments to existing propagation results
                         for obj_id, mask in frame_segments.items():
                             self.propagation_results[f_idx][obj_id] = mask
-                    
                     print(f"Propagated masks for {len(new_objects_in_this_frame)} new objects")
                 except Exception as e:
                     print(f"Error during mask propagation for new objects: {e}")
@@ -425,7 +421,7 @@ class ObjectTrackingPipeline:
                         # Run propagation for ALL objects
                         print("Running propagation for all objects after reset")
                         all_object_ids = list(self.tracked_objects.keys())
-                        segments = self.sam_wrapper.propagate_masks(objects_to_track=all_object_ids)
+                        segments, _ = self.sam_wrapper.propagate_masks(objects_to_track=all_object_ids)
                         
                         # Replace all propagation results
                         self.propagation_results = segments
@@ -1024,16 +1020,13 @@ class ObjectTrackingPipeline:
             # Run propagation just for this object
             try:
                 print(f"Running propagation for object {obj_id}...")
-                segments = self.sam_wrapper.propagate_masks(objects_to_track=[obj_id])
-                
+                segments, _ = self.sam_wrapper.propagate_masks(objects_to_track=[obj_id])
                 # Store the propagation results
                 for f_idx, frame_segments in segments.items():
                     if f_idx not in self.propagation_results:
                         self.propagation_results[f_idx] = {}
-                    
                     if obj_id in frame_segments:
                         self.propagation_results[f_idx][obj_id] = frame_segments[obj_id]
-                
                 print(f"Successfully propagated masks for object {obj_id}")
             except Exception as e:
                 print(f"Error during propagation for object {obj_id}: {e}")

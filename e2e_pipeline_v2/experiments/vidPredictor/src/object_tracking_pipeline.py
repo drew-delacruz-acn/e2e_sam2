@@ -453,6 +453,17 @@ class ObjectTrackingPipeline:
                     # Update tracked_objects with the new boxes, with proper error handling
                     if obj_id in self.tracked_objects:
                         self.tracked_objects[obj_id]["boxes"] = all_boxes
+                        # Also collect and store masks
+                        all_masks = []
+                        for frame_idx in sorted(self.propagation_results.keys()):
+                            if obj_id in self.propagation_results[frame_idx]:
+                                all_masks.append(self.propagation_results[frame_idx][obj_id])
+                        
+                        # Store masks if we have them
+                        if all_masks:
+                            self.tracked_objects[obj_id]["masks"] = all_masks
+                            print(f"Stored {len(all_masks)} masks for object {obj_id}")
+                        
                         print(f"Successfully updated boxes for object {obj_id}")
                     else:
                         # Create the object entry if it doesn't exist
@@ -463,7 +474,8 @@ class ObjectTrackingPipeline:
                             "first_detected": obj_data["first_detected"],  # Use the original detection frame
                             "last_seen": frame_idx,
                             "confidence": obj_data.get("confidence", [1.0])[0] if isinstance(obj_data.get("confidence"), list) else obj_data.get("confidence", 1.0),
-                            "boxes": all_boxes
+                            "boxes": all_boxes,
+                            "masks": obj_data.get("masks", [])  # Add masks with empty list as default
                         }
                         print(f"Created new entry for object {obj_id}")
                 
@@ -526,7 +538,9 @@ class ObjectTrackingPipeline:
             streamlined_results["objects"][str(obj_id)] = {
                 "id": obj_id,
                 "class": obj_data["class"],
-                "boxes": obj_data["boxes"]  # Keep only the ID, class, and boxes
+                "boxes": obj_data["boxes"],  # Keep only the ID, class, and boxes
+                # Make sure we keep masks for visualization
+                "masks": obj_data.get("masks", [])  # Add masks back, with empty list as default
                 # Removed: first_detected, last_seen, confidence
             }
         
@@ -1274,6 +1288,17 @@ class ObjectTrackingPipeline:
                 # Update tracked_objects with the new boxes, with proper error handling
                 if obj_id in self.tracked_objects:
                     self.tracked_objects[obj_id]["boxes"] = all_boxes
+                    # Also collect and store masks
+                    all_masks = []
+                    for frame_idx in sorted(self.propagation_results.keys()):
+                        if obj_id in self.propagation_results[frame_idx]:
+                            all_masks.append(self.propagation_results[frame_idx][obj_id])
+                    
+                    # Store masks if we have them
+                    if all_masks:
+                        self.tracked_objects[obj_id]["masks"] = all_masks
+                        print(f"Stored {len(all_masks)} masks for object {obj_id}")
+                    
                     print(f"Successfully updated boxes for object {obj_id}")
                 else:
                     # Create the object entry if it doesn't exist
@@ -1284,7 +1309,8 @@ class ObjectTrackingPipeline:
                         "first_detected": obj_data["first_detected"],  # Use the original detection frame
                         "last_seen": frame_idx,
                         "confidence": obj_data.get("confidence", [1.0])[0] if isinstance(obj_data.get("confidence"), list) else obj_data.get("confidence", 1.0),
-                        "boxes": all_boxes
+                        "boxes": all_boxes,
+                        "masks": obj_data.get("masks", [])  # Add masks with empty list as default
                     }
                     print(f"Created new entry for object {obj_id}")
                 
@@ -1347,7 +1373,9 @@ class ObjectTrackingPipeline:
             streamlined_results["objects"][str(obj_id)] = {
                 "id": obj_id,
                 "class": obj_data["class"],
-                "boxes": obj_data["boxes"]  # Keep only the ID, class, and boxes
+                "boxes": obj_data["boxes"],  # Keep only the ID, class, and boxes
+                # Make sure we keep masks for visualization
+                "masks": obj_data.get("masks", [])  # Add masks back, with empty list as default
                 # Removed: first_detected, last_seen, confidence
             }
         

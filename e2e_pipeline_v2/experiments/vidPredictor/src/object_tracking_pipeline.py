@@ -1033,21 +1033,49 @@ class ObjectTrackingPipeline:
             # Run propagation just for this object
             try:
                 print(f"Running propagation for object {obj_id}...")
-                result = self.sam_wrapper.propagate_masks(objects_to_track=[obj_id])
-                print(f"DEBUG: propagate_masks(objects_to_track=[{obj_id}]) returned type: {type(result)}")
-                if isinstance(result, tuple):
-                    print(f"DEBUG: propagate_masks(objects_to_track=[{obj_id}]) tuple length: {len(result)}")
-                    segments = result[0]
-                else:
-                    print(f"DEBUG: propagate_masks(objects_to_track=[{obj_id}]) value: {result}")
-                    segments = result
+                
+                try:
+                    # Call propagate_masks with detailed debug logging
+                    result = self.sam_wrapper.propagate_masks(objects_to_track=[obj_id])
+                    
+                    # Detailed logging of return value
+                    print(f"DEBUG: propagate_masks returned type: {type(result)}")
+                    
+                    if isinstance(result, tuple):
+                        print(f"DEBUG: propagate_masks tuple length: {len(result)}")
+                        # Handle both 2-element and 3-element tuples
+                        if len(result) == 2:
+                            segments, boxes_by_frame = result
+                            print(f"DEBUG: Unpacked 2-element tuple - segments ({len(segments)} frames) and boxes")
+                        else:
+                            print(f"DEBUG: Unexpected tuple length: {len(result)}, attempting to use first element")
+                            segments = result[0]
+                    else:
+                        print(f"DEBUG: Result is not a tuple, trying to use directly as segments dictionary")
+                        segments = result
+                    
+                    # Extra checking to make sure 'segments' is something we can work with
+                    if not isinstance(segments, dict):
+                        print(f"ERROR: segments is not a dictionary but a {type(segments).__name__}")
+                        raise TypeError(f"Expected dictionary for segments but got {type(segments).__name__}")
+                        
+                    print(f"DEBUG: Segments contains {len(segments)} frames")
+                    for frame_idx in list(segments.keys())[:3]:  # Just show first 3 frames
+                        print(f"DEBUG: Frame {frame_idx} has {len(segments[frame_idx])} objects")
+                
+                except Exception as propagate_error:
+                    print(f"ERROR in propagate_masks call: {propagate_error}")
+                    import traceback
+                    print(f"Propagation error traceback: {traceback.format_exc()}")
+                    raise propagate_error  # Re-raise to outer exception handler
+                
                 # Store the propagation results
                 for f_idx, frame_segments in segments.items():
                     if f_idx not in self.propagation_results:
                         self.propagation_results[f_idx] = {}
                     if obj_id in frame_segments:
                         self.propagation_results[f_idx][obj_id] = frame_segments[obj_id]
-                print(f"Successfully propagated masks for object {obj_id}")
+                print(f"Successfully propagated masks for object {obj_id}, available in {len(segments)} frames")
             except Exception as e:
                 print(f"Error during propagation for object {obj_id}: {e}")
                 print("Using fallback approach: copying initial mask to other frames")
@@ -1058,7 +1086,8 @@ class ObjectTrackingPipeline:
                     if f_idx not in self.propagation_results:
                         self.propagation_results[f_idx] = {}
                     self.propagation_results[f_idx][obj_id] = obj_data["masks"][0]
-            
+                print(f"Applied initial mask for object {obj_id} to frames {first_frame_idx} through {last_frame}")
+
             # Store updated object data
             self.tracked_objects[obj_id] = obj_data
             results["object_tracks"][obj_id] = obj_data

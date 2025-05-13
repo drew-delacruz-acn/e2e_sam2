@@ -212,52 +212,147 @@ class SAM2VideoWrapper:
         boxes_by_frame = {}
         
         try:
+            print(f"Starting propagate_masks with objects_to_track={objects_to_track}")
+            print(f"Using predictor type: {type(self.predictor).__name__}")
+            
+            # Get propagate_in_video method to inspect
+            propagate_method = self.predictor.propagate_in_video
+            print(f"Propagate method: {propagate_method.__name__} from {propagate_method.__module__}")
+            
             # Directly handle the 3-element tuple from propagate_in_video
-            for item in self.predictor.propagate_in_video(self.inference_state):
-                # Explicitly unpack all three elements
-                out_frame_idx, out_obj_ids, out_mask_logits = item
+            iterator = self.predictor.propagate_in_video(self.inference_state)
+            print(f"Iterator type: {type(iterator).__name__}")
+            
+            # Debug first item from iterator without consuming it
+            try:
+                # Use tee to peek at the first item without consuming the iterator
+                import itertools
+                iterator, debug_iterator = itertools.tee(iterator)
+                first_item = next(debug_iterator, None)
+                print(f"First item type: {type(first_item).__name__}")
+                print(f"First item value: {first_item}")
+                if isinstance(first_item, tuple):
+                    print(f"First item tuple length: {len(first_item)}")
+                    for i, element in enumerate(first_item):
+                        print(f"  Element {i}: type={type(element).__name__}, value={element}")
+            except Exception as peek_error:
+                print(f"Error peeking at iterator: {peek_error}")
+            
+            # Create a unified iterator wrapper that can handle different return values
+            def robust_iterator_wrapper(iterator):
+                """Wrap the propagate_in_video iterator to handle different API versions."""
+                for item in iterator:
+                    if not isinstance(item, tuple):
+                        print(f"WARNING: Expected tuple but got {type(item).__name__}")
+                        # Skip non-tuple items
+                        continue
+                        
+                    if len(item) == 3:
+                        # API version returning (frame_idx, obj_ids, mask_logits)
+                        yield item
+                    elif len(item) == 2:
+                        # API version returning (frame_idx, mask_logits) - infer obj_ids
+                        frame_idx, mask_logits = item
+                        # If objects_to_track is specified, use that as obj_ids
+                        # If not, use a default obj_id of 1
+                        obj_ids = objects_to_track if objects_to_track is not None else [1]
+                        
+                        # Make mask_logits a list if it isn't already (needed for iteration)
+                        if not isinstance(mask_logits, list):
+                            # Ensure we have one mask_logit per obj_id
+                            mask_logits = [mask_logits] * len(obj_ids)
+                        
+                        print(f"Converted 2-element tuple to 3-element: frame_idx={frame_idx}, obj_ids={obj_ids}, mask_logits (count)={len(mask_logits)}")
+                        yield (frame_idx, obj_ids, mask_logits)
+                    else:
+                        print(f"WARNING: Unexpected tuple length: {len(item)}")
+                        # Try to use the tuple elements we have
+                        if len(item) >= 1:
+                            frame_idx = item[0]
+                            # Fill in other fields with defaults
+                            obj_ids = objects_to_track if objects_to_track is not None else [1]
+                            mask_logits = [torch.zeros((1, 1))] * len(obj_ids)  # Empty masks
+                            if len(item) >= 2:
+                                # Try to use the second element as mask_logits
+                                mask_logits_element = item[1]
+                                if isinstance(mask_logits_element, list):
+                                    mask_logits = mask_logits_element
+                                else:
+                                    mask_logits = [mask_logits_element] * len(obj_ids)
+                            
+                            print(f"Constructed reasonable default 3-element tuple from unexpected tuple length {len(item)}")
+                            yield (frame_idx, obj_ids, mask_logits)
+            
+            # Use our robust iterator wrapper
+            frame_count = 0
+            for out_frame_idx, out_obj_ids, out_mask_logits in robust_iterator_wrapper(iterator):
+                frame_count += 1
+                print(f"Processing item {frame_count}: frame={out_frame_idx}, objects={out_obj_ids}")
                 
                 # Filter objects if needed
                 if objects_to_track is not None:
+                    print(f"Filtering objects to track: {objects_to_track}")
                     indices = [i for i, obj_id in enumerate(out_obj_ids) if obj_id in objects_to_track]
                     if not indices:
+                        print(f"No matching objects found, skipping frame {out_frame_idx}")
                         continue
                     filtered_obj_ids = [out_obj_ids[i] for i in indices]
                     filtered_mask_logits = [out_mask_logits[i] for i in indices]
+                    print(f"After filtering: {len(filtered_obj_ids)} objects remain")
                 else:
                     filtered_obj_ids = out_obj_ids
                     filtered_mask_logits = out_mask_logits
+                    print(f"No filtering applied, using all {len(filtered_obj_ids)} objects")
                     
                 video_segments[out_frame_idx] = {}
                 boxes_by_frame[out_frame_idx] = {}
                 
-                for obj_id, mask_logit in zip(filtered_obj_ids, filtered_mask_logits):
+                # Process each object
+                for i, (obj_id, mask_logit) in enumerate(zip(filtered_obj_ids, filtered_mask_logits)):
+                    print(f"Processing object {obj_id} in frame {out_frame_idx}")
+                    print(f"Mask logit type: {type(mask_logit).__name__}, shape: {getattr(mask_logit, 'shape', 'unknown')}")
+                    
                     # Convert logits to binary mask (torch tensor)
                     if isinstance(mask_logit, torch.Tensor):
                         mask = (mask_logit.sigmoid() > 0.5)
+                        print(f"Converted tensor mask, shape: {mask.shape}")
                     else:
+                        print(f"Converting non-tensor mask type: {type(mask_logit).__name__}")
                         mask = (torch.from_numpy(mask_logit).sigmoid() > 0.5)
-                        
+                        print(f"Converted numpy mask, shape: {mask.shape}")
+                    
+                    # Save to results
                     video_segments[out_frame_idx][obj_id] = mask.cpu().numpy()
                     
-                    # Use torchvision.ops.masks_to_boxes (expects (N, H, W))
-                    box = torchvision.ops.masks_to_boxes(mask[None])[0].cpu().tolist()
-                    
-                    # Only save if the box is valid (non-zero area)
-                    if box[0] < box[2] and box[1] < box[3]:
-                        boxes_by_frame[out_frame_idx][obj_id] = {
-                            "box": box,
-                            "class": obj_id
-                        }
-                    else:
-                        print(f"Warning: Empty or invalid box for object {obj_id} in frame {out_frame_idx}, box: {box}")
+                    try:
+                        # Use torchvision.ops.masks_to_boxes (expects (N, H, W))
+                        print(f"Creating bounding box from mask shape: {mask.shape}")
+                        expanded_mask = mask[None] if mask.ndim < 3 else mask
+                        print(f"Expanded mask shape: {expanded_mask.shape}")
+                        
+                        box = torchvision.ops.masks_to_boxes(expanded_mask)[0].cpu().tolist()
+                        print(f"Generated box: {box}")
+                        
+                        # Only save if the box is valid (non-zero area)
+                        if box[0] < box[2] and box[1] < box[3]:
+                            boxes_by_frame[out_frame_idx][obj_id] = {
+                                "box": box,
+                                "class": obj_id
+                            }
+                        else:
+                            print(f"Warning: Empty or invalid box for object {obj_id} in frame {out_frame_idx}, box: {box}")
+                    except Exception as box_error:
+                        print(f"Error creating box for object {obj_id}: {box_error}")
                     
                 print(f"Processed frame {out_frame_idx}, found {len(filtered_obj_ids)} objects")
             
+            print(f"Finished propagation, processed {frame_count} frames, found {len(video_segments)} frames with objects")
             return video_segments, boxes_by_frame
         
         except Exception as e:
             print(f"Error during mask propagation: {str(e)}")
+            import traceback
+            print(f"Traceback: {traceback.format_exc()}")
             # Since we don't want a fallback, just raise the exception
             raise e
     

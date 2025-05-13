@@ -214,6 +214,9 @@ class SAM2VideoWrapper:
         try:
             for item in self.predictor.propagate_in_video(self.inference_state):
                 print(f"DEBUG: propagate_in_video yielded: type={type(item)}, value={item}")
+                if not isinstance(item, tuple) or len(item) != 3:
+                    print(f"ERROR: Unexpected output from propagate_in_video: {item}")
+                    continue
                 out_frame_idx, out_obj_ids, out_mask_logits = item
                 # Filter objects if needed
                 if objects_to_track is not None:

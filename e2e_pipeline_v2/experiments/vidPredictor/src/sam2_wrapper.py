@@ -212,34 +212,11 @@ class SAM2VideoWrapper:
         boxes_by_frame = {}
         
         try:
-            # Wrap propagate_in_video in a try-except block to handle unpacking errors
-            def safe_propagate():
-                try:
-                    for item in self.predictor.propagate_in_video(self.inference_state):
-                        print(f"DEBUG: propagate_in_video yielded: type={type(item)}, value={item}")
-                        if isinstance(item, tuple) and len(item) == 3:
-                            # The expected format: (frame_idx, obj_ids, mask_logits)
-                            yield item
-                        else:
-                            print(f"WARNING: Unexpected output format from propagate_in_video: {item}")
-                            # Try to handle other formats
-                            if isinstance(item, tuple):
-                                if len(item) == 2:
-                                    # If there are only 2 items, it might be (frame_idx, mask_logits)
-                                    frame_idx, mask_logits = item
-                                    # Since we don't have object IDs, use default [1]
-                                    obj_ids = [1]
-                                    yield (frame_idx, obj_ids, mask_logits)
-                                else:
-                                    print(f"ERROR: Unable to handle tuple of length {len(item)}")
-                            else:
-                                print(f"ERROR: Unable to handle non-tuple return value")
-                except Exception as inner_e:
-                    print(f"ERROR in propagate_in_video iterator: {str(inner_e)}")
-                    # Don't re-raise, just stop iteration
-                    return
+            # Directly handle the 3-element tuple from propagate_in_video
+            for item in self.predictor.propagate_in_video(self.inference_state):
+                # Explicitly unpack all three elements
+                out_frame_idx, out_obj_ids, out_mask_logits = item
                 
-            for out_frame_idx, out_obj_ids, out_mask_logits in safe_propagate():
                 # Filter objects if needed
                 if objects_to_track is not None:
                     indices = [i for i, obj_id in enumerate(out_obj_ids) if obj_id in objects_to_track]
@@ -250,17 +227,22 @@ class SAM2VideoWrapper:
                 else:
                     filtered_obj_ids = out_obj_ids
                     filtered_mask_logits = out_mask_logits
+                    
                 video_segments[out_frame_idx] = {}
                 boxes_by_frame[out_frame_idx] = {}
+                
                 for obj_id, mask_logit in zip(filtered_obj_ids, filtered_mask_logits):
                     # Convert logits to binary mask (torch tensor)
                     if isinstance(mask_logit, torch.Tensor):
                         mask = (mask_logit.sigmoid() > 0.5)
                     else:
                         mask = (torch.from_numpy(mask_logit).sigmoid() > 0.5)
+                        
                     video_segments[out_frame_idx][obj_id] = mask.cpu().numpy()
+                    
                     # Use torchvision.ops.masks_to_boxes (expects (N, H, W))
                     box = torchvision.ops.masks_to_boxes(mask[None])[0].cpu().tolist()
+                    
                     # Only save if the box is valid (non-zero area)
                     if box[0] < box[2] and box[1] < box[3]:
                         boxes_by_frame[out_frame_idx][obj_id] = {
@@ -269,73 +251,15 @@ class SAM2VideoWrapper:
                         }
                     else:
                         print(f"Warning: Empty or invalid box for object {obj_id} in frame {out_frame_idx}, box: {box}")
+                    
                 print(f"Processed frame {out_frame_idx}, found {len(filtered_obj_ids)} objects")
             
-            # If we didn't get any results but there was no error, use fallback
-            if not video_segments:
-                print("No frames were processed during propagation. Using fallback approach.")
-                return self._fallback_propagation(objects_to_track)
-            
             return video_segments, boxes_by_frame
+        
         except Exception as e:
             print(f"Error during mask propagation: {str(e)}")
-            print("Using fallback approach for propagation")
-            return self._fallback_propagation(objects_to_track)
-        
-    def _fallback_propagation(self, objects_to_track=None):
-        """Fallback method for propagation when the main method fails"""
-        print("Executing fallback propagation strategy")
-        video_segments = {}
-        boxes_by_frame = {}
-        
-        # Get the initial masks for each object
-        if not hasattr(self.predictor, 'get_frame_id_to_obj_id_to_mask'):
-            print("WARNING: Predictor doesn't have frame-to-obj mapping method, using empty results")
-            return video_segments, boxes_by_frame
-        
-        # Try to get existing masks
-        try:
-            frame_to_obj_to_mask = self.predictor.get_frame_id_to_obj_id_to_mask(self.inference_state)
-            
-            # Filter objects if needed
-            if objects_to_track is not None:
-                filtered_frame_to_obj = {}
-                for frame_idx, obj_to_mask in frame_to_obj_to_mask.items():
-                    filtered_obj_to_mask = {obj_id: mask for obj_id, mask in obj_to_mask.items() 
-                                           if obj_id in objects_to_track}
-                    if filtered_obj_to_mask:
-                        filtered_frame_to_obj[frame_idx] = filtered_obj_to_mask
-                frame_to_obj_to_mask = filtered_frame_to_obj
-            
-            # Process each frame and object
-            for frame_idx, obj_to_mask in frame_to_obj_to_mask.items():
-                video_segments[frame_idx] = {}
-                boxes_by_frame[frame_idx] = {}
-                
-                for obj_id, mask_logit in obj_to_mask.items():
-                    # Process mask
-                    if isinstance(mask_logit, torch.Tensor):
-                        mask = (mask_logit.sigmoid() > 0.5)
-                    else:
-                        mask = (torch.from_numpy(mask_logit).sigmoid() > 0.5)
-                        
-                    video_segments[frame_idx][obj_id] = mask.cpu().numpy()
-                    
-                    # Create box if possible
-                    try:
-                        box = torchvision.ops.masks_to_boxes(mask[None])[0].cpu().tolist()
-                        if box[0] < box[2] and box[1] < box[3]:
-                            boxes_by_frame[frame_idx][obj_id] = {
-                                "box": box,
-                                "class": obj_id
-                            }
-                    except Exception as box_error:
-                        print(f"Error creating box from mask: {box_error}")
-        except Exception as e:
-            print(f"Error during fallback propagation: {e}")
-            # Return empty results
-        
-        return video_segments, boxes_by_frame
+            # Since we don't want a fallback, just raise the exception
+            raise e
     
     def visualize_frame(self, frame_idx, mask=None, obj_ids=None, box=None, output_dir=None):
         """Visualize a frame with segmentation mask and prompts"""

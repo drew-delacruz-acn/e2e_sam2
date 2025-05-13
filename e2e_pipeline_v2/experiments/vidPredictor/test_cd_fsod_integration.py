@@ -269,6 +269,9 @@ def main():
     parser.add_argument("--debug", action="store_true", help="Enable debug logging")
     parser.add_argument("--no-enhanced-logging", action="store_true", help="Disable enhanced detector logging")
     
+    # Mask quality options
+    parser.add_argument("--mask-quality-threshold", type=int, default=0, help="Minimum pixel count for high-quality masks (default: 0)")
+    
     args = parser.parse_args()
     
     # Create output directory
@@ -295,6 +298,7 @@ def main():
     logger.info(f"  - Using separate objects: {args.separate_objects}")
     logger.info(f"  - Debug mode: {args.debug}")
     logger.info(f"  - Enhanced logging: {not args.no_enhanced_logging}")
+    logger.info(f"  - Mask quality threshold: {args.mask_quality_threshold}")
     
     # Check for files in the frames directory
     try:
@@ -357,10 +361,17 @@ def main():
             confidence_threshold=args.confidence,
             detector_type="cd_fsod",  # Use CD-FSOD detector
             cd_fsod_path=args.cd_fsod_path,
-            min_gap_frames=args.min_gap_frames
+            min_gap_frames=args.min_gap_frames,
+            mask_quality_threshold=args.mask_quality_threshold
         )
         logger.info("Pipeline initialized successfully")
         logger.info(f"Pipeline initialization took {time.time() - start_time:.2f} seconds")
+        
+        # Log mask quality threshold approach
+        logger.info("=" * 50)
+        logger.info(f"Using mask quality-based approach with threshold: {args.mask_quality_threshold} pixels")
+        logger.info("This will save all frames where mask pixel count > 0, with quality indicators")
+        logger.info("=" * 50)
     except Exception as e:
         logger.error(f"Error initializing pipeline: {e}")
         import traceback

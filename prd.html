@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Predictor (vidPredictor) - Product Requirements Document</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 20px;
+        }
+        h1 {
+            color: #2c3e50;
+            font-size: 2.5em;
+        }
+        h2 {
+            color: #3498db;
+            font-size: 1.8em;
+            margin-top: 30px;
+            border-bottom: 1px solid #e0e0e0;
+            padding-bottom: 10px;
+        }
+        h3 {
+            color: #2c3e50;
+            font-size: 1.4em;
+            margin-top: 25px;
+        }
+        p, ul, ol {
+            margin-bottom: 20px;
+        }
+        ul, ol {
+            padding-left: 25px;
+        }
+        .mermaid {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        th, td {
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+        th {
+            background-color: #3498db;
+            color: white;
+        }
+        tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        code {
+            background-color: #f8f9fa;
+            padding: 2px 5px;
+            border-radius: 3px;
+            font-family: 'Courier New', Courier, monospace;
+        }
+        .section {
+            margin-bottom: 40px;
+        }
+        .highlight {
+            background-color: #fffacd;
+            padding: 15px;
+            border-left: 5px solid #ffd700;
+            margin-bottom: 20px;
+        }
+        .feature {
+            background-color: #e8f4f8;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+        }
+        .status {
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 3px;
+            font-weight: bold;
+            margin-left: 10px;
+        }
+        .complete {
+            background-color: #d4edda;
+            color: #155724;
+        }
+        .in-progress {
+            background-color: #fff3cd;
+            color: #856404;
+        }
+        .planned {
+            background-color: #d1ecf1;
+            color: #0c5460;
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            mermaid.initialize({startOnLoad: true});
+        });
+    </script>
+</head>
+<body>
+    <header>
+        <h1>vidPredictor</h1>
+        <p>Video Object Detection, Segmentation, and Tracking Pipeline</p>
+        <p><em>Version 1.0 - Product Requirements Document</em></p>
+    </header>
+
+    <div class="section">
+        <h2>1. Introduction</h2>
+        <p>The vidPredictor module provides an end-to-end pipeline for object detection, segmentation, and tracking in video content. The system integrates multiple state-of-the-art computer vision models and techniques to perform these tasks efficiently and accurately.</p>
+        
+        <div class="highlight">
+            <h3>Core Capabilities</h3>
+            <ul>
+                <li>Multi-model object detection using OWLv2 and CD-FSOD</li>
+                <li>Precise object segmentation with SAM2 (Segment Anything Model version 2)</li>
+                <li>Temporal consistency through video object tracking</li>
+                <li>Support for custom text-based object queries</li>
+                <li>Visualization tools for analysis and debugging</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>2. System Architecture</h2>
+        <p>The vidPredictor uses a modular architecture with individual components responsible for specific tasks:</p>
+
+        <div class="mermaid">
+            graph TD
+                A[Input Video Frames] --> B[Object Detection]
+                B --> |Bounding Boxes| C[Segmentation]
+                C --> |Object Masks| D[Object Tracking]
+                D --> E[Results Visualization]
+                
+                subgraph "Detection Options"
+                    B1[OWLv2 Detector] --> B
+                    B2[CD-FSOD Detector] --> B
+                end
+                
+                subgraph "Core Pipeline Components"
+                    C1[SAM2 Video Wrapper] --> C
+                    D1[Object Tracker] --> D
+                    F1[Embedding Extractor] --> D
+                end
+        </div>
+
+        <h3>2.1 Component Breakdown</h3>
+        <table>
+            <tr>
+                <th>Component</th>
+                <th>Description</th>
+                <th>Status</th>
+            </tr>
+            <tr>
+                <td>Object Tracking Pipeline</td>
+                <td>Orchestrates the entire workflow from detection to tracking</td>
+                <td><span class="status complete">Complete</span></td>
+            </tr>
+            <tr>
+                <td>OWLv2 Detector</td>
+                <td>Open-vocabulary detector supporting text-based queries</td>
+                <td><span class="status complete">Complete</span></td>
+            </tr>
+            <tr>
+                <td>CD-FSOD Detector</td>
+                <td>Context-Driven Few-Shot Object Detector</td>
+                <td><span class="status complete">Complete</span></td>
+            </tr>
+            <tr>
+                <td>SAM2 Video Wrapper</td>
+                <td>Wrapper for Segment Anything Model 2 for video segmentation</td>
+                <td><span class="status complete">Complete</span></td>
+            </tr>
+            <tr>
+                <td>Object Tracker</td>
+                <td>Handles object identity preservation across video frames</td>
+                <td><span class="status complete">Complete</span></td>
+            </tr>
+            <tr>
+                <td>Embedding Extractor</td>
+                <td>Extracts visual embeddings for object matching</td>
+                <td><span class="status complete">Complete</span></td>
+            </tr>
+            <tr>
+                <td>Frame Loader</td>
+                <td>Utility for loading video frames from disk</td>
+                <td><span class="status complete">Complete</span></td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="section">
+        <h2>3. Data Flow</h2>
+        <p>The following diagram illustrates how data flows through the vidPredictor system:</p>
+
+        <div class="mermaid">
+            sequenceDiagram
+                participant User
+                participant Pipeline as ObjectTrackingPipeline
+                participant Detector as Object Detector (OWLv2/CD-FSOD)
+                participant SAM2 as SAM2 Video Wrapper
+                participant Tracker as Object Tracker
+                participant Results as Results Storage
+
+                User->>Pipeline: process_video(frames_dir, text_queries)
+                Pipeline->>Detector: detect(first_frame, text_queries)
+                Detector-->>Pipeline: detection results (boxes, labels, scores)
+                
+                loop For each detection
+                    Pipeline->>SAM2: add_box(frame_idx, obj_id, box)
+                    SAM2-->>Pipeline: mask for object
+                    Pipeline->>Tracker: track object (store ID, class, box, mask)
+                end
+                
+                Pipeline->>SAM2: propagate_masks(object_ids)
+                SAM2-->>Pipeline: propagated masks for all frames
+                
+                Pipeline->>Results: store tracked objects & visualizations
+                Pipeline-->>User: results (object tracks, visualizations)
+        </div>
+
+        <h3>3.1 Processing Steps</h3>
+        <ol>
+            <li>Load video frames from the specified directory</li>
+            <li>Initialize models (detector, SAM2, tracker)</li>
+            <li>Detect objects in the first frame based on text queries</li>
+            <li>For each detected object:
+                <ul>
+                    <li>Generate a segmentation mask using SAM2</li>
+                    <li>Extract visual embeddings for tracking</li>
+                    <li>Assign a unique ID to the object</li>
+                </ul>
+            </li>
+            <li>Propagate segmentation masks to all video frames</li>
+            <li>Associate objects across frames to maintain consistent IDs</li>
+            <li>Generate visualizations and structured results output</li>
+        </ol>
+    </div>
+
+    <div class="section">
+        <h2>4. Key Features</h2>
+
+        <div class="feature">
+            <h3>4.1 Multi-Model Object Detection</h3>
+            <p>The system supports multiple detection backends:</p>
+            <ul>
+                <li><strong>OWLv2 Detector:</strong> Google's open-vocabulary detector that can find objects based on arbitrary text descriptions</li>
+                <li><strong>CD-FSOD Detector:</strong> Context-Driven Few-Shot Object Detector that can work with limited examples</li>
+            </ul>
+        </div>
+
+        <div class="feature">
+            <h3>4.2 SAM2 Integration</h3>
+            <p>Integration with Segment Anything Model 2 provides high-quality object segmentation:</p>
+            <ul>
+                <li>Converts detection boxes into precise segmentation masks</li>
+                <li>Propagates masks across video frames for temporal consistency</li>
+                <li>Provides mask visualization capabilities</li>
+            </ul>
+        </div>
+
+        <div class="feature">
+            <h3>4.3 Object Tracking</h3>
+            <p>The system maintains object identity throughout the video:</p>
+            <ul>
+                <li>Uses visual embeddings to track objects across frames</li>
+                <li>Assigns consistent IDs to the same object across the video</li>
+                <li>Handles object persistence and reappearance</li>
+            </ul>
+        </div>
+
+        <div class="feature">
+            <h3>4.4 Visualization & Results Storage</h3>
+            <p>Comprehensive visualization and data export capabilities:</p>
+            <ul>
+                <li>Per-frame visualizations with detection boxes and segmentation masks</li>
+                <li>Per-object visualizations showing the tracked object across frames</li>
+                <li>Structured JSON output for further analysis</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>5. Technical Requirements</h2>
+
+        <h3>5.1 Dependencies</h3>
+        <table>
+            <tr>
+                <th>Component</th>
+                <th>Dependencies</th>
+            </tr>
+            <tr>
+                <td>Core Pipeline</td>
+                <td>PyTorch, NumPy, PIL, Matplotlib</td>
+            </tr>
+            <tr>
+                <td>OWLv2 Detector</td>
+                <td>Transformers (Hugging Face), PyTorch</td>
+            </tr>
+            <tr>
+                <td>SAM2 Video Wrapper</td>
+                <td>SAM2 library, PyTorch</td>
+            </tr>
+            <tr>
+                <td>CD-FSOD Detector</td>
+                <td>JSON processing libraries</td>
+            </tr>
+        </table>
+
+        <h3>5.2 Hardware Requirements</h3>
+        <p>The system has been designed to run on various hardware configurations:</p>
+        <ul>
+            <li><strong>GPU:</strong> CUDA-compatible GPU for optimal performance</li>
+            <li><strong>Apple Silicon:</strong> MPS support for Mac devices with M-series chips</li>
+            <li><strong>CPU:</strong> Fallback option for environments without GPU acceleration</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>6. Usage Examples</h2>
+
+        <h3>6.1 Basic Usage</h3>
+        <pre><code>
+# Initialize pipeline
+pipeline = ObjectTrackingPipeline(
+    owlv2_checkpoint="path/to/owlv2_checkpoint.pt",
+    sam2_checkpoint="path/to/sam2_checkpoint.pt",
+    sam2_config="path/to/sam2_config.yaml",
+    output_dir="./results",
+    detector_type="owlv2"  # or "cd_fsod"
+)
+
+# Process video with queries
+pipeline.process_video(
+    frames_dir="path/to/video_frames",
+    text_queries=["person", "car", "dog"]
+)
+        </code></pre>
+
+        <h3>6.2 Using CD-FSOD Detector</h3>
+        <pre><code>
+# Initialize with CD-FSOD detector
+pipeline = ObjectTrackingPipeline(
+    owlv2_checkpoint="path/to/owlv2_checkpoint.pt",
+    sam2_checkpoint="path/to/sam2_checkpoint.pt",
+    sam2_config="path/to/sam2_config.yaml",
+    output_dir="./results",
+    detector_type="cd_fsod",
+    cd_fsod_path="path/to/cd_fsod_json_dir",
+    min_gap_frames=10
+)
+
+# Process video
+pipeline.process_video(
+    frames_dir="path/to/video_frames",
+    text_queries=["relevant", "object", "classes"]
+)
+        </code></pre>
+    </div>
+
+    <div class="section">
+        <h2>7. Testing</h2>
+        <p>The module includes several test scripts for verifying functionality:</p>
+        
+        <table>
+            <tr>
+                <th>Test Script</th>
+                <th>Description</th>
+            </tr>
+            <tr>
+                <td>test_sam2_integration.py</td>
+                <td>Tests SAM2 integration with frame segmentation and mask propagation</td>
+            </tr>
+            <tr>
+                <td>test_cd_fsod_integration.py</td>
+                <td>Tests CD-FSOD detector integration with the object tracking pipeline</td>
+            </tr>
+            <tr>
+                <td>test_cd_fsod_detector.py</td>
+                <td>Standalone tests for the CD-FSOD detector component</td>
+            </tr>
+            <tr>
+                <td>test_owlv2.py</td>
+                <td>Standalone tests for the OWLv2 detector</td>
+            </tr>
+            <tr>
+                <td>test_object_tracker.py</td>
+                <td>Tests for the object tracker component</td>
+            </tr>
+            <tr>
+                <td>test_embedding_generator.py</td>
+                <td>Tests for the embedding extractor component</td>
+            </tr>
+            <tr>
+                <td>test_fsod_continuity.py</td>
+                <td>Tests object tracking continuity with the CD-FSOD detector</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="section">
+        <h2>8. Future Enhancements</h2>
+
+        <div class="mermaid">
+            gantt
+                title Future Development Roadmap
+                dateFormat  YYYY-MM-DD
+                
+                section Performance
+                GPU Optimization         :done, perf1, 2023-01-01, 30d
+                Multi-GPU Support        :active, perf2, after perf1, 45d
+                Batched Processing       :planned, perf3, after perf2, 30d
+                
+                section Features
+                Real-time Processing     :active, feat1, 2023-02-15, 60d
+                More Detection Models    :planned, feat2, after feat1, 45d
+                Interactive Interface    :planned, feat3, after feat2, 60d
+                
+                section Integration
+                Video Input Support      :active, int1, 2023-03-01, 30d
+                Cloud Service API        :planned, int2, after int1, 60d
+                Mobile Integration       :planned, int3, after int2, 90d
+        </div>
+
+        <h3>8.1 Planned Features</h3>
+        <ul>
+            <li><strong>Real-time Video Processing:</strong> Adapt pipeline for real-time video stream processing</li>
+            <li><strong>Additional Detection Models:</strong> Support for more detector backends like DETR, YOLO, etc.</li>
+            <li><strong>Model Switching:</strong> Ability to dynamically switch or combine detector models</li>
+            <li><strong>Interactive Visualization:</strong> Web-based interface for visualizing and interacting with results</li>
+            <li><strong>Multi-GPU Support:</strong> Distribute processing across multiple GPUs for better performance</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>9. Conclusion</h2>
+        <p>The vidPredictor module provides a comprehensive solution for video object detection, segmentation, and tracking. Its modular architecture allows for flexibility in implementation and future expansion, while the integration of state-of-the-art models ensures high-quality results.</p>
+        
+        <p>The combination of OWLv2/CD-FSOD for detection, SAM2 for segmentation, and custom tracking mechanisms creates a powerful pipeline for video analysis tasks. The system's ability to maintain object identity across frames while providing precise segmentation masks makes it suitable for a wide range of applications in video analytics, surveillance, content creation, and more.</p>
+    </div>
+
+    <footer style="margin-top: 50px; text-align: center; color: #777; border-top: 1px solid #e0e0e0; padding-top: 20px;">
+        <p>&copy; 2023-2024 vidPredictor Team | PRD Version 1.0</p>
+    </footer>
+</body>
+</html> 

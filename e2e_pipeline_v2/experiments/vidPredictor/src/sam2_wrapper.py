@@ -4,6 +4,7 @@ import torch
 import matplotlib.pyplot as plt
 import os
 from PIL import Image
+import torchvision
 
 # Import SAM2 functionality
 from sam2.build_sam import build_sam2_video_predictor
@@ -200,16 +201,17 @@ class SAM2VideoWrapper:
             objects_to_track: List of object IDs to track (default: all objects)
             
         Returns:
-            Dictionary mapping frame indices to segmentation results
+            Tuple: (video_segments, boxes_by_frame)
+                video_segments: Dictionary mapping frame indices to segmentation results
+                boxes_by_frame: Dictionary mapping frame indices to bounding boxes per object
         """
         if self.inference_state is None:
             raise ValueError("Must call set_video before propagating masks")
             
-        # Run propagation through all frames - correctly handling the iterator
-        video_segments = {}  # video_segments contains the per-frame segmentation results
+        video_segments = {}
+        boxes_by_frame = {}
         
         try:
-            # Iterate through the propagation results
             for out_frame_idx, out_obj_ids, out_mask_logits in self.predictor.propagate_in_video(self.inference_state):
                 # Filter objects if needed
                 if objects_to_track is not None:
@@ -222,22 +224,30 @@ class SAM2VideoWrapper:
                     filtered_obj_ids = out_obj_ids
                     filtered_mask_logits = out_mask_logits
                 
-                # Store masks by object ID
-                video_segments[out_frame_idx] = {
-                    obj_id: self.process_mask_logits(mask_logit)
-                    for obj_id, mask_logit in zip(filtered_obj_ids, filtered_mask_logits)
-                }
-                print(f"Processed frame {out_frame_idx}, found {len(filtered_obj_ids)} objects")
+                video_segments[out_frame_idx] = {}
+                boxes_by_frame[out_frame_idx] = {}
                 
-            return video_segments
-            
+                for obj_id, mask_logit in zip(filtered_obj_ids, filtered_mask_logits):
+                    # Convert logits to binary mask (torch tensor)
+                    if isinstance(mask_logit, torch.Tensor):
+                        mask = (mask_logit.sigmoid() > 0.5)
+                    else:
+                        mask = (torch.from_numpy(mask_logit).sigmoid() > 0.5)
+                    video_segments[out_frame_idx][obj_id] = mask.cpu().numpy()
+                    # Use torchvision.ops.masks_to_boxes (expects (N, H, W))
+                    box = torchvision.ops.masks_to_boxes(mask[None])[0].cpu().tolist()
+                    # Only save if the box is valid (non-zero area)
+                    if box[0] < box[2] and box[1] < box[3]:
+                        boxes_by_frame[out_frame_idx][obj_id] = {
+                            "box": box,
+                            "class": obj_id
+                        }
+                    else:
+                        print(f"Warning: Empty or invalid box for object {obj_id} in frame {out_frame_idx}, box: {box}")
+                print(f"Processed frame {out_frame_idx}, found {len(filtered_obj_ids)} objects")
+            return video_segments, boxes_by_frame
         except Exception as e:
             print(f"Error during mask propagation: {str(e)}")
-            # Print available methods for debugging
-            print("Available methods on predictor:")
-            for method_name in dir(self.predictor):
-                if not method_name.startswith('_'):
-                    print(f"  {method_name}")
             raise e
     
     def visualize_frame(self, frame_idx, mask=None, obj_ids=None, box=None, output_dir=None):

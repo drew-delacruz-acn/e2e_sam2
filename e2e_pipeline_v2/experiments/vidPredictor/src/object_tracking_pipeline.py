@@ -228,8 +228,9 @@ class ObjectTrackingPipeline:
         if self.tracked_objects:
             print("Running mask propagation for all tracked objects...")
             object_ids = list(self.tracked_objects.keys())
-            segments = self.sam_wrapper.propagate_masks(objects_to_track=object_ids)
+            segments, boxes_by_frame = self.sam_wrapper.propagate_masks(objects_to_track=object_ids)
             self.propagation_results = segments
+            results["propagated_boxes_by_frame"] = boxes_by_frame
             print(f"Propagated masks for {len(object_ids)} objects across {len(segments)} frames")
         else:
             print("No objects to propagate")
@@ -478,7 +479,6 @@ class ObjectTrackingPipeline:
         
         # Save final results
         with open(self.output_dir / "tracking_results.json", "w") as f:
-            # Convert numpy arrays and tensors to lists
             json_results = self._prepare_for_json(results)
             json.dump(json_results, f, indent=2)
         

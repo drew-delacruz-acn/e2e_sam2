@@ -1,0 +1,138 @@
+# vidPredictor - Product Requirements Document
+
+## 1. Introduction
+The vidPredictor module provides an end-to-end pipeline for object detection, segmentation, and tracking in video content. The system integrates multiple state-of-the-art computer vision models and techniques to perform these tasks efficiently and accurately.
+
+### Core Capabilities
+- Multi-model object detection using OWLv2 and CD-FSOD
+- Precise object segmentation with SAM2 (Segment Anything Model version 2)
+- Temporal consistency through video object tracking
+- Support for custom text-based object queries
+- Visualization tools for analysis and debugging
+
+## 2. System Architecture
+The vidPredictor uses a modular architecture with individual components responsible for specific tasks:
+
+### Component Breakdown
+- Object Tracking Pipeline: Orchestrates the entire workflow from detection to tracking
+- OWLv2 Detector: Open-vocabulary detector supporting text-based queries
+- CD-FSOD Detector: Context-Driven Few-Shot Object Detector
+- SAM2 Video Wrapper: Wrapper for Segment Anything Model 2 for video segmentation
+- Object Tracker: Handles object identity preservation across video frames
+- Embedding Extractor: Extracts visual embeddings for object matching
+- Frame Loader: Utility for loading video frames from disk
+
+## 3. Data Flow
+The system follows these processing steps:
+1. Load video frames from the specified directory
+2. Initialize models (detector, SAM2, tracker)
+3. Detect objects in the first frame based on text queries
+4. For each detected object:
+   - Generate a segmentation mask using SAM2
+   - Extract visual embeddings for tracking
+   - Assign a unique ID to the object
+5. Propagate segmentation masks to all video frames
+6. Associate objects across frames to maintain consistent IDs
+7. Generate visualizations and structured results output
+
+## 4. Key Features
+
+### 4.1 Multi-Model Object Detection
+The system supports multiple detection backends:
+- OWLv2 Detector: Google's open-vocabulary detector that can find objects based on arbitrary text descriptions
+- CD-FSOD Detector: Context-Driven Few-Shot Object Detector that can work with limited examples
+
+### 4.2 SAM2 Integration
+Integration with Segment Anything Model 2 provides high-quality object segmentation:
+- Converts detection boxes into precise segmentation masks
+- Propagates masks across video frames for temporal consistency
+- Provides mask visualization capabilities
+
+### 4.3 Object Tracking
+The system maintains object identity throughout the video:
+- Uses visual embeddings to track objects across frames
+- Assigns consistent IDs to the same object across the video
+- Handles object persistence and reappearance
+
+### 4.4 Visualization & Results Storage
+Comprehensive visualization and data export capabilities:
+- Per-frame visualizations with detection boxes and segmentation masks
+- Per-object visualizations showing the tracked object across frames
+- Structured JSON output for further analysis
+
+## 5. Technical Requirements
+
+### 5.1 Dependencies
+- Core Pipeline: PyTorch, NumPy, PIL, Matplotlib
+- OWLv2 Detector: Transformers (Hugging Face), PyTorch
+- SAM2 Video Wrapper: SAM2 library, PyTorch
+- CD-FSOD Detector: JSON processing libraries
+
+### 5.2 Hardware Requirements
+The system has been designed to run on various hardware configurations:
+- GPU: CUDA-compatible GPU for optimal performance
+- Apple Silicon: MPS support for Mac devices with M-series chips
+- CPU: Fallback option for environments without GPU acceleration
+
+## 6. Usage Examples
+
+### 6.1 Basic Usage
+```python
+# Initialize pipeline
+pipeline = ObjectTrackingPipeline(
+    owlv2_checkpoint="path/to/owlv2_checkpoint.pt",
+    sam2_checkpoint="path/to/sam2_checkpoint.pt",
+    sam2_config="path/to/sam2_config.yaml",
+    output_dir="./results",
+    detector_type="owlv2"  # or "cd_fsod"
+)
+
+# Process video with queries
+pipeline.process_video(
+    frames_dir="path/to/video_frames",
+    text_queries=["person", "car", "dog"]
+)
+```
+
+### 6.2 Using CD-FSOD Detector
+```python
+# Initialize with CD-FSOD detector
+pipeline = ObjectTrackingPipeline(
+    owlv2_checkpoint="path/to/owlv2_checkpoint.pt",
+    sam2_checkpoint="path/to/sam2_checkpoint.pt",
+    sam2_config="path/to/sam2_config.yaml",
+    output_dir="./results",
+    detector_type="cd_fsod",
+    cd_fsod_path="path/to/cd_fsod_json_dir",
+    min_gap_frames=10
+)
+
+# Process video
+pipeline.process_video(
+    frames_dir="path/to/video_frames",
+    text_queries=["relevant", "object", "classes"]
+)
+```
+
+## 7. Testing
+The module includes several test scripts for verifying functionality:
+- test_sam2_integration.py: Tests SAM2 integration with frame segmentation and mask propagation
+- test_cd_fsod_integration.py: Tests CD-FSOD detector integration with the object tracking pipeline
+- test_cd_fsod_detector.py: Standalone tests for the CD-FSOD detector component
+- test_owlv2.py: Standalone tests for the OWLv2 detector
+- test_object_tracker.py: Tests for the object tracker component
+- test_embedding_generator.py: Tests for the embedding extractor component
+- test_fsod_continuity.py: Tests object tracking continuity with the CD-FSOD detector
+
+## 8. Future Enhancements
+Planned features include:
+- Real-time Video Processing: Adapt pipeline for real-time video stream processing
+- Additional Detection Models: Support for more detector backends like DETR, YOLO, etc.
+- Model Switching: Ability to dynamically switch or combine detector models
+- Interactive Visualization: Web-based interface for visualizing and interacting with results
+- Multi-GPU Support: Distribute processing across multiple GPUs for better performance
+
+## 9. Conclusion
+The vidPredictor module provides a comprehensive solution for video object detection, segmentation, and tracking. Its modular architecture allows for flexibility in implementation and future expansion, while the integration of state-of-the-art models ensures high-quality results.
+
+The combination of OWLv2/CD-FSOD for detection, SAM2 for segmentation, and custom tracking mechanisms creates a powerful pipeline for video analysis tasks. The system's ability to maintain object identity across frames while providing precise segmentation masks makes it suitable for a wide range of applications in video analytics, surveillance, content creation, and more. 

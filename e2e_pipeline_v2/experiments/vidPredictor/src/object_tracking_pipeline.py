@@ -690,10 +690,9 @@ class ObjectTrackingPipeline:
         object_quality_stats = {}
         for obj_id in self.tracked_objects.keys():
             object_quality_stats[obj_id] = {
-                "high_quality_count": 0,  # Frames with pixel count >= threshold
-                "low_quality_count": 0,   # Frames with 0 < pixel count < threshold
+                "high_quality_count": 0,  # Frames with pixel count > threshold
+                "low_quality_count": 0,   # Frames with 0 < pixel count <= threshold
                 "empty_mask_count": 0,    # Frames with 0 pixels
-                "fallback_count": 0,      # Frames using fallback boxes
                 "frames_saved": 0,        # Total frames saved
                 "frames_processed": 0,    # Total frames processed
                 "high_quality_frames": [],
@@ -770,7 +769,6 @@ class ObjectTrackingPipeline:
                     box_data = self.boxes_by_frame[frame_idx][obj_id]
                     if isinstance(box_data, dict) and box_data.get("is_fallback", False):
                         is_fallback = True
-                        object_quality_stats[obj_id]["fallback_count"] += 1
                 
                 # Apply mask overlay
                 if isinstance(mask, np.ndarray):
@@ -842,7 +840,6 @@ class ObjectTrackingPipeline:
             print(f"    High quality masks (>{self.mask_quality_threshold} pixels): {stats['high_quality_count']}")
             print(f"    Low quality masks (1-{self.mask_quality_threshold} pixels): {stats['low_quality_count']}")
             print(f"    Empty masks (0 pixels): {stats['empty_mask_count']} (not saved)")
-            print(f"    Fallback boxes: {stats['fallback_count']}")
             
             # Store quality metrics in the tracked object for later use
             self.tracked_objects[obj_id]['mask_quality_stats'] = stats
@@ -881,7 +878,6 @@ class ObjectTrackingPipeline:
             high_quality_frames = []
             low_quality_frames = []
             empty_mask_frames = []
-            fallback_frames = []
             
             # Process all frames that have masks for this object
             for frame_idx in sorted(self.propagation_results.keys()):
@@ -904,26 +900,15 @@ class ObjectTrackingPipeline:
                         low_quality_frames.append(frame_idx)
                     else:
                         empty_mask_frames.append(frame_idx)
-                    
-                    # Check if using fallback box
-                    if hasattr(self, 'boxes_by_frame') and frame_idx in self.boxes_by_frame and obj_id in self.boxes_by_frame[frame_idx]:
-                        box_data = self.boxes_by_frame[frame_idx][obj_id]
-                        if isinstance(box_data, dict) and box_data.get("is_fallback", False):
-                            fallback_frames.append(frame_idx)
                 
-            # Get original metadata
-            first_frame = obj_data.get("first_detected")
-            last_frame = obj_data.get("last_seen")
+            # No need to get first_detected and last_seen metadata anymore
             
             # Store in the mapping - streamlined version with only essential data
             mapping[str(obj_id)] = {
                 "class": obj_data["class"],
-                "first_detected": first_frame,
-                "last_seen": last_frame,
                 "high_quality_frames": high_quality_frames,
                 "low_quality_frames": low_quality_frames,
                 "empty_mask_frames": empty_mask_frames,
-                "fallback_box_frames": fallback_frames,
                 "mask_quality_threshold": self.mask_quality_threshold
             }
         
@@ -937,7 +922,6 @@ class ObjectTrackingPipeline:
         total_high_quality = sum(len(data["high_quality_frames"]) for data in mapping.values())
         total_low_quality = sum(len(data["low_quality_frames"]) for data in mapping.values())
         total_empty = sum(len(data["empty_mask_frames"]) for data in mapping.values())
-        total_fallback = sum(len(data["fallback_box_frames"]) for data in mapping.values())
         total_saved = total_high_quality + total_low_quality
         
         print(f"Object tracking quality statistics:")
@@ -945,7 +929,6 @@ class ObjectTrackingPipeline:
         print(f"  Total high quality frames (>{self.mask_quality_threshold} pixels): {total_high_quality}")
         print(f"  Total low quality frames (1-{self.mask_quality_threshold} pixels): {total_low_quality}")
         print(f"  Total empty mask frames (0 pixels): {total_empty} (not saved)")
-        print(f"  Total fallback box frames: {total_fallback}")
         print(f"  Total saved frames (non-empty masks): {total_saved}")
         
         # Generate a separate summary JSON with overall statistics
@@ -956,18 +939,15 @@ class ObjectTrackingPipeline:
                 "high_quality_frames": total_high_quality,
                 "low_quality_frames": total_low_quality,
                 "empty_mask_frames": total_empty,
-                "fallback_box_frames": total_fallback,
                 "mask_quality_threshold": self.mask_quality_threshold
             },
             "objects": {
                 obj_id: {
                     "class": data["class"],
-                    "frame_range": [data["first_detected"], data["last_seen"]],
                     "quality_counts": {
                         "high_quality": len(data["high_quality_frames"]),
                         "low_quality": len(data["low_quality_frames"]),
-                        "empty": len(data["empty_mask_frames"]),
-                        "fallback": len(data["fallback_box_frames"])
+                        "empty": len(data["empty_mask_frames"])
                     }
                 } for obj_id, data in mapping.items()
             }

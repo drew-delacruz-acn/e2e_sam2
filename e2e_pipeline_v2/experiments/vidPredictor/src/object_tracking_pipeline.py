@@ -713,6 +713,15 @@ class ObjectTrackingPipeline:
                 # Count frame as processed
                 object_quality_stats[obj_id]["frames_processed"] += 1
                 
+                # Count true pixels in mask to assess quality
+                pixel_count = self._count_mask_pixels(mask)
+                
+                # Skip frames with zero pixels (empty masks)
+                if pixel_count == 0:
+                    object_quality_stats[obj_id]["empty_mask_count"] += 1
+                    object_quality_stats[obj_id]["empty_mask_frames"].append(frame_idx)
+                    continue  # Skip saving this frame
+                
                 # Load the original frame
                 frame_path = frame_map[frame_idx]
                 frame = np.array(Image.open(frame_path).convert("RGB"))
@@ -724,18 +733,11 @@ class ObjectTrackingPipeline:
                 color = plt.cm.tab10(obj_id % 10)[:3]
                 color_rgb = (int(color[0]*255), int(color[1]*255), int(color[2]*255))
                 
-                # Count true pixels in mask to assess quality
-                pixel_count = self._count_mask_pixels(mask)
-                
                 # Categorize mask quality
-                is_empty_mask = pixel_count == 0
                 is_high_quality = pixel_count >= self.mask_quality_threshold
                 
                 # Update statistics based on quality
-                if is_empty_mask:
-                    object_quality_stats[obj_id]["empty_mask_count"] += 1
-                    object_quality_stats[obj_id]["empty_mask_frames"].append(frame_idx)
-                elif is_high_quality:
+                if is_high_quality:
                     object_quality_stats[obj_id]["high_quality_count"] += 1
                     object_quality_stats[obj_id]["high_quality_frames"].append(frame_idx)
                 else:
@@ -770,29 +772,13 @@ class ObjectTrackingPipeline:
                     
                     try:
                         # Use different visualization styles based on quality
-                        if is_empty_mask:
-                            # Use a red color for empty masks
-                            empty_color_rgb = (255, 50, 50)  # Reddish
-                            # Create a colored mask image - use entire frame with reduced opacity
-                            colored_mask = np.zeros_like(vis_frame)
-                            # Add a red border around the frame to indicate empty mask
-                            border_size = 20
-                            colored_mask[:border_size, :] = empty_color_rgb  # Top
-                            colored_mask[-border_size:, :] = empty_color_rgb  # Bottom
-                            colored_mask[:, :border_size] = empty_color_rgb  # Left
-                            colored_mask[:, -border_size:] = empty_color_rgb  # Right
-                            
-                            # Blend the mask with the original frame
-                            alpha = 0.3
-                            vis_frame = cv2.addWeighted(colored_mask, alpha, vis_frame, 1.0, 0)
-                        else:
-                            # Use normal overlay for non-empty masks
-                            colored_mask = np.zeros_like(vis_frame)
-                            colored_mask[mask_bool] = color_rgb  # Use RGB without alpha
-                            
-                            # Blend the mask with the original frame - higher alpha for high quality
-                            alpha = 0.6 if is_high_quality else 0.3
-                            vis_frame = cv2.addWeighted(colored_mask, alpha, vis_frame, 1.0, 0)
+                        # Use normal overlay for non-empty masks
+                        colored_mask = np.zeros_like(vis_frame)
+                        colored_mask[mask_bool] = color_rgb  # Use RGB without alpha
+                        
+                        # Blend the mask with the original frame - higher alpha for high quality
+                        alpha = 0.6 if is_high_quality else 0.3
+                        vis_frame = cv2.addWeighted(colored_mask, alpha, vis_frame, 1.0, 0)
                     except Exception as e:
                         print(f"Error applying mask for object {obj_id} on frame {frame_idx}: {e}")
                         continue
@@ -801,9 +787,7 @@ class ObjectTrackingPipeline:
                 title_text = f"Object #{obj_id}: {obj_class} - {pixel_count} pixels"
                 
                 # Add quality indicators to the title
-                if is_empty_mask:
-                    title_text += " [EMPTY MASK]"
-                elif not is_high_quality:
+                if not is_high_quality:
                     title_text += f" [LOW QUALITY < {self.mask_quality_threshold}]"
                 if is_fallback:
                     title_text += " [FALLBACK BOX]"
@@ -837,7 +821,7 @@ class ObjectTrackingPipeline:
             print(f"    Frames saved: {stats['frames_saved']}")
             print(f"    High quality masks (>={self.mask_quality_threshold} pixels): {stats['high_quality_count']}")
             print(f"    Low quality masks (1-{self.mask_quality_threshold-1} pixels): {stats['low_quality_count']}")
-            print(f"    Empty masks (0 pixels): {stats['empty_mask_count']}")
+            print(f"    Empty masks (0 pixels): {stats['empty_mask_count']} (not saved)")
             print(f"    Fallback boxes: {stats['fallback_count']}")
             
             # Store quality metrics in the tracked object for later use
@@ -906,7 +890,7 @@ class ObjectTrackingPipeline:
                         box_data = self.boxes_by_frame[frame_idx][obj_id]
                         if isinstance(box_data, dict) and box_data.get("is_fallback", False):
                             fallback_frames.append(frame_idx)
-            
+                
             # Get original metadata
             first_frame = obj_data.get("first_detected")
             last_frame = obj_data.get("last_seen")
@@ -931,7 +915,8 @@ class ObjectTrackingPipeline:
                 "total_low_quality_frames": len(low_quality_frames),
                 "total_empty_frames": len(empty_mask_frames),
                 "total_fallback_frames": len(fallback_frames),
-                "mask_quality_threshold": self.mask_quality_threshold
+                "mask_quality_threshold": self.mask_quality_threshold,
+                "saved_frames": high_quality_frames + low_quality_frames  # Only non-empty masks are saved
             }
         
         # Write the mapping to a JSON file
@@ -944,11 +929,13 @@ class ObjectTrackingPipeline:
         total_low_quality = sum(int(data["total_low_quality_frames"]) for data in mapping.values())
         total_empty = sum(int(data["total_empty_frames"]) for data in mapping.values())
         total_fallback = sum(int(data["total_fallback_frames"]) for data in mapping.values())
+        total_saved = total_high_quality + total_low_quality
         print(f"Object tracking quality statistics:")
         print(f"  Total high quality frames (>={self.mask_quality_threshold} pixels): {total_high_quality}")
         print(f"  Total low quality frames (1-{self.mask_quality_threshold-1} pixels): {total_low_quality}")
-        print(f"  Total empty mask frames (0 pixels): {total_empty}")
+        print(f"  Total empty mask frames (0 pixels): {total_empty} (not saved)")
         print(f"  Total fallback box frames: {total_fallback}")
+        print(f"  Total saved frames (non-empty masks): {total_saved}")
         
         # Verify consistency with saved mask visualizations
         try:
@@ -965,10 +952,18 @@ class ObjectTrackingPipeline:
                     continue
                 
                 # Check that all quality frames have corresponding images
-                for frame_idx in obj_data["high_quality_frames"] + obj_data["low_quality_frames"]:
+                saved_frames = obj_data.get("saved_frames", [])  # Use the new saved_frames field
+                for frame_idx in saved_frames:
                     mask_path = mask_dir / f"frame_{frame_idx:04d}.jpg"
                     if not mask_path.exists():
                         print(f"  Warning: Missing mask image for object {obj_id} frame {frame_idx}")
+                        consistent = False
+                
+                # Check that empty mask frames do NOT have images
+                for frame_idx in obj_data["empty_mask_frames"]:
+                    mask_path = mask_dir / f"frame_{frame_idx:04d}.jpg"
+                    if mask_path.exists():
+                        print(f"  Warning: Found mask image for empty mask object {obj_id} frame {frame_idx}")
                         consistent = False
             
             if consistent:

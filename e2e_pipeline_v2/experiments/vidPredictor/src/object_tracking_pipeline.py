@@ -382,7 +382,14 @@ class ObjectTrackingPipeline:
             if new_objects_in_this_frame:
                 print(f"Found {len(new_objects_in_this_frame)} new objects in frame {frame_idx}, running propagation...")
                 try:
-                    segments, _ = self.sam_wrapper.propagate_masks(objects_to_track=new_objects_in_this_frame)
+                    result = self.sam_wrapper.propagate_masks(objects_to_track=new_objects_in_this_frame)
+                    print(f"DEBUG: propagate_masks(objects_to_track={new_objects_in_this_frame}) returned type: {type(result)}")
+                    if isinstance(result, tuple):
+                        print(f"DEBUG: propagate_masks(objects_to_track={new_objects_in_this_frame}) tuple length: {len(result)}")
+                        segments = result[0]
+                    else:
+                        print(f"DEBUG: propagate_masks(objects_to_track={new_objects_in_this_frame}) value: {result}")
+                        segments = result
                     # Update the propagation results with the new segments
                     for f_idx, frame_segments in segments.items():
                         if f_idx not in self.propagation_results:
@@ -421,8 +428,14 @@ class ObjectTrackingPipeline:
                         # Run propagation for ALL objects
                         print("Running propagation for all objects after reset")
                         all_object_ids = list(self.tracked_objects.keys())
-                        segments, _ = self.sam_wrapper.propagate_masks(objects_to_track=all_object_ids)
-                        
+                        result = self.sam_wrapper.propagate_masks(objects_to_track=all_object_ids)
+                        print(f"DEBUG: propagate_masks(objects_to_track=all_object_ids) returned type: {type(result)}")
+                        if isinstance(result, tuple):
+                            print(f"DEBUG: propagate_masks(objects_to_track=all_object_ids) tuple length: {len(result)}")
+                            segments = result[0]
+                        else:
+                            print(f"DEBUG: propagate_masks(objects_to_track=all_object_ids) value: {result}")
+                            segments = result
                         # Replace all propagation results
                         self.propagation_results = segments
                         print(f"Successfully propagated all objects after reset")
@@ -1020,7 +1033,14 @@ class ObjectTrackingPipeline:
             # Run propagation just for this object
             try:
                 print(f"Running propagation for object {obj_id}...")
-                segments, _ = self.sam_wrapper.propagate_masks(objects_to_track=[obj_id])
+                result = self.sam_wrapper.propagate_masks(objects_to_track=[obj_id])
+                print(f"DEBUG: propagate_masks(objects_to_track=[{obj_id}]) returned type: {type(result)}")
+                if isinstance(result, tuple):
+                    print(f"DEBUG: propagate_masks(objects_to_track=[{obj_id}]) tuple length: {len(result)}")
+                    segments = result[0]
+                else:
+                    print(f"DEBUG: propagate_masks(objects_to_track=[{obj_id}]) value: {result}")
+                    segments = result
                 # Store the propagation results
                 for f_idx, frame_segments in segments.items():
                     if f_idx not in self.propagation_results:

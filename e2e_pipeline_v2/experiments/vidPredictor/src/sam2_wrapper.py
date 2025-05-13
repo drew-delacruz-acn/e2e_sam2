@@ -51,14 +51,20 @@ class SAM2VideoWrapper:
         """
         if frames_dir is not None:
             # Using directory path approach (like in vidPredict_demo.py)
-            self.frames_dir = frames_dir
-            self.inference_state = self.predictor.init_state(video_path=frames_dir)
-            self.predictor.reset_state(self.inference_state)
-            print(f"Set video from directory: {frames_dir}")
-            return
+            # Verify frames_dir is a valid directory path
+            if isinstance(frames_dir, str):
+                if not os.path.isdir(frames_dir):
+                    raise ValueError(f"frames_dir is not a valid directory: {frames_dir}")
+                
+                self.frames_dir = frames_dir
+                self.inference_state = self.predictor.init_state(video_path=frames_dir)
+                self.predictor.reset_state(self.inference_state)
+                print(f"Set video from directory: {frames_dir}")
+                return
+            else:
+                raise TypeError(f"frames_dir must be a string path, got {type(frames_dir)}")
             
         elif frames is not None:
-
             print(f'USING DIRECT FRAMES APPROACH')
             # Using direct frames approach - save frames to temporary directory
             import tempfile

@@ -137,8 +137,7 @@ class ObjectTrackingPipeline:
         print(f"Processing {len(frame_files)} frames with queries: {text_queries}")
         print(f"Using detector: {self.detector_type}")
         
-        # Initialize SAM2 with the video frames directory
-        print(f"Setting up SAM2 with frames directory: {frames_dir}")
+        # Set video for SAM2
         self.sam_wrapper.set_video(frames_dir=frames_dir)
         
         # Results storage
@@ -245,7 +244,9 @@ class ObjectTrackingPipeline:
             object_ids = list(self.tracked_objects.keys())
             segments, boxes_by_frame = self.sam_wrapper.propagate_masks(objects_to_track=object_ids)
             self.propagation_results = segments
+            # Store boxes_by_frame in both results and class attribute
             results["propagated_boxes_by_frame"] = boxes_by_frame
+            self.boxes_by_frame = boxes_by_frame
             print(f"Propagated masks for {len(object_ids)} objects across {len(segments)} frames")
         else:
             print("No objects to propagate")
@@ -396,104 +397,102 @@ class ObjectTrackingPipeline:
             # Run mask propagation if we found new objects in this frame
             if new_objects_in_this_frame:
                 print(f"Found {len(new_objects_in_this_frame)} new objects in frame {frame_idx}, running propagation...")
-                try:
-                    print(f"Running propagation for object {obj_id}...")
-                    result = self.sam_wrapper.propagate_masks(objects_to_track=[obj_id])
-                    print(f"DEBUG: propagate_masks(objects_to_track={obj_id}) returned type: {type(result)}")
-                    if isinstance(result, tuple):
-                        print(f"DEBUG: propagate_masks(objects_to_track={obj_id}) tuple length: {len(result)}")
-                        segments, boxes_by_frame = result
-                    else:
-                        print(f"DEBUG: propagate_masks(objects_to_track={obj_id}) value: {result}")
-                        segments = result
-                        boxes_by_frame = {}  # Initialize empty dict if no boxes returned
-                    
-                    # Store all propagation results
-                    for frame_idx, masks in segments.items():
-                        if frame_idx not in self.propagation_results:
-                            self.propagation_results[frame_idx] = {}
+                
+                # Process each new object individually
+                for obj_id in new_objects_in_this_frame:
+                    try:
+                        print(f"Running propagation for object {obj_id}...")
+                        result = self.sam_wrapper.propagate_masks(objects_to_track=[obj_id])
+                        print(f"DEBUG: propagate_masks(objects_to_track={obj_id}) returned type: {type(result)}")
+                        if isinstance(result, tuple):
+                            print(f"DEBUG: propagate_masks(objects_to_track={obj_id}) tuple length: {len(result)}")
+                            segments, boxes_by_frame = result
+                        else:
+                            print(f"DEBUG: propagate_masks(objects_to_track={obj_id}) value: {result}")
+                            segments = result
+                            boxes_by_frame = {}  # Initialize empty dict if no boxes returned
                         
-                        # Only copy if the propagation returned masks for this object
-                        if obj_id in masks:
-                            self.propagation_results[frame_idx][obj_id] = masks[obj_id]
-                    
-                    # Store boxes_by_frame in the class attribute
-                    for frame_idx, boxes in boxes_by_frame.items():
-                        if frame_idx not in self.boxes_by_frame:
-                            self.boxes_by_frame[frame_idx] = {}
+                        # Store all propagation results
+                        for frame_idx, masks in segments.items():
+                            if frame_idx not in self.propagation_results:
+                                self.propagation_results[frame_idx] = {}
+                            
+                            # Only copy if the propagation returned masks for this object
+                            if obj_id in masks:
+                                self.propagation_results[frame_idx][obj_id] = masks[obj_id]
                         
-                        # Only copy if boxes exist for this object
-                        if obj_id in boxes:
-                            self.boxes_by_frame[frame_idx][obj_id] = boxes[obj_id]
+                        # Store boxes_by_frame in the class attribute
+                        for frame_idx, boxes in boxes_by_frame.items():
+                            if frame_idx not in self.boxes_by_frame:
+                                self.boxes_by_frame[frame_idx] = {}
+                            
+                            # Only copy if boxes exist for this object
+                            if obj_id in boxes:
+                                self.boxes_by_frame[frame_idx][obj_id] = boxes[obj_id]
+                        
+                        # Collect all boxes for this object
+                        all_boxes = []
+                        for frame_idx in sorted(boxes_by_frame.keys()):
+                            if obj_id in boxes_by_frame[frame_idx]:
+                                box_data = boxes_by_frame[frame_idx][obj_id]
+                                if isinstance(box_data, dict):
+                                    box = box_data["box"]
+                                    all_boxes.append(box)
+                                    print(f"Adding box for frame {frame_idx} to object {obj_id}: {box}")
+                                else:
+                                    all_boxes.append(box_data)
+                                    print(f"Adding raw box for frame {frame_idx} to object {obj_id}: {box_data}")
+                        
+                        # Add logging to debug the tracked_objects dictionary
+                        print(f"DEBUG: tracked_objects keys before update: {list(self.tracked_objects.keys())}")
+                        print(f"DEBUG: Is object {obj_id} in tracked_objects? {obj_id in self.tracked_objects}")
+                        print(f"DEBUG: Number of boxes collected for object {obj_id}: {len(all_boxes)}")
+                        
+                        # Only update if we have boxes
+                        if not all_boxes:
+                            print(f"WARNING: No boxes collected for object {obj_id}, skipping tracked_objects update")
+                            continue
+                        
+                        # Update tracked_objects with the new boxes, with proper error handling
+                        if obj_id in self.tracked_objects:
+                            self.tracked_objects[obj_id]["boxes"] = all_boxes
+                            # Also collect and store masks
+                            all_masks = []
+                            for frame_idx in sorted(self.propagation_results.keys()):
+                                if obj_id in self.propagation_results[frame_idx]:
+                                    all_masks.append(self.propagation_results[frame_idx][obj_id])
+                            
+                            # Store masks if we have them
+                            if all_masks:
+                                self.tracked_objects[obj_id]["masks"] = all_masks
+                                print(f"Stored {len(all_masks)} masks for object {obj_id}")
+                            
+                            print(f"Successfully updated boxes for object {obj_id}")
+                        else:
+                            # Create the object entry if it doesn't exist
+                            obj_data = self.tracked_objects.get(obj_id, {})
+                            print(f"Object {obj_id} not found in tracked_objects. Creating entry.")
+                            self.tracked_objects[obj_id] = {
+                                "id": obj_id,
+                                "class": obj_data.get("class", "unknown"),  # Use the class from the original detected object
+                                "first_detected": obj_data.get("first_detected", frame_idx),  # Use the original detection frame
+                                "last_seen": frame_idx,
+                                "confidence": [obj_data.get("confidence", [1.0])[0] if isinstance(obj_data.get("confidence"), list) else obj_data.get("confidence", 1.0)],
+                                "boxes": all_boxes,
+                                "masks": obj_data.get("masks", [])  # Add masks with empty list as default
+                            }
+                            print(f"Created new entry for object {obj_id}")
                     
-                    # Collect all boxes for this object
-                    all_boxes = []
-                    for frame_idx in sorted(boxes_by_frame.keys()):
-                        if obj_id in boxes_by_frame[frame_idx]:
-                            box_data = boxes_by_frame[frame_idx][obj_id]
-                            if isinstance(box_data, dict):
-                                box = box_data["box"]
-                                all_boxes.append(box)
-                                print(f"Adding box for frame {frame_idx} to object {obj_id}: {box}")
-                            else:
-                                all_boxes.append(box_data)
-                                print(f"Adding raw box for frame {frame_idx} to object {obj_id}: {box_data}")
-                    
-                    # Add logging to debug the tracked_objects dictionary
-                    print(f"DEBUG: tracked_objects keys before update: {list(self.tracked_objects.keys())}")
-                    print(f"DEBUG: Is object {obj_id} in tracked_objects? {obj_id in self.tracked_objects}")
-                    print(f"DEBUG: Number of boxes collected for object {obj_id}: {len(all_boxes)}")
-                    
-                    # Only update if we have boxes
-                    if not all_boxes:
-                        print(f"WARNING: No boxes collected for object {obj_id}, skipping tracked_objects update")
-                        continue
-                    
-                    # Update tracked_objects with the new boxes, with proper error handling
+                        print(f"Successfully propagated masks for object {obj_id}, available in {len(segments)} frames")
+                    except Exception as e:
+                        print(f"Error during propagation for object {obj_id}: {e}")
+                        import traceback
+                        print(f"Propagation error traceback: {traceback.format_exc()}")
+                
+                # After processing all new objects, ensure they're in the results
+                for obj_id in new_objects_in_this_frame:
                     if obj_id in self.tracked_objects:
-                        self.tracked_objects[obj_id]["boxes"] = all_boxes
-                        # Also collect and store masks
-                        all_masks = []
-                        for frame_idx in sorted(self.propagation_results.keys()):
-                            if obj_id in self.propagation_results[frame_idx]:
-                                all_masks.append(self.propagation_results[frame_idx][obj_id])
-                        
-                        # Store masks if we have them
-                        if all_masks:
-                            self.tracked_objects[obj_id]["masks"] = all_masks
-                            print(f"Stored {len(all_masks)} masks for object {obj_id}")
-                        
-                        print(f"Successfully updated boxes for object {obj_id}")
-                    else:
-                        # Create the object entry if it doesn't exist
-                        print(f"Object {obj_id} not found in tracked_objects. Creating entry.")
-                        self.tracked_objects[obj_id] = {
-                            "id": obj_id,
-                            "class": obj_data["class"],  # Use the class from the original detected object
-                            "first_detected": obj_data["first_detected"],  # Use the original detection frame
-                            "last_seen": frame_idx,
-                            "confidence": [obj_data.get("confidence", [1.0])[0] if isinstance(obj_data.get("confidence"), list) else obj_data.get("confidence", 1.0)],
-                            "boxes": all_boxes,
-                            "masks": obj_data.get("masks", [])  # Add masks with empty list as default
-                        }
-                        print(f"Created new entry for object {obj_id}")
-                
-                    print(f"Successfully propagated masks for object {obj_id}, available in {len(segments)} frames")
-                except Exception as e:
-                    print(f"Error during propagation for object {obj_id}: {e}")
-                    import traceback
-                    print(f"Propagation error traceback: {traceback.format_exc()}")
-                    
-            # Store updated object data only if it doesn't exist yet
-            print(f"DEBUG: After propagation - Is object {obj_id} in tracked_objects? {obj_id in self.tracked_objects}")
-            if obj_id not in self.tracked_objects:
-                print(f"Adding object {obj_id} to tracked_objects after propagation")
-                self.tracked_objects[obj_id] = obj_data
-            else:
-                print(f"Object {obj_id} already exists in tracked_objects, keeping existing entry")
-                
-            # Always update the results dict
-            results["object_tracks"][obj_id] = obj_data
+                        results["object_tracks"][obj_id] = self.tracked_objects[obj_id]
         
         # Generate visualizations for all frames
         for i, frame_path in enumerate(frame_files):
@@ -1221,7 +1220,7 @@ class ObjectTrackingPipeline:
         }
         
         # Set video for SAM2
-        self.sam_wrapper.set_video(frames_dir)
+        self.sam_wrapper.set_video(frames_dir=frames_dir)
         
         # Get first frame
         first_frame_path = frame_files[0]

@@ -504,7 +504,6 @@ def main():
 
 if __name__ == "__main__":
     main() 
-# Frame 39 in sequence maps to frame index 39
 # Frame 40 in sequence maps to frame index 40
 # Frame 41 in sequence maps to frame index 41
 # Frame 42 in sequence maps to frame index 42
@@ -520,346 +519,346 @@ if __name__ == "__main__":
 # Frame 52 in sequence maps to frame index 52
 # Frame 53 in sequence maps to frame index 53
 # Phase 1: Detecting and tracking objects...
-# 2025-05-13 20:01:29,790 - DEBUG - Detecting objects in frame 0
+# 2025-05-13 20:17:21,768 - DEBUG - Detecting objects in frame 0
 # DEBUG:cd_fsod_test:Detecting objects in frame 0
-# 2025-05-13 20:01:29,790 - DEBUG - Frame 0: No objects detected
+# 2025-05-13 20:17:21,768 - DEBUG - Frame 0: No objects detected
 # DEBUG:cd_fsod_test:Frame 0: No objects detected
-# 2025-05-13 20:01:29,790 - DEBUG - Detection took 0.1ms
+# 2025-05-13 20:17:21,768 - DEBUG - Detection took 0.1ms
 # DEBUG:cd_fsod_test:Detection took 0.1ms
 # -----Initializing new objects-----
 # detections: []
-# 2025-05-13 20:01:29,794 - DEBUG - Detecting objects in frame 1
+# 2025-05-13 20:17:21,772 - DEBUG - Detecting objects in frame 1
 # DEBUG:cd_fsod_test:Detecting objects in frame 1
-# 2025-05-13 20:01:29,794 - DEBUG - Frame 1: No objects detected
+# 2025-05-13 20:17:21,772 - DEBUG - Frame 1: No objects detected
 # DEBUG:cd_fsod_test:Frame 1: No objects detected
-# 2025-05-13 20:01:29,794 - DEBUG - Detection took 0.1ms
+# 2025-05-13 20:17:21,772 - DEBUG - Detection took 0.1ms
 # DEBUG:cd_fsod_test:Detection took 0.1ms
 # -----Initializing new objects-----
 # detections: []
-# 2025-05-13 20:01:29,797 - DEBUG - Detecting objects in frame 2
+# 2025-05-13 20:17:21,775 - DEBUG - Detecting objects in frame 2
 # DEBUG:cd_fsod_test:Detecting objects in frame 2
-# 2025-05-13 20:01:29,797 - DEBUG - Frame 2: No objects detected
+# 2025-05-13 20:17:21,775 - DEBUG - Frame 2: No objects detected
 # DEBUG:cd_fsod_test:Frame 2: No objects detected
-# 2025-05-13 20:01:29,798 - DEBUG - Detection took 0.1ms
+# 2025-05-13 20:17:21,775 - DEBUG - Detection took 0.1ms
 # DEBUG:cd_fsod_test:Detection took 0.1ms
 # -----Initializing new objects-----
 # detections: []
-# 2025-05-13 20:01:29,801 - DEBUG - Detecting objects in frame 3
+# 2025-05-13 20:17:21,778 - DEBUG - Detecting objects in frame 3
 # DEBUG:cd_fsod_test:Detecting objects in frame 3
-# 2025-05-13 20:01:29,801 - DEBUG - Frame 3: Detected 1 objects ['Time Stick'] with scores ['0.99']
+# 2025-05-13 20:17:21,778 - DEBUG - Frame 3: Detected 1 objects ['Time Stick'] with scores ['0.99']
 # DEBUG:cd_fsod_test:Frame 3: Detected 1 objects ['Time Stick'] with scores ['0.99']
-# 2025-05-13 20:01:29,801 - DEBUG - Detection took 0.1ms
+# 2025-05-13 20:17:21,778 - DEBUG - Detection took 0.1ms
 # DEBUG:cd_fsod_test:Detection took 0.1ms
 # -----Initializing new objects-----
 # detections: [{'box': array([453, 224, 643, 473]), 'score': np.float64(0.9931594133377075), 'text': 'Time Stick'}]
 # -----Initializing [{'box': array([453, 224, 643, 473]), 'score': np.float64(0.9931594133377075), 'text': 'Time Stick'}]-----
 # Initialized object 1 (Time Stick)
 # Created new object 1 (Time Stick) at frame 3
-# 2025-05-13 20:01:29,992 - DEBUG - Detecting objects in frame 4
+# 2025-05-13 20:17:21,965 - DEBUG - Detecting objects in frame 4
 # DEBUG:cd_fsod_test:Detecting objects in frame 4
-# 2025-05-13 20:01:29,992 - DEBUG - Frame 4: No objects detected
+# 2025-05-13 20:17:21,965 - DEBUG - Frame 4: No objects detected
 # DEBUG:cd_fsod_test:Frame 4: No objects detected
-# 2025-05-13 20:01:29,992 - DEBUG - Detection took 0.1ms
+# 2025-05-13 20:17:21,965 - DEBUG - Detection took 0.1ms
 # DEBUG:cd_fsod_test:Detection took 0.1ms
-# 2025-05-13 20:01:29,995 - DEBUG - Detecting objects in frame 5
+# 2025-05-13 20:17:21,969 - DEBUG - Detecting objects in frame 5
 # DEBUG:cd_fsod_test:Detecting objects in frame 5
-# 2025-05-13 20:01:29,996 - DEBUG - Frame 5: No objects detected
+# 2025-05-13 20:17:21,969 - DEBUG - Frame 5: No objects detected
 # DEBUG:cd_fsod_test:Frame 5: No objects detected
-# 2025-05-13 20:01:29,996 - DEBUG - Detection took 0.1ms
+# 2025-05-13 20:17:21,969 - DEBUG - Detection took 0.1ms
 # DEBUG:cd_fsod_test:Detection took 0.1ms
-# 2025-05-13 20:01:29,999 - DEBUG - Detecting objects in frame 6
+# 2025-05-13 20:17:21,972 - DEBUG - Detecting objects in frame 6
 # DEBUG:cd_fsod_test:Detecting objects in frame 6
-# 2025-05-13 20:01:29,999 - DEBUG - Frame 6: No objects detected
+# 2025-05-13 20:17:21,972 - DEBUG - Frame 6: No objects detected
 # DEBUG:cd_fsod_test:Frame 6: No objects detected
-# 2025-05-13 20:01:29,999 - DEBUG - Detection took 0.1ms
+# 2025-05-13 20:17:21,972 - DEBUG - Detection took 0.1ms
 # DEBUG:cd_fsod_test:Detection took 0.1ms
-# 2025-05-13 20:01:30,002 - DEBUG - Detecting objects in frame 7
+# 2025-05-13 20:17:21,975 - DEBUG - Detecting objects in frame 7
 # DEBUG:cd_fsod_test:Detecting objects in frame 7
-# 2025-05-13 20:01:30,002 - DEBUG - Frame 7: No objects detected
+# 2025-05-13 20:17:21,975 - DEBUG - Frame 7: No objects detected
 # DEBUG:cd_fsod_test:Frame 7: No objects detected
-# 2025-05-13 20:01:30,003 - DEBUG - Detection took 0.1ms
+# 2025-05-13 20:17:21,975 - DEBUG - Detection took 0.1ms
 # DEBUG:cd_fsod_test:Detection took 0.1ms
-# 2025-05-13 20:01:30,006 - DEBUG - Detecting objects in frame 8
+# 2025-05-13 20:17:21,978 - DEBUG - Detecting objects in frame 8
 # DEBUG:cd_fsod_test:Detecting objects in frame 8
-# 2025-05-13 20:01:30,006 - DEBUG - Frame 8: No objects detected
+# 2025-05-13 20:17:21,978 - DEBUG - Frame 8: No objects detected
 # DEBUG:cd_fsod_test:Frame 8: No objects detected
-# 2025-05-13 20:01:30,006 - DEBUG - Detection took 0.1ms
+# 2025-05-13 20:17:21,978 - DEBUG - Detection took 0.1ms
 # DEBUG:cd_fsod_test:Detection took 0.1ms
-# 2025-05-13 20:01:30,009 - DEBUG - Detecting objects in frame 9
+# 2025-05-13 20:17:21,981 - DEBUG - Detecting objects in frame 9
 # DEBUG:cd_fsod_test:Detecting objects in frame 9
-# 2025-05-13 20:01:30,009 - DEBUG - Frame 9: No objects detected
+# 2025-05-13 20:17:21,981 - DEBUG - Frame 9: No objects detected
 # DEBUG:cd_fsod_test:Frame 9: No objects detected
-# 2025-05-13 20:01:30,009 - DEBUG - Detection took 0.1ms
+# 2025-05-13 20:17:21,981 - DEBUG - Detection took 0.1ms
 # DEBUG:cd_fsod_test:Detection took 0.1ms
-# 2025-05-13 20:01:30,012 - DEBUG - Detecting objects in frame 10
+# 2025-05-13 20:17:21,984 - DEBUG - Detecting objects in frame 10
 # DEBUG:cd_fsod_test:Detecting objects in frame 10
-# 2025-05-13 20:01:30,012 - DEBUG - Frame 10: No objects detected
+# 2025-05-13 20:17:21,984 - DEBUG - Frame 10: No objects detected
 # DEBUG:cd_fsod_test:Frame 10: No objects detected
-# 2025-05-13 20:01:30,012 - DEBUG - Detection took 0.1ms
+# 2025-05-13 20:17:21,984 - DEBUG - Detection took 0.1ms
 # DEBUG:cd_fsod_test:Detection took 0.1ms
-# 2025-05-13 20:01:30,015 - DEBUG - Detecting objects in frame 11
+# 2025-05-13 20:17:21,987 - DEBUG - Detecting objects in frame 11
 # DEBUG:cd_fsod_test:Detecting objects in frame 11
-# 2025-05-13 20:01:30,016 - DEBUG - Frame 11: No objects detected
+# 2025-05-13 20:17:21,987 - DEBUG - Frame 11: No objects detected
 # DEBUG:cd_fsod_test:Frame 11: No objects detected
-# 2025-05-13 20:01:30,016 - DEBUG - Detection took 0.1ms
+# 2025-05-13 20:17:21,987 - DEBUG - Detection took 0.1ms
 # DEBUG:cd_fsod_test:Detection took 0.1ms
-# 2025-05-13 20:01:30,019 - DEBUG - Detecting objects in frame 12
+# 2025-05-13 20:17:21,990 - DEBUG - Detecting objects in frame 12
 # DEBUG:cd_fsod_test:Detecting objects in frame 12
-# 2025-05-13 20:01:30,019 - DEBUG - Frame 12: No objects detected
+# 2025-05-13 20:17:21,990 - DEBUG - Frame 12: No objects detected
 # DEBUG:cd_fsod_test:Frame 12: No objects detected
-# 2025-05-13 20:01:30,019 - DEBUG - Detection took 0.1ms
+# 2025-05-13 20:17:21,990 - DEBUG - Detection took 0.1ms
 # DEBUG:cd_fsod_test:Detection took 0.1ms
-# 2025-05-13 20:01:30,022 - DEBUG - Detecting objects in frame 13
+# 2025-05-13 20:17:21,993 - DEBUG - Detecting objects in frame 13
 # DEBUG:cd_fsod_test:Detecting objects in frame 13
-# 2025-05-13 20:01:30,022 - DEBUG - Frame 13: No objects detected
+# 2025-05-13 20:17:21,993 - DEBUG - Frame 13: No objects detected
 # DEBUG:cd_fsod_test:Frame 13: No objects detected
-# 2025-05-13 20:01:30,023 - DEBUG - Detection took 0.1ms
+# 2025-05-13 20:17:21,993 - DEBUG - Detection took 0.1ms
 # DEBUG:cd_fsod_test:Detection took 0.1ms
-# 2025-05-13 20:01:30,026 - DEBUG - Detecting objects in frame 14
+# 2025-05-13 20:17:21,996 - DEBUG - Detecting objects in frame 14
 # DEBUG:cd_fsod_test:Detecting objects in frame 14
-# 2025-05-13 20:01:30,026 - DEBUG - Frame 14: No objects detected
+# 2025-05-13 20:17:21,996 - DEBUG - Frame 14: No objects detected
 # DEBUG:cd_fsod_test:Frame 14: No objects detected
-# 2025-05-13 20:01:30,026 - DEBUG - Detection took 0.1ms
+# 2025-05-13 20:17:21,996 - DEBUG - Detection took 0.1ms
 # DEBUG:cd_fsod_test:Detection took 0.1ms
-# 2025-05-13 20:01:30,029 - DEBUG - Detecting objects in frame 15
+# 2025-05-13 20:17:21,999 - DEBUG - Detecting objects in frame 15
 # DEBUG:cd_fsod_test:Detecting objects in frame 15
-# 2025-05-13 20:01:30,029 - DEBUG - Frame 15: No objects detected
+# 2025-05-13 20:17:21,999 - DEBUG - Frame 15: No objects detected
 # DEBUG:cd_fsod_test:Frame 15: No objects detected
-# 2025-05-13 20:01:30,029 - DEBUG - Detection took 0.1ms
+# 2025-05-13 20:17:21,999 - DEBUG - Detection took 0.1ms
 # DEBUG:cd_fsod_test:Detection took 0.1ms
-# 2025-05-13 20:01:30,032 - DEBUG - Detecting objects in frame 16
+# 2025-05-13 20:17:22,001 - DEBUG - Detecting objects in frame 16
 # DEBUG:cd_fsod_test:Detecting objects in frame 16
-# 2025-05-13 20:01:30,032 - DEBUG - Frame 16: No objects detected
+# 2025-05-13 20:17:22,002 - DEBUG - Frame 16: No objects detected
 # DEBUG:cd_fsod_test:Frame 16: No objects detected
-# 2025-05-13 20:01:30,033 - DEBUG - Detection took 0.1ms
+# 2025-05-13 20:17:22,002 - DEBUG - Detection took 0.1ms
 # DEBUG:cd_fsod_test:Detection took 0.1ms
-# 2025-05-13 20:01:30,036 - DEBUG - Detecting objects in frame 17
+# 2025-05-13 20:17:22,005 - DEBUG - Detecting objects in frame 17
 # DEBUG:cd_fsod_test:Detecting objects in frame 17
-# 2025-05-13 20:01:30,036 - DEBUG - Frame 17: No objects detected
+# 2025-05-13 20:17:22,005 - DEBUG - Frame 17: No objects detected
 # DEBUG:cd_fsod_test:Frame 17: No objects detected
-# 2025-05-13 20:01:30,036 - DEBUG - Detection took 0.1ms
+# 2025-05-13 20:17:22,005 - DEBUG - Detection took 0.1ms
 # DEBUG:cd_fsod_test:Detection took 0.1ms
-# 2025-05-13 20:01:30,039 - DEBUG - Detecting objects in frame 18
+# 2025-05-13 20:17:22,007 - DEBUG - Detecting objects in frame 18
 # DEBUG:cd_fsod_test:Detecting objects in frame 18
-# 2025-05-13 20:01:30,039 - DEBUG - Frame 18: No objects detected
+# 2025-05-13 20:17:22,008 - DEBUG - Frame 18: No objects detected
 # DEBUG:cd_fsod_test:Frame 18: No objects detected
-# 2025-05-13 20:01:30,039 - DEBUG - Detection took 0.1ms
+# 2025-05-13 20:17:22,008 - DEBUG - Detection took 0.1ms
 # DEBUG:cd_fsod_test:Detection took 0.1ms
-# 2025-05-13 20:01:30,042 - DEBUG - Detecting objects in frame 19
+# 2025-05-13 20:17:22,010 - DEBUG - Detecting objects in frame 19
 # DEBUG:cd_fsod_test:Detecting objects in frame 19
-# 2025-05-13 20:01:30,043 - DEBUG - Frame 19: No objects detected
+# 2025-05-13 20:17:22,011 - DEBUG - Frame 19: No objects detected
 # DEBUG:cd_fsod_test:Frame 19: No objects detected
-# 2025-05-13 20:01:30,043 - DEBUG - Detection took 0.1ms
+# 2025-05-13 20:17:22,011 - DEBUG - Detection took 0.1ms
 # DEBUG:cd_fsod_test:Detection took 0.1ms
-# 2025-05-13 20:01:30,046 - DEBUG - Detecting objects in frame 20
+# 2025-05-13 20:17:22,013 - DEBUG - Detecting objects in frame 20
 # DEBUG:cd_fsod_test:Detecting objects in frame 20
-# 2025-05-13 20:01:30,046 - DEBUG - Frame 20: No objects detected
+# 2025-05-13 20:17:22,014 - DEBUG - Frame 20: No objects detected
 # DEBUG:cd_fsod_test:Frame 20: No objects detected
-# 2025-05-13 20:01:30,046 - DEBUG - Detection took 0.1ms
+# 2025-05-13 20:17:22,014 - DEBUG - Detection took 0.1ms
 # DEBUG:cd_fsod_test:Detection took 0.1ms
-# 2025-05-13 20:01:30,049 - DEBUG - Detecting objects in frame 21
+# 2025-05-13 20:17:22,016 - DEBUG - Detecting objects in frame 21
 # DEBUG:cd_fsod_test:Detecting objects in frame 21
-# 2025-05-13 20:01:30,049 - DEBUG - Frame 21: No objects detected
+# 2025-05-13 20:17:22,016 - DEBUG - Frame 21: No objects detected
 # DEBUG:cd_fsod_test:Frame 21: No objects detected
-# 2025-05-13 20:01:30,049 - DEBUG - Detection took 0.1ms
+# 2025-05-13 20:17:22,016 - DEBUG - Detection took 0.1ms
 # DEBUG:cd_fsod_test:Detection took 0.1ms
-# 2025-05-13 20:01:30,052 - DEBUG - Detecting objects in frame 22
+# 2025-05-13 20:17:22,019 - DEBUG - Detecting objects in frame 22
 # DEBUG:cd_fsod_test:Detecting objects in frame 22
-# 2025-05-13 20:01:30,053 - DEBUG - Frame 22: No objects detected
+# 2025-05-13 20:17:22,019 - DEBUG - Frame 22: No objects detected
 # DEBUG:cd_fsod_test:Frame 22: No objects detected
-# 2025-05-13 20:01:30,053 - DEBUG - Detection took 0.1ms
+# 2025-05-13 20:17:22,020 - DEBUG - Detection took 0.1ms
 # DEBUG:cd_fsod_test:Detection took 0.1ms
-# 2025-05-13 20:01:30,056 - DEBUG - Detecting objects in frame 23
+# 2025-05-13 20:17:22,022 - DEBUG - Detecting objects in frame 23
 # DEBUG:cd_fsod_test:Detecting objects in frame 23
-# 2025-05-13 20:01:30,056 - DEBUG - Frame 23: No objects detected
+# 2025-05-13 20:17:22,023 - DEBUG - Frame 23: No objects detected
 # DEBUG:cd_fsod_test:Frame 23: No objects detected
-# 2025-05-13 20:01:30,056 - DEBUG - Detection took 0.1ms
+# 2025-05-13 20:17:22,023 - DEBUG - Detection took 0.1ms
 # DEBUG:cd_fsod_test:Detection took 0.1ms
-# 2025-05-13 20:01:30,059 - DEBUG - Detecting objects in frame 24
+# 2025-05-13 20:17:22,025 - DEBUG - Detecting objects in frame 24
 # DEBUG:cd_fsod_test:Detecting objects in frame 24
-# 2025-05-13 20:01:30,059 - DEBUG - Frame 24: No objects detected
+# 2025-05-13 20:17:22,025 - DEBUG - Frame 24: No objects detected
 # DEBUG:cd_fsod_test:Frame 24: No objects detected
-# 2025-05-13 20:01:30,059 - DEBUG - Detection took 0.1ms
+# 2025-05-13 20:17:22,026 - DEBUG - Detection took 0.1ms
 # DEBUG:cd_fsod_test:Detection took 0.1ms
-# 2025-05-13 20:01:30,062 - DEBUG - Detecting objects in frame 25
+# 2025-05-13 20:17:22,028 - DEBUG - Detecting objects in frame 25
 # DEBUG:cd_fsod_test:Detecting objects in frame 25
-# 2025-05-13 20:01:30,063 - DEBUG - Frame 25: No objects detected
+# 2025-05-13 20:17:22,028 - DEBUG - Frame 25: No objects detected
 # DEBUG:cd_fsod_test:Frame 25: No objects detected
-# 2025-05-13 20:01:30,063 - DEBUG - Detection took 0.1ms
+# 2025-05-13 20:17:22,029 - DEBUG - Detection took 0.1ms
 # DEBUG:cd_fsod_test:Detection took 0.1ms
-# 2025-05-13 20:01:30,066 - DEBUG - Detecting objects in frame 26
+# 2025-05-13 20:17:22,031 - DEBUG - Detecting objects in frame 26
 # DEBUG:cd_fsod_test:Detecting objects in frame 26
-# 2025-05-13 20:01:30,066 - DEBUG - Frame 26: No objects detected
+# 2025-05-13 20:17:22,031 - DEBUG - Frame 26: No objects detected
 # DEBUG:cd_fsod_test:Frame 26: No objects detected
-# 2025-05-13 20:01:30,066 - DEBUG - Detection took 0.1ms
+# 2025-05-13 20:17:22,032 - DEBUG - Detection took 0.1ms
 # DEBUG:cd_fsod_test:Detection took 0.1ms
-# 2025-05-13 20:01:30,069 - DEBUG - Detecting objects in frame 27
+# 2025-05-13 20:17:22,034 - DEBUG - Detecting objects in frame 27
 # DEBUG:cd_fsod_test:Detecting objects in frame 27
-# 2025-05-13 20:01:30,069 - DEBUG - Frame 27: No objects detected
+# 2025-05-13 20:17:22,034 - DEBUG - Frame 27: No objects detected
 # DEBUG:cd_fsod_test:Frame 27: No objects detected
-# 2025-05-13 20:01:30,069 - DEBUG - Detection took 0.1ms
+# 2025-05-13 20:17:22,035 - DEBUG - Detection took 0.1ms
 # DEBUG:cd_fsod_test:Detection took 0.1ms
-# 2025-05-13 20:01:30,072 - DEBUG - Detecting objects in frame 28
+# 2025-05-13 20:17:22,038 - DEBUG - Detecting objects in frame 28
 # DEBUG:cd_fsod_test:Detecting objects in frame 28
-# 2025-05-13 20:01:30,073 - DEBUG - Frame 28: No objects detected
+# 2025-05-13 20:17:22,038 - DEBUG - Frame 28: No objects detected
 # DEBUG:cd_fsod_test:Frame 28: No objects detected
-# 2025-05-13 20:01:30,073 - DEBUG - Detection took 0.1ms
+# 2025-05-13 20:17:22,038 - DEBUG - Detection took 0.1ms
 # DEBUG:cd_fsod_test:Detection took 0.1ms
-# 2025-05-13 20:01:30,076 - DEBUG - Detecting objects in frame 29
+# 2025-05-13 20:17:22,041 - DEBUG - Detecting objects in frame 29
 # DEBUG:cd_fsod_test:Detecting objects in frame 29
-# 2025-05-13 20:01:30,076 - DEBUG - Frame 29: No objects detected
+# 2025-05-13 20:17:22,041 - DEBUG - Frame 29: No objects detected
 # DEBUG:cd_fsod_test:Frame 29: No objects detected
-# 2025-05-13 20:01:30,076 - DEBUG - Detection took 0.1ms
+# 2025-05-13 20:17:22,041 - DEBUG - Detection took 0.1ms
 # DEBUG:cd_fsod_test:Detection took 0.1ms
-# 2025-05-13 20:01:30,079 - DEBUG - Detecting objects in frame 30
+# 2025-05-13 20:17:22,044 - DEBUG - Detecting objects in frame 30
 # DEBUG:cd_fsod_test:Detecting objects in frame 30
-# 2025-05-13 20:01:30,079 - DEBUG - Frame 30: No objects detected
+# 2025-05-13 20:17:22,044 - DEBUG - Frame 30: No objects detected
 # DEBUG:cd_fsod_test:Frame 30: No objects detected
-# 2025-05-13 20:01:30,079 - DEBUG - Detection took 0.1ms
+# 2025-05-13 20:17:22,044 - DEBUG - Detection took 0.1ms
 # DEBUG:cd_fsod_test:Detection took 0.1ms
-# 2025-05-13 20:01:30,082 - DEBUG - Detecting objects in frame 31
+# 2025-05-13 20:17:22,046 - DEBUG - Detecting objects in frame 31
 # DEBUG:cd_fsod_test:Detecting objects in frame 31
-# 2025-05-13 20:01:30,082 - DEBUG - Frame 31: No objects detected
+# 2025-05-13 20:17:22,046 - DEBUG - Frame 31: No objects detected
 # DEBUG:cd_fsod_test:Frame 31: No objects detected
-# 2025-05-13 20:01:30,082 - DEBUG - Detection took 0.1ms
+# 2025-05-13 20:17:22,047 - DEBUG - Detection took 0.1ms
 # DEBUG:cd_fsod_test:Detection took 0.1ms
-# 2025-05-13 20:01:30,085 - DEBUG - Detecting objects in frame 32
+# 2025-05-13 20:17:22,050 - DEBUG - Detecting objects in frame 32
 # DEBUG:cd_fsod_test:Detecting objects in frame 32
-# 2025-05-13 20:01:30,086 - DEBUG - Frame 32: No objects detected
+# 2025-05-13 20:17:22,050 - DEBUG - Frame 32: No objects detected
 # DEBUG:cd_fsod_test:Frame 32: No objects detected
-# 2025-05-13 20:01:30,086 - DEBUG - Detection took 0.1ms
+# 2025-05-13 20:17:22,050 - DEBUG - Detection took 0.1ms
 # DEBUG:cd_fsod_test:Detection took 0.1ms
-# 2025-05-13 20:01:30,089 - DEBUG - Detecting objects in frame 33
+# 2025-05-13 20:17:22,053 - DEBUG - Detecting objects in frame 33
 # DEBUG:cd_fsod_test:Detecting objects in frame 33
-# 2025-05-13 20:01:30,089 - DEBUG - Frame 33: No objects detected
+# 2025-05-13 20:17:22,053 - DEBUG - Frame 33: No objects detected
 # DEBUG:cd_fsod_test:Frame 33: No objects detected
-# 2025-05-13 20:01:30,089 - DEBUG - Detection took 0.1ms
+# 2025-05-13 20:17:22,053 - DEBUG - Detection took 0.1ms
 # DEBUG:cd_fsod_test:Detection took 0.1ms
-# 2025-05-13 20:01:30,092 - DEBUG - Detecting objects in frame 34
+# 2025-05-13 20:17:22,056 - DEBUG - Detecting objects in frame 34
 # DEBUG:cd_fsod_test:Detecting objects in frame 34
-# 2025-05-13 20:01:30,092 - DEBUG - Frame 34: No objects detected
+# 2025-05-13 20:17:22,056 - DEBUG - Frame 34: No objects detected
 # DEBUG:cd_fsod_test:Frame 34: No objects detected
-# 2025-05-13 20:01:30,092 - DEBUG - Detection took 0.1ms
+# 2025-05-13 20:17:22,056 - DEBUG - Detection took 0.1ms
 # DEBUG:cd_fsod_test:Detection took 0.1ms
-# 2025-05-13 20:01:30,096 - DEBUG - Detecting objects in frame 35
+# 2025-05-13 20:17:22,059 - DEBUG - Detecting objects in frame 35
 # DEBUG:cd_fsod_test:Detecting objects in frame 35
-# 2025-05-13 20:01:30,096 - DEBUG - Frame 35: No objects detected
+# 2025-05-13 20:17:22,059 - DEBUG - Frame 35: No objects detected
 # DEBUG:cd_fsod_test:Frame 35: No objects detected
-# 2025-05-13 20:01:30,096 - DEBUG - Detection took 0.1ms
+# 2025-05-13 20:17:22,059 - DEBUG - Detection took 0.1ms
 # DEBUG:cd_fsod_test:Detection took 0.1ms
-# 2025-05-13 20:01:30,099 - DEBUG - Detecting objects in frame 36
+# 2025-05-13 20:17:22,062 - DEBUG - Detecting objects in frame 36
 # DEBUG:cd_fsod_test:Detecting objects in frame 36
-# 2025-05-13 20:01:30,099 - DEBUG - Frame 36: No objects detected
+# 2025-05-13 20:17:22,062 - DEBUG - Frame 36: No objects detected
 # DEBUG:cd_fsod_test:Frame 36: No objects detected
-# 2025-05-13 20:01:30,099 - DEBUG - Detection took 0.1ms
+# 2025-05-13 20:17:22,062 - DEBUG - Detection took 0.1ms
 # DEBUG:cd_fsod_test:Detection took 0.1ms
-# 2025-05-13 20:01:30,103 - DEBUG - Detecting objects in frame 37
+# 2025-05-13 20:17:22,065 - DEBUG - Detecting objects in frame 37
 # DEBUG:cd_fsod_test:Detecting objects in frame 37
-# 2025-05-13 20:01:30,103 - DEBUG - Frame 37: No objects detected
+# 2025-05-13 20:17:22,066 - DEBUG - Frame 37: No objects detected
 # DEBUG:cd_fsod_test:Frame 37: No objects detected
-# 2025-05-13 20:01:30,103 - DEBUG - Detection took 0.1ms
+# 2025-05-13 20:17:22,066 - DEBUG - Detection took 0.1ms
 # DEBUG:cd_fsod_test:Detection took 0.1ms
-# 2025-05-13 20:01:30,106 - DEBUG - Detecting objects in frame 38
+# 2025-05-13 20:17:22,069 - DEBUG - Detecting objects in frame 38
 # DEBUG:cd_fsod_test:Detecting objects in frame 38
-# 2025-05-13 20:01:30,106 - DEBUG - Frame 38: No objects detected
+# 2025-05-13 20:17:22,069 - DEBUG - Frame 38: No objects detected
 # DEBUG:cd_fsod_test:Frame 38: No objects detected
-# 2025-05-13 20:01:30,106 - DEBUG - Detection took 0.1ms
+# 2025-05-13 20:17:22,069 - DEBUG - Detection took 0.1ms
 # DEBUG:cd_fsod_test:Detection took 0.1ms
-# 2025-05-13 20:01:30,109 - DEBUG - Detecting objects in frame 39
+# 2025-05-13 20:17:22,072 - DEBUG - Detecting objects in frame 39
 # DEBUG:cd_fsod_test:Detecting objects in frame 39
-# 2025-05-13 20:01:30,110 - DEBUG - Frame 39: No objects detected
+# 2025-05-13 20:17:22,073 - DEBUG - Frame 39: No objects detected
 # DEBUG:cd_fsod_test:Frame 39: No objects detected
-# 2025-05-13 20:01:30,110 - DEBUG - Detection took 0.1ms
+# 2025-05-13 20:17:22,073 - DEBUG - Detection took 0.1ms
 # DEBUG:cd_fsod_test:Detection took 0.1ms
-# 2025-05-13 20:01:30,113 - DEBUG - Detecting objects in frame 40
+# 2025-05-13 20:17:22,076 - DEBUG - Detecting objects in frame 40
 # DEBUG:cd_fsod_test:Detecting objects in frame 40
-# 2025-05-13 20:01:30,113 - DEBUG - Frame 40: No objects detected
+# 2025-05-13 20:17:22,076 - DEBUG - Frame 40: No objects detected
 # DEBUG:cd_fsod_test:Frame 40: No objects detected
-# 2025-05-13 20:01:30,113 - DEBUG - Detection took 0.1ms
+# 2025-05-13 20:17:22,076 - DEBUG - Detection took 0.1ms
 # DEBUG:cd_fsod_test:Detection took 0.1ms
-# 2025-05-13 20:01:30,116 - DEBUG - Detecting objects in frame 41
+# 2025-05-13 20:17:22,079 - DEBUG - Detecting objects in frame 41
 # DEBUG:cd_fsod_test:Detecting objects in frame 41
-# 2025-05-13 20:01:30,116 - DEBUG - Frame 41: No objects detected
+# 2025-05-13 20:17:22,079 - DEBUG - Frame 41: No objects detected
 # DEBUG:cd_fsod_test:Frame 41: No objects detected
-# 2025-05-13 20:01:30,116 - DEBUG - Detection took 0.1ms
+# 2025-05-13 20:17:22,079 - DEBUG - Detection took 0.1ms
 # DEBUG:cd_fsod_test:Detection took 0.1ms
-# 2025-05-13 20:01:30,120 - DEBUG - Detecting objects in frame 42
+# 2025-05-13 20:17:22,082 - DEBUG - Detecting objects in frame 42
 # DEBUG:cd_fsod_test:Detecting objects in frame 42
-# 2025-05-13 20:01:30,120 - DEBUG - Frame 42: No objects detected
+# 2025-05-13 20:17:22,082 - DEBUG - Frame 42: No objects detected
 # DEBUG:cd_fsod_test:Frame 42: No objects detected
-# 2025-05-13 20:01:30,120 - DEBUG - Detection took 0.1ms
+# 2025-05-13 20:17:22,082 - DEBUG - Detection took 0.1ms
 # DEBUG:cd_fsod_test:Detection took 0.1ms
-# 2025-05-13 20:01:30,123 - DEBUG - Detecting objects in frame 43
+# 2025-05-13 20:17:22,085 - DEBUG - Detecting objects in frame 43
 # DEBUG:cd_fsod_test:Detecting objects in frame 43
-# 2025-05-13 20:01:30,123 - DEBUG - Frame 43: No objects detected
+# 2025-05-13 20:17:22,086 - DEBUG - Frame 43: No objects detected
 # DEBUG:cd_fsod_test:Frame 43: No objects detected
-# 2025-05-13 20:01:30,123 - DEBUG - Detection took 0.1ms
+# 2025-05-13 20:17:22,086 - DEBUG - Detection took 0.1ms
 # DEBUG:cd_fsod_test:Detection took 0.1ms
-# 2025-05-13 20:01:30,127 - DEBUG - Detecting objects in frame 44
+# 2025-05-13 20:17:22,089 - DEBUG - Detecting objects in frame 44
 # DEBUG:cd_fsod_test:Detecting objects in frame 44
-# 2025-05-13 20:01:30,127 - DEBUG - Frame 44: No objects detected
+# 2025-05-13 20:17:22,089 - DEBUG - Frame 44: No objects detected
 # DEBUG:cd_fsod_test:Frame 44: No objects detected
-# 2025-05-13 20:01:30,127 - DEBUG - Detection took 0.1ms
+# 2025-05-13 20:17:22,089 - DEBUG - Detection took 0.1ms
 # DEBUG:cd_fsod_test:Detection took 0.1ms
-# 2025-05-13 20:01:30,130 - DEBUG - Detecting objects in frame 45
+# 2025-05-13 20:17:22,092 - DEBUG - Detecting objects in frame 45
 # DEBUG:cd_fsod_test:Detecting objects in frame 45
-# 2025-05-13 20:01:30,130 - DEBUG - Frame 45: No objects detected
+# 2025-05-13 20:17:22,092 - DEBUG - Frame 45: No objects detected
 # DEBUG:cd_fsod_test:Frame 45: No objects detected
-# 2025-05-13 20:01:30,130 - DEBUG - Detection took 0.1ms
+# 2025-05-13 20:17:22,092 - DEBUG - Detection took 0.1ms
 # DEBUG:cd_fsod_test:Detection took 0.1ms
-# 2025-05-13 20:01:30,133 - DEBUG - Detecting objects in frame 46
+# 2025-05-13 20:17:22,095 - DEBUG - Detecting objects in frame 46
 # DEBUG:cd_fsod_test:Detecting objects in frame 46
-# 2025-05-13 20:01:30,134 - DEBUG - Frame 46: No objects detected
+# 2025-05-13 20:17:22,095 - DEBUG - Frame 46: No objects detected
 # DEBUG:cd_fsod_test:Frame 46: No objects detected
-# 2025-05-13 20:01:30,134 - DEBUG - Detection took 0.1ms
+# 2025-05-13 20:17:22,095 - DEBUG - Detection took 0.1ms
 # DEBUG:cd_fsod_test:Detection took 0.1ms
-# 2025-05-13 20:01:30,137 - DEBUG - Detecting objects in frame 47
+# 2025-05-13 20:17:22,098 - DEBUG - Detecting objects in frame 47
 # DEBUG:cd_fsod_test:Detecting objects in frame 47
-# 2025-05-13 20:01:30,137 - DEBUG - Frame 47: No objects detected
+# 2025-05-13 20:17:22,098 - DEBUG - Frame 47: No objects detected
 # DEBUG:cd_fsod_test:Frame 47: No objects detected
-# 2025-05-13 20:01:30,137 - DEBUG - Detection took 0.1ms
+# 2025-05-13 20:17:22,098 - DEBUG - Detection took 0.1ms
 # DEBUG:cd_fsod_test:Detection took 0.1ms
-# 2025-05-13 20:01:30,140 - DEBUG - Detecting objects in frame 48
+# 2025-05-13 20:17:22,101 - DEBUG - Detecting objects in frame 48
 # DEBUG:cd_fsod_test:Detecting objects in frame 48
-# 2025-05-13 20:01:30,140 - DEBUG - Frame 48: No objects detected
+# 2025-05-13 20:17:22,101 - DEBUG - Frame 48: No objects detected
 # DEBUG:cd_fsod_test:Frame 48: No objects detected
-# 2025-05-13 20:01:30,140 - DEBUG - Detection took 0.1ms
+# 2025-05-13 20:17:22,101 - DEBUG - Detection took 0.1ms
 # DEBUG:cd_fsod_test:Detection took 0.1ms
-# 2025-05-13 20:01:30,143 - DEBUG - Detecting objects in frame 49
+# 2025-05-13 20:17:22,104 - DEBUG - Detecting objects in frame 49
 # DEBUG:cd_fsod_test:Detecting objects in frame 49
-# 2025-05-13 20:01:30,143 - DEBUG - Frame 49: No objects detected
+# 2025-05-13 20:17:22,104 - DEBUG - Frame 49: No objects detected
 # DEBUG:cd_fsod_test:Frame 49: No objects detected
-# 2025-05-13 20:01:30,144 - DEBUG - Detection took 0.1ms
+# 2025-05-13 20:17:22,104 - DEBUG - Detection took 0.1ms
 # DEBUG:cd_fsod_test:Detection took 0.1ms
-# 2025-05-13 20:01:30,147 - DEBUG - Detecting objects in frame 50
+# 2025-05-13 20:17:22,107 - DEBUG - Detecting objects in frame 50
 # DEBUG:cd_fsod_test:Detecting objects in frame 50
-# 2025-05-13 20:01:30,147 - DEBUG - Frame 50: No objects detected
+# 2025-05-13 20:17:22,107 - DEBUG - Frame 50: No objects detected
 # DEBUG:cd_fsod_test:Frame 50: No objects detected
-# 2025-05-13 20:01:30,147 - DEBUG - Detection took 0.1ms
+# 2025-05-13 20:17:22,107 - DEBUG - Detection took 0.1ms
 # DEBUG:cd_fsod_test:Detection took 0.1ms
-# 2025-05-13 20:01:30,150 - DEBUG - Detecting objects in frame 51
+# 2025-05-13 20:17:22,110 - DEBUG - Detecting objects in frame 51
 # DEBUG:cd_fsod_test:Detecting objects in frame 51
-# 2025-05-13 20:01:30,150 - DEBUG - Frame 51: No objects detected
+# 2025-05-13 20:17:22,110 - DEBUG - Frame 51: No objects detected
 # DEBUG:cd_fsod_test:Frame 51: No objects detected
-# 2025-05-13 20:01:30,150 - DEBUG - Detection took 0.1ms
+# 2025-05-13 20:17:22,110 - DEBUG - Detection took 0.1ms
 # DEBUG:cd_fsod_test:Detection took 0.1ms
-# 2025-05-13 20:01:30,153 - DEBUG - Detecting objects in frame 52
+# 2025-05-13 20:17:22,113 - DEBUG - Detecting objects in frame 52
 # DEBUG:cd_fsod_test:Detecting objects in frame 52
-# 2025-05-13 20:01:30,153 - DEBUG - Frame 52: No objects detected
+# 2025-05-13 20:17:22,113 - DEBUG - Frame 52: No objects detected
 # DEBUG:cd_fsod_test:Frame 52: No objects detected
-# 2025-05-13 20:01:30,153 - DEBUG - Detection took 0.1ms
+# 2025-05-13 20:17:22,113 - DEBUG - Detection took 0.1ms
 # DEBUG:cd_fsod_test:Detection took 0.1ms
-# 2025-05-13 20:01:30,156 - DEBUG - Detecting objects in frame 53
+# 2025-05-13 20:17:22,116 - DEBUG - Detecting objects in frame 53
 # DEBUG:cd_fsod_test:Detecting objects in frame 53
-# 2025-05-13 20:01:30,156 - DEBUG - Frame 53: No objects detected
+# 2025-05-13 20:17:22,116 - DEBUG - Frame 53: No objects detected
 # DEBUG:cd_fsod_test:Frame 53: No objects detected
-# 2025-05-13 20:01:30,156 - DEBUG - Detection took 0.1ms
+# 2025-05-13 20:17:22,116 - DEBUG - Detection took 0.1ms
 # DEBUG:cd_fsod_test:Detection took 0.1ms
 # Found 1 unique objects to process with SAM2
 
 # ==== Processing object 1 (Time Stick) separately ====
 # Resetting SAM2 state for object 1...
-# frame loading (JPEG): 100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 54/54 [00:01<00:00, 38.49it/s]
+# frame loading (JPEG): 100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 54/54 [00:01<00:00, 38.51it/s]
 # Set video from directory: /home/ubuntu/code/drew/e2e_sam2/e2e_pipeline_v2/experiments/vidPredictor/data/frames/Scenes 061-080__265H-2-_20230815215828529
 # Adding box for object 1 at frame 3
 # /home/ubuntu/code/drew/sam2/sam2/sam2_video_predictor.py:786: UserWarning: cannot import name '_C' from 'sam2' (/home/ubuntu/code/drew/sam2/sam2/__init__.py)
@@ -968,7 +967,7 @@ if __name__ == "__main__":
 # Expanded mask shape: torch.Size([1, 540, 960])
 # Generated box: [320.0, 304.0, 496.0, 481.0]
 # Processed frame 9, found 1 objects
-# propagate in video:  14%|█████████████████▋                                                                                                               | 7/51 [00:04<00:30,  1.42it/s]Processing item 8: frame=10, objects=[1]
+# propagate in video:  14%|█████████████████▋                                                                                                               | 7/51 [00:04<00:31,  1.42it/s]Processing item 8: frame=10, objects=[1]
 # Filtering objects to track: [1]
 # After filtering: 1 objects remain
 # Processing object 1 in frame 10
@@ -1045,7 +1044,7 @@ if __name__ == "__main__":
 # Expanded mask shape: torch.Size([1, 540, 960])
 # Generated box: [286.0, 419.0, 594.0, 480.0]
 # Processed frame 16, found 1 objects
-# propagate in video:  27%|███████████████████████████████████▏                                                                                            | 14/51 [00:10<00:29,  1.25it/s]Processing item 15: frame=17, objects=[1]
+# propagate in video:  27%|███████████████████████████████████▏                                                                                            | 14/51 [00:10<00:29,  1.24it/s]Processing item 15: frame=17, objects=[1]
 # Filtering objects to track: [1]
 # After filtering: 1 objects remain
 # Processing object 1 in frame 17
@@ -1065,7 +1064,7 @@ if __name__ == "__main__":
 # Empty mask detected for object 1 in frame 18 (no true pixels)
 # Using fallback box from previous frame: [286.0, 419.0, 594.0, 480.0]
 # Processed frame 18, found 1 objects
-# propagate in video:  31%|████████████████████████████████████████▏                                                                                       | 16/51 [00:11<00:28,  1.24it/s]Processing item 17: frame=19, objects=[1]
+# propagate in video:  31%|████████████████████████████████████████▏                                                                                       | 16/51 [00:11<00:28,  1.23it/s]Processing item 17: frame=19, objects=[1]
 # Filtering objects to track: [1]
 # After filtering: 1 objects remain
 # Processing object 1 in frame 19
@@ -1127,7 +1126,7 @@ if __name__ == "__main__":
 # Empty mask detected for object 1 in frame 24 (no true pixels)
 # Using fallback box from previous frame: [662.0, 235.0, 838.0, 480.0]
 # Processed frame 24, found 1 objects
-# propagate in video:  43%|███████████████████████████████████████████████████████▏                                                                        | 22/51 [00:16<00:23,  1.23it/s]Processing item 23: frame=25, objects=[1]
+# propagate in video:  43%|███████████████████████████████████████████████████████▏                                                                        | 22/51 [00:16<00:23,  1.22it/s]Processing item 23: frame=25, objects=[1]
 # Filtering objects to track: [1]
 # After filtering: 1 objects remain
 # Processing object 1 in frame 25
@@ -1137,7 +1136,7 @@ if __name__ == "__main__":
 # Empty mask detected for object 1 in frame 25 (no true pixels)
 # Using fallback box from previous frame: [662.0, 235.0, 838.0, 480.0]
 # Processed frame 25, found 1 objects
-# propagate in video:  45%|█████████████████████████████████████████████████████████▋                                                                      | 23/51 [00:17<00:22,  1.23it/s]Processing item 24: frame=26, objects=[1]
+# propagate in video:  45%|█████████████████████████████████████████████████████████▋                                                                      | 23/51 [00:17<00:22,  1.22it/s]Processing item 24: frame=26, objects=[1]
 # Filtering objects to track: [1]
 # After filtering: 1 objects remain
 # Processing object 1 in frame 26
@@ -1147,7 +1146,7 @@ if __name__ == "__main__":
 # Empty mask detected for object 1 in frame 26 (no true pixels)
 # Using fallback box from previous frame: [662.0, 235.0, 838.0, 480.0]
 # Processed frame 26, found 1 objects
-# propagate in video:  47%|████████████████████████████████████████████████████████████▏                                                                   | 24/51 [00:18<00:21,  1.23it/s]Processing item 25: frame=27, objects=[1]
+# propagate in video:  47%|████████████████████████████████████████████████████████████▏                                                                   | 24/51 [00:18<00:22,  1.22it/s]Processing item 25: frame=27, objects=[1]
 # Filtering objects to track: [1]
 # After filtering: 1 objects remain
 # Processing object 1 in frame 27
@@ -1157,7 +1156,7 @@ if __name__ == "__main__":
 # Empty mask detected for object 1 in frame 27 (no true pixels)
 # Using fallback box from previous frame: [662.0, 235.0, 838.0, 480.0]
 # Processed frame 27, found 1 objects
-# propagate in video:  49%|██████████████████████████████████████████████████████████████▋                                                                 | 25/51 [00:18<00:21,  1.23it/s]Processing item 26: frame=28, objects=[1]
+# propagate in video:  49%|██████████████████████████████████████████████████████████████▋                                                                 | 25/51 [00:19<00:21,  1.22it/s]Processing item 26: frame=28, objects=[1]
 # Filtering objects to track: [1]
 # After filtering: 1 objects remain
 # Processing object 1 in frame 28
@@ -1167,7 +1166,7 @@ if __name__ == "__main__":
 # Empty mask detected for object 1 in frame 28 (no true pixels)
 # Using fallback box from previous frame: [662.0, 235.0, 838.0, 480.0]
 # Processed frame 28, found 1 objects
-# propagate in video:  51%|█████████████████████████████████████████████████████████████████▎                                                              | 26/51 [00:19<00:20,  1.23it/s]Processing item 27: frame=29, objects=[1]
+# propagate in video:  51%|█████████████████████████████████████████████████████████████████▎                                                              | 26/51 [00:19<00:20,  1.22it/s]Processing item 27: frame=29, objects=[1]
 # Filtering objects to track: [1]
 # After filtering: 1 objects remain
 # Processing object 1 in frame 29
@@ -1177,7 +1176,7 @@ if __name__ == "__main__":
 # Empty mask detected for object 1 in frame 29 (no true pixels)
 # Using fallback box from previous frame: [662.0, 235.0, 838.0, 480.0]
 # Processed frame 29, found 1 objects
-# propagate in video:  53%|███████████████████████████████████████████████████████████████████▊                                                            | 27/51 [00:20<00:19,  1.23it/s]Processing item 28: frame=30, objects=[1]
+# propagate in video:  53%|███████████████████████████████████████████████████████████████████▊                                                            | 27/51 [00:20<00:19,  1.22it/s]Processing item 28: frame=30, objects=[1]
 # Filtering objects to track: [1]
 # After filtering: 1 objects remain
 # Processing object 1 in frame 30
@@ -1197,7 +1196,7 @@ if __name__ == "__main__":
 # Empty mask detected for object 1 in frame 31 (no true pixels)
 # Using fallback box from previous frame: [662.0, 235.0, 838.0, 480.0]
 # Processed frame 31, found 1 objects
-# propagate in video:  57%|████████████████████████████████████████████████████████████████████████▊                                                       | 29/51 [00:22<00:17,  1.22it/s]Processing item 30: frame=32, objects=[1]
+# propagate in video:  57%|████████████████████████████████████████████████████████████████████████▊                                                       | 29/51 [00:22<00:18,  1.22it/s]Processing item 30: frame=32, objects=[1]
 # Filtering objects to track: [1]
 # After filtering: 1 objects remain
 # Processing object 1 in frame 32
@@ -1267,7 +1266,7 @@ if __name__ == "__main__":
 # Empty mask detected for object 1 in frame 38 (no true pixels)
 # Using fallback box from previous frame: [662.0, 235.0, 838.0, 480.0]
 # Processed frame 38, found 1 objects
-# propagate in video:  71%|██████████████████████████████████████████████████████████████████████████████████████████▎                                     | 36/51 [00:27<00:12,  1.22it/s]Processing item 37: frame=39, objects=[1]
+# propagate in video:  71%|██████████████████████████████████████████████████████████████████████████████████████████▎                                     | 36/51 [00:28<00:12,  1.22it/s]Processing item 37: frame=39, objects=[1]
 # Filtering objects to track: [1]
 # After filtering: 1 objects remain
 # Processing object 1 in frame 39
@@ -1417,7 +1416,7 @@ if __name__ == "__main__":
 # Empty mask detected for object 1 in frame 53 (no true pixels)
 # Using fallback box from previous frame: [662.0, 235.0, 838.0, 480.0]
 # Processed frame 53, found 1 objects
-# propagate in video: 100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 51/51 [00:40<00:00,  1.27it/s]
+# propagate in video: 100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 51/51 [00:40<00:00,  1.26it/s]
 # Finished propagation, processed 51 frames, found 51 frames with objects
 # Mask statistics: 16 valid masks, 35 empty masks
 # DEBUG: propagate_masks returned type: <class 'tuple'>
@@ -1450,25 +1449,26 @@ if __name__ == "__main__":
 # Verification successful: All objects' masks are consistent with the mapping
 # Saved object-to-frame mapping to cd_fsod_results/object_frame_mapping.json
 # All results saved to: cd_fsod_results
-# 2025-05-13 20:02:13,903 - INFO - Video processing completed in 44.12 seconds
-# INFO:cd_fsod_test:Video processing completed in 44.12 seconds
-# 2025-05-13 20:02:13,903 - DEBUG - First detection details:
+# 2025-05-13 20:18:05,988 - INFO - Video processing completed in 44.23 seconds
+# INFO:cd_fsod_test:Video processing completed in 44.23 seconds
+# 2025-05-13 20:18:05,988 - DEBUG - First detection details:
 # DEBUG:cd_fsod_test:First detection details:
-# 2025-05-13 20:02:13,903 - DEBUG -   Object #1 (Time Stick) first detected at frame 3
+# 2025-05-13 20:18:05,988 - DEBUG -   Object #1 (Time Stick) first detected at frame 3
 # DEBUG:cd_fsod_test:  Object #1 (Time Stick) first detected at frame 3
-# 2025-05-13 20:02:13,903 - DEBUG -     From 3.json: {'coordinates': [453, 224, 643, 473], 'label': 'Time Stick', 'confidence': 0.9931594133377075}
+# 2025-05-13 20:18:05,988 - DEBUG -     From 3.json: {'coordinates': [453, 224, 643, 473], 'label': 'Time Stick', 'confidence': 0.9931594133377075}
 # DEBUG:cd_fsod_test:    From 3.json: {'coordinates': [453, 224, 643, 473], 'label': 'Time Stick', 'confidence': 0.9931594133377075}
-# 2025-05-13 20:02:13,904 - INFO - Generated 59 output files
-# INFO:cd_fsod_test:Generated 59 output files
-# 2025-05-13 20:02:13,904 - DEBUG - Output files: ['frame_0049.jpg', 'frame_0045.jpg', 'frame_0014.jpg', 'frame_0025.jpg', 'frame_0051.jpg', 'frame_0039.jpg', 'frame_0030.jpg', 'frame_0008.jpg', 'frame_0002.jpg', 'frame_0042.jpg']
+# 2025-05-13 20:18:05,989 - INFO - Generated 62 output files
+# INFO:cd_fsod_test:Generated 62 output files
+# 2025-05-13 20:18:05,989 - DEBUG - Output files: ['frame_0049.jpg', 'frame_0045.jpg', 'frame_0014.jpg', 'frame_0025.jpg', 'frame_0051.jpg', 'frame_0039.jpg', 'frame_0030.jpg', 'frame_0008.jpg', 'frame_0002.jpg', 'frame_0042.jpg']
 # DEBUG:cd_fsod_test:Output files: ['frame_0049.jpg', 'frame_0045.jpg', 'frame_0014.jpg', 'frame_0025.jpg', 'frame_0051.jpg', 'frame_0039.jpg', 'frame_0030.jpg', 'frame_0008.jpg', 'frame_0002.jpg', 'frame_0042.jpg']
-# 2025-05-13 20:02:13,904 - INFO - ================================================================================
+# 2025-05-13 20:18:05,989 - INFO - ================================================================================
 # INFO:cd_fsod_test:================================================================================
-# 2025-05-13 20:02:13,904 - INFO - CD-FSOD Integration Test Completed Successfully
+# 2025-05-13 20:18:05,989 - INFO - CD-FSOD Integration Test Completed Successfully
 # INFO:cd_fsod_test:CD-FSOD Integration Test Completed Successfully
-# 2025-05-13 20:02:13,904 - INFO - Total processing time: 47.89 seconds
-# INFO:cd_fsod_test:Total processing time: 47.89 seconds
-# 2025-05-13 20:02:13,904 - INFO - Results saved to: ./cd_fsod_results
+# 2025-05-13 20:18:05,989 - INFO - Total processing time: 48.00 seconds
+# INFO:cd_fsod_test:Total processing time: 48.00 seconds
+# 2025-05-13 20:18:05,989 - INFO - Results saved to: ./cd_fsod_results
 # INFO:cd_fsod_test:Results saved to: ./cd_fsod_results
-# 2025-05-13 20:02:13,904 - INFO - ================================================================================
+# 2025-05-13 20:18:05,989 - INFO - ================================================================================
 # INFO:cd_fsod_test:================================================================================
+# ^C

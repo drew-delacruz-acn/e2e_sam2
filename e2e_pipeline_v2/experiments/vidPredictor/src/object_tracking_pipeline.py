@@ -28,94 +28,104 @@ from embedding_extractor import EmbeddingExtractor
 class ObjectTrackingPipeline:
     def __init__(
         self,
-        owlv2_checkpoint: str,
-        sam2_checkpoint: str,
-        sam2_config: str,
-        output_dir: str,
-        confidence_threshold: float = 0.1,
-        device: Optional[torch.device] = None,
-        detector_type: str = "owlv2",  # New parameter for detector type
-        cd_fsod_path: Optional[str] = None,  # Path to CD-FSOD JSON directory
-        min_gap_frames: int = 10,  # Min gap frames for CD-FSOD detector
-        mask_quality_threshold: int = 0,  # Minimum pixel count for mask quality assessment
+        owlv2_checkpoint=None,
+        sam2_checkpoint=None, 
+        sam2_config=None,
+        output_dir="./outputs",
+        confidence_threshold=0.5,
+        device=None,
+        detector_type="owlv2",  # Can be 'owlv2' or 'cd_fsod'
+        cd_fsod_path=None,
+        min_gap_frames=10,
+        mask_quality_threshold=0
     ):
-        # Set device
-        if device is None:
-            self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-        else:
-            self.device = device
-        
-        # Create detector based on type
-        self.detector_type = detector_type
-        self.detector = self._create_detector(
-            detector_type=detector_type,
-            owlv2_checkpoint=owlv2_checkpoint,
-            cd_fsod_path=cd_fsod_path,
-            confidence_threshold=confidence_threshold,
-            min_gap_frames=min_gap_frames,
-            device=self.device
-        )
-        
-        # Initialize tracking components
-        self.output_dir = Path(output_dir)
-        self.output_dir.mkdir(exist_ok=True, parents=True)
-        self.confidence_threshold = confidence_threshold
-        self.tracker = ObjectTracker()
-        self.embedding_extractor = EmbeddingExtractor(device=self.device)
-        
-        # Create SAM2 wrapper
-        self.sam_wrapper = SAM2VideoWrapper(
-            checkpoint_path=sam2_checkpoint,
-            config_path=sam2_config,
-            device=self.device
-        )
-        
-        # Store tracked objects and propagation results
-        self.tracked_objects = {}  # Store tracked objects with masks
-        self.propagation_results = {}  # Store SAM2 propagation results
-        self.boxes_by_frame = {}  # Store boxes by frame, including fallbacks
-        
-        # Store quality threshold for mask assessment
-        self.mask_quality_threshold = mask_quality_threshold
-        
-        # Tracking state
-        self.next_id = 1
-        
-    def _create_detector(
-        self,
-        detector_type: str,
-        owlv2_checkpoint: str,
-        cd_fsod_path: Optional[str] = None,
-        confidence_threshold: float = 0.1,
-        min_gap_frames: int = 10,
-        device: torch.device = None
-    ):
-        """
-        Factory method to create the appropriate detector.
+        """Initialize the object tracking pipeline with OWLv2 and SAM2.
         
         Args:
-            detector_type: Type of detector ('owlv2' or 'cd_fsod')
-            owlv2_checkpoint: Path to OWLv2 checkpoint file
-            cd_fsod_path: Path to CD-FSOD JSON directory
-            confidence_threshold: Minimum confidence threshold
-            min_gap_frames: Minimum gap frames for CD-FSOD detector
-            device: Torch device for OWLv2 detector
-            
-        Returns:
-            Initialized detector object
+            owlv2_checkpoint: Path to OWLv2 checkpoint
+            sam2_checkpoint: Path to SAM2 checkpoint
+            sam2_config: Path to SAM2 config file
+            output_dir: Output directory for visualizations and results
+            confidence_threshold: Confidence threshold for detections
+            device: Device to use (default: cuda if available, else cpu)
+            detector_type: Type of detector to use ('owlv2' or 'cd_fsod')
+            cd_fsod_path: Path to CD-FSOD JSON detections directory (if using cd_fsod detector)
+            min_gap_frames: Minimum gap in frames to consider an object as a reappearance (for CD-FSOD)
+            mask_quality_threshold: Minimum pixel count for high-quality mask (default: 0, all non-empty masks are high-quality)
         """
-        if detector_type == "owlv2":
-            return OWLv2Detector(device=device)
-        elif detector_type == "cd_fsod":
-            if cd_fsod_path is None:
-                raise ValueError("cd_fsod_path must be provided when using CD-FSOD detector")
-            return CDFSODDetector(
-                json_dir=cd_fsod_path,
-                confidence_threshold=confidence_threshold,
-                min_gap_frames=min_gap_frames
+        # Use provided device or default to CUDA if available
+        if device is None:
+            self.device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+        else:
+            self.device = device
+            
+        print(f"Using device: {self.device}")
+        
+        # Set output directory
+        self.output_dir = Path(output_dir)
+        os.makedirs(self.output_dir, exist_ok=True)
+        print(f"Output directory: {self.output_dir}")
+        
+        # Set confidence threshold
+        self.confidence_threshold = confidence_threshold
+        print(f"Confidence threshold: {self.confidence_threshold}")
+        
+        # Store mask quality threshold
+        self.mask_quality_threshold = mask_quality_threshold
+        print(f"Mask quality threshold: {self.mask_quality_threshold}")
+        
+        # Set detector type
+        self.detector_type = detector_type
+        print(f"Using detector type: {self.detector_type}")
+        
+        # Initialize SAM2
+        if sam2_checkpoint is not None and sam2_config is not None:
+            print(f"Initializing SAM2 with checkpoint: {sam2_checkpoint}")
+            self.sam_wrapper = SAM2VideoWrapper(
+                checkpoint_path=sam2_checkpoint,
+                config_path=sam2_config,
+                device=self.device
             )
         else:
-            raise ValueError(f"Unknown detector type: {detector_type}. Must be 'owlv2' or 'cd_fsod'")
+            print("SAM2 checkpoint or config not provided, skipping SAM2 initialization")
+            self.sam_wrapper = None
+            
+        # Initialize detector based on type
+        if self.detector_type == "owlv2":
+            if owlv2_checkpoint is not None:
+                print(f"Initializing OWLv2 with checkpoint: {owlv2_checkpoint}")
+                self.detector = OWLv2Detector(
+                    checkpoint_path=owlv2_checkpoint,
+                    device=self.device
+                )
+            else:
+                print("OWLv2 checkpoint not provided, skipping OWLv2 initialization")
+                self.detector = None
+        elif self.detector_type == "cd_fsod":
+            if cd_fsod_path is not None:
+                print(f"Initializing CD-FSOD detector with path: {cd_fsod_path}")
+                self.detector = CDFSODDetector(
+                    json_dir=cd_fsod_path,
+                    min_gap_frames=min_gap_frames
+                )
+            else:
+                print("CD-FSOD path not provided, skipping CD-FSOD initialization")
+                self.detector = None
+        else:
+            raise ValueError(f"Unknown detector type: {self.detector_type}")
+            
+        # Initialize embedding extractor
+        print("Initializing embedding extractor")
+        self.embedding_extractor = EmbeddingExtractor(self.device)
+        
+        # Initialize tracking state
+        self.tracked_objects = {}  # Dictionary of tracked objects
+        self.next_id = 1  # Next object ID to assign
+        self.propagation_results = {}  # Store propagation results for visualization
+        self.boxes_by_frame = {}  # Store bounding boxes derived from masks
+        
+        # Log initialization complete
+        print("Pipeline initialization complete")
         
     def process_video(self, frames_dir: str, text_queries: List[str]):
         # Get all frames sorted using natural sort
@@ -406,28 +416,17 @@ class ObjectTrackingPipeline:
                         # Only copy if the propagation returned masks for this object
                         if obj_id in masks:
                             self.propagation_results[frame_idx][obj_id] = masks[obj_id]
-                            
-                            # Analyze mask quality
-                            mask = masks[obj_id]
-                            pixel_count = self._count_mask_pixels(mask)
-                            quality_status = "HIGH QUALITY" if pixel_count >= self.mask_quality_threshold else "LOW QUALITY" if pixel_count > 0 else "EMPTY"
-                            print(f"  Frame {frame_idx}: Object #{obj_id} mask statistics - sum: {pixel_count} pixels - {quality_status}")
                     
-                    # If we also have boxes_by_frame, store those too
-                    if isinstance(boxes_by_frame, dict) and boxes_by_frame:
-                        for frame_idx, boxes in boxes_by_frame.items():
-                            if frame_idx not in self.boxes_by_frame:
-                                self.boxes_by_frame[frame_idx] = {}
-                            
-                            # Only copy if boxes exist for this object
-                            if obj_id in boxes:
-                                self.boxes_by_frame[frame_idx][obj_id] = boxes[obj_id]
-                                
-                                # Check and log if it's a fallback box
-                                if isinstance(boxes[obj_id], dict) and boxes[obj_id].get("is_fallback", False):
-                                    print(f"  Frame {frame_idx}: Object #{obj_id} using FALLBACK BOX")
+                    # Store boxes_by_frame in the class attribute
+                    for frame_idx, boxes in boxes_by_frame.items():
+                        if frame_idx not in self.boxes_by_frame:
+                            self.boxes_by_frame[frame_idx] = {}
+                        
+                        # Only copy if boxes exist for this object
+                        if obj_id in boxes:
+                            self.boxes_by_frame[frame_idx][obj_id] = boxes[obj_id]
                     
-                    # NEW CODE: Update tracked_objects with all boxes from propagation
+                    # Collect all boxes for this object
                     all_boxes = []
                     for frame_idx in sorted(boxes_by_frame.keys()):
                         if obj_id in boxes_by_frame[frame_idx]:
@@ -954,6 +953,8 @@ class ObjectTrackingPipeline:
             high_quality_frames = []
             low_quality_frames = []
             empty_mask_frames = []
+            # Store bounding boxes for all frames
+            bounding_boxes = {}
             
             # Process all frames that have masks for this object
             for frame_idx in sorted(self.propagation_results.keys()):
@@ -976,6 +977,14 @@ class ObjectTrackingPipeline:
                         low_quality_frames.append(frame_idx)
                     else:
                         empty_mask_frames.append(frame_idx)
+                    
+                    # Store bounding box if available for this frame
+                    if frame_idx in self.boxes_by_frame and obj_id in self.boxes_by_frame[frame_idx]:
+                        box_data = self.boxes_by_frame[frame_idx][obj_id]
+                        if isinstance(box_data, dict) and "box" in box_data:
+                            bounding_boxes[str(frame_idx)] = box_data["box"]
+                        else:
+                            bounding_boxes[str(frame_idx)] = box_data
                 
             # No need to get first_detected and last_seen metadata anymore
             
@@ -985,7 +994,8 @@ class ObjectTrackingPipeline:
                 "high_quality_frames": high_quality_frames,
                 "low_quality_frames": low_quality_frames,
                 "empty_mask_frames": empty_mask_frames,
-                "mask_quality_threshold": self.mask_quality_threshold
+                "mask_quality_threshold": self.mask_quality_threshold,
+                "bounding_boxes": bounding_boxes
             }
         
         # Write the mapping to a JSON file
@@ -999,6 +1009,7 @@ class ObjectTrackingPipeline:
         total_low_quality = sum(len(data["low_quality_frames"]) for data in mapping.values())
         total_empty = sum(len(data["empty_mask_frames"]) for data in mapping.values())
         total_saved = total_high_quality + total_low_quality
+        total_boxes = sum(len(data.get("bounding_boxes", {})) for data in mapping.values())
         
         print(f"Object tracking quality statistics:")
         print(f"  Total objects tracked: {total_objects}")
@@ -1006,6 +1017,7 @@ class ObjectTrackingPipeline:
         print(f"  Total low quality frames (1-{self.mask_quality_threshold} pixels): {total_low_quality}")
         print(f"  Total empty mask frames (0 pixels): {total_empty} (not saved)")
         print(f"  Total saved frames (non-empty masks): {total_saved}")
+        print(f"  Total bounding boxes saved: {total_boxes}")
         
         # Generate a separate summary JSON with overall statistics
         summary = {
@@ -1015,6 +1027,7 @@ class ObjectTrackingPipeline:
                 "high_quality_frames": total_high_quality,
                 "low_quality_frames": total_low_quality,
                 "empty_mask_frames": total_empty,
+                "total_bounding_boxes": total_boxes,
                 "mask_quality_threshold": self.mask_quality_threshold
             },
             "objects": {
@@ -1023,7 +1036,8 @@ class ObjectTrackingPipeline:
                     "quality_counts": {
                         "high_quality": len(data["high_quality_frames"]),
                         "low_quality": len(data["low_quality_frames"]),
-                        "empty": len(data["empty_mask_frames"])
+                        "empty": len(data["empty_mask_frames"]),
+                        "bounding_boxes": len(data.get("bounding_boxes", {}))
                     }
                 } for obj_id, data in mapping.items()
             }
@@ -1202,211 +1216,111 @@ class ObjectTrackingPipeline:
             "metadata": {
                 "queries": text_queries,
                 "frame_count": len(frame_files),
-                "timestamp": time.strftime("%Y-%m-%d %H:%M:%S"),
-                "detector_type": self.detector_type  # Include detector type in metadata
+                "timestamp": time.strftime("%Y%m%d_%H%M%S")
             }
         }
         
-        # First detect and track all objects without SAM2
-        all_objects = self._detect_and_track_all_objects(frames_dir, frame_files, text_queries, results)
+        # Set video for SAM2
+        self.sam_wrapper.set_video(frames_dir)
         
-        # Now process each object separately with SAM2
-        self.tracked_objects = {}  # Clear existing tracked objects
-        self.propagation_results = {}  # Will store all propagation results
+        # Get first frame
+        first_frame_path = frame_files[0]
+        first_frame = Image.open(first_frame_path).convert("RGB")
+        first_frame_np = np.array(first_frame)
         
-        for obj_id, obj_data in all_objects.items():
-            print(f"\n==== Processing object {obj_id} ({obj_data['class']}) separately ====")
+        # Extract actual frame index from filename
+        first_frame_idx = self._extract_frame_idx_from_path(first_frame_path)
+        print(f"Processing first frame with extracted index: {first_frame_idx}")
+        
+        # Detect objects in first frame
+        # For CD-FSOD, we pass the frame filename to help extract the frame index
+        first_frame_data = first_frame
+        if self.detector_type == "cd_fsod":
+            # For CD-FSOD detector, we need to provide frame information
+            # We'll use the extracted frame index to ensure proper JSON matching
+            first_frame_data = {
+                "image": first_frame,
+                "frame_path": str(first_frame_path),
+                "frame_idx": first_frame_idx
+            }
             
-            # Reset SAM2 completely for this object
-            print(f"Resetting SAM2 state for object {obj_id}...")
-            self.sam_wrapper.set_video(frames_dir=frames_dir)
-            
-            # Get the first frame this object appears in
-            first_frame_idx = obj_data["first_detected"]
-            first_box = obj_data["boxes"][0]
-            
-            # Add box to SAM2
-            print(f"Adding box for object {obj_id} at frame {first_frame_idx}")
-            mask_logits = self.sam_wrapper.add_box(frame_idx=first_frame_idx, obj_id=obj_id, box=first_box)
-            
-            if mask_logits is None:
-                print(f"Failed to generate mask for object {obj_id}")
+        detections = self.detector.detect(
+            image=first_frame_data,
+            text_queries=text_queries,
+            threshold=self.confidence_threshold
+        )
+        
+        # Initialize object tracking
+        print(f' Detections {detections}')
+        for i, (box, label, conf) in enumerate(zip(detections["boxes"], detections["labels"], detections["scores"])):
+            if conf < self.confidence_threshold:
                 continue
                 
-            # Update mask in the object data
-            obj_data["masks"] = [mask_logits.cpu().numpy() if isinstance(mask_logits, torch.Tensor) else mask_logits]
+            # Convert box to XYXY format if needed
+            x1, y1, x2, y2 = box
+            x1, y1, x2, y2 = int(x1), int(y1), int(x2), int(y2)
             
-            # Run propagation just for this object
+            # Ensure box coordinates are valid
+            x1 = max(0, x1)
+            y1 = max(0, y1)
+            x2 = min(first_frame_np.shape[1], x2)
+            y2 = min(first_frame_np.shape[0], y2)
+            
+            # Skip invalid boxes
+            if x1 >= x2 or y1 >= y2:
+                print(f"Skipping invalid box: {[x1, y1, x2, y2]}")
+                continue
+                
+            box_area = first_frame_np[y1:y2, x1:x2]
+            
+            # Extract embedding for this object
             try:
-                print(f"Running propagation for object {obj_id}...")
-                result = self.sam_wrapper.propagate_masks(objects_to_track=[obj_id])
-                print(f"DEBUG: propagate_masks(objects_to_track={obj_id}) returned type: {type(result)}")
-                if isinstance(result, tuple):
-                    print(f"DEBUG: propagate_masks(objects_to_track={obj_id}) tuple length: {len(result)}")
-                    segments, boxes_by_frame = result
-                else:
-                    print(f"DEBUG: propagate_masks(objects_to_track={obj_id}) value: {result}")
-                    segments = result
-                    boxes_by_frame = {}  # Initialize empty dict if no boxes returned
-                
-                # Store all propagation results
-                for frame_idx, masks in segments.items():
-                    if frame_idx not in self.propagation_results:
-                        self.propagation_results[frame_idx] = {}
-                    
-                    # Only copy if the propagation returned masks for this object
-                    if obj_id in masks:
-                        self.propagation_results[frame_idx][obj_id] = masks[obj_id]
-                        
-                        # Analyze mask quality
-                        mask = masks[obj_id]
-                        pixel_count = self._count_mask_pixels(mask)
-                        quality_status = "HIGH QUALITY" if pixel_count >= self.mask_quality_threshold else "LOW QUALITY" if pixel_count > 0 else "EMPTY"
-                        print(f"  Frame {frame_idx}: Object #{obj_id} mask statistics - sum: {pixel_count} pixels - {quality_status}")
-                    
-                # If we also have boxes_by_frame, store those too
-                if isinstance(boxes_by_frame, dict) and boxes_by_frame:
-                    for frame_idx, boxes in boxes_by_frame.items():
-                        if frame_idx not in self.boxes_by_frame:
-                            self.boxes_by_frame[frame_idx] = {}
-                        
-                        # Only copy if boxes exist for this object
-                        if obj_id in boxes:
-                            self.boxes_by_frame[frame_idx][obj_id] = boxes[obj_id]
-                            
-                            # Check and log if it's a fallback box
-                            if isinstance(boxes[obj_id], dict) and boxes[obj_id].get("is_fallback", False):
-                                print(f"  Frame {frame_idx}: Object #{obj_id} using FALLBACK BOX")
-                
-                # NEW CODE: Update tracked_objects with all boxes from propagation
-                all_boxes = []
-                for frame_idx in sorted(boxes_by_frame.keys()):
-                    if obj_id in boxes_by_frame[frame_idx]:
-                        box_data = boxes_by_frame[frame_idx][obj_id]
-                        if isinstance(box_data, dict):
-                            box = box_data["box"]
-                            all_boxes.append(box)
-                            print(f"Adding box for frame {frame_idx} to object {obj_id}: {box}")
-                        else:
-                            all_boxes.append(box_data)
-                            print(f"Adding raw box for frame {frame_idx} to object {obj_id}: {box_data}")
-                
-                # Add logging to debug the tracked_objects dictionary
-                print(f"DEBUG: tracked_objects keys before update: {list(self.tracked_objects.keys())}")
-                print(f"DEBUG: Is object {obj_id} in tracked_objects? {obj_id in self.tracked_objects}")
-                print(f"DEBUG: Number of boxes collected for object {obj_id}: {len(all_boxes)}")
-                
-                # Only update if we have boxes
-                if not all_boxes:
-                    print(f"WARNING: No boxes collected for object {obj_id}, skipping tracked_objects update")
-                    continue
-                
-                # Update tracked_objects with the new boxes, with proper error handling
-                if obj_id in self.tracked_objects:
-                    self.tracked_objects[obj_id]["boxes"] = all_boxes
-                    # Also collect and store masks
-                    all_masks = []
-                    for frame_idx in sorted(self.propagation_results.keys()):
-                        if obj_id in self.propagation_results[frame_idx]:
-                            all_masks.append(self.propagation_results[frame_idx][obj_id])
-                    
-                    # Store masks if we have them
-                    if all_masks:
-                        self.tracked_objects[obj_id]["masks"] = all_masks
-                        print(f"Stored {len(all_masks)} masks for object {obj_id}")
-                    
-                    print(f"Successfully updated boxes for object {obj_id}")
-                else:
-                    # Create the object entry if it doesn't exist
-                    print(f"Object {obj_id} not found in tracked_objects. Creating entry.")
-                    self.tracked_objects[obj_id] = {
-                        "id": obj_id,
-                        "class": obj_data["class"],  # Use the class from the original detected object
-                        "first_detected": obj_data["first_detected"],  # Use the original detection frame
-                        "last_seen": frame_idx,
-                        "confidence": [obj_data.get("confidence", [1.0])[0] if isinstance(obj_data.get("confidence"), list) else obj_data.get("confidence", 1.0)],
-                        "boxes": all_boxes,
-                        "masks": obj_data.get("masks", [])  # Add masks with empty list as default
-                    }
-                    print(f"Created new entry for object {obj_id}")
-                
-                print(f"Successfully propagated masks for object {obj_id}, available in {len(segments)} frames")
+                embedding = self.embedding_extractor.extract(box_area)
             except Exception as e:
-                print(f"Error during propagation for object {obj_id}: {e}")
-                import traceback
-                print(f"Propagation error traceback: {traceback.format_exc()}")
-
-            # Store updated object data only if it doesn't exist yet
-            print(f"DEBUG: After propagation - Is object {obj_id} in tracked_objects? {obj_id in self.tracked_objects}")
-            if obj_id not in self.tracked_objects:
-                print(f"Adding object {obj_id} to tracked_objects after propagation")
-                self.tracked_objects[obj_id] = obj_data
-            else:
-                print(f"Object {obj_id} already exists in tracked_objects, keeping existing entry")
-                
-            # Always update the results dict
-            results["object_tracks"][obj_id] = obj_data
-        
-        # Generate visualizations for all frames
-        for i, frame_path in enumerate(frame_files):
-            # Extract the actual frame index
-            frame_idx = frame_indices[i]
+                print(f"Error extracting embedding: {e}")
+                continue
             
-            # Get visible objects for this frame
-            visible_objects = {
-                obj_id: data for obj_id, data in self.tracked_objects.items()
-                if data["first_detected"] <= frame_idx <= data["last_seen"]
+            # Create a unique object ID first
+            object_id = self.next_id
+            self.next_id += 1
+            
+            # Add box to SAM2 to get mask - match test pattern
+            box_coords = [x1, y1, x2, y2]
+            print(f"Adding box for object {object_id} at frame {first_frame_idx}: {box_coords}")
+            mask_logits = self.sam_wrapper.add_box(frame_idx=first_frame_idx, obj_id=object_id, box=box_coords)
+            
+            # Skip if mask generation failed
+            if mask_logits is None:
+                print(f"Failed to generate mask for object {object_id}")
+                continue
+            
+            # Store this object with the ID
+            self.tracked_objects[object_id] = {
+                "id": object_id,
+                "class": label,
+                "first_detected": first_frame_idx,  # Use extracted frame index
+                "boxes": [box_coords],
+                "embeddings": [embedding.cpu().numpy() if isinstance(embedding, torch.Tensor) else embedding],
+                "masks": [mask_logits.cpu().numpy() if isinstance(mask_logits, torch.Tensor) else mask_logits],
+                "last_seen": first_frame_idx,  # Use extracted frame index
+                "confidence": [conf]
             }
             
-            # Load the frame
-            frame = np.array(Image.open(frame_path).convert("RGB"))
+            # Store in results
+            results["object_tracks"][object_id] = self.tracked_objects[object_id]
+        
+        # Run mask propagation for all tracked objects
+        if self.tracked_objects:
+            print("Running mask propagation for all tracked objects...")
+            object_ids = list(self.tracked_objects.keys())
+            segments, boxes_by_frame = self.sam_wrapper.propagate_masks(objects_to_track=object_ids)
+            self.propagation_results = segments
+            # Store the boxes_by_frame in the class attribute
+            self.boxes_by_frame = boxes_by_frame
             
-            # Visualize without saving
-            self._visualize_frame(frame=frame, frame_idx=frame_idx, objects=visible_objects)
-        
-        # Save per-object visualizations
-        self.save_per_object_visualizations(frames_dir)
-        
-        # Save first detection frames
-        self.save_first_detections(frames_dir)
-        
-        # Save mapping of objects to frames they appear in
-        self.save_object_frame_mapping()
-        
-        # Prepare a streamlined version of tracking results without redundant data
-        streamlined_results = {
-            "metadata": {
-                "queries": text_queries,
-                "frame_count": len(frame_files),
-                "timestamp": time.strftime("%Y-%m-%d %H:%M:%S"),
-                "detector_type": self.detector_type
-            },
-            "objects": {}
-        }
-        
-        # Only include essential tracking data without masks
-        for obj_id, obj_data in self.tracked_objects.items():
-            # Ensure masks are always a list
-            masks = obj_data.get("masks", [])
-            if not isinstance(masks, list):
-                masks = [masks]
-                
-            streamlined_results["objects"][str(obj_id)] = {
-                "id": obj_id,
-                "class": obj_data["class"],
-                "boxes": obj_data["boxes"],  # Keep only the ID, class, and boxes
-                # Make sure we keep masks for visualization
-                "masks": masks  # Always store masks as a list
-                # Removed: first_detected, last_seen, confidence
-            }
-        
-        # Save streamlined tracking results
-        with open(self.output_dir / "tracking_results.json", "w") as f:
-            json_results = self._prepare_for_json(streamlined_results)
-            json.dump(json_results, f, indent=2)
-        
-        print(f"All results saved to: {self.output_dir}")
-        return streamlined_results
+            print(f"Propagated masks for {len(object_ids)} objects across {len(segments)} frames")
+        else:
+            print("No objects to propagate")
 
     def _extract_frame_idx_from_path(self, frame_path):
         """

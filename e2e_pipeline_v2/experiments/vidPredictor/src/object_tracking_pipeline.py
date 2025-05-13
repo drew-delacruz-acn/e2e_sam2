@@ -449,7 +449,7 @@ class ObjectTrackingPipeline:
             # Load the frame
             frame = np.array(Image.open(frame_path).convert("RGB"))
             
-            # Visualize
+            # Visualize without saving
             self._visualize_frame(frame=frame, frame_idx=frame_idx, objects=visible_objects)
         
         # Save per-object visualizations
@@ -555,10 +555,7 @@ class ObjectTrackingPipeline:
             text = f"{label} ({conf:.2f})"
             cv2.putText(vis_frame, text, (x1, y1-10), cv2.FONT_HERSHEY_SIMPLEX, 0.5, color_rgb, 2)
         
-        # Save visualization
-        output_path = self.output_dir / f"frame_{frame_idx:04d}.jpg"
-        cv2.imwrite(str(output_path), cv2.cvtColor(vis_frame, cv2.COLOR_RGB2BGR))
-        
+        # Return visualization (removed saving to disk)
         return vis_frame
     
     def _prepare_for_json(self, data):
@@ -1300,7 +1297,7 @@ class ObjectTrackingPipeline:
             # Load the frame
             frame = np.array(Image.open(frame_path).convert("RGB"))
             
-            # Visualize
+            # Visualize without saving
             self._visualize_frame(frame=frame, frame_idx=frame_idx, objects=visible_objects)
         
         # Save per-object visualizations

@@ -209,16 +209,13 @@ class SAM2VideoWrapper:
         boxes_by_frame = {}
         
         try:
-            print(f"Starting propagate_masks with objects_to_track={objects_to_track}")
             print(f"Using predictor type: {type(self.predictor).__name__}")
             
             # Get propagate_in_video method to inspect
             propagate_method = self.predictor.propagate_in_video
-            print(f"Propagate method: {propagate_method.__name__} from {propagate_method.__module__}")
             
             # Directly handle the 3-element tuple from propagate_in_video
             iterator = self.predictor.propagate_in_video(self.inference_state)
-            print(f"Iterator type: {type(iterator).__name__}")
             
            
             

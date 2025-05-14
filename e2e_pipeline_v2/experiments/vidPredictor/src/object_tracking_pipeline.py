@@ -1235,12 +1235,9 @@ class ObjectTrackingPipeline:
             try:
                 print(f"Running propagation for object {obj_id}...")
                 result = self.sam_wrapper.propagate_masks(objects_to_track=[obj_id])
-                print(f"DEBUG: propagate_masks(objects_to_track={obj_id}) returned type: {type(result)}")
                 if isinstance(result, tuple):
-                    print(f"DEBUG: propagate_masks(objects_to_track={obj_id}) tuple length: {len(result)}")
                     segments, boxes_by_frame = result
                 else:
-                    print(f"DEBUG: propagate_masks(objects_to_track={obj_id}) value: {result}")
                     segments = result
                     boxes_by_frame = {}  # Initialize empty dict if no boxes returned
                 

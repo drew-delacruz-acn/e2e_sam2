@@ -110,9 +110,7 @@ def enhanced_load_detections(self):
                 class_avg = stats["sum"] / stats["count"]
                 logger.info(f"  {label}: min={stats['min']:.6f}, max={stats['max']:.6f}, avg={class_avg:.6f}, count={stats['count']}")
     
-    logger.info(f"Loaded {len(detections_by_frame)} frames with {total_detections} total detections")
-    logger.info(f"Found {len(unique_classes)} unique object classes: {sorted(list(unique_classes))}")
-    logger.info(f"Detection loading took {time.time() - start_time:.2f} seconds")
+   
     
     # Log detailed stats in debug mode
     if logger.level <= logging.DEBUG:
@@ -121,6 +119,7 @@ def enhanced_load_detections(self):
             if frame_dets:
                 confidences = [f"{det.get('confidence', 0):.6f}" for det in frame_dets[:3]]
                 labels = [det.get('label', '') for det in frame_dets[:3]]
+                logger.debug(f"  Frame {frame_idx}: {len(frame_dets)} detections - Labels: {labels[:3]}, Confidences: {confidences[:3]}")
                 if len(frame_dets) > 3:
                     logger.debug(f"    ... and {len(frame_dets) - 3} more")
             else:

@@ -22,6 +22,8 @@ from pathlib import Path
 from datetime import datetime
 from functools import wraps
 import shutil
+import gc
+import torch
 
 # Add the src directory to the Python path
 sys.path.append(os.path.join(os.path.dirname(__file__), 'src'))
@@ -432,6 +434,12 @@ def process_scene(
         logger.info(f"Results saved to: {output_path}")
         logger.info("=" * 80)
         
+        # Clear GPU memory before moving to the next scene
+        logger.info("Clearing GPU memory and cache...")
+        torch.cuda.empty_cache()
+        gc.collect()
+        logger.info("Memory cleared successfully")
+        
         return True
         
     except Exception as e:
@@ -441,6 +449,12 @@ def process_scene(
         logger.info("=" * 80)
         logger.info(f"Scene Processing Failed: {scene_name}")
         logger.info("=" * 80)
+        
+        # Also clear memory after failed processing
+        logger.info("Clearing GPU memory and cache after failure...")
+        torch.cuda.empty_cache()
+        gc.collect()
+        
         return False
 
 def main():

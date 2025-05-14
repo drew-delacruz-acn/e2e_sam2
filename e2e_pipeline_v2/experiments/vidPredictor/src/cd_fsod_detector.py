@@ -208,7 +208,7 @@ class CDFSODDetector:
         threshold: Optional[float] = None
     ) -> Dict[str, Union[np.ndarray, List[str]]]:
         """
-        Detect objects in the given frame that either first appear or reappear after a gap.
+        Detect all objects in the given frame (not just first appearances or reappearances).
         
         Args:
             image: The image/frame to detect objects in or a dictionary with frame data
@@ -221,28 +221,23 @@ class CDFSODDetector:
         # Extract frame index from filename or metadata
         frame_idx = self._extract_frame_idx(image)
         
-        if frame_idx is None:
-            # If we can't determine the frame index, return empty results
+        if frame_idx is None or frame_idx not in self.detections_by_frame:
+            # If we can't determine the frame index or don't have detections, return empty results
             return {
                 "boxes": np.zeros((0, 4), dtype=np.float32),
                 "labels": [],
                 "scores": np.zeros(0, dtype=np.float32)
             }
         
-        # IMPORTANT: Only include first appearances and reappearances, not all detections in the frame
-        # This ensures we're only detecting objects when they first appear or reappear after a gap
-        frame_detections = []
+        # Use all detections in the frame, not just first appearances and reappearances
+        frame_detections = self.detections_by_frame[frame_idx]
         
-        # Add first appearances for this frame
-        if frame_idx in self.first_appearances:
-            frame_detections.extend(self.first_appearances[frame_idx])
-            
-        # Add reappearances for this frame
-        if frame_idx in self.reappearances:
-            frame_detections.extend(self.reappearances[frame_idx])
-        
-        # We deliberately DO NOT include other detections from self.detections_by_frame[frame_idx]
-        # as those would include continuing objects which we want to ignore
+        # Apply custom threshold if provided
+        if threshold is not None and threshold != self.confidence_threshold:
+            frame_detections = [
+                d for d in frame_detections 
+                if d.get('confidence', 0) >= threshold
+            ]
         
         # Apply label filtering using text queries
         filtered_detections = []

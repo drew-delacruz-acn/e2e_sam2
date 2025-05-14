@@ -32,7 +32,7 @@ class MockImage(np.ndarray):
 
 def main():
     # Create argument parser
-    parser = argparse.ArgumentParser(description='Run CD-FSOD Detector with custom JSON files')
+    parser = argparse.ArgumentParser(description='Run CD-FSOD Detector with custom JSON files (processes all detections in each frame)')
     parser.add_argument('--json_dir', type=str, required=True, 
                         help='Directory containing CD-FSOD JSON files (0.json, 1.json, etc.)')
     parser.add_argument('--frames_dir', type=str, required=False,
@@ -44,7 +44,7 @@ def main():
     parser.add_argument('--iou', type=float, default=0.5,
                         help='IoU threshold for object matching')
     parser.add_argument('--min_gap', type=int, default=10,
-                        help='Minimum frame gap to consider as a reappearance')
+                        help='Minimum frame gap to consider as a reappearance (used for tracking)')
     parser.add_argument('--queries', type=str, default='all',
                         help='Comma-separated list of object classes to detect (use "all" for all classes)')
     parser.add_argument('--start_frame', type=int, default=0,
@@ -55,8 +55,6 @@ def main():
                         help='Generate visualization of detections')
     parser.add_argument('--debug', action='store_true',
                         help='Print additional debug information')
-    parser.add_argument('--show_all_detections', action='store_true',
-                        help='Show all detections instead of just first appearances and reappearances')
     parser.add_argument('--show_track_info', action='store_true',
                         help='Show detailed object tracking information')
     
@@ -92,7 +90,8 @@ def main():
     print(f"Loaded detector with {len(detector.detections_by_frame)} frames")
     print(f"Available classes: {sorted(list(all_classes))}")
     print(f"Detecting classes: {text_queries}")
-    print(f"Minimum gap frames: {args.min_gap}")
+    print(f"Minimum gap frames for tracking: {args.min_gap}")
+    print(f"NOTE: Detector now processes ALL detections in each frame")
     
     # Print object tracking information if debugging
     if args.debug:
@@ -176,38 +175,21 @@ def main():
             # Use MockImage to properly handle frame_idx
             frame_rgb = MockImage(frame_rgb, frame_idx)
             
-            # Get all detections if requested
-            if args.show_all_detections and frame_idx in detector.detections_by_frame:
-                all_detections = []
-                for detection in detector.detections_by_frame[frame_idx]:
-                    if detection['label'] in text_queries:
-                        all_detections.append({
-                            'coordinates': detection['coordinates'],
-                            'label': detection['label'],
-                            'confidence': detection['confidence']
-                        })
-                
-                results = {
-                    'boxes': np.array([d['coordinates'] for d in all_detections]) if all_detections else np.zeros((0, 4)),
-                    'labels': [d['label'] for d in all_detections],
-                    'scores': np.array([d['confidence'] for d in all_detections]) if all_detections else np.zeros(0)
-                }
-                
-                detection_type = "ALL DETECTIONS"
+            # Get detections for this frame
+            results = detector.detect(frame_rgb, text_queries)
+            
+            # Determine detection type for this frame (purely for display purposes)
+            has_first_appearance = frame_idx in detector.first_appearances and detector.first_appearances[frame_idx]
+            has_reappearance = frame_idx in detector.reappearances and detector.reappearances[frame_idx]
+            
+            if has_first_appearance and has_reappearance:
+                detection_type = "ALL DETECTIONS (INCLUDES FIRST APPEARANCE + REAPPEARANCE)"
+            elif has_first_appearance:
+                detection_type = "ALL DETECTIONS (INCLUDES FIRST APPEARANCE)"
+            elif has_reappearance:
+                detection_type = "ALL DETECTIONS (INCLUDES REAPPEARANCE)"
             else:
-                # Detect objects (first appearances and reappearances only)
-                results = detector.detect(frame_rgb, text_queries)
-                
-                # Determine detection type for this frame
-                if frame_idx in detector.first_appearances and detector.first_appearances[frame_idx]:
-                    if frame_idx in detector.reappearances and detector.reappearances[frame_idx]:
-                        detection_type = "FIRST APPEARANCE + REAPPEARANCE"
-                    else:
-                        detection_type = "FIRST APPEARANCE"
-                elif frame_idx in detector.reappearances and detector.reappearances[frame_idx]:
-                    detection_type = "REAPPEARANCE"
-                else:
-                    detection_type = "NONE"
+                detection_type = "ALL DETECTIONS"
             
             # Print detection results
             print(f"Frame {frame_idx} ({frame_file}) - {detection_type}:")
@@ -221,17 +203,18 @@ def main():
             vis_frame = frame.copy()
             
             # Draw detection status text
-            if args.show_all_detections:
-                cv2.putText(vis_frame, "ALL DETECTIONS", (20, 30), 
-                          cv2.FONT_HERSHEY_SIMPLEX, 0.7, (255, 255, 0), 2)
-            else:
-                if frame_idx in detector.first_appearances and detector.first_appearances[frame_idx]:
-                    cv2.putText(vis_frame, "FIRST APPEARANCE", (20, 30), 
-                              cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 0, 255), 2)
-                
-                if frame_idx in detector.reappearances and detector.reappearances[frame_idx]:
-                    cv2.putText(vis_frame, "REAPPEARANCE", (20, 60), 
-                              cv2.FONT_HERSHEY_SIMPLEX, 0.7, (255, 0, 0), 2)
+            cv2.putText(vis_frame, "ALL DETECTIONS", (20, 30), 
+                      cv2.FONT_HERSHEY_SIMPLEX, 0.7, (255, 255, 0), 2)
+            
+            # Indicate if this frame contains first appearances or reappearances
+            if has_first_appearance:
+                cv2.putText(vis_frame, "INCLUDES FIRST APPEARANCE", (20, 60), 
+                          cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 0, 255), 2)
+            
+            if has_reappearance:
+                y_pos = 90 if has_first_appearance else 60
+                cv2.putText(vis_frame, "INCLUDES REAPPEARANCE", (20, y_pos), 
+                          cv2.FONT_HERSHEY_SIMPLEX, 0.7, (255, 0, 0), 2)
             
             # Draw each detection
             for box, label, score in zip(results['boxes'], results['labels'], results['scores']):
@@ -255,38 +238,21 @@ def main():
                 # Create a mock frame with just the index (no image data needed)
                 mock_frame = MockImage(np.zeros((1, 1, 3), dtype=np.uint8), frame_idx)
                 
-                # Get all detections if requested
-                if args.show_all_detections:
-                    all_detections = []
-                    for detection in detector.detections_by_frame[frame_idx]:
-                        if detection['label'] in text_queries:
-                            all_detections.append({
-                                'coordinates': detection['coordinates'],
-                                'label': detection['label'],
-                                'confidence': detection['confidence']
-                            })
-                    
-                    results = {
-                        'boxes': np.array([d['coordinates'] for d in all_detections]) if all_detections else np.zeros((0, 4)),
-                        'labels': [d['label'] for d in all_detections],
-                        'scores': np.array([d['confidence'] for d in all_detections]) if all_detections else np.zeros(0)
-                    }
-                    
-                    detection_type = "ALL DETECTIONS"
+                # Get detections for this frame
+                results = detector.detect(mock_frame, text_queries)
+                
+                # Determine detection type for this frame (purely for display purposes)
+                has_first_appearance = frame_idx in detector.first_appearances and detector.first_appearances[frame_idx]
+                has_reappearance = frame_idx in detector.reappearances and detector.reappearances[frame_idx]
+                
+                if has_first_appearance and has_reappearance:
+                    detection_type = "ALL DETECTIONS (INCLUDES FIRST APPEARANCE + REAPPEARANCE)"
+                elif has_first_appearance:
+                    detection_type = "ALL DETECTIONS (INCLUDES FIRST APPEARANCE)"
+                elif has_reappearance:
+                    detection_type = "ALL DETECTIONS (INCLUDES REAPPEARANCE)"
                 else:
-                    # Detect objects (first appearances and reappearances only)
-                    results = detector.detect(mock_frame, text_queries)
-                    
-                    # Determine detection type for this frame
-                    if frame_idx in detector.first_appearances and detector.first_appearances[frame_idx]:
-                        if frame_idx in detector.reappearances and detector.reappearances[frame_idx]:
-                            detection_type = "FIRST APPEARANCE + REAPPEARANCE"
-                        else:
-                            detection_type = "FIRST APPEARANCE"
-                    elif frame_idx in detector.reappearances and detector.reappearances[frame_idx]:
-                        detection_type = "REAPPEARANCE"
-                    else:
-                        detection_type = "NONE"
+                    detection_type = "ALL DETECTIONS"
                 
                 # Print detection results
                 print(f"Frame {frame_idx} - {detection_type}:")
@@ -305,13 +271,10 @@ if __name__ == "__main__":
     main() 
 
 # Example usage with visualization:
-# python run_cd_fsod.py --json_dir "/home/ubuntu/code/drew/e2e_sam2/e2e_pipeline_v2/experiments/vidPredictor/data/detections/Scenes 061-080__265H-2-_20230815215828529" --frames_dir "data/frames//Scenes 061-080__265H-2-_20230815215828529" --visualize --min_gap 10 --confidence 0.9
+# python run_cd_fsod.py --json_dir "/path/to/detections" --frames_dir "/path/to/frames" --visualize --min_gap 10 --confidence 0.9
 
 # Example usage with JSON only (no visualization):
-# python run_cd_fsod.py --json_dir "/home/ubuntu/code/drew/e2e_sam2/e2e_pipeline_v2/experiments/vidPredictor/data/detections/Scenes 061-080__265H-2-_20230815215828529" --min_gap 10 --confidence 0.9
-
-# Example usage to show all detections (including continuous tracks):
-# python run_cd_fsod.py --json_dir "/home/ubuntu/code/drew/e2e_sam2/e2e_pipeline_v2/experiments/vidPredictor/data/detections/Scenes 061-080__265H-2-_20230815215828529" --min_gap 10 --confidence 0.9 --show_all_detections
+# python run_cd_fsod.py --json_dir "/path/to/detections" --min_gap 10 --confidence 0.9
 
 # Example usage with detailed track info:
-# python run_cd_fsod.py --json_dir "/home/ubuntu/code/drew/e2e_sam2/e2e_pipeline_v2/experiments/vidPredictor/data/detections/Scenes 061-080__265H-2-_20230815215828529" --min_gap 10 --confidence 0.9 --show_track_info
+# python run_cd_fsod.py --json_dir "/path/to/detections" --min_gap 10 --confidence 0.9 --show_track_info

@@ -98,17 +98,25 @@ class ObjectTrackingPipeline:
             owlv2_checkpoint: Path to OWLv2 checkpoint file
             cd_fsod_path: Path to CD-FSOD JSON directory
             confidence_threshold: Minimum confidence threshold
-            min_gap_frames: Minimum gap frames for CD-FSOD detector
+            min_gap_frames: Minimum gap frames for CD-FSOD detector (used for tracking)
             device: Torch device for OWLv2 detector
             
         Returns:
             Initialized detector object
+            
+        Notes:
+            - The 'owlv2' detector processes all detections in each frame
+            - The 'cd_fsod' detector also processes all detections in each frame (not just first 
+              appearances and reappearances), making its behavior consistent with OWLv2
         """
         if detector_type == "owlv2":
             return OWLv2Detector(device=device)
         elif detector_type == "cd_fsod":
             if cd_fsod_path is None:
                 raise ValueError("cd_fsod_path must be provided when using CD-FSOD detector")
+            # The CD-FSOD detector now processes all detections in each frame like OWLv2
+            # We still track first appearances and reappearances internally for reference,
+            # but all detections are returned when detect() is called
             return CDFSODDetector(
                 json_dir=cd_fsod_path,
                 confidence_threshold=confidence_threshold,

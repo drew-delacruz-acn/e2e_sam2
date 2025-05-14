@@ -515,16 +515,80 @@ if __name__ == "__main__":
 
 
 
-# Using detector: cd_fsod
-# Phase 1: Detecting and tracking objects...
-# Initialized object 1 (Loki's Armor)
-# Created new object 1 (Loki's Armor) at frame 27
-# Updated object 1 (Loki's Armor) with score 0.82 (IoU: 0.65, Emb: 0.82)
-# Created new object 2 (Loki's Armor)
-# Created new object 2 (Loki's Armor) at frame 64
-# Updated object 2 (Loki's Armor) with score 0.88 (IoU: 0.64, Emb: 0.88)
-# Created new object 3 (Loki's Armor)
-# Created new object 3 (Loki's Armor) at frame 99
-# Updated object 3 (Loki's Armor) with score 0.92 (IoU: 0.65, Emb: 0.92)
-# Found 3 unique objects to process with SAM2
-#HENLO
+#  Error during scene processing: CUDA out of memory. Tried to allocate 2.13 GiB. GPU 0 has a total capacity of 14.58 GiB of which 1.46 GiB is free. Including non-PyTorch memory, this process has 13.11 GiB memory in use. Of the allocated memory 12.92 GiB is allocated by PyTorch, and 65.87 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+# 2025-05-14 19:45:25,377 - ERROR - Error during scene processing: CUDA out of memory. Tried to allocate 2.13 GiB. GPU 0 has a total capacity of 14.58 GiB of which 1.46 GiB is free. Including non-PyTorch memory, this process has 13.11 GiB memory in use. Of the allocated memory 12.92 GiB is allocated by PyTorch, and 65.87 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+# ERROR:video_segmentation.Scenes 001-020__110A-1-_20230728125233251:Error during scene processing: CUDA out of memory. Tried to allocate 2.13 GiB. GPU 0 has a total capacity of 14.58 GiB of which 1.46 GiB is free. Including non-PyTorch memory, this process has 13.11 GiB memory in use. Of the allocated memory 12.92 GiB is allocated by PyTorch, and 65.87 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+# 2025-05-14 19:45:25,378 - ERROR - [Scenes 001-020__110A-1-_20230728125233251] Traceback (most recent call last):
+#   File "/home/ubuntu/code/drew/e2e_sam2/e2e_pipeline_v2/experiments/vidPredictor/video_segmentation_pipeline.py", line 352, in process_scene
+#     pipeline.process_video_separate_objects(
+#   File "/home/ubuntu/code/drew/e2e_sam2/e2e_pipeline_v2/experiments/vidPredictor/video_segmentation_pipeline.py", line 346, in wrapped_process_video
+#     return original_process_video(frames_dir, text_queries)
+#            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+#   File "/home/ubuntu/code/drew/e2e_sam2/e2e_pipeline_v2/experiments/vidPredictor/src/object_tracking_pipeline.py", line 1217, in process_video_separate_objects
+#     self.sam_wrapper.set_video(frames_dir=frames_dir)
+#   File "/home/ubuntu/code/drew/e2e_sam2/e2e_pipeline_v2/experiments/vidPredictor/src/sam2_wrapper.py", line 55, in set_video
+#     self.inference_state = self.predictor.init_state(video_path=frames_dir)
+#                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+#   File "/home/ubuntu/code/drew/e2e_sam2/venv/lib/python3.12/site-packages/torch/utils/_contextlib.py", line 116, in decorate_context
+#     return func(*args, **kwargs)
+#            ^^^^^^^^^^^^^^^^^^^^^
+#   File "/home/ubuntu/code/drew/sam2/sam2/sam2_video_predictor.py", line 51, in init_state
+#     images, video_height, video_width = load_video_frames(
+#                                         ^^^^^^^^^^^^^^^^^^
+#   File "/home/ubuntu/code/drew/sam2/sam2/utils/misc.py", line 198, in load_video_frames
+#     return load_video_frames_from_jpg_images(
+#            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+#   File "/home/ubuntu/code/drew/sam2/sam2/utils/misc.py", line 271, in load_video_frames_from_jpg_images
+#     images = images.to(compute_device)
+#              ^^^^^^^^^^^^^^^^^^^^^^^^^
+# torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 2.13 GiB. GPU 0 has a total capacity of 14.58 GiB of which 1.46 GiB is free. Including non-PyTorch memory, this process has 13.11 GiB memory in use. Of the allocated memory 12.92 GiB is allocated by PyTorch, and 65.87 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+
+# 2025-05-14 19:45:25,378 - ERROR - Traceback (most recent call last):
+#   File "/home/ubuntu/code/drew/e2e_sam2/e2e_pipeline_v2/experiments/vidPredictor/video_segmentation_pipeline.py", line 352, in process_scene
+#     pipeline.process_video_separate_objects(
+#   File "/home/ubuntu/code/drew/e2e_sam2/e2e_pipeline_v2/experiments/vidPredictor/video_segmentation_pipeline.py", line 346, in wrapped_process_video
+#     return original_process_video(frames_dir, text_queries)
+#            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+#   File "/home/ubuntu/code/drew/e2e_sam2/e2e_pipeline_v2/experiments/vidPredictor/src/object_tracking_pipeline.py", line 1217, in process_video_separate_objects
+#     self.sam_wrapper.set_video(frames_dir=frames_dir)
+#   File "/home/ubuntu/code/drew/e2e_sam2/e2e_pipeline_v2/experiments/vidPredictor/src/sam2_wrapper.py", line 55, in set_video
+#     self.inference_state = self.predictor.init_state(video_path=frames_dir)
+#                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+#   File "/home/ubuntu/code/drew/e2e_sam2/venv/lib/python3.12/site-packages/torch/utils/_contextlib.py", line 116, in decorate_context
+#     return func(*args, **kwargs)
+#            ^^^^^^^^^^^^^^^^^^^^^
+#   File "/home/ubuntu/code/drew/sam2/sam2/sam2_video_predictor.py", line 51, in init_state
+#     images, video_height, video_width = load_video_frames(
+#                                         ^^^^^^^^^^^^^^^^^^
+#   File "/home/ubuntu/code/drew/sam2/sam2/utils/misc.py", line 198, in load_video_frames
+#     return load_video_frames_from_jpg_images(
+#            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+#   File "/home/ubuntu/code/drew/sam2/sam2/utils/misc.py", line 271, in load_video_frames_from_jpg_images
+#     images = images.to(compute_device)
+#              ^^^^^^^^^^^^^^^^^^^^^^^^^
+# torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 2.13 GiB. GPU 0 has a total capacity of 14.58 GiB of which 1.46 GiB is free. Including non-PyTorch memory, this process has 13.11 GiB memory in use. Of the allocated memory 12.92 GiB is allocated by PyTorch, and 65.87 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+
+# ERROR:video_segmentation.Scenes 001-020__110A-1-_20230728125233251:Traceback (most recent call last):
+#   File "/home/ubuntu/code/drew/e2e_sam2/e2e_pipeline_v2/experiments/vidPredictor/video_segmentation_pipeline.py", line 352, in process_scene
+#     pipeline.process_video_separate_objects(
+#   File "/home/ubuntu/code/drew/e2e_sam2/e2e_pipeline_v2/experiments/vidPredictor/video_segmentation_pipeline.py", line 346, in wrapped_process_video
+#     return original_process_video(frames_dir, text_queries)
+#            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+#   File "/home/ubuntu/code/drew/e2e_sam2/e2e_pipeline_v2/experiments/vidPredictor/src/object_tracking_pipeline.py", line 1217, in process_video_separate_objects
+#     self.sam_wrapper.set_video(frames_dir=frames_dir)
+#   File "/home/ubuntu/code/drew/e2e_sam2/e2e_pipeline_v2/experiments/vidPredictor/src/sam2_wrapper.py", line 55, in set_video
+#     self.inference_state = self.predictor.init_state(video_path=frames_dir)
+#                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+#   File "/home/ubuntu/code/drew/e2e_sam2/venv/lib/python3.12/site-packages/torch/utils/_contextlib.py", line 116, in decorate_context
+#     return func(*args, **kwargs)
+#            ^^^^^^^^^^^^^^^^^^^^^
+#   File "/home/ubuntu/code/drew/sam2/sam2/sam2_video_predictor.py", line 51, in init_state
+#     images, video_height, video_width = load_video_frames(
+#                                         ^^^^^^^^^^^^^^^^^^
+#   File "/home/ubuntu/code/drew/sam2/sam2/utils/misc.py", line 198, in load_video_frames
+#     return load_video_frames_from_jpg_images(
+#            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+#   File "/home/ubuntu/code/drew/sam2/sam2/utils/misc.py", line 271, in load_video_frames_from_jpg_images
+#     images = images.to(compute_device)
+#              ^^^^^^^^^^^^^^^^^^^^^^^^^
+# torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 2.13 GiB. GPU 0 has a total capacity of 14.58 GiB of which 1.46 GiB is free. Including non-PyTorch memory, this process has 13.11 GiB memory in use. Of the allocated memory 12.92 GiB is allocated by PyTorch, and 65.87 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)

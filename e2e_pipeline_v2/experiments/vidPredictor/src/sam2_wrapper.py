@@ -220,20 +220,7 @@ class SAM2VideoWrapper:
             iterator = self.predictor.propagate_in_video(self.inference_state)
             print(f"Iterator type: {type(iterator).__name__}")
             
-            # # Debug first item from iterator without consuming it
-            # try:
-            #     # Use tee to peek at the first item without consuming the iterator
-            #     import itertools
-            #     iterator, debug_iterator = itertools.tee(iterator)
-            #     first_item = next(debug_iterator, None)
-            #     print(f"First item type: {type(first_item).__name__}")
-            #     print(f"First item value: {first_item}")
-            #     if isinstance(first_item, tuple):
-            #         print(f"First item tuple length: {len(first_item)}")
-            #         for i, element in enumerate(first_item):
-            #             print(f"  Element {i}: type={type(element).__name__}, value={element}")
-            # except Exception as peek_error:
-            #     print(f"Error peeking at iterator: {peek_error}")
+           
             
             # Create a unified iterator wrapper that can handle different return values
             def robust_iterator_wrapper(iterator):
@@ -291,22 +278,18 @@ class SAM2VideoWrapper:
             frame_count = 0
             for out_frame_idx, out_obj_ids, out_mask_logits in robust_iterator_wrapper(iterator):
                 frame_count += 1
-                print(f"Processing item {frame_count}: frame={out_frame_idx}, objects={out_obj_ids}")
                 
                 # Filter objects if needed
                 if objects_to_track is not None:
-                    print(f"Filtering objects to track: {objects_to_track}")
                     indices = [i for i, obj_id in enumerate(out_obj_ids) if obj_id in objects_to_track]
                     if not indices:
                         print(f"No matching objects found, skipping frame {out_frame_idx}")
                         continue
                     filtered_obj_ids = [out_obj_ids[i] for i in indices]
                     filtered_mask_logits = [out_mask_logits[i] for i in indices]
-                    print(f"After filtering: {len(filtered_obj_ids)} objects remain")
                 else:
                     filtered_obj_ids = out_obj_ids
                     filtered_mask_logits = out_mask_logits
-                    print(f"No filtering applied, using all {len(filtered_obj_ids)} objects")
                     
                 video_segments[out_frame_idx] = {}
                 boxes_by_frame[out_frame_idx] = {}
@@ -382,7 +365,6 @@ class SAM2VideoWrapper:
                         # Track the error
                         empty_mask_count += 1
                     
-                print(f"Processed frame {out_frame_idx}, found {len(filtered_obj_ids)} objects")
             
             print(f"Finished propagation, processed {frame_count} frames, found {len(video_segments)} frames with objects")
             return video_segments, boxes_by_frame
@@ -458,24 +440,4 @@ class SAM2VideoWrapper:
             print(f"Saved segmentation visualization to {vis_path}")
         
         plt.show()
-        print('HELLO')
-        #WHY
-
-#         Adding box to frame 0...
-# /home/ubuntu/code/drew/sam2/sam2/sam2_video_predictor.py:786: UserWarning: cannot import name '_C' from 'sam2' (/home/ubuntu/code/drew/sam2/sam2/__init__.py)
-
-# Skipping the post-processing step due to the error above. You can still use SAM 2 and it's OK to ignore the error above, although some post-processing functionality may be limited (which doesn't affect the results in most cases; see https://github.com/facebookresearch/sam2/blob/main/INSTALL.md).
-#   pred_masks_gpu = fill_holes_in_mask_scores(
-# Mask shape: (540, 960)
-# Mask dtype: bool
-# Mask values: min=False, max=True
-# Number of True pixels: 88393
-# Traceback (most recent call last):
-#   File "/home/ubuntu/code/drew/e2e_sam2/e2e_pipeline_v2/experiments/vidPredictor/test_sam2_integration.py", line 41, in <module>
-#     sam_wrapper.visualize_frame(
-#   File "/home/ubuntu/code/drew/e2e_sam2/e2e_pipeline_v2/experiments/vidPredictor/src/sam2_wrapper.py", line 258, in visualize_frame
-#     self.show_mask(m, ax, obj_id=obj_id)
-#   File "/home/ubuntu/code/drew/e2e_sam2/e2e_pipeline_v2/experiments/vidPredictor/src/sam2_wrapper.py", line 158, in show_mask
-#     h, w = mask.shape
-#     ^^^^
-# ValueError: not enough values to unpack (expected 2, got 1)
+        

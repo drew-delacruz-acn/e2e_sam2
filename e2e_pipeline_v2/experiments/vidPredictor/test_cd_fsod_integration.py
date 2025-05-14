@@ -527,3 +527,4 @@ if __name__ == "__main__":
 # Created new object 3 (Loki's Armor) at frame 99
 # Updated object 3 (Loki's Armor) with score 0.92 (IoU: 0.65, Emb: 0.92)
 # Found 3 unique objects to process with SAM2
+#HENLO

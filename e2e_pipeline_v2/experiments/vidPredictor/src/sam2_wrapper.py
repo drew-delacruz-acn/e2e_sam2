@@ -168,15 +168,12 @@ class SAM2VideoWrapper:
             mask = self.process_mask_logits(mask)
         
         # Ensure mask is 2D
-        print(f"Original mask shape in show_mask: {mask.shape}")
         if len(mask.shape) == 1:
-            print(f"Warning: Mask is 1D with shape {mask.shape}, cannot display properly")
             # Return without trying to display this mask
             return
         elif len(mask.shape) > 2:
             # Squeeze to make it 2D
             mask = np.squeeze(mask)
-            print(f"Squeezed mask to shape: {mask.shape}")
             
         # Get mask dimensions - now we're sure it's 2D
         h, w = mask.shape
@@ -322,11 +319,8 @@ class SAM2VideoWrapper:
                     # Convert logits to binary mask (torch tensor)
                     if isinstance(mask_logit, torch.Tensor):
                         mask = (mask_logit.sigmoid() > 0.5)
-                        print(f"Converted tensor mask, shape: {mask.shape}")
                     else:
-                        print(f"Converting non-tensor mask type: {type(mask_logit).__name__}")
                         mask = (torch.from_numpy(mask_logit).sigmoid() > 0.5)
-                        print(f"Converted numpy mask, shape: {mask.shape}")
                     
                     # Save to results
                     video_segments[out_frame_idx][obj_id] = mask.cpu().numpy()
@@ -334,18 +328,14 @@ class SAM2VideoWrapper:
                     try:
                         # Check if mask has any True values (non-empty)
                         mask_sum = mask.sum().item()
-                        print(f"Mask statistics - sum: {mask_sum}, shape: {mask.shape}")
                         
                         if mask_sum > 0:
                             # Only create box if mask contains some True values
-                            print(f"Creating bounding box from mask with {mask_sum} true pixels")
                             
                             # Use torchvision.ops.masks_to_boxes (expects (N, H, W))
                             expanded_mask = mask[None] if mask.ndim < 3 else mask
-                            print(f"Expanded mask shape: {expanded_mask.shape}")
                             
                             box = torchvision.ops.masks_to_boxes(expanded_mask)[0].cpu().tolist()
-                            print(f"Generated box: {box}")
                             
                             # Only save if the box is valid (non-zero area)
                             if box[0] < box[2] and box[1] < box[3]:
@@ -357,17 +347,14 @@ class SAM2VideoWrapper:
                                 last_valid_boxes[obj_id] = box
                                 valid_mask_count += 1
                             else:
-                                print(f"Warning: Empty or invalid box for object {obj_id} in frame {out_frame_idx}, box: {box}")
                                 empty_mask_count += 1
                         else:
                             # Empty mask - use fallback
                             empty_mask_count += 1
-                            print(f"Empty mask detected for object {obj_id} in frame {out_frame_idx} (no true pixels)")
                             
                             # Use fallback: last valid box if available
                             if obj_id in last_valid_boxes:
                                 fallback_box = last_valid_boxes[obj_id]
-                                print(f"Using fallback box from previous frame: {fallback_box}")
                                 boxes_by_frame[out_frame_idx][obj_id] = {
                                     "box": fallback_box,
                                     "class": obj_id,
@@ -386,7 +373,6 @@ class SAM2VideoWrapper:
                                         center_x + box_w//2, 
                                         center_y + box_h//2
                                     ]
-                                    print(f"No previous valid box, using centered default: {default_box}")
                                     boxes_by_frame[out_frame_idx][obj_id] = {
                                         "box": default_box,
                                         "class": obj_id,
@@ -395,14 +381,12 @@ class SAM2VideoWrapper:
                                     }
                 
                     except Exception as box_error:
-                        print(f"Error creating box for object {obj_id}: {box_error}")
                         # Track the error
                         empty_mask_count += 1
                     
                 print(f"Processed frame {out_frame_idx}, found {len(filtered_obj_ids)} objects")
             
             print(f"Finished propagation, processed {frame_count} frames, found {len(video_segments)} frames with objects")
-            print(f"Mask statistics: {valid_mask_count} valid masks, {empty_mask_count} empty masks")
             return video_segments, boxes_by_frame
         
         except Exception as e:

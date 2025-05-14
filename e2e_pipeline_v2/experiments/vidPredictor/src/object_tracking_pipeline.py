@@ -419,8 +419,7 @@ class ObjectTrackingPipeline:
                             mask = masks[obj_id]
                             pixel_count = self._count_mask_pixels(mask)
                             quality_status = "HIGH QUALITY" if pixel_count >= self.mask_quality_threshold else "LOW QUALITY" if pixel_count > 0 else "EMPTY"
-                            print(f"  Frame {frame_idx}: Object #{obj_id} mask statistics - sum: {pixel_count} pixels - {quality_status}")
-                    
+                        
                     # If we also have boxes_by_frame, store those too
                     if isinstance(boxes_by_frame, dict) and boxes_by_frame:
                         for frame_idx, boxes in boxes_by_frame.items():
@@ -431,9 +430,9 @@ class ObjectTrackingPipeline:
                             if obj_id in boxes:
                                 self.boxes_by_frame[frame_idx][obj_id] = boxes[obj_id]
                                 
-                                # Check and log if it's a fallback box
+                                # Check fallback box silently
                                 if isinstance(boxes[obj_id], dict) and boxes[obj_id].get("is_fallback", False):
-                                    print(f"  Frame {frame_idx}: Object #{obj_id} using FALLBACK BOX")
+                                    pass  # No logging
                     
                     # NEW CODE: Update tracked_objects with all boxes from propagation
                     all_boxes = []
@@ -622,9 +621,6 @@ class ObjectTrackingPipeline:
                         vis_frame = cv2.addWeighted(colored_mask, alpha, vis_frame, 1.0, 0)
                     except Exception as e:
                         print(f"Error applying mask for object {obj_id}: {e}")
-                        print(f"Mask shape: {mask.shape}, Mask dtype: {mask.dtype}")
-                        print(f"Vis frame shape: {vis_frame.shape}")
-                        print(f"Colored mask shape: {colored_mask.shape}")
                         continue
             
             # Draw label
@@ -1270,7 +1266,6 @@ class ObjectTrackingPipeline:
                         mask = masks[obj_id]
                         pixel_count = self._count_mask_pixels(mask)
                         quality_status = "HIGH QUALITY" if pixel_count >= self.mask_quality_threshold else "LOW QUALITY" if pixel_count > 0 else "EMPTY"
-                        print(f"  Frame {frame_idx}: Object #{obj_id} mask statistics - sum: {pixel_count} pixels - {quality_status}")
                     
                 # If we also have boxes_by_frame, store those too
                 if isinstance(boxes_by_frame, dict) and boxes_by_frame:
@@ -1282,9 +1277,9 @@ class ObjectTrackingPipeline:
                         if obj_id in boxes:
                             self.boxes_by_frame[frame_idx][obj_id] = boxes[obj_id]
                             
-                            # Check and log if it's a fallback box
+                            # Check fallback box silently
                             if isinstance(boxes[obj_id], dict) and boxes[obj_id].get("is_fallback", False):
-                                print(f"  Frame {frame_idx}: Object #{obj_id} using FALLBACK BOX")
+                                pass  # No logging
                 
                 # NEW CODE: Update tracked_objects with all boxes from propagation
                 all_boxes = []
@@ -1337,7 +1332,7 @@ class ObjectTrackingPipeline:
                         "masks": obj_data.get("masks", [])  # Add masks with empty list as default
                     }
                     print(f"Created new entry for object {obj_id}")
-                
+            
                 print(f"Successfully propagated masks for object {obj_id}, available in {len(segments)} frames")
             except Exception as e:
                 print(f"Error during propagation for object {obj_id}: {e}")

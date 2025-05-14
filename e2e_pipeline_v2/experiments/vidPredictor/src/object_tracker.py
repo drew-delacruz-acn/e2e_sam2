@@ -5,7 +5,7 @@ import os
 import matplotlib.pyplot as plt
 
 class ObjectTracker:
-    def __init__(self, iou_weight=0.5, emb_weight=0.5, match_threshold=0.3):
+    def __init__(self, iou_weight=0.0, emb_weight=1.0, match_threshold=0.4):
         """Initialize simple two-tier object tracker"""
         self.tracked_objects = {}
         self.next_obj_id = 1
@@ -115,8 +115,8 @@ class ObjectTracker:
                 # Calculate embedding similarity
                 emb_sim = cosine_similarity([det_embedding], [obj_data["embedding"]])[0][0]
                 
-                # Combined score
-                combined_score = (self.iou_weight * iou) + (self.emb_weight * emb_sim)
+                # Combined score - Use only embedding similarity
+                combined_score = emb_sim  # Ignore iou_weight and iou
                 
                 match_scores.append((obj_id, i, combined_score, iou, emb_sim))
         

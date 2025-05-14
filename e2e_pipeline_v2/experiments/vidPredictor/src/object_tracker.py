@@ -5,13 +5,27 @@ import os
 import matplotlib.pyplot as plt
 
 class ObjectTracker:
-    def __init__(self, iou_weight=0.5, emb_weight=0.5, match_threshold=0.4):
-        """Initialize simple two-tier object tracker"""
+    def __init__(self, iou_weight=0.5, emb_weight=0.5, match_threshold=0.4, 
+                 min_iou_threshold=0.1, min_emb_threshold=0.5,
+                 new_instance_max_iou=0.1):
+        """Initialize simple two-tier object tracker
+        
+        Args:
+            iou_weight: Weight for IoU in combined score calculation
+            emb_weight: Weight for embedding similarity in combined score calculation
+            match_threshold: Minimum combined score to consider a match
+            min_iou_threshold: Minimum IoU required for a potential match
+            min_emb_threshold: Minimum embedding similarity required for a potential match
+            new_instance_max_iou: Maximum IoU to consider a new instance of the same class
+        """
         self.tracked_objects = {}
         self.next_obj_id = 1
         self.iou_weight = iou_weight
         self.emb_weight = emb_weight
         self.match_threshold = match_threshold
+        self.min_iou_threshold = min_iou_threshold
+        self.min_emb_threshold = min_emb_threshold
+        self.new_instance_max_iou = new_instance_max_iou
     
     def calculate_iou(self, box1, box2):
         """Calculate IoU between two boxes"""
@@ -98,16 +112,24 @@ class ObjectTracker:
             crop = frame[y1:y2, x1:x2]
             det_embedding = embedding_extractor.extract(crop)
             
-            # Compare with all existing objects
+            # Group existing objects by class for better instance handling
+            class_objects = {}
             for obj_id, obj_data in self.tracked_objects.items():
+                if obj_data["class"] == label:
+                    if obj_data["class"] not in class_objects:
+                        class_objects[obj_data["class"]] = []
+                    class_objects[obj_data["class"]].append((obj_id, obj_data))
+            
+            # Skip if no objects of this class are being tracked
+            if label not in class_objects:
+                continue
+                
+            # Compare with all existing objects of the same class
+            for obj_id, obj_data in class_objects[label]:
                 # Skip if not seen recently (within 30 frames)
                 if frame_idx - obj_data["last_seen"] > 30:
                     continue
                 
-                # Skip if class labels don't match
-                if obj_data["class"] != label:
-                    continue
-                    
                 # Calculate IoU with last known position
                 last_box = obj_data["trajectory"][-1][1]
                 iou = self.calculate_iou(box, last_box)
@@ -115,10 +137,13 @@ class ObjectTracker:
                 # Calculate embedding similarity
                 emb_sim = cosine_similarity([det_embedding], [obj_data["embedding"]])[0][0]
                 
-                # Combined score - Use only embedding similarity
-                combined_score = emb_sim  # Ignore iou_weight and iou
+                # Combined score using weighted average of IoU and embedding similarity
+                combined_score = self.iou_weight * iou + self.emb_weight * emb_sim
                 
-                match_scores.append((obj_id, i, combined_score, iou, emb_sim))
+                # Apply minimum thresholds for both IoU and embedding similarity
+                # Only consider matches where both metrics meet minimum requirements
+                if (iou >= self.min_iou_threshold and emb_sim >= self.min_emb_threshold):
+                    match_scores.append((obj_id, i, combined_score, iou, emb_sim))
         
         # Sort by combined score
         match_scores.sort(key=lambda x: x[2], reverse=True)
@@ -161,32 +186,65 @@ class ObjectTracker:
                 current_objects[obj_id] = box
                 print(f"Updated object {obj_id} ({detection['text']}) with score {score:.2f} (IoU: {iou:.2f}, Emb: {emb_sim:.2f})")
         
-        # Handle new objects
+        # Handle new detections - either new objects or new instances of existing classes
         for i, detection in enumerate(detections):
-            if i not in matched_detections:
+            if i in matched_detections:
+                continue
+                
+            box = detection["box"]
+            label = detection["text"]
+            
+            # Extract crop and embedding
+            x1, y1, x2, y2 = [int(c) for c in box]
+            if x1 >= x2 or y1 >= y2 or x1 < 0 or y1 < 0 or x2 >= frame.shape[1] or y2 >= frame.shape[0]:
+                continue
+                
+            crop = frame[y1:y2, x1:x2]
+            det_embedding = embedding_extractor.extract(crop)
+            
+            # Check if this is a new instance of an existing class
+            is_new_instance = True
+            max_emb_sim = 0.0
+            max_iou = 0.0
+            
+            # Look at all existing objects of the same class
+            for obj_id, obj_data in self.tracked_objects.items():
+                if obj_data["class"] == label:
+                    # Calculate IoU with the most recent position
+                    last_box = obj_data["trajectory"][-1][1]
+                    iou = self.calculate_iou(box, last_box)
+                    
+                    # Calculate embedding similarity
+                    emb_sim = cosine_similarity([det_embedding], [obj_data["embedding"]])[0][0]
+                    
+                    # Track maximum values
+                    max_emb_sim = max(max_emb_sim, emb_sim)
+                    max_iou = max(max_iou, iou)
+                    
+                    # If significant overlap or very high similarity with any existing instance,
+                    # this might not be a new instance
+                    if iou > self.new_instance_max_iou and emb_sim > self.min_emb_threshold:
+                        is_new_instance = False
+                        break
+            
+            # Create a new object if this is a new instance
+            if is_new_instance:
                 obj_id = self.next_obj_id
                 self.next_obj_id += 1
                 
-                box = detection["box"]
-                
-                # Extract crop and embedding
-                x1, y1, x2, y2 = [int(c) for c in box]
-                if x1 >= x2 or y1 >= y2 or x1 < 0 or y1 < 0 or x2 >= frame.shape[1] or y2 >= frame.shape[0]:
-                    continue
-                    
-                crop = frame[y1:y2, x1:x2]
-                embedding = embedding_extractor.extract(crop)
-                
                 # Initialize object
                 self.tracked_objects[obj_id] = {
-                    "class": detection["text"],
-                    "embedding": embedding,
+                    "class": label,
+                    "embedding": det_embedding,
                     "trajectory": [(frame_idx, box)],
                     "last_seen": frame_idx
                 }
                 
                 current_objects[obj_id] = box
-                print(f"Created new object {obj_id} ({detection['text']})")
+                if max_emb_sim > 0:
+                    print(f"Created new instance {obj_id} of ({label}) - distinct from existing instances (max IoU: {max_iou:.2f}, max Emb: {max_emb_sim:.2f})")
+                else:
+                    print(f"Created new object {obj_id} ({label})")
         
         # Create tracking visualization if output_dir provided
         if output_dir is not None:

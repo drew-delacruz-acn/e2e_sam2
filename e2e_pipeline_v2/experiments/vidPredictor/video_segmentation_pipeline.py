@@ -436,8 +436,22 @@ def process_scene(
         
         # Clear GPU memory before moving to the next scene
         logger.info("Clearing GPU memory and cache...")
+        # Log memory usage before clearing
+        if torch.cuda.is_available():
+            before_mem = torch.cuda.memory_allocated() / (1024 ** 3)
+            before_cached = torch.cuda.memory_reserved() / (1024 ** 3)
+            logger.info(f"Before clearing - GPU memory allocated: {before_mem:.2f} GB, reserved: {before_cached:.2f} GB")
+        
         torch.cuda.empty_cache()
         gc.collect()
+        
+        # Log memory usage after clearing
+        if torch.cuda.is_available():
+            after_mem = torch.cuda.memory_allocated() / (1024 ** 3)
+            after_cached = torch.cuda.memory_reserved() / (1024 ** 3)
+            logger.info(f"After clearing - GPU memory allocated: {after_mem:.2f} GB, reserved: {after_cached:.2f} GB")
+            logger.info(f"Memory freed: {before_mem - after_mem:.2f} GB allocated, {before_cached - after_cached:.2f} GB reserved")
+        
         logger.info("Memory cleared successfully")
         
         return True
@@ -452,8 +466,21 @@ def process_scene(
         
         # Also clear memory after failed processing
         logger.info("Clearing GPU memory and cache after failure...")
+        # Log memory usage before clearing
+        if torch.cuda.is_available():
+            before_mem = torch.cuda.memory_allocated() / (1024 ** 3)
+            before_cached = torch.cuda.memory_reserved() / (1024 ** 3)
+            logger.info(f"Before clearing - GPU memory allocated: {before_mem:.2f} GB, reserved: {before_cached:.2f} GB")
+        
         torch.cuda.empty_cache()
         gc.collect()
+        
+        # Log memory usage after clearing
+        if torch.cuda.is_available():
+            after_mem = torch.cuda.memory_allocated() / (1024 ** 3)
+            after_cached = torch.cuda.memory_reserved() / (1024 ** 3)
+            logger.info(f"After clearing - GPU memory allocated: {after_mem:.2f} GB, reserved: {after_cached:.2f} GB")
+            logger.info(f"Memory freed: {before_mem - after_mem:.2f} GB allocated, {before_cached - after_cached:.2f} GB reserved")
         
         return False
 

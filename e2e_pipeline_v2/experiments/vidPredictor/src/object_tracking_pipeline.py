@@ -1197,7 +1197,6 @@ class ObjectTrackingPipeline:
         for i, frame_path in enumerate(frame_files):
             frame_idx = self._extract_frame_idx_from_path(frame_path)
             frame_indices.append(frame_idx)
-            print(f"Frame {i} in sequence maps to frame index {frame_idx}")
         
         # Results storage
         results = {

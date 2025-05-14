@@ -116,13 +116,11 @@ def enhanced_load_detections(self):
     
     # Log detailed stats in debug mode
     if logger.level <= logging.DEBUG:
-        logger.debug("Detections per frame:")
         for frame_idx in sorted(detections_by_frame.keys())[:10]:  # Show first 10 frames only
             frame_dets = detections_by_frame[frame_idx]
             if frame_dets:
                 confidences = [f"{det.get('confidence', 0):.6f}" for det in frame_dets[:3]]
                 labels = [det.get('label', '') for det in frame_dets[:3]]
-                logger.debug(f"  Frame {frame_idx}: {len(frame_dets)} detections - Labels: {labels[:3]}, Confidences: {confidences[:3]}")
                 if len(frame_dets) > 3:
                     logger.debug(f"    ... and {len(frame_dets) - 3} more")
             else:
@@ -188,7 +186,6 @@ def enhanced_detect(self, image, text_queries, threshold=None):
     else:
         logger.debug(f"Frame {frame_idx}: No objects detected")
     
-    logger.debug(f"Detection took {(time.time() - start_time)*1000:.1f}ms")
     
     return result
 

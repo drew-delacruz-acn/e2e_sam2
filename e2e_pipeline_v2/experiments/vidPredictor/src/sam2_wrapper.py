@@ -313,8 +313,6 @@ class SAM2VideoWrapper:
                 
                 # Process each object
                 for i, (obj_id, mask_logit) in enumerate(zip(filtered_obj_ids, filtered_mask_logits)):
-                    print(f"Processing object {obj_id} in frame {out_frame_idx}")
-                    print(f"Mask logit type: {type(mask_logit).__name__}, shape: {getattr(mask_logit, 'shape', 'unknown')}")
                     
                     # Convert logits to binary mask (torch tensor)
                     if isinstance(mask_logit, torch.Tensor):

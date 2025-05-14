@@ -439,10 +439,8 @@ class ObjectTrackingPipeline:
                             if isinstance(box_data, dict):
                                 box = box_data["box"]
                                 all_boxes.append(box)
-                                print(f"Adding box for frame {frame_idx} to object {obj_id}: {box}")
                             else:
                                 all_boxes.append(box_data)
-                                print(f"Adding raw box for frame {frame_idx} to object {obj_id}: {box_data}")
                     
                     # Add logging to debug the tracked_objects dictionary
                     print(f"DEBUG: tracked_objects keys before update: {list(self.tracked_objects.keys())}")
@@ -1285,10 +1283,8 @@ class ObjectTrackingPipeline:
                         if isinstance(box_data, dict):
                             box = box_data["box"]
                             all_boxes.append(box)
-                            print(f"Adding box for frame {frame_idx} to object {obj_id}: {box}")
                         else:
                             all_boxes.append(box_data)
-                            print(f"Adding raw box for frame {frame_idx} to object {obj_id}: {box_data}")
                 
                 # Add logging to debug the tracked_objects dictionary
                 print(f"DEBUG: tracked_objects keys before update: {list(self.tracked_objects.keys())}")

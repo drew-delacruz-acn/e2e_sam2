@@ -5,7 +5,7 @@ import os
 import matplotlib.pyplot as plt
 
 class ObjectTracker:
-    def __init__(self, iou_weight=0.5, emb_weight=0.5, match_threshold=0.4):
+    def __init__(self, iou_weight=0.5, emb_weight=0.5, match_threshold=0.3):
         """Initialize simple two-tier object tracker"""
         self.tracked_objects = {}
         self.next_obj_id = 1

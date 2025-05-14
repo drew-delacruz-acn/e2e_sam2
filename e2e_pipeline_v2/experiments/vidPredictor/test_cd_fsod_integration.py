@@ -511,3 +511,19 @@ def main():
 
 if __name__ == "__main__":
     main() 
+
+
+
+
+# Using detector: cd_fsod
+# Phase 1: Detecting and tracking objects...
+# Initialized object 1 (Loki's Armor)
+# Created new object 1 (Loki's Armor) at frame 27
+# Updated object 1 (Loki's Armor) with score 0.82 (IoU: 0.65, Emb: 0.82)
+# Created new object 2 (Loki's Armor)
+# Created new object 2 (Loki's Armor) at frame 64
+# Updated object 2 (Loki's Armor) with score 0.88 (IoU: 0.64, Emb: 0.88)
+# Created new object 3 (Loki's Armor)
+# Created new object 3 (Loki's Armor) at frame 99
+# Updated object 3 (Loki's Armor) with score 0.92 (IoU: 0.65, Emb: 0.92)
+# Found 3 unique objects to process with SAM2

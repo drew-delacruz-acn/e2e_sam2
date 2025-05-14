@@ -748,6 +748,10 @@ class ObjectTrackingPipeline:
         object_masks_dir = self.output_dir / "object_masks"
         object_masks_dir.mkdir(exist_ok=True, parents=True)
         
+        # Create base directory for binary masks
+        binary_masks_dir = self.output_dir / "binary_masks"
+        binary_masks_dir.mkdir(exist_ok=True, parents=True)
+        
         # Get frame paths with natural sorting
         frames_path = Path(frames_dir)
         frame_files = sorted([f for f in frames_path.glob("*.jpg") or frames_path.glob("*.png")], key=natural_sort_key)
@@ -772,9 +776,13 @@ class ObjectTrackingPipeline:
                 "empty_mask_frames": []
             }
             
-            # Create directory for this object
+            # Create directory for this object's visualization
             obj_dir = object_masks_dir / f"object_{obj_id}_{self.tracked_objects[obj_id]['class']}"
             obj_dir.mkdir(exist_ok=True)
+            
+            # Create directory for this object's binary masks
+            binary_obj_dir = binary_masks_dir / f"object_{obj_id}_{self.tracked_objects[obj_id]['class']}"
+            binary_obj_dir.mkdir(exist_ok=True)
             
         # Process all frames in propagation results
         for frame_idx in sorted(self.propagation_results.keys()):
@@ -860,6 +868,19 @@ class ObjectTrackingPipeline:
                     # Convert to bool and ensure shape is compatible
                     mask_bool = mask.astype(bool)
                     
+                    # Save binary mask as JPG
+                    try:
+                        # Create binary mask image (255 for true pixels, 0 for false)
+                        binary_mask_img = np.zeros(mask_bool.shape, dtype=np.uint8)
+                        binary_mask_img[mask_bool] = 255
+                        
+                        # Save to binary masks directory
+                        quality_label = "high" if is_high_quality else "low"
+                        binary_mask_path = binary_masks_dir / f"object_{obj_id}_{self.tracked_objects[obj_id]['class']}" / f"frame_{frame_idx}_{quality_label}quality.jpg"
+                        cv2.imwrite(str(binary_mask_path), binary_mask_img)
+                    except Exception as e:
+                        print(f"Error saving binary mask for object {obj_id} on frame {frame_idx}: {e}")
+                    
                     try:
                         # Use different visualization styles based on quality
                         # Use normal overlay for non-empty masks
@@ -897,10 +918,12 @@ class ObjectTrackingPipeline:
                         cv2.putText(vis_frame, "FALLBACK BOX", (x1, y1-10), 
                                    cv2.FONT_HERSHEY_SIMPLEX, 0.6, fallback_color, 2)
                 
-                # Save visualization
-                obj_dir = object_masks_dir / f"object_{obj_id}_{obj_class}"
-                output_path = obj_dir / f"frame_{frame_idx:04d}.jpg"
-                cv2.imwrite(str(output_path), cv2.cvtColor(vis_frame, cv2.COLOR_RGB2BGR))
+                # Save visualization to object's directory
+                quality_label = "high" if is_high_quality else "low"
+                vis_output_path = object_masks_dir / f"object_{obj_id}_{self.tracked_objects[obj_id]['class']}" / f"frame_{frame_idx}_{quality_label}quality.jpg"
+                cv2.imwrite(str(vis_output_path), cv2.cvtColor(vis_frame, cv2.COLOR_RGB2BGR))
+                
+                # Count as saved
                 object_quality_stats[obj_id]["frames_saved"] += 1
         
         # Log quality statistics for each object
@@ -917,6 +940,7 @@ class ObjectTrackingPipeline:
             self.tracked_objects[obj_id]['mask_quality_stats'] = stats
         
         print(f"All per-object mask visualizations saved to {object_masks_dir}")
+        print(f"All binary masks saved to {binary_masks_dir}")
     
     def _count_mask_pixels(self, mask):
         """Count the number of true pixels in a mask"""

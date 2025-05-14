@@ -304,9 +304,6 @@ class ObjectTrackingPipeline:
                     "text": detections["labels"][i]
                 })
 
-            print(f"-----Initializing new objects-----")
-            print(f"detections: {tracker_detections}")
-            print(f"-----Initializing {tracker_detections}-----")
 
             # Get boxes for current frame from tracker
             current_boxes = self.tracker.update_tracks(

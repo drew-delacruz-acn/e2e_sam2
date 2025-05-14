@@ -220,20 +220,20 @@ class SAM2VideoWrapper:
             iterator = self.predictor.propagate_in_video(self.inference_state)
             print(f"Iterator type: {type(iterator).__name__}")
             
-            # Debug first item from iterator without consuming it
-            try:
-                # Use tee to peek at the first item without consuming the iterator
-                import itertools
-                iterator, debug_iterator = itertools.tee(iterator)
-                first_item = next(debug_iterator, None)
-                print(f"First item type: {type(first_item).__name__}")
-                print(f"First item value: {first_item}")
-                if isinstance(first_item, tuple):
-                    print(f"First item tuple length: {len(first_item)}")
-                    for i, element in enumerate(first_item):
-                        print(f"  Element {i}: type={type(element).__name__}, value={element}")
-            except Exception as peek_error:
-                print(f"Error peeking at iterator: {peek_error}")
+            # # Debug first item from iterator without consuming it
+            # try:
+            #     # Use tee to peek at the first item without consuming the iterator
+            #     import itertools
+            #     iterator, debug_iterator = itertools.tee(iterator)
+            #     first_item = next(debug_iterator, None)
+            #     print(f"First item type: {type(first_item).__name__}")
+            #     print(f"First item value: {first_item}")
+            #     if isinstance(first_item, tuple):
+            #         print(f"First item tuple length: {len(first_item)}")
+            #         for i, element in enumerate(first_item):
+            #             print(f"  Element {i}: type={type(element).__name__}, value={element}")
+            # except Exception as peek_error:
+            #     print(f"Error peeking at iterator: {peek_error}")
             
             # Create a unified iterator wrapper that can handle different return values
             def robust_iterator_wrapper(iterator):

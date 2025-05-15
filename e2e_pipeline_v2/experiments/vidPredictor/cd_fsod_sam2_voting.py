@@ -76,6 +76,13 @@ def process_scene(scene_path, detections_path, output_path, args, main_logger):
     # Load CD-FSOD detections
     detector = CDFSODDetector(json_dir=str(detections_path), confidence_threshold=args.confidence, min_gap_frames=args.min_gap_frames)
     logger.info(f"Loaded CD-FSOD detections from {detections_path}")
+    # Log summary of detections for the scene
+    det_by_frame = detector.detections_by_frame
+    logger.info(f"Scene {scene_name}: {len(det_by_frame)} frames with detections.")
+    for frame_idx, dets in list(det_by_frame.items())[:5]:
+        logger.info(f"  Frame {frame_idx}: {len(dets)} detections.")
+        for i, d in enumerate(dets):
+            logger.info(f"    Detection {i}: box={d.get('box')}, label={d.get('label')}, score={d.get('confidence', d.get('score', 'N/A'))}")
     # Track objects (IoU only)
     tracker = ObjectTracker(iou_weight=1.0, emb_weight=0.0)
     tracked_objects = defaultdict(list)  # obj_id -> list of (frame_idx, box, label, score)

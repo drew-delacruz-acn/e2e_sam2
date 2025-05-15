@@ -233,10 +233,7 @@ class CDFSODDetector:
         # Extract frame index from filename or metadata
         frame_idx = self._extract_frame_idx(image)
 
-        print(f'HERE---------------')
-        print(f'FRAME IDX {frame_idx}')
-        print(f'frame detections by frame {self.detections_by_frame}')
-        
+
         if frame_idx is None or frame_idx not in self.detections_by_frame:
             print('did we go here')
             # If we can't determine the frame index or don't have detections, return empty results
@@ -292,8 +289,6 @@ class CDFSODDetector:
             Frame index or None if it cannot be determined
         """
 
-        print(f'IMAGE ====')
-        print(image)
         # Handle dictionary input format (used by the pipeline)
         if isinstance(image, dict) and 'frame_idx' in image:
             return image['frame_idx']
@@ -307,7 +302,6 @@ class CDFSODDetector:
             # Extract frame index from filename
             match = re.search(r'(\d+)', os.path.basename(image))
             if match:
-                print(f'EXTRACTED FRAME IDX {match.group(1)}')
                 return int(match.group(1))
             else:
                 # If no match, return None

@@ -99,9 +99,7 @@ def process_scene(scene_path, detections_path, output_path, args, main_logger):
     for idx, frame in enumerate(frames):
         dets = detector.detect(frame_paths[idx], args.text_queries)
         detections = []
-        print('------------')
-        print(dets)
-        print('------------')
+
         for coordinates, label, score in zip(dets["coordinates"], dets["labels"], dets["scores"]):
             if coordinates is None or (isinstance(coordinates, (list, tuple)) and any(b is None for b in coordinates)):
                 logger.warning(f"Skipping detection in frame {idx}: invalid coordinates: {coordinates}, label: {label}, score: {score}")
@@ -356,73 +354,95 @@ def main():
 
 if __name__ == "__main__":
     main() 
-# python e2e_pipeline_v2/experiments/vidPredictor/cd_fsod_sam2_voting.py  --frames-root "data/frames/" --detections-root "data/detections_cdfsod/" --output-root gitignore_exception/testing --sam2-checkpoint checkpoints/sam2.1_hiera_large.pt --sam2-config configs/sam2.1/sam2.1_hiera_l.yaml --confidence 0.1 --min-gap-frames 20 --text-queries "all" --scene 'Scenes 061-080__265H-2-_20230815215828529' --separate-objects
-# 2025-05-15 18:50:52,399 - INFO - Logging to file: gitignore_exception/testing/cd_fsod_sam2_voting_20250515_185052.log
-# 2025-05-15 18:50:52,399 - INFO - Found 1 scene directories to process
-# 2025-05-15 18:50:52,399 - INFO - [1/1] Processing scene: Scenes 061-080__265H-2-_20230815215828529
-# 2025-05-15 18:50:52,399 - INFO - [Scenes 061-080__265H-2-_20230815215828529] Logging to file: gitignore_exception/testing/Scenes 061-080__265H-2-_20230815215828529/Scenes 061-080__265H-2-_20230815215828529_cd_fsod_sam2_voting_20250515_185052.log
-# 2025-05-15 18:50:52,399 - INFO - Logging to file: gitignore_exception/testing/Scenes 061-080__265H-2-_20230815215828529/Scenes 061-080__265H-2-_20230815215828529_cd_fsod_sam2_voting_20250515_185052.log
-# 2025-05-15 18:50:52,399 - INFO - [Scenes 061-080__265H-2-_20230815215828529] Processing scene: Scenes 061-080__265H-2-_20230815215828529
-# 2025-05-15 18:50:52,399 - INFO - Processing scene: Scenes 061-080__265H-2-_20230815215828529
+#  python e2e_pipeline_v2/experiments/vidPredictor/cd_fsod_sam2_voting.py  --frames-root "data/frames/" --detections-root "data/detections_cdfsod/" --output-root gitignore_exception/testing --sam2-checkpoint checkpoints/sam2.1_hiera_large.pt --sam2-config configs/sam2.1/sam2.1_hiera_l.yaml --confidence 0.1 --min-gap-frames 20 --text-queries "all" --scene 'Scenes 061-080__265H-2-_20230815215828529' --separate-objects
+# 2025-05-15 19:06:15,249 - INFO - Logging to file: gitignore_exception/testing/cd_fsod_sam2_voting_20250515_190615.log
+# 2025-05-15 19:06:15,249 - INFO - Found 1 scene directories to process
+# 2025-05-15 19:06:15,249 - INFO - [1/1] Processing scene: Scenes 061-080__265H-2-_20230815215828529
+# 2025-05-15 19:06:15,250 - INFO - [Scenes 061-080__265H-2-_20230815215828529] Logging to file: gitignore_exception/testing/Scenes 061-080__265H-2-_20230815215828529/Scenes 061-080__265H-2-_20230815215828529_cd_fsod_sam2_voting_20250515_190615.log
+# 2025-05-15 19:06:15,250 - INFO - Logging to file: gitignore_exception/testing/Scenes 061-080__265H-2-_20230815215828529/Scenes 061-080__265H-2-_20230815215828529_cd_fsod_sam2_voting_20250515_190615.log
+# 2025-05-15 19:06:15,250 - INFO - [Scenes 061-080__265H-2-_20230815215828529] Processing scene: Scenes 061-080__265H-2-_20230815215828529
+# 2025-05-15 19:06:15,250 - INFO - Processing scene: Scenes 061-080__265H-2-_20230815215828529
 # Loaded 54 frames from data/frames/Scenes 061-080__265H-2-_20230815215828529
-# 2025-05-15 18:50:52,609 - INFO - [Scenes 061-080__265H-2-_20230815215828529] Loaded 54 frames from data/frames/Scenes 061-080__265H-2-_20230815215828529
-# 2025-05-15 18:50:52,609 - INFO - Loaded 54 frames from data/frames/Scenes 061-080__265H-2-_20230815215828529
-# 2025-05-15 18:50:52,611 - INFO - [Scenes 061-080__265H-2-_20230815215828529] Loaded CD-FSOD detections from data/detections_cdfsod/Scenes 061-080__265H-2-_20230815215828529
-# 2025-05-15 18:50:52,611 - INFO - Loaded CD-FSOD detections from data/detections_cdfsod/Scenes 061-080__265H-2-_20230815215828529
-# 2025-05-15 18:50:52,611 - INFO - [Scenes 061-080__265H-2-_20230815215828529] Scene Scenes 061-080__265H-2-_20230815215828529: 54 frames with detections.
-# 2025-05-15 18:50:52,611 - INFO - Scene Scenes 061-080__265H-2-_20230815215828529: 54 frames with detections.
-# 2025-05-15 18:50:52,612 - INFO - [Scenes 061-080__265H-2-_20230815215828529]   Frame 0: 0 detections.
-# 2025-05-15 18:50:52,612 - INFO -   Frame 0: 0 detections.
-# 2025-05-15 18:50:52,612 - INFO - [Scenes 061-080__265H-2-_20230815215828529]   Frame 1: 0 detections.
-# 2025-05-15 18:50:52,612 - INFO -   Frame 1: 0 detections.
-# 2025-05-15 18:50:52,612 - INFO - [Scenes 061-080__265H-2-_20230815215828529]   Frame 2: 0 detections.
-# 2025-05-15 18:50:52,612 - INFO -   Frame 2: 0 detections.
-# 2025-05-15 18:50:52,612 - INFO - [Scenes 061-080__265H-2-_20230815215828529]   Frame 3: 2 detections.
-# 2025-05-15 18:50:52,612 - INFO -   Frame 3: 2 detections.
-# 2025-05-15 18:50:52,613 - INFO - [Scenes 061-080__265H-2-_20230815215828529]     Detection 0: box=[330, 107, 577, 506], label=TVA Uniform, score=0.8781716227531433
-# 2025-05-15 18:50:52,613 - INFO -     Detection 0: box=[330, 107, 577, 506], label=TVA Uniform, score=0.8781716227531433
-# 2025-05-15 18:50:52,613 - INFO - [Scenes 061-080__265H-2-_20230815215828529]     Detection 1: box=[542, 223, 634, 380], label=Time Stick, score=0.9803071618080139
-# 2025-05-15 18:50:52,613 - INFO -     Detection 1: box=[542, 223, 634, 380], label=Time Stick, score=0.9803071618080139
-# 2025-05-15 18:50:52,613 - INFO - [Scenes 061-080__265H-2-_20230815215828529]   Frame 4: 0 detections.
-# 2025-05-15 18:50:52,613 - INFO -   Frame 4: 0 detections.
-# IMAGE ====
-# data/frames/Scenes 061-080__265H-2-_20230815215828529/0.jpg
-# EXTRACTED FRAME IDX 0
-# HERE---------------
-# FRAME IDX 0
-# frame detections by frame {0: [], 1: [], 2: [], 3: [{'coordinates': [330, 107, 577, 506], 'label': 'TVA Uniform', 'confidence': 0.8781716227531433, 'object_id': 'TVA Uniform_0'}, {'coordinates': [542, 223, 634, 380], 'label': 'Time Stick', 'confidence': 0.9803071618080139, 'object_id': 'Time Stick_0'}], 4: [], 5: [], 6: [{'coordinates': [245, 218, 497, 477], 'label': 'Time Stick', 'confidence': 0.9080433249473572, 'object_id': 'Time Stick_0'}], 7: [{'coordinates': [284, 266, 458, 476], 'label': 'Time Stick', 'confidence': 0.9254939556121826, 'object_id': 'Time Stick_0'}], 8: [{'coordinates': [313, 291, 510, 487], 'label': 'Time Stick', 'confidence': 0.8289669752120972, 'object_id': 'Time Stick_0'}], 9: [{'coordinates': [301, 298, 503, 481], 'label': 'Time Stick', 'confidence': 0.806576132774353, 'object_id': 'Time Stick_0'}], 10: [{'coordinates': [322, 303, 507, 485], 'label': 'Time Stick', 'confidence': 0.8656324744224548, 'object_id': 'Time Stick_0'}], 11: [], 12: [], 13: [{'coordinates': [376, 109, 633, 470], 'label': 'TVA Uniform', 'confidence': 0.9413918256759644, 'object_id': 'TVA Uniform_0'}, {'coordinates': [587, 345, 664, 479], 'label': 'Time Stick', 'confidence': 0.9548423290252686, 'object_id': 'Time Stick_0'}, {'coordinates': [314, 267, 637, 482], 'label': 'Time Stick', 'confidence': 0.9046198725700378, 'object_id': 'Time Stick_0'}], 14: [{'coordinates': [356, 90, 609, 471], 'label': 'TVA Uniform', 'confidence': 0.992297351360321, 'object_id': 'TVA Uniform_0'}], 15: [{'coordinates': [341, 100, 629, 487], 'label': 'TVA Uniform', 'confidence': 0.9956328272819519, 'object_id': 'TVA Uniform_0'}], 16: [{'coordinates': [311, 82, 554, 480], 'label': 'TVA Uniform', 'confidence': 0.9951287508010864, 'object_id': 'TVA Uniform_0'}], 17: [], 18: [{'coordinates': [315, 127, 479, 205], 'label': "Sylvie's horned headpiece", 'confidence': 0.988658607006073, 'object_id': "Sylvie's horned headpiece_0"}], 19: [{'coordinates': [56, 55, 212, 480], 'label': 'TVA Uniform', 'confidence': 0.7251200079917908, 'object_id': 'TVA Uniform_0'}], 20: [{'coordinates': [543, 79, 717, 180], 'label': "Sylvie's horned headpiece", 'confidence': 0.992920458316803, 'object_id': "Sylvie's horned headpiece_0"}], 21: [], 22: [], 23: [], 24: [], 25: [], 26: [], 27: [], 28: [{'coordinates': [372, 81, 464, 181], 'label': "Sylvie's horned headpiece", 'confidence': 0.8353860974311829, 'object_id': "Sylvie's horned headpiece_0"}], 29: [], 30: [], 31: [], 32: [], 33: [{'coordinates': [583, 102, 672, 199], 'label': "Sylvie's horned headpiece", 'confidence': 0.8724778294563293, 'object_id': "Sylvie's horned headpiece_0"}], 34: [], 35: [], 36: [], 37: [], 38: [], 39: [], 40: [], 41: [], 42: [], 43: [{'coordinates': [414, 154, 554, 227], 'label': "Sylvie's horned headpiece", 'confidence': 0.9423537850379944, 'object_id': "Sylvie's horned headpiece_0"}], 44: [], 45: [], 46: [], 47: [], 48: [], 49: [], 50: [], 51: [], 52: [], 53: []}
-# ------------
-# {'coordinates': [], 'labels': [], 'scores': []}
-# ------------
-# IMAGE ====
-# data/frames/Scenes 061-080__265H-2-_20230815215828529/1.jpg
-# EXTRACTED FRAME IDX 1
-# HERE---------------
-# FRAME IDX 1
-# frame detections by frame {0: [], 1: [], 2: [], 3: [{'coordinates': [330, 107, 577, 506], 'label': 'TVA Uniform', 'confidence': 0.8781716227531433, 'object_id': 'TVA Uniform_0'}, {'coordinates': [542, 223, 634, 380], 'label': 'Time Stick', 'confidence': 0.9803071618080139, 'object_id': 'Time Stick_0'}], 4: [], 5: [], 6: [{'coordinates': [245, 218, 497, 477], 'label': 'Time Stick', 'confidence': 0.9080433249473572, 'object_id': 'Time Stick_0'}], 7: [{'coordinates': [284, 266, 458, 476], 'label': 'Time Stick', 'confidence': 0.9254939556121826, 'object_id': 'Time Stick_0'}], 8: [{'coordinates': [313, 291, 510, 487], 'label': 'Time Stick', 'confidence': 0.8289669752120972, 'object_id': 'Time Stick_0'}], 9: [{'coordinates': [301, 298, 503, 481], 'label': 'Time Stick', 'confidence': 0.806576132774353, 'object_id': 'Time Stick_0'}], 10: [{'coordinates': [322, 303, 507, 485], 'label': 'Time Stick', 'confidence': 0.8656324744224548, 'object_id': 'Time Stick_0'}], 11: [], 12: [], 13: [{'coordinates': [376, 109, 633, 470], 'label': 'TVA Uniform', 'confidence': 0.9413918256759644, 'object_id': 'TVA Uniform_0'}, {'coordinates': [587, 345, 664, 479], 'label': 'Time Stick', 'confidence': 0.9548423290252686, 'object_id': 'Time Stick_0'}, {'coordinates': [314, 267, 637, 482], 'label': 'Time Stick', 'confidence': 0.9046198725700378, 'object_id': 'Time Stick_0'}], 14: [{'coordinates': [356, 90, 609, 471], 'label': 'TVA Uniform', 'confidence': 0.992297351360321, 'object_id': 'TVA Uniform_0'}], 15: [{'coordinates': [341, 100, 629, 487], 'label': 'TVA Uniform', 'confidence': 0.9956328272819519, 'object_id': 'TVA Uniform_0'}], 16: [{'coordinates': [311, 82, 554, 480], 'label': 'TVA Uniform', 'confidence': 0.9951287508010864, 'object_id': 'TVA Uniform_0'}], 17: [], 18: [{'coordinates': [315, 127, 479, 205], 'label': "Sylvie's horned headpiece", 'confidence': 0.988658607006073, 'object_id': "Sylvie's horned headpiece_0"}], 19: [{'coordinates': [56, 55, 212, 480], 'label': 'TVA Uniform', 'confidence': 0.7251200079917908, 'object_id': 'TVA Uniform_0'}], 20: [{'coordinates': [543, 79, 717, 180], 'label': "Sylvie's horned headpiece", 'confidence': 0.992920458316803, 'object_id': "Sylvie's horned headpiece_0"}], 21: [], 22: [], 23: [], 24: [], 25: [], 26: [], 27: [], 28: [{'coordinates': [372, 81, 464, 181], 'label': "Sylvie's horned headpiece", 'confidence': 0.8353860974311829, 'object_id': "Sylvie's horned headpiece_0"}], 29: [], 30: [], 31: [], 32: [], 33: [{'coordinates': [583, 102, 672, 199], 'label': "Sylvie's horned headpiece", 'confidence': 0.8724778294563293, 'object_id': "Sylvie's horned headpiece_0"}], 34: [], 35: [], 36: [], 37: [], 38: [], 39: [], 40: [], 41: [], 42: [], 43: [{'coordinates': [414, 154, 554, 227], 'label': "Sylvie's horned headpiece", 'confidence': 0.9423537850379944, 'object_id': "Sylvie's horned headpiece_0"}], 44: [], 45: [], 46: [], 47: [], 48: [], 49: [], 50: [], 51: [], 52: [], 53: []}
-# ------------
-# {'coordinates': [], 'labels': [], 'scores': []}
-# ------------
-# IMAGE ====
-# data/frames/Scenes 061-080__265H-2-_20230815215828529/10.jpg
-# EXTRACTED FRAME IDX 10
-# HERE---------------
-# FRAME IDX 10
-# frame detections by frame {0: [], 1: [], 2: [], 3: [{'coordinates': [330, 107, 577, 506], 'label': 'TVA Uniform', 'confidence': 0.8781716227531433, 'object_id': 'TVA Uniform_0'}, {'coordinates': [542, 223, 634, 380], 'label': 'Time Stick', 'confidence': 0.9803071618080139, 'object_id': 'Time Stick_0'}], 4: [], 5: [], 6: [{'coordinates': [245, 218, 497, 477], 'label': 'Time Stick', 'confidence': 0.9080433249473572, 'object_id': 'Time Stick_0'}], 7: [{'coordinates': [284, 266, 458, 476], 'label': 'Time Stick', 'confidence': 0.9254939556121826, 'object_id': 'Time Stick_0'}], 8: [{'coordinates': [313, 291, 510, 487], 'label': 'Time Stick', 'confidence': 0.8289669752120972, 'object_id': 'Time Stick_0'}], 9: [{'coordinates': [301, 298, 503, 481], 'label': 'Time Stick', 'confidence': 0.806576132774353, 'object_id': 'Time Stick_0'}], 10: [{'coordinates': [322, 303, 507, 485], 'label': 'Time Stick', 'confidence': 0.8656324744224548, 'object_id': 'Time Stick_0'}], 11: [], 12: [], 13: [{'coordinates': [376, 109, 633, 470], 'label': 'TVA Uniform', 'confidence': 0.9413918256759644, 'object_id': 'TVA Uniform_0'}, {'coordinates': [587, 345, 664, 479], 'label': 'Time Stick', 'confidence': 0.9548423290252686, 'object_id': 'Time Stick_0'}, {'coordinates': [314, 267, 637, 482], 'label': 'Time Stick', 'confidence': 0.9046198725700378, 'object_id': 'Time Stick_0'}], 14: [{'coordinates': [356, 90, 609, 471], 'label': 'TVA Uniform', 'confidence': 0.992297351360321, 'object_id': 'TVA Uniform_0'}], 15: [{'coordinates': [341, 100, 629, 487], 'label': 'TVA Uniform', 'confidence': 0.9956328272819519, 'object_id': 'TVA Uniform_0'}], 16: [{'coordinates': [311, 82, 554, 480], 'label': 'TVA Uniform', 'confidence': 0.9951287508010864, 'object_id': 'TVA Uniform_0'}], 17: [], 18: [{'coordinates': [315, 127, 479, 205], 'label': "Sylvie's horned headpiece", 'confidence': 0.988658607006073, 'object_id': "Sylvie's horned headpiece_0"}], 19: [{'coordinates': [56, 55, 212, 480], 'label': 'TVA Uniform', 'confidence': 0.7251200079917908, 'object_id': 'TVA Uniform_0'}], 20: [{'coordinates': [543, 79, 717, 180], 'label': "Sylvie's horned headpiece", 'confidence': 0.992920458316803, 'object_id': "Sylvie's horned headpiece_0"}], 21: [], 22: [], 23: [], 24: [], 25: [], 26: [], 27: [], 28: [{'coordinates': [372, 81, 464, 181], 'label': "Sylvie's horned headpiece", 'confidence': 0.8353860974311829, 'object_id': "Sylvie's horned headpiece_0"}], 29: [], 30: [], 31: [], 32: [], 33: [{'coordinates': [583, 102, 672, 199], 'label': "Sylvie's horned headpiece", 'confidence': 0.8724778294563293, 'object_id': "Sylvie's horned headpiece_0"}], 34: [], 35: [], 36: [], 37: [], 38: [], 39: [], 40: [], 41: [], 42: [], 43: [{'coordinates': [414, 154, 554, 227], 'label': "Sylvie's horned headpiece", 'confidence': 0.9423537850379944, 'object_id': "Sylvie's horned headpiece_0"}], 44: [], 45: [], 46: [], 47: [], 48: [], 49: [], 50: [], 51: [], 52: [], 53: []}
-# ------------
-# {'coordinates': [[322, 303, 507, 485]], 'labels': ['Time Stick'], 'scores': [0.8656324744224548]}
-# ------------
+# 2025-05-15 19:06:15,458 - INFO - [Scenes 061-080__265H-2-_20230815215828529] Loaded 54 frames from data/frames/Scenes 061-080__265H-2-_20230815215828529
+# 2025-05-15 19:06:15,458 - INFO - Loaded 54 frames from data/frames/Scenes 061-080__265H-2-_20230815215828529
+# 2025-05-15 19:06:15,460 - INFO - [Scenes 061-080__265H-2-_20230815215828529] Loaded CD-FSOD detections from data/detections_cdfsod/Scenes 061-080__265H-2-_20230815215828529
+# 2025-05-15 19:06:15,460 - INFO - Loaded CD-FSOD detections from data/detections_cdfsod/Scenes 061-080__265H-2-_20230815215828529
+# 2025-05-15 19:06:15,460 - INFO - [Scenes 061-080__265H-2-_20230815215828529] Scene Scenes 061-080__265H-2-_20230815215828529: 54 frames with detections.
+# 2025-05-15 19:06:15,460 - INFO - Scene Scenes 061-080__265H-2-_20230815215828529: 54 frames with detections.
+# 2025-05-15 19:06:15,462 - INFO - [Scenes 061-080__265H-2-_20230815215828529]   Frame 0: 0 detections.
+# 2025-05-15 19:06:15,462 - INFO -   Frame 0: 0 detections.
+# 2025-05-15 19:06:15,462 - INFO - [Scenes 061-080__265H-2-_20230815215828529]   Frame 1: 0 detections.
+# 2025-05-15 19:06:15,462 - INFO -   Frame 1: 0 detections.
+# 2025-05-15 19:06:15,462 - INFO - [Scenes 061-080__265H-2-_20230815215828529]   Frame 2: 0 detections.
+# 2025-05-15 19:06:15,462 - INFO -   Frame 2: 0 detections.
+# 2025-05-15 19:06:15,462 - INFO - [Scenes 061-080__265H-2-_20230815215828529]   Frame 3: 2 detections.
+# 2025-05-15 19:06:15,462 - INFO -   Frame 3: 2 detections.
+# 2025-05-15 19:06:15,462 - INFO - [Scenes 061-080__265H-2-_20230815215828529]     Detection 0: box=[330, 107, 577, 506], label=TVA Uniform, score=0.8781716227531433
+# 2025-05-15 19:06:15,462 - INFO -     Detection 0: box=[330, 107, 577, 506], label=TVA Uniform, score=0.8781716227531433
+# 2025-05-15 19:06:15,462 - INFO - [Scenes 061-080__265H-2-_20230815215828529]     Detection 1: box=[542, 223, 634, 380], label=Time Stick, score=0.9803071618080139
+# 2025-05-15 19:06:15,462 - INFO -     Detection 1: box=[542, 223, 634, 380], label=Time Stick, score=0.9803071618080139
+# 2025-05-15 19:06:15,462 - INFO - [Scenes 061-080__265H-2-_20230815215828529]   Frame 4: 0 detections.
+# 2025-05-15 19:06:15,462 - INFO -   Frame 4: 0 detections.
+# Initialized object 1 (Time Stick)
+# Updated object 1 (Time Stick) with score 0.47 (IoU: 0.47)
+# Created new object 2 (TVA Uniform)
+# Updated object 2 (TVA Uniform) with score 0.80 (IoU: 0.80)
+# Updated object 2 (TVA Uniform) with score 0.82 (IoU: 0.82)
+# Updated object 2 (TVA Uniform) with score 0.64 (IoU: 0.64)
+# Created new object 3 (Sylvie's horned headpiece)
+# Updated object 2 (TVA Uniform) with score 0.75 (IoU: 0.75)
+# 2025-05-15 19:06:15,463 - INFO - [Scenes 061-080__265H-2-_20230815215828529] Tracked 3 objects in scene Scenes 061-080__265H-2-_20230815215828529
+# 2025-05-15 19:06:15,463 - INFO - Tracked 3 objects in scene Scenes 061-080__265H-2-_20230815215828529
+# 2025-05-15 19:06:15,463 - INFO - [Scenes 061-080__265H-2-_20230815215828529] Processing each object separately for mask propagation and voting.
+# 2025-05-15 19:06:15,463 - INFO - Processing each object separately for mask propagation and voting.
+# SAM2 using device: cuda
+# USING DIRECT FRAMES APPROACH
+# Creating temporary directory for frames: /tmp/tmp7sw83ult
+# frame loading (JPEG): 100%|█████████████████████████████████████████████████████████████| 54/54 [00:01<00:00, 37.93it/s]
+# Set 54 frames via temporary directory
+# Using predictor type: SAM2VideoPredictor
+# Error during mask propagation: No input points or masks are provided for any object; please add inputs first.
+# Traceback: Traceback (most recent call last):
+#   File "/home/ubuntu/code/drew/e2e_sam2/e2e_pipeline_v2/experiments/vidPredictor/src/sam2_wrapper.py", line 276, in propagate_masks
+#     for out_frame_idx, out_obj_ids, out_mask_logits in robust_iterator_wrapper(iterator):
+#   File "/home/ubuntu/code/drew/e2e_sam2/e2e_pipeline_v2/experiments/vidPredictor/src/sam2_wrapper.py", line 225, in robust_iterator_wrapper
+#     for item in iterator:
+#   File "/home/ubuntu/code/drew/e2e_sam2/venv/lib/python3.12/site-packages/torch/utils/_contextlib.py", line 36, in generator_context
+#     response = gen.send(None)
+#                ^^^^^^^^^^^^^^
+#   File "/home/ubuntu/code/drew/sam2/sam2/sam2_video_predictor.py", line 554, in propagate_in_video
+#     self.propagate_in_video_preflight(inference_state)
+#   File "/home/ubuntu/code/drew/e2e_sam2/venv/lib/python3.12/site-packages/torch/utils/_contextlib.py", line 116, in decorate_context
+#     return func(*args, **kwargs)
+#            ^^^^^^^^^^^^^^^^^^^^^
+#   File "/home/ubuntu/code/drew/sam2/sam2/sam2_video_predictor.py", line 485, in propagate_in_video_preflight
+#     raise RuntimeError(
+# RuntimeError: No input points or masks are provided for any object; please add inputs first.
+
 # Traceback (most recent call last):
-#   File "/home/ubuntu/code/drew/e2e_sam2/e2e_pipeline_v2/experiments/vidPredictor/cd_fsod_sam2_voting.py", line 358, in <module>
+#   File "/home/ubuntu/code/drew/e2e_sam2/e2e_pipeline_v2/experiments/vidPredictor/cd_fsod_sam2_voting.py", line 356, in <module>
 #     main() 
 #     ^^^^^^
-#   File "/home/ubuntu/code/drew/e2e_sam2/e2e_pipeline_v2/experiments/vidPredictor/cd_fsod_sam2_voting.py", line 344, in main
+#   File "/home/ubuntu/code/drew/e2e_sam2/e2e_pipeline_v2/experiments/vidPredictor/cd_fsod_sam2_voting.py", line 342, in main
 #     success = process_scene(
 #               ^^^^^^^^^^^^^^
-#   File "/home/ubuntu/code/drew/e2e_sam2/e2e_pipeline_v2/experiments/vidPredictor/cd_fsod_sam2_voting.py", line 114, in process_scene
-#     current_tracks = tracker.update_tracks(frame, idx, detections, embedding_extractor=None)
-#                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-#   File "/home/ubuntu/code/drew/e2e_sam2/e2e_pipeline_v2/experiments/vidPredictor/src/object_tracker.py", line 74, in update_tracks
-#     box = detection["box"]
-#           ~~~~~~~~~^^^^^^^
-# KeyError: 'box'
+#   File "/home/ubuntu/code/drew/e2e_sam2/e2e_pipeline_v2/experiments/vidPredictor/cd_fsod_sam2_voting.py", line 128, in process_scene
+#     video_segments, _ = sam2.propagate_masks(objects_to_track=[obj_id])
+#                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+#   File "/home/ubuntu/code/drew/e2e_sam2/e2e_pipeline_v2/experiments/vidPredictor/src/sam2_wrapper.py", line 374, in propagate_masks
+#     raise e
+#   File "/home/ubuntu/code/drew/e2e_sam2/e2e_pipeline_v2/experiments/vidPredictor/src/sam2_wrapper.py", line 276, in propagate_masks
+#     for out_frame_idx, out_obj_ids, out_mask_logits in robust_iterator_wrapper(iterator):
+#   File "/home/ubuntu/code/drew/e2e_sam2/e2e_pipeline_v2/experiments/vidPredictor/src/sam2_wrapper.py", line 225, in robust_iterator_wrapper
+#     for item in iterator:
+#   File "/home/ubuntu/code/drew/e2e_sam2/venv/lib/python3.12/site-packages/torch/utils/_contextlib.py", line 36, in generator_context
+#     response = gen.send(None)
+#                ^^^^^^^^^^^^^^
+#   File "/home/ubuntu/code/drew/sam2/sam2/sam2_video_predictor.py", line 554, in propagate_in_video
+#     self.propagate_in_video_preflight(inference_state)
+#   File "/home/ubuntu/code/drew/e2e_sam2/venv/lib/python3.12/site-packages/torch/utils/_contextlib.py", line 116, in decorate_context
+#     return func(*args, **kwargs)
+#            ^^^^^^^^^^^^^^^^^^^^^
+#   File "/home/ubuntu/code/drew/sam2/sam2/sam2_video_predictor.py", line 485, in propagate_in_video_preflight
+#     raise RuntimeError(
+# RuntimeError: No input points or masks are provided for any object; please add inputs first.

@@ -125,6 +125,10 @@ def process_scene(scene_path, detections_path, output_path, args, main_logger):
         sam2 = SAM2VideoWrapper(args.sam2_checkpoint, args.sam2_config)
         for obj_id, track in tracked_objects.items():
             sam2.set_video(frames=frames)
+            # Add boxes for this object before propagation
+            for frame_idx, coordinates, label, score in track:
+                sam2.add_box(frame_idx=frame_idx, obj_id=obj_id, box=coordinates)
+            # Now propagate masks
             video_segments, _ = sam2.propagate_masks(objects_to_track=[obj_id])
             mask_frames = []
             labels = []
@@ -148,6 +152,11 @@ def process_scene(scene_path, detections_path, output_path, args, main_logger):
         logger.info("Processing all objects together for mask propagation and voting.")
         sam2 = SAM2VideoWrapper(args.sam2_checkpoint, args.sam2_config)
         sam2.set_video(frames=frames)
+        # Add boxes for all objects before propagation
+        for obj_id, track in tracked_objects.items():
+            for frame_idx, coordinates, label, score in track:
+                sam2.add_box(frame_idx=frame_idx, obj_id=obj_id, box=coordinates)
+        # Now propagate masks
         video_segments, _ = sam2.propagate_masks(objects_to_track=list(tracked_objects.keys()))
         for obj_id, track in tracked_objects.items():
             mask_frames = []

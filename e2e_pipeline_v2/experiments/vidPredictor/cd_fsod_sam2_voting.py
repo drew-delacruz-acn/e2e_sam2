@@ -102,32 +102,56 @@ def process_scene(scene_path, detections_path, output_path, args, main_logger):
             tracked_objects[obj_id].append((idx, box, label, score))
     logger.info(f"Tracked {len(tracked_objects)} objects in scene {scene_name}")
     # Propagate masks with SAM2
-    sam2 = SAM2VideoWrapper(args.sam2_checkpoint, args.sam2_config)
-    sam2.set_video(frames=frames)
-    video_segments, _ = sam2.propagate_masks(objects_to_track=list(tracked_objects.keys()))
-    # Voting and label smoothing
     voting_results = defaultdict(dict)  # obj_id -> frame_idx -> {"label": ..., "mask": ...}
     corrections_log = []
-    for obj_id, track in tracked_objects.items():
-        mask_frames = []
-        labels = []
-        for (frame_idx, box, label, score) in track:
-            mask = video_segments.get(frame_idx, {}).get(obj_id)
-            if mask is not None and np.any(mask):
-                mask_frames.append(frame_idx)
-                labels.append(label)
-        if not mask_frames:
-            continue
-        voted_label, is_tie = majority_vote(labels)
-        if is_tie:
-            # Tie-breaker: use label from first frame
-            voted_label = labels[0]
-            corrections_log.append({"obj_id": obj_id, "frames": mask_frames, "reason": "tie", "chosen_label": voted_label})
-        for fidx in mask_frames:
-            voting_results[obj_id][fidx] = {
-                "label": voted_label,
-                "mask": video_segments[fidx][obj_id]
-            }
+    if args.separate_objects:
+        logger.info("Processing each object separately for mask propagation and voting.")
+        sam2 = SAM2VideoWrapper(args.sam2_checkpoint, args.sam2_config)
+        for obj_id, track in tracked_objects.items():
+            sam2.set_video(frames=frames)
+            video_segments, _ = sam2.propagate_masks(objects_to_track=[obj_id])
+            mask_frames = []
+            labels = []
+            for (frame_idx, box, label, score) in track:
+                mask = video_segments.get(frame_idx, {}).get(obj_id)
+                if mask is not None and np.any(mask):
+                    mask_frames.append(frame_idx)
+                    labels.append(label)
+            if not mask_frames:
+                continue
+            voted_label, is_tie = majority_vote(labels)
+            if is_tie:
+                voted_label = labels[0]
+                corrections_log.append({"obj_id": obj_id, "frames": mask_frames, "reason": "tie", "chosen_label": voted_label})
+            for fidx in mask_frames:
+                voting_results[obj_id][fidx] = {
+                    "label": voted_label,
+                    "mask": video_segments[fidx][obj_id]
+                }
+    else:
+        logger.info("Processing all objects together for mask propagation and voting.")
+        sam2 = SAM2VideoWrapper(args.sam2_checkpoint, args.sam2_config)
+        sam2.set_video(frames=frames)
+        video_segments, _ = sam2.propagate_masks(objects_to_track=list(tracked_objects.keys()))
+        for obj_id, track in tracked_objects.items():
+            mask_frames = []
+            labels = []
+            for (frame_idx, box, label, score) in track:
+                mask = video_segments.get(frame_idx, {}).get(obj_id)
+                if mask is not None and np.any(mask):
+                    mask_frames.append(frame_idx)
+                    labels.append(label)
+            if not mask_frames:
+                continue
+            voted_label, is_tie = majority_vote(labels)
+            if is_tie:
+                voted_label = labels[0]
+                corrections_log.append({"obj_id": obj_id, "frames": mask_frames, "reason": "tie", "chosen_label": voted_label})
+            for fidx in mask_frames:
+                voting_results[obj_id][fidx] = {
+                    "label": voted_label,
+                    "mask": video_segments[fidx][obj_id]
+                }
     # Save results
     results_dir = Path(output_path)
     results_dir.mkdir(exist_ok=True, parents=True)
@@ -265,6 +289,7 @@ def main():
     parser.add_argument("--min-gap-frames", type=int, default=10, help="Minimum gap frames for CD-FSOD reappearances")
     parser.add_argument("--scene", help="Process only the specified scene name (optional)")
     parser.add_argument("--debug", action="store_true", help="Enable debug logging")
+    parser.add_argument("--separate-objects", action="store_true", help="Process each object separately (for dtype safety)")
     args = parser.parse_args()
     output_root = Path(args.output_root)
     output_root.mkdir(exist_ok=True, parents=True)

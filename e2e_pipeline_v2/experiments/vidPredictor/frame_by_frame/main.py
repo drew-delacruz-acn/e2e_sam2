@@ -20,6 +20,11 @@ from src.detection_processor import (
 )
 from src.sam2_segmenter import SAM2VideoSegmenter
 from src.visualization import visualize_segmentation_results
+from src.result_processor import (
+    match_detections_to_segments,
+    create_segmentation_summary,
+    save_results_to_json
+)
 
 def parse_args():
     """Parse command line arguments"""
@@ -38,6 +43,10 @@ def parse_args():
                         help='Stride for visualization (display every nth frame)')
     parser.add_argument('--save_path', type=str, default=None,
                         help='Path to save visualization results (optional)')
+    parser.add_argument('--output_json', type=str, default='segmentation_results.json',
+                        help='Path to save the output JSON file')
+    parser.add_argument('--iou_threshold', type=float, default=0.5,
+                        help='IoU threshold for matching detections to segments')
     return parser.parse_args()
 
 def main():
@@ -82,21 +91,36 @@ def main():
     print("Propagating segmentation through video...")
     video_segments = segmenter.propagate_segmentation(inference_state)
     
-    # Visualize results
-    print("Visualizing segmentation results...")
-    figures = visualize_segmentation_results(
-        args.frames_dir, 
-        frame_names, 
-        video_segments, 
-        vis_frame_stride=args.vis_stride,
-        save_path=args.save_path
+    # Match detections to segments
+    print("Matching detections to segments...")
+    object_detections = match_detections_to_segments(
+        video_segments, filtered_detections, iou_threshold=args.iou_threshold
     )
     
-    print(f"Processed {len(frame_names)} frames with {len(tracking_objects)} object classes")
-    if args.save_path:
-        print(f"Visualization saved to {args.save_path}")
-    else:
-        plt.show()
+    # Create summary of segmentation results
+    print("Creating segmentation summary...")
+    results = create_segmentation_summary(video_segments, tracking_objects, object_detections)
+    
+    # Save results to JSON
+    print(f"Saving results to {args.output_json}...")
+    save_results_to_json(results, args.output_json)
+    
+    # Visualize results
+    if args.save_path or not args.output_json:  # Only visualize if save_path is specified or no output_json
+        print("Visualizing segmentation results...")
+        figures = visualize_segmentation_results(
+            args.frames_dir, 
+            frame_names, 
+            video_segments, 
+            vis_frame_stride=args.vis_stride,
+            save_path=args.save_path
+        )
+        
+        print(f"Processed {len(frame_names)} frames with {len(tracking_objects)} object classes")
+        if args.save_path:
+            print(f"Visualization saved to {args.save_path}")
+        else:
+            plt.show()
     
     print("Done!")
 

@@ -363,35 +363,35 @@ def main():
 
 if __name__ == "__main__":
     main() 
-#  python e2e_pipeline_v2/experiments/vidPredictor/cd_fsod_sam2_voting.py  --frames-root "data/frames/" --detections-root "data/detections_cdfsod/" --output-root gitignore_exception/testing --sam2-checkpoint checkpoints/sam2.1_hiera_large.pt --sam2-config configs/sam2.1/sam2.1_hiera_l.yaml --confidence 0.1 --min-gap-frames 20 --text-queries "all" --scene 'Scenes 061-080__265H-2-_20230815215828529' --separate-objects
-# 2025-05-15 19:06:15,249 - INFO - Logging to file: gitignore_exception/testing/cd_fsod_sam2_voting_20250515_190615.log
-# 2025-05-15 19:06:15,249 - INFO - Found 1 scene directories to process
-# 2025-05-15 19:06:15,249 - INFO - [1/1] Processing scene: Scenes 061-080__265H-2-_20230815215828529
-# 2025-05-15 19:06:15,250 - INFO - [Scenes 061-080__265H-2-_20230815215828529] Logging to file: gitignore_exception/testing/Scenes 061-080__265H-2-_20230815215828529/Scenes 061-080__265H-2-_20230815215828529_cd_fsod_sam2_voting_20250515_190615.log
-# 2025-05-15 19:06:15,250 - INFO - Logging to file: gitignore_exception/testing/Scenes 061-080__265H-2-_20230815215828529/Scenes 061-080__265H-2-_20230815215828529_cd_fsod_sam2_voting_20250515_190615.log
-# 2025-05-15 19:06:15,250 - INFO - [Scenes 061-080__265H-2-_20230815215828529] Processing scene: Scenes 061-080__265H-2-_20230815215828529
-# 2025-05-15 19:06:15,250 - INFO - Processing scene: Scenes 061-080__265H-2-_20230815215828529
+# python e2e_pipeline_v2/experiments/vidPredictor/cd_fsod_sam2_voting.py  --frames-root "data/frames/" --detections-root "data/detections_cdfsod/" --output-root gitignore_exception/testing --sam2-checkpoint checkpoints/sam2.1_hiera_large.pt --sam2-config configs/sam2.1/sam2.1_hiera_l.yaml --confidence 0.1 --min-gap-frames 20 --text-queries "all" --scene 'Scenes 061-080__265H-2-_20230815215828529' --separate-objects
+# 2025-05-15 19:13:28,598 - INFO - Logging to file: gitignore_exception/testing/cd_fsod_sam2_voting_20250515_191328.log
+# 2025-05-15 19:13:28,599 - INFO - Found 1 scene directories to process
+# 2025-05-15 19:13:28,599 - INFO - [1/1] Processing scene: Scenes 061-080__265H-2-_20230815215828529
+# 2025-05-15 19:13:28,599 - INFO - [Scenes 061-080__265H-2-_20230815215828529] Logging to file: gitignore_exception/testing/Scenes 061-080__265H-2-_20230815215828529/Scenes 061-080__265H-2-_20230815215828529_cd_fsod_sam2_voting_20250515_191328.log
+# 2025-05-15 19:13:28,599 - INFO - Logging to file: gitignore_exception/testing/Scenes 061-080__265H-2-_20230815215828529/Scenes 061-080__265H-2-_20230815215828529_cd_fsod_sam2_voting_20250515_191328.log
+# 2025-05-15 19:13:28,599 - INFO - [Scenes 061-080__265H-2-_20230815215828529] Processing scene: Scenes 061-080__265H-2-_20230815215828529
+# 2025-05-15 19:13:28,599 - INFO - Processing scene: Scenes 061-080__265H-2-_20230815215828529
 # Loaded 54 frames from data/frames/Scenes 061-080__265H-2-_20230815215828529
-# 2025-05-15 19:06:15,458 - INFO - [Scenes 061-080__265H-2-_20230815215828529] Loaded 54 frames from data/frames/Scenes 061-080__265H-2-_20230815215828529
-# 2025-05-15 19:06:15,458 - INFO - Loaded 54 frames from data/frames/Scenes 061-080__265H-2-_20230815215828529
-# 2025-05-15 19:06:15,460 - INFO - [Scenes 061-080__265H-2-_20230815215828529] Loaded CD-FSOD detections from data/detections_cdfsod/Scenes 061-080__265H-2-_20230815215828529
-# 2025-05-15 19:06:15,460 - INFO - Loaded CD-FSOD detections from data/detections_cdfsod/Scenes 061-080__265H-2-_20230815215828529
-# 2025-05-15 19:06:15,460 - INFO - [Scenes 061-080__265H-2-_20230815215828529] Scene Scenes 061-080__265H-2-_20230815215828529: 54 frames with detections.
-# 2025-05-15 19:06:15,460 - INFO - Scene Scenes 061-080__265H-2-_20230815215828529: 54 frames with detections.
-# 2025-05-15 19:06:15,462 - INFO - [Scenes 061-080__265H-2-_20230815215828529]   Frame 0: 0 detections.
-# 2025-05-15 19:06:15,462 - INFO -   Frame 0: 0 detections.
-# 2025-05-15 19:06:15,462 - INFO - [Scenes 061-080__265H-2-_20230815215828529]   Frame 1: 0 detections.
-# 2025-05-15 19:06:15,462 - INFO -   Frame 1: 0 detections.
-# 2025-05-15 19:06:15,462 - INFO - [Scenes 061-080__265H-2-_20230815215828529]   Frame 2: 0 detections.
-# 2025-05-15 19:06:15,462 - INFO -   Frame 2: 0 detections.
-# 2025-05-15 19:06:15,462 - INFO - [Scenes 061-080__265H-2-_20230815215828529]   Frame 3: 2 detections.
-# 2025-05-15 19:06:15,462 - INFO -   Frame 3: 2 detections.
-# 2025-05-15 19:06:15,462 - INFO - [Scenes 061-080__265H-2-_20230815215828529]     Detection 0: box=[330, 107, 577, 506], label=TVA Uniform, score=0.8781716227531433
-# 2025-05-15 19:06:15,462 - INFO -     Detection 0: box=[330, 107, 577, 506], label=TVA Uniform, score=0.8781716227531433
-# 2025-05-15 19:06:15,462 - INFO - [Scenes 061-080__265H-2-_20230815215828529]     Detection 1: box=[542, 223, 634, 380], label=Time Stick, score=0.9803071618080139
-# 2025-05-15 19:06:15,462 - INFO -     Detection 1: box=[542, 223, 634, 380], label=Time Stick, score=0.9803071618080139
-# 2025-05-15 19:06:15,462 - INFO - [Scenes 061-080__265H-2-_20230815215828529]   Frame 4: 0 detections.
-# 2025-05-15 19:06:15,462 - INFO -   Frame 4: 0 detections.
+# 2025-05-15 19:13:28,808 - INFO - [Scenes 061-080__265H-2-_20230815215828529] Loaded 54 frames from data/frames/Scenes 061-080__265H-2-_20230815215828529
+# 2025-05-15 19:13:28,808 - INFO - Loaded 54 frames from data/frames/Scenes 061-080__265H-2-_20230815215828529
+# 2025-05-15 19:13:28,811 - INFO - [Scenes 061-080__265H-2-_20230815215828529] Loaded CD-FSOD detections from data/detections_cdfsod/Scenes 061-080__265H-2-_20230815215828529
+# 2025-05-15 19:13:28,811 - INFO - Loaded CD-FSOD detections from data/detections_cdfsod/Scenes 061-080__265H-2-_20230815215828529
+# 2025-05-15 19:13:28,811 - INFO - [Scenes 061-080__265H-2-_20230815215828529] Scene Scenes 061-080__265H-2-_20230815215828529: 54 frames with detections.
+# 2025-05-15 19:13:28,811 - INFO - Scene Scenes 061-080__265H-2-_20230815215828529: 54 frames with detections.
+# 2025-05-15 19:13:28,812 - INFO - [Scenes 061-080__265H-2-_20230815215828529]   Frame 0: 0 detections.
+# 2025-05-15 19:13:28,812 - INFO -   Frame 0: 0 detections.
+# 2025-05-15 19:13:28,812 - INFO - [Scenes 061-080__265H-2-_20230815215828529]   Frame 1: 0 detections.
+# 2025-05-15 19:13:28,812 - INFO -   Frame 1: 0 detections.
+# 2025-05-15 19:13:28,812 - INFO - [Scenes 061-080__265H-2-_20230815215828529]   Frame 2: 0 detections.
+# 2025-05-15 19:13:28,812 - INFO -   Frame 2: 0 detections.
+# 2025-05-15 19:13:28,813 - INFO - [Scenes 061-080__265H-2-_20230815215828529]   Frame 3: 2 detections.
+# 2025-05-15 19:13:28,813 - INFO -   Frame 3: 2 detections.
+# 2025-05-15 19:13:28,813 - INFO - [Scenes 061-080__265H-2-_20230815215828529]     Detection 0: box=[330, 107, 577, 506], label=TVA Uniform, score=0.8781716227531433
+# 2025-05-15 19:13:28,813 - INFO -     Detection 0: box=[330, 107, 577, 506], label=TVA Uniform, score=0.8781716227531433
+# 2025-05-15 19:13:28,813 - INFO - [Scenes 061-080__265H-2-_20230815215828529]     Detection 1: box=[542, 223, 634, 380], label=Time Stick, score=0.9803071618080139
+# 2025-05-15 19:13:28,813 - INFO -     Detection 1: box=[542, 223, 634, 380], label=Time Stick, score=0.9803071618080139
+# 2025-05-15 19:13:28,813 - INFO - [Scenes 061-080__265H-2-_20230815215828529]   Frame 4: 0 detections.
+# 2025-05-15 19:13:28,813 - INFO -   Frame 4: 0 detections.
 # Initialized object 1 (Time Stick)
 # Updated object 1 (Time Stick) with score 0.47 (IoU: 0.47)
 # Created new object 2 (TVA Uniform)
@@ -400,58 +400,54 @@ if __name__ == "__main__":
 # Updated object 2 (TVA Uniform) with score 0.64 (IoU: 0.64)
 # Created new object 3 (Sylvie's horned headpiece)
 # Updated object 2 (TVA Uniform) with score 0.75 (IoU: 0.75)
-# 2025-05-15 19:06:15,463 - INFO - [Scenes 061-080__265H-2-_20230815215828529] Tracked 3 objects in scene Scenes 061-080__265H-2-_20230815215828529
-# 2025-05-15 19:06:15,463 - INFO - Tracked 3 objects in scene Scenes 061-080__265H-2-_20230815215828529
-# 2025-05-15 19:06:15,463 - INFO - [Scenes 061-080__265H-2-_20230815215828529] Processing each object separately for mask propagation and voting.
-# 2025-05-15 19:06:15,463 - INFO - Processing each object separately for mask propagation and voting.
+# 2025-05-15 19:13:28,814 - INFO - [Scenes 061-080__265H-2-_20230815215828529] Tracked 3 objects in scene Scenes 061-080__265H-2-_20230815215828529
+# 2025-05-15 19:13:28,814 - INFO - Tracked 3 objects in scene Scenes 061-080__265H-2-_20230815215828529
+# 2025-05-15 19:13:28,814 - INFO - [Scenes 061-080__265H-2-_20230815215828529] Processing each object separately for mask propagation and voting.
+# 2025-05-15 19:13:28,814 - INFO - Processing each object separately for mask propagation and voting.
 # SAM2 using device: cuda
 # USING DIRECT FRAMES APPROACH
-# Creating temporary directory for frames: /tmp/tmp7sw83ult
-# frame loading (JPEG): 100%|█████████████████████████████████████████████████████████████| 54/54 [00:01<00:00, 37.93it/s]
+# Creating temporary directory for frames: /tmp/tmpazd3bjn4
+# frame loading (JPEG): 100%|█████████████████████████████████████████████████████████████| 54/54 [00:01<00:00, 38.14it/s]
+# Set 54 frames via temporary directory
+# /home/ubuntu/code/drew/sam2/sam2/sam2_video_predictor.py:786: UserWarning: cannot import name '_C' from 'sam2' (/home/ubuntu/code/drew/sam2/sam2/__init__.py)
+
+# Skipping the post-processing step due to the error above. You can still use SAM 2 and it's OK to ignore the error above, although some post-processing functionality may be limited (which doesn't affect the results in most cases; see https://github.com/facebookresearch/sam2/blob/main/INSTALL.md).
+#   pred_masks_gpu = fill_holes_in_mask_scores(
+# Using predictor type: SAM2VideoPredictor
+# propagate in video: 100%|███████████████████████████████████████████████████████████████| 52/52 [00:51<00:00,  1.01it/s]
+# Finished propagation, processed 52 frames, found 52 frames with objects
+# USING DIRECT FRAMES APPROACH
+# Creating temporary directory for frames: /tmp/tmpe1b8gf_5
+# frame loading (JPEG): 100%|█████████████████████████████████████████████████████████████| 54/54 [00:01<00:00, 38.72it/s]
 # Set 54 frames via temporary directory
 # Using predictor type: SAM2VideoPredictor
-# Error during mask propagation: No input points or masks are provided for any object; please add inputs first.
-# Traceback: Traceback (most recent call last):
-#   File "/home/ubuntu/code/drew/e2e_sam2/e2e_pipeline_v2/experiments/vidPredictor/src/sam2_wrapper.py", line 276, in propagate_masks
-#     for out_frame_idx, out_obj_ids, out_mask_logits in robust_iterator_wrapper(iterator):
-#   File "/home/ubuntu/code/drew/e2e_sam2/e2e_pipeline_v2/experiments/vidPredictor/src/sam2_wrapper.py", line 225, in robust_iterator_wrapper
-#     for item in iterator:
-#   File "/home/ubuntu/code/drew/e2e_sam2/venv/lib/python3.12/site-packages/torch/utils/_contextlib.py", line 36, in generator_context
-#     response = gen.send(None)
-#                ^^^^^^^^^^^^^^
-#   File "/home/ubuntu/code/drew/sam2/sam2/sam2_video_predictor.py", line 554, in propagate_in_video
-#     self.propagate_in_video_preflight(inference_state)
-#   File "/home/ubuntu/code/drew/e2e_sam2/venv/lib/python3.12/site-packages/torch/utils/_contextlib.py", line 116, in decorate_context
-#     return func(*args, **kwargs)
-#            ^^^^^^^^^^^^^^^^^^^^^
-#   File "/home/ubuntu/code/drew/sam2/sam2/sam2_video_predictor.py", line 485, in propagate_in_video_preflight
-#     raise RuntimeError(
-# RuntimeError: No input points or masks are provided for any object; please add inputs first.
+# propagate in video: 100%|███████████████████████████████████████████████████████████████| 49/49 [00:49<00:00,  1.00s/it]
+# Finished propagation, processed 49 frames, found 49 frames with objects
+# USING DIRECT FRAMES APPROACH
+# Creating temporary directory for frames: /tmp/tmp19p5n1wb
+# frame loading (JPEG): 100%|█████████████████████████████████████████████████████████████| 54/54 [00:01<00:00, 38.85it/s]
+# Set 54 frames via temporary directory
+# Using predictor type: SAM2VideoPredictor
+# propagate in video: 100%|███████████████████████████████████████████████████████████████| 44/44 [00:43<00:00,  1.01it/s]
+# Finished propagation, processed 44 frames, found 44 frames with objects
+# Traceback (most recent call last):
+#   File "/home/ubuntu/code/drew/e2e_sam2/venv/lib/python3.12/site-packages/PIL/Image.py", line 3299, in fromarray
+#     mode, rawmode = _fromarray_typemap[typekey]
+#                     ~~~~~~~~~~~~~~~~~~^^^^^^^^^
+# KeyError: ((1, 1, 960), '|u1')
+
+# The above exception was the direct cause of the following exception:
 
 # Traceback (most recent call last):
-#   File "/home/ubuntu/code/drew/e2e_sam2/e2e_pipeline_v2/experiments/vidPredictor/cd_fsod_sam2_voting.py", line 356, in <module>
+#   File "/home/ubuntu/code/drew/e2e_sam2/e2e_pipeline_v2/experiments/vidPredictor/cd_fsod_sam2_voting.py", line 365, in <module>
 #     main() 
 #     ^^^^^^
-#   File "/home/ubuntu/code/drew/e2e_sam2/e2e_pipeline_v2/experiments/vidPredictor/cd_fsod_sam2_voting.py", line 342, in main
+#   File "/home/ubuntu/code/drew/e2e_sam2/e2e_pipeline_v2/experiments/vidPredictor/cd_fsod_sam2_voting.py", line 351, in main
 #     success = process_scene(
 #               ^^^^^^^^^^^^^^
-#   File "/home/ubuntu/code/drew/e2e_sam2/e2e_pipeline_v2/experiments/vidPredictor/cd_fsod_sam2_voting.py", line 128, in process_scene
-#     video_segments, _ = sam2.propagate_masks(objects_to_track=[obj_id])
-#                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-#   File "/home/ubuntu/code/drew/e2e_sam2/e2e_pipeline_v2/experiments/vidPredictor/src/sam2_wrapper.py", line 374, in propagate_masks
-#     raise e
-#   File "/home/ubuntu/code/drew/e2e_sam2/e2e_pipeline_v2/experiments/vidPredictor/src/sam2_wrapper.py", line 276, in propagate_masks
-#     for out_frame_idx, out_obj_ids, out_mask_logits in robust_iterator_wrapper(iterator):
-#   File "/home/ubuntu/code/drew/e2e_sam2/e2e_pipeline_v2/experiments/vidPredictor/src/sam2_wrapper.py", line 225, in robust_iterator_wrapper
-#     for item in iterator:
-#   File "/home/ubuntu/code/drew/e2e_sam2/venv/lib/python3.12/site-packages/torch/utils/_contextlib.py", line 36, in generator_context
-#     response = gen.send(None)
-#                ^^^^^^^^^^^^^^
-#   File "/home/ubuntu/code/drew/sam2/sam2/sam2_video_predictor.py", line 554, in propagate_in_video
-#     self.propagate_in_video_preflight(inference_state)
-#   File "/home/ubuntu/code/drew/e2e_sam2/venv/lib/python3.12/site-packages/torch/utils/_contextlib.py", line 116, in decorate_context
-#     return func(*args, **kwargs)
-#            ^^^^^^^^^^^^^^^^^^^^^
-#   File "/home/ubuntu/code/drew/sam2/sam2/sam2_video_predictor.py", line 485, in propagate_in_video_preflight
-#     raise RuntimeError(
-# RuntimeError: No input points or masks are provided for any object; please add inputs first.
+#   File "/home/ubuntu/code/drew/e2e_sam2/e2e_pipeline_v2/experiments/vidPredictor/cd_fsod_sam2_voting.py", line 194, in process_scene
+#     Image.fromarray(mask).save(mask_path)
+#     ^^^^^^^^^^^^^^^^^^^^^
+#   File "/home/ubuntu/code/drew/e2e_sam2/venv/lib/python3.12/site-packages/PIL/Image.py", line 3303, in fromarray
+#     raise TypeError(msg) from e
+# TypeError: Cannot handle this data type: (1, 1, 960), |u1

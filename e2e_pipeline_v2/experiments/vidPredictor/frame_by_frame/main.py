@@ -41,15 +41,22 @@ def parse_args():
                         help='Confidence threshold for filtering detections')
     parser.add_argument('--vis_stride', type=int, default=1,
                         help='Stride for visualization (display every nth frame)')
-    parser.add_argument('--save_path', type=str, default=None,
-                        help='Path to save visualization results (optional)')
-    parser.add_argument('--output_json', type=str, default='segmentation_results.json',
-                        help='Path to save the output JSON file')
+    parser.add_argument('--results_dir', type=str, default='results',
+                        help='Directory to save all results (JSON and images)')
     parser.add_argument('--iou_threshold', type=float, default=0.3,
                         help='IoU threshold for matching detections to segments')
     parser.add_argument('--debug', action='store_true',
                         help='Enable debug mode with additional logging')
+    parser.add_argument('--no_vis', action='store_true',
+                        help='Skip visualization generation')
     return parser.parse_args()
+
+def ensure_dir(directory):
+    """Ensure directory exists, create if it doesn't"""
+    if not os.path.exists(directory):
+        os.makedirs(directory)
+        print(f"Created directory: {directory}")
+    return directory
 
 def main():
     """Main function to run the pipeline"""
@@ -58,6 +65,11 @@ def main():
     
     # Parse command line arguments
     args = parse_args()
+    
+    # Create results directory
+    results_dir = ensure_dir(args.results_dir)
+    vis_dir = ensure_dir(os.path.join(results_dir, "visualizations"))
+    json_path = os.path.join(results_dir, "segmentation_results.json")
     
     # Load and process detections
     print("Loading detection files...")
@@ -112,26 +124,24 @@ def main():
     results = create_segmentation_summary(video_segments, tracking_objects, object_detections)
     
     # Save results to JSON
-    print(f"Saving results to {args.output_json}...")
-    save_results_to_json(results, args.output_json)
+    print(f"Saving results to {json_path}...")
+    save_results_to_json(results, json_path)
     
     # Visualize results
-    if args.save_path or not args.output_json:  # Only visualize if save_path is specified or no output_json
+    if not args.no_vis:
         print("Visualizing segmentation results...")
         figures = visualize_segmentation_results(
             args.frames_dir, 
             frame_names, 
             video_segments, 
             vis_frame_stride=args.vis_stride,
-            save_path=args.save_path
+            save_path=vis_dir
         )
         
         print(f"Processed {len(frame_names)} frames with {len(tracking_objects)} object classes")
-        if args.save_path:
-            print(f"Visualization saved to {args.save_path}")
-        else:
-            plt.show()
+        print(f"Visualization saved to {vis_dir}")
     
+    print(f"All results saved to {results_dir}")
     print("Done!")
 
 if __name__ == "__main__":

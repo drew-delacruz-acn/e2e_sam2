@@ -64,20 +64,52 @@ def visualize_segmentation_results(frames_dir, frame_names, video_segments, vis_
     plt.close("all")
     all_figures = []
     
-    for out_frame_idx in range(0, len(frame_names), vis_frame_stride):
-        fig = plt.figure(figsize=(6, 4))
-        plt.title(f"frame {out_frame_idx}")
-        plt.imshow(Image.open(os.path.join(frames_dir, frame_names[out_frame_idx])))
-        
-        if out_frame_idx in video_segments:
-            for out_obj_id, out_mask in video_segments[out_frame_idx].items():
-                show_mask(out_mask, plt.gca(), obj_id=out_obj_id)
-        
-        all_figures.append(fig)
-        
-        # Save figure if save_path is provided
-        if save_path:
-            os.makedirs(save_path, exist_ok=True)
-            plt.savefig(os.path.join(save_path, f"frame_{out_frame_idx:04d}.png"), dpi=150, bbox_inches='tight')
+    # Create save directory if needed
+    if save_path:
+        os.makedirs(save_path, exist_ok=True)
+        print(f"Saving visualizations to: {save_path}")
     
-    return all_figures 
+    # Total frames to process
+    total_frames = len(range(0, len(frame_names), vis_frame_stride))
+    processed_frames = 0
+    
+    try:
+        for out_frame_idx in range(0, len(frame_names), vis_frame_stride):
+            processed_frames += 1
+            
+            # Progress update every 10%
+            if total_frames > 10 and processed_frames % (total_frames // 10) == 0:
+                print(f"Visualizing frames: {processed_frames}/{total_frames} ({processed_frames/total_frames*100:.1f}%)")
+            
+            # Create figure
+            fig = plt.figure(figsize=(10, 8), dpi=150)
+            plt.title(f"Frame {out_frame_idx}")
+            
+            # Load and display frame
+            frame_path = os.path.join(frames_dir, frame_names[out_frame_idx])
+            plt.imshow(Image.open(frame_path))
+            
+            # Add segmentation masks
+            if out_frame_idx in video_segments:
+                for out_obj_id, out_mask in video_segments[out_frame_idx].items():
+                    show_mask(out_mask, plt.gca(), obj_id=int(out_obj_id))
+            
+            # Save figure if save_path is provided
+            if save_path:
+                save_file = os.path.join(save_path, f"frame_{out_frame_idx:04d}.png")
+                plt.savefig(save_file, dpi=150, bbox_inches='tight', pad_inches=0.1, transparent=False)
+                plt.close(fig)  # Close immediately to free memory
+            else:
+                all_figures.append(fig)
+        
+        print(f"Visualization complete: {processed_frames} frames processed")
+        
+        # Show figures if not saved to disk
+        if not save_path and all_figures:
+            plt.show()
+        
+        return all_figures
+    
+    finally:
+        # Make sure to close all figures to avoid memory leaks
+        plt.close("all") 

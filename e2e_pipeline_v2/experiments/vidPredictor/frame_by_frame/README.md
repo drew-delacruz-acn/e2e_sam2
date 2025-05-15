@@ -11,6 +11,7 @@ This package provides a modular implementation of a video object segmentation pi
 - Match SAM2 segmentations with CDFSOD detections
 - Generate object-centric tracking and detection summary in JSON format
 - Visualize and save segmentation results
+- Save all results to a single organized directory
 
 ## Directory Structure
 
@@ -48,8 +49,7 @@ python main.py \
   --model_cfg /path/to/sam2_config.yaml \
   --confidence_threshold 0.9 \
   --vis_stride 1 \
-  --save_path /path/to/output_visualizations \
-  --output_json /path/to/results.json \
+  --results_dir /path/to/results \
   --iou_threshold 0.5
 ```
 
@@ -61,9 +61,23 @@ python main.py \
 - `--model_cfg`: Path to the SAM2 model configuration file
 - `--confidence_threshold`: Minimum confidence threshold for filtering detections (default: 0.9)
 - `--vis_stride`: Visualization stride - display every nth frame (default: 1)
-- `--save_path`: Optional path to save visualization results
-- `--output_json`: Path to save the output JSON file (default: segmentation_results.json)
-- `--iou_threshold`: IoU threshold for matching detections to segments (default: 0.5)
+- `--results_dir`: Directory to save all results (JSON and visualization images) (default: 'results')
+- `--iou_threshold`: IoU threshold for matching detections to segments (default: 0.3)
+- `--debug`: Enable debug mode with additional logging
+- `--no_vis`: Skip visualization generation
+
+## Results Directory Structure
+
+When you run the pipeline, it creates a results directory with this structure:
+
+```
+results_dir/
+├── segmentation_results.json   # Object-centric tracking and detection data
+└── visualizations/             # Directory containing visualization images
+    ├── frame_0000.png
+    ├── frame_0001.png
+    ├── ...
+```
 
 ## Detection File Format
 
@@ -125,5 +139,5 @@ The modular structure makes it easy to extend or modify components:
 This project is available under the MIT License.
 
 <!-- 
-python e2e_pipeline_v2/experiments/vidPredictor/frame_by_frame/main.py --detections_dir "/Users/andrewdelacruz/e2e_sam2/gitignore_exception/data/detections/Scenes 061-080__265H-2-_20230815215828529" --frames_dir "/Users/andrewdelacruz/e2e_sam2/gitignore_exception/data/frames/Scenes 061-080__265H-2-_20230815215828529" --sam2_checkpoint checkpoints/sam2.1_hiera_large.pt --model_cfg configs/sam2.1/sam2.1_hiera_l.yaml --output_json segmentation_results.json
+python e2e_pipeline_v2/experiments/vidPredictor/frame_by_frame/main.py --detections_dir "/Users/andrewdelacruz/e2e_sam2/gitignore_exception/data/detections/Scenes 061-080__265H-2-_20230815215828529" --frames_dir "/Users/andrewdelacruz/e2e_sam2/gitignore_exception/data/frames/Scenes 061-080__265H-2-_20230815215828529" --sam2_checkpoint checkpoints/sam2.1_hiera_large.pt --model_cfg configs/sam2.1/sam2.1_hiera_l.yaml --results_dir results
 -->

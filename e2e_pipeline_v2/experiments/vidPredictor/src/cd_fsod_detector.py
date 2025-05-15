@@ -3,10 +3,14 @@ import json
 import numpy as np
 import re
 from typing import Dict, List, Tuple, Any, Optional, Union
+import logging  # Add import for logging
 
 # Add natural sorting function
 def natural_sort_key(s):
-    """Key function for natural sorting"""
+    """
+    Sort strings with embedded integers naturally.
+    E.g., ["frame1.jpg", "frame2.jpg", "frame10.jpg"] instead of ["frame1.jpg", "frame10.jpg", "frame2.jpg"]
+    """
     return [int(text) if text.isdigit() else text.lower() 
             for text in re.split(r'(\d+)', str(s))]
 
@@ -78,6 +82,13 @@ class CDFSODDetector:
                     d for d in detections 
                     if d.get('confidence', 0) >= self.confidence_threshold
                 ]
+                
+                # Add logging for filtered detections
+                logger = logging.getLogger("video_segmentation")
+                logger.info(f"Frame {frame_idx}: Found {len(filtered_detections)} detections above threshold {self.confidence_threshold}")
+                if logger.level <= logging.DEBUG:
+                    for det in filtered_detections:
+                        logger.debug(f"  Detected {det['label']} at {det['coordinates']} with confidence {det['confidence']:.3f}")
                 
                 detections_by_frame[frame_idx] = filtered_detections
         

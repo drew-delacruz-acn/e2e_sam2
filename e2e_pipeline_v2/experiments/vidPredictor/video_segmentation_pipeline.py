@@ -625,3 +625,6 @@ def main():
 
 if __name__ == "__main__":
     main() 
+    
+
+# $ python e2e_pipeline_v2/experiments/vidPredictor/video_segmentation_pipeline.py  --frames-root "data/frames/" --detections-root "data/detections_cdfsod/" --output-root e2e_cdfsod_iou_cos_5050 --sam2-checkpoint checkpoints/sam2.1_hiera_large.pt --sam2-config configs/sam2.1/sam2.1_hiera_l.yaml --confidence 0.9 --min-gap-frames 20 --separate-objects --text-queries "all"

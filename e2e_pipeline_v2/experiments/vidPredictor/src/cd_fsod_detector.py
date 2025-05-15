@@ -227,7 +227,7 @@ class CDFSODDetector:
             threshold: Optional confidence threshold (overrides the default)
             
         Returns:
-            Dictionary containing 'boxes', 'labels', and 'scores' for detected objects
+            Dictionary containing 'coordinates', 'labels', and 'scores' for detected objects
         """
         # Extract frame index from filename or metadata
         frame_idx = self._extract_frame_idx(image)
@@ -235,9 +235,9 @@ class CDFSODDetector:
         if frame_idx is None or frame_idx not in self.detections_by_frame:
             # If we can't determine the frame index or don't have detections, return empty results
             return {
-                "boxes": np.zeros((0, 4), dtype=np.float32),
+                "coordinates": [],
                 "labels": [],
-                "scores": np.zeros(0, dtype=np.float32)
+                "scores": []
             }
         
         # Use all detections in the frame, not just first appearances and reappearances
@@ -247,30 +247,26 @@ class CDFSODDetector:
         if threshold is not None and threshold != self.confidence_threshold:
             frame_detections = [
                 d for d in frame_detections 
-                if d.get('confidence', 0) >= threshold
+                if d.get('confidence', d.get('score', 0)) >= threshold
             ]
         
         # Apply label filtering using text queries
         filtered_detections = []
         for detection in frame_detections:
             label = detection["label"]
-            
-            # Check if this label matches any of the requested queries
             if not text_queries or "all" in text_queries or label in text_queries:
                 filtered_detections.append(detection)
         
-        # Prepare output in the format expected by the pipeline
-        if filtered_detections:
-            boxes = np.array([d["coordinates"] for d in filtered_detections])
-            labels = [d["label"] for d in filtered_detections]
-            scores = np.array([d["confidence"] for d in filtered_detections])
-        else:
-            boxes = np.zeros((0, 4), dtype=np.float32)
-            labels = []
-            scores = np.zeros(0, dtype=np.float32)
-        
+        # Convert to dict of lists
+        coordinates = []
+        labels = []
+        scores = []
+        for d in filtered_detections:
+            coordinates.append(d["coordinates"])
+            labels.append(d["label"])
+            scores.append(d.get("confidence", d.get("score", 0)))
         return {
-            "boxes": boxes,
+            "coordinates": coordinates,
             "labels": labels,
             "scores": scores
         }

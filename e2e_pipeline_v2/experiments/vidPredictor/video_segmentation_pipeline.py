@@ -638,3 +638,206 @@ if __name__ == "__main__":
     
 
 # $ python e2e_pipeline_v2/experiments/vidPredictor/video_segmentation_pipeline.py  --frames-root "data/frames/" --detections-root "data/detections_cdfsod/" --output-root e2e_cdfsod_iou_cos_5050 --sam2-checkpoint checkpoints/sam2.1_hiera_large.pt --sam2-config configs/sam2.1/sam2.1_hiera_l.yaml --confidence 0.9 --min-gap-frames 20 --separate-objects --text-queries "all"
+
+
+# python e2e_pipeline_v2/experiments/vidPredictor/cd_fsod_sam2_voting.py  --frames-root "data/frames/" --detections-root "data/detections_cdfsod/" --output-root e2e_cdfsod_iou_cos_5050 --sam2-checkpoint checkpoints/sam2.1_hiera_large.pt --sam2-config configs/sam2.1/sam2.1_hiera_l.yaml --confidence 0.9 --min-gap-frames 20 --text-queries "all" --scene 'Scenes 061-080__265H-2-_20230815215828529' --separate-objects
+# 2025-05-15 18:02:30,786 - INFO - Logging to file: e2e_cdfsod_iou_cos_5050/cd_fsod_sam2_voting_20250515_180230.log
+# 2025-05-15 18:02:30,787 - INFO - Found 1 scene directories to process
+# 2025-05-15 18:02:30,787 - INFO - [1/1] Processing scene: Scenes 061-080__265H-2-_20230815215828529
+# 2025-05-15 18:02:30,787 - INFO - [Scenes 061-080__265H-2-_20230815215828529] Logging to file: e2e_cdfsod_iou_cos_5050/Scenes 061-080__265H-2-_20230815215828529/Scenes 061-080__265H-2-_20230815215828529_cd_fsod_sam2_voting_20250515_180230.log
+# 2025-05-15 18:02:30,787 - INFO - Logging to file: e2e_cdfsod_iou_cos_5050/Scenes 061-080__265H-2-_20230815215828529/Scenes 061-080__265H-2-_20230815215828529_cd_fsod_sam2_voting_20250515_180230.log
+# 2025-05-15 18:02:30,787 - INFO - [Scenes 061-080__265H-2-_20230815215828529] Processing scene: Scenes 061-080__265H-2-_20230815215828529
+# 2025-05-15 18:02:30,787 - INFO - Processing scene: Scenes 061-080__265H-2-_20230815215828529
+# Loaded 54 frames from data/frames/Scenes 061-080__265H-2-_20230815215828529
+# 2025-05-15 18:02:30,995 - INFO - [Scenes 061-080__265H-2-_20230815215828529] Loaded 54 frames from data/frames/Scenes 061-080__265H-2-_20230815215828529
+# 2025-05-15 18:02:30,995 - INFO - Loaded 54 frames from data/frames/Scenes 061-080__265H-2-_20230815215828529
+# 2025-05-15 18:02:30,998 - INFO - [Scenes 061-080__265H-2-_20230815215828529] Loaded CD-FSOD detections from data/detections_cdfsod/Scenes 061-080__265H-2-_20230815215828529
+# 2025-05-15 18:02:30,998 - INFO - Loaded CD-FSOD detections from data/detections_cdfsod/Scenes 061-080__265H-2-_20230815215828529
+# 2025-05-15 18:02:30,998 - INFO - [Scenes 061-080__265H-2-_20230815215828529] Scene Scenes 061-080__265H-2-_20230815215828529: 54 frames with detections.
+# 2025-05-15 18:02:30,998 - INFO - Scene Scenes 061-080__265H-2-_20230815215828529: 54 frames with detections.
+# 2025-05-15 18:02:30,999 - INFO - [Scenes 061-080__265H-2-_20230815215828529]   Frame 0: 0 detections.
+# 2025-05-15 18:02:30,999 - INFO -   Frame 0: 0 detections.
+# 2025-05-15 18:02:30,999 - INFO - [Scenes 061-080__265H-2-_20230815215828529]   Frame 1: 0 detections.
+# 2025-05-15 18:02:30,999 - INFO -   Frame 1: 0 detections.
+# 2025-05-15 18:02:30,999 - INFO - [Scenes 061-080__265H-2-_20230815215828529]   Frame 2: 0 detections.
+# 2025-05-15 18:02:30,999 - INFO -   Frame 2: 0 detections.
+# 2025-05-15 18:02:30,999 - INFO - [Scenes 061-080__265H-2-_20230815215828529]   Frame 3: 1 detections.
+# 2025-05-15 18:02:30,999 - INFO -   Frame 3: 1 detections.
+# 2025-05-15 18:02:30,999 - INFO - [Scenes 061-080__265H-2-_20230815215828529]     Detection 0: box=None, label=Time Stick, score=0.9803071618080139
+# 2025-05-15 18:02:30,999 - INFO -     Detection 0: box=None, label=Time Stick, score=0.9803071618080139
+# 2025-05-15 18:02:30,999 - INFO - [Scenes 061-080__265H-2-_20230815215828529]   Frame 4: 0 detections.
+# 2025-05-15 18:02:30,999 - INFO -   Frame 4: 0 detections.
+# 2025-05-15 18:02:31,000 - INFO - [Scenes 061-080__265H-2-_20230815215828529] Tracked 0 objects in scene Scenes 061-080__265H-2-_20230815215828529
+# 2025-05-15 18:02:31,000 - INFO - Tracked 0 objects in scene Scenes 061-080__265H-2-_20230815215828529
+# 2025-05-15 18:02:31,000 - INFO - [Scenes 061-080__265H-2-_20230815215828529] Processing each object separately for mask propagation and voting.
+# 2025-05-15 18:02:31,000 - INFO - Processing each object separately for mask propagation and voting.
+# SAM2 using device: cuda
+# 2025-05-15 18:02:35,790 - INFO - [Scenes 061-080__265H-2-_20230815215828529] Frame 0000: Found 0 detections.
+# 2025-05-15 18:02:35,790 - INFO - Frame 0000: Found 0 detections.
+# INFO:cd_fsod_sam2_voting.Scenes 061-080__265H-2-_20230815215828529:Frame 0000: Found 0 detections.
+# 2025-05-15 18:02:35,791 - INFO - [Scenes 061-080__265H-2-_20230815215828529] Frame 0001: Found 0 detections.
+# 2025-05-15 18:02:35,791 - INFO - Frame 0001: Found 0 detections.
+# INFO:cd_fsod_sam2_voting.Scenes 061-080__265H-2-_20230815215828529:Frame 0001: Found 0 detections.
+# 2025-05-15 18:02:35,791 - INFO - [Scenes 061-080__265H-2-_20230815215828529] Frame 0002: Found 0 detections.
+# 2025-05-15 18:02:35,791 - INFO - Frame 0002: Found 0 detections.
+# INFO:cd_fsod_sam2_voting.Scenes 061-080__265H-2-_20230815215828529:Frame 0002: Found 0 detections.
+# 2025-05-15 18:02:35,791 - INFO - [Scenes 061-080__265H-2-_20230815215828529] Frame 0003: Found 0 detections.
+# 2025-05-15 18:02:35,791 - INFO - Frame 0003: Found 0 detections.
+# INFO:cd_fsod_sam2_voting.Scenes 061-080__265H-2-_20230815215828529:Frame 0003: Found 0 detections.
+# 2025-05-15 18:02:35,791 - INFO - [Scenes 061-080__265H-2-_20230815215828529] Frame 0004: Found 0 detections.
+# 2025-05-15 18:02:35,791 - INFO - Frame 0004: Found 0 detections.
+# INFO:cd_fsod_sam2_voting.Scenes 061-080__265H-2-_20230815215828529:Frame 0004: Found 0 detections.
+# 2025-05-15 18:02:35,792 - INFO - [Scenes 061-080__265H-2-_20230815215828529] Frame 0005: Found 0 detections.
+# 2025-05-15 18:02:35,792 - INFO - Frame 0005: Found 0 detections.
+# INFO:cd_fsod_sam2_voting.Scenes 061-080__265H-2-_20230815215828529:Frame 0005: Found 0 detections.
+# 2025-05-15 18:02:35,792 - INFO - [Scenes 061-080__265H-2-_20230815215828529] Frame 0006: Found 0 detections.
+# 2025-05-15 18:02:35,792 - INFO - Frame 0006: Found 0 detections.
+# INFO:cd_fsod_sam2_voting.Scenes 061-080__265H-2-_20230815215828529:Frame 0006: Found 0 detections.
+# 2025-05-15 18:02:35,792 - INFO - [Scenes 061-080__265H-2-_20230815215828529] Frame 0007: Found 0 detections.
+# 2025-05-15 18:02:35,792 - INFO - Frame 0007: Found 0 detections.
+# INFO:cd_fsod_sam2_voting.Scenes 061-080__265H-2-_20230815215828529:Frame 0007: Found 0 detections.
+# 2025-05-15 18:02:35,792 - INFO - [Scenes 061-080__265H-2-_20230815215828529] Frame 0008: Found 0 detections.
+# 2025-05-15 18:02:35,792 - INFO - Frame 0008: Found 0 detections.
+# INFO:cd_fsod_sam2_voting.Scenes 061-080__265H-2-_20230815215828529:Frame 0008: Found 0 detections.
+# 2025-05-15 18:02:35,792 - INFO - [Scenes 061-080__265H-2-_20230815215828529] Frame 0009: Found 0 detections.
+# 2025-05-15 18:02:35,792 - INFO - Frame 0009: Found 0 detections.
+# INFO:cd_fsod_sam2_voting.Scenes 061-080__265H-2-_20230815215828529:Frame 0009: Found 0 detections.
+# 2025-05-15 18:02:35,792 - INFO - [Scenes 061-080__265H-2-_20230815215828529] Frame 0010: Found 0 detections.
+# 2025-05-15 18:02:35,792 - INFO - Frame 0010: Found 0 detections.
+# INFO:cd_fsod_sam2_voting.Scenes 061-080__265H-2-_20230815215828529:Frame 0010: Found 0 detections.
+# 2025-05-15 18:02:35,793 - INFO - [Scenes 061-080__265H-2-_20230815215828529] Frame 0011: Found 0 detections.
+# 2025-05-15 18:02:35,793 - INFO - Frame 0011: Found 0 detections.
+# INFO:cd_fsod_sam2_voting.Scenes 061-080__265H-2-_20230815215828529:Frame 0011: Found 0 detections.
+# 2025-05-15 18:02:35,793 - INFO - [Scenes 061-080__265H-2-_20230815215828529] Frame 0012: Found 0 detections.
+# 2025-05-15 18:02:35,793 - INFO - Frame 0012: Found 0 detections.
+# INFO:cd_fsod_sam2_voting.Scenes 061-080__265H-2-_20230815215828529:Frame 0012: Found 0 detections.
+# 2025-05-15 18:02:35,793 - INFO - [Scenes 061-080__265H-2-_20230815215828529] Frame 0013: Found 0 detections.
+# 2025-05-15 18:02:35,793 - INFO - Frame 0013: Found 0 detections.
+# INFO:cd_fsod_sam2_voting.Scenes 061-080__265H-2-_20230815215828529:Frame 0013: Found 0 detections.
+# 2025-05-15 18:02:35,793 - INFO - [Scenes 061-080__265H-2-_20230815215828529] Frame 0014: Found 0 detections.
+# 2025-05-15 18:02:35,793 - INFO - Frame 0014: Found 0 detections.
+# INFO:cd_fsod_sam2_voting.Scenes 061-080__265H-2-_20230815215828529:Frame 0014: Found 0 detections.
+# 2025-05-15 18:02:35,793 - INFO - [Scenes 061-080__265H-2-_20230815215828529] Frame 0015: Found 0 detections.
+# 2025-05-15 18:02:35,793 - INFO - Frame 0015: Found 0 detections.
+# INFO:cd_fsod_sam2_voting.Scenes 061-080__265H-2-_20230815215828529:Frame 0015: Found 0 detections.
+# 2025-05-15 18:02:35,793 - INFO - [Scenes 061-080__265H-2-_20230815215828529] Frame 0016: Found 0 detections.
+# 2025-05-15 18:02:35,793 - INFO - Frame 0016: Found 0 detections.
+# INFO:cd_fsod_sam2_voting.Scenes 061-080__265H-2-_20230815215828529:Frame 0016: Found 0 detections.
+# 2025-05-15 18:02:35,794 - INFO - [Scenes 061-080__265H-2-_20230815215828529] Frame 0017: Found 0 detections.
+# 2025-05-15 18:02:35,794 - INFO - Frame 0017: Found 0 detections.
+# INFO:cd_fsod_sam2_voting.Scenes 061-080__265H-2-_20230815215828529:Frame 0017: Found 0 detections.
+# 2025-05-15 18:02:35,794 - INFO - [Scenes 061-080__265H-2-_20230815215828529] Frame 0018: Found 0 detections.
+# 2025-05-15 18:02:35,794 - INFO - Frame 0018: Found 0 detections.
+# INFO:cd_fsod_sam2_voting.Scenes 061-080__265H-2-_20230815215828529:Frame 0018: Found 0 detections.
+# 2025-05-15 18:02:35,794 - INFO - [Scenes 061-080__265H-2-_20230815215828529] Frame 0019: Found 0 detections.
+# 2025-05-15 18:02:35,794 - INFO - Frame 0019: Found 0 detections.
+# INFO:cd_fsod_sam2_voting.Scenes 061-080__265H-2-_20230815215828529:Frame 0019: Found 0 detections.
+# 2025-05-15 18:02:35,794 - INFO - [Scenes 061-080__265H-2-_20230815215828529] Frame 0020: Found 0 detections.
+# 2025-05-15 18:02:35,794 - INFO - Frame 0020: Found 0 detections.
+# INFO:cd_fsod_sam2_voting.Scenes 061-080__265H-2-_20230815215828529:Frame 0020: Found 0 detections.
+# 2025-05-15 18:02:35,794 - INFO - [Scenes 061-080__265H-2-_20230815215828529] Frame 0021: Found 0 detections.
+# 2025-05-15 18:02:35,794 - INFO - Frame 0021: Found 0 detections.
+# INFO:cd_fsod_sam2_voting.Scenes 061-080__265H-2-_20230815215828529:Frame 0021: Found 0 detections.
+# 2025-05-15 18:02:35,794 - INFO - [Scenes 061-080__265H-2-_20230815215828529] Frame 0022: Found 0 detections.
+# 2025-05-15 18:02:35,794 - INFO - Frame 0022: Found 0 detections.
+# INFO:cd_fsod_sam2_voting.Scenes 061-080__265H-2-_20230815215828529:Frame 0022: Found 0 detections.
+# 2025-05-15 18:02:35,795 - INFO - [Scenes 061-080__265H-2-_20230815215828529] Frame 0023: Found 0 detections.
+# 2025-05-15 18:02:35,795 - INFO - Frame 0023: Found 0 detections.
+# INFO:cd_fsod_sam2_voting.Scenes 061-080__265H-2-_20230815215828529:Frame 0023: Found 0 detections.
+# 2025-05-15 18:02:35,795 - INFO - [Scenes 061-080__265H-2-_20230815215828529] Frame 0024: Found 0 detections.
+# 2025-05-15 18:02:35,795 - INFO - Frame 0024: Found 0 detections.
+# INFO:cd_fsod_sam2_voting.Scenes 061-080__265H-2-_20230815215828529:Frame 0024: Found 0 detections.
+# 2025-05-15 18:02:35,795 - INFO - [Scenes 061-080__265H-2-_20230815215828529] Frame 0025: Found 0 detections.
+# 2025-05-15 18:02:35,795 - INFO - Frame 0025: Found 0 detections.
+# INFO:cd_fsod_sam2_voting.Scenes 061-080__265H-2-_20230815215828529:Frame 0025: Found 0 detections.
+# 2025-05-15 18:02:35,795 - INFO - [Scenes 061-080__265H-2-_20230815215828529] Frame 0026: Found 0 detections.
+# 2025-05-15 18:02:35,795 - INFO - Frame 0026: Found 0 detections.
+# INFO:cd_fsod_sam2_voting.Scenes 061-080__265H-2-_20230815215828529:Frame 0026: Found 0 detections.
+# 2025-05-15 18:02:35,795 - INFO - [Scenes 061-080__265H-2-_20230815215828529] Frame 0027: Found 0 detections.
+# 2025-05-15 18:02:35,795 - INFO - Frame 0027: Found 0 detections.
+# INFO:cd_fsod_sam2_voting.Scenes 061-080__265H-2-_20230815215828529:Frame 0027: Found 0 detections.
+# 2025-05-15 18:02:35,795 - INFO - [Scenes 061-080__265H-2-_20230815215828529] Frame 0028: Found 0 detections.
+# 2025-05-15 18:02:35,795 - INFO - Frame 0028: Found 0 detections.
+# INFO:cd_fsod_sam2_voting.Scenes 061-080__265H-2-_20230815215828529:Frame 0028: Found 0 detections.
+# 2025-05-15 18:02:35,796 - INFO - [Scenes 061-080__265H-2-_20230815215828529] Frame 0029: Found 0 detections.
+# 2025-05-15 18:02:35,796 - INFO - Frame 0029: Found 0 detections.
+# INFO:cd_fsod_sam2_voting.Scenes 061-080__265H-2-_20230815215828529:Frame 0029: Found 0 detections.
+# 2025-05-15 18:02:35,796 - INFO - [Scenes 061-080__265H-2-_20230815215828529] Frame 0030: Found 0 detections.
+# 2025-05-15 18:02:35,796 - INFO - Frame 0030: Found 0 detections.
+# INFO:cd_fsod_sam2_voting.Scenes 061-080__265H-2-_20230815215828529:Frame 0030: Found 0 detections.
+# 2025-05-15 18:02:35,796 - INFO - [Scenes 061-080__265H-2-_20230815215828529] Frame 0031: Found 0 detections.
+# 2025-05-15 18:02:35,796 - INFO - Frame 0031: Found 0 detections.
+# INFO:cd_fsod_sam2_voting.Scenes 061-080__265H-2-_20230815215828529:Frame 0031: Found 0 detections.
+# 2025-05-15 18:02:35,796 - INFO - [Scenes 061-080__265H-2-_20230815215828529] Frame 0032: Found 0 detections.
+# 2025-05-15 18:02:35,796 - INFO - Frame 0032: Found 0 detections.
+# INFO:cd_fsod_sam2_voting.Scenes 061-080__265H-2-_20230815215828529:Frame 0032: Found 0 detections.
+# 2025-05-15 18:02:35,796 - INFO - [Scenes 061-080__265H-2-_20230815215828529] Frame 0033: Found 0 detections.
+# 2025-05-15 18:02:35,796 - INFO - Frame 0033: Found 0 detections.
+# INFO:cd_fsod_sam2_voting.Scenes 061-080__265H-2-_20230815215828529:Frame 0033: Found 0 detections.
+# 2025-05-15 18:02:35,796 - INFO - [Scenes 061-080__265H-2-_20230815215828529] Frame 0034: Found 0 detections.
+# 2025-05-15 18:02:35,796 - INFO - Frame 0034: Found 0 detections.
+# INFO:cd_fsod_sam2_voting.Scenes 061-080__265H-2-_20230815215828529:Frame 0034: Found 0 detections.
+# 2025-05-15 18:02:35,797 - INFO - [Scenes 061-080__265H-2-_20230815215828529] Frame 0035: Found 0 detections.
+# 2025-05-15 18:02:35,797 - INFO - Frame 0035: Found 0 detections.
+# INFO:cd_fsod_sam2_voting.Scenes 061-080__265H-2-_20230815215828529:Frame 0035: Found 0 detections.
+# 2025-05-15 18:02:35,797 - INFO - [Scenes 061-080__265H-2-_20230815215828529] Frame 0036: Found 0 detections.
+# 2025-05-15 18:02:35,797 - INFO - Frame 0036: Found 0 detections.
+# INFO:cd_fsod_sam2_voting.Scenes 061-080__265H-2-_20230815215828529:Frame 0036: Found 0 detections.
+# 2025-05-15 18:02:35,797 - INFO - [Scenes 061-080__265H-2-_20230815215828529] Frame 0037: Found 0 detections.
+# 2025-05-15 18:02:35,797 - INFO - Frame 0037: Found 0 detections.
+# INFO:cd_fsod_sam2_voting.Scenes 061-080__265H-2-_20230815215828529:Frame 0037: Found 0 detections.
+# 2025-05-15 18:02:35,797 - INFO - [Scenes 061-080__265H-2-_20230815215828529] Frame 0038: Found 0 detections.
+# 2025-05-15 18:02:35,797 - INFO - Frame 0038: Found 0 detections.
+# INFO:cd_fsod_sam2_voting.Scenes 061-080__265H-2-_20230815215828529:Frame 0038: Found 0 detections.
+# 2025-05-15 18:02:35,797 - INFO - [Scenes 061-080__265H-2-_20230815215828529] Frame 0039: Found 0 detections.
+# 2025-05-15 18:02:35,797 - INFO - Frame 0039: Found 0 detections.
+# INFO:cd_fsod_sam2_voting.Scenes 061-080__265H-2-_20230815215828529:Frame 0039: Found 0 detections.
+# 2025-05-15 18:02:35,798 - INFO - [Scenes 061-080__265H-2-_20230815215828529] Frame 0040: Found 0 detections.
+# 2025-05-15 18:02:35,798 - INFO - Frame 0040: Found 0 detections.
+# INFO:cd_fsod_sam2_voting.Scenes 061-080__265H-2-_20230815215828529:Frame 0040: Found 0 detections.
+# 2025-05-15 18:02:35,798 - INFO - [Scenes 061-080__265H-2-_20230815215828529] Frame 0041: Found 0 detections.
+# 2025-05-15 18:02:35,798 - INFO - Frame 0041: Found 0 detections.
+# INFO:cd_fsod_sam2_voting.Scenes 061-080__265H-2-_20230815215828529:Frame 0041: Found 0 detections.
+# 2025-05-15 18:02:35,798 - INFO - [Scenes 061-080__265H-2-_20230815215828529] Frame 0042: Found 0 detections.
+# 2025-05-15 18:02:35,798 - INFO - Frame 0042: Found 0 detections.
+# INFO:cd_fsod_sam2_voting.Scenes 061-080__265H-2-_20230815215828529:Frame 0042: Found 0 detections.
+# 2025-05-15 18:02:35,798 - INFO - [Scenes 061-080__265H-2-_20230815215828529] Frame 0043: Found 0 detections.
+# 2025-05-15 18:02:35,798 - INFO - Frame 0043: Found 0 detections.
+# INFO:cd_fsod_sam2_voting.Scenes 061-080__265H-2-_20230815215828529:Frame 0043: Found 0 detections.
+# 2025-05-15 18:02:35,798 - INFO - [Scenes 061-080__265H-2-_20230815215828529] Frame 0044: Found 0 detections.
+# 2025-05-15 18:02:35,798 - INFO - Frame 0044: Found 0 detections.
+# INFO:cd_fsod_sam2_voting.Scenes 061-080__265H-2-_20230815215828529:Frame 0044: Found 0 detections.
+# 2025-05-15 18:02:35,799 - INFO - [Scenes 061-080__265H-2-_20230815215828529] Frame 0045: Found 0 detections.
+# 2025-05-15 18:02:35,799 - INFO - Frame 0045: Found 0 detections.
+# INFO:cd_fsod_sam2_voting.Scenes 061-080__265H-2-_20230815215828529:Frame 0045: Found 0 detections.
+# 2025-05-15 18:02:35,799 - INFO - [Scenes 061-080__265H-2-_20230815215828529] Frame 0046: Found 0 detections.
+# 2025-05-15 18:02:35,799 - INFO - Frame 0046: Found 0 detections.
+# INFO:cd_fsod_sam2_voting.Scenes 061-080__265H-2-_20230815215828529:Frame 0046: Found 0 detections.
+# 2025-05-15 18:02:35,799 - INFO - [Scenes 061-080__265H-2-_20230815215828529] Frame 0047: Found 0 detections.
+# 2025-05-15 18:02:35,799 - INFO - Frame 0047: Found 0 detections.
+# INFO:cd_fsod_sam2_voting.Scenes 061-080__265H-2-_20230815215828529:Frame 0047: Found 0 detections.
+# 2025-05-15 18:02:35,799 - INFO - [Scenes 061-080__265H-2-_20230815215828529] Frame 0048: Found 0 detections.
+# 2025-05-15 18:02:35,799 - INFO - Frame 0048: Found 0 detections.
+# INFO:cd_fsod_sam2_voting.Scenes 061-080__265H-2-_20230815215828529:Frame 0048: Found 0 detections.
+# 2025-05-15 18:02:35,800 - INFO - [Scenes 061-080__265H-2-_20230815215828529] Frame 0049: Found 0 detections.
+# 2025-05-15 18:02:35,800 - INFO - Frame 0049: Found 0 detections.
+# INFO:cd_fsod_sam2_voting.Scenes 061-080__265H-2-_20230815215828529:Frame 0049: Found 0 detections.
+# 2025-05-15 18:02:35,800 - INFO - [Scenes 061-080__265H-2-_20230815215828529] Frame 0050: Found 0 detections.
+# 2025-05-15 18:02:35,800 - INFO - Frame 0050: Found 0 detections.
+# INFO:cd_fsod_sam2_voting.Scenes 061-080__265H-2-_20230815215828529:Frame 0050: Found 0 detections.
+# 2025-05-15 18:02:35,800 - INFO - [Scenes 061-080__265H-2-_20230815215828529] Frame 0051: Found 0 detections.
+# 2025-05-15 18:02:35,800 - INFO - Frame 0051: Found 0 detections.
+# INFO:cd_fsod_sam2_voting.Scenes 061-080__265H-2-_20230815215828529:Frame 0051: Found 0 detections.
+# 2025-05-15 18:02:35,800 - INFO - [Scenes 061-080__265H-2-_20230815215828529] Frame 0052: Found 0 detections.
+# 2025-05-15 18:02:35,800 - INFO - Frame 0052: Found 0 detections.
+# INFO:cd_fsod_sam2_voting.Scenes 061-080__265H-2-_20230815215828529:Frame 0052: Found 0 detections.
+# 2025-05-15 18:02:35,800 - INFO - [Scenes 061-080__265H-2-_20230815215828529] Frame 0053: Found 0 detections.
+# 2025-05-15 18:02:35,800 - INFO - Frame 0053: Found 0 detections.
+# INFO:cd_fsod_sam2_voting.Scenes 061-080__265H-2-_20230815215828529:Frame 0053: Found 0 detections.
+# 2025-05-15 18:02:35,801 - INFO - [Scenes 061-080__265H-2-_20230815215828529] Saved results for scene Scenes 061-080__265H-2-_20230815215828529 to e2e_cdfsod_iou_cos_5050/Scenes 061-080__265H-2-_20230815215828529
+# 2025-05-15 18:02:35,801 - INFO - Saved results for scene Scenes 061-080__265H-2-_20230815215828529 to e2e_cdfsod_iou_cos_5050/Scenes 061-080__265H-2-_20230815215828529
+# INFO:cd_fsod_sam2_voting.Scenes 061-080__265H-2-_20230815215828529:Saved results for scene Scenes 061-080__265H-2-_20230815215828529 to e2e_cdfsod_iou_cos_5050/Scenes 061-080__265H-2-_20230815215828529
+# 2025-05-15 18:02:35,803 - INFO - Scene Scenes 061-080__265H-2-_20230815215828529 processed successfully in 5.02 seconds
+# INFO:cd_fsod_sam2_voting:Scene Scenes 061-080__265H-2-_20230815215828529 processed successfully in 5.02 seconds
+# 2025-05-15 18:02:35,803 - INFO - CDFSOD + SAM2 Voting Pipeline Completed
+# INFO:cd_fsod_sam2_voting:CDFSOD + SAM2 Voting Pipeline Completed

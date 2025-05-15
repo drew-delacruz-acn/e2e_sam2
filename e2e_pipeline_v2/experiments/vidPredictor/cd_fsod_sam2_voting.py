@@ -86,14 +86,28 @@ def process_scene(scene_path, detections_path, output_path, args, main_logger):
     # Track objects (IoU only)
     tracker = ObjectTracker(iou_weight=1.0, emb_weight=0.0)
     tracked_objects = defaultdict(list)  # obj_id -> list of (frame_idx, box, label, score)
+    # Log raw detection JSONs for first few frames
+    for idx, frame_path in enumerate(frame_paths[:5]):
+        try:
+            with open(frame_path.replace(str(scene_path), str(detections_path)).replace('.jpg', '.json').replace('.png', '.json'), 'r') as f:
+                raw_json = f.read()
+            logger.debug(f"Raw detection JSON for frame {idx}: {raw_json}")
+        except Exception as e:
+            logger.debug(f"Could not read detection JSON for frame {idx}: {e}")
     for idx, frame in enumerate(frames):
         dets = detector.detect(frame_paths[idx], args.text_queries)
         detections = []
         for i in range(len(dets["boxes"])):
+            box = dets["boxes"][i]
+            label = dets["labels"][i]
+            score = dets["scores"][i]
+            if box is None or (isinstance(box, (list, tuple)) and any(b is None for b in box)):
+                logger.warning(f"Skipping detection in frame {idx}: invalid box: {box}, label: {label}, score: {score}")
+                continue
             detections.append({
-                "box": dets["boxes"][i],
-                "text": dets["labels"][i],
-                "score": dets["scores"][i]
+                "box": box,
+                "text": label,
+                "score": score
             })
         current_tracks = tracker.update_tracks(frame, idx, detections, embedding_extractor=None)
         for obj_id, box in current_tracks.items():
@@ -101,6 +115,8 @@ def process_scene(scene_path, detections_path, output_path, args, main_logger):
             score = None  # Optionally, you can store the detection score
             tracked_objects[obj_id].append((idx, box, label, score))
     logger.info(f"Tracked {len(tracked_objects)} objects in scene {scene_name}")
+    if len(tracked_objects) == 0:
+        logger.warning(f"No objects were tracked in scene {scene_name}. Possible causes: empty detections, high confidence threshold, or invalid detection boxes.")
     # Propagate masks with SAM2
     voting_results = defaultdict(dict)  # obj_id -> frame_idx -> {"label": ..., "mask": ...}
     corrections_log = []
@@ -152,6 +168,8 @@ def process_scene(scene_path, detections_path, output_path, args, main_logger):
                     "label": voted_label,
                     "mask": video_segments[fidx][obj_id]
                 }
+    if len(tracked_objects) == 0:
+        logger.warning(f"Skipping mask propagation and voting for scene {scene_name} because no objects were tracked.")
     # Save results
     results_dir = Path(output_path)
     results_dir.mkdir(exist_ok=True, parents=True)
@@ -275,6 +293,10 @@ def process_scene(scene_path, detections_path, output_path, args, main_logger):
     with open(results_dir / "corrections_log.json", "w") as f:
         json.dump(corrections_log, f, indent=2)
     logger.info(f"Saved results for scene {scene_name} to {results_dir}")
+
+    # At the end of scene processing, add a summary
+    num_frames_with_detections = sum(1 for dets in det_by_frame.values() if len(dets) > 0)
+    logger.info(f"Scene summary: {len(tracked_objects)} objects tracked, {num_frames_with_detections} frames with detections out of {len(frames)} frames.")
     return True
 
 def main():

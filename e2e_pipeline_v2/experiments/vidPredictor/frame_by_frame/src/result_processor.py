@@ -202,7 +202,7 @@ def create_segmentation_summary(video_segments, tracking_objects, object_detecti
         
         # Get all detections for this object
         cdfsod_predictions = object_detections.get(obj_id, [])
-        
+        print(f'APPEARANCES: {appearances}')
         print(f"Object {obj_id}: {len(appearances)} appearances, {len(cdfsod_predictions)} CDFSOD predictions")
         
         # Create object summary

@@ -283,7 +283,9 @@ def process_scene(
                 detector_type="cd_fsod",
                 cd_fsod_path=str(detections_path),
                 min_gap_frames=args.min_gap_frames,
-                mask_quality_threshold=args.mask_quality_threshold
+                mask_quality_threshold=args.mask_quality_threshold,
+                iou_weight=args.iou_weight,
+                emb_weight=args.emb_weight
             )
         else:  # owlv2
             pipeline = ObjectTrackingPipeline(
@@ -294,7 +296,9 @@ def process_scene(
                 confidence_threshold=args.confidence,
                 detector_type="owlv2",
                 min_gap_frames=args.min_gap_frames,
-                mask_quality_threshold=args.mask_quality_threshold
+                mask_quality_threshold=args.mask_quality_threshold,
+                iou_weight=args.iou_weight,
+                emb_weight=args.emb_weight
             )
             
         logger.info("Pipeline initialized successfully")
@@ -521,6 +525,10 @@ def main():
     # Mask quality options
     parser.add_argument("--mask-quality-threshold", type=int, default=0, help="Minimum pixel count for high-quality masks (default: 0)")
     
+    # Tracking options
+    parser.add_argument("--iou-weight", type=float, default=0.5, help="Weight for IoU in object tracking (0.0-1.0)")
+    parser.add_argument("--emb-weight", type=float, default=0.5, help="Weight for embedding similarity in object tracking (0.0-1.0)")
+    
     args = parser.parse_args()
     
     # Validate detector-specific requirements
@@ -559,6 +567,7 @@ def main():
     main_logger.info(f"  - Debug mode: {args.debug}")
     main_logger.info(f"  - Enhanced logging: {not args.no_enhanced_logging}")
     main_logger.info(f"  - Mask quality threshold: {args.mask_quality_threshold}")
+    main_logger.info(f"  - Tracking weights: IoU={args.iou_weight:.2f}, Embedding={args.emb_weight:.2f}")
     if args.scene:
         main_logger.info(f"  - Processing only scene: {args.scene}")
     

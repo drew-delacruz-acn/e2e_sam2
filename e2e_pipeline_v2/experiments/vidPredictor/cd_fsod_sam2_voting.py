@@ -97,26 +97,26 @@ def process_scene(scene_path, detections_path, output_path, args, main_logger):
     for idx, frame in enumerate(frames):
         dets = detector.detect(frame_paths[idx], args.text_queries)
         detections = []
-        for i in range(len(dets["boxes"])):
-            box = dets["boxes"][i]
+        for i in range(len(dets["coordinates"])):
+            coordinates = dets["coordinates"][i]
             label = dets["labels"][i]
             score = dets["scores"][i]
-            if box is None or (isinstance(box, (list, tuple)) and any(b is None for b in box)):
-                logger.warning(f"Skipping detection in frame {idx}: invalid box: {box}, label: {label}, score: {score}")
+            if coordinates is None or (isinstance(coordinates, (list, tuple)) and any(b is None for b in coordinates)):
+                logger.warning(f"Skipping detection in frame {idx}: invalid coordinates: {coordinates}, label: {label}, score: {score}")
                 continue
             detections.append({
-                "box": box,
+                "coordinates": coordinates,
                 "text": label,
                 "score": score
             })
         current_tracks = tracker.update_tracks(frame, idx, detections, embedding_extractor=None)
-        for obj_id, box in current_tracks.items():
+        for obj_id, coordinates in current_tracks.items():
             label = tracker.tracked_objects[obj_id]["class"]
             score = None  # Optionally, you can store the detection score
-            tracked_objects[obj_id].append((idx, box, label, score))
+            tracked_objects[obj_id].append((idx, coordinates, label, score))
     logger.info(f"Tracked {len(tracked_objects)} objects in scene {scene_name}")
     if len(tracked_objects) == 0:
-        logger.warning(f"No objects were tracked in scene {scene_name}. Possible causes: empty detections, high confidence threshold, or invalid detection boxes.")
+        logger.warning(f"No objects were tracked in scene {scene_name}. Possible causes: empty detections, high confidence threshold, or invalid detection coordinates.")
     # Propagate masks with SAM2
     voting_results = defaultdict(dict)  # obj_id -> frame_idx -> {"label": ..., "mask": ...}
     corrections_log = []
@@ -128,7 +128,7 @@ def process_scene(scene_path, detections_path, output_path, args, main_logger):
             video_segments, _ = sam2.propagate_masks(objects_to_track=[obj_id])
             mask_frames = []
             labels = []
-            for (frame_idx, box, label, score) in track:
+            for (frame_idx, coordinates, label, score) in track:
                 mask = video_segments.get(frame_idx, {}).get(obj_id)
                 if mask is not None and np.any(mask):
                     mask_frames.append(frame_idx)
@@ -152,7 +152,7 @@ def process_scene(scene_path, detections_path, output_path, args, main_logger):
         for obj_id, track in tracked_objects.items():
             mask_frames = []
             labels = []
-            for (frame_idx, box, label, score) in track:
+            for (frame_idx, coordinates, label, score) in track:
                 mask = video_segments.get(frame_idx, {}).get(obj_id)
                 if mask is not None and np.any(mask):
                     mask_frames.append(frame_idx)
@@ -203,24 +203,24 @@ def process_scene(scene_path, detections_path, output_path, args, main_logger):
     for idx, frame_path in enumerate(frame_paths):
         # Load original detections
         dets = detector.detect(frame_path, args.text_queries)
-        logger.info(f"Frame {idx:04d}: Found {len(dets['boxes'])} detections.")
-        for i in range(len(dets["boxes"])):
-            logger.info(f"  Detection {i}: box={dets['boxes'][i]}, label={dets['labels'][i]}, score={dets['scores'][i]:.3f}")
+        logger.info(f"Frame {idx:04d}: Found {len(dets['coordinates'])} detections.")
+        for i in range(len(dets["coordinates"])):
+            logger.info(f"  Detection {i}: coordinates={dets['coordinates'][i]}, label={dets['labels'][i]}, score={dets['scores'][i]:.3f}")
         updated_dets = []
         used_obj_ids = set()
-        for i in range(len(dets["boxes"])):
-            box = dets["boxes"][i]
+        for i in range(len(dets["coordinates"])):
+            coordinates = dets["coordinates"][i]
             orig_label = dets["labels"][i]
             score = dets["scores"][i]
             # Find the tracked object for this detection (by IoU match)
             best_obj_id = None
             best_iou = 0.0
             for obj_id, track in tracked_objects.items():
-                for (trk_idx, trk_box, trk_label, _) in track:
+                for (trk_idx, trk_coordinates, trk_label, _) in track:
                     if trk_idx == idx:
                         # Compute IoU
-                        x1, y1, x2, y2 = box
-                        tx1, ty1, tx2, ty2 = trk_box
+                        x1, y1, x2, y2 = coordinates
+                        tx1, ty1, tx2, ty2 = trk_coordinates
                         xi1 = max(x1, tx1)
                         yi1 = max(y1, ty1)
                         xi2 = min(x2, tx2)
@@ -240,7 +240,7 @@ def process_scene(scene_path, detections_path, output_path, args, main_logger):
                 mask_path = obj_frame_lookup[best_obj_id][idx]["mask_path"]
                 corrected = (voted_label != orig_label)
                 updated_dets.append({
-                    "box": box,
+                    "coordinates": coordinates,
                     "label": voted_label,
                     "score": float(score),
                     "voted_label": voted_label,
@@ -251,7 +251,7 @@ def process_scene(scene_path, detections_path, output_path, args, main_logger):
                 used_obj_ids.add(best_obj_id)
             else:
                 updated_dets.append({
-                    "box": box,
+                    "coordinates": coordinates,
                     "label": orig_label,
                     "score": float(score),
                     "voted_label": orig_label,
@@ -272,11 +272,11 @@ def process_scene(scene_path, detections_path, output_path, args, main_logger):
                 ys, xs = np.where(mask > 0)
                 if len(xs) > 0 and len(ys) > 0:
                     x1, y1, x2, y2 = int(xs.min()), int(ys.min()), int(xs.max()), int(ys.max())
-                    box = [x1, y1, x2, y2]
+                    coordinates = [x1, y1, x2, y2]
                 else:
-                    box = [0, 0, 0, 0]
+                    coordinates = [0, 0, 0, 0]
                 updated_dets.append({
-                    "box": box,
+                    "coordinates": coordinates,
                     "label": voted_label,
                     "score": -1.0,
                     "voted_label": voted_label,

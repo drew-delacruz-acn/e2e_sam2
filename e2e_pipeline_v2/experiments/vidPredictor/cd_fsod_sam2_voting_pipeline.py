@@ -79,8 +79,6 @@ class CDFSODSAM2VotingPipeline(ObjectTrackingPipeline):
     def _perform_label_voting(self, obj_id, frame_indices):
         labels = []
         for frame_idx in frame_indices:
-            # Try to get the label for this object in this frame
-            # Use the tracked_objects' class as the label (could be improved if per-frame labels are stored)
             if obj_id in self.tracked_objects:
                 labels.append(self.tracked_objects[obj_id]["class"])
         if not labels:
@@ -100,8 +98,7 @@ class CDFSODSAM2VotingPipeline(ObjectTrackingPipeline):
         self.label_votes[obj_id] = dict(label_counts)
         return voted_label
 
-    def process_video(self, frames_dir: str, text_queries):
-        super().process_video(frames_dir, text_queries)
+    def run_voting(self):
         for obj_id, obj_data in self.tracked_objects.items():
             frame_indices = []
             for frame_idx, masks in self.propagation_results.items():
@@ -113,6 +110,10 @@ class CDFSODSAM2VotingPipeline(ObjectTrackingPipeline):
                 print(f"Object {obj_id} voted label: {voted_label}")
                 print(f"Vote distribution: {self.label_votes[obj_id]}")
         self._save_voting_results()
+
+    def process_video(self, frames_dir: str, text_queries):
+        super().process_video(frames_dir, text_queries)
+        self.run_voting()
 
     def _save_voting_results(self):
         results = {
@@ -145,6 +146,7 @@ def main():
     parser.add_argument("--mask-quality-threshold", type=int, default=0, help="Minimum pixel count for high-quality masks")
     parser.add_argument("--iou-weight", type=float, default=0.5, help="Weight for IoU in object tracking (set to 1.0 for IoU-only)")
     parser.add_argument("--emb-weight", type=float, default=0.5, help="Weight for embedding similarity in object tracking (set to 0.0 for IoU-only)")
+    parser.add_argument("--separate-objects", action="store_true", help="Process each object separately to avoid dtype issues")
     parser.add_argument("--scene", help="Process only the specified scene name (optional)")
     parser.add_argument("--debug", action="store_true", help="Enable debug logging")
     args = parser.parse_args()
@@ -178,10 +180,17 @@ def main():
             emb_weight=args.emb_weight
         )
         try:
-            pipeline.process_video(
-                frames_dir=str(scene_dir),
-                text_queries=["all"]
-            )
+            if args.separate_objects:
+                pipeline.process_video_separate_objects(
+                    frames_dir=str(scene_dir),
+                    text_queries=["all"]
+                )
+            else:
+                pipeline.process_video(
+                    frames_dir=str(scene_dir),
+                    text_queries=["all"]
+                )
+            pipeline.run_voting()
             logger.info(f"Successfully processed scene: {scene_name}")
         except Exception as e:
             logger.error(f"Error processing scene {scene_name}: {e}")

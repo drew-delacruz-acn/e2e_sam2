@@ -154,6 +154,9 @@ def process_scene(scene_path, detections_path, output_path, args, main_logger):
     for idx, frame_path in enumerate(frame_paths):
         # Load original detections
         dets = detector.detect(frame_path, args.text_queries)
+        logger.info(f"Frame {idx:04d}: Found {len(dets['boxes'])} detections.")
+        for i in range(len(dets["boxes"])):
+            logger.info(f"  Detection {i}: box={dets['boxes'][i]}, label={dets['labels'][i]}, score={dets['scores'][i]:.3f}")
         updated_dets = []
         used_obj_ids = set()
         for i in range(len(dets["boxes"])):

@@ -639,7 +639,7 @@ if __name__ == "__main__":
 
 # $ python e2e_pipeline_v2/experiments/vidPredictor/video_segmentation_pipeline.py  --frames-root "data/frames/" --detections-root "data/detections_cdfsod/" --output-root e2e_cdfsod_iou_cos_5050 --sam2-checkpoint checkpoints/sam2.1_hiera_large.pt --sam2-config configs/sam2.1/sam2.1_hiera_l.yaml --confidence 0.9 --min-gap-frames 20 --separate-objects --text-queries "all"
 
-
+#hoiii
 # python e2e_pipeline_v2/experiments/vidPredictor/cd_fsod_sam2_voting.py  --frames-root "data/frames/" --detections-root "data/detections_cdfsod/" --output-root e2e_cdfsod_iou_cos_5050 --sam2-checkpoint checkpoints/sam2.1_hiera_large.pt --sam2-config configs/sam2.1/sam2.1_hiera_l.yaml --confidence 0.9 --min-gap-frames 20 --text-queries "all" --scene 'Scenes 061-080__265H-2-_20230815215828529' --separate-objects
 # 2025-05-15 18:02:30,786 - INFO - Logging to file: e2e_cdfsod_iou_cos_5050/cd_fsod_sam2_voting_20250515_180230.log
 # 2025-05-15 18:02:30,787 - INFO - Found 1 scene directories to process

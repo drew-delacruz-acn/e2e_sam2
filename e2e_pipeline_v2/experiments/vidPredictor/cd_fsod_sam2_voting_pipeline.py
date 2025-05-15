@@ -2,10 +2,14 @@
 """
 CD-FSOD SAM2 Voting Pipeline
 
-This script implements a video object detection and segmentation pipeline that fuses
-CD-FSOD detections and SAM2 mask propagation using an object-centric voting strategy.
-The goal is to improve temporal consistency and correct short-term misclassifications
-by assigning the most frequent label to each object across all frames where it is present.
+This script processes multiple video scenes from a directory structure, performing
+object detection and segmentation using CD-FSOD JSON detections and segmentation with SAM2.
+It then applies an object-centric voting strategy to assign the most frequent label to each object
+across all frames where it is present, improving temporal consistency.
+
+The script takes input directories containing scenes (subdirectories) of frames and
+detections, and produces an output directory with the same structure containing
+temporally-smoothed, corrected results.
 """
 
 import argparse
@@ -16,9 +20,8 @@ import time
 import json
 from pathlib import Path
 from datetime import datetime
-from collections import Counter
+from collections import Counter, defaultdict
 import torch
-import numpy as np
 
 # Add the src directory to the Python path
 sys.path.append(os.path.join(os.path.dirname(__file__), 'src'))
@@ -41,7 +44,7 @@ def setup_logger(name, log_level=logging.INFO, output_dir=None, scene_name=None)
         os.makedirs(output_dir, exist_ok=True)
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
         log_name = f"{scene_name}_" if scene_name else ""
-        log_file = os.path.join(output_dir, f"{log_name}voting_pipeline_{timestamp}.log")
+        log_file = os.path.join(output_dir, f"{log_name}cd_fsod_sam2_voting_{timestamp}.log")
         file_handler = logging.FileHandler(log_file)
         file_handler.setLevel(log_level)
         file_handler.setFormatter(formatter)
@@ -49,112 +52,146 @@ def setup_logger(name, log_level=logging.INFO, output_dir=None, scene_name=None)
         logger.info(f"Logging to file: {log_file}")
     return logger
 
-class CDFSODSAM2VotingPipeline(ObjectTrackingPipeline):
-    def __init__(
-        self,
-        sam2_checkpoint: str,
-        sam2_config: str,
-        output_dir: str,
-        confidence_threshold: float = 0.5,
-        min_gap_frames: int = 10,
-        mask_quality_threshold: int = 0,
-        iou_weight: float = 0.5,
-        emb_weight: float = 0.5
-    ):
-        super().__init__(
-            owlv2_checkpoint=None,  # Not used with CD-FSOD
-            sam2_checkpoint=sam2_checkpoint,
-            sam2_config=sam2_config,
-            output_dir=output_dir,
-            confidence_threshold=confidence_threshold,
-            detector_type="cd_fsod",
-            min_gap_frames=min_gap_frames,
-            mask_quality_threshold=mask_quality_threshold,
-            iou_weight=iou_weight,
-            emb_weight=emb_weight
-        )
-        self.voted_labels = {}
-        self.label_votes = {}
+def natural_sort_key(s):
+    import re
+    return [int(text) if text.isdigit() else text.lower() for text in re.split(r'(\d+)', str(s))]
 
-    def _perform_label_voting(self, obj_id, frame_indices):
-        labels = []
-        for frame_idx in frame_indices:
-            if obj_id in self.tracked_objects:
-                labels.append(self.tracked_objects[obj_id]["class"])
-        if not labels:
-            return None
-        label_counts = Counter(labels)
-        most_common = label_counts.most_common(1)[0]
-        if len(label_counts) > 1:
-            max_count = most_common[1]
-            tied_labels = [label for label, count in label_counts.items() if count == max_count]
-            if len(tied_labels) > 1:
-                voted_label = labels[0]
-            else:
-                voted_label = most_common[0]
-        else:
-            voted_label = most_common[0]
-        self.voted_labels[obj_id] = voted_label
-        self.label_votes[obj_id] = dict(label_counts)
-        return voted_label
+class VotingPipeline(ObjectTrackingPipeline):
+    """
+    Extends ObjectTrackingPipeline to add object-centric voting for label smoothing.
+    """
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.voting_logs = {}
 
-    def run_voting(self):
+    def perform_voting(self):
+        """
+        For each tracked object, assign the most frequent label across all frames where its mask exists.
+        Update per-frame predictions to reflect this voted label. Log corrections and tie-breaks.
+        """
+        logger = logging.getLogger("cd_fsod_sam2_voting")
         for obj_id, obj_data in self.tracked_objects.items():
-            frame_indices = []
+            # Gather all frames where mask exists for this object
+            mask_frames = []
             for frame_idx, masks in self.propagation_results.items():
-                if obj_id in masks:
-                    frame_indices.append(frame_idx)
-            voted_label = self._perform_label_voting(obj_id, frame_indices)
-            if voted_label:
-                self.tracked_objects[obj_id]["class"] = voted_label
-                print(f"Object {obj_id} voted label: {voted_label}")
-                print(f"Vote distribution: {self.label_votes[obj_id]}")
-        self._save_voting_results()
-
-    def process_video(self, frames_dir: str, text_queries):
-        super().process_video(frames_dir, text_queries)
-        self.run_voting()
-
-    def _save_voting_results(self):
-        results = {
-            "voted_labels": self.voted_labels,
-            "vote_distributions": self.label_votes,
-            "objects": {
-                str(obj_id): {
-                    "final_label": obj_data["class"],
-                    "first_detected": obj_data["first_detected"],
-                    "last_seen": obj_data["last_seen"],
-                    "frame_count": len(obj_data["boxes"])
-                }
-                for obj_id, obj_data in self.tracked_objects.items()
+                if obj_id in masks and masks[obj_id] is not None and (hasattr(masks[obj_id], 'size') and masks[obj_id].size > 0):
+                    mask_frames.append(frame_idx)
+            if not mask_frames:
+                continue
+            # Gather all predicted labels for these frames
+            labels = []
+            for f in mask_frames:
+                # Try to get the label from detections if available, else use object's class
+                label = obj_data.get('class', None)
+                if 'frame_results' in self.__dict__ and f in self.frame_results:
+                    # Try to find detection for this object in this frame
+                    dets = self.frame_results[f].get('detections', [])
+                    for det in dets:
+                        if det.get('label'):
+                            labels.append(det['label'])
+                            break
+                    else:
+                        if label:
+                            labels.append(label)
+                elif label:
+                    labels.append(label)
+            if not labels:
+                continue
+            # Majority vote
+            label_counts = Counter(labels)
+            most_common = label_counts.most_common()
+            voted_label = most_common[0][0]
+            tie = False
+            if len(most_common) > 1 and most_common[0][1] == most_common[1][1]:
+                tie = True
+                # Tie-breaker: use label from first frame, or highest average confidence if available
+                voted_label = labels[0]
+            # Update all frames in span
+            for f in mask_frames:
+                obj_data['class'] = voted_label
+                # Optionally, update frame_results if you want per-frame output
+                if 'frame_results' in self.__dict__ and f in self.frame_results:
+                    for det in self.frame_results[f].get('detections', []):
+                        det['label'] = voted_label
+            # Log corrections and tie-breaks
+            self.voting_logs[obj_id] = {
+                'mask_frames': mask_frames,
+                'labels': labels,
+                'voted_label': voted_label,
+                'label_counts': dict(label_counts),
+                'tie': tie
             }
-        }
-        output_path = Path(self.output_dir) / "voting_results.json"
-        with open(output_path, 'w') as f:
-            json.dump(results, f, indent=2)
-        print(f"Saved voting results to {output_path}")
+            logger.info(f"Object {obj_id}: voted label '{voted_label}' (votes: {dict(label_counts)}){' [TIE]' if tie else ''}")
+
+    def save_voting_logs(self, output_dir):
+        with open(os.path.join(output_dir, 'voting_logs.json'), 'w') as f:
+            json.dump(self.voting_logs, f, indent=2)
+
+
+def process_scene(scene_path, detections_path, output_path, args, main_logger):
+    scene_name = scene_path.name
+    log_level = logging.DEBUG if args.debug else logging.INFO
+    logger = setup_logger(
+        name=f"cd_fsod_sam2_voting.{scene_name}",
+        log_level=log_level,
+        output_dir=output_path,
+        scene_name=scene_name
+    )
+    logger.info(f"Processing scene: {scene_name}")
+    # Check for frames
+    frame_files = sorted([f for f in scene_path.glob("*.jpg")] + [f for f in scene_path.glob("*.png")], key=natural_sort_key)
+    if len(frame_files) == 0:
+        logger.error(f"No frames found in {scene_path}. Skipping scene.")
+        return False
+    # Check for JSON files
+    json_files = sorted([f for f in detections_path.glob("*.json")], key=natural_sort_key)
+    if len(json_files) == 0:
+        logger.error(f"No JSON files found in {detections_path}. Skipping scene.")
+        return False
+    # Initialize pipeline
+    pipeline = VotingPipeline(
+        owlv2_checkpoint=None,
+        sam2_checkpoint=args.sam2_checkpoint,
+        sam2_config=args.sam2_config,
+        output_dir=str(output_path),
+        confidence_threshold=args.confidence,
+        detector_type="cd_fsod",
+        cd_fsod_path=str(detections_path),
+        min_gap_frames=args.min_gap_frames,
+        mask_quality_threshold=args.mask_quality_threshold
+    )
+    # Process video (object tracking + mask propagation)
+    pipeline.process_video(
+        frames_dir=str(scene_path),
+        text_queries=args.text_queries
+    )
+    # Perform voting
+    pipeline.perform_voting()
+    # Save logs
+    pipeline.save_voting_logs(str(output_path))
+    logger.info(f"Scene {scene_name} processed and voting results saved.")
+    return True
 
 def main():
-    parser = argparse.ArgumentParser(description="CD-FSOD SAM2 Voting Pipeline")
+    pipeline_start_time = time.time()
+    parser = argparse.ArgumentParser(description="CD-FSOD SAM2 Voting Pipeline for multiple scenes")
     parser.add_argument("--frames-root", required=True, help="Root directory containing scene subdirectories with frames")
     parser.add_argument("--detections-root", required=True, help="Root directory containing scene subdirectories with detections")
     parser.add_argument("--output-root", default="./voting_results", help="Root output directory for results")
     parser.add_argument("--sam2-checkpoint", required=True, help="Path to SAM2 checkpoint")
     parser.add_argument("--sam2-config", required=True, help="Path to SAM2 config file")
+    parser.add_argument("--text-queries", default=["all"], nargs="+", help="Text queries for object detection (default: 'all')")
     parser.add_argument("--confidence", type=float, default=0.5, help="Confidence threshold for detections")
-    parser.add_argument("--min-gap-frames", type=int, default=10, help="Minimum gap frames for reappearances")
-    parser.add_argument("--mask-quality-threshold", type=int, default=0, help="Minimum pixel count for high-quality masks")
-    parser.add_argument("--iou-weight", type=float, default=0.5, help="Weight for IoU in object tracking (set to 1.0 for IoU-only)")
-    parser.add_argument("--emb-weight", type=float, default=0.5, help="Weight for embedding similarity in object tracking (set to 0.0 for IoU-only)")
-    parser.add_argument("--separate-objects", action="store_true", help="Process each object separately to avoid dtype issues")
+    parser.add_argument("--min-gap-frames", type=int, default=10, help="Minimum gap frames for CD-FSOD reappearances")
     parser.add_argument("--scene", help="Process only the specified scene name (optional)")
     parser.add_argument("--debug", action="store_true", help="Enable debug logging")
+    parser.add_argument("--mask-quality-threshold", type=int, default=0, help="Minimum pixel count for high-quality masks (default: 0)")
     args = parser.parse_args()
     output_root = Path(args.output_root)
     output_root.mkdir(exist_ok=True, parents=True)
     log_level = logging.DEBUG if args.debug else logging.INFO
-    logger = setup_logger(
-        name="voting_pipeline",
+    main_logger = setup_logger(
+        name="cd_fsod_sam2_voting",
         log_level=log_level,
         output_dir=args.output_root
     )
@@ -162,39 +199,52 @@ def main():
     detections_root = Path(args.detections_root)
     if args.scene:
         scene_dirs = [frames_root / args.scene]
+        if not scene_dirs[0].exists() or not scene_dirs[0].is_dir():
+            main_logger.error(f"Specified scene directory not found: {scene_dirs[0]}")
+            return
     else:
         scene_dirs = [d for d in frames_root.iterdir() if d.is_dir()]
-    for scene_dir in scene_dirs:
+        scene_dirs.sort(key=lambda x: natural_sort_key(x.name))
+    main_logger.info(f"Found {len(scene_dirs)} scene directories to process")
+    successful_scenes = 0
+    failed_scenes = 0
+    for scene_idx, scene_dir in enumerate(scene_dirs):
         scene_name = scene_dir.name
-        logger.info(f"Processing scene: {scene_name}")
+        main_logger.info(f"[{scene_idx+1}/{len(scene_dirs)}] Processing scene: {scene_name}")
+        detection_dir = detections_root / scene_name
+        if not detection_dir.exists() or not detection_dir.is_dir():
+            main_logger.error(f"Matching detection directory not found for scene {scene_name}: {detection_dir}")
+            main_logger.error(f"Skipping scene: {scene_name}")
+            failed_scenes += 1
+            continue
         scene_output_dir = output_root / scene_name
         scene_output_dir.mkdir(exist_ok=True, parents=True)
-        pipeline = CDFSODSAM2VotingPipeline(
-            sam2_checkpoint=args.sam2_checkpoint,
-            sam2_config=args.sam2_config,
-            output_dir=str(scene_output_dir),
-            confidence_threshold=args.confidence,
-            min_gap_frames=args.min_gap_frames,
-            mask_quality_threshold=args.mask_quality_threshold,
-            iou_weight=args.iou_weight,
-            emb_weight=args.emb_weight
+        start_time = time.time()
+        success = process_scene(
+            scene_path=scene_dir,
+            detections_path=detection_dir,
+            output_path=scene_output_dir,
+            args=args,
+            main_logger=main_logger
         )
-        try:
-            if args.separate_objects:
-                pipeline.process_video_separate_objects(
-                    frames_dir=str(scene_dir),
-                    text_queries=["all"]
-                )
-            else:
-                pipeline.process_video(
-                    frames_dir=str(scene_dir),
-                    text_queries=["all"]
-                )
-            pipeline.run_voting()
-            logger.info(f"Successfully processed scene: {scene_name}")
-        except Exception as e:
-            logger.error(f"Error processing scene {scene_name}: {e}")
-            continue
+        if success:
+            main_logger.info(f"Scene {scene_name} processed successfully in {time.time() - start_time:.2f} seconds")
+            successful_scenes += 1
+        else:
+            main_logger.error(f"Failed to process scene: {scene_name}")
+            failed_scenes += 1
+    main_logger.info("=" * 80)
+    main_logger.info("CD-FSOD SAM2 Voting Pipeline Completed")
+    main_logger.info(f"Successfully processed {successful_scenes} scenes")
+    if failed_scenes > 0:
+        main_logger.warning(f"Failed to process {failed_scenes} scenes")
+    main_logger.info(f"Results saved to: {args.output_root}")
+    main_logger.info("=" * 80)
+    total_pipeline_time = time.time() - pipeline_start_time
+    hours, remainder = divmod(total_pipeline_time, 3600)
+    minutes, seconds = divmod(remainder, 60)
+    main_logger.info(f"Total pipeline execution time: {int(hours)}h {int(minutes)}m {seconds:.2f}s")
+    main_logger.info("=" * 80)
 
 if __name__ == "__main__":
     main() 

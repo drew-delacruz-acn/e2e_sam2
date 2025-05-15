@@ -38,8 +38,6 @@ class ObjectTrackingPipeline:
         cd_fsod_path: Optional[str] = None,  # Path to CD-FSOD JSON directory
         min_gap_frames: int = 10,  # Min gap frames for CD-FSOD detector
         mask_quality_threshold: int = 0,  # Minimum pixel count for mask quality assessment
-        iou_weight: float = 0.5,  # NEW
-        emb_weight: float = 0.5   # NEW
     ):
         # Set device
         if device is None:
@@ -62,7 +60,7 @@ class ObjectTrackingPipeline:
         self.output_dir = Path(output_dir)
         self.output_dir.mkdir(exist_ok=True, parents=True)
         self.confidence_threshold = confidence_threshold
-        self.tracker = ObjectTracker(iou_weight=iou_weight, emb_weight=emb_weight)
+        self.tracker = ObjectTracker()
         self.embedding_extractor = EmbeddingExtractor(device=self.device)
         
         # Create SAM2 wrapper

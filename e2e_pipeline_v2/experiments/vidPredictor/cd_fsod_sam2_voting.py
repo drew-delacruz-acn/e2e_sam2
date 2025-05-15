@@ -363,6 +363,8 @@ def main():
 
 if __name__ == "__main__":
     main() 
+
+    ###
 # python e2e_pipeline_v2/experiments/vidPredictor/cd_fsod_sam2_voting.py  --frames-root "data/frames/" --detections-root "data/detections_cdfsod/" --output-root gitignore_exception/testing --sam2-checkpoint checkpoints/sam2.1_hiera_large.pt --sam2-config configs/sam2.1/sam2.1_hiera_l.yaml --confidence 0.1 --min-gap-frames 20 --text-queries "all" --scene 'Scenes 061-080__265H-2-_20230815215828529' --separate-objects
 # 2025-05-15 19:13:28,598 - INFO - Logging to file: gitignore_exception/testing/cd_fsod_sam2_voting_20250515_191328.log
 # 2025-05-15 19:13:28,599 - INFO - Found 1 scene directories to process

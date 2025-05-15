@@ -1,0 +1,17 @@
+2025-05-15 19:13:28,598 - INFO - Logging to file: gitignore_exception/testing/cd_fsod_sam2_voting_20250515_191328.log
+2025-05-15 19:13:28,599 - INFO - Found 1 scene directories to process
+2025-05-15 19:13:28,599 - INFO - [1/1] Processing scene: Scenes 061-080__265H-2-_20230815215828529
+2025-05-15 19:13:28,599 - INFO - Logging to file: gitignore_exception/testing/Scenes 061-080__265H-2-_20230815215828529/Scenes 061-080__265H-2-_20230815215828529_cd_fsod_sam2_voting_20250515_191328.log
+2025-05-15 19:13:28,599 - INFO - Processing scene: Scenes 061-080__265H-2-_20230815215828529
+2025-05-15 19:13:28,808 - INFO - Loaded 54 frames from data/frames/Scenes 061-080__265H-2-_20230815215828529
+2025-05-15 19:13:28,811 - INFO - Loaded CD-FSOD detections from data/detections_cdfsod/Scenes 061-080__265H-2-_20230815215828529
+2025-05-15 19:13:28,811 - INFO - Scene Scenes 061-080__265H-2-_20230815215828529: 54 frames with detections.
+2025-05-15 19:13:28,812 - INFO -   Frame 0: 0 detections.
+2025-05-15 19:13:28,812 - INFO -   Frame 1: 0 detections.
+2025-05-15 19:13:28,812 - INFO -   Frame 2: 0 detections.
+2025-05-15 19:13:28,813 - INFO -   Frame 3: 2 detections.
+2025-05-15 19:13:28,813 - INFO -     Detection 0: box=[330, 107, 577, 506], label=TVA Uniform, score=0.8781716227531433
+2025-05-15 19:13:28,813 - INFO -     Detection 1: box=[542, 223, 634, 380], label=Time Stick, score=0.9803071618080139
+2025-05-15 19:13:28,813 - INFO -   Frame 4: 0 detections.
+2025-05-15 19:13:28,814 - INFO - Tracked 3 objects in scene Scenes 061-080__265H-2-_20230815215828529
+2025-05-15 19:13:28,814 - INFO - Processing each object separately for mask propagation and voting.

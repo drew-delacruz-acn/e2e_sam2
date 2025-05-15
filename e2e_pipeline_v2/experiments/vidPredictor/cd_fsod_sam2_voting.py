@@ -107,7 +107,7 @@ def process_scene(scene_path, detections_path, output_path, args, main_logger):
                 logger.warning(f"Skipping detection in frame {idx}: invalid coordinates: {coordinates}, label: {label}, score: {score}")
                 continue
             detections.append({
-                "coordinates": coordinates,
+                "box": coordinates,
                 "text": label,
                 "score": score
             })

@@ -1,0 +1,77 @@
+2025-05-15 18:48:41,408 - INFO - Logging to file: gitignore_exception/testing/cd_fsod_sam2_voting_20250515_184841.log
+2025-05-15 18:48:41,408 - INFO - Found 1 scene directories to process
+2025-05-15 18:48:41,408 - INFO - [1/1] Processing scene: Scenes 061-080__265H-2-_20230815215828529
+2025-05-15 18:48:41,409 - INFO - Logging to file: gitignore_exception/testing/Scenes 061-080__265H-2-_20230815215828529/Scenes 061-080__265H-2-_20230815215828529_cd_fsod_sam2_voting_20250515_184841.log
+2025-05-15 18:48:41,409 - INFO - Processing scene: Scenes 061-080__265H-2-_20230815215828529
+2025-05-15 18:48:41,621 - INFO - Loaded 54 frames from data/frames/Scenes 061-080__265H-2-_20230815215828529
+2025-05-15 18:48:41,623 - INFO - Loaded CD-FSOD detections from data/detections_cdfsod/Scenes 061-080__265H-2-_20230815215828529
+2025-05-15 18:48:41,623 - INFO - Scene Scenes 061-080__265H-2-_20230815215828529: 54 frames with detections.
+2025-05-15 18:48:41,624 - INFO -   Frame 0: 0 detections.
+2025-05-15 18:48:41,625 - INFO -   Frame 1: 0 detections.
+2025-05-15 18:48:41,625 - INFO -   Frame 2: 0 detections.
+2025-05-15 18:48:41,625 - INFO -   Frame 3: 2 detections.
+2025-05-15 18:48:41,625 - INFO -     Detection 0: box=[330, 107, 577, 506], label=TVA Uniform, score=0.8781716227531433
+2025-05-15 18:48:41,625 - INFO -     Detection 1: box=[542, 223, 634, 380], label=Time Stick, score=0.9803071618080139
+2025-05-15 18:48:41,625 - INFO -   Frame 4: 0 detections.
+2025-05-15 18:48:41,692 - INFO - Tracked 0 objects in scene Scenes 061-080__265H-2-_20230815215828529
+2025-05-15 18:48:41,692 - WARNING - No objects were tracked in scene Scenes 061-080__265H-2-_20230815215828529. Possible causes: empty detections, high confidence threshold, or invalid detection coordinates.
+2025-05-15 18:48:41,692 - INFO - Processing each object separately for mask propagation and voting.
+2025-05-15 18:48:45,229 - WARNING - Skipping mask propagation and voting for scene Scenes 061-080__265H-2-_20230815215828529 because no objects were tracked.
+2025-05-15 18:48:45,229 - INFO - Frame 0000: Found 0 detections.
+2025-05-15 18:48:45,230 - INFO - Frame 0001: Found 0 detections.
+2025-05-15 18:48:45,230 - INFO - Frame 0002: Found 0 detections.
+2025-05-15 18:48:45,230 - INFO - Frame 0003: Found 0 detections.
+2025-05-15 18:48:45,231 - INFO - Frame 0004: Found 0 detections.
+2025-05-15 18:48:45,231 - INFO - Frame 0005: Found 0 detections.
+2025-05-15 18:48:45,232 - INFO - Frame 0006: Found 0 detections.
+2025-05-15 18:48:45,232 - INFO - Frame 0007: Found 0 detections.
+2025-05-15 18:48:45,232 - INFO - Frame 0008: Found 0 detections.
+2025-05-15 18:48:45,233 - INFO - Frame 0009: Found 0 detections.
+2025-05-15 18:48:45,233 - INFO - Frame 0010: Found 0 detections.
+2025-05-15 18:48:45,233 - INFO - Frame 0011: Found 0 detections.
+2025-05-15 18:48:45,234 - INFO - Frame 0012: Found 0 detections.
+2025-05-15 18:48:45,234 - INFO - Frame 0013: Found 0 detections.
+2025-05-15 18:48:45,234 - INFO - Frame 0014: Found 0 detections.
+2025-05-15 18:48:45,235 - INFO - Frame 0015: Found 0 detections.
+2025-05-15 18:48:45,235 - INFO - Frame 0016: Found 0 detections.
+2025-05-15 18:48:45,236 - INFO - Frame 0017: Found 0 detections.
+2025-05-15 18:48:45,236 - INFO - Frame 0018: Found 0 detections.
+2025-05-15 18:48:45,236 - INFO - Frame 0019: Found 0 detections.
+2025-05-15 18:48:45,237 - INFO - Frame 0020: Found 0 detections.
+2025-05-15 18:48:45,237 - INFO - Frame 0021: Found 0 detections.
+2025-05-15 18:48:45,237 - INFO - Frame 0022: Found 0 detections.
+2025-05-15 18:48:45,238 - INFO - Frame 0023: Found 0 detections.
+2025-05-15 18:48:45,238 - INFO - Frame 0024: Found 0 detections.
+2025-05-15 18:48:45,238 - INFO - Frame 0025: Found 0 detections.
+2025-05-15 18:48:45,239 - INFO - Frame 0026: Found 0 detections.
+2025-05-15 18:48:45,239 - INFO - Frame 0027: Found 0 detections.
+2025-05-15 18:48:45,240 - INFO - Frame 0028: Found 0 detections.
+2025-05-15 18:48:45,240 - INFO - Frame 0029: Found 0 detections.
+2025-05-15 18:48:45,240 - INFO - Frame 0030: Found 0 detections.
+2025-05-15 18:48:45,241 - INFO - Frame 0031: Found 0 detections.
+2025-05-15 18:48:45,241 - INFO - Frame 0032: Found 0 detections.
+2025-05-15 18:48:45,242 - INFO - Frame 0033: Found 0 detections.
+2025-05-15 18:48:45,242 - INFO - Frame 0034: Found 0 detections.
+2025-05-15 18:48:45,300 - INFO - Frame 0035: Found 0 detections.
+2025-05-15 18:48:45,300 - INFO - Frame 0036: Found 0 detections.
+2025-05-15 18:48:45,301 - INFO - Frame 0037: Found 0 detections.
+2025-05-15 18:48:45,301 - INFO - Frame 0038: Found 0 detections.
+2025-05-15 18:48:45,301 - INFO - Frame 0039: Found 0 detections.
+2025-05-15 18:48:45,302 - INFO - Frame 0040: Found 0 detections.
+2025-05-15 18:48:45,302 - INFO - Frame 0041: Found 0 detections.
+2025-05-15 18:48:45,302 - INFO - Frame 0042: Found 0 detections.
+2025-05-15 18:48:45,303 - INFO - Frame 0043: Found 0 detections.
+2025-05-15 18:48:45,303 - INFO - Frame 0044: Found 0 detections.
+2025-05-15 18:48:45,303 - INFO - Frame 0045: Found 0 detections.
+2025-05-15 18:48:45,304 - INFO - Frame 0046: Found 0 detections.
+2025-05-15 18:48:45,304 - INFO - Frame 0047: Found 0 detections.
+2025-05-15 18:48:45,304 - INFO - Frame 0048: Found 0 detections.
+2025-05-15 18:48:45,305 - INFO - Frame 0049: Found 0 detections.
+2025-05-15 18:48:45,305 - INFO - Frame 0050: Found 0 detections.
+2025-05-15 18:48:45,306 - INFO - Frame 0051: Found 0 detections.
+2025-05-15 18:48:45,306 - INFO - Frame 0052: Found 0 detections.
+2025-05-15 18:48:45,308 - INFO - Frame 0053: Found 0 detections.
+2025-05-15 18:48:45,309 - INFO - Saved results for scene Scenes 061-080__265H-2-_20230815215828529 to gitignore_exception/testing/Scenes 061-080__265H-2-_20230815215828529
+2025-05-15 18:48:45,309 - INFO - Scene summary: 0 objects tracked, 16 frames with detections out of 54 frames.
+2025-05-15 18:48:45,311 - INFO - Scene Scenes 061-080__265H-2-_20230815215828529 processed successfully in 3.90 seconds
+2025-05-15 18:48:45,311 - INFO - CDFSOD + SAM2 Voting Pipeline Completed

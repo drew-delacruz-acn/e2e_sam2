@@ -60,62 +60,102 @@ def get_bounding_box_from_mask(mask):
     
     return [int(x_min), int(y_min), int(x_max), int(y_max)]
 
-def match_detections_to_segments(video_segments, detections_by_frame, iou_threshold=0.5):
+def get_tracking_box_for_frame(tracking_objects, obj_id, frame_idx):
     """
-    Match CDFSOD detections to SAM2 segmented objects based on IoU
+    Get the bounding box for an object in a specific frame from tracking data
+    
+    Args:
+        tracking_objects: List of tracking objects
+        obj_id: Object ID to find
+        frame_idx: Frame number to find
+        
+    Returns:
+        Bounding box [x1, y1, x2, y2] or None if not found
+    """
+    for obj in tracking_objects:
+        if obj['objectID'] == int(obj_id):
+            for occurrence in obj['frameOccurences']:
+                if occurrence['frameNum'] == frame_idx:
+                    return occurrence['box']
+    return None
+
+def match_detections_to_segments(video_segments, detections_by_frame, tracking_objects, iou_threshold=0.3):
+    """
+    Match CDFSOD detections to SAM2 segmented objects based on IoU and tracking information
     
     Args:
         video_segments: Dictionary mapping frame indices to segmentation results
         detections_by_frame: Dictionary mapping frame indices to CDFSOD detections
-        iou_threshold: Minimum IoU value to consider a match
+        tracking_objects: List of tracking objects with frame occurrences
+        iou_threshold: Minimum IoU value to consider a match (default: 0.3)
         
     Returns:
         Dictionary mapping object IDs to their detection matches
     """
     object_detections = {}
     
-    # Process each frame
-    for frame_idx in sorted(video_segments.keys()):
-        # Get segmentation results for this frame
-        frame_segments = video_segments[frame_idx]
+    # First, establish object ID to class mapping from tracking_objects
+    object_class_map = {}
+    for obj in tracking_objects:
+        obj_id = obj['objectID']
+        obj_class = obj['objectName']
+        object_class_map[obj_id] = obj_class
+    
+    print(f"Found {len(object_class_map)} objects in tracking data")
+    print(f"Object classes: {object_class_map}")
+    
+    # Next, build initial detections directly from tracking information
+    for obj in tracking_objects:
+        obj_id = obj['objectID']
+        if obj_id not in object_detections:
+            object_detections[obj_id] = []
         
-        # Check if we have detections for this frame
-        if frame_idx not in detections_by_frame:
-            continue
-        
-        # Get detections for this frame
-        frame_detections = detections_by_frame[frame_idx]
-        
-        # Find matches between segments and detections
-        for obj_id, mask in frame_segments.items():
-            # If this is a new object, initialize its detection list
-            if obj_id not in object_detections:
-                object_detections[obj_id] = []
+        # Add each frame occurrence as a detection
+        for occurrence in obj['frameOccurences']:
+            frame_num = occurrence['frameNum']
+            confidence = occurrence.get('confidence', 0.0)
             
-            # Get bounding box for the mask
-            sam_box = get_bounding_box_from_mask(mask)
-            
-            # Find matching detections
-            matches = []
-            for detection in frame_detections:
-                detection_box = detection['coordinates']
-                iou = calculate_iou(sam_box, detection_box)
+            # Check if there's a detection in this frame
+            if frame_num in detections_by_frame and len(detections_by_frame[frame_num]) > 0:
+                # Find the matching detection based on IoU
+                tracking_box = occurrence['box']
                 
-                if iou >= iou_threshold:
-                    matches.append((iou, detection))
-            
-            # If we have matches, add the best one to this object's detections
-            if matches:
-                # Sort by IoU (highest first)
-                matches.sort(reverse=True, key=lambda x: x[0])
-                best_match = matches[0][1]
+                # Find all matching detections based on IoU
+                matches = []
+                for detection in detections_by_frame[frame_num]:
+                    detection_box = detection['coordinates']
+                    iou = calculate_iou(tracking_box, detection_box)
+                    
+                    if iou >= iou_threshold:
+                        matches.append((iou, detection))
                 
-                # Add to object's detections
-                object_detections[obj_id].append({
-                    'frameNumber': frame_idx,
-                    'class': best_match['label'],
-                    'confidence': best_match['confidence']
-                })
+                # If we have matches, use the best one
+                if matches:
+                    matches.sort(reverse=True, key=lambda x: x[0])
+                    best_match = matches[0][1]
+                    
+                    # Add to object's detections
+                    object_detections[obj_id].append({
+                        'frameNumber': frame_num,
+                        'class': best_match['label'],
+                        'confidence': best_match['confidence']
+                    })
+                    print(f"Added detection for object {obj_id} ({best_match['label']}) at frame {frame_num}")
+                else:
+                    # If no match found, just use the object's class
+                    object_detections[obj_id].append({
+                        'frameNumber': frame_num,
+                        'class': object_class_map[obj_id],
+                        'confidence': confidence
+                    })
+                    print(f"No matching detection found, using object class: {object_class_map[obj_id]} at frame {frame_num}")
+    
+    # Print out summary of detected objects
+    for obj_id, detections in object_detections.items():
+        print(f"Object {obj_id} ({object_class_map.get(obj_id, 'Unknown')}) has {len(detections)} detections")
+        if len(detections) > 0:
+            frame_numbers = [d['frameNumber'] for d in detections]
+            print(f"  Frame numbers: {frame_numbers}")
     
     return object_detections
 
@@ -136,16 +176,25 @@ def create_segmentation_summary(video_segments, tracking_objects, object_detecti
     # Get all unique object IDs
     object_ids = set()
     for frame_idx, segments in video_segments.items():
-        object_ids.update(segments.keys())
+        for obj_id in segments.keys():
+            object_ids.add(int(obj_id))
+    
+    print(f"Found {len(object_ids)} unique object IDs in video segments")
     
     # Process each object
     for obj_id in sorted(object_ids):
         # Get all frames where this object appears
         appearances = []
         for frame_idx in sorted(video_segments.keys()):
-            if obj_id in video_segments[frame_idx]:
-                mask = video_segments[frame_idx][obj_id]
-                box = get_bounding_box_from_mask(mask)
+            if str(obj_id) in video_segments[frame_idx]:
+                # Try to get box from tracking data first (more accurate)
+                box = get_tracking_box_for_frame(tracking_objects, obj_id, frame_idx)
+                
+                # If not found, compute from mask
+                if box is None:
+                    mask = video_segments[frame_idx][str(obj_id)]
+                    box = get_bounding_box_from_mask(mask)
+                
                 appearances.append({
                     'frameNum': frame_idx,
                     'boundingBox': box
@@ -153,6 +202,8 @@ def create_segmentation_summary(video_segments, tracking_objects, object_detecti
         
         # Get all detections for this object
         cdfsod_predictions = object_detections.get(obj_id, [])
+        
+        print(f"Object {obj_id}: {len(appearances)} appearances, {len(cdfsod_predictions)} CDFSOD predictions")
         
         # Create object summary
         obj_summary = {

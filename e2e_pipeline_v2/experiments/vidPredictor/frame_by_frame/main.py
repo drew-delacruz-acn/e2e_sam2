@@ -45,8 +45,10 @@ def parse_args():
                         help='Path to save visualization results (optional)')
     parser.add_argument('--output_json', type=str, default='segmentation_results.json',
                         help='Path to save the output JSON file')
-    parser.add_argument('--iou_threshold', type=float, default=0.5,
+    parser.add_argument('--iou_threshold', type=float, default=0.3,
                         help='IoU threshold for matching detections to segments')
+    parser.add_argument('--debug', action='store_true',
+                        help='Enable debug mode with additional logging')
     return parser.parse_args()
 
 def main():
@@ -68,6 +70,11 @@ def main():
     
     print("Converting detections to tracking format...")
     tracking_objects = convert_detections_to_tracking_format(filtered_detections)
+    
+    if args.debug:
+        print(f"Found {len(tracking_objects)} tracking objects:")
+        for obj in tracking_objects:
+            print(f"  ID: {obj['objectID']}, Name: {obj['objectName']}, Occurrences: {len(obj['frameOccurences'])}")
     
     # Get frame names
     frame_names = get_frame_names(args.frames_dir)
@@ -94,7 +101,10 @@ def main():
     # Match detections to segments
     print("Matching detections to segments...")
     object_detections = match_detections_to_segments(
-        video_segments, filtered_detections, iou_threshold=args.iou_threshold
+        video_segments, 
+        filtered_detections, 
+        tracking_objects,
+        iou_threshold=args.iou_threshold
     )
     
     # Create summary of segmentation results

@@ -485,6 +485,9 @@ def process_scene(
         return False
 
 def main():
+    # Start timer for entire pipeline
+    pipeline_start_time = time.time()
+    
     # Parse arguments
     parser = argparse.ArgumentParser(description="Video Segmentation Pipeline for multiple scenes")
     
@@ -621,6 +624,13 @@ def main():
     if failed_scenes > 0:
         main_logger.warning(f"Failed to process {failed_scenes} scenes")
     main_logger.info(f"Results saved to: {args.output_root}")
+    main_logger.info("=" * 80)
+    
+    # Calculate and log total pipeline time
+    total_pipeline_time = time.time() - pipeline_start_time
+    hours, remainder = divmod(total_pipeline_time, 3600)
+    minutes, seconds = divmod(remainder, 60)
+    main_logger.info(f"Total pipeline execution time: {int(hours)}h {int(minutes)}m {seconds:.2f}s")
     main_logger.info("=" * 80)
 
 if __name__ == "__main__":

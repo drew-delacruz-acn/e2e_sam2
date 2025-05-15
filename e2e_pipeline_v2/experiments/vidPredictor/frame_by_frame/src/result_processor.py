@@ -72,12 +72,31 @@ def get_tracking_box_for_frame(tracking_objects, obj_id, frame_idx):
     Returns:
         Bounding box [x1, y1, x2, y2] or None if not found
     """
-    for obj in tracking_objects:
-        if obj['objectID'] == int(obj_id):
-            for occurrence in obj['frameOccurences']:
-                if occurrence['frameNum'] == frame_idx:
-                    return occurrence['box']
-    return None
+    try:
+        # Convert obj_id to int to ensure consistent comparison
+        obj_id_int = int(obj_id)
+        
+        # Debug when object ID is not found
+        found = False
+        
+        for obj in tracking_objects:
+            if obj['objectID'] == obj_id_int:
+                found = True
+                for occurrence in obj['frameOccurences']:
+                    if occurrence['frameNum'] == frame_idx:
+                        return occurrence['box']
+                # Debug missing frame
+                print(f"  [DEBUG] Object {obj_id} exists but frame {frame_idx} not found in its occurrences")
+                return None
+                
+        if not found:
+            print(f"  [DEBUG] Object ID {obj_id} not found in tracking objects (type: {type(obj_id)})")
+            print(f"  [DEBUG] Available object IDs: {[obj['objectID'] for obj in tracking_objects]}")
+            
+        return None
+    except Exception as e:
+        print(f"  [ERROR] Exception in get_tracking_box_for_frame: {e} for obj_id={obj_id} (type: {type(obj_id)})")
+        return None
 
 def match_detections_to_segments(video_segments, detections_by_frame, tracking_objects, iou_threshold=0.3):
     """
@@ -92,7 +111,14 @@ def match_detections_to_segments(video_segments, detections_by_frame, tracking_o
     Returns:
         Dictionary mapping object IDs to their detection matches
     """
+    print("\n=== DEBUG: Matching detections to segments ===")
     object_detections = {}
+    
+    # Validate that video_segments is not empty
+    if not video_segments:
+        print("WARNING: video_segments dictionary is empty!")
+        print("No segments to match with detections.")
+        return {}
     
     # First, establish object ID to class mapping from tracking_objects
     object_class_map = {}
@@ -103,6 +129,31 @@ def match_detections_to_segments(video_segments, detections_by_frame, tracking_o
     
     print(f"Found {len(object_class_map)} objects in tracking data")
     print(f"Object classes: {object_class_map}")
+    
+    # Debug info about video segments
+    print(f"\nVideo segments info:")
+    print(f"Total frames with segments: {len(video_segments)}")
+    
+    # Count objects per frame
+    all_objects = set()
+    for frame_idx, segments in video_segments.items():
+        objects_in_frame = list(segments.keys())
+        all_objects.update([int(obj_id) for obj_id in objects_in_frame])
+        print(f"  Frame {frame_idx}: {len(objects_in_frame)} objects: {objects_in_frame}")
+    
+    print(f"Total unique objects in video segments: {len(all_objects)}")
+    print(f"Object IDs in video segments: {sorted(all_objects)}")
+    print(f"Object IDs in tracking data: {sorted(object_class_map.keys())}")
+    
+    # Check for mismatches
+    missing_in_tracking = [obj_id for obj_id in all_objects if obj_id not in object_class_map]
+    missing_in_segments = [obj_id for obj_id in object_class_map if obj_id not in all_objects]
+    
+    if missing_in_tracking:
+        print(f"WARNING: {len(missing_in_tracking)} objects in segments but not in tracking: {missing_in_tracking}")
+    
+    if missing_in_segments:
+        print(f"WARNING: {len(missing_in_segments)} objects in tracking but not in segments: {missing_in_segments}")
     
     # Next, build initial detections directly from tracking information
     for obj in tracking_objects:
@@ -171,7 +222,13 @@ def create_segmentation_summary(video_segments, tracking_objects, object_detecti
     Returns:
         List of objects with their appearance and detection information
     """
+    print("\n=== DEBUG: Creating segmentation summary ===")
     result = []
+    
+    # Validate inputs
+    if not video_segments:
+        print("WARNING: video_segments is empty, no segmentation results to summarize")
+        return []
     
     # Get all unique object IDs
     object_ids = set()
@@ -180,39 +237,106 @@ def create_segmentation_summary(video_segments, tracking_objects, object_detecti
             object_ids.add(int(obj_id))
     
     print(f"Found {len(object_ids)} unique object IDs in video segments")
+    print(f"Object IDs: {sorted(object_ids)}")
+    
+    # Check which objects have CDFSOD predictions
+    cdfsod_objects = set(object_detections.keys())
+    print(f"Found {len(cdfsod_objects)} objects with CDFSOD predictions")
+    print(f"CDFSOD object IDs: {sorted(cdfsod_objects)}")
+    
+    # Objects missing CDFSOD predictions
+    missing_cdfsod = object_ids - cdfsod_objects
+    if missing_cdfsod:
+        print(f"WARNING: {len(missing_cdfsod)} objects without CDFSOD predictions: {sorted(missing_cdfsod)}")
+    
+    # Objects with CDFSOD predictions but no segmentation
+    missing_segments = cdfsod_objects - object_ids
+    if missing_segments:
+        print(f"WARNING: {len(missing_segments)} objects with CDFSOD predictions but no segmentation: {sorted(missing_segments)}")
     
     # Process each object
     for obj_id in sorted(object_ids):
+        # Convert obj_id to int for consistent comparison
+        obj_id_int = int(obj_id)
+        
+        print(f"\nProcessing object {obj_id_int}:")
+        
         # Get all frames where this object appears
         appearances = []
+        frame_appearances = []
+        
         for frame_idx in sorted(video_segments.keys()):
-            if str(obj_id) in video_segments[frame_idx]:
+            # Make sure we're comparing correctly (string vs int)
+            str_obj_id = str(obj_id_int)
+            
+            # Debug the object types
+            if frame_idx not in video_segments:
+                print(f"  Frame {frame_idx} not in video_segments, skipping")
+                continue
+                
+            # Debug segment keys
+            segment_keys = list(video_segments[frame_idx].keys())
+            print(f"  Frame {frame_idx} has objects: {segment_keys}")
+            
+            if str_obj_id in video_segments[frame_idx]:
+                print(f"  Object {obj_id_int} found in frame {frame_idx}")
+                
                 # Try to get box from tracking data first (more accurate)
-                box = get_tracking_box_for_frame(tracking_objects, obj_id, frame_idx)
+                box = get_tracking_box_for_frame(tracking_objects, obj_id_int, frame_idx)
                 
                 # If not found, compute from mask
                 if box is None:
-                    mask = video_segments[frame_idx][str(obj_id)]
+                    print(f"  No tracking box found, computing from mask")
+                    mask = video_segments[frame_idx][str_obj_id]
                     box = get_bounding_box_from_mask(mask)
+                    print(f"  Computed box from mask: {box}")
+                else:
+                    print(f"  Found tracking box: {box}")
                 
                 appearances.append({
                     'frameNum': frame_idx,
                     'boundingBox': box
                 })
+                
+                frame_appearances.append(frame_idx)
         
         # Get all detections for this object
-        cdfsod_predictions = object_detections.get(obj_id, [])
-        print(f'APPEARANCES: {appearances}')
-        print(f"Object {obj_id}: {len(appearances)} appearances, {len(cdfsod_predictions)} CDFSOD predictions")
+        cdfsod_predictions = object_detections.get(obj_id_int, [])
+        
+        # Debug the appearance vs predictions
+        print(f"Object {obj_id_int}: {len(appearances)} appearances, {len(cdfsod_predictions)} CDFSOD predictions")
+        print(f"  Appearances in frames: {frame_appearances}")
+        
+        if cdfsod_predictions:
+            pred_frames = [p['frameNumber'] for p in cdfsod_predictions]
+            print(f"  CDFSOD predictions in frames: {pred_frames}")
+            
+            # Debug frames with predictions but no appearances
+            pred_no_app = [f for f in pred_frames if f not in frame_appearances]
+            if pred_no_app:
+                print(f"  WARNING: {len(pred_no_app)} frames with predictions but no appearances: {pred_no_app}")
+                
+            # Debug frames with appearances but no predictions
+            app_no_pred = [f for f in frame_appearances if f not in pred_frames]
+            if app_no_pred:
+                print(f"  WARNING: {len(app_no_pred)} frames with appearances but no predictions: {app_no_pred}")
         
         # Create object summary
         obj_summary = {
-            'samObjectId': int(obj_id),
+            'samObjectId': int(obj_id_int),
             'samDictatedAppearances': appearances,
             'cdfsodPredictions': cdfsod_predictions
         }
         
         result.append(obj_summary)
+    
+    # Final summary
+    print(f"\nCreated summary for {len(result)} objects")
+    for obj_summary in result:
+        obj_id = obj_summary['samObjectId']
+        n_appearances = len(obj_summary['samDictatedAppearances'])
+        n_predictions = len(obj_summary['cdfsodPredictions'])
+        print(f"Object {obj_id}: {n_appearances} appearances, {n_predictions} predictions")
     
     return result
 

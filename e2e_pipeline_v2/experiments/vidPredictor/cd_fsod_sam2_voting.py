@@ -97,7 +97,11 @@ def process_scene(scene_path, detections_path, output_path, args, main_logger):
     for idx, frame in enumerate(frames):
         dets = detector.detect(frame_paths[idx], args.text_queries)
         detections = []
+        print('------------')
+        print(dets)
+        print('------------')
         for i in range(len(dets["coordinates"])):
+           
             coordinates = dets["coordinates"][i]
             label = dets["labels"][i]
             score = dets["scores"][i]
@@ -354,3 +358,70 @@ def main():
 
 if __name__ == "__main__":
     main() 
+
+
+# python e2e_pipeline_v2/experiments/vidPredictor/cd_fsod_sam2_voting.py  --frames-root "data/frames/" --detections-root "data/detections_cdfsod/" --output-root e2e_cdfsod_iou_cos_5050 --sam2-checkpoint checkpoints/sam2.1_hiera_large.pt --sam2-config configs/sam2.1/sam2.1_hiera_l.yaml --confidence 0.9 --min-gap-frames 20 --text-queries "all" --scene 'Scenes 061-080__265H-2-_20230815215828529' --separate-objects
+# 2025-05-15 18:18:19,469 - INFO - Logging to file: e2e_cdfsod_iou_cos_5050/cd_fsod_sam2_voting_20250515_181819.log
+# 2025-05-15 18:18:19,469 - INFO - Found 1 scene directories to process
+# 2025-05-15 18:18:19,470 - INFO - [1/1] Processing scene: Scenes 061-080__265H-2-_20230815215828529
+# 2025-05-15 18:18:19,470 - INFO - [Scenes 061-080__265H-2-_20230815215828529] Logging to file: e2e_cdfsod_iou_cos_5050/Scenes 061-080__265H-2-_20230815215828529/Scenes 061-080__265H-2-_20230815215828529_cd_fsod_sam2_voting_20250515_181819.log
+# 2025-05-15 18:18:19,470 - INFO - Logging to file: e2e_cdfsod_iou_cos_5050/Scenes 061-080__265H-2-_20230815215828529/Scenes 061-080__265H-2-_20230815215828529_cd_fsod_sam2_voting_20250515_181819.log
+# 2025-05-15 18:18:19,470 - INFO - [Scenes 061-080__265H-2-_20230815215828529] Processing scene: Scenes 061-080__265H-2-_20230815215828529
+# 2025-05-15 18:18:19,470 - INFO - Processing scene: Scenes 061-080__265H-2-_20230815215828529
+# Loaded 54 frames from data/frames/Scenes 061-080__265H-2-_20230815215828529
+# 2025-05-15 18:18:19,683 - INFO - [Scenes 061-080__265H-2-_20230815215828529] Loaded 54 frames from data/frames/Scenes 061-080__265H-2-_20230815215828529
+# 2025-05-15 18:18:19,683 - INFO - Loaded 54 frames from data/frames/Scenes 061-080__265H-2-_20230815215828529
+# 2025-05-15 18:18:19,685 - INFO - [Scenes 061-080__265H-2-_20230815215828529] Loaded CD-FSOD detections from data/detections_cdfsod/Scenes 061-080__265H-2-_20230815215828529
+# 2025-05-15 18:18:19,685 - INFO - Loaded CD-FSOD detections from data/detections_cdfsod/Scenes 061-080__265H-2-_20230815215828529
+# 2025-05-15 18:18:19,686 - INFO - [Scenes 061-080__265H-2-_20230815215828529] Scene Scenes 061-080__265H-2-_20230815215828529: 54 frames with detections.
+# 2025-05-15 18:18:19,686 - INFO - Scene Scenes 061-080__265H-2-_20230815215828529: 54 frames with detections.
+# 2025-05-15 18:18:19,687 - INFO - [Scenes 061-080__265H-2-_20230815215828529]   Frame 0: 0 detections.
+# 2025-05-15 18:18:19,687 - INFO -   Frame 0: 0 detections.
+# 2025-05-15 18:18:19,687 - INFO - [Scenes 061-080__265H-2-_20230815215828529]   Frame 1: 0 detections.
+# 2025-05-15 18:18:19,687 - INFO -   Frame 1: 0 detections.
+# 2025-05-15 18:18:19,687 - INFO - [Scenes 061-080__265H-2-_20230815215828529]   Frame 2: 0 detections.
+# 2025-05-15 18:18:19,687 - INFO -   Frame 2: 0 detections.
+# 2025-05-15 18:18:19,687 - INFO - [Scenes 061-080__265H-2-_20230815215828529]   Frame 3: 1 detections.
+# 2025-05-15 18:18:19,687 - INFO -   Frame 3: 1 detections.
+# 2025-05-15 18:18:19,687 - INFO - [Scenes 061-080__265H-2-_20230815215828529]     Detection 0: box=None, label=Time Stick, score=0.9803071618080139
+# 2025-05-15 18:18:19,687 - INFO -     Detection 0: box=None, label=Time Stick, score=0.9803071618080139
+# 2025-05-15 18:18:19,687 - INFO - [Scenes 061-080__265H-2-_20230815215828529]   Frame 4: 0 detections.
+# 2025-05-15 18:18:19,687 - INFO -   Frame 4: 0 detections.
+# ------------
+# {'boxes': array([], shape=(0, 4), dtype=float32), 'labels': [], 'scores': array([], dtype=float32)}
+# ------------
+# Traceback (most recent call last):
+#   File "/home/ubuntu/code/drew/e2e_sam2/e2e_pipeline_v2/experiments/vidPredictor/cd_fsod_sam2_voting.py", line 360, in <module>
+#     main() 
+#     ^^^^^^
+#   File "/home/ubuntu/code/drew/e2e_sam2/e2e_pipeline_v2/experiments/vidPredictor/cd_fsod_sam2_voting.py", line 346, in main
+#     success = process_scene(
+#               ^^^^^^^^^^^^^^
+#   File "/home/ubuntu/code/drew/e2e_sam2/e2e_pipeline_v2/experiments/vidPredictor/cd_fsod_sam2_voting.py", line 103, in process_scene
+#     for i in range(len(dets["coordinates"])):
+#                        ~~~~^^^^^^^^^^^^^^^
+# KeyError: 'coordinates'
+
+
+# [
+#     {
+#         "coordinates": [
+#             330,
+#             107,
+#             577,
+#             506
+#         ],
+#         "label": "TVA Uniform",
+#         "confidence": 0.8781716227531433
+#     },
+#     {
+#         "coordinates": [
+#             542,
+#             223,
+#             634,
+#             380
+#         ],
+#         "label": "Time Stick",
+#         "confidence": 0.9803071618080139
+#     }
+# ]

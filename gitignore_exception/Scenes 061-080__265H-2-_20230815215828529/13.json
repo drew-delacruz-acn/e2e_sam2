@@ -1,0 +1,32 @@
+[
+    {
+        "coordinates": [
+            376,
+            109,
+            633,
+            470
+        ],
+        "label": "TVA Uniform",
+        "confidence": 0.9413918256759644
+    },
+    {
+        "coordinates": [
+            587,
+            345,
+            664,
+            479
+        ],
+        "label": "Time Stick",
+        "confidence": 0.9548423290252686
+    },
+    {
+        "coordinates": [
+            314,
+            267,
+            637,
+            482
+        ],
+        "label": "Time Stick",
+        "confidence": 0.9046198725700378
+    }
+]

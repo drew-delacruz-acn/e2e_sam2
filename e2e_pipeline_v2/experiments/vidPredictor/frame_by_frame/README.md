@@ -86,3 +86,7 @@ The modular structure makes it easy to extend or modify components:
 ## License
 
 This project is available under the MIT License. 
+
+<!-- 
+
+python e2e_pipeline_v2/experiments/vidPredictor/frame_by_frame/main.py --detections_dir "/Users/andrewdelacruz/e2e_sam2/gitignore_exception/data/detections/Scenes 061-080__265H-2-_20230815215828529" --frames_dir "/Users/andrewdelacruz/e2e_sam2/gitignore_exception/data/frames/Scenes 061-080__265H-2-_20230815215828529" --sam2_checkpoint checkpoints/sam2.1_hiera_large.pt --model_cfg configs/sam2.1/sam2.1_hiera_l.yaml -->

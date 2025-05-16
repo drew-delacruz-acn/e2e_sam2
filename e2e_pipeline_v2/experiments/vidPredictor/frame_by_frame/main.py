@@ -111,10 +111,20 @@ def save_binary_masks(video_segments, results_dir, tracking_objects):
             obj_dir = ensure_dir(os.path.join(masks_dir, obj_name))
             
             # Save the binary mask as a numpy array
-            mask_path = os.path.join(obj_dir, f"frame_{frame_idx:05d}.npy")
-            # Convert mask to binary (0 or 1) and save
             binary_mask = mask.astype(np.uint8)
-            np.save(mask_path, binary_mask)
+            
+            # 1. Save as NPY (for programmatic use)
+            npy_path = os.path.join(obj_dir, f"frame_{frame_idx:05d}.npy")
+            np.save(npy_path, binary_mask)
+            
+            # 2. Save as PNG (for easy viewing)
+            png_path = os.path.join(obj_dir, f"frame_{frame_idx:05d}.png")
+            plt.figure(figsize=(8, 8), dpi=100)
+            plt.imshow(binary_mask, cmap='binary')
+            plt.axis('off')
+            plt.tight_layout()
+            plt.savefig(png_path, bbox_inches='tight', pad_inches=0)
+            plt.close()
             
             # Update counts
             if obj_name not in mask_counts:

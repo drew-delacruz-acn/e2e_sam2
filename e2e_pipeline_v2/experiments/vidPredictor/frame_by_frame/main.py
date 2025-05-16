@@ -50,8 +50,6 @@ def parse_args():
                         help='Enable debug mode with additional logging')
     parser.add_argument('--no_vis', action='store_true',
                         help='Skip visualization generation')
-    parser.add_argument('--show_boxes', action='store_true',
-                        help='Show bounding boxes in visualizations')
     return parser.parse_args()
 
 def ensure_dir(directory):
@@ -238,8 +236,7 @@ def main():
             frame_names, 
             video_segments, 
             vis_frame_stride=args.vis_stride,
-            save_path=vis_dir,
-            show_boxes=args.show_boxes
+            save_path=vis_dir
         )
         
         print(f"Processed {len(frame_names)} frames with {len(tracking_objects)} object classes")

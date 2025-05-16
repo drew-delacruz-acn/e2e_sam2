@@ -280,3 +280,12 @@ def main():
 
 if __name__ == "__main__":
     main() 
+
+
+# python batch_process.py \
+#   --detections_root /path/to/detections \
+#   --frames_root /path/to/frames \
+#   --results_root /path/to/results \
+#   --sam2_checkpoint /path/to/sam2_checkpoint.pt \
+#   --model_cfg /path/to/sam2_config.yaml \
+#   --parallel --max_workers 4

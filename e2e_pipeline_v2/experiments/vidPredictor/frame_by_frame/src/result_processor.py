@@ -37,6 +37,43 @@ def calculate_iou(box1, box2):
     # Return the IoU value
     return intersection_area / union_area if union_area > 0 else 0.0
 
+def validate_bounding_box(box, min_width=10, min_height=10, min_area=100):
+    """
+    Validate that a bounding box meets minimum requirements
+    
+    Args:
+        box: Bounding box coordinates [x1, y1, x2, y2]
+        min_width: Minimum width for a valid box
+        min_height: Minimum height for a valid box
+        min_area: Minimum area for a valid box
+        
+    Returns:
+        (bool, str): Tuple of (is_valid, reason_if_invalid)
+    """
+    # Unpack box coordinates
+    x1, y1, x2, y2 = box
+    
+    # Check if box is properly ordered
+    if x1 > x2 or y1 > y2:
+        return False, f"Invalid box ordering: [{x1}, {y1}, {x2}, {y2}]"
+    
+    # Calculate width and height
+    width = x2 - x1
+    height = y2 - y1
+    area = width * height
+    
+    # Check minimum dimensions
+    if width < min_width:
+        return False, f"Width too small: {width} < {min_width}"
+    
+    if height < min_height:
+        return False, f"Height too small: {height} < {min_height}"
+    
+    if area < min_area:
+        return False, f"Area too small: {area} < {min_area}"
+    
+    return True, "Valid box"
+
 def get_bounding_box_from_mask(mask):
     """
     Calculate bounding box coordinates from a binary mask
@@ -47,18 +84,51 @@ def get_bounding_box_from_mask(mask):
     Returns:
         Bounding box coordinates [x1, y1, x2, y2]
     """
+    # Print original mask shape for debugging
+    print(f"  DEBUG: Original mask shape: {mask.shape}")
+    
+    # Handle multi-dimensional masks by squeezing extra dimensions
+    if mask.ndim > 2:
+        mask = np.squeeze(mask)
+        print(f"  DEBUG: Squeezed mask shape: {mask.shape}")
+    
+    # Make sure mask is binary (0/1 values)
+    mask = (mask > 0).astype(np.uint8)
+    
     # Find non-zero elements (the mask)
     mask_positions = np.where(mask)
     
     # No mask points, return empty box
     if len(mask_positions[0]) == 0:
+        print("  DEBUG: Empty mask, returning [0,0,0,0]")
         return [0, 0, 0, 0]
     
     # Get the boundary coordinates
     y_min, y_max = np.min(mask_positions[0]), np.max(mask_positions[0])
     x_min, x_max = np.min(mask_positions[1]), np.max(mask_positions[1])
     
-    return [int(x_min), int(y_min), int(x_max), int(y_max)]
+    # Log the computed box
+    box = [int(x_min), int(y_min), int(x_max), int(y_max)]
+    print(f"  DEBUG: Computed box from mask: {box}")
+    
+    # Validate the box
+    is_valid, reason = validate_bounding_box(box)
+    if not is_valid:
+        print(f"  WARNING: {reason}")
+        # If invalid, return a default box based on mask dimensions
+        if mask.shape[0] > 0 and mask.shape[1] > 0:
+            center_y = mask.shape[0] // 2
+            center_x = mask.shape[1] // 2
+            default_box = [
+                max(0, center_x - 50),  # x1
+                max(0, center_y - 50),  # y1
+                min(mask.shape[1], center_x + 50),  # x2
+                min(mask.shape[0], center_y + 50)   # y2
+            ]
+            print(f"  DEBUG: Using default box: {default_box}")
+            return default_box
+    
+    return box
 
 def get_tracking_box_for_frame(tracking_objects, obj_id, frame_idx):
     """
@@ -255,6 +325,9 @@ def create_segmentation_summary(video_segments, tracking_objects, object_detecti
         print(f"WARNING: {len(missing_segments)} objects with CDFSOD predictions but no segmentation: {sorted(missing_segments)}")
     
     # Process each object
+    # Track stats on tracking boxes vs computed boxes
+    tracking_box_count = 0
+    computed_box_count = 0
 
     for obj_id in sorted(object_ids):
         # Convert obj_id to int for consistent comparison
@@ -289,10 +362,13 @@ def create_segmentation_summary(video_segments, tracking_objects, object_detecti
                 if box is None:
                     print(f"  No tracking box found, computing from mask")
                     mask = video_segments[frame_idx][str_obj_id]
+                    print(f"  Using mask for frame {frame_idx}, object {obj_id_int}")
                     box = get_bounding_box_from_mask(mask)
                     print(f"  Computed box from mask: {box}")
+                    computed_box_count += 1
                 else:
                     print(f"  Found tracking box: {box}")
+                    tracking_box_count += 1
                 
                 appearances.append({
                     'frameNum': frame_idx,
@@ -333,6 +409,8 @@ def create_segmentation_summary(video_segments, tracking_objects, object_detecti
     
     # Final summary
     print(f"\nCreated summary for {len(result)} objects")
+    print(f"Total tracking boxes used: {tracking_box_count}")
+    print(f"Total computed boxes used: {computed_box_count}")
     for obj_summary in result:
         obj_id = obj_summary['samObjectId']
         n_appearances = len(obj_summary['samDictatedAppearances'])

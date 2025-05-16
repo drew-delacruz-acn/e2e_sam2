@@ -132,9 +132,12 @@ class SAM2VideoSegmenter:
             if len(out_obj_ids) > 0:
                 print(f"Frame {out_frame_idx}: Found {len(out_obj_ids)} objects: {out_obj_ids}")
                 for i, obj_id in enumerate(out_obj_ids):
+                    # Get more information about the mask logits
+                    print(f"  Object {obj_id}: mask_logits shape = {out_mask_logits[i].shape}")
+                    
                     mask = (out_mask_logits[i] > 0.0).cpu().numpy()
                     mask_sum = np.sum(mask)
-                    print(f"  Object {obj_id}: mask sum = {mask_sum}")
+                    print(f"  Object {obj_id}: mask shape = {mask.shape}, mask sum = {mask_sum}")
                     
                     # Only include masks that actually have pixels
                     if mask_sum > 0:
@@ -155,6 +158,13 @@ class SAM2VideoSegmenter:
         print("\nSegmentation Summary:")
         print(f"Total frames with segments: {len(video_segments)}")
         print(f"Total unique objects: {len(segment_stats)}")
+        
+        # Print sample of mask shapes from each object
+        print("\nSample of mask shapes:")
+        for frame_idx, segments in list(video_segments.items())[:3]:  # First 3 frames
+            print(f"  Frame {frame_idx}:")
+            for obj_id, mask in segments.items():
+                print(f"    Object {obj_id}: mask shape = {mask.shape}")
         
         for obj_id, frames in segment_stats.items():
             print(f"  Object {obj_id}: appears in {len(frames)} frames")

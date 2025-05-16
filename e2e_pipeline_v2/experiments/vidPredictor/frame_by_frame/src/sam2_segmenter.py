@@ -112,14 +112,13 @@ class SAM2VideoSegmenter:
             box=box,
         )
     
-    def propagate_segmentation(self, inference_state, reverse=False, min_mask_pixels=10):
+    def propagate_segmentation(self, inference_state, reverse=False):
         """
         Propagate segmentation through video frames
         
         Args:
             inference_state: SAM2 inference state
             reverse: Whether to propagate in reverse direction
-            min_mask_pixels: Minimum number of pixels required for a valid mask
             
         Returns:
             Dictionary mapping frame indices to segmentation results
@@ -132,51 +131,23 @@ class SAM2VideoSegmenter:
             # Debug mask logits
             if len(out_obj_ids) > 0:
                 print(f"Frame {out_frame_idx}: Found {len(out_obj_ids)} objects: {out_obj_ids}")
-                
-                # Create frame entry if needed
-                if out_frame_idx not in video_segments:
-                    video_segments[out_frame_idx] = {}
-                
                 for i, obj_id in enumerate(out_obj_ids):
-                    # Convert mask to binary numpy array
                     mask = (out_mask_logits[i] > 0.0).cpu().numpy()
                     mask_sum = np.sum(mask)
                     print(f"  Object {obj_id}: mask sum = {mask_sum}")
                     
-                    # Only include masks that have significant pixels
-                    # This filters out default or almost empty masks
-                    if mask_sum >= min_mask_pixels:
-                        # Calculate mask dimensions and check if it's a reasonable size
-                        if len(mask.shape) >= 2:
-                            height, width = mask.shape[:2]
-                            
-                            # Calculate the bounding box
-                            mask_positions = np.where(mask)
-                            
-                            if len(mask_positions[0]) > 0:
-                                y_min, y_max = np.min(mask_positions[0]), np.max(mask_positions[0])
-                                x_min, x_max = np.min(mask_positions[1]), np.max(mask_positions[1])
-                                
-                                # Calculate box dimensions
-                                box_width = x_max - x_min
-                                box_height = y_max - y_min
-                                
-                                # Only include masks with reasonable dimensions
-                                if box_width > 0 and box_height > 0:
-                                    video_segments[out_frame_idx][str(obj_id)] = mask
-                                    
-                                    # Update stats
-                                    if obj_id not in segment_stats:
-                                        segment_stats[obj_id] = []
-                                    segment_stats[obj_id].append(out_frame_idx)
-                                else:
-                                    print(f"  WARNING: Object {obj_id} has zero-size bounding box in frame {out_frame_idx}")
-                            else:
-                                print(f"  WARNING: Object {obj_id} has no mask points in frame {out_frame_idx}")
-                        else:
-                            print(f"  WARNING: Object {obj_id} has unexpected mask shape: {mask.shape}")
+                    # Only include masks that actually have pixels
+                    if mask_sum > 0:
+                        if out_frame_idx not in video_segments:
+                            video_segments[out_frame_idx] = {}
+                        video_segments[out_frame_idx][str(obj_id)] = mask
+                        
+                        # Update stats
+                        if obj_id not in segment_stats:
+                            segment_stats[obj_id] = []
+                        segment_stats[obj_id].append(out_frame_idx)
                     else:
-                        print(f"  WARNING: Object {obj_id} has empty or minimal mask in frame {out_frame_idx}")
+                        print(f"  WARNING: Object {obj_id} has empty mask in frame {out_frame_idx}")
             else:
                 print(f"Frame {out_frame_idx}: No objects detected")
         

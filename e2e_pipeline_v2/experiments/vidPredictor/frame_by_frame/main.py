@@ -110,8 +110,15 @@ def save_binary_masks(video_segments, results_dir, tracking_objects):
             # Create directory for this object
             obj_dir = ensure_dir(os.path.join(masks_dir, obj_name))
             
-            # Save the binary mask as a numpy array
-            binary_mask = mask.astype(np.uint8)
+            # Handle different mask dimensions
+            # Use np.squeeze to remove singleton dimensions (e.g., (1,540,960) -> (540,960))
+            if mask.ndim > 2:
+                # Print the original shape for debugging
+                print(f"  Reshaping mask for object {obj_id} from {mask.shape}", end=" ")
+                binary_mask = np.squeeze(mask).astype(np.uint8)
+                print(f"to {binary_mask.shape}")
+            else:
+                binary_mask = mask.astype(np.uint8)
             
             # 1. Save as NPY (for programmatic use)
             npy_path = os.path.join(obj_dir, f"frame_{frame_idx:05d}.npy")

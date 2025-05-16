@@ -255,7 +255,6 @@ def create_segmentation_summary(video_segments, tracking_objects, object_detecti
         print(f"WARNING: {len(missing_segments)} objects with CDFSOD predictions but no segmentation: {sorted(missing_segments)}")
     
     # Process each object
-
     for obj_id in sorted(object_ids):
         # Convert obj_id to int for consistent comparison
         obj_id_int = int(obj_id)
@@ -294,12 +293,17 @@ def create_segmentation_summary(video_segments, tracking_objects, object_detecti
                 else:
                     print(f"  Found tracking box: {box}")
                 
-                appearances.append({
-                    'frameNum': frame_idx,
-                    'boundingBox': box
-                })
-                
-                frame_appearances.append(frame_idx)
+                # Only add boxes that have a valid non-zero area
+                # Check if the box has non-zero width and height
+                if (box[2] - box[0] > 0) and (box[3] - box[1] > 0):
+                    appearances.append({
+                        'frameNum': frame_idx,
+                        'boundingBox': box
+                    })
+                    frame_appearances.append(frame_idx)
+                    print(f"  Added valid box: {box}")
+                else:
+                    print(f"  Skipping invalid box with zero area: {box}")
         
         # Get all detections for this object
         cdfsod_predictions = object_detections.get(obj_id_int, [])

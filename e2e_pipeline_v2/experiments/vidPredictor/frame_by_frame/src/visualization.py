@@ -2,6 +2,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 from PIL import Image
 import os
+from .result_processor import get_bounding_box_from_mask
 
 def show_mask(mask, ax, obj_id=None, random_color=False):
     """
@@ -38,19 +39,35 @@ def show_points(coords, labels, ax, marker_size=200):
     ax.scatter(pos_points[:, 0], pos_points[:, 1], color='green', marker='*', s=marker_size, edgecolor='white', linewidth=1.25)
     ax.scatter(neg_points[:, 0], neg_points[:, 1], color='red', marker='*', s=marker_size, edgecolor='white', linewidth=1.25)
 
-def show_box(box, ax):
+def show_box(box, ax, obj_id=None):
     """
     Display a bounding box on the given axes
     
     Args:
         box: Bounding box coordinates [x1, y1, x2, y2]
         ax: Matplotlib axes to draw on
+        obj_id: Object ID for color selection (optional)
     """
     x0, y0 = box[0], box[1]
     w, h = box[2] - box[0], box[3] - box[1]
-    ax.add_patch(plt.Rectangle((x0, y0), w, h, edgecolor='green', facecolor=(0, 0, 0, 0), lw=2))
+    
+    # Get color based on object ID
+    if obj_id is not None:
+        cmap = plt.get_cmap("tab10")
+        color = cmap(obj_id)[:3]
+    else:
+        color = 'green'
+    
+    # Draw rectangle
+    ax.add_patch(plt.Rectangle((x0, y0), w, h, edgecolor=color, facecolor=(0, 0, 0, 0), lw=2))
+    
+    # Add object ID label at top-left corner of the box
+    if obj_id is not None:
+        ax.text(x0, y0-5, f"ID: {obj_id}", color=color, 
+                fontsize=8, weight='bold', backgroundcolor='white')
 
-def visualize_segmentation_results(frames_dir, frame_names, video_segments, vis_frame_stride=1, save_path=None):
+def visualize_segmentation_results(frames_dir, frame_names, video_segments, vis_frame_stride=1, 
+                                 save_path=None, show_boxes=True):
     """
     Visualize segmentation results
     
@@ -60,6 +77,7 @@ def visualize_segmentation_results(frames_dir, frame_names, video_segments, vis_
         video_segments: Dictionary mapping frame indices to segmentation results
         vis_frame_stride: Stride for visualization (display every nth frame)
         save_path: Directory to save visualization frames (optional)
+        show_boxes: Whether to show bounding boxes (default: True)
     """
     plt.close("all")
     all_figures = []
@@ -89,10 +107,20 @@ def visualize_segmentation_results(frames_dir, frame_names, video_segments, vis_
             frame_path = os.path.join(frames_dir, frame_names[out_frame_idx])
             plt.imshow(Image.open(frame_path))
             
-            # Add segmentation masks
+            # Add segmentation masks and bounding boxes
             if out_frame_idx in video_segments:
                 for out_obj_id, out_mask in video_segments[out_frame_idx].items():
-                    show_mask(out_mask, plt.gca(), obj_id=int(out_obj_id))
+                    obj_id_int = int(out_obj_id)
+                    
+                    # Show mask
+                    show_mask(out_mask, plt.gca(), obj_id=obj_id_int)
+                    
+                    # Show bounding box
+                    if show_boxes:
+                        box = get_bounding_box_from_mask(out_mask)
+                        # Only show box if it has non-zero dimensions
+                        if (box[2] - box[0] > 0) and (box[3] - box[1] > 0):
+                            show_box(box, plt.gca(), obj_id=obj_id_int)
             
             # Save figure if save_path is provided
             if save_path:

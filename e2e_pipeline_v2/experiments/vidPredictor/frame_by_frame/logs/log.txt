@@ -1,0 +1,899 @@
+python e2e_pipeline_v2/experiments/vidPredictor/frame_by_frame/main.py --detections_dir "/home/ubuntu/code/drew/e2e_sam2/data/detections_cdfsod/Scenes 061-080__265H-2-_20230815215828529" --frames_dir "/home/ubuntu/code/drew/e2e_sam2/data/frames/Scenes 061-080__265H-2-_20230815215828529" --sam2_checkpoint checkpoints/sam2.1_hiera_large.pt --model_cfg configs/sam2.1/sam2.1_hiera_l.yaml --results_dir frame_by_frame_rezy_logs --debug
+Created directory: frame_by_frame_rezy_logs/debug
+
+=== VIDEO SEGMENTATION PIPELINE START ===
+Detection files directory: /home/ubuntu/code/drew/e2e_sam2/data/detections_cdfsod/Scenes 061-080__265H-2-_20230815215828529
+Frames directory: /home/ubuntu/code/drew/e2e_sam2/data/frames/Scenes 061-080__265H-2-_20230815215828529
+Results will be saved to: frame_by_frame_rezy_logs
+
+=== STEP 1: Loading and processing detections ===
+Loaded 54 detection files
+Loaded detections for 54 frames
+Debug info saved to frame_by_frame_rezy_logs/debug/detections_by_frame.json
+Filtering detections with confidence threshold 0.9...
+Filtered detections: kept 12/19 (63.2%)
+Confidence threshold: 0.9
+Filtered detections: 19 -> 12 (63.2% kept)
+Debug info saved to frame_by_frame_rezy_logs/debug/filtered_detections.json
+Converting detections to tracking format...
+Found 3 tracking objects:
+  1. ID: 1, Name: Time Stick, Occurrences: 5, Frame range: 3-13
+  2. ID: 2, Name: TVA Uniform, Occurrences: 4, Frame range: 13-16
+  3. ID: 3, Name: Sylvie's horned headpiece, Occurrences: 3, Frame range: 18-43
+Debug info saved to frame_by_frame_rezy_logs/debug/tracking_objects.json
+
+=== STEP 2: Processing frames ===
+Found 54 frames
+
+=== STEP 3: Initializing SAM2 segmenter ===
+Using device: cuda
+Setting up video inference...
+frame loading (JPEG): 100%|█████████████████████████████████████████████████████████████| 54/54 [00:01<00:00, 38.20it/s]
+Processing 10 unique frames with detections
+Frame range: 3-43
+
+=== STEP 4: Processing objects with SAM2 ===
+
+=== DEBUG: Processing tracking objects ===
+Total objects: 3
+Total frames to process: 10
+
+Processing frame 3
+  Object 1 (Time Stick) found, box: [542, 223, 634, 380]
+/home/ubuntu/code/drew/sam2/sam2/sam2_video_predictor.py:786: UserWarning: cannot import name '_C' from 'sam2' (/home/ubuntu/code/drew/sam2/sam2/__init__.py)
+
+Skipping the post-processing step due to the error above. You can still use SAM 2 and it's OK to ignore the error above, although some post-processing functionality may be limited (which doesn't affect the results in most cases; see https://github.com/facebookresearch/sam2/blob/main/INSTALL.md).
+  pred_masks_gpu = fill_holes_in_mask_scores(
+  Object 2 (TVA Uniform) NOT in frame 3, sending default box
+  Object 3 (Sylvie's horned headpiece) NOT in frame 3, sending default box
+
+Processing frame 6
+  Object 1 (Time Stick) found, box: [245, 218, 497, 477]
+  Object 2 (TVA Uniform) NOT in frame 6, sending default box
+  Object 3 (Sylvie's horned headpiece) NOT in frame 6, sending default box
+
+Processing frame 7
+  Object 1 (Time Stick) found, box: [284, 266, 458, 476]
+  Object 2 (TVA Uniform) NOT in frame 7, sending default box
+  Object 3 (Sylvie's horned headpiece) NOT in frame 7, sending default box
+
+Processing frame 13
+  Object 1 (Time Stick) found, box: [587, 345, 664, 479]
+  Object 2 (TVA Uniform) found, box: [376, 109, 633, 470]
+  Object 3 (Sylvie's horned headpiece) NOT in frame 13, sending default box
+
+Processing frame 14
+  Object 1 (Time Stick) NOT in frame 14, sending default box
+  Object 2 (TVA Uniform) found, box: [356, 90, 609, 471]
+  Object 3 (Sylvie's horned headpiece) NOT in frame 14, sending default box
+
+Processing frame 15
+  Object 1 (Time Stick) NOT in frame 15, sending default box
+  Object 2 (TVA Uniform) found, box: [341, 100, 629, 487]
+  Object 3 (Sylvie's horned headpiece) NOT in frame 15, sending default box
+
+Processing frame 16
+  Object 1 (Time Stick) NOT in frame 16, sending default box
+  Object 2 (TVA Uniform) found, box: [311, 82, 554, 480]
+  Object 3 (Sylvie's horned headpiece) NOT in frame 16, sending default box
+
+Processing frame 18
+  Object 1 (Time Stick) NOT in frame 18, sending default box
+  Object 2 (TVA Uniform) NOT in frame 18, sending default box
+  Object 3 (Sylvie's horned headpiece) found, box: [315, 127, 479, 205]
+
+Processing frame 20
+  Object 1 (Time Stick) NOT in frame 20, sending default box
+  Object 2 (TVA Uniform) NOT in frame 20, sending default box
+  Object 3 (Sylvie's horned headpiece) found, box: [543, 79, 717, 180]
+
+Processing frame 43
+  Object 1 (Time Stick) NOT in frame 43, sending default box
+  Object 2 (TVA Uniform) NOT in frame 43, sending default box
+  Object 3 (Sylvie's horned headpiece) found, box: [414, 154, 554, 227]
+
+Summary of objects sent to SAM2:
+  Object 1: sent in 4 frames
+    Frame numbers: [3, 6, 7, 13]
+  Object 2: sent in 4 frames
+    Frame numbers: [13, 14, 15, 16]
+  Object 3: sent in 3 frames
+    Frame numbers: [18, 20, 43]
+
+=== STEP 5: Propagating segmentation ===
+
+=== DEBUG: Propagating segmentation ===
+propagate in video:   0%|                                                                        | 0/51 [00:00<?, ?it/s]Frame 3: Found 3 objects: [1, 2, 3]
+  Object 1: mask sum = 2654
+  Object 2: mask sum = 10
+  Object 3: mask sum = 10
+propagate in video:   2%|█▎                                                              | 1/51 [00:00<00:23,  2.16it/s]Frame 4: Found 3 objects: [1, 2, 3]
+  Object 1: mask sum = 2142
+  Object 2: mask sum = 8244
+  Object 3: mask sum = 0
+  WARNING: Object 3 has empty mask in frame 4
+propagate in video:   4%|██▌                                                             | 2/51 [00:02<00:59,  1.21s/it]Frame 5: Found 3 objects: [1, 2, 3]
+  Object 1: mask sum = 8272
+  Object 2: mask sum = 12141
+  Object 3: mask sum = 0
+  WARNING: Object 3 has empty mask in frame 5
+propagate in video:   6%|███▊                                                            | 3/51 [00:03<01:10,  1.48s/it]Frame 6: Found 3 objects: [1, 2, 3]
+  Object 1: mask sum = 10989
+  Object 2: mask sum = 11
+  Object 3: mask sum = 11
+Frame 7: Found 3 objects: [1, 2, 3]
+  Object 1: mask sum = 6141
+  Object 2: mask sum = 8
+  Object 3: mask sum = 8
+Frame 8: Found 3 objects: [1, 2, 3]
+  Object 1: mask sum = 5843
+  Object 2: mask sum = 0
+  WARNING: Object 2 has empty mask in frame 8
+  Object 3: mask sum = 0
+  WARNING: Object 3 has empty mask in frame 8
+propagate in video:  12%|███████▌                                                        | 6/51 [00:05<00:41,  1.09it/s]Frame 9: Found 3 objects: [1, 2, 3]
+  Object 1: mask sum = 2403
+  Object 2: mask sum = 0
+  WARNING: Object 2 has empty mask in frame 9
+  Object 3: mask sum = 0
+  WARNING: Object 3 has empty mask in frame 9
+propagate in video:  14%|████████▊                                                       | 7/51 [00:07<00:51,  1.17s/it]Frame 10: Found 3 objects: [1, 2, 3]
+  Object 1: mask sum = 2281
+  Object 2: mask sum = 0
+  WARNING: Object 2 has empty mask in frame 10
+  Object 3: mask sum = 0
+  WARNING: Object 3 has empty mask in frame 10
+propagate in video:  16%|██████████                                                      | 8/51 [00:09<01:00,  1.40s/it]Frame 11: Found 3 objects: [1, 2, 3]
+  Object 1: mask sum = 2268
+  Object 2: mask sum = 0
+  WARNING: Object 2 has empty mask in frame 11
+  Object 3: mask sum = 0
+  WARNING: Object 3 has empty mask in frame 11
+propagate in video:  18%|███████████▎                                                    | 9/51 [00:11<01:05,  1.56s/it]Frame 12: Found 3 objects: [1, 2, 3]
+  Object 1: mask sum = 6094
+  Object 2: mask sum = 0
+  WARNING: Object 2 has empty mask in frame 12
+  Object 3: mask sum = 0
+  WARNING: Object 3 has empty mask in frame 12
+propagate in video:  20%|████████████▎                                                  | 10/51 [00:13<01:09,  1.70s/it]Frame 13: Found 3 objects: [1, 2, 3]
+  Object 1: mask sum = 5563
+  Object 2: mask sum = 44389
+  Object 3: mask sum = 11
+Frame 14: Found 3 objects: [1, 2, 3]
+  Object 1: mask sum = 11
+  Object 2: mask sum = 51445
+  Object 3: mask sum = 11
+Frame 15: Found 3 objects: [1, 2, 3]
+  Object 1: mask sum = 11
+  Object 2: mask sum = 51983
+  Object 3: mask sum = 11
+Frame 16: Found 3 objects: [1, 2, 3]
+  Object 1: mask sum = 10
+  Object 2: mask sum = 58015
+  Object 3: mask sum = 10
+Frame 17: Found 3 objects: [1, 2, 3]
+  Object 1: mask sum = 6954
+  Object 2: mask sum = 0
+  WARNING: Object 2 has empty mask in frame 17
+  Object 3: mask sum = 0
+  WARNING: Object 3 has empty mask in frame 17
+propagate in video:  29%|██████████████████▌                                            | 15/51 [00:15<00:29,  1.22it/s]Frame 18: Found 3 objects: [1, 2, 3]
+  Object 1: mask sum = 11
+  Object 2: mask sum = 11
+  Object 3: mask sum = 9018
+Frame 19: Found 3 objects: [1, 2, 3]
+  Object 1: mask sum = 0
+  WARNING: Object 1 has empty mask in frame 19
+  Object 2: mask sum = 72423
+  Object 3: mask sum = 6864
+propagate in video:  33%|█████████████████████                                          | 17/51 [00:17<00:28,  1.19it/s]Frame 20: Found 3 objects: [1, 2, 3]
+  Object 1: mask sum = 11
+  Object 2: mask sum = 11
+  Object 3: mask sum = 4041
+Frame 21: Found 3 objects: [1, 2, 3]
+  Object 1: mask sum = 3486
+  Object 2: mask sum = 0
+  WARNING: Object 2 has empty mask in frame 21
+  Object 3: mask sum = 0
+  WARNING: Object 3 has empty mask in frame 21
+propagate in video:  37%|███████████████████████▍                                       | 19/51 [00:19<00:27,  1.15it/s]Frame 22: Found 3 objects: [1, 2, 3]
+  Object 1: mask sum = 0
+  WARNING: Object 1 has empty mask in frame 22
+  Object 2: mask sum = 0
+  WARNING: Object 2 has empty mask in frame 22
+  Object 3: mask sum = 9535
+propagate in video:  39%|████████████████████████▋                                      | 20/51 [00:21<00:32,  1.05s/it]Frame 23: Found 3 objects: [1, 2, 3]
+  Object 1: mask sum = 0
+  WARNING: Object 1 has empty mask in frame 23
+  Object 2: mask sum = 0
+  WARNING: Object 2 has empty mask in frame 23
+  Object 3: mask sum = 3379
+propagate in video:  41%|█████████████████████████▉                                     | 21/51 [00:23<00:37,  1.25s/it]Frame 24: Found 3 objects: [1, 2, 3]
+  Object 1: mask sum = 0
+  WARNING: Object 1 has empty mask in frame 24
+  Object 2: mask sum = 0
+  WARNING: Object 2 has empty mask in frame 24
+  Object 3: mask sum = 5484
+propagate in video:  43%|███████████████████████████▏                                   | 22/51 [00:25<00:41,  1.42s/it]Frame 25: Found 3 objects: [1, 2, 3]
+  Object 1: mask sum = 0
+  WARNING: Object 1 has empty mask in frame 25
+  Object 2: mask sum = 36848
+  Object 3: mask sum = 694
+propagate in video:  45%|████████████████████████████▍                                  | 23/51 [00:27<00:44,  1.58s/it]Frame 26: Found 3 objects: [1, 2, 3]
+  Object 1: mask sum = 0
+  WARNING: Object 1 has empty mask in frame 26
+  Object 2: mask sum = 0
+  WARNING: Object 2 has empty mask in frame 26
+  Object 3: mask sum = 597
+propagate in video:  47%|█████████████████████████████▋                                 | 24/51 [00:29<00:46,  1.72s/it]Frame 27: Found 3 objects: [1, 2, 3]
+  Object 1: mask sum = 0
+  WARNING: Object 1 has empty mask in frame 27
+  Object 2: mask sum = 0
+  WARNING: Object 2 has empty mask in frame 27
+  Object 3: mask sum = 3352
+propagate in video:  49%|██████████████████████████████▉                                | 25/51 [00:32<00:48,  1.87s/it]Frame 28: Found 3 objects: [1, 2, 3]
+  Object 1: mask sum = 0
+  WARNING: Object 1 has empty mask in frame 28
+  Object 2: mask sum = 0
+  WARNING: Object 2 has empty mask in frame 28
+  Object 3: mask sum = 2955
+propagate in video:  51%|████████████████████████████████                               | 26/51 [00:34<00:49,  1.96s/it]Frame 29: Found 3 objects: [1, 2, 3]
+  Object 1: mask sum = 0
+  WARNING: Object 1 has empty mask in frame 29
+  Object 2: mask sum = 0
+  WARNING: Object 2 has empty mask in frame 29
+  Object 3: mask sum = 0
+  WARNING: Object 3 has empty mask in frame 29
+propagate in video:  53%|█████████████████████████████████▎                             | 27/51 [00:36<00:48,  2.04s/it]Frame 30: Found 3 objects: [1, 2, 3]
+  Object 1: mask sum = 0
+  WARNING: Object 1 has empty mask in frame 30
+  Object 2: mask sum = 0
+  WARNING: Object 2 has empty mask in frame 30
+  Object 3: mask sum = 6990
+propagate in video:  55%|██████████████████████████████████▌                            | 28/51 [00:38<00:47,  2.08s/it]Frame 31: Found 3 objects: [1, 2, 3]
+  Object 1: mask sum = 0
+  WARNING: Object 1 has empty mask in frame 31
+  Object 2: mask sum = 0
+  WARNING: Object 2 has empty mask in frame 31
+  Object 3: mask sum = 0
+  WARNING: Object 3 has empty mask in frame 31
+propagate in video:  57%|███████████████████████████████████▊                           | 29/51 [00:40<00:46,  2.13s/it]Frame 32: Found 3 objects: [1, 2, 3]
+  Object 1: mask sum = 0
+  WARNING: Object 1 has empty mask in frame 32
+  Object 2: mask sum = 0
+  WARNING: Object 2 has empty mask in frame 32
+  Object 3: mask sum = 8664
+propagate in video:  59%|█████████████████████████████████████                          | 30/51 [00:43<00:45,  2.16s/it]Frame 33: Found 3 objects: [1, 2, 3]
+  Object 1: mask sum = 0
+  WARNING: Object 1 has empty mask in frame 33
+  Object 2: mask sum = 0
+  WARNING: Object 2 has empty mask in frame 33
+  Object 3: mask sum = 2451
+propagate in video:  61%|██████████████████████████████████████▎                        | 31/51 [00:45<00:43,  2.17s/it]Frame 34: Found 3 objects: [1, 2, 3]
+  Object 1: mask sum = 0
+  WARNING: Object 1 has empty mask in frame 34
+  Object 2: mask sum = 0
+  WARNING: Object 2 has empty mask in frame 34
+  Object 3: mask sum = 3109
+propagate in video:  63%|███████████████████████████████████████▌                       | 32/51 [00:47<00:41,  2.19s/it]Frame 35: Found 3 objects: [1, 2, 3]
+  Object 1: mask sum = 0
+  WARNING: Object 1 has empty mask in frame 35
+  Object 2: mask sum = 0
+  WARNING: Object 2 has empty mask in frame 35
+  Object 3: mask sum = 2176
+propagate in video:  65%|████████████████████████████████████████▊                      | 33/51 [00:49<00:39,  2.21s/it]Frame 36: Found 3 objects: [1, 2, 3]
+  Object 1: mask sum = 0
+  WARNING: Object 1 has empty mask in frame 36
+  Object 2: mask sum = 0
+  WARNING: Object 2 has empty mask in frame 36
+  Object 3: mask sum = 2042
+propagate in video:  67%|██████████████████████████████████████████                     | 34/51 [00:52<00:37,  2.21s/it]Frame 37: Found 3 objects: [1, 2, 3]
+  Object 1: mask sum = 0
+  WARNING: Object 1 has empty mask in frame 37
+  Object 2: mask sum = 0
+  WARNING: Object 2 has empty mask in frame 37
+  Object 3: mask sum = 1788
+propagate in video:  69%|███████████████████████████████████████████▏                   | 35/51 [00:54<00:35,  2.20s/it]Frame 38: Found 3 objects: [1, 2, 3]
+  Object 1: mask sum = 0
+  WARNING: Object 1 has empty mask in frame 38
+  Object 2: mask sum = 0
+  WARNING: Object 2 has empty mask in frame 38
+  Object 3: mask sum = 1718
+propagate in video:  71%|████████████████████████████████████████████▍                  | 36/51 [00:56<00:33,  2.20s/it]Frame 39: Found 3 objects: [1, 2, 3]
+  Object 1: mask sum = 0
+  WARNING: Object 1 has empty mask in frame 39
+  Object 2: mask sum = 0
+  WARNING: Object 2 has empty mask in frame 39
+  Object 3: mask sum = 2000
+propagate in video:  73%|█████████████████████████████████████████████▋                 | 37/51 [00:58<00:30,  2.20s/it]Frame 40: Found 3 objects: [1, 2, 3]
+  Object 1: mask sum = 0
+  WARNING: Object 1 has empty mask in frame 40
+  Object 2: mask sum = 0
+  WARNING: Object 2 has empty mask in frame 40
+  Object 3: mask sum = 0
+  WARNING: Object 3 has empty mask in frame 40
+propagate in video:  75%|██████████████████████████████████████████████▉                | 38/51 [01:00<00:28,  2.20s/it]Frame 41: Found 3 objects: [1, 2, 3]
+  Object 1: mask sum = 0
+  WARNING: Object 1 has empty mask in frame 41
+  Object 2: mask sum = 0
+  WARNING: Object 2 has empty mask in frame 41
+  Object 3: mask sum = 789
+propagate in video:  76%|████████████████████████████████████████████████▏              | 39/51 [01:03<00:26,  2.20s/it]Frame 42: Found 3 objects: [1, 2, 3]
+  Object 1: mask sum = 0
+  WARNING: Object 1 has empty mask in frame 42
+  Object 2: mask sum = 0
+  WARNING: Object 2 has empty mask in frame 42
+  Object 3: mask sum = 3802
+propagate in video:  78%|█████████████████████████████████████████████████▍             | 40/51 [01:05<00:24,  2.20s/it]Frame 43: Found 3 objects: [1, 2, 3]
+  Object 1: mask sum = 11
+  Object 2: mask sum = 11
+  Object 3: mask sum = 3823
+Frame 44: Found 3 objects: [1, 2, 3]
+  Object 1: mask sum = 0
+  WARNING: Object 1 has empty mask in frame 44
+  Object 2: mask sum = 0
+  WARNING: Object 2 has empty mask in frame 44
+  Object 3: mask sum = 3475
+propagate in video:  82%|███████████████████████████████████████████████████▉           | 42/51 [01:07<00:15,  1.67s/it]Frame 45: Found 3 objects: [1, 2, 3]
+  Object 1: mask sum = 0
+  WARNING: Object 1 has empty mask in frame 45
+  Object 2: mask sum = 0
+  WARNING: Object 2 has empty mask in frame 45
+  Object 3: mask sum = 2149
+propagate in video:  84%|█████████████████████████████████████████████████████          | 43/51 [01:09<00:14,  1.79s/it]Frame 46: Found 3 objects: [1, 2, 3]
+  Object 1: mask sum = 0
+  WARNING: Object 1 has empty mask in frame 46
+  Object 2: mask sum = 0
+  WARNING: Object 2 has empty mask in frame 46
+  Object 3: mask sum = 2129
+propagate in video:  86%|██████████████████████████████████████████████████████▎        | 44/51 [01:11<00:13,  1.87s/it]Frame 47: Found 3 objects: [1, 2, 3]
+  Object 1: mask sum = 0
+  WARNING: Object 1 has empty mask in frame 47
+  Object 2: mask sum = 0
+  WARNING: Object 2 has empty mask in frame 47
+  Object 3: mask sum = 0
+  WARNING: Object 3 has empty mask in frame 47
+propagate in video:  88%|███████████████████████████████████████████████████████▌       | 45/51 [01:13<00:11,  1.94s/it]Frame 48: Found 3 objects: [1, 2, 3]
+  Object 1: mask sum = 0
+  WARNING: Object 1 has empty mask in frame 48
+  Object 2: mask sum = 0
+  WARNING: Object 2 has empty mask in frame 48
+  Object 3: mask sum = 0
+  WARNING: Object 3 has empty mask in frame 48
+propagate in video:  90%|████████████████████████████████████████████████████████▊      | 46/51 [01:15<00:09,  1.99s/it]Frame 49: Found 3 objects: [1, 2, 3]
+  Object 1: mask sum = 0
+  WARNING: Object 1 has empty mask in frame 49
+  Object 2: mask sum = 0
+  WARNING: Object 2 has empty mask in frame 49
+  Object 3: mask sum = 0
+  WARNING: Object 3 has empty mask in frame 49
+propagate in video:  92%|██████████████████████████████████████████████████████████     | 47/51 [01:17<00:08,  2.03s/it]Frame 50: Found 3 objects: [1, 2, 3]
+  Object 1: mask sum = 0
+  WARNING: Object 1 has empty mask in frame 50
+  Object 2: mask sum = 0
+  WARNING: Object 2 has empty mask in frame 50
+  Object 3: mask sum = 0
+  WARNING: Object 3 has empty mask in frame 50
+propagate in video:  94%|███████████████████████████████████████████████████████████▎   | 48/51 [01:20<00:06,  2.07s/it]Frame 51: Found 3 objects: [1, 2, 3]
+  Object 1: mask sum = 0
+  WARNING: Object 1 has empty mask in frame 51
+  Object 2: mask sum = 0
+  WARNING: Object 2 has empty mask in frame 51
+  Object 3: mask sum = 0
+  WARNING: Object 3 has empty mask in frame 51
+propagate in video:  96%|████████████████████████████████████████████████████████████▌  | 49/51 [01:22<00:04,  2.11s/it]Frame 52: Found 3 objects: [1, 2, 3]
+  Object 1: mask sum = 0
+  WARNING: Object 1 has empty mask in frame 52
+  Object 2: mask sum = 0
+  WARNING: Object 2 has empty mask in frame 52
+  Object 3: mask sum = 0
+  WARNING: Object 3 has empty mask in frame 52
+propagate in video:  98%|█████████████████████████████████████████████████████████████▊ | 50/51 [01:24<00:02,  2.14s/it]Frame 53: Found 3 objects: [1, 2, 3]
+  Object 1: mask sum = 0
+  WARNING: Object 1 has empty mask in frame 53
+  Object 2: mask sum = 0
+  WARNING: Object 2 has empty mask in frame 53
+  Object 3: mask sum = 0
+  WARNING: Object 3 has empty mask in frame 53
+propagate in video: 100%|███████████████████████████████████████████████████████████████| 51/51 [01:26<00:00,  1.70s/it]
+
+Segmentation Summary:
+Total frames with segments: 41
+Total unique objects: 3
+  Object 1: appears in 19 frames
+    Frame numbers: [3, 4, 5, 6, 7, 8, 9, 10, 11, 12]...
+  Object 2: appears in 14 frames
+    Frame numbers: [3, 4, 5, 6, 7, 13, 14, 15, 16, 18]...
+  Object 3: appears in 32 frames
+    Frame numbers: [3, 6, 7, 13, 14, 15, 16, 18, 19, 20]...
+Debug info saved to frame_by_frame_rezy_logs/debug/segment_counts.json
+Debug info saved to frame_by_frame_rezy_logs/debug/object_appearances.json
+Found 3 objects with segment appearances
+
+=== STEP 6: Matching detections to segments ===
+
+=== DEBUG: Matching detections to segments ===
+Found 3 objects in tracking data
+Object classes: {1: 'Time Stick', 2: 'TVA Uniform', 3: "Sylvie's horned headpiece"}
+
+Video segments info:
+Total frames with segments: 41
+  Frame 3: 3 objects: ['1', '2', '3']
+  Frame 4: 2 objects: ['1', '2']
+  Frame 5: 2 objects: ['1', '2']
+  Frame 6: 3 objects: ['1', '2', '3']
+  Frame 7: 3 objects: ['1', '2', '3']
+  Frame 8: 1 objects: ['1']
+  Frame 9: 1 objects: ['1']
+  Frame 10: 1 objects: ['1']
+  Frame 11: 1 objects: ['1']
+  Frame 12: 1 objects: ['1']
+  Frame 13: 3 objects: ['1', '2', '3']
+  Frame 14: 3 objects: ['1', '2', '3']
+  Frame 15: 3 objects: ['1', '2', '3']
+  Frame 16: 3 objects: ['1', '2', '3']
+  Frame 17: 1 objects: ['1']
+  Frame 18: 3 objects: ['1', '2', '3']
+  Frame 19: 2 objects: ['2', '3']
+  Frame 20: 3 objects: ['1', '2', '3']
+  Frame 21: 1 objects: ['1']
+  Frame 22: 1 objects: ['3']
+  Frame 23: 1 objects: ['3']
+  Frame 24: 1 objects: ['3']
+  Frame 25: 2 objects: ['2', '3']
+  Frame 26: 1 objects: ['3']
+  Frame 27: 1 objects: ['3']
+  Frame 28: 1 objects: ['3']
+  Frame 30: 1 objects: ['3']
+  Frame 32: 1 objects: ['3']
+  Frame 33: 1 objects: ['3']
+  Frame 34: 1 objects: ['3']
+  Frame 35: 1 objects: ['3']
+  Frame 36: 1 objects: ['3']
+  Frame 37: 1 objects: ['3']
+  Frame 38: 1 objects: ['3']
+  Frame 39: 1 objects: ['3']
+  Frame 41: 1 objects: ['3']
+  Frame 42: 1 objects: ['3']
+  Frame 43: 3 objects: ['1', '2', '3']
+  Frame 44: 1 objects: ['3']
+  Frame 45: 1 objects: ['3']
+  Frame 46: 1 objects: ['3']
+Total unique objects in video segments: 3
+Object IDs in video segments: [1, 2, 3]
+Object IDs in tracking data: [1, 2, 3]
+Added detection for object 1 (Time Stick) at frame 3
+Added detection for object 1 (Time Stick) at frame 6
+Added detection for object 1 (Time Stick) at frame 7
+Added detection for object 1 (Time Stick) at frame 13
+Added detection for object 1 (Time Stick) at frame 13
+Added detection for object 2 (TVA Uniform) at frame 13
+Added detection for object 2 (TVA Uniform) at frame 14
+Added detection for object 2 (TVA Uniform) at frame 15
+Added detection for object 2 (TVA Uniform) at frame 16
+Added detection for object 3 (Sylvie's horned headpiece) at frame 18
+Added detection for object 3 (Sylvie's horned headpiece) at frame 20
+Added detection for object 3 (Sylvie's horned headpiece) at frame 43
+Object 1 (Time Stick) has 5 detections
+  Frame numbers: [3, 6, 7, 13, 13]
+Object 2 (TVA Uniform) has 4 detections
+  Frame numbers: [13, 14, 15, 16]
+Object 3 (Sylvie's horned headpiece) has 3 detections
+  Frame numbers: [18, 20, 43]
+Found 3 objects with detections
+Debug info saved to frame_by_frame_rezy_logs/debug/object_detections.json
+
+=== STEP 7: Creating segmentation summary ===
+
+=== DEBUG: Creating segmentation summary ===
+Found 3 unique object IDs in video segments
+Object IDs: [1, 2, 3]
+Found 3 objects with CDFSOD predictions
+CDFSOD object IDs: [1, 2, 3]
+
+Processing object 1:
+  Frame 3 has objects: ['1', '2', '3']
+  Object 1 found in frame 3
+  Found tracking box: [542, 223, 634, 380]
+  Frame 4 has objects: ['1', '2']
+  Object 1 found in frame 4
+  [DEBUG] Object 1 exists but frame 4 not found in its occurrences
+  No tracking box found, computing from mask
+  Computed box from mask: [264, 0, 314, 0]
+  Frame 5 has objects: ['1', '2']
+  Object 1 found in frame 5
+  [DEBUG] Object 1 exists but frame 5 not found in its occurrences
+  No tracking box found, computing from mask
+  Computed box from mask: [270, 0, 481, 0]
+  Frame 6 has objects: ['1', '2', '3']
+  Object 1 found in frame 6
+  Found tracking box: [245, 218, 497, 477]
+  Frame 7 has objects: ['1', '2', '3']
+  Object 1 found in frame 7
+  Found tracking box: [284, 266, 458, 476]
+  Frame 8 has objects: ['1']
+  Object 1 found in frame 8
+  [DEBUG] Object 1 exists but frame 8 not found in its occurrences
+  No tracking box found, computing from mask
+  Computed box from mask: [289, 0, 481, 0]
+  Frame 9 has objects: ['1']
+  Object 1 found in frame 9
+  [DEBUG] Object 1 exists but frame 9 not found in its occurrences
+  No tracking box found, computing from mask
+  Computed box from mask: [304, 0, 359, 0]
+  Frame 10 has objects: ['1']
+  Object 1 found in frame 10
+  [DEBUG] Object 1 exists but frame 10 not found in its occurrences
+  No tracking box found, computing from mask
+  Computed box from mask: [312, 0, 366, 0]
+  Frame 11 has objects: ['1']
+  Object 1 found in frame 11
+  [DEBUG] Object 1 exists but frame 11 not found in its occurrences
+  No tracking box found, computing from mask
+  Computed box from mask: [298, 0, 352, 0]
+  Frame 12 has objects: ['1']
+  Object 1 found in frame 12
+  [DEBUG] Object 1 exists but frame 12 not found in its occurrences
+  No tracking box found, computing from mask
+  Computed box from mask: [287, 0, 481, 0]
+  Frame 13 has objects: ['1', '2', '3']
+  Object 1 found in frame 13
+  Found tracking box: [587, 345, 664, 479]
+  Frame 14 has objects: ['1', '2', '3']
+  Object 1 found in frame 14
+  [DEBUG] Object 1 exists but frame 14 not found in its occurrences
+  No tracking box found, computing from mask
+  Computed box from mask: [0, 0, 2, 0]
+  Frame 15 has objects: ['1', '2', '3']
+  Object 1 found in frame 15
+  [DEBUG] Object 1 exists but frame 15 not found in its occurrences
+  No tracking box found, computing from mask
+  Computed box from mask: [0, 0, 2, 0]
+  Frame 16 has objects: ['1', '2', '3']
+  Object 1 found in frame 16
+  [DEBUG] Object 1 exists but frame 16 not found in its occurrences
+  No tracking box found, computing from mask
+  Computed box from mask: [0, 0, 2, 0]
+  Frame 17 has objects: ['1']
+  Object 1 found in frame 17
+  [DEBUG] Object 1 exists but frame 17 not found in its occurrences
+  No tracking box found, computing from mask
+  Computed box from mask: [248, 0, 299, 0]
+  Frame 18 has objects: ['1', '2', '3']
+  Object 1 found in frame 18
+  [DEBUG] Object 1 exists but frame 18 not found in its occurrences
+  No tracking box found, computing from mask
+  Computed box from mask: [0, 0, 2, 0]
+  Frame 19 has objects: ['2', '3']
+  Frame 20 has objects: ['1', '2', '3']
+  Object 1 found in frame 20
+  [DEBUG] Object 1 exists but frame 20 not found in its occurrences
+  No tracking box found, computing from mask
+  Computed box from mask: [0, 0, 2, 0]
+  Frame 21 has objects: ['1']
+  Object 1 found in frame 21
+  [DEBUG] Object 1 exists but frame 21 not found in its occurrences
+  No tracking box found, computing from mask
+  Computed box from mask: [233, 0, 315, 0]
+  Frame 22 has objects: ['3']
+  Frame 23 has objects: ['3']
+  Frame 24 has objects: ['3']
+  Frame 25 has objects: ['2', '3']
+  Frame 26 has objects: ['3']
+  Frame 27 has objects: ['3']
+  Frame 28 has objects: ['3']
+  Frame 30 has objects: ['3']
+  Frame 32 has objects: ['3']
+  Frame 33 has objects: ['3']
+  Frame 34 has objects: ['3']
+  Frame 35 has objects: ['3']
+  Frame 36 has objects: ['3']
+  Frame 37 has objects: ['3']
+  Frame 38 has objects: ['3']
+  Frame 39 has objects: ['3']
+  Frame 41 has objects: ['3']
+  Frame 42 has objects: ['3']
+  Frame 43 has objects: ['1', '2', '3']
+  Object 1 found in frame 43
+  [DEBUG] Object 1 exists but frame 43 not found in its occurrences
+  No tracking box found, computing from mask
+  Computed box from mask: [0, 0, 2, 0]
+  Frame 44 has objects: ['3']
+  Frame 45 has objects: ['3']
+  Frame 46 has objects: ['3']
+Object 1: 19 appearances, 5 CDFSOD predictions
+  Appearances in frames: [3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 20, 21, 43]
+  CDFSOD predictions in frames: [3, 6, 7, 13, 13]
+  WARNING: 15 frames with appearances but no predictions: [4, 5, 8, 9, 10, 11, 12, 14, 15, 16, 17, 18, 20, 21, 43]
+
+Processing object 2:
+  Frame 3 has objects: ['1', '2', '3']
+  Object 2 found in frame 3
+  [DEBUG] Object 2 exists but frame 3 not found in its occurrences
+  No tracking box found, computing from mask
+  Computed box from mask: [0, 0, 2, 0]
+  Frame 4 has objects: ['1', '2']
+  Object 2 found in frame 4
+  [DEBUG] Object 2 exists but frame 4 not found in its occurrences
+  No tracking box found, computing from mask
+  Computed box from mask: [367, 0, 480, 0]
+  Frame 5 has objects: ['1', '2']
+  Object 2 found in frame 5
+  [DEBUG] Object 2 exists but frame 5 not found in its occurrences
+  No tracking box found, computing from mask
+  Computed box from mask: [355, 0, 480, 0]
+  Frame 6 has objects: ['1', '2', '3']
+  Object 2 found in frame 6
+  [DEBUG] Object 2 exists but frame 6 not found in its occurrences
+  No tracking box found, computing from mask
+  Computed box from mask: [0, 0, 2, 0]
+  Frame 7 has objects: ['1', '2', '3']
+  Object 2 found in frame 7
+  [DEBUG] Object 2 exists but frame 7 not found in its occurrences
+  No tracking box found, computing from mask
+  Computed box from mask: [0, 0, 1, 0]
+  Frame 8 has objects: ['1']
+  Frame 9 has objects: ['1']
+  Frame 10 has objects: ['1']
+  Frame 11 has objects: ['1']
+  Frame 12 has objects: ['1']
+  Frame 13 has objects: ['1', '2', '3']
+  Object 2 found in frame 13
+  Found tracking box: [376, 109, 633, 470]
+  Frame 14 has objects: ['1', '2', '3']
+  Object 2 found in frame 14
+  Found tracking box: [356, 90, 609, 471]
+  Frame 15 has objects: ['1', '2', '3']
+  Object 2 found in frame 15
+  Found tracking box: [341, 100, 629, 487]
+  Frame 16 has objects: ['1', '2', '3']
+  Object 2 found in frame 16
+  Found tracking box: [311, 82, 554, 480]
+  Frame 17 has objects: ['1']
+  Frame 18 has objects: ['1', '2', '3']
+  Object 2 found in frame 18
+  [DEBUG] Object 2 exists but frame 18 not found in its occurrences
+  No tracking box found, computing from mask
+  Computed box from mask: [0, 0, 2, 0]
+  Frame 19 has objects: ['2', '3']
+  Object 2 found in frame 19
+  [DEBUG] Object 2 exists but frame 19 not found in its occurrences
+  No tracking box found, computing from mask
+  Computed box from mask: [59, 0, 477, 0]
+  Frame 20 has objects: ['1', '2', '3']
+  Object 2 found in frame 20
+  [DEBUG] Object 2 exists but frame 20 not found in its occurrences
+  No tracking box found, computing from mask
+  Computed box from mask: [0, 0, 2, 0]
+  Frame 21 has objects: ['1']
+  Frame 22 has objects: ['3']
+  Frame 23 has objects: ['3']
+  Frame 24 has objects: ['3']
+  Frame 25 has objects: ['2', '3']
+  Object 2 found in frame 25
+  [DEBUG] Object 2 exists but frame 25 not found in its occurrences
+  No tracking box found, computing from mask
+  Computed box from mask: [367, 0, 481, 0]
+  Frame 26 has objects: ['3']
+  Frame 27 has objects: ['3']
+  Frame 28 has objects: ['3']
+  Frame 30 has objects: ['3']
+  Frame 32 has objects: ['3']
+  Frame 33 has objects: ['3']
+  Frame 34 has objects: ['3']
+  Frame 35 has objects: ['3']
+  Frame 36 has objects: ['3']
+  Frame 37 has objects: ['3']
+  Frame 38 has objects: ['3']
+  Frame 39 has objects: ['3']
+  Frame 41 has objects: ['3']
+  Frame 42 has objects: ['3']
+  Frame 43 has objects: ['1', '2', '3']
+  Object 2 found in frame 43
+  [DEBUG] Object 2 exists but frame 43 not found in its occurrences
+  No tracking box found, computing from mask
+  Computed box from mask: [0, 0, 2, 0]
+  Frame 44 has objects: ['3']
+  Frame 45 has objects: ['3']
+  Frame 46 has objects: ['3']
+Object 2: 14 appearances, 4 CDFSOD predictions
+  Appearances in frames: [3, 4, 5, 6, 7, 13, 14, 15, 16, 18, 19, 20, 25, 43]
+  CDFSOD predictions in frames: [13, 14, 15, 16]
+  WARNING: 10 frames with appearances but no predictions: [3, 4, 5, 6, 7, 18, 19, 20, 25, 43]
+
+Processing object 3:
+  Frame 3 has objects: ['1', '2', '3']
+  Object 3 found in frame 3
+  [DEBUG] Object 3 exists but frame 3 not found in its occurrences
+  No tracking box found, computing from mask
+  Computed box from mask: [0, 0, 2, 0]
+  Frame 4 has objects: ['1', '2']
+  Frame 5 has objects: ['1', '2']
+  Frame 6 has objects: ['1', '2', '3']
+  Object 3 found in frame 6
+  [DEBUG] Object 3 exists but frame 6 not found in its occurrences
+  No tracking box found, computing from mask
+  Computed box from mask: [0, 0, 2, 0]
+  Frame 7 has objects: ['1', '2', '3']
+  Object 3 found in frame 7
+  [DEBUG] Object 3 exists but frame 7 not found in its occurrences
+  No tracking box found, computing from mask
+  Computed box from mask: [0, 0, 1, 0]
+  Frame 8 has objects: ['1']
+  Frame 9 has objects: ['1']
+  Frame 10 has objects: ['1']
+  Frame 11 has objects: ['1']
+  Frame 12 has objects: ['1']
+  Frame 13 has objects: ['1', '2', '3']
+  Object 3 found in frame 13
+  [DEBUG] Object 3 exists but frame 13 not found in its occurrences
+  No tracking box found, computing from mask
+  Computed box from mask: [0, 0, 2, 0]
+  Frame 14 has objects: ['1', '2', '3']
+  Object 3 found in frame 14
+  [DEBUG] Object 3 exists but frame 14 not found in its occurrences
+  No tracking box found, computing from mask
+  Computed box from mask: [0, 0, 2, 0]
+  Frame 15 has objects: ['1', '2', '3']
+  Object 3 found in frame 15
+  [DEBUG] Object 3 exists but frame 15 not found in its occurrences
+  No tracking box found, computing from mask
+  Computed box from mask: [0, 0, 2, 0]
+  Frame 16 has objects: ['1', '2', '3']
+  Object 3 found in frame 16
+  [DEBUG] Object 3 exists but frame 16 not found in its occurrences
+  No tracking box found, computing from mask
+  Computed box from mask: [0, 0, 2, 0]
+  Frame 17 has objects: ['1']
+  Frame 18 has objects: ['1', '2', '3']
+  Object 3 found in frame 18
+  Found tracking box: [315, 127, 479, 205]
+  Frame 19 has objects: ['2', '3']
+  Object 3 found in frame 19
+  [DEBUG] Object 3 exists but frame 19 not found in its occurrences
+  No tracking box found, computing from mask
+  Computed box from mask: [161, 0, 262, 0]
+  Frame 20 has objects: ['1', '2', '3']
+  Object 3 found in frame 20
+  Found tracking box: [543, 79, 717, 180]
+  Frame 21 has objects: ['1']
+  Frame 22 has objects: ['3']
+  Object 3 found in frame 22
+  [DEBUG] Object 3 exists but frame 22 not found in its occurrences
+  No tracking box found, computing from mask
+  Computed box from mask: [163, 0, 270, 0]
+  Frame 23 has objects: ['3']
+  Object 3 found in frame 23
+  [DEBUG] Object 3 exists but frame 23 not found in its occurrences
+  No tracking box found, computing from mask
+  Computed box from mask: [73, 0, 150, 0]
+  Frame 24 has objects: ['3']
+  Object 3 found in frame 24
+  [DEBUG] Object 3 exists but frame 24 not found in its occurrences
+  No tracking box found, computing from mask
+  Computed box from mask: [108, 0, 222, 0]
+  Frame 25 has objects: ['2', '3']
+  Object 3 found in frame 25
+  [DEBUG] Object 3 exists but frame 25 not found in its occurrences
+  No tracking box found, computing from mask
+  Computed box from mask: [121, 0, 156, 0]
+  Frame 26 has objects: ['3']
+  Object 3 found in frame 26
+  [DEBUG] Object 3 exists but frame 26 not found in its occurrences
+  No tracking box found, computing from mask
+  Computed box from mask: [140, 0, 178, 0]
+  Frame 27 has objects: ['3']
+  Object 3 found in frame 27
+  [DEBUG] Object 3 exists but frame 27 not found in its occurrences
+  No tracking box found, computing from mask
+  Computed box from mask: [119, 0, 186, 0]
+  Frame 28 has objects: ['3']
+  Object 3 found in frame 28
+  [DEBUG] Object 3 exists but frame 28 not found in its occurrences
+  No tracking box found, computing from mask
+  Computed box from mask: [101, 0, 187, 0]
+  Frame 30 has objects: ['3']
+  Object 3 found in frame 30
+  [DEBUG] Object 3 exists but frame 30 not found in its occurrences
+  No tracking box found, computing from mask
+  Computed box from mask: [141, 0, 220, 0]
+  Frame 32 has objects: ['3']
+  Object 3 found in frame 32
+  [DEBUG] Object 3 exists but frame 32 not found in its occurrences
+  No tracking box found, computing from mask
+  Computed box from mask: [148, 0, 235, 0]
+  Frame 33 has objects: ['3']
+  Object 3 found in frame 33
+  [DEBUG] Object 3 exists but frame 33 not found in its occurrences
+  No tracking box found, computing from mask
+  Computed box from mask: [103, 0, 194, 0]
+  Frame 34 has objects: ['3']
+  Object 3 found in frame 34
+  [DEBUG] Object 3 exists but frame 34 not found in its occurrences
+  No tracking box found, computing from mask
+  Computed box from mask: [181, 0, 276, 0]
+  Frame 35 has objects: ['3']
+  Object 3 found in frame 35
+  [DEBUG] Object 3 exists but frame 35 not found in its occurrences
+  No tracking box found, computing from mask
+  Computed box from mask: [145, 0, 221, 0]
+  Frame 36 has objects: ['3']
+  Object 3 found in frame 36
+  [DEBUG] Object 3 exists but frame 36 not found in its occurrences
+  No tracking box found, computing from mask
+  Computed box from mask: [181, 0, 261, 0]
+  Frame 37 has objects: ['3']
+  Object 3 found in frame 37
+  [DEBUG] Object 3 exists but frame 37 not found in its occurrences
+  No tracking box found, computing from mask
+  Computed box from mask: [202, 0, 268, 0]
+  Frame 38 has objects: ['3']
+  Object 3 found in frame 38
+  [DEBUG] Object 3 exists but frame 38 not found in its occurrences
+  No tracking box found, computing from mask
+  Computed box from mask: [176, 0, 246, 0]
+  Frame 39 has objects: ['3']
+  Object 3 found in frame 39
+  [DEBUG] Object 3 exists but frame 39 not found in its occurrences
+  No tracking box found, computing from mask
+  Computed box from mask: [163, 0, 221, 0]
+  Frame 41 has objects: ['3']
+  Object 3 found in frame 41
+  [DEBUG] Object 3 exists but frame 41 not found in its occurrences
+  No tracking box found, computing from mask
+  Computed box from mask: [182, 0, 219, 0]
+  Frame 42 has objects: ['3']
+  Object 3 found in frame 42
+  [DEBUG] Object 3 exists but frame 42 not found in its occurrences
+  No tracking box found, computing from mask
+  Computed box from mask: [119, 0, 206, 0]
+  Frame 43 has objects: ['1', '2', '3']
+  Object 3 found in frame 43
+  Found tracking box: [414, 154, 554, 227]
+  Frame 44 has objects: ['3']
+  Object 3 found in frame 44
+  [DEBUG] Object 3 exists but frame 44 not found in its occurrences
+  No tracking box found, computing from mask
+  Computed box from mask: [121, 0, 217, 0]
+  Frame 45 has objects: ['3']
+  Object 3 found in frame 45
+  [DEBUG] Object 3 exists but frame 45 not found in its occurrences
+  No tracking box found, computing from mask
+  Computed box from mask: [214, 0, 284, 0]
+  Frame 46 has objects: ['3']
+  Object 3 found in frame 46
+  [DEBUG] Object 3 exists but frame 46 not found in its occurrences
+  No tracking box found, computing from mask
+  Computed box from mask: [225, 0, 279, 0]
+Object 3: 32 appearances, 3 CDFSOD predictions
+  Appearances in frames: [3, 6, 7, 13, 14, 15, 16, 18, 19, 20, 22, 23, 24, 25, 26, 27, 28, 30, 32, 33, 34, 35, 36, 37, 38, 39, 41, 42, 43, 44, 45, 46]
+  CDFSOD predictions in frames: [18, 20, 43]
+  WARNING: 29 frames with appearances but no predictions: [3, 6, 7, 13, 14, 15, 16, 19, 22, 23, 24, 25, 26, 27, 28, 30, 32, 33, 34, 35, 36, 37, 38, 39, 41, 42, 44, 45, 46]
+
+Created summary for 3 objects
+Object 1: 19 appearances, 5 predictions
+Object 2: 14 appearances, 4 predictions
+Object 3: 32 appearances, 3 predictions
+Created summary for 3 objects
+
+=== STEP 8: Saving results to frame_by_frame_rezy_logs/segmentation_results.json ===
+Results saved to frame_by_frame_rezy_logs/segmentation_results.json
+
+=== STEP 9: Visualizing segmentation results ===
+Saving visualizations to: frame_by_frame_rezy_logs/visualizations
+Visualizing frames: 5/54 (9.3%)
+Visualizing frames: 10/54 (18.5%)
+Visualizing frames: 15/54 (27.8%)
+Visualizing frames: 20/54 (37.0%)
+Visualizing frames: 25/54 (46.3%)
+Visualizing frames: 30/54 (55.6%)
+Visualizing frames: 35/54 (64.8%)
+Visualizing frames: 40/54 (74.1%)
+Visualizing frames: 45/54 (83.3%)
+Visualizing frames: 50/54 (92.6%)
+Visualization complete: 54 frames processed
+Processed 54 frames with 3 object classes
+Visualization saved to frame_by_frame_rezy_logs/visualizations
+
+All results saved to frame_by_frame_rezy_logs
+=== VIDEO SEGMENTATION PIPELINE COMPLETE ===

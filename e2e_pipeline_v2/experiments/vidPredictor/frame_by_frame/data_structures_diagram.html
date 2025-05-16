@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SAM2 Video Segmentation Data Structures</title>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        h1, h2, h3 {
+            color: #2c3e50;
+        }
+        .mermaid {
+            margin: 30px 0;
+            padding: 20px;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+        }
+        .diagram-container {
+            margin-bottom: 40px;
+        }
+        .code-example {
+            font-family: 'Courier New', Courier, monospace;
+            background-color: #f8f9fa;
+            border-left: 4px solid #8e44ad;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 4px;
+            overflow-x: auto;
+        }
+        .note {
+            background-color: #e7f5fe;
+            border-left: 4px solid #3498db;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <h1>SAM2 Video Segmentation Data Structures</h1>
+    <p>This document visualizes the data structures and formats used in the SAM2 Video Segmentation Pipeline.</p>
+
+    <div class="diagram-container">
+        <h2>Input Data Formats</h2>
+        <div class="note">
+            <p>The pipeline starts with detection data in JSON format and video frames as images.</p>
+        </div>
+        <div class="mermaid">
+            classDiagram
+                class DetectionJSON {
+                    Array of Detections
+                }
+                
+                class Detection {
+                    +String label
+                    +Float confidence
+                    +Array[4] coordinates [x1,y1,x2,y2]
+                }
+                
+                class VideoFrames {
+                    +Image frame_0000.jpg
+                    +Image frame_0001.jpg
+                    +...
+                }
+                
+                DetectionJSON *-- Detection : contains
+        </div>
+        
+        <div class="code-example">
+            <h3>Example Detection JSON (0.json):</h3>
+            <pre>[
+  {
+    "label": "Time Stick",
+    "confidence": 0.95,
+    "coordinates": [100, 150, 200, 250]
+  },
+  {
+    "label": "Person",
+    "confidence": 0.92,
+    "coordinates": [300, 400, 450, 650]
+  }
+]</pre>
+        </div>
+    </div>
+
+    <div class="diagram-container">
+        <h2>Transformation: JSON to Tracking Format</h2>
+        <div class="note">
+            <p>The pipeline converts per-frame detection data into an object-centric tracking format.</p>
+        </div>
+        <div class="mermaid">
+            flowchart TD
+                A[Frame 0 Detections] --> D[Object-Centric Format]
+                B[Frame 1 Detections] --> D
+                C[Frame N Detections] --> D
+                
+                D --> E["Tracking Objects
+                        (List of Objects with
+                        Appearances Across Frames)"]
+                
+                subgraph "Tracking Object"
+                    F[Object ID] 
+                    G[Object Name]
+                    H[Frame Occurrences]
+                end
+                
+                E --> F
+                E --> G
+                E --> H
+                
+                H --> I["Frame Number"] 
+                H --> J["Bounding Box"]
+                H --> K["Confidence"]
+        </div>
+        
+        <div class="code-example">
+            <h3>Tracking Objects Structure:</h3>
+            <pre>[
+  {
+    "objectID": 1,
+    "objectName": "Time Stick",
+    "frameOccurences": [
+      {
+        "frameNum": 0,
+        "box": [100, 150, 200, 250],
+        "confidence": 0.95
+      },
+      {
+        "frameNum": 1,
+        "box": [102, 153, 202, 253],
+        "confidence": 0.94
+      }
+    ]
+  },
+  {
+    "objectID": 2,
+    "objectName": "Person",
+    "frameOccurences": [
+      {
+        "frameNum": 0,
+        "box": [300, 400, 450, 650],
+        "confidence": 0.92
+      }
+    ]
+  }
+]</pre>
+        </div>
+    </div>
+
+    <div class="diagram-container">
+        <h2>SAM2 Segmentation Result Structure</h2>
+        <div class="note">
+            <p>After segmentation, the pipeline produces a dictionary mapping frame indices to object segmentation masks.</p>
+        </div>
+        <div class="mermaid">
+            classDiagram
+                class VideoSegments {
+                    +Dict frame_to_segments
+                }
+                
+                class FrameSegments {
+                    +Dict object_id_to_mask
+                }
+                
+                class Mask {
+                    +Array[H,W] binary_mask
+                }
+                
+                VideoSegments *-- FrameSegments : contains
+                FrameSegments *-- Mask : contains
+        </div>
+        
+        <div class="code-example">
+            <h3>Video Segments Structure:</h3>
+            <pre>{
+  0: {                          # Frame index
+    "1": numpy.array([H,W]),    # Object ID -> Binary mask
+    "2": numpy.array([H,W])
+  },
+  1: {
+    "1": numpy.array([H,W]),
+    "2": numpy.array([H,W])
+  }
+}</pre>
+        </div>
+    </div>
+
+    <div class="diagram-container">
+        <h2>Output JSON Format</h2>
+        <div class="note">
+            <p>The final output is an object-centric representation of tracking and detection data.</p>
+        </div>
+        <div class="mermaid">
+            classDiagram
+                class SegmentationResults {
+                    +Array of ObjectSummary
+                }
+                
+                class ObjectSummary {
+                    +Int samObjectId
+                    +Array samDictatedAppearances
+                    +Array cdfsodPredictions
+                }
+                
+                class SAMAppearance {
+                    +Int frameNum
+                    +Array[4] boundingBox
+                }
+                
+                class CDFSODPrediction {
+                    +Int frameNumber
+                    +String class
+                    +Float confidence
+                }
+                
+                SegmentationResults *-- ObjectSummary : contains
+                ObjectSummary *-- SAMAppearance : contains
+                ObjectSummary *-- CDFSODPrediction : contains
+        </div>
+        
+        <div class="code-example">
+            <h3>Final Result JSON Structure:</h3>
+            <pre>[
+  {
+    "samObjectId": 1,
+    "samDictatedAppearances": [
+      {"frameNum": 0, "boundingBox": [100, 150, 200, 250]},
+      {"frameNum": 1, "boundingBox": [102, 153, 202, 253]}
+    ],
+    "cdfsodPredictions": [
+      {"frameNumber": 0, "class": "Time Stick", "confidence": 0.95},
+      {"frameNumber": 1, "class": "Time Stick", "confidence": 0.94}
+    ]
+  },
+  {
+    "samObjectId": 2,
+    "samDictatedAppearances": [
+      {"frameNum": 0, "boundingBox": [300, 400, 450, 650]}
+    ],
+    "cdfsodPredictions": [
+      {"frameNumber": 0, "class": "Person", "confidence": 0.92}
+    ]
+  }
+]</pre>
+        </div>
+    </div>
+
+    <div class="diagram-container">
+        <h2>Mask Processing and Visualization</h2>
+        <div class="note">
+            <p>The pipeline can process segmentation masks for visualization and analysis.</p>
+        </div>
+        <div class="mermaid">
+            flowchart TD
+                A[Video Segments] --> B{Save Binary Masks?}
+                B -->|Yes| C[Create Mask Directory]
+                C --> D[Save NPY Files]
+                C --> E[Save PNG Visualizations]
+                
+                A --> F[Visualize Segmentation]
+                F --> G[Load Frame Image]
+                F --> H[Apply Colored Overlays]
+                H --> I[Add Bounding Boxes]
+                I --> J[Save Visualization PNG]
+                
+                style A fill:#f9d5e5,stroke:#333
+                style D fill:#d5e8f9,stroke:#333
+                style E fill:#d5e8f9,stroke:#333
+                style J fill:#d5e8f9,stroke:#333
+        </div>
+    </div>
+
+    <script>
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'default',
+            securityLevel: 'loose',
+            flowchart: { useMaxWidth: false }
+        });
+    </script>
+</body>
+</html> 

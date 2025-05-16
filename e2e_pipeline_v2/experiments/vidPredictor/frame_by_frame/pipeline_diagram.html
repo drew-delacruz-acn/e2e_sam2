@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SAM2 Video Segmentation Pipeline Diagrams</title>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        h1, h2, h3 {
+            color: #2c3e50;
+        }
+        .mermaid {
+            margin: 30px 0;
+            padding: 20px;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+        }
+        .diagram-container {
+            margin-bottom: 40px;
+        }
+        .note {
+            background-color: #e7f5fe;
+            border-left: 4px solid #3498db;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <h1>SAM2 Video Segmentation Pipeline</h1>
+    <p>This document visualizes the frame-by-frame approach for video segmentation using SAM2 (Segment Anything Model 2).</p>
+
+    <div class="diagram-container">
+        <h2>Pipeline Overview</h2>
+        <div class="note">
+            <p>This diagram shows the high-level flow of the entire pipeline, from detection files to final output.</p>
+        </div>
+        <div class="mermaid">
+            flowchart TD
+                subgraph Inputs
+                    A[Detection JSON Files] 
+                    B[Video Frames]
+                    C[SAM2 Model]
+                end
+                
+                A --> D[Load & Process Detections]
+                B --> E[Process Video Frames]
+                C --> F[Initialize SAM2]
+                
+                D --> G[Convert to Tracking Format]
+                E --> H[Set Up Video Inference]
+                F --> H
+                
+                G --> I[Process Objects with SAM2]
+                H --> I
+                
+                I --> J[Propagate Segmentation]
+                J --> K[Match Detections to Segments]
+                K --> L[Create Segmentation Summary]
+                
+                L --> M[Save Results JSON]
+                J --> N[Visualize Results]
+                J --> O[Save Binary Masks]
+                
+                subgraph Outputs
+                    M
+                    N
+                    O
+                end
+                
+                style A fill:#f9d5e5,stroke:#333
+                style B fill:#f9d5e5,stroke:#333
+                style C fill:#f9d5e5,stroke:#333
+                style M fill:#d5e8f9,stroke:#333
+                style N fill:#d5e8f9,stroke:#333
+                style O fill:#d5e8f9,stroke:#333
+        </div>
+    </div>
+
+    <div class="diagram-container">
+        <h2>Detailed Detection Processing Flow</h2>
+        <div class="note">
+            <p>This diagram details how detection files are processed into tracking objects.</p>
+        </div>
+        <div class="mermaid">
+            flowchart LR
+                A[Detection JSON Files] --> B[Load Detection Files]
+                B --> C{Filter by Confidence}
+                C -->|Above Threshold| D[Convert to Tracking Format]
+                C -->|Below Threshold| E[Discard]
+                
+                D --> F[Tracking Objects]
+                
+                subgraph "Tracking Object Structure"
+                    F --> G["Object ID"]
+                    F --> H["Object Name"]
+                    F --> I["Frame Occurrences:
+                            - Frame Number
+                            - Bounding Box
+                            - Confidence"]
+                end
+                
+                style A fill:#f9d5e5,stroke:#333
+                style F fill:#d5e8f9,stroke:#333
+        </div>
+    </div>
+
+    <div class="diagram-container">
+        <h2>SAM2 Segmentation Process</h2>
+        <div class="note">
+            <p>This diagram illustrates how SAM2 is used to segment objects across video frames.</p>
+        </div>
+        <div class="mermaid">
+            sequenceDiagram
+                participant Tracking as Tracking Objects
+                participant SAM2 as SAM2 Segmenter
+                participant Frames as Video Frames
+                participant Results as Segmentation Results
+                
+                Tracking->>SAM2: Initialize with bounding boxes
+                SAM2->>Frames: Initialize video
+                
+                loop For each frame with detections
+                    Tracking->>SAM2: Send object location
+                    SAM2->>Frames: Process frame
+                end
+                
+                SAM2->>SAM2: Propagate segmentation through video
+                SAM2->>Results: Generate video segments (frame index -> object masks)
+                
+                Note over Results: Contains mask for each object<br>in each frame
+        </div>
+    </div>
+
+    <div class="diagram-container">
+        <h2>Object Tracking and Matching</h2>
+        <div class="note">
+            <p>This diagram shows how object segmentation is matched with original detections.</p>
+        </div>
+        <div class="mermaid">
+            flowchart TD
+                A[Video Segments] --> C[Match Detections to Segments]
+                B[Filtered Detections] --> C
+                D[Tracking Objects] --> C
+                
+                C --> E[Object-Detection Matching]
+                E --> F[Create Segmentation Summary]
+                
+                F --> G[Output JSON]
+                
+                subgraph "Output JSON Format"
+                    G --> H["SAM Object ID"]
+                    G --> I["SAM Dictated Appearances:
+                            - Frame Numbers
+                            - Bounding Boxes"]
+                    G --> J["CDFSOD Predictions:
+                            - Frame Numbers
+                            - Object Class
+                            - Confidence Scores"]
+                end
+                
+                style A fill:#f9d5e5,stroke:#333
+                style B fill:#f9d5e5,stroke:#333
+                style D fill:#f9d5e5,stroke:#333
+                style G fill:#d5e8f9,stroke:#333
+        </div>
+    </div>
+
+    <div class="diagram-container">
+        <h2>Data Flow Architecture</h2>
+        <div class="note">
+            <p>This diagram visualizes the overall data flow between modules.</p>
+        </div>
+        <div class="mermaid">
+            classDiagram
+                class DetectionProcessor {
+                    +load_detection_files()
+                    +filter_detections_by_confidence()
+                    +convert_detections_to_tracking_format()
+                }
+                
+                class SAM2VideoSegmenter {
+                    +initialize_video()
+                    +process_tracking_objects()
+                    +propagate_segmentation()
+                }
+                
+                class ResultProcessor {
+                    +match_detections_to_segments()
+                    +create_segmentation_summary()
+                    +save_results_to_json()
+                }
+                
+                class Visualization {
+                    +visualize_segmentation_results()
+                }
+                
+                class Utils {
+                    +set_env_variables()
+                    +get_frame_names()
+                    +get_unique_frame_numbers()
+                }
+                
+                DetectionProcessor --> SAM2VideoSegmenter: Tracking Objects
+                SAM2VideoSegmenter --> ResultProcessor: Video Segments
+                DetectionProcessor --> ResultProcessor: Filtered Detections
+                ResultProcessor --> Visualization: Results
+                SAM2VideoSegmenter --> Visualization: Video Segments
+                Utils --> DetectionProcessor: Helper Functions
+                Utils --> SAM2VideoSegmenter: Helper Functions
+        </div>
+    </div>
+
+    <script>
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'default',
+            securityLevel: 'loose',
+            flowchart: { useMaxWidth: false }
+        });
+    </script>
+</body>
+</html> 

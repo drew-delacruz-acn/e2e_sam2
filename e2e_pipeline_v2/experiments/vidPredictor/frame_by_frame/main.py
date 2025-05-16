@@ -11,6 +11,8 @@ import argparse
 import torch
 import matplotlib.pyplot as plt
 import json
+import numpy as np
+from pathlib import Path
 
 # Import modules
 from src.utils import set_env_variables, get_frame_names, get_unique_frame_numbers
@@ -50,6 +52,8 @@ def parse_args():
                         help='Enable debug mode with additional logging')
     parser.add_argument('--no_vis', action='store_true',
                         help='Skip visualization generation')
+    parser.add_argument('--save_masks', action='store_true',
+                        help='Save binary masks for each object')
     return parser.parse_args()
 
 def ensure_dir(directory):
@@ -80,6 +84,50 @@ def dump_debug_info(data, filename, output_dir):
         else:
             json.dump(data, f, indent=2)
     print(f"Debug info saved to {debug_path}")
+
+def save_binary_masks(video_segments, results_dir, tracking_objects):
+    """Save binary masks for each object in a separate folder"""
+    print("\n=== Saving binary masks ===")
+    masks_dir = ensure_dir(os.path.join(results_dir, "masks"))
+    
+    # Create a dictionary to map object IDs to names
+    obj_id_to_name = {}
+    for obj in tracking_objects:
+        obj_id_to_name[str(obj['objectID'])] = obj['objectName']
+    
+    # Count of saved masks per object
+    mask_counts = {}
+    
+    # Process each frame
+    for frame_idx, segments in video_segments.items():
+        # Process each object in the frame
+        for obj_id, mask in segments.items():
+            # Get object name or use ID if name not found
+            obj_name = obj_id_to_name.get(obj_id, f"unknown_{obj_id}")
+            # Sanitize object name for filesystem
+            obj_name = obj_name.replace("/", "_").replace(" ", "_")
+            
+            # Create directory for this object
+            obj_dir = ensure_dir(os.path.join(masks_dir, obj_name))
+            
+            # Save the binary mask as a numpy array
+            mask_path = os.path.join(obj_dir, f"frame_{frame_idx:05d}.npy")
+            # Convert mask to binary (0 or 1) and save
+            binary_mask = mask.astype(np.uint8)
+            np.save(mask_path, binary_mask)
+            
+            # Update counts
+            if obj_name not in mask_counts:
+                mask_counts[obj_name] = 0
+            mask_counts[obj_name] += 1
+    
+    # Print summary
+    print(f"Binary masks saved to {masks_dir}")
+    print("Mask counts per object:")
+    for obj_name, count in mask_counts.items():
+        print(f"  {obj_name}: {count} masks")
+    
+    return masks_dir
 
 def main():
     """Main function to run the pipeline"""
@@ -183,6 +231,11 @@ def main():
         
         dump_debug_info(object_appearances, "object_appearances.json", debug_dir)
         print(f"Found {len(object_appearances)} objects with segment appearances")
+    
+    # Save binary masks if requested
+    if args.save_masks:
+        print("\n=== STEP 5b: Saving binary masks ===")
+        masks_dir = save_binary_masks(video_segments, results_dir, tracking_objects)
     
     # Match detections to segments
     print("\n=== STEP 6: Matching detections to segments ===")

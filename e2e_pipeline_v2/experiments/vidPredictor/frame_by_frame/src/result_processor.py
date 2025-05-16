@@ -182,6 +182,7 @@ def create_segmentation_summary(video_segments, tracking_objects, object_detecti
     print(f"Found {len(object_ids)} unique object IDs in video segments")
     
     # Process each object
+
     for obj_id in sorted(object_ids):
         # Get all frames where this object appears
         appearances = []
@@ -189,7 +190,7 @@ def create_segmentation_summary(video_segments, tracking_objects, object_detecti
             if str(obj_id) in video_segments[frame_idx]:
                 # Try to get box from tracking data first (more accurate)
                 box = get_tracking_box_for_frame(tracking_objects, obj_id, frame_idx)
-                
+                print(f'BOX: {box}')
                 # If not found, compute from mask
                 if box is None:
                     mask = video_segments[frame_idx][str(obj_id)]

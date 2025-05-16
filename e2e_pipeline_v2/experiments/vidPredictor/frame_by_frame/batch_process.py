@@ -149,21 +149,26 @@ def process_video_sequence(args, video_name):
     logger.info(f"Processing {video_name} with command: {' '.join(cmd)}")
     
     try:
-        # Run the command and capture output
+        # Run the command and print output in real-time
         start_time = time.time()
-        process = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, universal_newlines=True)
-        stdout, stderr = process.communicate()
+        
+        # If we want to see the output in real-time, don't capture stdout/stderr
+        # Instead, pass them through to the parent process's stdout/stderr
+        logger.info(f"--- Starting main.py for {video_name} - Output follows ---")
+        process = subprocess.Popen(cmd)
+        process.wait()  # Wait for the process to complete
+        logger.info(f"--- End of main.py output for {video_name} ---")
         
         # Check if the process was successful
         if process.returncode == 0:
             elapsed_time = time.time() - start_time
             logger.info(f"Completed {video_name} in {elapsed_time:.2f} seconds")
             success = True
-            output = stdout
+            output = "Output was printed to console in real-time"
         else:
-            logger.error(f"Failed to process {video_name}: {stderr}")
+            logger.error(f"Failed to process {video_name} with exit code {process.returncode}")
             success = False
-            output = stderr
+            output = f"Process failed with exit code {process.returncode}"
         
         # Clean up GPU memory after processing
         logger.info("Cleaning up GPU memory...")

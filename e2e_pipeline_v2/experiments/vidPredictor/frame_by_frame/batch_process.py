@@ -119,6 +119,12 @@ def process_video_sequence(args, video_name):
     # Ensure the results directory exists
     os.makedirs(results_dir, exist_ok=True)
     
+    # If debug mode is enabled, ensure the debug directory exists before running main.py
+    if args.debug:
+        debug_dir = os.path.join(results_dir, "debug")
+        os.makedirs(debug_dir, exist_ok=True)
+        logger.info(f"Created debug directory: {debug_dir}")
+    
     # Build the command
     cmd = [
         "python", 

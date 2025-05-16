@@ -119,11 +119,10 @@ def process_video_sequence(args, video_name):
     # Ensure the results directory exists
     os.makedirs(results_dir, exist_ok=True)
     
-    # If debug mode is enabled, ensure the debug directory exists before running main.py
-    if args.debug:
-        debug_dir = os.path.join(results_dir, "debug")
-        os.makedirs(debug_dir, exist_ok=True)
-        logger.info(f"Created debug directory: {debug_dir}")
+    # Always create debug directory because main.py uses it even without --debug due to "or True" condition
+    debug_dir = os.path.join(results_dir, "debug")
+    os.makedirs(debug_dir, exist_ok=True)
+    logger.info(f"Created debug directory: {debug_dir}")
     
     # Build the command
     cmd = [
@@ -136,12 +135,11 @@ def process_video_sequence(args, video_name):
         "--results_dir", results_dir,
         "--confidence_threshold", str(args.confidence_threshold),
         "--vis_stride", str(args.vis_stride),
-        "--iou_threshold", str(args.iou_threshold)
+        "--iou_threshold", str(args.iou_threshold),
+        "--debug"  # Always enable debug mode because main.py requires it
     ]
     
-    # Add optional flags
-    if args.debug:
-        cmd.append("--debug")
+    # Add other optional flags (except debug which is now always on)
     if args.no_vis:
         cmd.append("--no_vis")
     if args.save_masks:

@@ -301,12 +301,16 @@ def main():
     # Visualize results
     if not args.no_vis:
         print("\n=== STEP 9: Visualizing segmentation results ===")
+        # Pass the get_bounding_box_from_mask function to avoid circular imports
+        from src.result_processor import get_bounding_box_from_mask
         figures = visualize_segmentation_results(
             args.frames_dir, 
             frame_names, 
             video_segments, 
             vis_frame_stride=args.vis_stride,
-            save_path=vis_dir
+            save_path=vis_dir,
+            show_boxes=True,  # Show bounding boxes
+            bbox_func=get_bounding_box_from_mask  # Pass the function
         )
         
         print(f"Processed {len(frame_names)} frames with {len(tracking_objects)} object classes")

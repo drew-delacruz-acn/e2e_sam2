@@ -50,7 +50,7 @@ def show_box(box, ax):
     w, h = box[2] - box[0], box[3] - box[1]
     ax.add_patch(plt.Rectangle((x0, y0), w, h, edgecolor='green', facecolor=(0, 0, 0, 0), lw=2))
 
-def visualize_segmentation_results(frames_dir, frame_names, video_segments, vis_frame_stride=1, save_path=None):
+def visualize_segmentation_results(frames_dir, frame_names, video_segments, vis_frame_stride=1, save_path=None, show_boxes=True, bbox_func=None):
     """
     Visualize segmentation results
     
@@ -60,6 +60,8 @@ def visualize_segmentation_results(frames_dir, frame_names, video_segments, vis_
         video_segments: Dictionary mapping frame indices to segmentation results
         vis_frame_stride: Stride for visualization (display every nth frame)
         save_path: Directory to save visualization frames (optional)
+        show_boxes: Whether to show bounding boxes around masks
+        bbox_func: Function to compute bounding box from mask (to avoid circular imports)
     """
     plt.close("all")
     all_figures = []
@@ -89,15 +91,44 @@ def visualize_segmentation_results(frames_dir, frame_names, video_segments, vis_
             frame_path = os.path.join(frames_dir, frame_names[out_frame_idx])
             plt.imshow(Image.open(frame_path))
             
-            # Add segmentation masks
+            # Add segmentation masks and bounding boxes
             if out_frame_idx in video_segments:
                 for out_obj_id, out_mask in video_segments[out_frame_idx].items():
+                    # Show mask
                     show_mask(out_mask, plt.gca(), obj_id=int(out_obj_id))
+                    
+                    # Show bounding box if requested
+                    if show_boxes:
+                        try:
+                            # Compute bounding box from mask
+                            if bbox_func:
+                                box = bbox_func(out_mask)
+                            else:
+                                # Simple fallback bounding box calculation if no function provided
+                                mask_positions = np.where(np.squeeze(out_mask) > 0)
+                                if len(mask_positions[0]) > 0:
+                                    row_min, row_max = np.min(mask_positions[0]), np.max(mask_positions[0])
+                                    col_min, col_max = np.min(mask_positions[1]), np.max(mask_positions[1])
+                                    box = [int(col_min), int(row_min), int(col_max), int(row_max)]
+                                else:
+                                    box = [0, 0, 0, 0]
+                            show_box(box, plt.gca())
+                            
+                            # Add label with object ID
+                            plt.text(
+                                box[0], box[1] - 5,
+                                f"ID: {out_obj_id}",
+                                color='white', fontsize=10,
+                                bbox={'facecolor': 'green', 'alpha': 0.7, 'pad': 2}
+                            )
+                        except Exception as e:
+                            print(f"Error showing box for object {out_obj_id}: {e}")
             
             # Save figure if save_path is provided
             if save_path:
                 save_file = os.path.join(save_path, f"frame_{out_frame_idx:04d}.png")
-                plt.savefig(save_file, dpi=150, bbox_inches='tight', pad_inches=0.1, transparent=False)
+                # Remove padding to avoid misalignment
+                plt.savefig(save_file, dpi=150, bbox_inches='tight', pad_inches=0, transparent=False)
                 plt.close(fig)  # Close immediately to free memory
             else:
                 all_figures.append(fig)

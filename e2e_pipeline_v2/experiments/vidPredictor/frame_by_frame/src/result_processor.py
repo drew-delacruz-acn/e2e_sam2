@@ -96,6 +96,8 @@ def get_bounding_box_from_mask(mask):
     mask = (mask > 0).astype(np.uint8)
     
     # Find non-zero elements (the mask)
+    # IMPORTANT: np.where returns (row_indices, column_indices)
+    # where row = y-coordinate and column = x-coordinate
     mask_positions = np.where(mask)
     
     # No mask points, return empty box
@@ -104,11 +106,13 @@ def get_bounding_box_from_mask(mask):
         return [0, 0, 0, 0]
     
     # Get the boundary coordinates
-    y_min, y_max = np.min(mask_positions[0]), np.max(mask_positions[0])
-    x_min, x_max = np.min(mask_positions[1]), np.max(mask_positions[1])
+    # mask_positions[0] = rows (y), mask_positions[1] = columns (x)
+    row_min, row_max = np.min(mask_positions[0]), np.max(mask_positions[0])
+    col_min, col_max = np.min(mask_positions[1]), np.max(mask_positions[1])
     
-    # Log the computed box
-    box = [int(x_min), int(y_min), int(x_max), int(y_max)]
+    # For box coordinates [x1, y1, x2, y2], map from (row, col) to (x, y):
+    # x1 = col_min, y1 = row_min, x2 = col_max, y2 = row_max
+    box = [int(col_min), int(row_min), int(col_max), int(row_max)]
     print(f"  DEBUG: Computed box from mask: {box}")
     
     # Validate the box

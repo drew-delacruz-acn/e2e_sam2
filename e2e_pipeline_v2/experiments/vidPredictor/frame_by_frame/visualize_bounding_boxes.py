@@ -40,7 +40,7 @@ def load_json_results(json_path):
 def get_frame_list(frames_dir):
     """Get list of frame filenames and their corresponding frame numbers"""
     frames = {}
-    frame_pattern = re.compile(r'frame_(\d+)\.png')
+    frame_pattern = re.compile(r'(\d+)\.jpg')
     
     for file in os.listdir(frames_dir):
         match = frame_pattern.match(file)

@@ -93,9 +93,9 @@ def detect_scenes(frames_dir, fps=30, detector="adaptive", threshold=27,
 
 if __name__ == "__main__":
     # Example usage - modify these parameters as needed
-    frames_dir = "/path/to/your/frames"  # Change this to your frames directory
+    frames_dir = "/home/ubuntu/code/drew/e2e_sam2/data/frames/Scenes 061-080__265H-2-_20230815215828529"  # Change this to your frames directory
     fps = 24
-    detector = "adaptive"
+    detector = "threshold"
     threshold = 27
     sigma = 0.33
     min_scene_len = 15

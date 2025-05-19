@@ -6,7 +6,8 @@
 [{‘frameNumber’:6, ‘class’:Scepter}]
 },
 [{‘samObjectId’: ’blueMask’,
-‘samDictatedAppearances’:[3,4,5], 🡪 first appearance was frame 3
+‘samDictatedAppea
+rances’:[3,4,5], 🡪 first appearance was frame 3
 ‘cdfsodPredictions’:[
 {‘frameNumber’:3, ‘class’:Time Stick, ‘confidence’:82},
 [{‘frameNumber’:5, ‘class’:Time Stick}]

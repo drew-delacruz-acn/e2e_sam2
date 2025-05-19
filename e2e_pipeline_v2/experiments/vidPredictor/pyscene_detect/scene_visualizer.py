@@ -45,7 +45,7 @@ def main():
     # Frame directory input
     frames_dir = st.text_input(
         "Frames Directory",
-        "/Users/andrewdelacruz/e2e_sam2/gitignore_exception/data/frames/Scenes 061-080__265H-2-_20230815215828529"
+        "data/frames/Scenes 061-080__265H-2-_20230815215828529"
     )
     
     if st.button("Detect Scenes"):

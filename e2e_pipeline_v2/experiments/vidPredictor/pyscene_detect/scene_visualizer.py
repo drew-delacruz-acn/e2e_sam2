@@ -112,13 +112,13 @@ def main():
     
     # Show relevant parameters based on detector type
     if detector == "adaptive":
-        sigma = st.sidebar.slider("Sigma", 0.01, 1.0, 0.33, 0.01, 
+        adaptive_threshold = st.sidebar.slider("Adaptive Threshold", 0.01, 1.0, 0.33, 0.01, 
                                 help="Controls how quickly the detector adapts to changes (0.0-1.0)")
         threshold = 27  # Default value, not used by adaptive detector
     else:
         threshold = st.sidebar.slider("Threshold", 1, 100, 27,
                                     help="Detection sensitivity (lower = more sensitive)")
-        sigma = 0.33  # Default value, only used by adaptive detector
+        adaptive_threshold = 0.33  # Default value, only used by adaptive detector
     
     min_scene_len = st.sidebar.slider("Min Scene Length", 1, 100, 15, 
                                     help="Minimum number of frames a scene must contain")
@@ -145,7 +145,7 @@ def main():
             fps=fps,
             detector=detector,
             threshold=threshold,
-            sigma=sigma,
+            adaptive_threshold=adaptive_threshold,
             min_scene_len=min_scene_len
         )
         

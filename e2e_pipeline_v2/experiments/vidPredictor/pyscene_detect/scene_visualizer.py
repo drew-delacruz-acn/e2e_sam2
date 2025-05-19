@@ -61,9 +61,42 @@ def display_scene_context(frame_files, scene_start, is_first_scene=False):
             if frame_num == scene_start and not is_first_scene:
                 st.markdown("**Scene Boundary**")
 
+def get_scene_directories(base_dir):
+    """Get all scene directories from the base directory"""
+    base_path = Path(base_dir)
+    if not base_path.exists():
+        return []
+    
+    # Get all directories that contain image files
+    scene_dirs = []
+    for d in base_path.iterdir():
+        if d.is_dir():
+            # Check if directory contains image files
+            if list(d.glob("*.jpg")) or list(d.glob("*.png")):
+                scene_dirs.append(str(d))
+    
+    return sorted(scene_dirs)
+
 def main():
     st.set_page_config(page_title="Scene Detection Visualizer", layout="wide")
     st.title("Scene Detection Visualizer")
+    
+    # Base directory for all scenes
+    base_dir = "data/frames/"
+    
+    # Get available scene directories
+    scene_dirs = get_scene_directories(base_dir)
+    
+    if not scene_dirs:
+        st.error("No scene directories found!")
+        return
+    
+    # Scene directory selection
+    selected_dir = st.selectbox(
+        "Select Scene Directory",
+        scene_dirs,
+        format_func=lambda x: Path(x).name
+    )
     
     # Sidebar controls
     st.sidebar.header("Detection Parameters")
@@ -72,20 +105,14 @@ def main():
     threshold = st.sidebar.slider("Threshold", 1, 100, 27)
     min_scene_len = st.sidebar.slider("Min Scene Length", 1, 100, 15)
     
-    # Frame directory input
-    frames_dir = st.text_input(
-        "Frames Directory",
-        "data/frames/Scenes 061-080__265H-2-_20230815215828529"
-    )
-    
     if st.button("Detect Scenes"):
-        if not Path(frames_dir).exists():
-            st.error("Frames directory does not exist!")
+        if not Path(selected_dir).exists():
+            st.error("Selected directory does not exist!")
             return
             
         # Get frame files
-        frame_files = sorted(list(Path(frames_dir).glob("*.jpg")) + 
-                           list(Path(frames_dir).glob("*.png")))
+        frame_files = sorted(list(Path(selected_dir).glob("*.jpg")) + 
+                           list(Path(selected_dir).glob("*.png")))
         
         if not frame_files:
             st.error("No frame files found!")
@@ -93,7 +120,7 @@ def main():
             
         # Detect scenes
         scene_starts = detect_scenes(
-            frames_dir=frames_dir,
+            frames_dir=selected_dir,
             fps=fps,
             detector=detector,
             threshold=threshold,

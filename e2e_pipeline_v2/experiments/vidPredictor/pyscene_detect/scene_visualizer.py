@@ -114,11 +114,17 @@ def main():
     if detector == "adaptive":
         adaptive_threshold = st.sidebar.slider("Adaptive Threshold", 0.01, 1.0, 0.33, 0.01, 
                                 help="Controls how quickly the detector adapts to changes (0.0-1.0)")
+        min_content_val = st.sidebar.slider("Min Content Value", 1.0, 20.0, 8.0, 0.5,
+                                help="Minimum content value to trigger a scene cut")
+        window_width = st.sidebar.slider("Window Width", 1, 15, 2, 1,
+                                help="Number of frames to average for adaptive detection")
         threshold = 27  # Default value, not used by adaptive detector
     else:
         threshold = st.sidebar.slider("Threshold", 1, 100, 27,
                                     help="Detection sensitivity (lower = more sensitive)")
         adaptive_threshold = 0.33  # Default value, only used by adaptive detector
+        min_content_val = 8.0  # Default value
+        window_width = 2  # Default value
     
     min_scene_len = st.sidebar.slider("Min Scene Length", 1, 100, 15, 
                                     help="Minimum number of frames a scene must contain")
@@ -146,7 +152,9 @@ def main():
             detector=detector,
             threshold=threshold,
             adaptive_threshold=adaptive_threshold,
-            min_scene_len=min_scene_len
+            min_scene_len=min_scene_len,
+            min_content_val=min_content_val,
+            window_width=window_width
         )
         
         # Display results

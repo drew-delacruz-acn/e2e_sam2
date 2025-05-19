@@ -33,22 +33,28 @@ def create_timeline_plot(scene_starts, total_frames):
 
 def display_scene_context(frame_files, scene_start, is_first_scene=False):
     """Display frames around a scene boundary"""
+    # Get frame numbers from filenames
+    frame_numbers = [int(f.stem) for f in frame_files]
+    
     if is_first_scene:
         # For first scene, show first 3 frames
         frames_to_show = frame_files[:3]
-        frame_numbers = list(range(3))
+        display_numbers = frame_numbers[:3]
     else:
         # For other scenes, show 3 frames before and after
-        start_idx = max(0, scene_start - 3)
-        end_idx = min(len(frame_files), scene_start + 3)
-        frames_to_show = frame_files[start_idx:end_idx]
-        frame_numbers = list(range(start_idx, end_idx))
+        # Find the index of the scene start frame
+        start_idx = frame_numbers.index(scene_start)
+        # Get 3 frames before and after
+        start_display = max(0, start_idx - 3)
+        end_display = min(len(frame_files), start_idx + 3)
+        frames_to_show = frame_files[start_display:end_display]
+        display_numbers = frame_numbers[start_display:end_display]
     
     # Create columns for the frames
     cols = st.columns(len(frames_to_show))
     
     # Display each frame with its number
-    for col, (frame_path, frame_num) in enumerate(zip(frames_to_show, frame_numbers)):
+    for col, (frame_path, frame_num) in enumerate(zip(frames_to_show, display_numbers)):
         with cols[col]:
             frame = load_frame(frame_path)
             st.image(frame, caption=f"Frame {frame_num}")

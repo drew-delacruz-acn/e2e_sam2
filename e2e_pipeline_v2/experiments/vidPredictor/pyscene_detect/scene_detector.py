@@ -5,7 +5,7 @@ Detect scene boundaries in a directory of frame images.
 This version keeps **exactly** the same public API you started with—no change to
 how you import or call `detect_scenes`, and it still returns the same list of
 scene‑start indices.  The only fix is that the old, ignored `sigma` parameter
-now correctly feeds PySceneDetect’s `adaptive_threshold` knob when you choose
+now correctly feeds PySceneDetect's `adaptive_threshold` knob when you choose
 `detector="adaptive"`.
 
 Example (unchanged)::
@@ -29,12 +29,18 @@ def detect_scenes(
     threshold: float = 27,
     adaptive_threshold: float = 2.0,          # ← now mapped to adaptive_threshold
     min_scene_len: int = 15,
+    min_content_val: float = 8.0,
+    window_width: int = 2,
     ext: str = ".jpg",
 ):
     """Detect scene boundaries in a folder of numbered frames.
 
     Parameters are *identical* to the original signature; only the internal
     wiring changed so that ``sigma`` actually matters for the adaptive method.
+    
+    Additional parameters for adaptive detector:
+        min_content_val: Minimum content value to trigger a scene cut
+        window_width: Number of frames to average for adaptive detection
     """
     # --- basic validation -------------------------------------------------
     frames_dir = Path(frames_dir)
@@ -55,11 +61,12 @@ def detect_scenes(
     # --- detector factory (unchanged inputs) -----------------------------
     d_lower = detector.lower()
     if d_lower == "adaptive":
-        # Map *sigma* → adaptive_threshold so callers don’t have to change.
+        # Map *sigma* → adaptive_threshold so callers don't have to change.
         det = AdaptiveDetector(
             adaptive_threshold=adaptive_threshold,
-            min_content_val=8.0,       # sensible default; adjust if needed
+            min_content_val=min_content_val,
             min_scene_len=min_scene_len,
+            window_width=window_width
         )
     elif d_lower == "content":
         det = ContentDetector(threshold=threshold, min_scene_len=min_scene_len)
@@ -98,6 +105,8 @@ if __name__ == "__main__":
         detector="adaptive",
         adaptive_threshold=2.0,
         min_scene_len=15,
+        min_content_val=8.0,
+        window_width=2,
         ext=".jpg",
     )
     print("Detected cuts:", _cuts)

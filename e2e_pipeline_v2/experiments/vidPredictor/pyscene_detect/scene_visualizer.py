@@ -62,7 +62,7 @@ def main():
     # Sidebar controls
     st.sidebar.header("Detection Parameters")
     fps = st.sidebar.slider("FPS", 1, 60, 24)
-    detector = st.sidebar.slider("Detector", ["adaptive", "content", "threshold"])
+    detector = st.sidebar.selectbox("Detector", ["adaptive", "content", "threshold"])
     threshold = st.sidebar.slider("Threshold", 1, 100, 27)
     min_scene_len = st.sidebar.slider("Min Scene Length", 1, 100, 15)
     

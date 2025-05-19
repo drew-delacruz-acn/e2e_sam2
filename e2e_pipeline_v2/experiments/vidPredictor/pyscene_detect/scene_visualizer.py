@@ -5,6 +5,7 @@ from pathlib import Path
 import matplotlib.pyplot as plt
 from scene_detector import detect_scenes
 import re
+import pandas as pd
 
 def natural_sort_key(s):
     """Helper function for natural sorting of strings containing numbers"""
@@ -17,6 +18,26 @@ def load_frame(frame_path):
     img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
     return img
 
+def add_highlight_border(img, is_boundary=False):
+    """Add colored border to highlight scene boundary frames"""
+    if is_boundary:
+        # Add a red border (5 pixels wide) for scene boundary frames
+        border_color = [255, 0, 0]  # Red for scene boundary
+        border_size = 5
+    else:
+        # Add a thin gray border for regular frames
+        border_color = [200, 200, 200]  # Light gray for regular frames
+        border_size = 1
+        
+    h, w = img.shape[:2]
+    bordered = cv2.copyMakeBorder(
+        img, 
+        border_size, border_size, border_size, border_size, 
+        cv2.BORDER_CONSTANT, 
+        value=border_color
+    )
+    return bordered
+
 def create_timeline_plot(scene_starts, total_frames):
     """Create a timeline visualization of scene starts"""
     fig, ax = plt.subplots(figsize=(10, 2))
@@ -24,10 +45,17 @@ def create_timeline_plot(scene_starts, total_frames):
     # Plot timeline
     ax.plot([0, total_frames], [0, 0], 'k-', alpha=0.3)
     
-    # Plot scene starts
+    # Create colored segments for alternating scenes
+    colors = ['#e6f7ff', '#fff0e6']  # Light blue and light orange
+    for i in range(len(scene_starts)):
+        start = scene_starts[i]
+        end = scene_starts[i+1] if i < len(scene_starts)-1 else total_frames
+        ax.axvspan(start, end, alpha=0.2, color=colors[i % len(colors)])
+    
+    # Plot scene starts as thicker red lines
     for start in scene_starts:
-        ax.axvline(x=start, color='r', alpha=0.5)
-        ax.text(start, 0.1, f'Scene {start}', rotation=45)
+        ax.axvline(x=start, color='r', linewidth=2, alpha=0.7)
+        ax.text(start, 0.1, f'Frame {start}', rotation=45, color='darkred', fontweight='bold')
     
     ax.set_xlim(0, total_frames)
     ax.set_ylim(-0.5, 0.5)
@@ -63,9 +91,20 @@ def display_scene_context(frame_files, scene_start, is_first_scene=False):
     for col, (frame_path, frame_num) in enumerate(zip(frames_to_show, display_numbers)):
         with cols[col]:
             frame = load_frame(frame_path)
-            st.image(frame, caption=f"Frame {frame_num}")
-            if frame_num == scene_start and not is_first_scene:
-                st.markdown("**Scene Boundary**")
+            
+            # Highlight scene boundary frames
+            is_boundary = frame_num == scene_start and not is_first_scene
+            frame_with_border = add_highlight_border(frame, is_boundary)
+            
+            # Add caption with appropriate styling
+            if is_boundary:
+                st.image(frame_with_border, caption=f"Frame {frame_num}")
+                st.markdown(
+                    f'<div style="text-align: center; color: red; font-weight: bold; margin-top: -15px;">⬆ SCENE BOUNDARY ⬆</div>', 
+                    unsafe_allow_html=True
+                )
+            else:
+                st.image(frame_with_border, caption=f"Frame {frame_num}")
 
 def get_scene_directories(base_dir):
     """Get all scene directories from the base directory"""
@@ -83,6 +122,25 @@ def get_scene_directories(base_dir):
     
     # Sort using natural sort (handles numbers in strings properly)
     return sorted(scene_dirs, key=natural_sort_key)
+
+def display_scene_summary(scene_starts, total_frames):
+    """Display a summary table showing which frames belong to which scenes"""
+    scene_data = []
+    
+    for i, start in enumerate(scene_starts):
+        end = scene_starts[i + 1] - 1 if i < len(scene_starts) - 1 else total_frames - 1
+        scene_data.append({
+            "Scene Number": i + 1,
+            "Start Frame": start,
+            "End Frame": end,
+            "Duration (frames)": end - start + 1
+        })
+    
+    # Convert to DataFrame for easy display
+    df = pd.DataFrame(scene_data)
+    
+    # Display the summary table
+    st.dataframe(df)
 
 def main():
     st.set_page_config(page_title="Scene Detection Visualizer", layout="wide")
@@ -162,6 +220,10 @@ def main():
         
         # Show timeline
         st.pyplot(create_timeline_plot(scene_starts, len(frame_files)))
+        
+        # Show scene summary table
+        st.subheader("Scene Summary")
+        display_scene_summary(scene_starts, len(frame_files))
         
         # Show scene information with context
         st.subheader("Scene Information")

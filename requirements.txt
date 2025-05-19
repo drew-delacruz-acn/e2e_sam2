@@ -6,3 +6,5 @@ faiss-cpu>=1.7.2  # Use faiss-gpu for GPU support
 Pillow>=8.0.0
 matplotlib>=3.3.0
 tqdm>=4.50.0
+streamlit>=1.32.0
+opencv-python>=4.8.0

@@ -15,11 +15,11 @@ Example usage as a script:
 
 import os
 from pathlib import Path
-from scenedetect import open_video, SceneManager
+from scenedetect import SceneManager, VideoManager, open_video
 from scenedetect.detectors import ContentDetector, AdaptiveDetector, ThresholdDetector
 
 def detect_scenes(frames_dir, fps=30, detector="adaptive", threshold=27, 
-                 sigma=0.33, min_scene_len=15):
+                 sigma=0.33, min_scene_len=15, ext=".jpg"):
     """
     Detect scene boundaries in a directory of frame images.
     
@@ -30,10 +30,9 @@ def detect_scenes(frames_dir, fps=30, detector="adaptive", threshold=27,
         threshold (float): Detection threshold (for content/threshold detectors)
         sigma (float): Sigma factor for adaptive detector (0.0-1.0)
         min_scene_len (int): Minimum scene length in frames
-    
+        ext (str): Image file extension (e.g., ".jpg" or ".png")
     Returns:
         list: List of tuples containing (start_frame, end_frame) for each scene
-    
     Raises:
         ValueError: If frames_dir doesn't exist or is not a directory
         RuntimeError: If no frames are found or scene detection fails
@@ -46,16 +45,21 @@ def detect_scenes(frames_dir, fps=30, detector="adaptive", threshold=27,
         raise ValueError(f"Frames directory does not exist: {frames_dir}")
     
     # Check for frame files
-    frame_files = list(frames_dir.glob("*.jpg")) + list(frames_dir.glob("*.png"))
+    frame_files = sorted(list(frames_dir.glob("*.jpg")) + list(frames_dir.glob("*.png")))
     if not frame_files:
         raise RuntimeError(f"No frame files found in {frames_dir}")
     
     print(f"Found {len(frame_files)} frames in {frames_dir}")
     
+    # Build OpenCV-style pattern for image sequence
+    ext = ext if ext.startswith('.') else f'.{ext}'
+    pattern = str(frames_dir / f"%d{ext}")
+    print(f"Using image sequence pattern: {pattern}")
+    
     # Initialize detector
     detector = detector.lower()
     if detector == "adaptive":
-        detector = AdaptiveDetector(min_scene_len=min_scene_len, sigma=sigma)
+        detector = AdaptiveDetector(min_scene_len=min_scene_len)
     elif detector == "content":
         detector = ContentDetector(threshold=threshold, min_scene_len=min_scene_len)
     elif detector == "threshold":
@@ -67,8 +71,8 @@ def detect_scenes(frames_dir, fps=30, detector="adaptive", threshold=27,
     scene_manager = SceneManager()
     scene_manager.add_detector(detector)
     
-    # Open the video (frames)
-    video = open_video(str(frames_dir), framerate=fps)
+    # Open the image sequence as a video
+    video = open_video(pattern, framerate=fps)
     
     # Detect scenes
     print("Detecting scenes...")
@@ -79,26 +83,23 @@ def detect_scenes(frames_dir, fps=30, detector="adaptive", threshold=27,
         print("No scenes detected!")
         return []
     
-    # Convert to list of (start_frame, end_frame) tuples
-    scene_boundaries = [(scene[0].get_frames(), scene[1].get_frames()) 
-                       for scene in scenes]
+    # Create a list of start indices for each scene, including the first (0)
+    scene_start_indices = [0] + [scene[0].get_frames() for scene in scenes[1:]]
     
     # Print summary
-    print(f"\nDetected {len(scene_boundaries)} scenes:")
-    for i, (start, end) in enumerate(scene_boundaries, 1):
-        print(f"Scene {i:03d}: frames {start:>6} - {end:>6} "
-              f"(duration: {end-start+1} frames)")
+    print(f"\nScene start indices: {scene_start_indices}")
     
-    return scene_boundaries
+    return scene_start_indices
 
 if __name__ == "__main__":
     # Example usage - modify these parameters as needed
-    frames_dir = "/path/to/your/frames"  # Change this to your frames directory
+    frames_dir = "/Users/andrewdelacruz/e2e_sam2/gitignore_exception/data/frames/Scenes 061-080__265H-2-_20230815215828529"  # Change this to your frames directory
     fps = 24
-    detector = "adaptive"
+    detector = "threshold"
     threshold = 27
     sigma = 0.33
     min_scene_len = 15
+    ext = ".jpg"
     
     # Run detection
     scenes = detect_scenes(
@@ -107,5 +108,8 @@ if __name__ == "__main__":
         detector=detector,
         threshold=threshold,
         sigma=sigma,
-        min_scene_len=min_scene_len
+        min_scene_len=min_scene_len,
+        ext=ext
     ) 
+
+    print(scenes)

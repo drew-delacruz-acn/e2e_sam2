@@ -4,6 +4,12 @@ import numpy as np
 from pathlib import Path
 import matplotlib.pyplot as plt
 from scene_detector import detect_scenes
+import re
+
+def natural_sort_key(s):
+    """Helper function for natural sorting of strings containing numbers"""
+    return [int(text) if text.isdigit() else text.lower()
+            for text in re.split('([0-9]+)', str(s))]
 
 def load_frame(frame_path):
     """Load and resize frame for display"""
@@ -75,7 +81,8 @@ def get_scene_directories(base_dir):
             if list(d.glob("*.jpg")) or list(d.glob("*.png")):
                 scene_dirs.append(str(d))
     
-    return sorted(scene_dirs)
+    # Sort using natural sort (handles numbers in strings properly)
+    return sorted(scene_dirs, key=natural_sort_key)
 
 def main():
     st.set_page_config(page_title="Scene Detection Visualizer", layout="wide")
@@ -110,9 +117,12 @@ def main():
             st.error("Selected directory does not exist!")
             return
             
-        # Get frame files
-        frame_files = sorted(list(Path(selected_dir).glob("*.jpg")) + 
-                           list(Path(selected_dir).glob("*.png")))
+        # Get frame files and sort them naturally
+        frame_files = sorted(
+            list(Path(selected_dir).glob("*.jpg")) + 
+            list(Path(selected_dir).glob("*.png")),
+            key=natural_sort_key
+        )
         
         if not frame_files:
             st.error("No frame files found!")

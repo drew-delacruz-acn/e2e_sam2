@@ -31,6 +31,30 @@ def create_timeline_plot(scene_starts, total_frames):
     
     return fig
 
+def display_scene_context(frame_files, scene_start, is_first_scene=False):
+    """Display frames around a scene boundary"""
+    if is_first_scene:
+        # For first scene, show first 3 frames
+        frames_to_show = frame_files[:3]
+        frame_numbers = list(range(3))
+    else:
+        # For other scenes, show 3 frames before and after
+        start_idx = max(0, scene_start - 3)
+        end_idx = min(len(frame_files), scene_start + 3)
+        frames_to_show = frame_files[start_idx:end_idx]
+        frame_numbers = list(range(start_idx, end_idx))
+    
+    # Create columns for the frames
+    cols = st.columns(len(frames_to_show))
+    
+    # Display each frame with its number
+    for col, (frame_path, frame_num) in enumerate(zip(frames_to_show, frame_numbers)):
+        with cols[col]:
+            frame = load_frame(frame_path)
+            st.image(frame, caption=f"Frame {frame_num}")
+            if frame_num == scene_start and not is_first_scene:
+                st.markdown("**Scene Boundary**")
+
 def main():
     st.set_page_config(page_title="Scene Detection Visualizer", layout="wide")
     st.title("Scene Detection Visualizer")
@@ -38,7 +62,7 @@ def main():
     # Sidebar controls
     st.sidebar.header("Detection Parameters")
     fps = st.sidebar.slider("FPS", 1, 60, 24)
-    detector = st.sidebar.selectbox("Detector", ["adaptive", "content", "threshold"])
+    detector = st.sidebar.slider("Detector", ["adaptive", "content", "threshold"])
     threshold = st.sidebar.slider("Threshold", 1, 100, 27)
     min_scene_len = st.sidebar.slider("Min Scene Length", 1, 100, 15)
     
@@ -76,17 +100,17 @@ def main():
         # Show timeline
         st.pyplot(create_timeline_plot(scene_starts, len(frame_files)))
         
-        # Show scene information
+        # Show scene information with context
         st.subheader("Scene Information")
         for i, start in enumerate(scene_starts):
             end = scene_starts[i + 1] if i < len(scene_starts) - 1 else len(frame_files)
             duration = end - start
-            st.write(f"Scene {i+1}: Frames {start}-{end-1} (Duration: {duration} frames)")
             
-            # Show first frame of scene
-            if start < len(frame_files):
-                frame = load_frame(frame_files[start])
-                st.image(frame, caption=f"Start of Scene {i+1}")
+            st.markdown(f"### Scene {i+1}: Frames {start}-{end-1} (Duration: {duration} frames)")
+            
+            # Display frames around scene boundary
+            display_scene_context(frame_files, start, is_first_scene=(i == 0))
+            st.markdown("---")  # Add separator between scenes
         
         # Show all scene starts
         st.subheader("Scene Start Indices")

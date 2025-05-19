@@ -112,7 +112,7 @@ def main():
     
     # Show relevant parameters based on detector type
     if detector == "adaptive":
-        adaptive_threshold = st.sidebar.slider("Adaptive Threshold", 0.01, 1.0, 0.33, 0.01, 
+        adaptive_threshold = st.sidebar.slider("Adaptive Threshold", 0.01, 2.0, 0.33, 0.01, 
                                 help="Controls how quickly the detector adapts to changes (0.0-1.0)")
         threshold = 27  # Default value, not used by adaptive detector
     else:

@@ -83,7 +83,7 @@ def display_scene_context(frame_files, scene_start, is_first_scene=False):
         # Find the index of the scene start frame
         start_idx = frame_numbers.index(scene_start)
         # Get 3 frames before and after
-        start_display = max(0, start_idx)
+        start_display = max(0, start_idx-1)
         end_display = min(len(frame_files), start_idx + 3)
         frames_to_show = frame_files[start_display:end_display]
         display_numbers = frame_numbers[start_display:end_display]
@@ -155,6 +155,7 @@ def save_visualizations(scene_starts, frame_files, selected_dir, output_dir):
     
     # Save the timeline plot
     fig = create_timeline_plot(scene_starts, len(frame_files))
+    print(f"Saving timeline plot to {output_path}")
     timeline_path = output_path / "timeline.png"
     fig.savefig(str(timeline_path), dpi=300, bbox_inches='tight')
     plt.close(fig)

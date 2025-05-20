@@ -101,7 +101,7 @@ def display_scene_context(frame_files, scene_start, is_first_scene=False):
         # Find the index of the scene start frame
         start_idx = frame_numbers.index(scene_start)
         # Get 3 frames before and after
-        start_display = max(0, start_idx - 3)
+        start_display = max(0, start_idx-1)
         end_display = min(len(frame_files), start_idx + 3)
         frames_to_show = frame_files[start_display:end_display]
         display_numbers = frame_numbers[start_display:end_display]
@@ -167,6 +167,7 @@ def display_scene_summary(scene_starts, total_frames):
 def save_visualizations(scene_starts, frame_files, selected_dir, output_dir):
     """Save all visualizations to the specified directory"""
     output_path = Path(output_dir)
+    print('------------------------------------------')
     
     # Create output directory if it doesn't exist
     output_path.mkdir(parents=True, exist_ok=True)
@@ -174,6 +175,7 @@ def save_visualizations(scene_starts, frame_files, selected_dir, output_dir):
     
     # Save the timeline plot
     fig = create_timeline_plot(scene_starts, len(frame_files))
+    print(f"Saving timeline plot to {output_path}")
     timeline_path = output_path / "timeline.png"
     fig.savefig(str(timeline_path), dpi=300, bbox_inches='tight')
     plt.close(fig)
@@ -252,7 +254,7 @@ def main():
     st.title("Scene Detection Visualizer")
     
     # Base directory for all scenes
-    base_dir = "/Users/andrewdelacruz/e2e_sam2/gitignore_exception/data/frames"
+    base_dir = "data/frames/"
     
     # Get available scene directories
     scene_dirs = get_scene_directories(base_dir)
@@ -275,7 +277,7 @@ def main():
     
     # Show relevant parameters based on detector type
     if detector == "adaptive":
-        adaptive_threshold = st.sidebar.slider("Adaptive Threshold", 0.01, 1.0, 0.33, 0.01, 
+        adaptive_threshold = st.sidebar.slider("Adaptive Threshold", 0.01, 2.0, 0.33, 0.01, 
                                 help="Controls how quickly the detector adapts to changes (0.0-1.0)")
         min_content_val = st.sidebar.slider("Min Content Value", 1.0, 20.0, 8.0, 0.5,
                                 help="Minimum content value to trigger a scene cut")

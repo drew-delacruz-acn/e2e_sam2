@@ -140,7 +140,7 @@ class SAM2VideoSegmenter:
                     print(f"  Object {obj_id}: mask shape = {mask.shape}, mask sum = {mask_sum}")
                     
                     # Only include masks that actually have pixels
-                    if mask_sum > 0:
+                    if mask_sum > 100:
                         if out_frame_idx not in video_segments:
                             video_segments[out_frame_idx] = {}
                         video_segments[out_frame_idx][str(obj_id)] = mask

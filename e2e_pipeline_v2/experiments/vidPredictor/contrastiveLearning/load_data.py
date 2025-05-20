@@ -18,6 +18,9 @@ def load_pickle(file_path):
 
 df =load_pickle('/home/ubuntu/code/drew/e2e_sam2/data/definitiveObjects_jeremiah.pkl')
 print(df.head())
+print(df.columns)
 
 print(len(df.iloc[0, 2]))
+
+print(len(df.iloc[0, 3]))
 print(df.iloc[:,0].value_counts())

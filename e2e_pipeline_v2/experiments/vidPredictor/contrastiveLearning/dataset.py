@@ -10,7 +10,18 @@ class ContrastiveDataset(Dataset):
     def __init__(self, frame: pd.DataFrame):
         vecs = np.vstack(frame["embedding"].values).astype("float32")
         self.vecs = torch.tensor(vecs)
-        self.labels = torch.tensor(frame["class"].values.astype("int64"))
+        
+        # Create a mapping from string classes to integer indices
+        unique_classes = frame["class"].unique()
+        self.class_to_idx = {cls: idx for idx, cls in enumerate(unique_classes)}
+        self.idx_to_class = {idx: cls for cls, idx in self.class_to_idx.items()}
+        
+        # Convert classes to integer indices
+        integer_labels = [self.class_to_idx[cls] for cls in frame["class"].values]
+        self.labels = torch.tensor(integer_labels)
+        
+        # Store the original classes for reference
+        self.original_classes = frame["class"].values
 
     def __getitem__(self, idx):
         return self.vecs[idx], self.labels[idx]

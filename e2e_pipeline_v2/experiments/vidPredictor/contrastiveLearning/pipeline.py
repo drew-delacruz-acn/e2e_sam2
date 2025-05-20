@@ -3,6 +3,7 @@ import torch
 import numpy as np
 import pandas as pd
 from sklearn.metrics import silhouette_score, davies_bouldin_score
+from sklearn.preprocessing import LabelEncoder
 
 from .data_io import load_frame
 from .dataset import ContrastiveDataset
@@ -54,9 +55,15 @@ def run_pipeline(
 
     # Compute metrics if requested
     if log_metrics:
-        labels = frame["class"].values
-        sil = silhouette_score(proj, labels)      # cohesion/separation
-        dbi = davies_bouldin_score(proj, labels)  # lower = better
-        print(f"Silhouette={sil:.3f}  Davies-Bouldin={dbi:.3f}")
+        # Convert string labels to integers for metrics computation
+        label_encoder = LabelEncoder()
+        numeric_labels = label_encoder.fit_transform(frame["class"].values)
+        
+        try:
+            sil = silhouette_score(proj, numeric_labels)      # cohesion/separation
+            dbi = davies_bouldin_score(proj, numeric_labels)  # lower = better
+            print(f"Silhouette={sil:.3f}  Davies-Bouldin={dbi:.3f}")
+        except Exception as e:
+            print(f"Error computing metrics: {e}")
 
     return reps 

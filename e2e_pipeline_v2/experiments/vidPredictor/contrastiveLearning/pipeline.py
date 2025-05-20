@@ -14,6 +14,7 @@ def run_pipeline(
     src,
     method: str = "mean",
     log_metrics: bool = True,
+    proj_dim: int = 128,
 ) -> pd.DataFrame:
     """
     Run the complete supervised contrastive learning pipeline.
@@ -26,6 +27,8 @@ def run_pipeline(
         Method to use for prototype generation.
     log_metrics : bool, default=True
         Whether to compute and log clustering metrics.
+    proj_dim : int, default=128
+        Output dimension for the projection head.
         
     Returns
     -------
@@ -36,13 +39,13 @@ def run_pipeline(
     frame = load_frame(src)
     
     # Get embedding dimension
-    vec_dim = len(frame["finetuned_embedding"].iloc[0])
+    vec_dim = len(frame["embedding"].iloc[0])
     
     # Create dataset
     ds = ContrastiveDataset(frame)
     
     # Train projection head
-    model = train_supcon(ds, vec_dim, epochs=10)
+    model = train_supcon(ds, vec_dim, epochs=10, proj_dim=proj_dim)
 
     # Get projected embeddings
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")

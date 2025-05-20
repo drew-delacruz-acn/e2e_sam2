@@ -91,16 +91,28 @@ def plot_pca(embeddings, labels, prototypes, proto_labels=None, title_prefix="")
         
         # Plotting
         fig, ax = plt.subplots(figsize=(10, 8))
-        scatter = ax.scatter(emb_2d[:, 0], emb_2d[:, 1], c=numeric_labels, cmap='tab10', s=15, alpha=0.6)
-        ax.scatter(proto_2d[:, 0], proto_2d[:, 1], c=numeric_proto_labels, cmap='tab10', 
+        
+        # Use a colormap with enough colors
+        cmap = plt.cm.get_cmap('tab20', len(np.unique(numeric_labels)))
+        
+        scatter = ax.scatter(emb_2d[:, 0], emb_2d[:, 1], c=numeric_labels, cmap=cmap, s=15, alpha=0.6)
+        ax.scatter(proto_2d[:, 0], proto_2d[:, 1], c=numeric_proto_labels, cmap=cmap, 
                   marker='*', s=300, edgecolors='k', linewidths=1.2)
         
-        # Add labels and legend
+        # Add labels and legend - use custom legend to ensure all classes appear
         ax.set_title(f"{title_prefix}PCA: Embeddings (dots) vs. Class Prototypes (stars)")
         ax.set_xlabel(f"PC1 ({pca.explained_variance_ratio_[0]:.2%} variance)")
         ax.set_ylabel(f"PC2 ({pca.explained_variance_ratio_[1]:.2%} variance)")
-        legend1 = ax.legend(*scatter.legend_elements(), title="Classes")
-        ax.add_artist(legend1)
+        
+        # Create a custom legend
+        unique_labels = np.unique(numeric_labels)
+        legend_elements = []
+        for i, label in enumerate(unique_labels):
+            legend_elements.append(plt.Line2D([0], [0], marker='o', color='w', 
+                                             markerfacecolor=cmap(i), markersize=8, 
+                                             label=f'Class {labels[np.where(numeric_labels == label)[0][0]]}'))
+        
+        ax.legend(handles=legend_elements, title="Classes", loc='best')
         
         plt.tight_layout()
         return fig
@@ -143,14 +155,26 @@ def plot_umap(embeddings, labels, prototypes, proto_labels=None, title_prefix=""
         
         # Plotting
         fig, ax = plt.subplots(figsize=(10, 8))
-        scatter = ax.scatter(emb_2d[:, 0], emb_2d[:, 1], c=numeric_labels, cmap='tab10', s=15, alpha=0.6)
-        ax.scatter(proto_2d[:, 0], proto_2d[:, 1], c=numeric_proto_labels, cmap='tab10', 
+        
+        # Use a colormap with enough colors
+        cmap = plt.cm.get_cmap('tab20', len(np.unique(numeric_labels)))
+        
+        scatter = ax.scatter(emb_2d[:, 0], emb_2d[:, 1], c=numeric_labels, cmap=cmap, s=15, alpha=0.6)
+        ax.scatter(proto_2d[:, 0], proto_2d[:, 1], c=numeric_proto_labels, cmap=cmap, 
                 marker='*', s=300, edgecolors='k', linewidths=1.2)
         
         # Add labels and legend
         ax.set_title(f"{title_prefix}UMAP: Embeddings (dots) vs. Class Prototypes (stars)")
-        legend1 = ax.legend(*scatter.legend_elements(), title="Classes")
-        ax.add_artist(legend1)
+        
+        # Create a custom legend
+        unique_labels = np.unique(numeric_labels)
+        legend_elements = []
+        for i, label in enumerate(unique_labels):
+            legend_elements.append(plt.Line2D([0], [0], marker='o', color='w', 
+                                             markerfacecolor=cmap(i), markersize=8, 
+                                             label=f'Class {labels[np.where(numeric_labels == label)[0][0]]}'))
+        
+        ax.legend(handles=legend_elements, title="Classes", loc='best')
         
         plt.tight_layout()
         return fig
@@ -196,14 +220,26 @@ def plot_tsne(embeddings, labels, prototypes, proto_labels=None, title_prefix=""
         
         # Plotting
         fig, ax = plt.subplots(figsize=(10, 8))
-        scatter = ax.scatter(emb_2d[:, 0], emb_2d[:, 1], c=numeric_labels, cmap='tab10', s=15, alpha=0.6)
-        ax.scatter(proto_2d[:, 0], proto_2d[:, 1], c=numeric_proto_labels, cmap='tab10', 
+        
+        # Use a colormap with enough colors
+        cmap = plt.cm.get_cmap('tab20', len(np.unique(numeric_labels)))
+        
+        scatter = ax.scatter(emb_2d[:, 0], emb_2d[:, 1], c=numeric_labels, cmap=cmap, s=15, alpha=0.6)
+        ax.scatter(proto_2d[:, 0], proto_2d[:, 1], c=numeric_proto_labels, cmap=cmap, 
                 marker='*', s=300, edgecolors='k', linewidths=1.2)
         
         # Add labels and legend
         ax.set_title(f"{title_prefix}t-SNE: Embeddings (dots) vs. Class Prototypes (stars)")
-        legend1 = ax.legend(*scatter.legend_elements(), title="Classes")
-        ax.add_artist(legend1)
+        
+        # Create a custom legend
+        unique_labels = np.unique(numeric_labels)
+        legend_elements = []
+        for i, label in enumerate(unique_labels):
+            legend_elements.append(plt.Line2D([0], [0], marker='o', color='w', 
+                                             markerfacecolor=cmap(i), markersize=8, 
+                                             label=f'Class {labels[np.where(numeric_labels == label)[0][0]]}'))
+        
+        ax.legend(handles=legend_elements, title="Classes", loc='best')
         
         plt.tight_layout()
         return fig
@@ -264,9 +300,18 @@ def plot_plotly_3d(embeddings, labels, prototypes, proto_labels=None, title_pref
         if proto_labels is None:
             proto_labels = np.unique(labels)
         
-        # Convert labels to strings for plotly
-        str_labels = [f"Class {l}" for l in labels]
-        str_proto_labels = [f"Prototype Class {l}" for l in proto_labels]
+        # Create a list of actual class labels for each data point
+        if isinstance(labels[0], str):
+            str_labels = [f"{l}" for l in labels]
+        else:
+            str_labels = [f"Class {l}" for l in labels]
+            
+        # Use a colormap with enough colors
+        # Create a custom colorscale with enough colors
+        num_classes = len(np.unique(numeric_labels))
+        colorscale = px.colors.qualitative.Dark24[:num_classes]
+        if num_classes > 24:  # If more than 24 classes, extend with more colors
+            colorscale.extend(px.colors.qualitative.Light24[:(num_classes-24)])
         
         # Create a dataframe for better plotting with plotly
         df = pd.DataFrame({
@@ -280,11 +325,22 @@ def plot_plotly_3d(embeddings, labels, prototypes, proto_labels=None, title_pref
         # Create the 3D scatter plot
         fig = px.scatter_3d(
             df, x='x', y='y', z='z',
-            color='numeric_label', 
-            color_continuous_scale=px.colors.qualitative.Set1,
+            color='label',  # Use actual labels instead of numeric
+            color_discrete_sequence=colorscale,
             opacity=0.7,
             title=title
         )
+        
+        # Create a map of prototype labels to colors
+        label_to_color = {}
+        for i, label in enumerate(np.unique(labels)):
+            if i < len(colorscale):
+                label_to_color[label] = colorscale[i]
+            else:
+                label_to_color[label] = colorscale[i % len(colorscale)]
+                
+        # Get colors for each prototype
+        proto_colors = [label_to_color[l] for l in proto_labels]
         
         # Add prototypes as stars
         fig.add_trace(go.Scatter3d(
@@ -295,10 +351,10 @@ def plot_plotly_3d(embeddings, labels, prototypes, proto_labels=None, title_pref
             marker=dict(
                 symbol='star',
                 size=12,
-                color=numeric_proto_labels,
-                colorscale=px.colors.qualitative.Set1,
+                color=proto_colors,
                 line=dict(color='black', width=1)
             ),
+            text=[f"Prototype: {l}" for l in proto_labels],
             name='Prototypes'
         ))
         
@@ -310,7 +366,7 @@ def plot_plotly_3d(embeddings, labels, prototypes, proto_labels=None, title_pref
                 zaxis_title='Z'
             ),
             margin=dict(l=0, r=0, b=0, t=30),
-            coloraxis_showscale=False
+            legend_title_text='Classes'
         )
         
         return fig

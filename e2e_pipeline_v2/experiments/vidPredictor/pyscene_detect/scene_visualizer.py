@@ -9,7 +9,12 @@ import pandas as pd
 import os
 import shutil
 import matplotlib
+import logging
 matplotlib.use('Agg')
+
+# Configure logging
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+logger = logging.getLogger(__name__)
 
 def natural_sort_key(s):
     """Helper function for natural sorting of strings containing numbers"""
@@ -152,6 +157,7 @@ def save_visualizations(scene_starts, frame_files, selected_dir, output_dir):
     
     # Create output directory if it doesn't exist
     output_path.mkdir(parents=True, exist_ok=True)
+    logger.info(f"Created output directory: {output_path}")
     
     # Save the timeline plot
     fig = create_timeline_plot(scene_starts, len(frame_files))
@@ -159,6 +165,7 @@ def save_visualizations(scene_starts, frame_files, selected_dir, output_dir):
     timeline_path = output_path / "timeline.png"
     fig.savefig(str(timeline_path), dpi=300, bbox_inches='tight')
     plt.close(fig)
+    logger.info(f"Saved timeline plot to: {timeline_path}")
     
     # Save scene summary as CSV
     scene_data = []
@@ -173,6 +180,7 @@ def save_visualizations(scene_starts, frame_files, selected_dir, output_dir):
     df = pd.DataFrame(scene_data)
     summary_path = output_path / "scene_summary.csv"
     df.to_csv(str(summary_path), index=False)
+    logger.info(f"Saved scene summary to: {summary_path}")
     
     # Save frame visualizations for each scene
     frame_numbers = [int(f.stem) for f in frame_files]
@@ -180,11 +188,13 @@ def save_visualizations(scene_starts, frame_files, selected_dir, output_dir):
     # Create a scenes subdirectory
     scenes_dir = output_path / "scenes"
     scenes_dir.mkdir(exist_ok=True)
+    logger.info(f"Created scenes directory: {scenes_dir}")
     
     # Save frames around each scene boundary
     for i, start in enumerate(scene_starts):
         scene_dir = scenes_dir / f"scene_{i+1}"
         scene_dir.mkdir(exist_ok=True)
+        logger.info(f"Created directory for scene {i+1}: {scene_dir}")
         
         # Determine frames to save
         if i == 0:
@@ -199,6 +209,7 @@ def save_visualizations(scene_starts, frame_files, selected_dir, output_dir):
             display_range = range(start_display, end_display)
         
         # Save individual frames
+        saved_frames = []
         for idx in display_range:
             frame_path = frame_files[idx]
             frame_num = frame_numbers[idx]
@@ -214,7 +225,14 @@ def save_visualizations(scene_starts, frame_files, selected_dir, output_dir):
             boundary_marker = "_BOUNDARY" if is_boundary else ""
             frame_save_path = scene_dir / f"frame_{frame_num}{boundary_marker}.png"
             cv2.imwrite(str(frame_save_path), cv2.cvtColor(frame_with_border, cv2.COLOR_RGB2BGR))
+            saved_frames.append(str(frame_save_path))
+        
+        logger.info(f"Saved {len(saved_frames)} frames for scene {i+1}")
+        if len(saved_frames) <= 6:  # Only log individual paths if there aren't too many
+            for frame_path in saved_frames:
+                logger.info(f"  - {frame_path}")
     
+    logger.info(f"All visualizations successfully saved to: {output_path}")
     return output_path
 
 def main():
@@ -325,6 +343,16 @@ def main():
             with st.spinner("Saving visualizations..."):
                 output_path = save_visualizations(scene_starts, frame_files, selected_dir, save_dir)
                 st.success(f"Visualizations saved to: {output_path}")
+                
+                # Display log of saved files
+                with st.expander("View Save Log", expanded=True):
+                    st.info(f"Timeline plot: {output_path}/timeline.png")
+                    st.info(f"Scene summary: {output_path}/scene_summary.csv")
+                    
+                    for i in range(len(scene_starts)):
+                        scene_path = f"{output_path}/scenes/scene_{i+1}"
+                        st.info(f"Scene {i+1} frames: {scene_path}/")
+                
                 st.balloons()
 
 if __name__ == "__main__":

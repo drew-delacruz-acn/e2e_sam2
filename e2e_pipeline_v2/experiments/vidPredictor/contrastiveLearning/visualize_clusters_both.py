@@ -544,8 +544,8 @@ def main():
         logger.info(f"Generating prototypes using {args.method} method...")
         # Create a temporary DataFrame with the projected embeddings
         proj_df = df.copy()
-        proj_df['finetuned_embedding'] = list(projected_emb_array)
-        proto_df = run_pipeline(proj_df, method=args.method)
+        proj_df['embedding'] = list(projected_emb_array)
+        proto_df = run_pipeline(proj_df, method=args.method, proj_dim=args.proj_dim)
         
         # Save the prototypes
         proto_path = os.path.join(output_dir, 'prototypes.pkl')

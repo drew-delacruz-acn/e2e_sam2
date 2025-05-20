@@ -154,6 +154,7 @@ def display_scene_summary(scene_starts, total_frames):
 def save_visualizations(scene_starts, frame_files, selected_dir, output_dir):
     """Save all visualizations to the specified directory"""
     output_path = Path(output_dir)
+    print('------------------------------------------')
     
     # Create output directory if it doesn't exist
     output_path.mkdir(parents=True, exist_ok=True)

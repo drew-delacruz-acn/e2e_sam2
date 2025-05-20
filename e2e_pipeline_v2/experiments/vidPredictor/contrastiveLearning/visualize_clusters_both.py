@@ -448,13 +448,13 @@ def plot_diagnostics(embeddings, labels, prototypes, title_prefix=""):
         logger.error(f"Error in diagnostics: {e}")
         return None
 
-def project_embeddings(df, vec_dim):
+def project_embeddings(df, vec_dim, epochs=1, temperature=0.1):
     """Project embeddings using the contrastive learning model."""
     # Create the dataset
     ds = ContrastiveDataset(df)
     
     # Train projection head
-    model = train_supcon(ds, vec_dim, epochs=1)
+    model = train_supcon(ds, vec_dim, epochs=epochs, temperature=temperature)
     
     # Project the embeddings
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
@@ -469,7 +469,7 @@ def main():
     parser = argparse.ArgumentParser(description='Visualize both original and projected embeddings')
     parser.add_argument('--input', type=str, help='Path to input DataFrame pickle with embeddings')
     parser.add_argument('--prototypes', type=str, help='Path to prototypes DataFrame pickle')
-    parser.add_argument('--output', type=str, default='contrastive_viz_both', help='Output directory for plots')
+    parser.add_argument('--output', type=str, default='contrastive_viz_both', help='Base output directory for plots')
     parser.add_argument('--method', type=str, default='mean', choices=['mean', 'medoid'], 
                         help='Method for prototype generation if prototypes not provided')
     parser.add_argument('--sample', action='store_true', help='Use sample data for demonstration')
@@ -479,10 +479,26 @@ def main():
                         help='Samples per class for sample data')
     parser.add_argument('--skip_original', action='store_true', 
                         help='Skip visualization of original embeddings (if they are too high-dimensional)')
+    parser.add_argument('--epochs', type=int, default=1, 
+                        help='Number of epochs for contrastive learning training')
+    parser.add_argument('--temperature', type=float, default=0.1, 
+                        help='Temperature parameter for contrastive loss (lower=harder boundaries)')
+    parser.add_argument('--no_auto_naming', action='store_true',
+                        help='Disable automatic output directory naming based on parameters')
     args = parser.parse_args()
     
-    # Create output directory
-    os.makedirs(args.output, exist_ok=True)
+    # Create output directory with epochs and temperature in the name
+    if args.no_auto_naming:
+        output_dir = args.output
+    else:
+        # Format temperature with appropriate precision
+        temp_str = f"{args.temperature:.3f}".rstrip('0').rstrip('.') if args.temperature != int(args.temperature) else str(int(args.temperature))
+        output_dir = f"{args.output}_e{args.epochs}_t{temp_str}"
+        if args.method != 'mean':  # Add method only if not the default
+            output_dir += f"_{args.method}"
+    
+    logger.info(f"Using output directory: {output_dir}")
+    os.makedirs(output_dir, exist_ok=True)
     
     # Check for optional dependencies
     deps = try_import_optional_deps()
@@ -507,9 +523,14 @@ def main():
     vec_dim = orig_emb_array.shape[1]  # Embedding dimension
     
     # Project the embeddings
-    logger.info("Projecting embeddings using contrastive learning...")
-    projected_emb_array, model = project_embeddings(df, vec_dim)
+    logger.info(f"Projecting embeddings using contrastive learning (epochs={args.epochs}, temperature={args.temperature})...")
+    projected_emb_array, model = project_embeddings(df, vec_dim, epochs=args.epochs, temperature=args.temperature)
     logger.info(f"Projected embedding dimension: {projected_emb_array.shape[1]}")
+    
+    # Save the projection model
+    model_path = os.path.join(output_dir, 'projection_model.pt')
+    torch.save(model.state_dict(), model_path)
+    logger.info(f"Saved projection model to {model_path}")
     
     # Load or generate prototypes for the projected embeddings
     if args.prototypes:
@@ -523,7 +544,7 @@ def main():
         proto_df = run_pipeline(proj_df, method=args.method)
         
         # Save the prototypes
-        proto_path = os.path.join(args.output, 'prototypes.pkl')
+        proto_path = os.path.join(output_dir, 'prototypes.pkl')
         proto_df.to_pickle(proto_path)
         logger.info(f"Saved prototypes to {proto_path}")
     
@@ -569,7 +590,7 @@ def main():
             orig_pca_fig = plot_pca(orig_emb_array, orig_labels, orig_proto_array, orig_proto_labels, 
                                    title_prefix="Original Embeddings - ")
             if orig_pca_fig:
-                orig_pca_path = os.path.join(args.output, 'original_pca_plot.png')
+                orig_pca_path = os.path.join(output_dir, 'original_pca_plot.png')
                 orig_pca_fig.savefig(orig_pca_path, dpi=300, bbox_inches='tight')
                 logger.info(f"Saved original PCA plot to {orig_pca_path}")
             
@@ -577,7 +598,7 @@ def main():
             orig_diag_fig = plot_diagnostics(orig_emb_array, orig_labels, orig_proto_array, 
                                             title_prefix="Original Embeddings - ")
             if orig_diag_fig:
-                orig_diag_path = os.path.join(args.output, 'original_diagnostics_plot.png')
+                orig_diag_path = os.path.join(output_dir, 'original_diagnostics_plot.png')
                 orig_diag_fig.savefig(orig_diag_path, dpi=300, bbox_inches='tight')
                 logger.info(f"Saved original diagnostics to {orig_diag_path}")
                 
@@ -587,7 +608,7 @@ def main():
                 orig_umap_fig = plot_umap(orig_emb_array, orig_labels, orig_proto_array, orig_proto_labels,
                                          title_prefix="Original Embeddings - ")
                 if orig_umap_fig:
-                    orig_umap_path = os.path.join(args.output, 'original_umap_plot.png')
+                    orig_umap_path = os.path.join(output_dir, 'original_umap_plot.png')
                     orig_umap_fig.savefig(orig_umap_path, dpi=300, bbox_inches='tight')
                     logger.info(f"Saved original UMAP plot to {orig_umap_path}")
             
@@ -596,7 +617,7 @@ def main():
                 orig_tsne_fig = plot_tsne(orig_emb_array, orig_labels, orig_proto_array, orig_proto_labels,
                                          title_prefix="Original Embeddings - ")
                 if orig_tsne_fig:
-                    orig_tsne_path = os.path.join(args.output, 'original_tsne_plot.png')
+                    orig_tsne_path = os.path.join(output_dir, 'original_tsne_plot.png')
                     orig_tsne_fig.savefig(orig_tsne_path, dpi=300, bbox_inches='tight')
                     logger.info(f"Saved original t-SNE plot to {orig_tsne_path}")
             
@@ -605,7 +626,7 @@ def main():
                 orig_plotly_fig = plot_plotly_3d(orig_emb_array, orig_labels, orig_proto_array, orig_proto_labels,
                                                 title_prefix="Original Embeddings - ", method='pca')
                 if orig_plotly_fig:
-                    orig_plotly_path = os.path.join(args.output, 'original_pca_3d.html')
+                    orig_plotly_path = os.path.join(output_dir, 'original_pca_3d.html')
                     orig_plotly_fig.write_html(orig_plotly_path)
                     logger.info(f"Saved original 3D PCA plot to {orig_plotly_path}")
         except Exception as e:
@@ -621,7 +642,7 @@ def main():
     proj_pca_fig = plot_pca(projected_emb_array, orig_labels, projected_proto_array, projected_proto_labels,
                            title_prefix="Projected Embeddings - ")
     if proj_pca_fig:
-        proj_pca_path = os.path.join(args.output, 'projected_pca_plot.png')
+        proj_pca_path = os.path.join(output_dir, 'projected_pca_plot.png')
         proj_pca_fig.savefig(proj_pca_path, dpi=300, bbox_inches='tight')
         logger.info(f"Saved projected PCA plot to {proj_pca_path}")
     
@@ -629,7 +650,7 @@ def main():
     proj_diag_fig = plot_diagnostics(projected_emb_array, orig_labels, projected_proto_array,
                                     title_prefix="Projected Embeddings - ")
     if proj_diag_fig:
-        proj_diag_path = os.path.join(args.output, 'projected_diagnostics_plot.png')
+        proj_diag_path = os.path.join(output_dir, 'projected_diagnostics_plot.png')
         proj_diag_fig.savefig(proj_diag_path, dpi=300, bbox_inches='tight')
         logger.info(f"Saved projected diagnostics to {proj_diag_path}")
     
@@ -638,7 +659,7 @@ def main():
         proj_umap_fig = plot_umap(projected_emb_array, orig_labels, projected_proto_array, projected_proto_labels,
                                  title_prefix="Projected Embeddings - ")
         if proj_umap_fig:
-            proj_umap_path = os.path.join(args.output, 'projected_umap_plot.png')
+            proj_umap_path = os.path.join(output_dir, 'projected_umap_plot.png')
             proj_umap_fig.savefig(proj_umap_path, dpi=300, bbox_inches='tight')
             logger.info(f"Saved projected UMAP plot to {proj_umap_path}")
     
@@ -647,7 +668,7 @@ def main():
         proj_tsne_fig = plot_tsne(projected_emb_array, orig_labels, projected_proto_array, projected_proto_labels,
                                  title_prefix="Projected Embeddings - ")
         if proj_tsne_fig:
-            proj_tsne_path = os.path.join(args.output, 'projected_tsne_plot.png')
+            proj_tsne_path = os.path.join(output_dir, 'projected_tsne_plot.png')
             proj_tsne_fig.savefig(proj_tsne_path, dpi=300, bbox_inches='tight')
             logger.info(f"Saved projected t-SNE plot to {proj_tsne_path}")
     
@@ -656,12 +677,12 @@ def main():
         proj_plotly_fig = plot_plotly_3d(projected_emb_array, orig_labels, projected_proto_array, projected_proto_labels,
                                         title_prefix="Projected Embeddings - ", method='pca')
         if proj_plotly_fig:
-            proj_plotly_path = os.path.join(args.output, 'projected_pca_3d.html')
+            proj_plotly_path = os.path.join(output_dir, 'projected_pca_3d.html')
             proj_plotly_fig.write_html(proj_plotly_path)
             logger.info(f"Saved projected 3D PCA plot to {proj_plotly_path}")
     
     logger.info("Visualization complete!")
-    logger.info(f"All plots saved to {args.output} directory")
+    logger.info(f"All plots saved to {output_dir} directory")
 
 if __name__ == "__main__":
     main() 

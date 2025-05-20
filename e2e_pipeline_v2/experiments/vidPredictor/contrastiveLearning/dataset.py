@@ -8,7 +8,9 @@ class ContrastiveDataset(Dataset):
     """Wraps a DataFrame into (embedding, label) tensors."""
 
     def __init__(self, frame: pd.DataFrame):
-        vecs = np.vstack(frame["finetuned_embedding"].values).astype("float32")
+        # Use 'embedding' column for consistency throughout the pipeline
+        embedding_col = "embedding" if "embedding" in frame.columns else "finetuned_embedding"
+        vecs = np.vstack(frame[embedding_col].values).astype("float32")
         self.vecs = torch.tensor(vecs)
         
         # Create a mapping from string classes to integer indices

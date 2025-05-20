@@ -42,7 +42,7 @@ def run_pipeline(
     ds = ContrastiveDataset(frame)
     
     # Train projection head
-    model = train_supcon(ds, vec_dim, epochs=1)
+    model = train_supcon(ds, vec_dim, epochs=10)
 
     # Get projected embeddings
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")

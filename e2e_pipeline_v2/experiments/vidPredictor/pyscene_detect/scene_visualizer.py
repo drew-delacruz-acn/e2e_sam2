@@ -10,11 +10,24 @@ import os
 import shutil
 import matplotlib
 import logging
+import sys
 matplotlib.use('Agg')
 
-# Configure logging
-logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+# Configure logging to write to both console and file
+log_file = os.path.join(os.path.dirname(os.path.abspath(__file__)), "scene_visualizer.log")
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(levelname)s - %(message)s',
+    handlers=[
+        logging.FileHandler(log_file, mode='a'),
+        logging.StreamHandler(sys.stdout)
+    ]
+)
 logger = logging.getLogger(__name__)
+
+# Force a test log message on import
+logger.info("Scene Visualizer starting - log test")
+print("Scene Visualizer starting - print test")
 
 def natural_sort_key(s):
     """Helper function for natural sorting of strings containing numbers"""

@@ -6,6 +6,10 @@ import matplotlib.pyplot as plt
 from scene_detector import detect_scenes
 import re
 import pandas as pd
+import os
+import shutil
+import matplotlib
+matplotlib.use('Agg')
 
 def natural_sort_key(s):
     """Helper function for natural sorting of strings containing numbers"""
@@ -142,6 +146,76 @@ def display_scene_summary(scene_starts, total_frames):
     # Display the summary table
     st.dataframe(df)
 
+def save_visualizations(scene_starts, frame_files, selected_dir, output_dir):
+    """Save all visualizations to the specified directory"""
+    output_path = Path(output_dir)
+    
+    # Create output directory if it doesn't exist
+    output_path.mkdir(parents=True, exist_ok=True)
+    
+    # Save the timeline plot
+    fig = create_timeline_plot(scene_starts, len(frame_files))
+    timeline_path = output_path / "timeline.png"
+    fig.savefig(str(timeline_path), dpi=300, bbox_inches='tight')
+    plt.close(fig)
+    
+    # Save scene summary as CSV
+    scene_data = []
+    for i, start in enumerate(scene_starts):
+        end = scene_starts[i + 1] - 1 if i < len(scene_starts) - 1 else len(frame_files) - 1
+        scene_data.append({
+            "Scene Number": i + 1,
+            "Start Frame": start,
+            "End Frame": end,
+            "Duration (frames)": end - start + 1
+        })
+    df = pd.DataFrame(scene_data)
+    summary_path = output_path / "scene_summary.csv"
+    df.to_csv(str(summary_path), index=False)
+    
+    # Save frame visualizations for each scene
+    frame_numbers = [int(f.stem) for f in frame_files]
+    
+    # Create a scenes subdirectory
+    scenes_dir = output_path / "scenes"
+    scenes_dir.mkdir(exist_ok=True)
+    
+    # Save frames around each scene boundary
+    for i, start in enumerate(scene_starts):
+        scene_dir = scenes_dir / f"scene_{i+1}"
+        scene_dir.mkdir(exist_ok=True)
+        
+        # Determine frames to save
+        if i == 0:
+            # First scene, save first few frames
+            display_range = range(0, min(3, len(frame_files)))
+        else:
+            # Find index of scene start
+            start_idx = frame_numbers.index(start)
+            # Get frames around boundary
+            start_display = max(0, start_idx - 3)
+            end_display = min(len(frame_files), start_idx + 3)
+            display_range = range(start_display, end_display)
+        
+        # Save individual frames
+        for idx in display_range:
+            frame_path = frame_files[idx]
+            frame_num = frame_numbers[idx]
+            
+            # Load frame
+            frame = load_frame(frame_path)
+            
+            # Add appropriate border
+            is_boundary = frame_num == start and i > 0
+            frame_with_border = add_highlight_border(frame, is_boundary)
+            
+            # Save frame with descriptive filename
+            boundary_marker = "_BOUNDARY" if is_boundary else ""
+            frame_save_path = scene_dir / f"frame_{frame_num}{boundary_marker}.png"
+            cv2.imwrite(str(frame_save_path), cv2.cvtColor(frame_with_border, cv2.COLOR_RGB2BGR))
+    
+    return output_path
+
 def main():
     st.set_page_config(page_title="Scene Detection Visualizer", layout="wide")
     st.title("Scene Detection Visualizer")
@@ -240,6 +314,17 @@ def main():
         # Show all scene starts
         st.subheader("Scene Start Indices")
         st.write(scene_starts)
+        
+        # Add save visualizations section
+        st.header("Save Visualizations")
+        save_dir = st.text_input("Output Directory (absolute path)", 
+                                value=os.path.join(os.path.dirname(selected_dir), "scene_visualizations"))
+        
+        if st.button("Save All Visualizations"):
+            with st.spinner("Saving visualizations..."):
+                output_path = save_visualizations(scene_starts, frame_files, selected_dir, save_dir)
+                st.success(f"Visualizations saved to: {output_path}")
+                st.balloons()
 
 if __name__ == "__main__":
     main() 

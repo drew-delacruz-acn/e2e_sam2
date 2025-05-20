@@ -39,7 +39,9 @@ def run_pipeline(
     frame = load_frame(src)
     
     # Get embedding dimension
-    vec_dim = len(frame["embedding"].iloc[0])
+    # Use 'embedding' column for consistency throughout the pipeline
+    embedding_col = "embedding" if "embedding" in frame.columns else "finetuned_embedding"
+    vec_dim = len(frame[embedding_col].iloc[0])
     
     # Create dataset
     ds = ContrastiveDataset(frame)

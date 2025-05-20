@@ -448,7 +448,7 @@ def plot_diagnostics(embeddings, labels, prototypes, title_prefix=""):
         logger.error(f"Error in diagnostics: {e}")
         return None
 
-def project_embeddings(df, vec_dim, epochs=1, temperature=0.1, proj_dim=128):
+def project_embeddings(df, vec_dim, epochs=1, temperature=0.1, proj_dim=2048):
     """Project embeddings using the contrastive learning model."""
     # Create the dataset
     ds = ContrastiveDataset(df)

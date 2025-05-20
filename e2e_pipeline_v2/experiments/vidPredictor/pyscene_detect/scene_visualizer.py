@@ -79,7 +79,7 @@ def display_scene_context(frame_files, scene_start, is_first_scene=False):
         # Find the index of the scene start frame
         start_idx = frame_numbers.index(scene_start)
         # Get 3 frames before and after
-        start_display = max(0, start_idx - 3)
+        start_display = max(0, start_idx)
         end_display = min(len(frame_files), start_idx + 3)
         frames_to_show = frame_files[start_display:end_display]
         display_numbers = frame_numbers[start_display:end_display]

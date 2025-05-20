@@ -12,6 +12,7 @@ def train_supcon(
     batch_size: int = 128,
     temperature: float = 0.1,
     lr: float = 1e-3,
+    proj_dim: int = 128,
 ):
     """
     Train a projection head using supervised contrastive learning.
@@ -30,6 +31,8 @@ def train_supcon(
         Temperature parameter for the contrastive loss.
     lr : float, default=1e-3
         Learning rate for the optimizer.
+    proj_dim : int, default=128
+        Output dimension for the projection head.
         
     Returns
     -------
@@ -37,7 +40,7 @@ def train_supcon(
         Trained projection head model.
     """
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-    model = ProjectionHead(in_dim).to(device)
+    model = ProjectionHead(in_dim, proj_dim=proj_dim).to(device)
     loss_fn = SupConLoss(temperature=temperature)
     optim = torch.optim.Adam(model.parameters(), lr=lr)
 

@@ -448,13 +448,13 @@ def plot_diagnostics(embeddings, labels, prototypes, title_prefix=""):
         logger.error(f"Error in diagnostics: {e}")
         return None
 
-def project_embeddings(df, vec_dim, epochs=1, temperature=0.1):
+def project_embeddings(df, vec_dim, epochs=1, temperature=0.1, proj_dim=128):
     """Project embeddings using the contrastive learning model."""
     # Create the dataset
     ds = ContrastiveDataset(df)
     
     # Train projection head
-    model = train_supcon(ds, vec_dim, epochs=epochs, temperature=temperature)
+    model = train_supcon(ds, vec_dim, epochs=epochs, temperature=temperature, proj_dim=proj_dim)
     
     # Project the embeddings
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
@@ -483,6 +483,8 @@ def main():
                         help='Number of epochs for contrastive learning training')
     parser.add_argument('--temperature', type=float, default=0.1, 
                         help='Temperature parameter for contrastive loss (lower=harder boundaries)')
+    parser.add_argument('--proj_dim', type=int, default=128, 
+                        help='Projection dimension for the output embeddings')
     parser.add_argument('--no_auto_naming', action='store_true',
                         help='Disable automatic output directory naming based on parameters')
     args = parser.parse_args()
@@ -494,6 +496,8 @@ def main():
         # Format temperature with appropriate precision
         temp_str = f"{args.temperature:.3f}".rstrip('0').rstrip('.') if args.temperature != int(args.temperature) else str(int(args.temperature))
         output_dir = f"{args.output}_e{args.epochs}_t{temp_str}"
+        if args.proj_dim != 128:  # Add projection dimension if not the default
+            output_dir += f"_dim{args.proj_dim}"
         if args.method != 'mean':  # Add method only if not the default
             output_dir += f"_{args.method}"
     
@@ -523,8 +527,8 @@ def main():
     vec_dim = orig_emb_array.shape[1]  # Embedding dimension
     
     # Project the embeddings
-    logger.info(f"Projecting embeddings using contrastive learning (epochs={args.epochs}, temperature={args.temperature})...")
-    projected_emb_array, model = project_embeddings(df, vec_dim, epochs=args.epochs, temperature=args.temperature)
+    logger.info(f"Projecting embeddings using contrastive learning (epochs={args.epochs}, temperature={args.temperature}, proj_dim={args.proj_dim})...")
+    projected_emb_array, model = project_embeddings(df, vec_dim, epochs=args.epochs, temperature=args.temperature, proj_dim=args.proj_dim)
     logger.info(f"Projected embedding dimension: {projected_emb_array.shape[1]}")
     
     # Save the projection model

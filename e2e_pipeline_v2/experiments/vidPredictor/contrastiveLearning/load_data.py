@@ -16,11 +16,8 @@ def load_pickle(file_path):
     return pd.DataFrame(data)
 
 
-df =load_pickle('/home/ubuntu/code/drew/e2e_sam2/data/definitiveObjects_jeremiah.pkl')
+df =load_pickle('/Users/andrewdelacruz/e2e_sam2/gitignore_exception/contrastive_embeddings_viz_e20_t0.3_dim2048/prototypes.pkl')
 print(df.head())
 print(df.columns)
+print(df)
 
-print(len(df.iloc[0, 2]))
-
-print(len(df.iloc[0, 3]))
-print(df.iloc[:,0].value_counts())

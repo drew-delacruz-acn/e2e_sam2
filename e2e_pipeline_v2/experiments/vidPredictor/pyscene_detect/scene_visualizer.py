@@ -266,6 +266,49 @@ def save_visualizations(scene_starts, frame_files, selected_dir, output_dir):
     logger.info(f"All visualizations successfully saved to: {output_path}")
     return output_path
 
+def display_all_frames(frame_files, scene_boundaries):
+    """Display all frames in rows of 8, with scene boundaries highlighted
+    
+    Args:
+        frame_files: List of all frame files
+        scene_boundaries: List of frame indices where scenes start
+    """
+    # Get frame numbers from filenames
+    frame_numbers = [int(f.stem) for f in frame_files]
+    
+    # Calculate how many rows we need (8 frames per row maximum)
+    frames_per_row = 8
+    num_rows = math.ceil(len(frame_files) / frames_per_row)
+    
+    st.write(f"Total frames: {len(frame_files)}")
+    
+    # Display frames in rows with 8 columns max
+    for row_idx in range(num_rows):
+        start_frame_idx = row_idx * frames_per_row
+        end_frame_idx = min((row_idx + 1) * frames_per_row, len(frame_files))
+        row_frames = frame_files[start_frame_idx:end_frame_idx]
+        row_frame_numbers = frame_numbers[start_frame_idx:end_frame_idx]
+        
+        # Create columns for each frame in this row
+        cols = st.columns(len(row_frames))
+        
+        # Display each frame with its number
+        for col_idx, (frame_path, frame_num) in enumerate(zip(row_frames, row_frame_numbers)):
+            with cols[col_idx]:
+                frame = load_frame(frame_path)
+                
+                # Check if this is a scene boundary frame
+                is_boundary = frame_num in scene_boundaries
+                frame_with_border = add_highlight_border(frame, is_boundary)
+                
+                # Add caption with appropriate styling
+                st.image(frame_with_border, caption=f"Frame {frame_num}")
+                if is_boundary:
+                    st.markdown(
+                        f'<div style="text-align: center; color: red; font-weight: bold; margin-top: -15px;">⬆ SCENE BOUNDARY ⬆</div>', 
+                        unsafe_allow_html=True
+                    )
+
 def main():
     st.set_page_config(page_title="Scene Detection Visualizer", layout="wide")
     st.title("Scene Detection Visualizer")
@@ -349,17 +392,9 @@ def main():
         st.subheader("Scene Summary")
         display_scene_summary(scene_starts, len(frame_files))
         
-        # Show scene information with context
-        st.subheader("Scene Information")
-        for i, start in enumerate(scene_starts):
-            end = scene_starts[i + 1] if i < len(scene_starts) - 1 else len(frame_files)
-            duration = end - start
-            
-            st.markdown(f"### Scene {i+1}: Frames {start}-{end-1} (Duration: {duration} frames)")
-            
-            # Display all frames in the scene, organized in rows of 8
-            display_scene_context(frame_files, scene_starts, i, is_first_scene=(i == 0))
-            st.markdown("---")  # Add separator between scenes
+        # Show all frames in rows of 8, highlighting scene boundaries
+        st.subheader("All Frames")
+        display_all_frames(frame_files, scene_starts)
         
         # Show all scene starts
         st.subheader("Scene Start Indices")

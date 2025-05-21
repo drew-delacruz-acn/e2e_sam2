@@ -27,6 +27,9 @@ def build_prototypes(
         DataFrame with columns ['class', 'representative_embedding'].
     """
     df = frame[["class"]].copy()
+    print('--------------------------------')
+    print(df)
+    print('--------------------------------')
     df["proj"] = list(proj_vecs)
 
     reps = []

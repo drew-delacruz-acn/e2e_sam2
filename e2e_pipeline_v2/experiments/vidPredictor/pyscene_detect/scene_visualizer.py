@@ -141,7 +141,7 @@ def display_scene_context(frame_files, scene_boundaries, scene_idx, is_first_sce
                 st.image(frame_with_border, caption=f"Frame {frame_num}")
                 if is_boundary:
                     st.markdown(
-                        f'<div style="text-align: center; color: red; font-weight: bold; margin-top: -15px;">⬆ SCENE BOUNDARY ⬆</div>', 
+                        f'<div style="text-align: center; color: red; font-weight: bold; margin-top: -15px;">SCENE BOUNDARY</div>', 
                         unsafe_allow_html=True
                     )
 
@@ -305,7 +305,7 @@ def display_all_frames(frame_files, scene_boundaries):
                 st.image(frame_with_border, caption=f"Frame {frame_num}")
                 if is_boundary:
                     st.markdown(
-                        f'<div style="text-align: center; color: red; font-weight: bold; margin-top: -15px;">⬆ SCENE BOUNDARY ⬆</div>', 
+                        f'<div style="text-align: center; color: red; font-weight: bold; margin-top: -15px;">SCENE BOUNDARY</div>', 
                         unsafe_allow_html=True
                     )
 

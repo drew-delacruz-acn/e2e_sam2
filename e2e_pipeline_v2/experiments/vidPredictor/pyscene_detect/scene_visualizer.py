@@ -11,6 +11,7 @@ import shutil
 import matplotlib
 import logging
 import sys
+import math
 matplotlib.use('Agg')
 
 # Configure logging to write to both console and file
@@ -87,46 +88,62 @@ def create_timeline_plot(scene_starts, total_frames):
     
     return fig
 
-def display_scene_context(frame_files, scene_start, is_first_scene=False):
-    """Display frames around a scene boundary"""
+def display_scene_context(frame_files, scene_boundaries, scene_idx, is_first_scene=False):
+    """Display all frames in a scene with highlighted boundaries
+    
+    Args:
+        frame_files: List of all frame files
+        scene_boundaries: List of frame indices where scenes start
+        scene_idx: Index of the current scene
+        is_first_scene: Whether this is the first scene
+    """
+    # Determine scene start and end frame indices
+    scene_start = scene_boundaries[scene_idx]
+    scene_end = scene_boundaries[scene_idx + 1] if scene_idx < len(scene_boundaries) - 1 else len(frame_files)
+    
     # Get frame numbers from filenames
     frame_numbers = [int(f.stem) for f in frame_files]
     
-    if is_first_scene:
-        # For first scene, show first 3 frames
-        frames_to_show = frame_files[:3]
-        display_numbers = frame_numbers[:3]
-    else:
-        # For other scenes, show 3 frames before and after
-        # Find the index of the scene start frame
-        start_idx = frame_numbers.index(scene_start)
-        # Get 3 frames before and after
-        start_display = max(0, start_idx-1)
-        end_display = min(len(frame_files), start_idx + 3)
-        frames_to_show = frame_files[start_display:end_display]
-        display_numbers = frame_numbers[start_display:end_display]
+    # Find the indices of the scene's frames in the frame_files list
+    start_idx = frame_numbers.index(scene_start)
+    end_idx = min(len(frame_files), frame_numbers.index(scene_start) + (scene_end - scene_start)) if scene_idx < len(scene_boundaries) - 1 else len(frame_files)
     
-    # Create columns for the frames
-    cols = st.columns(len(frames_to_show))
+    # Get all frames for this scene
+    scene_frames = frame_files[start_idx:end_idx]
+    scene_frame_numbers = frame_numbers[start_idx:end_idx]
     
-    # Display each frame with its number
-    for col, (frame_path, frame_num) in enumerate(zip(frames_to_show, display_numbers)):
-        with cols[col]:
-            frame = load_frame(frame_path)
-            
-            # Highlight scene boundary frames
-            is_boundary = frame_num == scene_start and not is_first_scene
-            frame_with_border = add_highlight_border(frame, is_boundary)
-            
-            # Add caption with appropriate styling
-            if is_boundary:
+    # Calculate how many rows we need (8 frames per row maximum)
+    frames_per_row = 8
+    num_rows = math.ceil(len(scene_frames) / frames_per_row)
+    
+    st.write(f"Total frames in this scene: {len(scene_frames)}")
+    
+    # Display frames in rows with 8 columns max
+    for row_idx in range(num_rows):
+        start_frame_idx = row_idx * frames_per_row
+        end_frame_idx = min((row_idx + 1) * frames_per_row, len(scene_frames))
+        row_frames = scene_frames[start_frame_idx:end_frame_idx]
+        row_frame_numbers = scene_frame_numbers[start_frame_idx:end_frame_idx]
+        
+        # Create columns for each frame in this row
+        cols = st.columns(len(row_frames))
+        
+        # Display each frame with its number
+        for col_idx, (frame_path, frame_num) in enumerate(zip(row_frames, row_frame_numbers)):
+            with cols[col_idx]:
+                frame = load_frame(frame_path)
+                
+                # Check if this is a scene boundary frame
+                is_boundary = frame_num in scene_boundaries
+                frame_with_border = add_highlight_border(frame, is_boundary)
+                
+                # Add caption with appropriate styling
                 st.image(frame_with_border, caption=f"Frame {frame_num}")
-                st.markdown(
-                    f'<div style="text-align: center; color: red; font-weight: bold; margin-top: -15px;">⬆ SCENE BOUNDARY ⬆</div>', 
-                    unsafe_allow_html=True
-                )
-            else:
-                st.image(frame_with_border, caption=f"Frame {frame_num}")
+                if is_boundary:
+                    st.markdown(
+                        f'<div style="text-align: center; color: red; font-weight: bold; margin-top: -15px;">⬆ SCENE BOUNDARY ⬆</div>', 
+                        unsafe_allow_html=True
+                    )
 
 def get_scene_directories(base_dir):
     """Get all scene directories from the base directory"""
@@ -340,8 +357,8 @@ def main():
             
             st.markdown(f"### Scene {i+1}: Frames {start}-{end-1} (Duration: {duration} frames)")
             
-            # Display frames around scene boundary
-            display_scene_context(frame_files, start, is_first_scene=(i == 0))
+            # Display all frames in the scene, organized in rows of 8
+            display_scene_context(frame_files, scene_starts, i, is_first_scene=(i == 0))
             st.markdown("---")  # Add separator between scenes
         
         # Show all scene starts

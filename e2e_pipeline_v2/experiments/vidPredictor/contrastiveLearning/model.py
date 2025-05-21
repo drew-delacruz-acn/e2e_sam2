@@ -8,8 +8,8 @@ class ProjectionHead(nn.Module):
     def __init__(self, in_dim: int, proj_dim: int = 128):
         super().__init__()
         self.net = nn.Sequential(
-            nn.Linear(in_dim, 256), nn.ReLU(inplace=True),
-            nn.Linear(256, proj_dim)
+            nn.Linear(in_dim, proj_dim),
+            nn.ReLU(inplace=True)
         )
 
     def forward(self, x):

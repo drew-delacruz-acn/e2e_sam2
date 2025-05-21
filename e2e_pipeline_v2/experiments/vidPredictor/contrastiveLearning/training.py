@@ -9,9 +9,9 @@ def train_supcon(
     dataset,
     in_dim: int,
     epochs: int = 1,
-    batch_size: int = 128,
+    batch_size: int = 8,
     temperature: float = 0.1,
-    lr: float = 1e-3,
+    lr: float = 1e-5,
     proj_dim: int = 128,
 ):
     """

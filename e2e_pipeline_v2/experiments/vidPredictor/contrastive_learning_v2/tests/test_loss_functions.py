@@ -332,7 +332,7 @@ class TestLossIntegration:
     def test_loss_with_toy_separable_data(self, toy_separable_data):
         """Test loss computation with perfectly separable toy data."""
         # Convert DataFrame to tensors
-        embeddings_list = toy_separable_data['fine_tuned_embeddings'].tolist()
+        embeddings_list = toy_separable_data['finetuned_embedding'].tolist()
         embeddings = torch.tensor(np.stack(embeddings_list), dtype=torch.float32)
         
         # Create label mapping

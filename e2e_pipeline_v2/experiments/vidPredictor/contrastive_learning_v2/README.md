@@ -66,7 +66,7 @@ python train_representatives.py --data path/to/your/data.pkl --output results/
 
 Your PKL file should contain a pandas DataFrame with:
 - `class`: String class labels
-- `fine_tuned_embeddings`: List/array of embedding vectors
+- `finetuned_embedding`: List/array of embedding vectors
 
 Example:
 ```python
@@ -74,8 +74,8 @@ import pandas as pd
 import numpy as np
 
 data = [
-    {'class': 'mirror', 'fine_tuned_embeddings': np.array([1.0, 2.0, ...])},
-    {'class': 'lamp', 'fine_tuned_embeddings': np.array([3.0, 4.0, ...])},
+    {'class': 'mirror', 'finetuned_embedding': np.array([1.0, 2.0, ...])},
+    {'class': 'lamp', 'finetuned_embedding': np.array([3.0, 4.0, ...])},
     # ... more samples
 ]
 df = pd.DataFrame(data)

@@ -22,7 +22,7 @@ def sample_dataframe():
             embedding = center + 0.1 * np.random.randn(2048)
             data.append({
                 'class': cls, 
-                'fine_tuned_embeddings': embedding.astype(np.float32)
+                'finetuned_embedding': embedding.astype(np.float32)
             })
     
     return pd.DataFrame(data)
@@ -37,12 +37,12 @@ def toy_separable_data():
     # Class A: points around (2, 2)
     for i in range(5):
         embedding = np.array([2.0, 2.0]) + 0.1 * np.random.randn(2)
-        data.append({'class': 'A', 'fine_tuned_embeddings': embedding.astype(np.float32)})
+        data.append({'class': 'A', 'finetuned_embedding': embedding.astype(np.float32)})
     
     # Class B: points around (-2, -2)  
     for i in range(5):
         embedding = np.array([-2.0, -2.0]) + 0.1 * np.random.randn(2)
-        data.append({'class': 'B', 'fine_tuned_embeddings': embedding.astype(np.float32)})
+        data.append({'class': 'B', 'finetuned_embedding': embedding.astype(np.float32)})
         
     return pd.DataFrame(data)
 
@@ -69,7 +69,7 @@ def dataframe_with_nans():
     for i, emb in enumerate(embeddings):
         data.append({
             'class': f'class_{i}',
-            'fine_tuned_embeddings': emb.astype(np.float32)
+            'finetuned_embedding': emb.astype(np.float32)
         })
     
     return pd.DataFrame(data)
@@ -96,7 +96,7 @@ def single_sample_per_class():
     
     for i, cls in enumerate(['A', 'B', 'C']):
         embedding = np.random.randn(10).astype(np.float32)
-        data.append({'class': cls, 'fine_tuned_embeddings': embedding})
+        data.append({'class': cls, 'finetuned_embedding': embedding})
     
     return pd.DataFrame(data)
 

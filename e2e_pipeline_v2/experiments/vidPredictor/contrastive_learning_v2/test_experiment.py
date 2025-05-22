@@ -27,17 +27,17 @@ def create_toy_data():
     # Class A: around (2, 2)
     for i in range(15):
         embedding = np.array([2.0, 2.0]) + 0.3 * np.random.randn(2)
-        data.append({'class': 'mirror', 'fine_tuned_embeddings': embedding.astype(np.float32)})
+        data.append({'class': 'mirror', 'finetuned_embedding': embedding.astype(np.float32)})
     
     # Class B: around (-2, -2)
     for i in range(15):
         embedding = np.array([-2.0, -2.0]) + 0.3 * np.random.randn(2)
-        data.append({'class': 'lamp', 'fine_tuned_embeddings': embedding.astype(np.float32)})
+        data.append({'class': 'lamp', 'finetuned_embedding': embedding.astype(np.float32)})
     
     # Class C: around (2, -2)
     for i in range(15):
         embedding = np.array([2.0, -2.0]) + 0.3 * np.random.randn(2)
-        data.append({'class': 'wall', 'fine_tuned_embeddings': embedding.astype(np.float32)})
+        data.append({'class': 'wall', 'finetuned_embedding': embedding.astype(np.float32)})
     
     return pd.DataFrame(data)
 
@@ -69,11 +69,11 @@ def test_experiment():
         import torch
         
         train_embeddings = torch.tensor(
-            np.stack(train_df['fine_tuned_embeddings'].tolist()), 
+            np.stack(train_df['finetuned_embedding'].tolist()), 
             dtype=torch.float32
         )
         val_embeddings = torch.tensor(
-            np.stack(val_df['fine_tuned_embeddings'].tolist()), 
+            np.stack(val_df['finetuned_embedding'].tolist()), 
             dtype=torch.float32
         )
         

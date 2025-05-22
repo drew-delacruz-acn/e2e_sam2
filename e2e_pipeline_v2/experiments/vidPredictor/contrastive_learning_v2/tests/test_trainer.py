@@ -15,7 +15,7 @@ class TestTrainerInitialization:
     def test_initialization_with_class_means(self, sample_dataframe):
         """Test representatives are initialized as class means."""
         # Convert DataFrame to expected format
-        embeddings_list = sample_dataframe['fine_tuned_embeddings'].tolist()
+        embeddings_list = sample_dataframe['finetuned_embedding'].tolist()
         embeddings = torch.tensor(np.stack(embeddings_list), dtype=torch.float32)
         
         # Create label mapping
@@ -77,7 +77,7 @@ class TestTrainingLoop:
     def test_representatives_update_during_training(self, toy_separable_data):
         """Test that representatives actually change after optimizer step."""
         # Convert toy data to tensors
-        embeddings_list = toy_separable_data['fine_tuned_embeddings'].tolist()
+        embeddings_list = toy_separable_data['finetuned_embedding'].tolist()
         embeddings = torch.tensor(np.stack(embeddings_list), dtype=torch.float32)
         
         unique_classes = toy_separable_data['class'].unique()
@@ -112,7 +112,7 @@ class TestTrainingLoop:
         # config = {'lr': 0.01, 'margin': 0.15, 'lambda_push': 0.25, 'epochs': 10}
         # trainer = ContrastiveTrainer(config)
         # 
-        # embeddings_list = toy_separable_data['fine_tuned_embeddings'].tolist()
+        # embeddings_list = toy_separable_data['finetuned_embedding'].tolist()
         # embeddings = torch.tensor(np.stack(embeddings_list), dtype=torch.float32)
         # 
         # unique_classes = toy_separable_data['class'].unique()
@@ -131,7 +131,7 @@ class TestTrainingLoop:
         # assert losses[-1] < losses[0], "Final loss should be less than initial loss"
         
         # Verify test data is suitable for this test
-        embeddings_list = toy_separable_data['fine_tuned_embeddings'].tolist()
+        embeddings_list = toy_separable_data['finetuned_embedding'].tolist()
         embeddings = torch.tensor(np.stack(embeddings_list), dtype=torch.float32)
         
         # Data should be separable (class A around (2,2), class B around (-2,-2))
@@ -182,7 +182,7 @@ class TestEvaluation:
     def test_f1_calculation_baseline_vs_learned(self, toy_separable_data):
         """Test F1 score calculation for baseline vs learned representatives."""
         # Convert data
-        embeddings_list = toy_separable_data['fine_tuned_embeddings'].tolist()
+        embeddings_list = toy_separable_data['finetuned_embedding'].tolist()
         embeddings = torch.tensor(np.stack(embeddings_list), dtype=torch.float32)
         
         unique_classes = toy_separable_data['class'].unique()
@@ -334,7 +334,7 @@ class TestTrainerIntegration:
         # trainer = ContrastiveTrainer(config)
         # 
         # # Prepare data
-        # embeddings_list = toy_separable_data['fine_tuned_embeddings'].tolist()
+        # embeddings_list = toy_separable_data['finetuned_embedding'].tolist()
         # embeddings = torch.tensor(np.stack(embeddings_list), dtype=torch.float32)
         # 
         # unique_classes = toy_separable_data['class'].unique()
@@ -375,7 +375,7 @@ class TestTrainerIntegration:
         # trainer = ContrastiveTrainer(config)
         # 
         # # Prepare data
-        # embeddings_list = toy_separable_data['fine_tuned_embeddings'].tolist()
+        # embeddings_list = toy_separable_data['finetuned_embedding'].tolist()
         # embeddings = torch.tensor(np.stack(embeddings_list), dtype=torch.float32)
         # 
         # unique_classes = toy_separable_data['class'].unique()
@@ -396,7 +396,7 @@ class TestTrainerIntegration:
         # assert final_loss < initial_loss, "Loss should decrease during training"
         
         # Verify the data is indeed perfectly separable
-        embeddings_list = toy_separable_data['fine_tuned_embeddings'].tolist()
+        embeddings_list = toy_separable_data['finetuned_embedding'].tolist()
         embeddings = torch.tensor(np.stack(embeddings_list), dtype=torch.float32)
         
         class_a_mask = toy_separable_data['class'] == 'A'

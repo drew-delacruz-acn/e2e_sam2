@@ -27,7 +27,7 @@ def validate_dataframe(df: pd.DataFrame) -> None:
         ValueError: If DataFrame is missing required columns or has invalid data
     """
     # Check required columns
-    required_columns = ['class', 'fine_tuned_embeddings']
+    required_columns = ['class', 'finetuned_embedding']
     missing_columns = [col for col in required_columns if col not in df.columns]
     
     if missing_columns:
@@ -41,7 +41,7 @@ def validate_dataframe(df: pd.DataFrame) -> None:
         raise ValueError("All class labels must be strings")
     
     # Check embeddings format and consistency
-    embeddings = df['fine_tuned_embeddings'].tolist()
+    embeddings = df['finetuned_embedding'].tolist()
     
     if len(embeddings) == 0:
         raise ValueError("No embeddings found")

@@ -42,8 +42,8 @@ class TestEndToEndWorkflow:
         # trainer = ContrastiveTrainer(config)
         # 
         # # Convert to tensors
-        # train_embeddings = torch.tensor(np.stack(train_df['fine_tuned_embeddings'].tolist()))
-        # val_embeddings = torch.tensor(np.stack(val_df['fine_tuned_embeddings'].tolist()))
+        # train_embeddings = torch.tensor(np.stack(train_df['finetuned_embedding'].tolist()))
+        # val_embeddings = torch.tensor(np.stack(val_df['finetuned_embedding'].tolist()))
         # 
         # class_to_idx = {cls: idx for idx, cls in enumerate(class_names)}
         # train_labels = torch.tensor([class_to_idx[cls] for cls in train_df['class']])
@@ -98,7 +98,7 @@ class TestEndToEndWorkflow:
         #     
         #     trainer = ContrastiveTrainer(config)
         #     
-        #     embeddings_list = toy_separable_data['fine_tuned_embeddings'].tolist()
+        #     embeddings_list = toy_separable_data['finetuned_embedding'].tolist()
         #     embeddings = torch.tensor(np.stack(embeddings_list), dtype=torch.float32)
         #     
         #     unique_classes = toy_separable_data['class'].unique()
@@ -167,7 +167,7 @@ class TestEndToEndWorkflow:
         # 
         # trainer = ContrastiveTrainer(config)
         # 
-        # embeddings_list = toy_separable_data['fine_tuned_embeddings'].tolist()
+        # embeddings_list = toy_separable_data['finetuned_embedding'].tolist()
         # embeddings = torch.tensor(np.stack(embeddings_list), dtype=torch.float32)
         # 
         # unique_classes = toy_separable_data['class'].unique()
@@ -196,7 +196,7 @@ class TestEndToEndWorkflow:
         # assert learned_f1 > 0.8, f"Should achieve high F1 on separable data, got {learned_f1:.3f}"
         
         # Verify test data is suitable for this test
-        embeddings_list = toy_separable_data['fine_tuned_embeddings'].tolist()
+        embeddings_list = toy_separable_data['finetuned_embedding'].tolist()
         embeddings = torch.tensor(np.stack(embeddings_list), dtype=torch.float32)
         
         # Check that classes are well-separated
@@ -257,7 +257,7 @@ class TestErrorHandling:
     
     def test_handles_empty_dataframe(self):
         """Test handling of empty input data."""
-        empty_df = pd.DataFrame(columns=['class', 'fine_tuned_embeddings'])
+        empty_df = pd.DataFrame(columns=['class', 'finetuned_embedding'])
         
         # When implemented:
         # with pytest.raises(ValueError, match="Empty dataset"):
@@ -266,7 +266,7 @@ class TestErrorHandling:
         # Verify test setup
         assert len(empty_df) == 0
         assert 'class' in empty_df.columns
-        assert 'fine_tuned_embeddings' in empty_df.columns
+        assert 'finetuned_embedding' in empty_df.columns
 
 
 class TestPerformanceAndScaling:
@@ -288,7 +288,7 @@ class TestPerformanceAndScaling:
         # 
         # trainer = ContrastiveTrainer(config)
         # 
-        # embeddings_list = sample_dataframe['fine_tuned_embeddings'].tolist()
+        # embeddings_list = sample_dataframe['finetuned_embedding'].tolist()
         # embeddings = torch.tensor(np.stack(embeddings_list), dtype=torch.float32)
         # 
         # unique_classes = sample_dataframe['class'].unique()
@@ -305,7 +305,7 @@ class TestPerformanceAndScaling:
         
         # For now, verify test data size
         assert len(sample_dataframe) == 30  # 3 classes × 10 samples
-        embedding_dim = len(sample_dataframe['fine_tuned_embeddings'].iloc[0])
+        embedding_dim = len(sample_dataframe['finetuned_embedding'].iloc[0])
         assert embedding_dim == 2048  # Standard embedding dimension
     
     def test_memory_usage_reasonable(self, sample_dataframe):
@@ -313,7 +313,7 @@ class TestPerformanceAndScaling:
         # When implemented, could monitor memory usage during training
         # For now, just verify data structures are reasonable size
         
-        embeddings_list = sample_dataframe['fine_tuned_embeddings'].tolist()
+        embeddings_list = sample_dataframe['finetuned_embedding'].tolist()
         embeddings = torch.tensor(np.stack(embeddings_list), dtype=torch.float32)
         
         # Calculate memory usage
@@ -339,7 +339,7 @@ class TestPerformanceAndScaling:
                 embedding = center + 0.1 * torch.randn(embedding_dim)
                 data.append({
                     'class': f'class_{class_id}',
-                    'fine_tuned_embeddings': embedding.numpy()
+                    'finetuned_embedding': embedding.numpy()
                 })
         
         large_df = pd.DataFrame(data)
@@ -354,7 +354,7 @@ class TestPerformanceAndScaling:
         # 
         # trainer = ContrastiveTrainer(config)
         # 
-        # embeddings_list = large_df['fine_tuned_embeddings'].tolist()
+        # embeddings_list = large_df['finetuned_embedding'].tolist()
         # embeddings = torch.tensor(np.stack(embeddings_list), dtype=torch.float32)
         # 
         # unique_classes = large_df['class'].unique()

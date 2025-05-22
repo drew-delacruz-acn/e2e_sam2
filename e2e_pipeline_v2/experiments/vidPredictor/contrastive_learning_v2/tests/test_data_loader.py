@@ -19,16 +19,16 @@ class TestDataValidation:
         # validate_dataframe should not raise any exceptions
         
         # Expected behavior:
-        # - DataFrame has 'class' and 'fine_tuned_embeddings' columns
+        # - DataFrame has 'class' and 'finetuned_embedding' columns
         # - All embeddings are same length
         # - All embeddings are numeric and finite
         # - At least one sample per class
         
         assert 'class' in sample_dataframe.columns
-        assert 'fine_tuned_embeddings' in sample_dataframe.columns
+        assert 'finetuned_embedding' in sample_dataframe.columns
         
         # Check embedding consistency
-        embeddings = sample_dataframe['fine_tuned_embeddings'].tolist()
+        embeddings = sample_dataframe['finetuned_embedding'].tolist()
         embedding_lengths = [len(emb) for emb in embeddings]
         assert len(set(embedding_lengths)) == 1, "All embeddings should have same length"
         
@@ -40,7 +40,7 @@ class TestDataValidation:
         """Test validation fails with missing required columns."""
         # Should raise ValueError when required columns are missing
         
-        required_columns = ['class', 'fine_tuned_embeddings']
+        required_columns = ['class', 'finetuned_embedding']
         missing_columns = [col for col in required_columns if col not in invalid_dataframe.columns]
         
         assert len(missing_columns) > 0, "Test data should be missing required columns"
@@ -51,7 +51,7 @@ class TestDataValidation:
     
     def test_validate_embeddings_format(self, sample_dataframe):
         """Test embeddings are properly formatted."""
-        embeddings = sample_dataframe['fine_tuned_embeddings'].tolist()
+        embeddings = sample_dataframe['finetuned_embedding'].tolist()
         
         # All embeddings should be numpy arrays or lists of numbers
         for emb in embeddings:
@@ -63,7 +63,7 @@ class TestDataValidation:
         """Test validation handles NaN and infinite values."""
         # Should either raise error or warn about NaN/inf values
         
-        embeddings = dataframe_with_nans['fine_tuned_embeddings'].tolist()
+        embeddings = dataframe_with_nans['finetuned_embedding'].tolist()
         
         # Verify test data actually contains NaN/inf
         has_nan = any(np.any(np.isnan(emb)) for emb in embeddings)
@@ -92,7 +92,7 @@ class TestDataLoading:
         assert isinstance(loaded_df, pd.DataFrame)
         assert len(loaded_df) == 30  # 3 classes × 10 samples
         assert 'class' in loaded_df.columns
-        assert 'fine_tuned_embeddings' in loaded_df.columns
+        assert 'finetuned_embedding' in loaded_df.columns
         
         # When we implement load_and_split_data:
         # train_df, val_df, class_names = load_and_split_data(temp_pkl_file)
@@ -172,7 +172,7 @@ class TestDataIntegrity:
     
     def test_embedding_dimensions_consistent(self, sample_dataframe):
         """Test all embeddings have the same dimensionality."""
-        embeddings = sample_dataframe['fine_tuned_embeddings'].tolist()
+        embeddings = sample_dataframe['finetuned_embedding'].tolist()
         
         if len(embeddings) > 0:
             expected_dim = len(embeddings[0])
@@ -191,7 +191,7 @@ class TestDataIntegrity:
     
     def test_embeddings_are_numeric(self, sample_dataframe):
         """Test all embedding values are numeric."""
-        embeddings = sample_dataframe['fine_tuned_embeddings'].tolist()
+        embeddings = sample_dataframe['finetuned_embedding'].tolist()
         
         for emb in embeddings:
             emb_array = np.array(emb)
@@ -218,4 +218,4 @@ class TestDataLoaderIntegration:
         
         assert len(df) > 0
         assert 'class' in df.columns
-        assert 'fine_tuned_embeddings' in df.columns 
+        assert 'finetuned_embedding' in df.columns 

@@ -95,11 +95,11 @@ def main():
     # 2. Convert to tensors
     print("🔄 Converting to tensors...")
     train_embeddings = torch.tensor(
-        np.stack(train_df['fine_tuned_embeddings'].tolist()), 
+        np.stack(train_df['finetuned_embedding'].tolist()), 
         dtype=torch.float32
     )
     val_embeddings = torch.tensor(
-        np.stack(val_df['fine_tuned_embeddings'].tolist()), 
+        np.stack(val_df['finetuned_embedding'].tolist()), 
         dtype=torch.float32
     ) if len(val_df) > 0 else torch.empty(0, train_embeddings.shape[1])
     

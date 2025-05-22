@@ -109,11 +109,37 @@ python train_representatives.py \
 The experiment generates:
 
 1. **Results JSON** (`results.json`): Metrics and configuration
-2. **Representatives PKL** (`representatives.pkl`): Learned class representatives
+2. **Representatives PKL** (`representatives.pkl`): Learned class representatives as pandas DataFrame with columns:
+   - `finetuned_embedding`: NumPy array containing the learned representative vector
+   - `class`: String class name
 3. **Visualizations**:
    - `loss_curve.png`: Training loss over epochs
    - `tsne_plot.png`: t-SNE visualization of embeddings and representatives
    - `embeddings_2d.png`: Direct 2D plot (for 2D data)
+
+## 📥 Loading Representatives
+
+The learned representatives are saved as a pandas DataFrame. Here's how to load and use them:
+
+```python
+import pandas as pd
+import numpy as np
+
+# Load representatives
+df = pd.read_pickle('results/representatives.pkl')
+
+# Access data
+print(f"Shape: {df.shape}")
+print(f"Columns: {list(df.columns)}")
+print(f"Classes: {df['class'].tolist()}")
+
+# Get embedding for specific class
+class_embedding = df[df['class'] == 'mirror']['finetuned_embedding'].iloc[0]
+
+# Convert all embeddings to numpy array for computation
+embeddings_array = np.stack(df['finetuned_embedding'].values)
+class_names = df['class'].values
+```
 
 ## 🧪 Testing
 
@@ -128,6 +154,12 @@ python -m pytest tests/test_data_loader.py -v
 python -m pytest tests/test_loss_functions.py -v
 python -m pytest tests/test_trainer.py -v
 python -m pytest tests/test_integration.py -v
+
+# Test DataFrame format
+python test_dataframe_output.py
+
+# See usage examples
+python example_usage.py
 ```
 
 ## 🔬 Implementation Details

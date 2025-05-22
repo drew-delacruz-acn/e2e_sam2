@@ -19,6 +19,7 @@ import json
 import pickle
 import torch
 import numpy as np
+import pandas as pd
 from pathlib import Path
 from typing import Dict, Any
 
@@ -189,15 +190,24 @@ def main():
         json.dump(results, f, indent=2)
     print(f"✅ Results saved to {results_file}")
     
-    # Save learned representatives
+    # Save learned representatives as DataFrame
     representatives_file = output_dir / 'representatives.pkl'
-    with open(representatives_file, 'wb') as f:
-        pickle.dump({
-            'representatives': trainer.representatives.detach().cpu().numpy(),
-            'class_names': class_names,
-            'class_to_idx': class_to_idx
-        }, f)
-    print(f"✅ Representatives saved to {representatives_file}")
+    
+    # Create DataFrame with finetuned_embedding and class columns
+    representatives_data = []
+    representatives_numpy = trainer.representatives.detach().cpu().numpy()
+    
+    for i, class_name in enumerate(class_names):
+        representatives_data.append({
+            'finetuned_embedding': representatives_numpy[i],
+            'class': class_name
+        })
+    
+    representatives_df = pd.DataFrame(representatives_data)
+    representatives_df.to_pickle(representatives_file)
+    print(f"✅ Representatives DataFrame saved to {representatives_file}")
+    print(f"📊 DataFrame shape: {representatives_df.shape}")
+    print(f"📋 Columns: {list(representatives_df.columns)}")
     
     # 8. Generate visualizations
     print("📊 Generating visualizations...")

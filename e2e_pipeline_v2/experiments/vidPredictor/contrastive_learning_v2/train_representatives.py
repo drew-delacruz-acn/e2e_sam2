@@ -35,7 +35,7 @@ def parse_args():
     parser.add_argument('--data', type=str, required=True,
                        help='Path to PKL file containing embeddings')
     parser.add_argument('--output', type=str, default='results/',
-                       help='Output directory for results')
+                       help='Output directory for results (auto-generates subfolder based on parameters if using default)')
     parser.add_argument('--val-frac', type=float, default=0.3,
                        help='Fraction of data for validation')
     parser.add_argument('--lr', type=float, default=0.01,
@@ -51,6 +51,11 @@ def parse_args():
     parser.add_argument('--device', type=str, default='auto',
                        choices=['auto', 'cpu', 'cuda'],
                        help='Device to use for training')
+    parser.add_argument('--init-method', type=str, default='class_means',
+                       choices=['class_means', 'random', 'bounded_random', 'perturbed_means'],
+                       help='Representative initialization method')
+    parser.add_argument('--no-auto-name', action='store_true',
+                       help='Disable automatic experiment folder naming')
     
     return parser.parse_args()
 
@@ -63,13 +68,38 @@ def set_seed(seed: int):
         torch.cuda.manual_seed(seed)
 
 
+def generate_experiment_name(args):
+    """Generate experiment folder name based on parameters."""
+    # Create a descriptive name with key parameters
+    name_parts = [
+        f"init_{args.init_method}",
+        f"lr_{args.lr}",
+        f"margin_{args.margin}",
+        f"lambda_{args.lambda_push}",
+        f"epochs_{args.epochs}"
+    ]
+    
+    # Add seed if it's not the default
+    if args.seed != 42:
+        name_parts.append(f"seed_{args.seed}")
+    
+    return "_".join(name_parts)
+
+
 def main():
     """Main experiment function."""
     args = parse_args()
     
     # Set up
     set_seed(args.seed)
-    output_dir = Path(args.output)
+    
+    # Generate experiment-specific folder name if using default output
+    if args.output == 'results/' and not args.no_auto_name:
+        experiment_name = generate_experiment_name(args)
+        output_dir = Path('results') / experiment_name
+    else:
+        output_dir = Path(args.output)
+    
     output_dir.mkdir(parents=True, exist_ok=True)
     
     print("🚀 Starting Contrastive Learning Experiment")
@@ -77,6 +107,7 @@ def main():
     print(f"📊 Output: {output_dir}")
     print(f"⚙️  Config: lr={args.lr}, margin={args.margin}, λ={args.lambda_push}")
     print(f"🔄 Epochs: {args.epochs}")
+    print(f"🎯 Initialization: {args.init_method}")
     print()
     
     # 1. Load and split data
@@ -126,13 +157,19 @@ def main():
     print(f"🖥️  Using device: {device}")
     
     # 4. Initialize representatives and get baseline
-    print("🎯 Initializing representatives as class means...")
-    trainer.initialize_representatives(train_embeddings, train_labels)
+    init_method_display = {
+        'class_means': 'class means',
+        'random': 'random normal',
+        'bounded_random': 'bounded random',
+        'perturbed_means': 'perturbed class means'
+    }
+    print(f"🎯 Initializing representatives using {init_method_display[args.init_method]}...")
+    trainer.initialize_representatives(train_embeddings, train_labels, init_method=args.init_method)
     
     # Evaluate baseline performance
     if len(val_df) > 0:
         baseline_f1 = trainer.evaluate(val_embeddings, val_labels, trainer.representatives.detach())
-        print(f"📊 Baseline F1 (class means): {baseline_f1:.4f}")
+        print(f"📊 Baseline F1 ({init_method_display[args.init_method]}): {baseline_f1:.4f}")
     else:
         baseline_f1 = None
         print("⚠️  No validation data - skipping baseline evaluation")
@@ -166,6 +203,7 @@ def main():
     # Save configuration and metrics
     results = {
         'config': config,
+        'init_method': args.init_method,
         'data_info': {
             'num_train_samples': len(train_df),
             'num_val_samples': len(val_df),

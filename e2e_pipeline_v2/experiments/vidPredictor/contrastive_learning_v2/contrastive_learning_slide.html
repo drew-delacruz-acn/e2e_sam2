@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contrastive Learning - Slide Version</title>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: white;
+        }
+        .slide-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+        }
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 2em;
+        }
+        .mermaid {
+            text-align: center;
+            margin: 20px 0;
+        }
+        .key-points {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border-left: 5px solid #007bff;
+        }
+        .formula-box {
+            background: #fff3cd;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+            text-align: center;
+            font-family: 'Courier New', monospace;
+            font-size: 1.2em;
+            border: 2px solid #ffc107;
+        }
+        .results-box {
+            background: #d4edda;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border: 2px solid #28a745;
+        }
+        ul {
+            font-size: 1.1em;
+            line-height: 1.6;
+        }
+        .highlight {
+            font-weight: bold;
+            color: #dc3545;
+        }
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <h1>🎯 Contrastive Learning for Representative Learning</h1>
+        
+        <!-- Main Process Diagram -->
+        <div class="mermaid">
+            graph TD
+                A[📊 Input: 18 Classes<br/>2048D Embeddings] --> B[🎯 Initialize Representatives<br/>Class Means]
+                B --> C[🔄 Training Loop]
+                
+                subgraph "Contrastive Loss"
+                    D[⬅️ PULL<br/>Attract Same Class]
+                    E[➡️ PUSH<br/>Repel Different Classes]
+                    F[📐 Cosine Similarity<br/>+ Margin Constraint]
+                end
+                
+                C --> D
+                C --> E
+                D --> F
+                E --> F
+                F --> G[🔄 Update Representatives]
+                G --> H{Converged?}
+                H -->|No| C
+                H -->|Yes| I[💾 Optimized Representatives<br/>DataFrame Output]
+                
+                subgraph "Current Issues"
+                    J[⚠️ Max Similarity: 0.535<br/>TVA Monitor ↔ Classic Loki Armor]
+                    K[📊 Mean Similarity: 0.366<br/>Poor Class Separation]
+                end
+                
+                subgraph "Target Improvement"
+                    L[✅ Max Similarity: <0.4<br/>Better Distinction]
+                    M[📈 Mean Similarity: <0.3<br/>Clearer Boundaries]
+                end
+                
+                J --> L
+                K --> M
+                
+                style A fill:#e1f5fe
+                style B fill:#f3e5f5
+                style C fill:#fff3e0
+                style D fill:#c8e6c9
+                style E fill:#ffcdd2
+                style F fill:#fff8e1
+                style I fill:#e0f2f1
+                style J fill:#ffebee
+                style K fill:#ffebee
+                style L fill:#e8f5e8
+                style M fill:#e8f5e8
+        </div>
+        
+        <!-- Key Formula -->
+        <div class="formula-box">
+            <strong>Contrastive Loss:</strong><br/>
+            L = Σ_c [ -mean(cos(r_c, P^c)) + λ × mean(max(0, cos(r_c, N^c) - margin)) ]
+        </div>
+        
+        <!-- Key Points -->
+        <div class="key-points">
+            <h3>🎯 Key Concepts:</h3>
+            <ul>
+                <li><strong>Pull Term:</strong> Attracts representatives closer to same-class samples</li>
+                <li><strong>Push Term:</strong> Repels representatives from different-class samples</li>
+                <li><strong>Margin:</strong> Minimum required cosine distance from negatives</li>
+                <li><strong>Lambda (λ):</strong> Controls balance between pull and push forces</li>
+            </ul>
+        </div>
+        
+        <!-- Current Results -->
+        <div class="results-box">
+            <h3>📊 Current Analysis Results:</h3>
+            <ul>
+                <li><span class="highlight">Problem:</span> TVA Monitor and Classic Loki Armor too similar (0.535)</li>
+                <li><span class="highlight">Issue:</span> Armor classes are confusing each other</li>
+                <li><span class="highlight">Solution:</span> Increase margin (0.15→0.3) and lambda (0.25→0.6)</li>
+                <li><span class="highlight">Expected:</span> Better separation, improved classification accuracy</li>
+            </ul>
+        </div>
+        
+        <!-- Parameter Strategy -->
+        <div class="mermaid">
+            graph LR
+                subgraph "Parameter Optimization Strategy"
+                    A[🔥 Aggressive<br/>margin=0.3, λ=0.6] 
+                    B[⚖️ Balanced<br/>margin=0.22, λ=0.35]
+                    C[🛡️ Conservative<br/>margin=0.18, λ=0.3]
+                end
+                
+                D[Current Issues<br/>Max Sim: 0.535] --> A
+                D --> B
+                D --> C
+                
+                A --> E[Target: Max<0.4]
+                B --> F[Target: Max<0.45]
+                C --> G[Target: Max<0.5]
+                
+                style A fill:#ffebee
+                style B fill:#fff8e1
+                style C fill:#e0f2f1
+                style D fill:#ffcdd2
+                style E fill:#c8e6c9
+                style F fill:#fff3cd
+                style G fill:#e1f5fe
+        </div>
+    </div>
+
+    <script>
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'default',
+            flowchart: {
+                useMaxWidth: true,
+                htmlLabels: true,
+                curve: 'basis'
+            }
+        });
+    </script>
+</body>
+</html> 

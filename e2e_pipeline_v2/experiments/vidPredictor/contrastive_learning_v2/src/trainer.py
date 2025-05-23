@@ -66,13 +66,19 @@ class ContrastiveTrainer:
         self.representatives = None
         self.optimizer = None
         
-    def initialize_representatives(self, embeddings: torch.Tensor, labels: torch.Tensor) -> None:
+    def initialize_representatives(self, embeddings: torch.Tensor, labels: torch.Tensor, 
+                                 init_method: str = 'class_means') -> None:
         """
-        Initialize representatives as class means.
+        Initialize representatives using different strategies.
         
         Args:
             embeddings: Tensor of shape (num_samples, embedding_dim)
             labels: Tensor of shape (num_samples,) with class indices
+            init_method: Initialization method. Options:
+                - 'class_means': Initialize as class means (default)
+                - 'random': Random initialization from standard normal
+                - 'bounded_random': Random initialization within embedding bounds
+                - 'perturbed_means': Class means + small random perturbation
         """
         embeddings = embeddings.to(self.device)
         labels = labels.to(self.device)
@@ -80,15 +86,47 @@ class ContrastiveTrainer:
         num_classes = len(torch.unique(labels))
         embedding_dim = embeddings.shape[1]
         
-        # Initialize representatives as class means
+        # Initialize representatives tensor
         self.representatives = torch.zeros(num_classes, embedding_dim, 
                                          device=self.device, requires_grad=True)
         
-        for class_idx in range(num_classes):
-            class_mask = (labels == class_idx)
-            if class_mask.any():
-                class_embeddings = embeddings[class_mask]
-                self.representatives.data[class_idx] = class_embeddings.mean(dim=0)
+        if init_method == 'class_means':
+            # Initialize as class means (original method)
+            for class_idx in range(num_classes):
+                class_mask = (labels == class_idx)
+                if class_mask.any():
+                    class_embeddings = embeddings[class_mask]
+                    self.representatives.data[class_idx] = class_embeddings.mean(dim=0)
+                    
+        elif init_method == 'random':
+            # Random initialization from standard normal distribution
+            torch.nn.init.normal_(self.representatives.data, mean=0.0, std=1.0)
+            
+        elif init_method == 'bounded_random':
+            # Random initialization within the bounds of the embedding space
+            emb_min = embeddings.min(dim=0)[0]
+            emb_max = embeddings.max(dim=0)[0]
+            
+            for class_idx in range(num_classes):
+                # Uniform random within embedding bounds
+                random_vals = torch.rand(embedding_dim, device=self.device)
+                self.representatives.data[class_idx] = emb_min + random_vals * (emb_max - emb_min)
+                
+        elif init_method == 'perturbed_means':
+            # Class means with small random perturbation
+            for class_idx in range(num_classes):
+                class_mask = (labels == class_idx)
+                if class_mask.any():
+                    class_embeddings = embeddings[class_mask]
+                    class_mean = class_embeddings.mean(dim=0)
+                    
+                    # Add small random perturbation (10% of std)
+                    perturbation = torch.randn_like(class_mean) * 0.1 * class_embeddings.std(dim=0)
+                    self.representatives.data[class_idx] = class_mean + perturbation
+                    
+        else:
+            raise ValueError(f"Unknown initialization method: {init_method}. "
+                           f"Choose from: 'class_means', 'random', 'bounded_random', 'perturbed_means'")
         
         # Initialize optimizer
         self.optimizer = optim.Adam([self.representatives], lr=self.config['lr'])

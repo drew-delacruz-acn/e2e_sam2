@@ -1,0 +1,22 @@
+# Configuration for contrastive learning experiment
+
+# Data settings
+data:
+  val_frac: 0.3  # Fraction of data for validation
+  seed: 42       # Random seed for reproducibility
+
+# Training hyperparameters
+training:
+  lr: 0.01           # Learning rate
+  margin: 0.15       # Cosine similarity margin for negatives
+  lambda_push: 0.25  # Weight for push term
+  epochs: 50         # Number of training epochs
+
+# Device settings
+device: auto  # 'auto', 'cpu', or 'cuda'
+
+# Output settings
+output:
+  save_plots: true
+  save_representatives: true
+  save_history: true 

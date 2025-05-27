@@ -124,6 +124,66 @@ def main():
     final_SOT = final_SOT.groupby(['video', 'tag'])['actual'].max().reset_index()
     print(f"✅ Loaded ground truth for {len(final_SOT)} video-tag pairs")
     
+    # 🔍 DEBUG: Let's examine the data structures
+    print("\n🔍 DEBUG INFO:")
+    print("Sample predictions:")
+    print(resnet_df[['video', 'visual_predicted_object', 'visual_max_score', 'owl_label']].head())
+    print("\nSample ground truth:")
+    print(final_SOT.head())
+    
+    print(f"\nUnique predicted classes: {sorted(resnet_df['visual_predicted_object'].unique())}")
+    print(f"Unique GT classes: {sorted(final_SOT['tag'].unique())}")
+    print(f"Classes in both: {set(resnet_df['visual_predicted_object'].unique()) & set(final_SOT['tag'].unique())}")
+    
+    # 🔍 Let's also check what owl_label contains - this might be the "actual" class!
+    print(f"\nUnique owl_label values: {sorted(resnet_df['owl_label'].unique())}")
+    
+    # 🔍 NEW APPROACH: Use owl_label as the actual class for cross-class confusion
+    print("\n🆕 Attempting cross-class confusion analysis using owl_label...")
+    
+    # Create true cross-class false positives
+    cross_class_fps = []
+    
+    for idx, row in resnet_df.iterrows():
+        predicted_class = row['visual_predicted_object']
+        actual_class = row['owl_label']  # This should be the true class
+        confidence = row['visual_max_score']
+        
+        if predicted_class != actual_class:
+            # This is a true cross-class false positive!
+            cross_class_fps.append({
+                'predicted_class': predicted_class,
+                'actual_class': actual_class,
+                'confidence_score': confidence,
+                'finetuned_embedding': row['finetuned_embedding'],
+                'video': row['video'],
+                'frame': row['frame'],
+                'fp_type': 'CrossClass',
+                'model_path': args.model_path,
+                'threshold': args.threshold
+            })
+    
+    if cross_class_fps:
+        cross_class_df = pd.DataFrame(cross_class_fps)
+        cross_class_df = cross_class_df.sort_values('confidence_score', ascending=False)
+        
+        print(f"\n🎯 Found {len(cross_class_df)} cross-class false positives!")
+        print("Top 10 cross-class confusions:")
+        for idx, row in cross_class_df.head(10).iterrows():
+            print(f"   {row['confidence_score']:.3f}: Predicted '{row['predicted_class']}' but actually '{row['actual_class']}' (video: {row['video']})")
+        
+        # Save cross-class FPs
+        output_file = args.output.replace('.pkl', '_crossclass.pkl')
+        cross_class_df.to_pickle(output_file)
+        print(f"\n💾 Saved cross-class false positives to: {output_file}")
+        
+    else:
+        print("\n❌ No cross-class false positives found using owl_label")
+
+    # Continue with original analysis for completeness...
+    print("\n" + "="*50)
+    print("ORIGINAL ANALYSIS (presence/absence):")
+    
     # Merge predictions with ground truth
     print("🔗 Merging predictions with ground truth...")
     
@@ -221,7 +281,7 @@ def main():
         fp_output['threshold'] = args.threshold
         
         # Save results
-        print(f"💾 Saving false positives to: {args.output}")
+        print(f"💾 Saving presence/absence false positives to: {args.output}")
         fp_output.to_pickle(args.output)
         
         # Display summary
@@ -241,7 +301,7 @@ def main():
                 print(f"   {row['confidence_score']:.3f}: Predicted '{row['predicted_class']}' but class not in GT for this video (video: {row['video']}, frame: {row['frame']})")
     
     else:
-        print("✅ No false positives found!")
+        print("✅ No presence/absence false positives found!")
         # Still save empty DataFrame for consistency
         fp_output = pd.DataFrame(columns=[
             'predicted_class', 'actual_class', 'confidence_score', 

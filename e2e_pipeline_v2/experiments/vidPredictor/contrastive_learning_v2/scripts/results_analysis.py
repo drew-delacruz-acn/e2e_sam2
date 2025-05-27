@@ -300,10 +300,59 @@ def main():
     print(f"   Classes: {len(all_classes)}")
     print(f"   Total combinations: {len(all_videos) * len(all_classes)}")
     
-    # Create comprehensive results
-    results = []
+    # Create TWO sets of results: ALL predictions and ABOVE-THRESHOLD predictions
     
-    # Get predictions lookup
+    # 1. ALL PREDICTIONS (regardless of threshold)
+    print(f"\n🔍 Creating comprehensive results (ALL predictions)...")
+    all_pred_lookup = {}
+    for idx, row in resnet_df_filtered.iterrows():  # Use ALL predictions
+        key = (row['video'], row['visual_predicted_object'])
+        if key not in all_pred_lookup or row['visual_max_score'] > all_pred_lookup[key]['score']:
+            all_pred_lookup[key] = {
+                'score': row['visual_max_score'],
+                'frame': row['frame']
+            }
+    
+    all_results = []
+    for video in all_videos:
+        for class_name in all_classes:
+            gt_key = (video, class_name)
+            pred_key = (video, class_name)
+            
+            # Get ground truth
+            actual = gt_lookup.get(gt_key, 0)
+            
+            # Get prediction (from ALL predictions)
+            prediction = 1 if pred_key in all_pred_lookup else 0
+            confidence = all_pred_lookup[pred_key]['score'] if pred_key in all_pred_lookup else 0.0
+            above_threshold = confidence > args.threshold
+            
+            # Classify
+            if actual == 1 and prediction == 1:
+                result_type = 'TP'
+            elif actual == 0 and prediction == 1:
+                result_type = 'FP'
+            elif actual == 1 and prediction == 0:
+                result_type = 'FN'
+            else:
+                result_type = 'TN'
+            
+            all_results.append({
+                'video': video,
+                'class': class_name,
+                'actual': actual,
+                'prediction': prediction,
+                'confidence': confidence,
+                'above_threshold': above_threshold,
+                'result_type': result_type
+            })
+    
+    all_results_df = pd.DataFrame(all_results)
+    
+    # 2. ABOVE-THRESHOLD PREDICTIONS (original logic)
+    print(f"🎯 Creating threshold-filtered results (confidence > {args.threshold})...")
+    
+    # Get predictions lookup (above threshold only)
     pred_lookup = {}
     for idx, row in predictions_above_threshold.iterrows():
         key = (row['video'], row['visual_predicted_object'])
@@ -313,7 +362,8 @@ def main():
                 'frame': row['frame']
             }
     
-    # Evaluate all video-class combinations
+    # Evaluate all video-class combinations (threshold-filtered)
+    results = []
     for video in all_videos:
         for class_name in all_classes:
             gt_key = (video, class_name)
@@ -322,7 +372,7 @@ def main():
             # Get ground truth
             actual = gt_lookup.get(gt_key, 0)
             
-            # Get prediction
+            # Get prediction (above threshold only)
             prediction = 1 if pred_key in pred_lookup else 0
             confidence = pred_lookup[pred_key]['score'] if pred_key in pred_lookup else 0.0
             
@@ -347,7 +397,7 @@ def main():
     
     results_df = pd.DataFrame(results)
     
-    # Calculate metrics
+    # Calculate metrics for THRESHOLD-FILTERED results
     counts = results_df['result_type'].value_counts()
     TP = counts.get('TP', 0)
     FP = counts.get('FP', 0)
@@ -359,7 +409,19 @@ def main():
     f1_score = 2 * precision * recall / (precision + recall) if (precision + recall) > 0 else 0
     accuracy = (TP + TN) / (TP + FP + FN + TN) if (TP + FP + FN + TN) > 0 else 0
     
-    print(f"\n📊 Presence/Absence Results:")
+    # Calculate metrics for ALL results
+    all_counts = all_results_df['result_type'].value_counts()
+    all_TP = all_counts.get('TP', 0)
+    all_FP = all_counts.get('FP', 0)
+    all_FN = all_counts.get('FN', 0)
+    all_TN = all_counts.get('TN', 0)
+    
+    all_precision = all_TP / (all_TP + all_FP) if (all_TP + all_FP) > 0 else 0
+    all_recall = all_TP / (all_TP + all_FN) if (all_TP + all_FN) > 0 else 0
+    all_f1_score = 2 * all_precision * all_recall / (all_precision + all_recall) if (all_precision + all_recall) > 0 else 0
+    all_accuracy = (all_TP + all_TN) / (all_TP + all_FP + all_FN + all_TN) if (all_TP + all_FP + all_FN + all_TN) > 0 else 0
+    
+    print(f"\n📊 Presence/Absence Results (THRESHOLD-FILTERED, confidence > {args.threshold}):")
     print(f"   TP: {TP}")
     print(f"   FP: {FP}")
     print(f"   FN: {FN}")
@@ -369,55 +431,102 @@ def main():
     print(f"   F1 Score: {f1_score:.4f}")
     print(f"   Accuracy: {accuracy:.4f}")
     
-    # Extract and save detailed results
-    false_positives = results_df[results_df['result_type'] == 'FP']
-    false_negatives = results_df[results_df['result_type'] == 'FN']
+    print(f"\n📊 Presence/Absence Results (ALL PREDICTIONS, any confidence):")
+    print(f"   TP: {all_TP}")
+    print(f"   FP: {all_FP}")
+    print(f"   FN: {all_FN}")
+    print(f"   TN: {all_TN}")
+    print(f"   Precision: {all_precision:.4f}")
+    print(f"   Recall: {all_recall:.4f}")
+    print(f"   F1 Score: {all_f1_score:.4f}")
+    print(f"   Accuracy: {all_accuracy:.4f}")
+    
+    # Extract and save detailed results from BOTH datasets
+    false_positives = results_df[results_df['result_type'] == 'FP']  # Above threshold
+    false_negatives = results_df[results_df['result_type'] == 'FN']  # Above threshold
+    
+    all_false_positives = all_results_df[all_results_df['result_type'] == 'FP']  # ALL predictions
+    all_false_negatives = all_results_df[all_results_df['result_type'] == 'FN']  # ALL predictions
     
     print(f"\n🚨 Error Analysis:")
-    print(f"   False Positives: {len(false_positives)}")
-    print(f"   False Negatives: {len(false_negatives)}")
+    print(f"   False Positives (above threshold): {len(false_positives)}")
+    print(f"   False Negatives (above threshold): {len(false_negatives)}")
+    print(f"   False Positives (ALL predictions): {len(all_false_positives)}")
+    print(f"   False Negatives (ALL predictions): {len(all_false_negatives)}")
     
     if len(false_positives) > 0:
-        print(f"\n🔝 Top False Positives (by confidence):")
+        print(f"\n🔝 Top False Positives - Above Threshold (by confidence):")
         fp_sorted = false_positives.sort_values('confidence', ascending=False)
         for idx, row in fp_sorted.head(5).iterrows():
             print(f"   {row['confidence']:.3f}: '{row['class']}' in {row['video']}")
     
+    if len(all_false_positives) > 0:
+        print(f"\n🔝 Top False Positives - ALL Predictions (by confidence):")
+        all_fp_sorted = all_false_positives.sort_values('confidence', ascending=False)
+        for idx, row in all_fp_sorted.head(5).iterrows():
+            thresh_marker = "✓" if row['above_threshold'] else "✗"
+            print(f"   {thresh_marker} {row['confidence']:.3f}: '{row['class']}' in {row['video']}")
+    
     if len(false_negatives) > 0:
-        print(f"\n❌ Sample False Negatives:")
+        print(f"\n❌ Sample False Negatives - Above Threshold:")
         for idx, row in false_negatives.head(5).iterrows():
             print(f"   Missed: '{row['class']}' in {row['video']}")
     
     # Save individual dataframes as CSV
     base_output = args.output.replace('.pkl', '')
     
+    # Save THRESHOLD-FILTERED results
     if len(false_positives) > 0:
-        fp_file = f"{base_output}_false_positives.csv"
+        fp_file = f"{base_output}_false_positives_threshold.csv"
         false_positives.to_csv(fp_file, index=False)
-        print(f"\n💾 Saved False Positives CSV to: {fp_file}")
+        print(f"\n💾 Saved False Positives (above threshold) CSV to: {fp_file}")
         print(f"   Columns: {list(false_positives.columns)}")
     
     if len(false_negatives) > 0:
-        fn_file = f"{base_output}_false_negatives.csv"
+        fn_file = f"{base_output}_false_negatives_threshold.csv"
         false_negatives.to_csv(fn_file, index=False)
-        print(f"💾 Saved False Negatives CSV to: {fn_file}")
+        print(f"💾 Saved False Negatives (above threshold) CSV to: {fn_file}")
         print(f"   Columns: {list(false_negatives.columns)}")
     
+    # Save ALL PREDICTIONS results
+    if len(all_false_positives) > 0:
+        all_fp_file = f"{base_output}_false_positives_all.csv"
+        all_false_positives.to_csv(all_fp_file, index=False)
+        print(f"💾 Saved False Positives (ALL predictions) CSV to: {all_fp_file}")
+        print(f"   Columns: {list(all_false_positives.columns)}")
+    
+    if len(all_false_negatives) > 0:
+        all_fn_file = f"{base_output}_false_negatives_all.csv"
+        all_false_negatives.to_csv(all_fn_file, index=False)
+        print(f"💾 Saved False Negatives (ALL predictions) CSV to: {all_fn_file}")
+        print(f"   Columns: {list(all_false_negatives.columns)}")
+    
     # Also save all results as CSV for easy inspection
-    all_results_file = f"{base_output}_all_results.csv"
-    results_df.to_csv(all_results_file, index=False)
+    threshold_results_file = f"{base_output}_results_threshold.csv"
+    results_df.to_csv(threshold_results_file, index=False)
+    print(f"💾 Saved Threshold Results CSV to: {threshold_results_file}")
+    
+    all_results_file = f"{base_output}_results_all.csv"
+    all_results_df.to_csv(all_results_file, index=False)
     print(f"💾 Saved All Results CSV to: {all_results_file}")
     
     # Save comprehensive results (keep the pickle for programmatic access)
     output_data = {
-        'metrics': {
+        'metrics_threshold': {
             'TP': TP, 'FP': FP, 'FN': FN, 'TN': TN,
             'precision': precision, 'recall': recall, 
             'f1_score': f1_score, 'accuracy': accuracy,
             'cross_class_accuracy': cross_class_accuracy
         },
-        'false_positives': false_positives.to_dict('records'),
-        'false_negatives': false_negatives.to_dict('records'),
+        'metrics_all': {
+            'TP': all_TP, 'FP': all_FP, 'FN': all_FN, 'TN': all_TN,
+            'precision': all_precision, 'recall': all_recall, 
+            'f1_score': all_f1_score, 'accuracy': all_accuracy
+        },
+        'false_positives_threshold': false_positives.to_dict('records'),
+        'false_negatives_threshold': false_negatives.to_dict('records'),
+        'false_positives_all': all_false_positives.to_dict('records'),
+        'false_negatives_all': all_false_negatives.to_dict('records'),
         'class_analysis': {
             'true_classes': sorted(list(true_classes)),
             'model_classes': sorted(list(model_classes)),
@@ -448,8 +557,10 @@ def main():
     print("📋 SUMMARY:")
     print("="*60)
     print(f"Cross-class accuracy: {cross_class_accuracy:.4f}")
-    print(f"Presence/absence F1: {f1_score:.4f}")
-    print(f"Total errors: {len(cross_class_results) + FP + FN}")
+    print(f"Presence/absence F1 (threshold): {f1_score:.4f}")
+    print(f"Presence/absence F1 (all): {all_f1_score:.4f}")
+    print(f"Total errors (threshold): {FP + FN}")
+    print(f"Total errors (all): {all_FP + all_FN}")
     print(f"Data columns used:")
     print(f"  - True class: {true_class_col}")
     print(f"  - Predicted class: visual_predicted_object")

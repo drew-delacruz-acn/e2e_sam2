@@ -39,6 +39,7 @@ train_sam2/model.torch
 !gitignore_exception/**/*.gif
 !gitignore_exception/**/*.json
 !gitignore_exception/**/*.log
+
 # Ignore Python cache files
 __pycache__/
 *.py[cod]

@@ -388,7 +388,27 @@ def main():
         for idx, row in false_negatives.head(5).iterrows():
             print(f"   Missed: '{row['class']}' in {row['video']}")
     
-    # Save comprehensive results
+    # Save individual dataframes as CSV
+    base_output = args.output.replace('.pkl', '')
+    
+    if len(false_positives) > 0:
+        fp_file = f"{base_output}_false_positives.csv"
+        false_positives.to_csv(fp_file, index=False)
+        print(f"\n💾 Saved False Positives CSV to: {fp_file}")
+        print(f"   Columns: {list(false_positives.columns)}")
+    
+    if len(false_negatives) > 0:
+        fn_file = f"{base_output}_false_negatives.csv"
+        false_negatives.to_csv(fn_file, index=False)
+        print(f"💾 Saved False Negatives CSV to: {fn_file}")
+        print(f"   Columns: {list(false_negatives.columns)}")
+    
+    # Also save all results as CSV for easy inspection
+    all_results_file = f"{base_output}_all_results.csv"
+    results_df.to_csv(all_results_file, index=False)
+    print(f"💾 Saved All Results CSV to: {all_results_file}")
+    
+    # Save comprehensive results (keep the pickle for programmatic access)
     output_data = {
         'metrics': {
             'TP': TP, 'FP': FP, 'FN': FN, 'TN': TN,
@@ -421,7 +441,7 @@ def main():
     with open(args.output, 'wb') as f:
         pickle.dump(output_data, f)
     
-    print(f"\n💾 Saved comprehensive analysis to: {args.output}")
+    print(f"💾 Saved comprehensive analysis (pickle) to: {args.output}")
     
     # Summary
     print(f"\n" + "="*60)

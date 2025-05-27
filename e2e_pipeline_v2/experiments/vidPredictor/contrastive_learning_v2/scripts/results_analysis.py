@@ -126,25 +126,46 @@ def main():
     
     # Merge predictions with ground truth
     print("🔗 Merging predictions with ground truth...")
-    merged = pd.merge(
-        resnet_df, 
-        final_SOT, 
-        left_on=['video', 'visual_predicted_object'], 
-        right_on=['video', 'tag'], 
-        how='right'
-    )
     
-    # Classify predictions
-    merged['prediction'] = merged['prediction'].fillna(0)
-    merged['answerClass'] = merged.apply(
-        lambda row: classify_answer(row['actual'], row['prediction']), 
-        axis=1
-    )
+    # First, let's get all predictions and mark which ones have ground truth
+    all_predictions = resnet_df.copy()
+    
+    # Create a comprehensive ground truth lookup
+    gt_lookup = final_SOT.set_index(['video', 'tag'])['actual'].to_dict()
+    
+    # For each prediction, find the ground truth
+    def get_ground_truth_and_classify(row):
+        video = row['video']
+        predicted_class = row['visual_predicted_object']
+        
+        # Check if this video-class combination exists in ground truth
+        gt_key = (video, predicted_class)
+        if gt_key in gt_lookup:
+            actual = gt_lookup[gt_key]
+            prediction = 1  # Model made a prediction
+            
+            # Classify
+            if actual == 1 and prediction == 1:
+                return pd.Series({'actual': actual, 'prediction': prediction, 'answerClass': 'TP', 'has_gt': True})
+            elif actual == 0 and prediction == 1:
+                return pd.Series({'actual': actual, 'prediction': prediction, 'answerClass': 'FP', 'has_gt': True})
+            else:
+                return pd.Series({'actual': actual, 'prediction': prediction, 'answerClass': 'Other', 'has_gt': True})
+        else:
+            # Model predicted a class that doesn't exist in ground truth for this video
+            # This is also a type of False Positive (hallucination)
+            return pd.Series({'actual': 0, 'prediction': 1, 'answerClass': 'FP_NoGT', 'has_gt': False})
+    
+    classification_results = all_predictions.apply(get_ground_truth_and_classify, axis=1)
+    merged = pd.concat([all_predictions, classification_results], axis=1)
+    
+    # Also need to find False Negatives (ground truth classes that were never predicted)
+    # For now, let's focus on the predictions we have
     
     # Calculate overall metrics
     counts = merged['answerClass'].value_counts()
     TP = counts.get('TP', 0)
-    FP = counts.get('FP', 0)
+    FP = counts.get('FP', 0) + counts.get('FP_NoGT', 0)  # Combine both types of FP
     FN = counts.get('FN', 0)
     TN = counts.get('TN', 0)
     
@@ -158,9 +179,14 @@ def main():
     print(f"   Recall: {recall:.4f}")
     print(f"   F1 Score: {f1_score:.4f}")
     
-    # Extract false positives
-    false_positives = merged[merged['answerClass'] == 'FP'].copy()
-    print(f"\n🚨 Found {len(false_positives)} false positives")
+    # Extract false positives (both types)
+    false_positives = merged[merged['answerClass'].isin(['FP', 'FP_NoGT'])].copy()
+    fp_with_gt = merged[merged['answerClass'] == 'FP']
+    fp_no_gt = merged[merged['answerClass'] == 'FP_NoGT']
+    
+    print(f"\n🚨 Found {len(false_positives)} total false positives:")
+    print(f"   - {len(fp_with_gt)} FPs: Model predicted class present but ground truth says absent")
+    print(f"   - {len(fp_no_gt)} FP_NoGT: Model predicted class not in ground truth for this video")
     
     if len(false_positives) > 0:
         # Sort by confidence score (highest first)
@@ -169,18 +195,25 @@ def main():
         # Create clean output DataFrame
         fp_output = false_positives[[
             'visual_predicted_object',  # predicted class
-            'tag',                     # actual class  
             'visual_max_score',        # confidence score
             'finetuned_embedding',     # embedding vector
             'video',                   # source video
-            'frame'                    # source frame
+            'frame',                   # source frame
+            'answerClass',             # type of FP
+            'has_gt'                   # whether ground truth exists
         ]].copy()
+        
+        # Add actual class info
+        fp_output['actual_class'] = fp_output.apply(
+            lambda row: row['visual_predicted_object'] if row['answerClass'] == 'FP' else 'Not in GT',
+            axis=1
+        )
         
         # Rename columns for clarity
         fp_output = fp_output.rename(columns={
             'visual_predicted_object': 'predicted_class',
-            'tag': 'actual_class',
-            'visual_max_score': 'confidence_score'
+            'visual_max_score': 'confidence_score',
+            'answerClass': 'fp_type'
         })
         
         # Add metadata
@@ -202,7 +235,10 @@ def main():
         print(f"\n🔝 Top 5 highest confidence false positives:")
         top_fps = fp_output.head()
         for idx, row in top_fps.iterrows():
-            print(f"   {row['confidence_score']:.3f}: Predicted '{row['predicted_class']}' but was '{row['actual_class']}' (video: {row['video']}, frame: {row['frame']})")
+            if row['fp_type'] == 'FP':
+                print(f"   {row['confidence_score']:.3f}: Predicted '{row['predicted_class']}' present but GT says absent (video: {row['video']}, frame: {row['frame']})")
+            else:
+                print(f"   {row['confidence_score']:.3f}: Predicted '{row['predicted_class']}' but class not in GT for this video (video: {row['video']}, frame: {row['frame']})")
     
     else:
         print("✅ No false positives found!")

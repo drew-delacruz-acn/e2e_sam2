@@ -120,8 +120,8 @@ def main():
     else:
         # Assume defObjects is a DataFrame
         if 'finetuned_embedding' in defObjects.columns:
-            class_emb_matrix = list(defObjects['finetuned_embedding'])
-            objs = list(defObjects['class'])
+    class_emb_matrix = list(defObjects['finetuned_embedding'])
+    objs = list(defObjects['class'])
         elif 'representative_embedding' in defObjects.columns:
             class_emb_matrix = list(defObjects['representative_embedding'])
             objs = list(defObjects['class'])

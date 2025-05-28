@@ -341,12 +341,26 @@ def evaluate_predictions(predictions: pd.DataFrame,
 
 
 def extract_false_positives(evaluation_results: pd.DataFrame,
-                           predictions: pd.DataFrame, # This is the output of generate_predictions before thresholding
+                           predictions_source: pd.DataFrame, 
                            exclusion_tracker: Dict) -> Tuple[pd.DataFrame, List[Dict]]:
     """
     Extract false positive cases and prepare them as negative examples for training.
     """
     print("🚨 Extracting false positives as negative examples...")
+
+    print(f"DEBUG (extract_false_positives): predictions_source index is_unique: {predictions_source.index.is_unique}")
+    if not predictions_source.empty:
+        print(f"DEBUG (extract_false_positives): predictions_source head:\\n{predictions_source.head()}")
+        if not predictions_source.index.is_unique:
+            print(f"DEBUG (extract_false_positives): Duplicated indices in predictions_source:\\n{predictions_source.index[predictions_source.index.duplicated()].unique()}")
+            # --- POTENTIAL QUICK FIX ---
+            print(f"WARNING (extract_false_positives): predictions_source came with non-unique index. Resetting index.")
+            predictions_source = predictions_source.reset_index(drop=True)
+            print(f"DEBUG (extract_false_positives): predictions_source index is_unique (after reset): {predictions_source.index.is_unique}")
+            # --- END POTENTIAL QUICK FIX ---
+    else:
+        print("DEBUG (extract_false_positives): predictions_source is empty.")
+
     fp_cases = evaluation_results[evaluation_results['classification'] == 'FP'].copy()
     if fp_cases.empty:
         print("✅ No false positives found!")
@@ -381,10 +395,10 @@ def extract_false_positives(evaluation_results: pd.DataFrame,
         # Find the original prediction entry that corresponds to this FP
         # The `predictions` dataframe here is the output of `generate_predictions`
         # which has `visual_predicted_object` and `finetuned_embedding`.
-        original_pred_entry = predictions[
-            (predictions['video'] == video) &
-            (predictions['visual_predicted_object'] == wrongly_predicted_as_class) &
-            (predictions['frame'] == frame_of_fp) # Ensure we get the exact FP frame
+        original_pred_entry = predictions_source[
+            (predictions_source['video'] == video) &
+            (predictions_source['visual_predicted_object'] == wrongly_predicted_as_class) &
+            (predictions_source['frame'] == frame_of_fp) # Ensure we get the exact FP frame
         ]
 
         if original_pred_entry.empty:
@@ -432,13 +446,28 @@ def run_single_iteration(iteration: int,
     representatives_path = train_contrastive_representatives(training_data, output_dir, args.epochs, args.margin)
 
     print(f"\n🔮 Phase 2B: Generating predictions...")
+    # This is the result *after* thresholding and deduplication of positive classes by generate_predictions
     predictions_for_eval = generate_predictions(resnet_data_for_prediction, representatives_path, current_iter_threshold, iteration_number=iteration)
+    
+    print(f"DEBUG (run_single_iteration): predictions_for_eval index is_unique: {predictions_for_eval.index.is_unique}")
+    if not predictions_for_eval.empty:
+        print(f"DEBUG (run_single_iteration): predictions_for_eval head:\\n{predictions_for_eval.head()}")
+        if not predictions_for_eval.index.is_unique:
+            print(f"DEBUG (run_single_iteration): Duplicated indices in predictions_for_eval:\\n{predictions_for_eval.index[predictions_for_eval.index.duplicated()].unique()}")
+    else:
+        print("DEBUG (run_single_iteration): predictions_for_eval is empty.")
+
 
     print(f"\n📊 Phase 2C: Evaluating predictions...")
     evaluation_results, metrics = evaluate_predictions(predictions_for_eval, ground_truth)
 
     print(f"\n🚨 Phase 2D: Extracting false positives...")
-    fp_data, new_exclusions = extract_false_positives(evaluation_results, predictions_for_eval, exclusion_tracker)
+    # Pass predictions_for_eval as the basis for identifying FP embeddings
+    fp_data, new_exclusions = extract_false_positives(
+        evaluation_results, 
+        predictions_for_eval, # This is predictions_source in the next function
+        exclusion_tracker
+    )
 
     print(f"\n💾 Saving iteration results...")
     evaluation_results.to_csv(output_dir / "evaluation_results.csv", index=False)

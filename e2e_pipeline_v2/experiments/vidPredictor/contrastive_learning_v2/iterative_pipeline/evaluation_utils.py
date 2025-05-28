@@ -193,9 +193,25 @@ def filter_evaluation_data(resnet_data: pd.DataFrame,
     excluded_pairs = set()
     total_exclusions = 0
     
+    # Debug: Track exclusion details
+    debug_exclusions = []
+    
     for iteration_key, exclusions in exclusion_tracker.items():
+        print(f"🔍 DEBUG: Processing {len(exclusions)} exclusions from iteration {iteration_key}")
         for exclusion in exclusions:
-            pair = (exclusion[COL_VIDEO], exclusion[COL_FRAME])
+            video = exclusion[COL_VIDEO]
+            frame = exclusion[COL_FRAME]
+            
+            # Debug: Check for type mismatches
+            debug_exclusions.append({
+                'iteration': iteration_key,
+                'video': video,
+                'frame': frame,
+                'video_type': type(video).__name__,
+                'frame_type': type(frame).__name__
+            })
+            
+            pair = (video, frame)
             excluded_pairs.add(pair)
             total_exclusions += 1
     
@@ -203,17 +219,46 @@ def filter_evaluation_data(resnet_data: pd.DataFrame,
         print("🚫 No exclusions to apply")
         return resnet_data.copy()
     
-    # Filter out excluded pairs
+    print(f"🔍 DEBUG: Total exclusion pairs created: {len(excluded_pairs)}")
+    print(f"🔍 DEBUG: Sample exclusion types:")
+    for i, exc in enumerate(debug_exclusions[:3]):
+        print(f"   {i+1}: Video={exc['video']} ({exc['video_type']}), Frame={exc['frame']} ({exc['frame_type']})")
+    
+    # Debug: Check data types in resnet_data
+    if COL_VIDEO in resnet_data.columns and COL_FRAME in resnet_data.columns:
+        sample_video = resnet_data[COL_VIDEO].iloc[0] if len(resnet_data) > 0 else None
+        sample_frame = resnet_data[COL_FRAME].iloc[0] if len(resnet_data) > 0 else None
+        print(f"🔍 DEBUG: Sample resnet_data types: Video={sample_video} ({type(sample_video).__name__}), Frame={sample_frame} ({type(sample_frame).__name__})")
+    
+    # Filter out excluded pairs with detailed tracking
     def is_not_excluded(row):
         pair = (row[COL_VIDEO], row[COL_FRAME])
         return pair not in excluded_pairs
     
     original_count = len(resnet_data)
-    filtered_data = resnet_data[resnet_data.apply(is_not_excluded, axis=1)].copy()
+    
+    # Apply filter with debug tracking
+    mask = resnet_data.apply(is_not_excluded, axis=1)
+    filtered_data = resnet_data[mask].copy()
+    
     filtered_count = len(filtered_data)
     excluded_count = original_count - filtered_count
     
     print(f"🚫 Excluded {excluded_count} training samples from evaluation")
     print(f"📊 Evaluation data: {original_count} → {filtered_count} samples")
+    print(f"🔍 DEBUG: Expected exclusions={total_exclusions}, Actual exclusions={excluded_count}")
+    
+    if excluded_count != total_exclusions:
+        print(f"⚠️ WARNING: Exclusion count mismatch! Expected {total_exclusions}, got {excluded_count}")
+        print(f"   Difference: {abs(excluded_count - total_exclusions)} samples")
+        
+        # Additional debugging: check for duplicates in exclusions
+        exclusion_pairs_list = [(exc[COL_VIDEO], exc[COL_FRAME]) for iter_exclusions in exclusion_tracker.values() for exc in iter_exclusions]
+        unique_exclusion_pairs = set(exclusion_pairs_list)
+        print(f"🔍 DEBUG: Total exclusion entries: {len(exclusion_pairs_list)}")
+        print(f"🔍 DEBUG: Unique exclusion pairs: {len(unique_exclusion_pairs)}")
+        
+        if len(exclusion_pairs_list) != len(unique_exclusion_pairs):
+            print(f"🔍 DEBUG: Found {len(exclusion_pairs_list) - len(unique_exclusion_pairs)} duplicate exclusions")
     
     return filtered_data 

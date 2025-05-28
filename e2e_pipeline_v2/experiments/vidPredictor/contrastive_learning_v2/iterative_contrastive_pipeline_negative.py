@@ -6,7 +6,8 @@ This pipeline implements an iterative approach to improve class representatives 
 1. Training contrastive learning models on current data
 2. Evaluating against predictions using cosine similarity
 3. Extracting false positives and adding them as NEGATIVE examples ("not_class")
-4. Using contrastive scoring during prediction (positive_sim - negative_sim)
+4. Using contrastive scoring during prediction (positive_sim - negative_sim) OR
+   using refined positive representatives directly.
 5. Iterating until convergence
 
 Usage:
@@ -15,7 +16,10 @@ Usage:
         --resnet-predictions path/to/resnetPredictions.pkl \
         --tracking-info path/to/trackingInfo.pkl \
         --iterations 5 \
-        --threshold 0.6
+        --threshold 0.6 \
+        --secondary-threshold 0.4 \
+        --margin 0.2 \
+        --secondary-margin 0.3
 """
 
 import argparse
@@ -72,7 +76,10 @@ def parse_args():
     parser.add_argument('--epochs', type=int, default=50,
                       help='Number of contrastive learning epochs (default: 50)')
     parser.add_argument('--margin', type=float, default=0.2,
-                      help='Contrastive learning margin (default: 0.2)')
+                      help='Contrastive learning margin for the first iteration (default: 0.2)')
+    parser.add_argument('--secondary-margin', type=float, default=None,
+                      help='Contrastive learning margin for iterations AFTER the first one. '
+                           'If not set, the primary --margin is used for all iterations.')
     
     # Exclusion strategy options
     exclusion_group = parser.add_mutually_exclusive_group()
@@ -115,6 +122,7 @@ def load_and_validate_data(definitiveObjects_path: str,
         print(f"✅ Loaded definitiveObjects: {definitiveObjects.shape} → using {required_cols}")
     except Exception as e:
         print(f"❌ Error loading definitiveObjects: {e}")
+        traceback.print_exc()
         raise
     
     # Load resnetPredictions
@@ -133,6 +141,7 @@ def load_and_validate_data(definitiveObjects_path: str,
         print(f"✅ Loaded resnetPredictions: {resnetPredictions.shape} → using {required_cols}")
     except Exception as e:
         print(f"❌ Error loading resnetPredictions: {e}")
+        traceback.print_exc()
         raise
         
     # Load trackingInfo
@@ -153,6 +162,7 @@ def load_and_validate_data(definitiveObjects_path: str,
         print(f"✅ Loaded trackingInfo: {trackingInfo.shape} → using {required_cols}")
     except Exception as e:
         print(f"❌ Error loading trackingInfo: {e}")
+        traceback.print_exc()
         raise
     
     print("✅ Data loading and validation complete!")
@@ -161,31 +171,43 @@ def load_and_validate_data(definitiveObjects_path: str,
 
 def train_contrastive_representatives(training_data: pd.DataFrame, 
                                    output_dir: Path,
-                                   epochs: int = 50,
-                                   margin: float = 0.2) -> Path:
+                                   epochs: int, 
+                                   margin_to_use: float # Accept specific margin
+                                   ) -> Path:
     """
     Train contrastive learning representatives using existing train_representatives.py.
     """
-    print(f"🏋️ Training contrastive representatives...")
+    print(f"🏋️ Training contrastive representatives (Epochs: {epochs}, Margin: {margin_to_use})...")
     temp_data_path = output_dir / "temp_training_data.pkl"
     output_dir.mkdir(parents=True, exist_ok=True)
     with open(temp_data_path, 'wb') as f:
         pickle.dump(training_data, f)
     
-    # Assuming train_representatives.py is in the same directory or accessible in PATH
-    # If it's in a specific subdirectory (e.g., ../../scripts), adjust the path
-    train_script_path = Path(__file__).parent / "../../train_representatives.py" 
-    if not train_script_path.exists():
-         # Fallback if not found relative to this script (e.g. if this script is moved)
-        train_script_path = Path("train_representatives.py")
-
+    # Try to find train_representatives.py in a few common locations relative to this script
+    possible_train_script_paths = [
+        Path(__file__).parent / "train_representatives.py", # Same directory
+        Path(__file__).parent.parent / "train_representatives.py", # One level up (e.g. if this is in a 'pipelines' subdir)
+        Path(__file__).parent.parent.parent / "train_representatives.py" # Two levels up (project root if this is nested)
+    ]
+    train_script_path = None
+    for p in possible_train_script_paths:
+        if p.exists():
+            train_script_path = p
+            break
+    if train_script_path is None:
+        # Fallback to just the name, relying on PATH or current dir if script moved
+        train_script_path_fallback = Path("train_representatives.py")
+        if train_script_path_fallback.exists():
+            train_script_path = train_script_path_fallback
+        else:
+            raise FileNotFoundError(f"train_representatives.py not found at expected locations: {possible_train_script_paths} or as 'train_representatives.py'")
 
     cmd = [
         "python", str(train_script_path),
         "--data", str(temp_data_path),
         "--output", str(output_dir),
         "--epochs", str(epochs),
-        "--margin", str(margin),
+        "--margin", str(margin_to_use),
         "--no-auto-name" 
     ]
     print(f"🔧 Running: {' '.join(cmd)}")
@@ -215,9 +237,10 @@ def cosine_similarity_prediction(embedding: np.ndarray,
     """
     Predict class using cosine similarity.
     """
+    if not class_embeddings or not class_names: return "unknown", 0.0 # Handle empty inputs
     input_tensor = F.normalize(torch.tensor(embedding, dtype=torch.float32).unsqueeze(0), dim=1)
     class_tensor = F.normalize(torch.tensor(np.vstack(class_embeddings), dtype=torch.float32), dim=1)
-    similarities = F.cosine_similarity(input_tensor, class_tensor).numpy()
+    similarities = F.cosine_similarity(input_tensor, class_tensor).numpy().flatten()
     best_idx = np.argmax(similarities)
     return class_names[best_idx], similarities[best_idx]
 
@@ -419,14 +442,15 @@ def run_single_iteration(iteration: int,
                         ground_truth: pd.DataFrame,
                         exclusion_tracker: Dict, # For logging, not direct filtering here
                         current_iter_threshold: float, 
+                        current_iter_margin: float, # Added for secondary margin
                         args) -> Tuple[pd.DataFrame, Dict, List[Dict]]:
     """Run a single iteration of the pipeline."""
-    print(f"\n🔄 ITERATION {iteration} (Using Threshold: {current_iter_threshold})\n" + "=" * 50)
+    print(f"\n🔄 ITERATION {iteration} (Using Threshold: {current_iter_threshold}, Margin: {current_iter_margin})\n" + "=" * 50)
     output_dir = Path(args.output) / f"iteration_{iteration}"
     output_dir.mkdir(parents=True, exist_ok=True)
 
     print(f"\n🏋️ Phase 2A: Training representatives...")
-    representatives_path = train_contrastive_representatives(training_data, output_dir, args.epochs, args.margin)
+    representatives_path = train_contrastive_representatives(training_data, output_dir, args.epochs, current_iter_margin)
 
     print(f"\n🔮 Phase 2B: Generating predictions...")
     # This is the result *after* thresholding and deduplication of positive classes by generate_predictions
@@ -462,7 +486,7 @@ def run_single_iteration(iteration: int,
     with open(output_dir / "training_results.json", 'w') as f: json.dump(metrics, f, indent=2)
 
     current_training_data_len = len(training_data)
-    new_training_data = training_data.copy() # Initialize with current training data
+    new_training_data_iter = training_data.copy() # Initialize with current training data
 
     if not fp_data.empty:
         print(f"DEBUG: training_data index is_unique: {training_data.index.is_unique}")
@@ -493,18 +517,18 @@ def run_single_iteration(iteration: int,
         else:
             temp_fp['emb_tuple'] = pd.Series(dtype='object', index=temp_fp.index)
 
-        dedup_cols_primary_path = ['class']
+        dedup_cols = ['class']
         # Check if 'emb_tuple' can be reliably used for deduplication
-        can_use_emb_tuple_for_dedup = (
+        can_use_emb_tuple = (
             'emb_tuple' in temp_td.columns and temp_td['emb_tuple'].notna().any() and
             'emb_tuple' in temp_fp.columns and temp_fp['emb_tuple'].notna().any() and
             all(isinstance(x, tuple) for x in temp_td['emb_tuple'].dropna()) and # Ensure they are actually tuples
             all(isinstance(x, tuple) for x in temp_fp['emb_tuple'].dropna())
         )
 
-        if can_use_emb_tuple_for_dedup:
+        if can_use_emb_tuple:
             print("DEBUG: Using primary deduplication path with 'emb_tuple'.")
-            dedup_cols_primary_path.append('emb_tuple')
+            dedup_cols.append('emb_tuple')
             
             # Ensure all necessary columns for concat exist in both DataFrames
             cols_for_concat_temp = ['class', 'finetuned_embedding', 'emb_tuple']
@@ -524,16 +548,16 @@ def run_single_iteration(iteration: int,
                 
                 num_before_dedup = len(temp_combined_for_dedup)
                 # Drop duplicates based on the 'emb_tuple' and 'class'
-                deduplicated_temp = temp_combined_for_dedup.drop_duplicates(subset=dedup_cols_primary_path, keep='first')
+                deduplicated_temp = temp_combined_for_dedup.drop_duplicates(subset=dedup_cols, keep='first')
                 # Select original columns (without 'emb_tuple') and reset index
-                new_training_data = deduplicated_temp[['class', 'finetuned_embedding']].reset_index(drop=True)
-                num_after_dedup = len(new_training_data)
+                new_training_data_iter = deduplicated_temp[['class', 'finetuned_embedding']].reset_index(drop=True)
+                num_after_dedup = len(new_training_data_iter)
                 print(f"🔄 Combined training data. Before dedup: {num_before_dedup}, After dedup on (class, embedding_tuple): {num_after_dedup} samples.")
             else:
                 print("⚠️ Could not prepare both DataFrames for primary deduplication path. Moving to fallback.")
-                can_use_emb_tuple_for_dedup = False # Force fallback
+                can_use_emb_tuple = False # Force fallback
 
-        if not can_use_emb_tuple_for_dedup: 
+        if not can_use_emb_tuple: 
             print("⚠️ Fallback deduplication: Tuple conversion for embeddings failed or one of the DFs was incompatible.")
             # This concat gets a clean 0..N-1 index due to ignore_index=True
             new_training_data_fallback = pd.concat([training_data, fp_data], ignore_index=True) 
@@ -553,31 +577,31 @@ def run_single_iteration(iteration: int,
                     # This is not ideal as it might drop legitimate different embeddings for the same class.
                     if 'class' in new_training_data_fallback.columns:
                         print("DEBUG: Fallback attempting drop_duplicates on 'class' only.")
-                        new_training_data = new_training_data_fallback.drop_duplicates(subset=['class'], keep='first').reset_index(drop=True)
+                        new_training_data_iter = new_training_data_fallback.drop_duplicates(subset=['class'], keep='first').reset_index(drop=True)
                     else: # If no 'class' column, just take the concat
-                        new_training_data = new_training_data_fallback
+                        new_training_data_iter = new_training_data_fallback
                 else:
-                    new_training_data = new_training_data_fallback # Should be empty
+                    new_training_data_iter = new_training_data_fallback # Should be empty
 
-                if len(new_training_data) < initial_len:
-                    print(f"   Performed basic drop_duplicates (on 'class' or was empty): {initial_len} -> {len(new_training_data)}")
+                if len(new_training_data_iter) < initial_len:
+                    print(f"   Performed basic drop_duplicates (on 'class' or was empty): {initial_len} -> {len(new_training_data_iter)}")
                 else:
                     print(f"   Basic drop_duplicates did not reduce size or was skipped.")
 
             except Exception as e_basic_dedup:
                  print(f"   Basic drop_duplicates failed: {e_basic_dedup}. Proceeding with data as is from concat (potential duplicates).")
-                 new_training_data = new_training_data_fallback # Use the concatenated version
+                 new_training_data_iter = new_training_data_fallback # Use the concatenated version
                  print(f"DEBUG: new_training_data state after basic_dedup exception")
-                 if not new_training_data.empty: print(f"DEBUG: Index: {new_training_data.index.is_unique}, Head:\n{new_training_data.head()}")
+                 if not new_training_data_iter.empty: print(f"DEBUG: Index: {new_training_data_iter.index.is_unique}, Head:\n{new_training_data_iter.head()}")
 
 
-        added_count = len(new_training_data) - current_training_data_len
-        print(f"🔄 Updated training data: {current_training_data_len} init + {len(fp_data)} new FPs -> {len(new_training_data)} total ({added_count} unique added).")
+        added_count = len(new_training_data_iter) - current_training_data_len
+        print(f"🔄 Updated training data: {current_training_data_len} init + {len(fp_data)} new FPs -> {len(new_training_data_iter)} total ({added_count} unique added).")
     # else: # fp_data is empty, new_training_data remains training_data.copy()
         # print(f"🔄 No new FPs to add. Training data size: {len(new_training_data)}.") # Covered by initialization
         
-    print(f"\n📊 ITERATION {iteration} SUMMARY: F1:{metrics['f1']:.4f}, P:{metrics['precision']:.4f}, R:{metrics['recall']:.4f}. Added FPs to train: {len(fp_data)}. New exclusions: {len(new_exclusions)}. Training size: {len(new_training_data)}")
-    return new_training_data, metrics, new_exclusions
+    print(f"\n📊 ITERATION {iteration} SUMMARY: F1:{metrics['f1']:.4f}, P:{metrics['precision']:.4f}, R:{metrics['recall']:.4f}. Added FPs to train: {len(fp_data)}. New exclusions: {len(new_exclusions)}. Training size: {len(new_training_data_iter)}")
+    return new_training_data_iter, metrics, new_exclusions
 
 
 def filter_evaluation_data(full_resnet_data: pd.DataFrame,
@@ -646,14 +670,15 @@ def run_iterative_pipeline(definitiveObjects: pd.DataFrame,
     resnet_data_for_prediction = resnetPredictions.copy()
 
     for i in range(1, args.iterations + 1):
-        # --- MODIFICATION TO SELECT THRESHOLD ---
-        current_iter_threshold_to_use = args.threshold # Default to primary threshold
-        if i > 1 and args.secondary_threshold is not None:
-            current_iter_threshold_to_use = args.secondary_threshold
-            print(f"💡 Using secondary threshold for iteration {i}: {current_iter_threshold_to_use}")
-        elif i == 1 :
-            print(f"💡 Using primary threshold for iteration {i}: {current_iter_threshold_to_use}")
-        # --- END MODIFICATION ---
+        current_iter_threshold_to_use = args.threshold 
+        current_iter_margin_to_use = args.margin 
+
+        if i > 1: 
+            if args.secondary_threshold is not None: current_iter_threshold_to_use = args.secondary_threshold
+            if args.secondary_margin is not None: current_iter_margin_to_use = args.secondary_margin
+        
+        if i == 1: print(f"💡 Iteration {i}: Using Primary Threshold: {current_iter_threshold_to_use}, Primary Margin: {current_iter_margin_to_use}")
+        else: print(f"💡 Iteration {i}: Using Threshold: {current_iter_threshold_to_use} (Secondary if set, else Primary), Margin: {current_iter_margin_to_use} (Secondary if set, else Primary)")
 
         new_training_data, metrics, new_exclusions = run_single_iteration(
             iteration=i,
@@ -661,7 +686,8 @@ def run_iterative_pipeline(definitiveObjects: pd.DataFrame,
             resnet_data_for_prediction=resnet_data_for_prediction,
             ground_truth=trackingInfo,
             exclusion_tracker=exclusion_tracker, 
-            current_iter_threshold=current_iter_threshold_to_use, # <-- MODIFIED: pass the chosen threshold
+            current_iter_threshold=current_iter_threshold_to_use,
+            current_iter_margin=current_iter_margin_to_use, 
             args=args
         )
         
@@ -671,8 +697,8 @@ def run_iterative_pipeline(definitiveObjects: pd.DataFrame,
         all_iteration_metrics.append({'iteration': i, **metrics})
         
         current_f1 = metrics['f1']
-        if i > 1 and previous_f1 >= 0 and (current_f1 - previous_f1) < args.convergence_threshold:
-            print(f"\n✅ Convergence reached at iteration {i}: F1 improvement ({current_f1 - previous_f1:.4f}) < threshold ({args.convergence_threshold:.4f})")
+        if i > 1 and previous_f1 >= 0 and abs(current_f1 - previous_f1) < args.convergence_threshold: # abs for safety
+            print(f"\n✅ Convergence at iter {i}: F1 imprv ({current_f1 - previous_f1:.4f}) < thresh ({args.convergence_threshold:.4f})")
             break
         previous_f1 = current_f1
         
@@ -680,21 +706,18 @@ def run_iterative_pipeline(definitiveObjects: pd.DataFrame,
             print("\n🏁 Maximum iterations reached.")
             
     # Save overall pipeline summary
+    summary = {'config': vars(args), 'iteration_metrics': all_iteration_metrics,
+               'final_training_data_size': len(current_training_data),
+               'final_exclusion_count': sum(len(v) for v in exclusion_tracker.values())}
     summary_path = Path(args.output) / "pipeline_summary.json"
-    with open(summary_path, 'w') as f:
-        json.dump({
-            'config': vars(args),
-            'iteration_metrics': all_iteration_metrics,
-            'final_training_data_size': len(current_training_data),
-            'final_exclusion_count': sum(len(v) for v in exclusion_tracker.values())
-        }, f, indent=2)
-    print(f"\n📜 Pipeline summary saved to: {summary_path}")
+    with open(summary_path, 'w') as f: json.dump(summary, f, indent=2)
+    print(f"\n📜 Pipeline summary saved to {summary_path}. Final F1: {all_iteration_metrics[-1]['f1']:.4f if all_iteration_metrics else 'N/A'}.")
     
     # Optional: Save final combined training data
     final_training_data_path = Path(args.output) / "final_training_data.pkl"
     with open(final_training_data_path, 'wb') as f:
         pickle.dump(current_training_data, f)
-    print(f"💾 Final combined training data saved to: {final_training_data_path}")
+    print(f"💾 Final training data saved to {final_training_data_path}.")
 
     return {'final_metrics': all_iteration_metrics[-1] if all_iteration_metrics else None}
 

@@ -59,7 +59,11 @@ def parse_args():
     parser.add_argument('--iterations', type=int, default=5,
                       help='Maximum number of iterations (default: 5)')
     parser.add_argument('--threshold', type=float, default=0.6,
-                      help='Confidence threshold for predictions (default: 0.6)')
+                      help='Confidence threshold for predictions, used in the first iteration (default: 0.6)')
+    parser.add_argument('--secondary-threshold', type=float, default=None,
+                      help='Confidence threshold for predictions for iterations AFTER the first one '
+                           '(i.e., after false positives have been added). '
+                           'If not set, the primary --threshold is used for all iterations (default: None).')
     parser.add_argument('--convergence-threshold', type=float, default=0.001,
                       help='F1 improvement threshold for convergence (default: 0.001)')
     
@@ -451,16 +455,15 @@ def extract_false_positives(evaluation_results: pd.DataFrame,
 
 def run_single_iteration(iteration: int,
                         training_data: pd.DataFrame,
-                        resnet_data_for_prediction: pd.DataFrame, # Full data for making predictions
+                        resnet_data_for_prediction: pd.DataFrame,
                         ground_truth: pd.DataFrame,
                         exclusion_tracker: Dict,
+                        current_iter_threshold: float,
                         args) -> Tuple[pd.DataFrame, Dict, List[Dict]]:
     """
     Run a single iteration of the pipeline.
-    `resnet_data_for_prediction` is the full set of embeddings we make predictions on.
-    `ground_truth` is used for evaluation.
     """
-    print(f"\n🔄 ITERATION {iteration}\n" + "=" * 50)
+    print(f"\n🔄 ITERATION {iteration} (Using Threshold: {current_iter_threshold})\n" + "=" * 50)
     output_dir = Path(args.output) / f"iteration_{iteration}"
     output_dir.mkdir(parents=True, exist_ok=True)
 
@@ -469,17 +472,16 @@ def run_single_iteration(iteration: int,
         training_data, output_dir, args.epochs, args.margin)
 
     print(f"\n🔮 Phase 2B: Generating predictions...")
-    all_predictions_with_scores = generate_predictions(
-        resnet_data_for_prediction, representatives_path, args.threshold
-    )
+    predictions_for_eval = generate_predictions(
+        resnet_data_for_prediction, representatives_path, current_iter_threshold)
 
     print(f"\n📊 Phase 2C: Evaluating predictions...")
-    evaluation_results, metrics = evaluate_predictions(all_predictions_with_scores, ground_truth)
+    evaluation_results, metrics = evaluate_predictions(predictions_for_eval, ground_truth)
 
     print(f"\n🚨 Phase 2D: Extracting false positives...")
     fp_data, new_exclusions = extract_false_positives(
-        evaluation_results,
-        all_predictions_with_scores, 
+        evaluation_results, 
+        predictions_for_eval, 
         exclusion_tracker
     )
 
@@ -491,82 +493,58 @@ def run_single_iteration(iteration: int,
     with open(output_dir / "exclusions.json", 'w') as f: json.dump(new_exclusions, f, indent=2)
     with open(output_dir / "training_results.json", 'w') as f: json.dump(metrics, f, indent=2)
 
-    new_training_data = training_data.copy() # Start with a copy
+    current_training_data_size = len(training_data)
     if not fp_data.empty:
-        # Temporarily convert embeddings to tuples for duplicate checking
         temp_training_data_for_dedup = training_data.copy()
+        if 'finetuned_embedding' in temp_training_data_for_dedup and not temp_training_data_for_dedup.empty and isinstance(temp_training_data_for_dedup['finetuned_embedding'].iloc[0], np.ndarray):
+            temp_training_data_for_dedup['finetuned_embedding_tuple'] = temp_training_data_for_dedup['finetuned_embedding'].apply(lambda x: tuple(x) if isinstance(x, np.ndarray) else x)
+        else:
+            temp_training_data_for_dedup['finetuned_embedding_tuple'] = temp_training_data_for_dedup.get('finetuned_embedding', pd.Series(dtype='object'))
+
         temp_fp_data_for_dedup = fp_data.copy()
-
-        # Check if 'finetuned_embedding' column exists and contains ndarray
-        if 'finetuned_embedding' in temp_training_data_for_dedup.columns and \
-           not temp_training_data_for_dedup.empty and \
-           isinstance(temp_training_data_for_dedup['finetuned_embedding'].iloc[0], np.ndarray):
-            temp_training_data_for_dedup['finetuned_embedding_tuple'] = temp_training_data_for_dedup['finetuned_embedding'].apply(tuple)
+        if 'finetuned_embedding' in temp_fp_data_for_dedup and not temp_fp_data_for_dedup.empty and isinstance(temp_fp_data_for_dedup['finetuned_embedding'].iloc[0], np.ndarray):
+            temp_fp_data_for_dedup['finetuned_embedding_tuple'] = temp_fp_data_for_dedup['finetuned_embedding'].apply(lambda x: tuple(x) if isinstance(x, np.ndarray) else x)
         else:
-             # Handle empty or already tupled - create empty or copy existing if not ndarray
-            temp_training_data_for_dedup['finetuned_embedding_tuple'] = None # Placeholder
-            if 'finetuned_embedding' in temp_training_data_for_dedup.columns:
-                 temp_training_data_for_dedup['finetuned_embedding_tuple'] = temp_training_data_for_dedup['finetuned_embedding']
-
-
-        if 'finetuned_embedding' in temp_fp_data_for_dedup.columns and \
-           not temp_fp_data_for_dedup.empty and \
-           isinstance(temp_fp_data_for_dedup['finetuned_embedding'].iloc[0], np.ndarray):
-            temp_fp_data_for_dedup['finetuned_embedding_tuple'] = temp_fp_data_for_dedup['finetuned_embedding'].apply(tuple)
-        else:
-            temp_fp_data_for_dedup['finetuned_embedding_tuple'] = None
-            if 'finetuned_embedding' in temp_fp_data_for_dedup.columns:
-                 temp_fp_data_for_dedup['finetuned_embedding_tuple'] = temp_fp_data_for_dedup['finetuned_embedding']
-
-        combined_for_dedup = pd.concat([temp_training_data_for_dedup, temp_fp_data_for_dedup], ignore_index=True)
+            temp_fp_data_for_dedup['finetuned_embedding_tuple'] = temp_fp_data_for_dedup.get('finetuned_embedding', pd.Series(dtype='object'))
         
-        # Perform drop_duplicates on the tuple column
-        # Ensure 'finetuned_embedding_tuple' exists before using in subset
-        dedup_columns = ['class']
-        if 'finetuned_embedding_tuple' in combined_for_dedup.columns:
-            dedup_columns.append('finetuned_embedding_tuple')
+        cols_to_concat = ['class', 'finetuned_embedding']
+        dedup_subset = ['class']
         
-        # Only drop if 'finetuned_embedding_tuple' was successfully created for both and is not None
-        can_dedup_on_embedding = ('finetuned_embedding_tuple' in temp_training_data_for_dedup.columns and \
-                                 temp_training_data_for_dedup['finetuned_embedding_tuple'].notna().all()) and \
-                                 ('finetuned_embedding_tuple' in temp_fp_data_for_dedup.columns and \
-                                  temp_fp_data_for_dedup['finetuned_embedding_tuple'].notna().all())
-
-        if not combined_for_dedup.empty and can_dedup_on_embedding:
-            num_before_dedup = len(combined_for_dedup)
-            deduplicated_df_indices = combined_for_dedup.drop_duplicates(subset=dedup_columns).index
+        if 'finetuned_embedding_tuple' in temp_training_data_for_dedup.columns and \
+           'finetuned_embedding_tuple' in temp_fp_data_for_dedup.columns:
+            cols_to_concat_temp = ['class', 'finetuned_embedding_tuple', 'finetuned_embedding']
+            temp_combined_for_dedup = pd.concat(
+                [temp_training_data_for_dedup[cols_to_concat_temp], 
+                 temp_fp_data_for_dedup[cols_to_concat_temp]], 
+                ignore_index=True
+            )
+            dedup_subset.append('finetuned_embedding_tuple')
             
-            # Create the new_training_data using original np.array embeddings from the combined (non-tupled) data
-            original_combined_data = pd.concat([training_data, fp_data], ignore_index=True)
-            new_training_data = original_combined_data.loc[deduplicated_df_indices].reset_index(drop=True)
+            num_before_dedup = len(temp_combined_for_dedup)
+            new_training_data = temp_combined_for_dedup.drop_duplicates(subset=dedup_subset, keep='first')[cols_to_concat].reset_index(drop=True)
             num_after_dedup = len(new_training_data)
-            print(f"🔄 Combined training data ({len(training_data)} existing + {len(fp_data)} new FPs).")
-            print(f"🔄 After drop_duplicates on (class, embedding_tuple): {num_before_dedup} -> {num_after_dedup} samples.")
-
-        else: # Fallback if tuple conversion didn't happen or df is empty
+            # print(f"🔄 Combined training data. Before dedup: {num_before_dedup}, After dedup on (class, embedding_tuple): {num_after_dedup} samples.") # Already verbose
+        else:
+            print("⚠️ Could not create tuple embeddings for deduplication. Concatenating and attempting basic deduplication.")
             new_training_data = pd.concat([training_data, fp_data], ignore_index=True)
-            # As a simpler fallback, try dropping based on all columns if embeddings are an issue,
-            # or just accept potential duplicates if embeddings are truly problematic for hashing.
-            # This might not be perfect for ndarrays.
-            if not new_training_data.empty:
-                 print(f"⚠️ Could not reliably convert embeddings to tuples for deduplication. Combining without ndarray-based deduplication.")
-                 # Attempt to drop duplicates if all columns are hashable, otherwise, this won't work for ndarray
-                 try:
-                    initial_len = len(new_training_data)
-                    new_training_data.drop_duplicates(inplace=True)
-                    if len(new_training_data) < initial_len:
-                        print(f"   Performed basic drop_duplicates: {initial_len} -> {len(new_training_data)}")
-                 except TypeError:
-                    print(f"   Skipping drop_duplicates as embeddings are unhashable in this path.")
+            try:
+                initial_len = len(new_training_data)
+                if not new_training_data.empty:
+                    new_training_data = new_training_data.loc[new_training_data.astype(str).drop_duplicates().index].reset_index(drop=True)
+                if len(new_training_data) < initial_len:
+                    print(f"   Performed basic drop_duplicates (astype str): {initial_len} -> {len(new_training_data)}")
+            except Exception as e_basic_dedup:
+                 print(f"   Basic drop_duplicates failed: {e_basic_dedup}. Proceeding with potential duplicates.")
 
-
-        print(f"🔄 Updated training data: {len(training_data)} initial + {len(fp_data)} new FPs -> {len(new_training_data)} total unique samples.")
+        added_count = len(new_training_data) - current_training_data_size
+        print(f"🔄 Updated training data: {current_training_data_size} initial + {len(fp_data)} new FPs -> {len(new_training_data)} total unique samples ({added_count} actually added).")
     else:
-        print(f"🔄 No new false positives to add, training data unchanged: {len(training_data)} samples")
+        new_training_data = training_data.copy()
+        print(f"🔄 No new false positives to add, training data unchanged: {len(new_training_data)} samples")
         
     print(f"\n📊 ITERATION {iteration} SUMMARY:")
     print(f"   🎯 F1: {metrics['f1']:.4f}, Precision: {metrics['precision']:.4f}, Recall: {metrics['recall']:.4f}")
-    print(f"   🚨 False Positives (used for new negatives): {metrics['fp']}") # This 'fp' is from evaluation stats
+    print(f"   🚨 False Positives (used for new negatives): {metrics['fp']}")
     print(f"   📍 Exclusion list: +{len(new_exclusions)} entries")
     print(f"   📈 Training data size: {len(new_training_data)}")
     
@@ -619,74 +597,52 @@ def filter_evaluation_data(full_resnet_data: pd.DataFrame,
 
 
 def run_iterative_pipeline(definitiveObjects: pd.DataFrame,
-                          resnetPredictions: pd.DataFrame, # This is the full, raw prediction data
-                          trackingInfo: pd.DataFrame,    # This is ground truth
+                          resnetPredictions: pd.DataFrame, 
+                          trackingInfo: pd.DataFrame,    
                           args) -> Dict:
     """
     Run the full iterative contrastive learning pipeline.
     """
     print("\n🚀 Starting Iterative Contrastive Learning Pipeline (Negative Classes Mode)")
-    
-    # Initial training data: definitiveObjects
     current_training_data = definitiveObjects.copy()
-    
-    # Exclusion tracker: {iteration_num: [exclusion_dicts]}
-    # exclusion_dict: {'video', 'frame', 'class' (original or not_X), 'reason', 'original_wrong_prediction' (if applicable)}
     exclusion_tracker: Dict[int, List[Dict]] = {} 
-    
     all_iteration_metrics = []
     previous_f1 = -1.0
 
-    # Determine evaluation strategy based on args
     if args.include_training_in_eval:
-        eval_exclusion_flag = False
         print("📈 Evaluation will INCLUDE all data (including those added to training).")
-    else: # Default is exclude_training_from_eval or track_training_separately
-        eval_exclusion_flag = True
-        print("📉 Evaluation will EXCLUDE data added to training in previous iterations (standard).")
-        if args.track_training_separately:
-            print("   (Will also track metrics on full data if possible, TBD)")
+    else: 
+        print("📉 Evaluation will EXCLUDE data added to training in previous iterations (standard behavior implied by not re-adding duplicates).")
 
-
-    # The resnetPredictions are the full set of embeddings we can make predictions on.
-    # For evaluation, we might filter this set based on what's been added to training.
-    # However, for generating candidates for new negatives, we should predict on the whole set.
-    
-    # For now, resnet_data_for_prediction will be the full set.
-    # Evaluation will use the ground_truth applied to predictions made on this full set.
-    # The `filter_evaluation_data` is somewhat misnamed if used this way; it's more about
-    # ensuring we don't retrain on the *exact same* FPs, which `drop_duplicates` in run_single_iteration handles.
-    
     resnet_data_for_prediction = resnetPredictions.copy()
 
     for i in range(1, args.iterations + 1):
-        # In each iteration, training_data grows.
-        # Predictions are made on the consistent `resnet_data_for_prediction`.
-        # Evaluation is against `ground_truth`.
-        
-        # If `eval_exclusion_flag` is true, we might want to filter `all_predictions_with_scores`
-        # *before* passing to `evaluate_predictions`, but this complicates `extract_false_positives`
-        # which needs to know about FPs from the unfiltered set.
-        # Simpler: evaluate on all predictions, `extract_false_positives` from these,
-        # and `current_training_data.drop_duplicates` handles not re-adding.
-        # The `eval_exclusion_flag` then primarily serves as a philosophical note on metric reporting.
+        # --- MODIFICATION TO SELECT THRESHOLD ---
+        current_iter_threshold_to_use = args.threshold # Default to primary threshold
+        if i > 1 and args.secondary_threshold is not None:
+            current_iter_threshold_to_use = args.secondary_threshold
+            print(f"💡 Using secondary threshold for iteration {i}: {current_iter_threshold_to_use}")
+        elif i == 1 :
+            print(f"💡 Using primary threshold for iteration {i}: {current_iter_threshold_to_use}")
+        # --- END MODIFICATION ---
 
         new_training_data, metrics, new_exclusions = run_single_iteration(
             iteration=i,
             training_data=current_training_data,
-            resnet_data_for_prediction=resnet_data_for_prediction, # Always use the full set for generating predictions
+            resnet_data_for_prediction=resnet_data_for_prediction,
             ground_truth=trackingInfo,
-            exclusion_tracker=exclusion_tracker, # Pass for logging, not for filtering resnet_data here
+            exclusion_tracker=exclusion_tracker, 
+            current_iter_threshold=current_iter_threshold_to_use, # <-- MODIFIED: pass the chosen threshold
             args=args
         )
         
         current_training_data = new_training_data
-        exclusion_tracker[i] = new_exclusions
+        if new_exclusions: 
+            exclusion_tracker[i] = new_exclusions
         all_iteration_metrics.append({'iteration': i, **metrics})
         
-        # Convergence check
         current_f1 = metrics['f1']
-        if i > 1 and (current_f1 - previous_f1) < args.convergence_threshold:
+        if i > 1 and previous_f1 >= 0 and (current_f1 - previous_f1) < args.convergence_threshold:
             print(f"\n✅ Convergence reached at iteration {i}: F1 improvement ({current_f1 - previous_f1:.4f}) < threshold ({args.convergence_threshold:.4f})")
             break
         previous_f1 = current_f1

@@ -27,6 +27,7 @@ import shutil
 from pathlib import Path
 from typing import Dict, List, Tuple, Set
 import warnings
+import traceback
 
 import numpy as np
 import pandas as pd
@@ -714,17 +715,27 @@ def main():
 
     except FileNotFoundError as e:
         print(f"❌ File not found: {e}. Please check input paths.")
+        print("--- Traceback ---")
+        traceback.print_exc()
+        print("--- End Traceback ---")
         sys.exit(1)
     except ValueError as e:
         print(f"❌ Data validation error: {e}")
+        print("--- Traceback ---")
+        traceback.print_exc()
+        print("--- End Traceback ---")
         sys.exit(1)
     except RuntimeError as e:
         print(f"❌ Pipeline runtime error: {e}")
-        sys.exit(1)
-    except Exception as e:
-        print(f"❌ An unexpected error occurred: {e}")
-        import traceback
+        print("--- Traceback ---")
         traceback.print_exc()
+        print("--- End Traceback ---")
+        sys.exit(1)
+    except Exception as e: # Generic catch-all
+        print(f"❌ An unexpected error occurred: {e}")
+        print("--- Traceback ---")
+        traceback.print_exc()
+        print("--- End Traceback ---")
         sys.exit(1)
 
 if __name__ == "__main__":

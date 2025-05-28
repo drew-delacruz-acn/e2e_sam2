@@ -119,7 +119,19 @@ def extract_false_positives(evaluation_results: pd.DataFrame,
         if frame_of_fp_val is None or pd.isna(frame_of_fp_val):
             print(f"⚠️ Skipping FP with no valid frame: Video {video_val}, Class {wrongly_predicted_as_class_val}")
             continue
-        frame_of_fp_val = int(frame_of_fp_val) 
+        
+        # Safe frame value conversion with proper validation
+        try:
+            if isinstance(frame_of_fp_val, (int, float)):
+                frame_of_fp_val = int(frame_of_fp_val)
+            elif isinstance(frame_of_fp_val, str):
+                frame_of_fp_val = int(float(frame_of_fp_val))  # Handle string numbers like "123.0"
+            else:
+                print(f"⚠️ Skipping FP with invalid frame type: Video {video_val}, Class {wrongly_predicted_as_class_val}, Frame type: {type(frame_of_fp_val)}")
+                continue
+        except (ValueError, TypeError) as e:
+            print(f"⚠️ Skipping FP with unconvertible frame value: Video {video_val}, Class {wrongly_predicted_as_class_val}, Frame: {frame_of_fp_val}, Error: {e}")
+            continue
         original_pred_entry_df = predictions_for_eval[
             (predictions_for_eval[COL_VIDEO] == video_val) &
             (predictions_for_eval[COL_VISUAL_PRED_OBJECT] == wrongly_predicted_as_class_val) &

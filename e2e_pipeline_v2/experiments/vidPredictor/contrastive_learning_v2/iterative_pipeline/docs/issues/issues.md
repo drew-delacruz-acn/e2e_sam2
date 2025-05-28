@@ -23,7 +23,7 @@ deduplicated_df = valid_predictions_for_grouping.loc[idx].reset_index(drop=True)
 **Impact**: `KeyError` or incorrect deduplication
 **Fix**: Reset index before groupby operations
 
-### 3. **Frame Value Conversion Error** ⬅️ NEXT TO FIX
+### ~~3. **Frame Value Conversion Error**~~ ✅ FIXED
 **File**: `evaluation_utils.py` (Lines 125-130)
 **Problem**: Converting frame values to `int()` without proper validation
 ```python
@@ -34,7 +34,7 @@ frame_of_fp_val = int(frame_of_fp_val)  # Could fail
 
 ## Logic Issues
 
-### 4. **Unused Configuration Fields**
+### 4. **Unused Configuration Fields** ⬅️ NEXT TO FIX
 **File**: `config.py` (Lines 26-28)
 **Problem**: Fields `exclude_training_from_eval`, `include_training_in_eval`, and `track_training_separately` are set but never used
 **Impact**: Misleading configuration, dead code

@@ -12,6 +12,14 @@ from .prediction_utils import generate_predictions
 from .evaluation_utils import evaluate_predictions, extract_false_positives, filter_evaluation_data
 from .config import PipelineConfig 
 
+# Global debug log collector
+DEBUG_LOGS = []
+
+def debug_log(message: str):
+    """Collect debug messages for saving to file."""
+    print(message)  # Still print to console
+    DEBUG_LOGS.append(f"{datetime.now().strftime('%H:%M:%S')} | {message}")
+
 def run_iterative_pipeline(
     definitiveObjects: pd.DataFrame,
     resnetPredictions: pd.DataFrame, 
@@ -21,7 +29,10 @@ def run_iterative_pipeline(
     """
     Run the full iterative contrastive learning pipeline.
     """
-    print("\n🚀 Starting Iterative Contrastive Learning Pipeline (Negative Classes Mode)")
+    global DEBUG_LOGS
+    DEBUG_LOGS = []  # Reset debug logs
+    
+    debug_log("\n🚀 Starting Iterative Contrastive Learning Pipeline (Negative Classes Mode)")
     
     current_training_data = definitiveObjects.copy()
     exclusion_tracker: Dict[int, List[Dict]] = {} 
@@ -31,15 +42,15 @@ def run_iterative_pipeline(
     output_base_dir = Path(config.output) 
 
     # Debug: Print configuration values
-    print(f"\n🔍 FILTERING DEBUG: Configuration values:")
-    print(f"   exclude_training_from_eval: {config.exclude_training_from_eval}")
-    print(f"   include_training_in_eval: {config.include_training_in_eval}")
-    print(f"   track_training_separately: {config.track_training_separately}")
+    debug_log(f"\n🔍 FILTERING DEBUG: Configuration values:")
+    debug_log(f"   exclude_training_from_eval: {config.exclude_training_from_eval}")
+    debug_log(f"   include_training_in_eval: {config.include_training_in_eval}")
+    debug_log(f"   track_training_separately: {config.track_training_separately}")
 
     if config.include_training_in_eval:
-        print("📈 Evaluation will INCLUDE all data (training data not explicitly excluded from resnetPredictions).")
+        debug_log("📈 Evaluation will INCLUDE all data (training data not explicitly excluded from resnetPredictions).")
     else: 
-        print("📉 Evaluation behavior: Standard, FPs added to training are not re-evaluated as FPs in the same way if they are learned.")
+        debug_log("📉 Evaluation behavior: Standard, FPs added to training are not re-evaluated as FPs in the same way if they are learned.")
 
     resnet_data_for_prediction = resnetPredictions.copy()
 
@@ -54,57 +65,57 @@ def run_iterative_pipeline(
                 current_iter_margin_to_use = config.secondary_margin
         
         if i == 1:
-            print(f"💡 Iteration {i}: Using Primary Threshold: {current_iter_threshold_to_use}, Primary Margin: {current_iter_margin_to_use}")
+            debug_log(f"💡 Iteration {i}: Using Primary Threshold: {current_iter_threshold_to_use}, Primary Margin: {current_iter_margin_to_use}")
         else:
             threshold_type = "Secondary" if config.secondary_threshold is not None and i > 1 else "Primary"
             margin_type = "Secondary" if config.secondary_margin is not None and i > 1 else "Primary"
-            print(f"💡 Iteration {i}: Using Threshold: {current_iter_threshold_to_use} ({threshold_type}), Margin: {current_iter_margin_to_use} ({margin_type})")
+            debug_log(f"💡 Iteration {i}: Using Threshold: {current_iter_threshold_to_use} ({threshold_type}), Margin: {current_iter_margin_to_use} ({margin_type})")
 
         # Debug: Print exclusion tracker state
-        print(f"\n🔍 FILTERING DEBUG (Iteration {i}):")
-        print(f"   Exclusion tracker keys: {list(exclusion_tracker.keys())}")
-        print(f"   Total exclusions so far: {sum(len(v) for v in exclusion_tracker.values())}")
+        debug_log(f"\n🔍 FILTERING DEBUG (Iteration {i}):")
+        debug_log(f"   Exclusion tracker keys: {list(exclusion_tracker.keys())}")
+        debug_log(f"   Total exclusions so far: {sum(len(v) for v in exclusion_tracker.values())}")
         for iter_key, exclusions in exclusion_tracker.items():
-            print(f"   Iteration {iter_key}: {len(exclusions)} exclusions")
+            debug_log(f"   Iteration {iter_key}: {len(exclusions)} exclusions")
 
         # Apply exclusion strategy to evaluation data
-        print(f"\n🔍 FILTERING DEBUG: Applying exclusion strategy...")
+        debug_log(f"\n🔍 FILTERING DEBUG: Applying exclusion strategy...")
         original_eval_size = len(resnetPredictions)
-        print(f"   Original resnetPredictions size: {original_eval_size}")
+        debug_log(f"   Original resnetPredictions size: {original_eval_size}")
         
         if config.exclude_training_from_eval:
-            print(f"   🔍 Calling filter_evaluation_data with exclude_training=True")
+            debug_log(f"   🔍 Calling filter_evaluation_data with exclude_training=True")
             eval_data = filter_evaluation_data(resnetPredictions, exclusion_tracker, exclude_training=True)
             eval_mode = "clean"
-            print("📉 Using CLEAN evaluation (excluding training data)")
+            debug_log("📉 Using CLEAN evaluation (excluding training data)")
         elif config.include_training_in_eval:
-            print(f"   🔍 Skipping filtering - include_training_in_eval=True")
+            debug_log(f"   🔍 Skipping filtering - include_training_in_eval=True")
             eval_data = resnetPredictions.copy()
             eval_mode = "contaminated"
-            print("📈 Using CONTAMINATED evaluation (including training data)")
+            debug_log("📈 Using CONTAMINATED evaluation (including training data)")
         elif config.track_training_separately:
-            print(f"   🔍 Using both evaluations - track_training_separately=True")
+            debug_log(f"   🔍 Using both evaluations - track_training_separately=True")
             # Use full data first, then run clean evaluation separately
             eval_data = resnetPredictions.copy()
             eval_mode = "both"
-            print("📊 Using BOTH evaluations (will run clean and contaminated)")
+            debug_log("📊 Using BOTH evaluations (will run clean and contaminated)")
         else:
-            print(f"   🔍 Default to clean - calling filter_evaluation_data")
+            debug_log(f"   🔍 Default to clean - calling filter_evaluation_data")
             # Default to clean
             eval_data = filter_evaluation_data(resnetPredictions, exclusion_tracker, exclude_training=True)
             eval_mode = "clean"
-            print("📉 Using CLEAN evaluation (default)")
+            debug_log("📉 Using CLEAN evaluation (default)")
 
         filtered_eval_size = len(eval_data)
-        print(f"🔍 FILTERING DEBUG: Evaluation data size after filtering:")
-        print(f"   Original: {original_eval_size}")
-        print(f"   Filtered: {filtered_eval_size}")
-        print(f"   Difference: {original_eval_size - filtered_eval_size}")
+        debug_log(f"🔍 FILTERING DEBUG: Evaluation data size after filtering:")
+        debug_log(f"   Original: {original_eval_size}")
+        debug_log(f"   Filtered: {filtered_eval_size}")
+        debug_log(f"   Difference: {original_eval_size - filtered_eval_size}")
         
         if original_eval_size == filtered_eval_size and exclusion_tracker:
-            print(f"   ⚠️ WARNING: No size change despite having exclusions!")
+            debug_log(f"   ⚠️ WARNING: No size change despite having exclusions!")
         elif original_eval_size != filtered_eval_size:
-            print(f"   ✅ Filtering applied: {original_eval_size - filtered_eval_size} samples removed")
+            debug_log(f"   ✅ Filtering applied: {original_eval_size - filtered_eval_size} samples removed")
 
         new_training_data, metrics, new_exclusions = run_single_iteration(
             iteration=i, 
@@ -127,16 +138,16 @@ def run_iterative_pipeline(
         # So we need to get the true evaluation size from the metrics or calculate it
         actual_evaluation_size = len(eval_data)  # This will be corrected below
         
-        print(f"🔍 PIPELINE DEBUG: eval_data input size: {len(eval_data)}")
-        print(f"🔍 PIPELINE DEBUG: Checking if actual evaluation size differs...")
+        debug_log(f"🔍 PIPELINE DEBUG: eval_data input size: {len(eval_data)}")
+        debug_log(f"🔍 PIPELINE DEBUG: Checking if actual evaluation size differs...")
         
         # The true evaluation size should be reflected in the total samples evaluated
         total_eval_samples = metrics.get('TP', 0) + metrics.get('FP', 0) + metrics.get('FN', 0) + metrics.get('TN', 0)
         if total_eval_samples > 0 and total_eval_samples != len(eval_data):
-            print(f"🔍 PIPELINE DEBUG: Data reduction detected!")
-            print(f"   Input to iteration: {len(eval_data)} samples")
-            print(f"   Actual evaluation: {total_eval_samples} samples") 
-            print(f"   Reduction: {len(eval_data) - total_eval_samples} samples lost in generate_predictions")
+            debug_log(f"🔍 PIPELINE DEBUG: Data reduction detected!")
+            debug_log(f"   Input to iteration: {len(eval_data)} samples")
+            debug_log(f"   Actual evaluation: {total_eval_samples} samples") 
+            debug_log(f"   Reduction: {len(eval_data) - total_eval_samples} samples lost in generate_predictions")
             actual_evaluation_size = total_eval_samples
         
         current_training_data = new_training_data
@@ -153,16 +164,16 @@ def run_iterative_pipeline(
             clean_eval_data = filter_evaluation_data(resnetPredictions, exclusion_tracker, exclude_training=True)
             
             if len(clean_eval_data) != len(eval_data):
-                print(f"\n🔄 Running clean evaluation for comparison...")
+                debug_log(f"\n🔄 Running clean evaluation for comparison...")
                 
                 # Load representatives and generate clean predictions  
                 representatives_path = output_base_dir / f"iteration_{i}" / "representatives.pkl"
                 clean_predictions = generate_predictions(clean_eval_data, representatives_path, current_iter_threshold_to_use, i)
                 clean_eval_results, clean_metrics = evaluate_predictions(clean_predictions, trackingInfo)
                 
-                print(f"📊 CLEAN vs CONTAMINATED COMPARISON:")
-                print(f"   Clean F1: {clean_metrics['f1']:.4f} ({len(clean_eval_data)} samples)")
-                print(f"   Contaminated F1: {metrics['f1']:.4f} ({len(eval_data)} samples)")
+                debug_log(f"📊 CLEAN vs CONTAMINATED COMPARISON:")
+                debug_log(f"   Clean F1: {clean_metrics['f1']:.4f} ({len(clean_eval_data)} samples)")
+                debug_log(f"   Contaminated F1: {metrics['f1']:.4f} ({len(eval_data)} samples)")
                 
                 # Save clean metrics
                 clean_metrics['iteration'] = i
@@ -172,16 +183,16 @@ def run_iterative_pipeline(
                 with open(output_base_dir / f"iteration_{i}" / "clean_metrics.json", 'w') as f:
                     json.dump(clean_metrics, f, indent=2)
             else:
-                print(f"\n📊 Clean and contaminated data are the same size - no exclusions to compare")
+                debug_log(f"\n📊 Clean and contaminated data are the same size - no exclusions to compare")
         
         current_f1 = metrics.get('f1', 0.0) 
         if i > 1 and previous_f1 >= 0 and abs(current_f1 - previous_f1) < config.convergence_threshold:
-            print(f"\n✅ Convergence reached at iteration {i}: F1 improvement ({current_f1 - previous_f1:.4f}) is less than threshold ({config.convergence_threshold:.4f}).")
+            debug_log(f"\n✅ Convergence reached at iteration {i}: F1 improvement ({current_f1 - previous_f1:.4f}) is less than threshold ({config.convergence_threshold:.4f}).")
             break
         previous_f1 = current_f1
         
         if i == config.iterations:
-            print("\n🏁 Maximum iterations reached.")
+            debug_log("\n🏁 Maximum iterations reached.")
             
     pipeline_summary_data = {
         'config': config.__dict__, 
@@ -213,34 +224,34 @@ def run_iterative_pipeline(
             elif final_f1_raw is not None:
                 final_f1_str = str(final_f1_raw)
 
-        print(f"\n📜 Pipeline summary saved to {summary_path}. Final F1: {final_f1_str}.")
+        debug_log(f"\n📜 Pipeline summary saved to {summary_path}. Final F1: {final_f1_str}.")
     except Exception as e:
-        print(f"❌ Error saving pipeline summary: {e}")
+        debug_log(f"❌ Error saving pipeline summary: {e}")
 
     # Save exclusion tracker data
     exclusion_path = output_base_dir / "cumulative_exclusions.json"
     try:
         with open(exclusion_path, 'w') as f:
             json.dump(exclusion_tracker, f, indent=2)
-        print(f"📍 Exclusion tracker saved to {exclusion_path}.")
+        debug_log(f"📍 Exclusion tracker saved to {exclusion_path}.")
     except Exception as e:
-        print(f"❌ Error saving exclusion tracker: {e}")
+        debug_log(f"❌ Error saving exclusion tracker: {e}")
 
     final_data_path = output_base_dir / "final_training_data.pkl"
     try:
         with open(final_data_path, 'wb') as f:
             pickle.dump(current_training_data, f)
-        print(f"💾 Final combined training data saved to {final_data_path}.")
+        debug_log(f"💾 Final combined training data saved to {final_data_path}.")
     except Exception as e:
-        print(f"❌ Error saving final training data: {e}")
+        debug_log(f"❌ Error saving final training data: {e}")
 
     # Generate analysis logs for debugging
     try:
         original_data_size = len(resnetPredictions)
         chat_log_file = create_analysis_logs(output_base_dir, all_iteration_metrics, exclusion_tracker, config, original_data_size)
-        print(f"\n🔍 Analysis complete! Copy {chat_log_file} contents to chat for debugging.")
+        debug_log(f"\n🔍 Analysis complete! Copy {chat_log_file} contents to chat for debugging.")
     except Exception as e:
-        print(f"❌ Error creating analysis logs: {e}")
+        debug_log(f"❌ Error creating analysis logs: {e}")
 
     return {'final_metrics': all_iteration_metrics[-1] if all_iteration_metrics else None} 
 
@@ -404,12 +415,22 @@ def create_analysis_logs(output_base_dir: Path, all_iteration_metrics: List[Dict
     with open(chat_file, 'w') as f:
         f.write('\n'.join(chat_summary))
     
+    # 5. SAVE DEBUG LOGS (all the filtering debug messages)
+    debug_file = logs_dir / f"debug_log_{timestamp}.txt"
+    with open(debug_file, 'w') as f:
+        f.write("=== COMPLETE DEBUG LOG ===\n")
+        f.write(f"Pipeline run at: {timestamp}\n")
+        f.write("=" * 50 + "\n\n")
+        for log_line in DEBUG_LOGS:
+            f.write(log_line + '\n')
+    
     # Print paths to all created files
-    print(f"\n📊 Analysis logs created in {logs_dir}:")
-    print(f"  📋 Evaluation analysis: {eval_file.name}")
-    print(f"  📍 Exclusion details: {exclusion_file.name}")
-    print(f"  📈 Metrics CSV: {metrics_file.name}")
-    print(f"  💬 Chat summary: {chat_file.name}")
-    print(f"\n📋 To analyze in chat, copy contents of: {chat_file}")
+    debug_log(f"\n📊 Analysis logs created in {logs_dir}:")
+    debug_log(f"  📋 Evaluation analysis: {eval_file.name}")
+    debug_log(f"  📍 Exclusion details: {exclusion_file.name}")
+    debug_log(f"  📈 Metrics CSV: {metrics_file.name}")
+    debug_log(f"  💬 Chat summary: {chat_file.name}")
+    debug_log(f"  🔍 Debug log: {debug_file.name}")
+    debug_log(f"\n📋 To analyze in chat, copy contents of: {chat_file}")
     
     return chat_file 

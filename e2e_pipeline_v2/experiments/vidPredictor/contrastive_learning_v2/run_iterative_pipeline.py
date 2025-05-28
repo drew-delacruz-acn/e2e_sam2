@@ -38,16 +38,33 @@ def parse_args_for_runner():
     parser.set_defaults(eval_strategy='exclude') 
     parser.add_argument('--output', type=str, default='results_negative_refactored')
     parser.add_argument('--test-mode', action='store_true')
+    
     parsed_args = parser.parse_args()
     config_dict = vars(parsed_args)
+    
+    # Extract eval_strategy before creating config
     eval_strat = config_dict.pop('eval_strategy', 'exclude')
+    
+    # Convert argument names from dashes to underscores for PipelineConfig
+    config_dict['definitive_objects'] = config_dict.pop('definitive_objects')
+    config_dict['resnet_predictions'] = config_dict.pop('resnet_predictions') 
+    config_dict['tracking_info'] = config_dict.pop('tracking_info')
+    config_dict['secondary_threshold'] = config_dict.pop('secondary_threshold')
+    config_dict['convergence_threshold'] = config_dict.pop('convergence_threshold')
+    config_dict['secondary_margin'] = config_dict.pop('secondary_margin')
+    config_dict['test_mode'] = config_dict.pop('test_mode')
+    
+    # Create config with properly named fields
     config = PipelineConfig(**config_dict)
+    
+    # Set evaluation strategy based on parsed argument
     if eval_strat == 'include':
         config.exclude_training_from_eval = False
         config.include_training_in_eval = True
     else:
         config.exclude_training_from_eval = True
         config.include_training_in_eval = False
+    
     return config
 
 def main_runner():

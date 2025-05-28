@@ -128,7 +128,7 @@ def generate_predictions(resnet_data: pd.DataFrame,
 
     deduplicated_df = result_df 
     if not result_df.empty and COL_VISUAL_PRED_OBJECT in result_df.columns:
-        valid_predictions_for_grouping = result_df[result_df[COL_VISUAL_PRED_OBJECT].notna()]
+        valid_predictions_for_grouping = result_df[result_df[COL_VISUAL_PRED_OBJECT].notna()].reset_index(drop=True)
         if not valid_predictions_for_grouping.empty:
             try:
                 idx = valid_predictions_for_grouping.groupby([COL_VIDEO, COL_VISUAL_PRED_OBJECT])[COL_VISUAL_MAX_SCORE].idxmax()

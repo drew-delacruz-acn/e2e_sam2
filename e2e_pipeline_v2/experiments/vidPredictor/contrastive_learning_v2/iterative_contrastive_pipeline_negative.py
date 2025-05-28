@@ -233,70 +233,53 @@ def generate_predictions(resnet_data: pd.DataFrame,
     """
     print(f"🔮 Generating predictions (Iteration {iteration_number}) with threshold {threshold} using ONLY POSITIVE representatives...")
     with open(representatives_path, 'rb') as f:
-        representatives_data = pickle.load(f) # This could be a dict or DataFrame
-
-    # Convert to DataFrame for consistent handling, then filter
+        representatives_data = pickle.load(f)
     if isinstance(representatives_data, dict):
         try: temp_df = pd.DataFrame(representatives_data)
         except: raise ValueError("Cannot convert dict representatives to DataFrame")
+        if 'finetuned_embedding' in temp_df.columns: reps_df = temp_df
+        elif 'representative_embedding' in temp_df.columns: reps_df = temp_df.rename(columns={'representative_embedding':'finetuned_embedding'})
+        else: raise ValueError("Dict representatives missing embedding column")
     elif isinstance(representatives_data, pd.DataFrame):
-        temp_df = representatives_data.copy()
-    else:
-        raise ValueError(f"Unknown representatives format: {type(representatives_data)}")
-
-    # Standardize column names if 'representative_embedding' is used
-    if 'representative_embedding' in temp_df.columns and 'finetuned_embedding' not in temp_df.columns:
-        temp_df = temp_df.rename(columns={'representative_embedding':'finetuned_embedding'})
-    
-    if not all(col in temp_df.columns for col in ['class', 'finetuned_embedding']):
+        if 'representative_embedding' in representatives_data.columns and 'finetuned_embedding' not in representatives_data.columns:
+            reps_df = representatives_data.rename(columns={'representative_embedding':'finetuned_embedding'})
+        else: reps_df = representatives_data
+    else: raise ValueError(f"Unknown representatives format: {type(representatives_data)}")
+    if not all(col in reps_df.columns for col in ['class', 'finetuned_embedding']):
         raise ValueError("Representatives DataFrame missing 'class' or 'finetuned_embedding'")
-
-    # --- KEY CHANGE: Filter to only use positive class representatives for prediction ---
-    positive_representatives_df = temp_df[~temp_df['class'].str.startswith('not_', na=False)].copy()
-    
+    positive_representatives_df = reps_df[~reps_df['class'].str.startswith('not_', na=False)].copy()
     if positive_representatives_df.empty:
         print("⚠️ No positive class representatives found after filtering! Cannot make predictions.")
-        # Return an empty DataFrame with the expected columns for 'predictions_for_eval'
-        # The columns should match what `evaluate_predictions` expects from its `predictions` input.
-        # Typically: 'video', 'visual_predicted_object', 'visual_max_score', 'frame', and others from resnet_data.
-        # For simplicity, returning a DataFrame that will result in 0 for all metrics.
         empty_pred_cols = list(resnet_data.columns) + ['visual_predicted_object', 'visual_max_score']
         return pd.DataFrame(columns=empty_pred_cols)
-
-
     class_embeddings = list(positive_representatives_df['finetuned_embedding'])
     class_names = list(positive_representatives_df['class'])
-    
     print(f"🏷️  Using {len(class_names)} POSITIVE representatives for prediction: {class_names}")
     
     predictions_list = []
     for _, row in resnet_data.iterrows():
-        # Always use the simple cosine similarity against the filtered positive representatives
-        pred_class, confidence = cosine_similarity_prediction( # Using the original simple one
+        pred_class, confidence = cosine_similarity_prediction( 
             row['finetuned_embedding'], 
             class_embeddings, 
             class_names
         )
         predictions_list.append({
             'visual_predicted_object': pred_class, 
-            'visual_max_score': confidence, 
-            'frame': row['frame'] # Ensure frame is carried over
+            'visual_max_score': confidence
         })
     
     pred_df = pd.DataFrame(predictions_list)
-    # Ensure resnet_data index is reset if it's not already unique, to prevent issues with concat
+    
     result_df = pd.concat([resnet_data.reset_index(drop=True), pred_df.reset_index(drop=True)], axis=1)
     print(f"✅ Generated {len(result_df)} initial predictions using positive reps.")
 
-    # Deduplication: keep highest scoring prediction per video-object pair.
-    # Since we only predicted positive classes, this step is simpler.
-    if not result_df.empty: # Check if predictions were made
+    if not result_df.empty and 'visual_predicted_object' in result_df.columns:
         idx = result_df.groupby(['video', 'visual_predicted_object'])['visual_max_score'].idxmax()
         deduplicated_df = result_df.loc[idx].reset_index(drop=True)
         print(f"✅ Deduplicated to {len(deduplicated_df)} unique video-class predictions.")
     else:
-        deduplicated_df = pd.DataFrame(columns=result_df.columns) # Empty df with same schema
-        print("⚠️ No predictions made, possibly due to no positive representatives.")
+        deduplicated_df = pd.DataFrame(columns=result_df.columns if not result_df.empty else list(resnet_data.columns) + ['visual_predicted_object', 'visual_max_score'])
+        print("⚠️ No predictions made or 'visual_predicted_object' missing, possibly due to no positive representatives or empty resnet_data.")
 
 
     final_df = deduplicated_df[deduplicated_df['visual_max_score'] >= threshold].copy()

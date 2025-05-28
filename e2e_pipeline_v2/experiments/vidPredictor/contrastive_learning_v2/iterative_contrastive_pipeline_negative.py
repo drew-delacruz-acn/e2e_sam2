@@ -469,26 +469,17 @@ def run_single_iteration(iteration: int,
         training_data, output_dir, args.epochs, args.margin)
 
     print(f"\n🔮 Phase 2B: Generating predictions...")
-    # Generate predictions on the *full* resnet_data, not filtered one
-    # The `generate_predictions` function handles thresholding internally
     all_predictions_with_scores = generate_predictions(
         resnet_data_for_prediction, representatives_path, args.threshold
     )
-    # `all_predictions_with_scores` is now thresholded and deduplicated for positive classes
 
     print(f"\n📊 Phase 2C: Evaluating predictions...")
-    # Evaluation uses the thresholded/deduplicated predictions
     evaluation_results, metrics = evaluate_predictions(all_predictions_with_scores, ground_truth)
 
     print(f"\n🚨 Phase 2D: Extracting false positives...")
-    # For extracting FPs, we need to look at the predictions *before* final thresholding
-    # if we want to capture embeddings of things that were *almost* predicted.
-    # However, the current `evaluation_results` is based on thresholded predictions.
-    # The `extract_false_positives` logic expects `predictions` to be the data from which FPs were derived.
-    # If `all_predictions_with_scores` (thresholded) is used, it's consistent.
     fp_data, new_exclusions = extract_false_positives(
-        evaluation_results, 
-        all_predictions_with_scores, # Pass the same predictions used for evaluation
+        evaluation_results,
+        all_predictions_with_scores, 
         exclusion_tracker
     )
 
@@ -500,16 +491,82 @@ def run_single_iteration(iteration: int,
     with open(output_dir / "exclusions.json", 'w') as f: json.dump(new_exclusions, f, indent=2)
     with open(output_dir / "training_results.json", 'w') as f: json.dump(metrics, f, indent=2)
 
-    new_training_data = training_data.copy()
+    new_training_data = training_data.copy() # Start with a copy
     if not fp_data.empty:
-        new_training_data = pd.concat([training_data, fp_data], ignore_index=True).drop_duplicates(subset=['class', 'finetuned_embedding'])
-        print(f"🔄 Updated training data: {len(training_data)} → {len(new_training_data)} samples (+{len(fp_data) - (len(training_data) + len(fp_data) - len(new_training_data)) } unique)")
+        # Temporarily convert embeddings to tuples for duplicate checking
+        temp_training_data_for_dedup = training_data.copy()
+        temp_fp_data_for_dedup = fp_data.copy()
+
+        # Check if 'finetuned_embedding' column exists and contains ndarray
+        if 'finetuned_embedding' in temp_training_data_for_dedup.columns and \
+           not temp_training_data_for_dedup.empty and \
+           isinstance(temp_training_data_for_dedup['finetuned_embedding'].iloc[0], np.ndarray):
+            temp_training_data_for_dedup['finetuned_embedding_tuple'] = temp_training_data_for_dedup['finetuned_embedding'].apply(tuple)
+        else:
+             # Handle empty or already tupled - create empty or copy existing if not ndarray
+            temp_training_data_for_dedup['finetuned_embedding_tuple'] = None # Placeholder
+            if 'finetuned_embedding' in temp_training_data_for_dedup.columns:
+                 temp_training_data_for_dedup['finetuned_embedding_tuple'] = temp_training_data_for_dedup['finetuned_embedding']
+
+
+        if 'finetuned_embedding' in temp_fp_data_for_dedup.columns and \
+           not temp_fp_data_for_dedup.empty and \
+           isinstance(temp_fp_data_for_dedup['finetuned_embedding'].iloc[0], np.ndarray):
+            temp_fp_data_for_dedup['finetuned_embedding_tuple'] = temp_fp_data_for_dedup['finetuned_embedding'].apply(tuple)
+        else:
+            temp_fp_data_for_dedup['finetuned_embedding_tuple'] = None
+            if 'finetuned_embedding' in temp_fp_data_for_dedup.columns:
+                 temp_fp_data_for_dedup['finetuned_embedding_tuple'] = temp_fp_data_for_dedup['finetuned_embedding']
+
+        combined_for_dedup = pd.concat([temp_training_data_for_dedup, temp_fp_data_for_dedup], ignore_index=True)
+        
+        # Perform drop_duplicates on the tuple column
+        # Ensure 'finetuned_embedding_tuple' exists before using in subset
+        dedup_columns = ['class']
+        if 'finetuned_embedding_tuple' in combined_for_dedup.columns:
+            dedup_columns.append('finetuned_embedding_tuple')
+        
+        # Only drop if 'finetuned_embedding_tuple' was successfully created for both and is not None
+        can_dedup_on_embedding = ('finetuned_embedding_tuple' in temp_training_data_for_dedup.columns and \
+                                 temp_training_data_for_dedup['finetuned_embedding_tuple'].notna().all()) and \
+                                 ('finetuned_embedding_tuple' in temp_fp_data_for_dedup.columns and \
+                                  temp_fp_data_for_dedup['finetuned_embedding_tuple'].notna().all())
+
+        if not combined_for_dedup.empty and can_dedup_on_embedding:
+            num_before_dedup = len(combined_for_dedup)
+            deduplicated_df_indices = combined_for_dedup.drop_duplicates(subset=dedup_columns).index
+            
+            # Create the new_training_data using original np.array embeddings from the combined (non-tupled) data
+            original_combined_data = pd.concat([training_data, fp_data], ignore_index=True)
+            new_training_data = original_combined_data.loc[deduplicated_df_indices].reset_index(drop=True)
+            num_after_dedup = len(new_training_data)
+            print(f"🔄 Combined training data ({len(training_data)} existing + {len(fp_data)} new FPs).")
+            print(f"🔄 After drop_duplicates on (class, embedding_tuple): {num_before_dedup} -> {num_after_dedup} samples.")
+
+        else: # Fallback if tuple conversion didn't happen or df is empty
+            new_training_data = pd.concat([training_data, fp_data], ignore_index=True)
+            # As a simpler fallback, try dropping based on all columns if embeddings are an issue,
+            # or just accept potential duplicates if embeddings are truly problematic for hashing.
+            # This might not be perfect for ndarrays.
+            if not new_training_data.empty:
+                 print(f"⚠️ Could not reliably convert embeddings to tuples for deduplication. Combining without ndarray-based deduplication.")
+                 # Attempt to drop duplicates if all columns are hashable, otherwise, this won't work for ndarray
+                 try:
+                    initial_len = len(new_training_data)
+                    new_training_data.drop_duplicates(inplace=True)
+                    if len(new_training_data) < initial_len:
+                        print(f"   Performed basic drop_duplicates: {initial_len} -> {len(new_training_data)}")
+                 except TypeError:
+                    print(f"   Skipping drop_duplicates as embeddings are unhashable in this path.")
+
+
+        print(f"🔄 Updated training data: {len(training_data)} initial + {len(fp_data)} new FPs -> {len(new_training_data)} total unique samples.")
     else:
-        print(f"🔄 No new unique false positives to add, training data unchanged: {len(training_data)} samples")
+        print(f"🔄 No new false positives to add, training data unchanged: {len(training_data)} samples")
         
     print(f"\n📊 ITERATION {iteration} SUMMARY:")
     print(f"   🎯 F1: {metrics['f1']:.4f}, Precision: {metrics['precision']:.4f}, Recall: {metrics['recall']:.4f}")
-    print(f"   🚨 False Positives (used for new negatives): {metrics['fp']}")
+    print(f"   🚨 False Positives (used for new negatives): {metrics['fp']}") # This 'fp' is from evaluation stats
     print(f"   📍 Exclusion list: +{len(new_exclusions)} entries")
     print(f"   📈 Training data size: {len(new_training_data)}")
     

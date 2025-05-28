@@ -662,6 +662,231 @@ def run_single_iteration(iteration: int,
     return new_training_data, metrics, new_exclusions
 
 
+def filter_evaluation_data(resnet_data: pd.DataFrame,
+                          exclusion_tracker: Dict,
+                          exclude_training: bool = True) -> pd.DataFrame:
+    """
+    Filter evaluation data based on exclusion strategy.
+    
+    Args:
+        resnet_data: Original prediction data
+        exclusion_tracker: Dictionary tracking excluded video-frame pairs
+        exclude_training: Whether to exclude training data from evaluation
+        
+    Returns:
+        Filtered DataFrame for evaluation
+    """
+    if not exclude_training or not exclusion_tracker:
+        return resnet_data.copy()
+    
+    # Collect all excluded video-frame pairs
+    excluded_pairs = set()
+    total_exclusions = 0
+    
+    for iteration, exclusions in exclusion_tracker.items():
+        for exclusion in exclusions:
+            pair = (exclusion['video'], exclusion['frame'])
+            excluded_pairs.add(pair)
+            total_exclusions += 1
+    
+    if total_exclusions == 0:
+        print("🚫 No exclusions to apply")
+        return resnet_data.copy()
+    
+    # Filter out excluded pairs
+    def is_not_excluded(row):
+        pair = (row['video'], row['frame'])
+        return pair not in excluded_pairs
+    
+    original_count = len(resnet_data)
+    filtered_data = resnet_data[resnet_data.apply(is_not_excluded, axis=1)].copy()
+    filtered_count = len(filtered_data)
+    excluded_count = original_count - filtered_count
+    
+    print(f"🚫 Excluded {excluded_count} training samples from evaluation")
+    print(f"📊 Evaluation data: {original_count} → {filtered_count} samples")
+    
+    return filtered_data
+
+
+def run_iterative_pipeline(definitiveObjects: pd.DataFrame,
+                          resnetPredictions: pd.DataFrame,
+                          trackingInfo: pd.DataFrame,
+                          args) -> Dict:
+    """
+    Run the complete iterative pipeline.
+    
+    Args:
+        definitiveObjects: Training objects data
+        resnetPredictions: Prediction data
+        trackingInfo: Ground truth data
+        args: Command line arguments
+        
+    Returns:
+        Dictionary with pipeline summary
+    """
+    print(f"\n📋 MILESTONE 3: Multi-Iteration Loop")
+    print("-" * 40)
+    
+    # Initialize tracking
+    exclusion_tracker = {}
+    current_training_data = definitiveObjects.copy()
+    metrics_history = []
+    converged = False
+    
+    # Create main output directory
+    output_dir = Path(args.output)
+    output_dir.mkdir(parents=True, exist_ok=True)
+    
+    for iteration in range(1, args.iterations + 1):
+        print(f"\n🔄 ITERATION {iteration}")
+        print("=" * 50)
+        
+        # Apply exclusion strategy to evaluation data
+        if args.exclude_training_from_eval:
+            eval_data = filter_evaluation_data(resnetPredictions, exclusion_tracker, exclude_training=True)
+            eval_mode = "clean"
+        elif args.include_training_in_eval:
+            eval_data = resnetPredictions.copy()
+            eval_mode = "contaminated"
+            print("⚠️  Including training data in evaluation (contaminated metrics)")
+        elif args.track_training_separately:
+            # We'll handle this after running the iteration
+            eval_data = resnetPredictions.copy()
+            eval_mode = "both"
+        else:
+            eval_data = filter_evaluation_data(resnetPredictions, exclusion_tracker, exclude_training=True)
+            eval_mode = "clean"
+        
+        # Run single iteration
+        new_training_data, metrics, new_exclusions = run_single_iteration(
+            iteration=iteration,
+            training_data=current_training_data,
+            resnet_data=eval_data,
+            ground_truth=trackingInfo,
+            exclusion_tracker=exclusion_tracker,
+            args=args
+        )
+        
+        # Update exclusion tracker
+        if new_exclusions:
+            exclusion_tracker[f'iteration_{iteration}'] = new_exclusions
+        
+        # Add iteration info to metrics
+        metrics['iteration'] = iteration
+        metrics['training_samples'] = len(current_training_data)
+        metrics['new_training_samples'] = len(new_training_data)
+        metrics['evaluation_samples'] = len(eval_data)
+        metrics['eval_mode'] = eval_mode
+        metrics_history.append(metrics)
+        
+        # Handle track_training_separately mode
+        if args.track_training_separately:
+            # Run clean evaluation
+            clean_eval_data = filter_evaluation_data(resnetPredictions, exclusion_tracker, exclude_training=True)
+            
+            if len(clean_eval_data) != len(eval_data):
+                print(f"\n🔄 Running clean evaluation for comparison...")
+                
+                # Load representatives and generate clean predictions
+                representatives_path = output_dir / f"iteration_{iteration}" / "representatives.pkl"
+                clean_predictions = generate_predictions(clean_eval_data, representatives_path, args.threshold)
+                clean_eval_results, clean_metrics = evaluate_predictions(clean_predictions, trackingInfo)
+                
+                print(f"📊 CLEAN vs CONTAMINATED COMPARISON:")
+                print(f"   Clean F1: {clean_metrics['f1']:.4f} ({len(clean_eval_data)} samples)")
+                print(f"   Contaminated F1: {metrics['f1']:.4f} ({len(eval_data)} samples)")
+                
+                # Save clean metrics
+                clean_metrics['iteration'] = iteration
+                clean_metrics['eval_mode'] = 'clean'
+                clean_metrics['evaluation_samples'] = len(clean_eval_data)
+                
+                with open(output_dir / f"iteration_{iteration}" / "clean_metrics.json", 'w') as f:
+                    json.dump(clean_metrics, f, indent=2)
+        
+        # Check for convergence
+        if iteration > 1:
+            prev_f1 = metrics_history[-2]['f1']
+            current_f1 = metrics['f1']
+            f1_improvement = current_f1 - prev_f1
+            
+            print(f"\n📈 Convergence Check:")
+            print(f"   Previous F1: {prev_f1:.4f}")
+            print(f"   Current F1: {current_f1:.4f}")
+            print(f"   Improvement: {f1_improvement:+.4f}")
+            print(f"   Threshold: {args.convergence_threshold:.4f}")
+            
+            if f1_improvement < args.convergence_threshold:
+                print(f"🎯 Converged after {iteration} iterations (improvement < {args.convergence_threshold})")
+                converged = True
+            else:
+                print(f"🔄 Continuing (improvement >= {args.convergence_threshold})")
+        
+        # Update training data for next iteration
+        current_training_data = new_training_data
+        
+        # Print iteration summary
+        total_exclusions = sum(len(exclusions) for exclusions in exclusion_tracker.values())
+        print(f"\n📊 ITERATION {iteration} SUMMARY:")
+        print(f"   🎯 F1: {metrics['f1']:.4f}, Precision: {metrics['precision']:.4f}, Recall: {metrics['recall']:.4f}")
+        print(f"   📊 Eval samples: {len(eval_data)} ({eval_mode})")
+        print(f"   🚨 False Positives: {metrics['fp']} cases extracted")
+        print(f"   📍 Total excluded: {total_exclusions} entries")
+        print(f"   📈 Training data: {len(definitiveObjects)} → {len(current_training_data)} samples")
+        
+        if converged:
+            break
+    
+    # Generate pipeline summary
+    final_iteration = len(metrics_history)
+    final_metrics = metrics_history[-1]
+    initial_samples = len(definitiveObjects)
+    final_samples = len(current_training_data)
+    total_exclusions = sum(len(exclusions) for exclusions in exclusion_tracker.values())
+    
+    pipeline_summary = {
+        'pipeline_info': {
+            'total_iterations': final_iteration,
+            'converged': converged,
+            'convergence_threshold': args.convergence_threshold,
+            'eval_strategy': 'clean' if args.exclude_training_from_eval else 'contaminated' if args.include_training_in_eval else 'both'
+        },
+        'data_summary': {
+            'initial_training_samples': initial_samples,
+            'final_training_samples': final_samples,
+            'samples_added': final_samples - initial_samples,
+            'total_exclusions': total_exclusions
+        },
+        'final_metrics': final_metrics,
+        'metrics_progression': metrics_history
+    }
+    
+    # Save pipeline summary
+    with open(output_dir / "pipeline_summary.json", 'w') as f:
+        json.dump(pipeline_summary, f, indent=2)
+    
+    # Save metrics progression CSV
+    metrics_df = pd.DataFrame(metrics_history)
+    metrics_df.to_csv(output_dir / "metrics_comparison.csv", index=False)
+    
+    # Save cumulative exclusions
+    with open(output_dir / "cumulative_exclusions.json", 'w') as f:
+        json.dump(exclusion_tracker, f, indent=2)
+    
+    print(f"\n🎉 PIPELINE COMPLETE!")
+    print(f"=" * 50)
+    print(f"📊 Final Results:")
+    print(f"   🔄 Iterations: {final_iteration}")
+    print(f"   🎯 Final F1: {final_metrics['f1']:.4f}")
+    print(f"   📈 Training samples: {initial_samples} → {final_samples} (+{final_samples - initial_samples})")
+    print(f"   📍 Total exclusions: {total_exclusions}")
+    print(f"   🎯 Converged: {'Yes' if converged else 'No'}")
+    print(f"   📁 Results saved to: {output_dir}")
+    
+    return pipeline_summary
+
+
 def main():
     """Main pipeline function."""
     args = parse_args()
@@ -690,36 +915,43 @@ def main():
             print("\n✅ Test mode complete - data loading successful!")
             return
         
-        # === MILESTONE 2: Single Iteration Training ===
-        print("\n📋 MILESTONE 2: Single Iteration Training")
-        print("-" * 40)
-        
-        # Initialize tracking
-        exclusion_tracker = {}
-        current_training_data = definitiveObjects.copy()
-        
-        # Run single iteration
-        new_training_data, metrics, new_exclusions = run_single_iteration(
-            iteration=1,
-            training_data=current_training_data,
-            resnet_data=resnetPredictions,
-            ground_truth=trackingInfo,
-            exclusion_tracker=exclusion_tracker,
-            args=args
-        )
-        
-        # Update exclusion tracker
-        exclusion_tracker['iteration_1'] = new_exclusions
-        
-        print(f"\n✅ MILESTONE 2 COMPLETE!")
-        print(f"   🎯 Iteration 1 F1: {metrics['f1']:.4f}")
-        print(f"   🚨 False positives extracted: {metrics['fp']}")
-        print(f"   📈 Training data updated: {len(definitiveObjects)} → {len(new_training_data)} samples")
-        print(f"   📁 Results saved to: {Path(args.output) / 'iteration_1'}")
-        
-        # TODO: Continue with Milestone 3
-        print("\n🔄 Ready for Milestone 3: Multi-Iteration Loop")
-        print("   (Implementation coming next...)")
+        # === MILESTONE 2 & 3: Complete Pipeline ===
+        if args.iterations == 1:
+            print("\n📋 MILESTONE 2: Single Iteration Training")
+            print("-" * 40)
+            
+            # Initialize tracking
+            exclusion_tracker = {}
+            current_training_data = definitiveObjects.copy()
+            
+            # Run single iteration
+            new_training_data, metrics, new_exclusions = run_single_iteration(
+                iteration=1,
+                training_data=current_training_data,
+                resnet_data=resnetPredictions,
+                ground_truth=trackingInfo,
+                exclusion_tracker=exclusion_tracker,
+                args=args
+            )
+            
+            # Update exclusion tracker
+            exclusion_tracker['iteration_1'] = new_exclusions
+            
+            print(f"\n✅ MILESTONE 2 COMPLETE!")
+            print(f"   🎯 Iteration 1 F1: {metrics['f1']:.4f}")
+            print(f"   🚨 False positives extracted: {metrics['fp']}")
+            print(f"   📈 Training data updated: {len(definitiveObjects)} → {len(new_training_data)} samples")
+            print(f"   📁 Results saved to: {Path(args.output) / 'iteration_1'}")
+        else:
+            # Run full iterative pipeline
+            pipeline_summary = run_iterative_pipeline(
+                definitiveObjects, resnetPredictions, trackingInfo, args
+            )
+            
+            print(f"\n✅ MILESTONE 3 COMPLETE!")
+            print(f"   🔄 Total iterations: {pipeline_summary['pipeline_info']['total_iterations']}")
+            print(f"   🎯 Final F1: {pipeline_summary['final_metrics']['f1']:.4f}")
+            print(f"   🎯 Converged: {pipeline_summary['pipeline_info']['converged']}")
         
     except Exception as e:
         print(f"\n❌ Pipeline failed: {e}")

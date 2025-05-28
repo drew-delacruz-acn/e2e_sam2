@@ -170,3 +170,50 @@ def extract_false_positives(evaluation_results: pd.DataFrame,
     if not fp_df_output.empty:
         print(f"🏷️ Negative classes created: {fp_df_output[COL_CLASS].value_counts().to_dict()}")
     return fp_df_output, exclusion_list 
+
+def filter_evaluation_data(resnet_data: pd.DataFrame,
+                          exclusion_tracker: Dict,
+                          exclude_training: bool = True) -> pd.DataFrame:
+    """
+    Filter evaluation data based on exclusion strategy.
+    
+    Args:
+        resnet_data: Original prediction data
+        exclusion_tracker: Dictionary tracking excluded video-frame pairs
+        exclude_training: Whether to exclude training data from evaluation
+        
+    Returns:
+        Filtered DataFrame for evaluation
+    """
+    if not exclude_training or not exclusion_tracker:
+        print("🚫 No evaluation data filtering applied")
+        return resnet_data.copy()
+    
+    # Collect all excluded video-frame pairs from all iterations
+    excluded_pairs = set()
+    total_exclusions = 0
+    
+    for iteration_key, exclusions in exclusion_tracker.items():
+        for exclusion in exclusions:
+            pair = (exclusion[COL_VIDEO], exclusion[COL_FRAME])
+            excluded_pairs.add(pair)
+            total_exclusions += 1
+    
+    if total_exclusions == 0:
+        print("🚫 No exclusions to apply")
+        return resnet_data.copy()
+    
+    # Filter out excluded pairs
+    def is_not_excluded(row):
+        pair = (row[COL_VIDEO], row[COL_FRAME])
+        return pair not in excluded_pairs
+    
+    original_count = len(resnet_data)
+    filtered_data = resnet_data[resnet_data.apply(is_not_excluded, axis=1)].copy()
+    filtered_count = len(filtered_data)
+    excluded_count = original_count - filtered_count
+    
+    print(f"🚫 Excluded {excluded_count} training samples from evaluation")
+    print(f"📊 Evaluation data: {original_count} → {filtered_count} samples")
+    
+    return filtered_data 

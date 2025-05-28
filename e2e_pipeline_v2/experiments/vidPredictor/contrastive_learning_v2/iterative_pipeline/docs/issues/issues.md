@@ -34,13 +34,13 @@ frame_of_fp_val = int(frame_of_fp_val)  # Could fail
 
 ## Logic Issues
 
-### 4. **Unused Configuration Fields** ⬅️ NEXT TO FIX
+### ~~4. **Unused Configuration Fields**~~ ✅ FIXED
 **File**: `config.py` (Lines 26-28)
 **Problem**: Fields `exclude_training_from_eval`, `include_training_in_eval`, and `track_training_separately` are set but never used
 **Impact**: Misleading configuration, dead code
 **Fix**: Either implement the logic or remove the fields
 
-### 5. **Convergence Logic Flaw**
+### 5. **Convergence Logic Flaw** ⬅️ NEXT TO FIX
 **File**: `pipeline_manager.py` (Lines 75-79)
 **Problem**: Only checks absolute difference, not relative improvement
 ```python

@@ -185,8 +185,16 @@ def filter_evaluation_data(resnet_data: pd.DataFrame,
     Returns:
         Filtered DataFrame for evaluation
     """
+    print(f"\n🔍 FILTER_EVALUATION_DATA CALLED:")
+    print(f"   resnet_data size: {len(resnet_data)}")
+    print(f"   exclude_training: {exclude_training}")
+    print(f"   exclusion_tracker: {type(exclusion_tracker)}")
+    print(f"   exclusion_tracker empty: {not exclusion_tracker}")
+    print(f"   exclusion_tracker keys: {list(exclusion_tracker.keys()) if exclusion_tracker else 'None'}")
+    
     if not exclude_training or not exclusion_tracker:
         print("🚫 No evaluation data filtering applied")
+        print(f"   Reason: exclude_training={exclude_training}, exclusion_tracker_empty={not exclusion_tracker}")
         return resnet_data.copy()
     
     # Collect all excluded video-frame pairs from all iterations

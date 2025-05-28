@@ -30,6 +30,12 @@ def run_iterative_pipeline(
 
     output_base_dir = Path(config.output) 
 
+    # Debug: Print configuration values
+    print(f"\n🔍 FILTERING DEBUG: Configuration values:")
+    print(f"   exclude_training_from_eval: {config.exclude_training_from_eval}")
+    print(f"   include_training_in_eval: {config.include_training_in_eval}")
+    print(f"   track_training_separately: {config.track_training_separately}")
+
     if config.include_training_in_eval:
         print("📈 Evaluation will INCLUDE all data (training data not explicitly excluded from resnetPredictions).")
     else: 
@@ -54,25 +60,51 @@ def run_iterative_pipeline(
             margin_type = "Secondary" if config.secondary_margin is not None and i > 1 else "Primary"
             print(f"💡 Iteration {i}: Using Threshold: {current_iter_threshold_to_use} ({threshold_type}), Margin: {current_iter_margin_to_use} ({margin_type})")
 
+        # Debug: Print exclusion tracker state
+        print(f"\n🔍 FILTERING DEBUG (Iteration {i}):")
+        print(f"   Exclusion tracker keys: {list(exclusion_tracker.keys())}")
+        print(f"   Total exclusions so far: {sum(len(v) for v in exclusion_tracker.values())}")
+        for iter_key, exclusions in exclusion_tracker.items():
+            print(f"   Iteration {iter_key}: {len(exclusions)} exclusions")
+
         # Apply exclusion strategy to evaluation data
+        print(f"\n🔍 FILTERING DEBUG: Applying exclusion strategy...")
+        original_eval_size = len(resnetPredictions)
+        print(f"   Original resnetPredictions size: {original_eval_size}")
+        
         if config.exclude_training_from_eval:
+            print(f"   🔍 Calling filter_evaluation_data with exclude_training=True")
             eval_data = filter_evaluation_data(resnetPredictions, exclusion_tracker, exclude_training=True)
             eval_mode = "clean"
             print("📉 Using CLEAN evaluation (excluding training data)")
         elif config.include_training_in_eval:
+            print(f"   🔍 Skipping filtering - include_training_in_eval=True")
             eval_data = resnetPredictions.copy()
             eval_mode = "contaminated"
             print("📈 Using CONTAMINATED evaluation (including training data)")
         elif config.track_training_separately:
+            print(f"   🔍 Using both evaluations - track_training_separately=True")
             # Use full data first, then run clean evaluation separately
             eval_data = resnetPredictions.copy()
             eval_mode = "both"
             print("📊 Using BOTH evaluations (will run clean and contaminated)")
         else:
+            print(f"   🔍 Default to clean - calling filter_evaluation_data")
             # Default to clean
             eval_data = filter_evaluation_data(resnetPredictions, exclusion_tracker, exclude_training=True)
             eval_mode = "clean"
             print("📉 Using CLEAN evaluation (default)")
+
+        filtered_eval_size = len(eval_data)
+        print(f"🔍 FILTERING DEBUG: Evaluation data size after filtering:")
+        print(f"   Original: {original_eval_size}")
+        print(f"   Filtered: {filtered_eval_size}")
+        print(f"   Difference: {original_eval_size - filtered_eval_size}")
+        
+        if original_eval_size == filtered_eval_size and exclusion_tracker:
+            print(f"   ⚠️ WARNING: No size change despite having exclusions!")
+        elif original_eval_size != filtered_eval_size:
+            print(f"   ✅ Filtering applied: {original_eval_size - filtered_eval_size} samples removed")
 
         new_training_data, metrics, new_exclusions = run_single_iteration(
             iteration=i, 

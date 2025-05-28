@@ -278,10 +278,10 @@ def generate_predictions(resnet_data: pd.DataFrame,
     class_embeddings = list(positive_representatives_df['finetuned_embedding'])
     class_names = list(positive_representatives_df['class'])
     print(f"🏷️  Using {len(class_names)} POSITIVE representatives for prediction: {class_names}")
-    
+
     predictions_list = []
     for _, row in resnet_data.iterrows():
-        pred_class, confidence = cosine_similarity_prediction( 
+            pred_class, confidence = cosine_similarity_prediction(
             row['finetuned_embedding'], 
             class_embeddings, 
             class_names
@@ -482,7 +482,7 @@ def run_single_iteration(iteration: int,
         fp_data.to_csv(output_dir / "false_positives_for_training.csv", index=False)
         with open(output_dir / "false_positives_for_training.pkl", 'wb') as f: pickle.dump(fp_data, f)
     if new_exclusions: 
-        with open(output_dir / "exclusions.json", 'w') as f: json.dump(new_exclusions, f, indent=2)
+    with open(output_dir / "exclusions.json", 'w') as f: json.dump(new_exclusions, f, indent=2)
     with open(output_dir / "training_results.json", 'w') as f: json.dump(metrics, f, indent=2)
 
     current_training_data_len = len(training_data)
@@ -666,7 +666,7 @@ def run_iterative_pipeline(definitiveObjects: pd.DataFrame,
         print("📈 Evaluation will INCLUDE all data (including those added to training).")
     else: 
         print("📉 Evaluation will EXCLUDE data added to training in previous iterations (standard behavior implied by not re-adding duplicates).")
-
+    
     resnet_data_for_prediction = resnetPredictions.copy()
 
     for i in range(1, args.iterations + 1):
@@ -693,7 +693,7 @@ def run_iterative_pipeline(definitiveObjects: pd.DataFrame,
         
         current_training_data = new_training_data
         if new_exclusions: 
-            exclusion_tracker[i] = new_exclusions
+        exclusion_tracker[i] = new_exclusions
         all_iteration_metrics.append({'iteration': i, **metrics})
         
         current_f1 = metrics['f1']

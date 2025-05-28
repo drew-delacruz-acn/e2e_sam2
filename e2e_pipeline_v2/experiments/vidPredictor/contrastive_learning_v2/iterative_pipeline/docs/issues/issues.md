@@ -40,6 +40,15 @@ frame_of_fp_val = int(frame_of_fp_val)  # Could fail
 **Impact**: Misleading configuration, dead code
 **Fix**: Either implement the logic or remove the fields
 
+### ✅ **NEW: Analysis Logging System Added**
+**Files**: `pipeline_manager.py`
+**Feature**: Added comprehensive logging system for debugging evaluation strategies
+- Creates `analysis_logs/` directory with multiple log formats
+- Generates compact summaries for easy copy-paste to chat
+- Tracks evaluation sizes, exclusions, and metrics over iterations
+- Includes diagnostic checks for filtering correctness
+**Usage**: Logs automatically generated at end of pipeline run
+
 ### 5. **Convergence Logic Flaw** ⬅️ NEXT TO FIX
 **File**: `pipeline_manager.py` (Lines 75-79)
 **Problem**: Only checks absolute difference, not relative improvement

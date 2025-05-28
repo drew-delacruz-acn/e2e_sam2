@@ -4,6 +4,7 @@ import json
 import pickle
 from typing import Dict, List, Tuple
 import numpy as np
+from datetime import datetime
 
 from .iteration_manager import run_single_iteration
 from .training_utils import train_contrastive_representatives
@@ -184,4 +185,182 @@ def run_iterative_pipeline(
     except Exception as e:
         print(f"❌ Error saving final training data: {e}")
 
+    # Generate analysis logs for debugging
+    try:
+        original_data_size = len(resnetPredictions)
+        chat_log_file = create_analysis_logs(output_base_dir, all_iteration_metrics, exclusion_tracker, config, original_data_size)
+        print(f"\n🔍 Analysis complete! Copy {chat_log_file} contents to chat for debugging.")
+    except Exception as e:
+        print(f"❌ Error creating analysis logs: {e}")
+
     return {'final_metrics': all_iteration_metrics[-1] if all_iteration_metrics else None} 
+
+def create_analysis_logs(output_base_dir: Path, all_iteration_metrics: List[Dict], 
+                        exclusion_tracker: Dict, config: PipelineConfig, original_data_size: int):
+    """
+    Create compact, analysis-ready logs for debugging evaluation strategies.
+    These logs are designed to be easily copied from VM and pasted into chat.
+    """
+    logs_dir = output_base_dir / "analysis_logs"
+    logs_dir.mkdir(parents=True, exist_ok=True)
+    
+    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+    
+    # 1. EVALUATION STRATEGY SUMMARY (most important for debugging)
+    eval_summary = []
+    eval_summary.append("=== EVALUATION STRATEGY ANALYSIS ===")
+    eval_summary.append(f"Timestamp: {timestamp}")
+    eval_summary.append(f"Strategy: exclude_training={config.exclude_training_from_eval}, include_training={config.include_training_in_eval}, track_separately={config.track_training_separately}")
+    eval_summary.append(f"Original Data Size: {original_data_size}")
+    eval_summary.append("")
+    
+    # Iteration-by-iteration breakdown
+    eval_summary.append("ITER | MODE         | EVAL_SIZE | EXCLUSIONS | F1      | PRECISION | RECALL")
+    eval_summary.append("-----|--------------|-----------|------------|---------|-----------|--------")
+    
+    cumulative_exclusions = 0
+    for i, metrics in enumerate(all_iteration_metrics, 1):
+        if i in exclusion_tracker:
+            cumulative_exclusions += len(exclusion_tracker[i])
+        
+        eval_size = metrics.get('evaluation_samples', 'N/A')
+        mode = metrics.get('eval_mode', 'unknown')
+        f1 = metrics.get('f1', 0)
+        precision = metrics.get('precision', 0)
+        recall = metrics.get('recall', 0)
+        
+        eval_summary.append(f"{i:4d} | {mode:12s} | {eval_size:9d} | {cumulative_exclusions:10d} | {f1:7.4f} | {precision:9.4f} | {recall:7.4f}")
+    
+    eval_summary.append("")
+    eval_summary.append("=== KEY DIAGNOSTICS ===")
+    
+    # Check for unexpected patterns
+    if all_iteration_metrics:
+        final_exclusions = sum(len(v) for v in exclusion_tracker.values())
+        final_eval_size = all_iteration_metrics[-1].get('evaluation_samples', original_data_size)
+        expected_eval_size = original_data_size - final_exclusions
+        
+        eval_summary.append(f"Expected final eval size: {expected_eval_size}")
+        eval_summary.append(f"Actual final eval size: {final_eval_size}")
+        eval_summary.append(f"Size difference: {abs(expected_eval_size - final_eval_size)}")
+        
+        if abs(expected_eval_size - final_eval_size) > 0:
+            eval_summary.append("⚠️  WARNING: Eval size mismatch - filtering may not be working correctly!")
+        else:
+            eval_summary.append("✅ Eval size matches expectations - filtering working correctly")
+    
+    # Save evaluation summary
+    eval_file = logs_dir / f"evaluation_analysis_{timestamp}.txt"
+    with open(eval_file, 'w') as f:
+        f.write('\n'.join(eval_summary))
+    
+    # 2. EXCLUSION DETAILS (for debugging data quality)
+    exclusion_details = []
+    exclusion_details.append("=== EXCLUSION TRACKING DETAILS ===")
+    exclusion_details.append(f"Total iterations: {len(all_iteration_metrics)}")
+    exclusion_details.append(f"Total exclusions: {sum(len(v) for v in exclusion_tracker.values())}")
+    exclusion_details.append("")
+    
+    for iteration, exclusions in exclusion_tracker.items():
+        exclusion_details.append(f"ITERATION {iteration}: {len(exclusions)} exclusions")
+        
+        # Group by class for analysis
+        class_counts = {}
+        for exc in exclusions:
+            cls = exc.get('class', 'unknown')
+            class_counts[cls] = class_counts.get(cls, 0) + 1
+        
+        for cls, count in sorted(class_counts.items()):
+            exclusion_details.append(f"  {cls}: {count} samples")
+        
+        # Show first few examples
+        exclusion_details.append("  Sample exclusions:")
+        for exc in exclusions[:3]:  # First 3 examples
+            video = exc.get('video', 'N/A')[:20]  # Truncate long video names
+            frame = exc.get('frame', 'N/A')
+            cls = exc.get('class', 'N/A')
+            exclusion_details.append(f"    {video}:{frame} -> {cls}")
+        
+        if len(exclusions) > 3:
+            exclusion_details.append(f"    ... and {len(exclusions) - 3} more")
+        exclusion_details.append("")
+    
+    exclusion_file = logs_dir / f"exclusion_details_{timestamp}.txt"
+    with open(exclusion_file, 'w') as f:
+        f.write('\n'.join(exclusion_details))
+    
+    # 3. METRICS COMPARISON (CSV format for easy analysis)
+    metrics_csv = []
+    metrics_csv.append("iteration,eval_mode,f1,precision,recall,tp,fp,fn,tn,eval_samples,exclusions")
+    
+    cumulative_exclusions = 0
+    for i, metrics in enumerate(all_iteration_metrics, 1):
+        if i in exclusion_tracker:
+            cumulative_exclusions += len(exclusion_tracker[i])
+        
+        row = [
+            str(i),
+            metrics.get('eval_mode', 'unknown'),
+            f"{metrics.get('f1', 0):.6f}",
+            f"{metrics.get('precision', 0):.6f}",
+            f"{metrics.get('recall', 0):.6f}",
+            str(metrics.get('TP', 0)),
+            str(metrics.get('FP', 0)),
+            str(metrics.get('FN', 0)),
+            str(metrics.get('TN', 0)),
+            str(metrics.get('evaluation_samples', 0)),
+            str(cumulative_exclusions)
+        ]
+        metrics_csv.append(','.join(row))
+    
+    metrics_file = logs_dir / f"metrics_comparison_{timestamp}.csv"
+    with open(metrics_file, 'w') as f:
+        f.write('\n'.join(metrics_csv))
+    
+    # 4. COMPACT SUMMARY FOR CHAT (single copyable block)
+    chat_summary = []
+    chat_summary.append("=== PIPELINE ANALYSIS SUMMARY (Copy to Chat) ===")
+    chat_summary.append(f"Config: exclude_training={config.exclude_training_from_eval}, include_training={config.include_training_in_eval}")
+    chat_summary.append(f"Data: {original_data_size} original samples, {len(all_iteration_metrics)} iterations")
+    
+    if all_iteration_metrics:
+        first_f1 = all_iteration_metrics[0].get('f1', 0)
+        last_f1 = all_iteration_metrics[-1].get('f1', 0)
+        final_exclusions = sum(len(v) for v in exclusion_tracker.values())
+        final_eval_size = all_iteration_metrics[-1].get('evaluation_samples', 0)
+        
+        chat_summary.append(f"Results: F1 {first_f1:.4f} -> {last_f1:.4f}, {final_exclusions} exclusions, {final_eval_size} final eval samples")
+        
+        # Flag unexpected patterns
+        if config.exclude_training_from_eval and final_eval_size >= original_data_size:
+            chat_summary.append("🚨 ISSUE: Clean mode should have fewer eval samples!")
+        elif config.include_training_in_eval and final_eval_size < original_data_size:
+            chat_summary.append("🚨 ISSUE: Contaminated mode should have all eval samples!")
+    
+    chat_summary.append("")
+    chat_summary.append("Iteration Details:")
+    for i, metrics in enumerate(all_iteration_metrics, 1):
+        if i in exclusion_tracker:
+            new_exclusions = len(exclusion_tracker[i])
+        else:
+            new_exclusions = 0
+        
+        eval_size = metrics.get('evaluation_samples', 0)
+        f1 = metrics.get('f1', 0)
+        mode = metrics.get('eval_mode', 'unknown')
+        
+        chat_summary.append(f"  Iter {i}: {mode} mode, {eval_size} samples, F1={f1:.4f}, +{new_exclusions} exclusions")
+    
+    chat_file = logs_dir / f"chat_summary_{timestamp}.txt"
+    with open(chat_file, 'w') as f:
+        f.write('\n'.join(chat_summary))
+    
+    # Print paths to all created files
+    print(f"\n📊 Analysis logs created in {logs_dir}:")
+    print(f"  📋 Evaluation analysis: {eval_file.name}")
+    print(f"  📍 Exclusion details: {exclusion_file.name}")
+    print(f"  📈 Metrics CSV: {metrics_file.name}")
+    print(f"  💬 Chat summary: {chat_file.name}")
+    print(f"\n📋 To analyze in chat, copy contents of: {chat_file}")
+    
+    return chat_file 

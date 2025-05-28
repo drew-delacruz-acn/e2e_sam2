@@ -2,7 +2,7 @@
 
 ## Critical Issues (Will Cause Runtime Errors)
 
-### 1. **Argument Parsing Logic Error** 
+### ~~1. **Argument Parsing Logic Error**~~ ✅ FIXED
 **File**: `run_iterative_pipeline.py` (Lines 39-50)
 **Problem**: The `eval_strategy` field doesn't exist in `PipelineConfig`, but the code tries to pass `config_dict` (which contains `eval_strategy`) to the constructor.
 ```python
@@ -13,7 +13,7 @@ config = PipelineConfig(**config_dict)  # This will fail
 **Impact**: `TypeError` at runtime
 **Fix**: Remove `eval_strategy` and handle argument name conversion properly
 
-### 2. **Potential Index Issues in Deduplication**
+### ~~2. **Potential Index Issues in Deduplication**~~ ✅ FIXED
 **File**: `prediction_utils.py` (Lines 130-140)
 **Problem**: If the original DataFrame has duplicate indices, `idxmax()` could return invalid indices.
 ```python
@@ -23,7 +23,7 @@ deduplicated_df = valid_predictions_for_grouping.loc[idx].reset_index(drop=True)
 **Impact**: `KeyError` or incorrect deduplication
 **Fix**: Reset index before groupby operations
 
-### 3. **Frame Value Conversion Error**
+### 3. **Frame Value Conversion Error** ⬅️ NEXT TO FIX
 **File**: `evaluation_utils.py` (Lines 125-130)
 **Problem**: Converting frame values to `int()` without proper validation
 ```python

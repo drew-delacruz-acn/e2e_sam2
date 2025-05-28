@@ -68,3 +68,4 @@ ENV/
 .DS_Store
 Thumbs.db train_sam2/model.torch
 train_sam2/model.torch
+*.pkl

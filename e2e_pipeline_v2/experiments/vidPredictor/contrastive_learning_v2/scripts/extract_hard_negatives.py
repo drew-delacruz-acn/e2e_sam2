@@ -71,10 +71,7 @@ def extract_hard_negatives(fp_df: pd.DataFrame, resnet_df: pd.DataFrame,
     # Filter by confidence
     high_conf_fp = fp_df[fp_df['confidence'] >= min_confidence].copy()
     print(f"   High confidence FPs: {len(high_conf_fp)}")
-    print(high_conf_fp.columns)
-    # print(high_conf_fp['class'])
-    # print(high_conf_fp.actual)
-    # print(high_conf_fp.prediction)    
+    
     # Create lookup for ResNet embeddings
     # Assuming ResNet data has 'video', 'frame', 'owl_label', 'finetuned_embedding'
     resnet_lookup = {}
@@ -83,8 +80,6 @@ def extract_hard_negatives(fp_df: pd.DataFrame, resnet_df: pd.DataFrame,
         resnet_lookup[key] = row['finetuned_embedding']
     
     hard_negatives = {}
-
-
     
     # Group by ground truth class
     for gt_class in high_conf_fp['ground_truth_class'].unique():

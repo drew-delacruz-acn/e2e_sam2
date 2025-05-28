@@ -14,7 +14,7 @@ def load_pickle(file_path):
     """
     with open(file_path, 'rb') as f:
         data = pickle.load(f)
-        print(f"Loaded {data['false_positives']} from {file_path}")
+        print(f"Loaded {data} from {file_path}")
     
 
     # Assuming `data` is the loaded dictionary

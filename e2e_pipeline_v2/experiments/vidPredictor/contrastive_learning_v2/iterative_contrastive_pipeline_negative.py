@@ -419,98 +419,151 @@ def run_single_iteration(iteration: int,
                         training_data: pd.DataFrame,
                         resnet_data_for_prediction: pd.DataFrame,
                         ground_truth: pd.DataFrame,
-                        exclusion_tracker: Dict,
-                        current_iter_threshold: float,
+                        exclusion_tracker: Dict, # For logging, not direct filtering here
+                        current_iter_threshold: float, 
                         args) -> Tuple[pd.DataFrame, Dict, List[Dict]]:
-    """
-    Run a single iteration of the pipeline.
-    """
+    """Run a single iteration of the pipeline."""
     print(f"\n🔄 ITERATION {iteration} (Using Threshold: {current_iter_threshold})\n" + "=" * 50)
     output_dir = Path(args.output) / f"iteration_{iteration}"
     output_dir.mkdir(parents=True, exist_ok=True)
 
     print(f"\n🏋️ Phase 2A: Training representatives...")
-    representatives_path = train_contrastive_representatives(
-        training_data, output_dir, args.epochs, args.margin)
+    representatives_path = train_contrastive_representatives(training_data, output_dir, args.epochs, args.margin)
 
     print(f"\n🔮 Phase 2B: Generating predictions...")
-    predictions_for_eval = generate_predictions(
-        resnet_data_for_prediction, representatives_path, current_iter_threshold, iteration_number=iteration
-    )
+    predictions_for_eval = generate_predictions(resnet_data_for_prediction, representatives_path, current_iter_threshold, iteration_number=iteration)
 
     print(f"\n📊 Phase 2C: Evaluating predictions...")
     evaluation_results, metrics = evaluate_predictions(predictions_for_eval, ground_truth)
 
     print(f"\n🚨 Phase 2D: Extracting false positives...")
-    fp_data, new_exclusions = extract_false_positives(
-        evaluation_results, 
-        predictions_for_eval, 
-        exclusion_tracker
-    )
+    fp_data, new_exclusions = extract_false_positives(evaluation_results, predictions_for_eval, exclusion_tracker)
 
     print(f"\n💾 Saving iteration results...")
     evaluation_results.to_csv(output_dir / "evaluation_results.csv", index=False)
     if not fp_data.empty:
         fp_data.to_csv(output_dir / "false_positives_for_training.csv", index=False)
         with open(output_dir / "false_positives_for_training.pkl", 'wb') as f: pickle.dump(fp_data, f)
-    with open(output_dir / "exclusions.json", 'w') as f: json.dump(new_exclusions, f, indent=2)
+    if new_exclusions: 
+        with open(output_dir / "exclusions.json", 'w') as f: json.dump(new_exclusions, f, indent=2)
     with open(output_dir / "training_results.json", 'w') as f: json.dump(metrics, f, indent=2)
 
-    current_training_data_size = len(training_data)
+    current_training_data_len = len(training_data)
+    new_training_data = training_data.copy() # Initialize with current training data
+
     if not fp_data.empty:
-        temp_training_data_for_dedup = training_data.copy()
-        if 'finetuned_embedding' in temp_training_data_for_dedup and not temp_training_data_for_dedup.empty and isinstance(temp_training_data_for_dedup['finetuned_embedding'].iloc[0], np.ndarray):
-            temp_training_data_for_dedup['finetuned_embedding_tuple'] = temp_training_data_for_dedup['finetuned_embedding'].apply(lambda x: tuple(x) if isinstance(x, np.ndarray) else x)
-        else:
-            temp_training_data_for_dedup['finetuned_embedding_tuple'] = temp_training_data_for_dedup.get('finetuned_embedding', pd.Series(dtype='object'))
+        print(f"DEBUG: training_data index is_unique: {training_data.index.is_unique}")
+        print(f"DEBUG: training_data.shape: {training_data.shape}")
+        if not training_data.empty: print(f"DEBUG: training_data head:\n{training_data.head()}")
+        
+        print(f"DEBUG: fp_data index is_unique: {fp_data.index.is_unique}")
+        print(f"DEBUG: fp_data.shape: {fp_data.shape}")
+        if not fp_data.empty: print(f"DEBUG: fp_data head:\n{fp_data.head()}")
 
-        temp_fp_data_for_dedup = fp_data.copy()
-        if 'finetuned_embedding' in temp_fp_data_for_dedup and not temp_fp_data_for_dedup.empty and isinstance(temp_fp_data_for_dedup['finetuned_embedding'].iloc[0], np.ndarray):
-            temp_fp_data_for_dedup['finetuned_embedding_tuple'] = temp_fp_data_for_dedup['finetuned_embedding'].apply(lambda x: tuple(x) if isinstance(x, np.ndarray) else x)
+        temp_td = training_data.copy()
+        temp_fp = fp_data.copy()
+        
+        # Prepare 'emb_tuple' column for temp_td
+        if 'finetuned_embedding' in temp_td.columns and not temp_td.empty and isinstance(temp_td['finetuned_embedding'].iloc[0], np.ndarray):
+            temp_td['emb_tuple'] = temp_td['finetuned_embedding'].apply(lambda x: tuple(x) if isinstance(x, np.ndarray) else x)
+        elif 'finetuned_embedding' in temp_td.columns: # Column exists but might be empty or not ndarray
+             temp_td['emb_tuple'] = temp_td['finetuned_embedding'] # Copy as is, might not be hashable for all
+        else: # Column doesn't exist
+            temp_td['emb_tuple'] = pd.Series(dtype='object', index=temp_td.index)
+
+
+        # Prepare 'emb_tuple' column for temp_fp
+        if 'finetuned_embedding' in temp_fp.columns and not temp_fp.empty and isinstance(temp_fp['finetuned_embedding'].iloc[0], np.ndarray):
+            temp_fp['emb_tuple'] = temp_fp['finetuned_embedding'].apply(lambda x: tuple(x) if isinstance(x, np.ndarray) else x)
+        elif 'finetuned_embedding' in temp_fp.columns:
+            temp_fp['emb_tuple'] = temp_fp['finetuned_embedding']
         else:
-            temp_fp_data_for_dedup['finetuned_embedding_tuple'] = temp_fp_data_for_dedup.get('finetuned_embedding', pd.Series(dtype='object'))
-        
-        cols_to_concat = ['class', 'finetuned_embedding']
-        dedup_subset = ['class']
-        
-        if 'finetuned_embedding_tuple' in temp_training_data_for_dedup.columns and \
-           'finetuned_embedding_tuple' in temp_fp_data_for_dedup.columns:
-            cols_to_concat_temp = ['class', 'finetuned_embedding_tuple', 'finetuned_embedding']
-            temp_combined_for_dedup = pd.concat(
-                [temp_training_data_for_dedup[cols_to_concat_temp], 
-                 temp_fp_data_for_dedup[cols_to_concat_temp]], 
-                ignore_index=True
-            )
-            dedup_subset.append('finetuned_embedding_tuple')
+            temp_fp['emb_tuple'] = pd.Series(dtype='object', index=temp_fp.index)
+
+        dedup_cols_primary_path = ['class']
+        # Check if 'emb_tuple' can be reliably used for deduplication
+        can_use_emb_tuple_for_dedup = (
+            'emb_tuple' in temp_td.columns and temp_td['emb_tuple'].notna().any() and
+            'emb_tuple' in temp_fp.columns and temp_fp['emb_tuple'].notna().any() and
+            all(isinstance(x, tuple) for x in temp_td['emb_tuple'].dropna()) and # Ensure they are actually tuples
+            all(isinstance(x, tuple) for x in temp_fp['emb_tuple'].dropna())
+        )
+
+        if can_use_emb_tuple_for_dedup:
+            print("DEBUG: Using primary deduplication path with 'emb_tuple'.")
+            dedup_cols_primary_path.append('emb_tuple')
             
-            num_before_dedup = len(temp_combined_for_dedup)
-            new_training_data = temp_combined_for_dedup.drop_duplicates(subset=dedup_subset, keep='first')[cols_to_concat].reset_index(drop=True)
-            num_after_dedup = len(new_training_data)
-            # print(f"🔄 Combined training data. Before dedup: {num_before_dedup}, After dedup on (class, embedding_tuple): {num_after_dedup} samples.") # Already verbose
-        else:
-            print("⚠️ Could not create tuple embeddings for deduplication. Concatenating and attempting basic deduplication.")
-            new_training_data = pd.concat([training_data, fp_data], ignore_index=True)
-            try:
-                initial_len = len(new_training_data)
-                if not new_training_data.empty:
-                    new_training_data = new_training_data.loc[new_training_data.astype(str).drop_duplicates().index].reset_index(drop=True)
-                if len(new_training_data) < initial_len:
-                    print(f"   Performed basic drop_duplicates (astype str): {initial_len} -> {len(new_training_data)}")
-            except Exception as e_basic_dedup:
-                 print(f"   Basic drop_duplicates failed: {e_basic_dedup}. Proceeding with potential duplicates.")
+            # Ensure all necessary columns for concat exist in both DataFrames
+            cols_for_concat_temp = ['class', 'finetuned_embedding', 'emb_tuple']
+            
+            # Create DataFrames with only the necessary columns, handling missing ones gracefully
+            df_list_for_concat = []
+            for df_orig, name in [(temp_td, "temp_td"), (temp_fp, "temp_fp")]:
+                cols_present = [col for col in cols_for_concat_temp if col in df_orig.columns]
+                if not df_orig.empty and cols_present:
+                    df_list_for_concat.append(df_orig[cols_present])
+                else: # Create an empty DataFrame with expected columns if original is empty or lacks key cols
+                    print(f"DEBUG: {name} is empty or lacks essential columns for primary dedup path concat.")
+                    # df_list_for_concat.append(pd.DataFrame(columns=cols_for_concat_temp)) # This might lead to issues if dtypes differ later
+            
+            if len(df_list_for_concat) == 2: # Both DFs were prepared
+                temp_combined_for_dedup = pd.concat(df_list_for_concat, ignore_index=True)
+                
+                num_before_dedup = len(temp_combined_for_dedup)
+                # Drop duplicates based on the 'emb_tuple' and 'class'
+                deduplicated_temp = temp_combined_for_dedup.drop_duplicates(subset=dedup_cols_primary_path, keep='first')
+                # Select original columns (without 'emb_tuple') and reset index
+                new_training_data = deduplicated_temp[['class', 'finetuned_embedding']].reset_index(drop=True)
+                num_after_dedup = len(new_training_data)
+                print(f"🔄 Combined training data. Before dedup: {num_before_dedup}, After dedup on (class, embedding_tuple): {num_after_dedup} samples.")
+            else:
+                print("⚠️ Could not prepare both DataFrames for primary deduplication path. Moving to fallback.")
+                can_use_emb_tuple_for_dedup = False # Force fallback
 
-        added_count = len(new_training_data) - current_training_data_size
-        print(f"🔄 Updated training data: {current_training_data_size} initial + {len(fp_data)} new FPs -> {len(new_training_data)} total unique samples ({added_count} actually added).")
-    else:
-        new_training_data = training_data.copy()
-        print(f"🔄 No new false positives to add, training data unchanged: {len(new_training_data)} samples")
+        if not can_use_emb_tuple_for_dedup: 
+            print("⚠️ Fallback deduplication: Tuple conversion for embeddings failed or one of the DFs was incompatible.")
+            # This concat gets a clean 0..N-1 index due to ignore_index=True
+            new_training_data_fallback = pd.concat([training_data, fp_data], ignore_index=True) 
+            
+            print(f"DEBUG: Fallback new_training_data_fallback (after concat, before astype dedup) index is_unique: {new_training_data_fallback.index.is_unique}")
+            if not new_training_data_fallback.empty: print(f"DEBUG: Fallback new_training_data_fallback head:\n{new_training_data_fallback.head()}")
+            
+            try:
+                initial_len = len(new_training_data_fallback)
+                if not new_training_data_fallback.empty:
+                    # This is a very broad attempt; may not work well if 'finetuned_embedding' is the only differentiator
+                    # and it's an ndarray.
+                    # Create a temporary column that's a string representation of all other columns for a row
+                    # This is computationally intensive and approximate.
+                    
+                    # A simpler fallback: drop based on 'class' only, if 'finetuned_embedding' is too problematic
+                    # This is not ideal as it might drop legitimate different embeddings for the same class.
+                    if 'class' in new_training_data_fallback.columns:
+                        print("DEBUG: Fallback attempting drop_duplicates on 'class' only.")
+                        new_training_data = new_training_data_fallback.drop_duplicates(subset=['class'], keep='first').reset_index(drop=True)
+                    else: # If no 'class' column, just take the concat
+                        new_training_data = new_training_data_fallback
+                else:
+                    new_training_data = new_training_data_fallback # Should be empty
+
+                if len(new_training_data) < initial_len:
+                    print(f"   Performed basic drop_duplicates (on 'class' or was empty): {initial_len} -> {len(new_training_data)}")
+                else:
+                    print(f"   Basic drop_duplicates did not reduce size or was skipped.")
+
+            except Exception as e_basic_dedup:
+                 print(f"   Basic drop_duplicates failed: {e_basic_dedup}. Proceeding with data as is from concat (potential duplicates).")
+                 new_training_data = new_training_data_fallback # Use the concatenated version
+                 print(f"DEBUG: new_training_data state after basic_dedup exception")
+                 if not new_training_data.empty: print(f"DEBUG: Index: {new_training_data.index.is_unique}, Head:\n{new_training_data.head()}")
+
+
+        added_count = len(new_training_data) - current_training_data_len
+        print(f"🔄 Updated training data: {current_training_data_len} init + {len(fp_data)} new FPs -> {len(new_training_data)} total ({added_count} unique added).")
+    # else: # fp_data is empty, new_training_data remains training_data.copy()
+        # print(f"🔄 No new FPs to add. Training data size: {len(new_training_data)}.") # Covered by initialization
         
-    print(f"\n📊 ITERATION {iteration} SUMMARY:")
-    print(f"   🎯 F1: {metrics['f1']:.4f}, Precision: {metrics['precision']:.4f}, Recall: {metrics['recall']:.4f}")
-    print(f"   🚨 False Positives (used for new negatives): {metrics['fp']}")
-    print(f"   📍 Exclusion list: +{len(new_exclusions)} entries")
-    print(f"   📈 Training data size: {len(new_training_data)}")
-    
+    print(f"\n📊 ITERATION {iteration} SUMMARY: F1:{metrics['f1']:.4f}, P:{metrics['precision']:.4f}, R:{metrics['recall']:.4f}. Added FPs to train: {len(fp_data)}. New exclusions: {len(new_exclusions)}. Training size: {len(new_training_data)}")
     return new_training_data, metrics, new_exclusions
 
 

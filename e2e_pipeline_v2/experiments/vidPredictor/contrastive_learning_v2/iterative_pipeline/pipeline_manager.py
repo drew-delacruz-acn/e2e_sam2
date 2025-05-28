@@ -3,6 +3,7 @@ from pathlib import Path
 import json
 import pickle
 from typing import Dict, List, Tuple
+import numpy as np
 
 from .iteration_manager import run_single_iteration
 from .training_utils import train_contrastive_representatives
@@ -94,7 +95,22 @@ def run_iterative_pipeline(
     try:
         with open(summary_path, 'w') as f:
             json.dump(pipeline_summary_data, f, indent=2)
-        print(f"\n📜 Pipeline summary saved to {summary_path}. Final F1: {all_iteration_metrics[-1]['f1']:.4f if all_iteration_metrics else 'N/A'}.")
+        
+        final_f1_str = 'N/A'
+        if all_iteration_metrics and 'f1' in all_iteration_metrics[-1]:
+            f1_val = all_iteration_metrics[-1]['f1']
+            if isinstance(f1_val, (float, np.floating)):
+                final_f1_str = f"{f1_val:.4f}"
+            else:
+                final_f1_str = str(f1_val)
+        elif all_iteration_metrics:
+            final_f1_raw = all_iteration_metrics[-1].get('f1')
+            if isinstance(final_f1_raw, (float, np.floating)):
+                final_f1_str = f"{final_f1_raw:.4f}"
+            elif final_f1_raw is not None:
+                final_f1_str = str(final_f1_raw)
+
+        print(f"\n📜 Pipeline summary saved to {summary_path}. Final F1: {final_f1_str}.")
     except Exception as e:
         print(f"❌ Error saving pipeline summary: {e}")
 

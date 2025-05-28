@@ -14,6 +14,7 @@ import numpy as np
 from typing import Dict, List, Any, Optional
 from sklearn.metrics import f1_score
 import warnings
+import pandas as pd
 
 from .loss_functions import contrastive_loss, cosine_similarity_matrix
 
@@ -244,4 +245,137 @@ class ContrastiveTrainer:
     
     def get_lambda_push(self) -> float:
         """Get current lambda push."""
-        return self.config['lambda_push'] 
+        return self.config['lambda_push']
+    
+    def set_hard_negatives(self, hard_negatives_dict: Dict[str, List[Dict]]) -> None:
+        """
+        Set hard negatives for enhanced training.
+        
+        Args:
+            hard_negatives_dict: Dict mapping class_name -> list of embedding dicts
+                Each embedding dict should have 'embedding' key with torch.Tensor
+        """
+        self.hard_negatives = {}
+        
+        # Convert class names to indices if we have a mapping
+        if hasattr(self, 'class_to_idx'):
+            for class_name, negatives in hard_negatives_dict.items():
+                if class_name in self.class_to_idx:
+                    class_idx = self.class_to_idx[class_name]
+                    self.hard_negatives[class_idx] = [neg['embedding'].to(self.device) for neg in negatives]
+        else:
+            # For now, assume class names are the indices or we'll handle this differently
+            print("⚠️  Warning: No class_to_idx mapping found. Hard negatives may not work correctly.")
+            self.hard_negatives = {}
+        
+        total_hard_negatives = sum(len(negs) for negs in self.hard_negatives.values())
+        print(f"🎯 Set {total_hard_negatives} hard negatives across {len(self.hard_negatives)} classes")
+    
+    def train_step_with_hard_negatives(self, embeddings: torch.Tensor, labels: torch.Tensor, 
+                                     lambda_hard: float = 0.5) -> tuple:
+        """
+        Enhanced training step with hard negatives.
+        
+        Args:
+            embeddings: Tensor of shape (num_samples, embedding_dim)
+            labels: Tensor of shape (num_samples,) with class indices
+            lambda_hard: Weight for hard negative loss
+            
+        Returns:
+            Tuple of (total_loss, standard_loss, hard_loss)
+        """
+        embeddings = embeddings.to(self.device)
+        labels = labels.to(self.device)
+        
+        # Zero gradients
+        self.optimizer.zero_grad()
+        
+        # Standard contrastive loss
+        standard_loss = contrastive_loss(
+            self.representatives, 
+            embeddings, 
+            labels, 
+            margin=self.config['margin'],
+            lambda_push=self.config['lambda_push']
+        )
+        
+        # Hard negative loss
+        hard_loss = torch.tensor(0.0, device=self.device)
+        if hasattr(self, 'hard_negatives') and self.hard_negatives:
+            for class_idx, neg_embeddings in self.hard_negatives.items():
+                if len(neg_embeddings) > 0:
+                    # Stack hard negatives for this class
+                    neg_tensor = torch.stack(neg_embeddings).to(self.device)
+                    
+                    # Get representative for this class
+                    rep = self.representatives[class_idx:class_idx+1]  # Keep batch dim
+                    
+                    # Compute similarity
+                    sim_matrix = cosine_similarity_matrix(rep, neg_tensor)
+                    
+                    # Push hard negatives away (beyond margin)
+                    margin = self.config['margin']
+                    violations = torch.clamp(sim_matrix - margin, min=0.0)
+                    hard_loss += torch.mean(violations)
+        
+        # Total loss
+        total_loss = standard_loss + lambda_hard * hard_loss
+        
+        # Backpropagation
+        total_loss.backward()
+        self.optimizer.step()
+        
+        return total_loss.detach(), standard_loss.detach(), hard_loss.detach()
+    
+    def load_representatives_from_dataframe(self, representatives_df, class_names: List[str]) -> None:
+        """
+        Load representatives from a pandas DataFrame.
+        
+        Args:
+            representatives_df: DataFrame with 'class' and 'finetuned_embedding' columns
+            class_names: List of class names in the correct order
+        """
+        # Create class to index mapping
+        self.class_to_idx = {cls: idx for idx, cls in enumerate(class_names)}
+        self.idx_to_class = {idx: cls for cls, idx in self.class_to_idx.items()}
+        
+        # Extract embeddings in the correct order
+        embeddings_list = []
+        for class_name in class_names:
+            class_rows = representatives_df[representatives_df['class'] == class_name]
+            if len(class_rows) == 0:
+                raise ValueError(f"Class '{class_name}' not found in representatives DataFrame")
+            embedding = class_rows.iloc[0]['finetuned_embedding']
+            embeddings_list.append(embedding)
+        
+        # Convert to tensor
+        embeddings_array = np.stack(embeddings_list)
+        self.representatives = torch.tensor(embeddings_array, dtype=torch.float32, 
+                                          device=self.device, requires_grad=True)
+        
+        # Initialize optimizer
+        self.optimizer = optim.Adam([self.representatives], lr=self.config['lr'])
+        
+        print(f"✅ Loaded representatives for {len(class_names)} classes")
+    
+    def save_representatives_to_dataframe(self, class_names: List[str]):
+        """
+        Save current representatives to a pandas DataFrame.
+        
+        Args:
+            class_names: List of class names in the correct order
+            
+        Returns:
+            DataFrame with 'class' and 'finetuned_embedding' columns
+        """
+        if self.representatives is None:
+            raise ValueError("No representatives to save")
+        
+        representatives_data = []
+        for i, class_name in enumerate(class_names):
+            representatives_data.append({
+                'class': class_name,
+                'finetuned_embedding': self.representatives[i].detach().cpu().numpy()
+            })
+        
+        return pd.DataFrame(representatives_data) 

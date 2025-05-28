@@ -481,14 +481,15 @@ def evaluate_predictions(predictions: pd.DataFrame,
     # Count classifications
     classification_counts = eval_df['classification'].value_counts()
     
+    # Convert to regular Python integers for JSON serialization
     metrics = {
-        'f1': f1,
-        'precision': precision,
-        'recall': recall,
-        'tp': classification_counts.get('TP', 0),
-        'fp': classification_counts.get('FP', 0),
-        'fn': classification_counts.get('FN', 0),
-        'tn': classification_counts.get('TN', 0)
+        'f1': float(f1),
+        'precision': float(precision),
+        'recall': float(recall),
+        'tp': int(classification_counts.get('TP', 0)),
+        'fp': int(classification_counts.get('FP', 0)),
+        'fn': int(classification_counts.get('FN', 0)),
+        'tn': int(classification_counts.get('TN', 0))
     }
     
     print(f"📊 Evaluation Results:")

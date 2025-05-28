@@ -90,12 +90,29 @@ def run_iterative_pipeline(
             extract_fps_func=extract_false_positives
         )
         
+        # Add evaluation mode to metrics with CORRECTED evaluation sample count
+        # The actual evaluation happens on the data AFTER generate_predictions processing
+        # So we need to get the true evaluation size from the metrics or calculate it
+        actual_evaluation_size = len(eval_data)  # This will be corrected below
+        
+        print(f"🔍 PIPELINE DEBUG: eval_data input size: {len(eval_data)}")
+        print(f"🔍 PIPELINE DEBUG: Checking if actual evaluation size differs...")
+        
+        # The true evaluation size should be reflected in the total samples evaluated
+        total_eval_samples = metrics.get('TP', 0) + metrics.get('FP', 0) + metrics.get('FN', 0) + metrics.get('TN', 0)
+        if total_eval_samples > 0 and total_eval_samples != len(eval_data):
+            print(f"🔍 PIPELINE DEBUG: Data reduction detected!")
+            print(f"   Input to iteration: {len(eval_data)} samples")
+            print(f"   Actual evaluation: {total_eval_samples} samples") 
+            print(f"   Reduction: {len(eval_data) - total_eval_samples} samples lost in generate_predictions")
+            actual_evaluation_size = total_eval_samples
+        
         current_training_data = new_training_data
         if new_exclusions: 
             exclusion_tracker[i] = new_exclusions 
         
         # Add evaluation mode to metrics
-        metrics_to_store = {'iteration': i, 'eval_mode': eval_mode, 'evaluation_samples': len(eval_data), **metrics}
+        metrics_to_store = {'iteration': i, 'eval_mode': eval_mode, 'evaluation_samples': actual_evaluation_size, **metrics}
         all_iteration_metrics.append(metrics_to_store)
         
         # Handle track_training_separately mode

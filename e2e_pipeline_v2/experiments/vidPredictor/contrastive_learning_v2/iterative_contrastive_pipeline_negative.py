@@ -220,124 +220,86 @@ def cosine_similarity_prediction(embedding: np.ndarray,
     best_idx = np.argmax(similarities)
     return class_names[best_idx], similarities[best_idx]
 
-def cosine_similarity_prediction_with_negatives(embedding: np.ndarray, 
-                                               class_embeddings: List[np.ndarray], 
-                                               class_names: List[str]) -> Tuple[str, float]:
-    """
-    Predict class using cosine similarity with support for negative classes.
-    Uses contrastive scoring: positive_similarity - negative_similarity
-    """
-    input_tensor = F.normalize(torch.tensor(embedding, dtype=torch.float32).unsqueeze(0), dim=1)
-    class_tensor = F.normalize(torch.tensor(np.vstack(class_embeddings), dtype=torch.float32), dim=1)
-    similarities = F.cosine_similarity(input_tensor, class_tensor).numpy().flatten() # Ensure 1D
-    
-    sim_dict = {name: sim for name, sim in zip(class_names, similarities)}
-    
-    positive_classes = [name for name in class_names if not name.startswith('not_')]
-    negative_classes = [name for name in class_names if name.startswith('not_')]
-    
-    if not negative_classes or not positive_classes:
-        best_idx = np.argmax(similarities)
-        return class_names[best_idx], similarities[best_idx]
-    
-    contrastive_scores = {}
-    for pos_class in positive_classes:
-        neg_class = f"not_{pos_class}"
-        pos_sim = sim_dict.get(pos_class, -1.0) # Default to low similarity
-        neg_sim = sim_dict.get(neg_class, -1.0) # Default to low similarity if not_class doesn't exist
-        contrastive_scores[pos_class] = pos_sim - neg_sim
-            
-    if not contrastive_scores: # Should not happen if positive_classes exist
-        best_idx = np.argmax(similarities) # Fallback
-        return class_names[best_idx], similarities[best_idx]
-
-    best_class = max(contrastive_scores, key=contrastive_scores.get)
-    # Confidence is the original similarity to the positive class, not the contrastive score
-    confidence = sim_dict.get(best_class, 0.0) 
-    return best_class, confidence
-
 
 def generate_predictions(resnet_data: pd.DataFrame,
                         representatives_path: Path,
-                        threshold: float) -> pd.DataFrame:
+                        threshold: float,
+                        iteration_number: int) -> pd.DataFrame:
     """
-    Generate predictions using trained representatives with support for negative classes.
+    Generate predictions using ONLY POSITIVE CLASS representatives.
+    "not_" class representatives (if they exist in the pkl file) are ignored for prediction,
+    having served their purpose during the training of positive class representatives.
     """
-    print(f"🔮 Generating predictions with threshold {threshold}...")
+    print(f"🔮 Generating predictions (Iteration {iteration_number}) with threshold {threshold} using ONLY POSITIVE representatives...")
     with open(representatives_path, 'rb') as f:
-        representatives = pickle.load(f)
+        representatives_data = pickle.load(f) # This could be a dict or DataFrame
 
-    if isinstance(representatives, dict):
-        # Assuming keys are 'class' and 'finetuned_embedding' or 'representative_embedding'
-        if 'finetuned_embedding' in representatives:
-            class_embeddings = list(representatives['finetuned_embedding'])
-            class_names = list(representatives['class'])
-        elif 'representative_embedding' in representatives: # For compatibility
-            class_embeddings = list(representatives['representative_embedding'])
-            class_names = list(representatives['class'])
-        else:
-             # Try to infer from DataFrame-like dict
-            try:
-                temp_df = pd.DataFrame(representatives)
-                if 'finetuned_embedding' in temp_df.columns:
-                     class_embeddings = list(temp_df['finetuned_embedding'])
-                     class_names = list(temp_df['class'])
-                elif 'representative_embedding' in temp_df.columns:
-                     class_embeddings = list(temp_df['representative_embedding'])
-                     class_names = list(temp_df['class'])
-                else:
-                    raise ValueError("Unexpected dict representatives format")
-            except Exception as e_dict:
-                raise ValueError(f"Unexpected dict representatives format: {e_dict}")
-    elif isinstance(representatives, pd.DataFrame):
-        if 'finetuned_embedding' in representatives.columns:
-            class_embeddings = list(representatives['finetuned_embedding'])
-            class_names = list(representatives['class'])
-        elif 'representative_embedding' in representatives.columns: # For compatibility
-            class_embeddings = list(representatives['representative_embedding'])
-            class_names = list(representatives['class'])
-        else:
-            raise ValueError("Unexpected DataFrame representatives format")
+    # Convert to DataFrame for consistent handling, then filter
+    if isinstance(representatives_data, dict):
+        try: temp_df = pd.DataFrame(representatives_data)
+        except: raise ValueError("Cannot convert dict representatives to DataFrame")
+    elif isinstance(representatives_data, pd.DataFrame):
+        temp_df = representatives_data.copy()
     else:
-        raise ValueError(f"Unknown representatives format: {type(representatives)}")
+        raise ValueError(f"Unknown representatives format: {type(representatives_data)}")
 
-    has_negatives = any(name.startswith('not_') for name in class_names)
-    positive_display_classes = [name for name in class_names if not name.startswith('not_')]
-    negative_display_classes = [name for name in class_names if name.startswith('not_')]
+    # Standardize column names if 'representative_embedding' is used
+    if 'representative_embedding' in temp_df.columns and 'finetuned_embedding' not in temp_df.columns:
+        temp_df = temp_df.rename(columns={'representative_embedding':'finetuned_embedding'})
+    
+    if not all(col in temp_df.columns for col in ['class', 'finetuned_embedding']):
+        raise ValueError("Representatives DataFrame missing 'class' or 'finetuned_embedding'")
 
-    print(f"🏷️  Loaded {len(class_names)} representatives:")
-    print(f"   • Positive classes ({len(positive_display_classes)}): {positive_display_classes}")
-    if negative_display_classes:
-        print(f"   • Negative classes ({len(negative_display_classes)}): {negative_display_classes}")
+    # --- KEY CHANGE: Filter to only use positive class representatives for prediction ---
+    positive_representatives_df = temp_df[~temp_df['class'].str.startswith('not_', na=False)].copy()
+    
+    if positive_representatives_df.empty:
+        print("⚠️ No positive class representatives found after filtering! Cannot make predictions.")
+        # Return an empty DataFrame with the expected columns for 'predictions_for_eval'
+        # The columns should match what `evaluate_predictions` expects from its `predictions` input.
+        # Typically: 'video', 'visual_predicted_object', 'visual_max_score', 'frame', and others from resnet_data.
+        # For simplicity, returning a DataFrame that will result in 0 for all metrics.
+        empty_pred_cols = list(resnet_data.columns) + ['visual_predicted_object', 'visual_max_score']
+        return pd.DataFrame(columns=empty_pred_cols)
 
+
+    class_embeddings = list(positive_representatives_df['finetuned_embedding'])
+    class_names = list(positive_representatives_df['class'])
+    
+    print(f"🏷️  Using {len(class_names)} POSITIVE representatives for prediction: {class_names}")
+    
     predictions_list = []
     for _, row in resnet_data.iterrows():
-        if has_negatives:
-            pred_class, confidence = cosine_similarity_prediction_with_negatives(
-                row['finetuned_embedding'], class_embeddings, class_names)
-        else:
-            pred_class, confidence = cosine_similarity_prediction(
-                row['finetuned_embedding'], class_embeddings, class_names)
-        predictions_list.append({'visual_predicted_object': pred_class, 'visual_max_score': confidence})
+        # Always use the simple cosine similarity against the filtered positive representatives
+        pred_class, confidence = cosine_similarity_prediction( # Using the original simple one
+            row['finetuned_embedding'], 
+            class_embeddings, 
+            class_names
+        )
+        predictions_list.append({
+            'visual_predicted_object': pred_class, 
+            'visual_max_score': confidence, 
+            'frame': row['frame'] # Ensure frame is carried over
+        })
     
     pred_df = pd.DataFrame(predictions_list)
+    # Ensure resnet_data index is reset if it's not already unique, to prevent issues with concat
     result_df = pd.concat([resnet_data.reset_index(drop=True), pred_df.reset_index(drop=True)], axis=1)
-    print(f"✅ Generated {len(result_df)} initial predictions")
+    print(f"✅ Generated {len(result_df)} initial predictions using positive reps.")
 
-    # Deduplication: keep highest scoring positive prediction per video-object pair
-    # Important: Only consider positive classes for this step, as 'not_' classes aren't final predictions
-    positive_predictions_df = result_df[~result_df['visual_predicted_object'].str.startswith('not_', na=False)].copy()
-    if not positive_predictions_df.empty:
-        idx = positive_predictions_df.groupby(['video', 'visual_predicted_object'])['visual_max_score'].idxmax()
-        deduplicated_df = positive_predictions_df.loc[idx].reset_index(drop=True)
-        print(f"✅ Reduced to {len(deduplicated_df)} unique positive video-class predictions after deduplication")
-    else: # No positive predictions made (e.g. if only 'not_' classes were predicted)
+    # Deduplication: keep highest scoring prediction per video-object pair.
+    # Since we only predicted positive classes, this step is simpler.
+    if not result_df.empty: # Check if predictions were made
+        idx = result_df.groupby(['video', 'visual_predicted_object'])['visual_max_score'].idxmax()
+        deduplicated_df = result_df.loc[idx].reset_index(drop=True)
+        print(f"✅ Deduplicated to {len(deduplicated_df)} unique video-class predictions.")
+    else:
         deduplicated_df = pd.DataFrame(columns=result_df.columns) # Empty df with same schema
-        print("⚠️  No positive class predictions found for deduplication!")
+        print("⚠️ No predictions made, possibly due to no positive representatives.")
 
-    # Apply threshold
-    final_df = deduplicated_df[deduplicated_df['visual_max_score'] >= threshold].copy() # Use >= for threshold
-    print(f"✅ {len(final_df)} predictions above/at threshold {threshold}")
+
+    final_df = deduplicated_df[deduplicated_df['visual_max_score'] >= threshold].copy()
+    print(f"✅ {len(final_df)} predictions at/above threshold {threshold}.")
     return final_df
 
 
@@ -473,7 +435,8 @@ def run_single_iteration(iteration: int,
 
     print(f"\n🔮 Phase 2B: Generating predictions...")
     predictions_for_eval = generate_predictions(
-        resnet_data_for_prediction, representatives_path, current_iter_threshold)
+        resnet_data_for_prediction, representatives_path, current_iter_threshold, iteration_number=iteration
+    )
 
     print(f"\n📊 Phase 2C: Evaluating predictions...")
     evaluation_results, metrics = evaluate_predictions(predictions_for_eval, ground_truth)

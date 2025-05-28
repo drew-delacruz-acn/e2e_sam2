@@ -281,7 +281,7 @@ def generate_predictions(resnet_data: pd.DataFrame,
 
     predictions_list = []
     for _, row in resnet_data.iterrows():
-            pred_class, confidence = cosine_similarity_prediction(
+        pred_class, confidence = cosine_similarity_prediction(
             row['finetuned_embedding'], 
             class_embeddings, 
             class_names
@@ -482,7 +482,8 @@ def run_single_iteration(iteration: int,
         fp_data.to_csv(output_dir / "false_positives_for_training.csv", index=False)
         with open(output_dir / "false_positives_for_training.pkl", 'wb') as f: pickle.dump(fp_data, f)
     if new_exclusions: 
-    with open(output_dir / "exclusions.json", 'w') as f: json.dump(new_exclusions, f, indent=2)
+        with open(output_dir / "exclusions.json", 'w') as f: json.dump(new_exclusions, f, indent=2)
+    
     with open(output_dir / "training_results.json", 'w') as f: json.dump(metrics, f, indent=2)
 
     current_training_data_len = len(training_data)
@@ -693,8 +694,8 @@ def run_iterative_pipeline(definitiveObjects: pd.DataFrame,
         
         current_training_data = new_training_data
         if new_exclusions: 
-        exclusion_tracker[i] = new_exclusions
-        all_iteration_metrics.append({'iteration': i, **metrics})
+            exclusion_tracker[i] = new_exclusions
+            all_iteration_metrics.append({'iteration': i, **metrics})
         
         current_f1 = metrics['f1']
         if i > 1 and previous_f1 >= 0 and abs(current_f1 - previous_f1) < args.convergence_threshold: # abs for safety

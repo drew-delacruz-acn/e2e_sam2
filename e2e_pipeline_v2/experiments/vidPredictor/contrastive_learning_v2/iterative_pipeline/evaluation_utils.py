@@ -45,25 +45,25 @@ def evaluate_predictions(predictions: pd.DataFrame,
     if not pd.api.types.is_numeric_dtype(gt_eval[COL_ACTUAL]):
             gt_eval[COL_ACTUAL] = gt_eval[COL_ACTUAL].astype(int)
 
-    debug_log(f"📊 FRAME-LEVEL EVALUATION DEBUG:")
-    debug_log(f"   Ground truth rows: {len(gt_eval)}")
-    debug_log(f"   Predictions rows: {len(predictions)}")
-    debug_log(f"   Ground truth columns: {list(gt_eval.columns)}")
-    debug_log(f"   Predictions columns: {list(predictions.columns)}")
+    print("📊 FRAME-LEVEL EVALUATION DEBUG:")
+    print("   Ground truth rows: {}".format(len(gt_eval)))
+    print("   Predictions rows: {}".format(len(predictions)))
+    print("   Ground truth columns: {}".format(list(gt_eval.columns)))
+    print("   Predictions columns: {}".format(list(predictions.columns)))
 
     # Check if frame columns exist
     if COL_FRAME not in gt_eval.columns:
-        debug_log(f"⚠️ WARNING: No frame column in ground truth. Available: {list(gt_eval.columns)}")
-        print(f"⚠️ WARNING: No frame column in ground truth. Falling back to video-class evaluation.")
+        print("⚠️ WARNING: No frame column in ground truth. Available: {}".format(list(gt_eval.columns)))
+        print("⚠️ WARNING: No frame column in ground truth. Falling back to video-class evaluation.")
         # Fall back to original logic if no frame data
         use_frame_matching = False
     elif COL_FRAME not in predictions.columns:
-        debug_log(f"⚠️ WARNING: No frame column in predictions. Available: {list(predictions.columns)}")
-        print(f"⚠️ WARNING: No frame column in predictions. Falling back to video-class evaluation.")
+        print("⚠️ WARNING: No frame column in predictions. Available: {}".format(list(predictions.columns)))
+        print("⚠️ WARNING: No frame column in predictions. Falling back to video-class evaluation.")
         use_frame_matching = False
     else:
         use_frame_matching = True
-        debug_log(f"✅ Frame columns found in both datasets. Using frame-level matching.")
+        print("✅ Frame columns found in both datasets. Using frame-level matching.")
 
     frame_matches = 0
     frame_mismatches = 0
@@ -121,11 +121,11 @@ def evaluate_predictions(predictions: pd.DataFrame,
     eval_df = pd.DataFrame(eval_results)
     
     if use_frame_matching:
-        debug_log(f"📊 FRAME-LEVEL MATCHING RESULTS:")
-        debug_log(f"   Frame matches found: {frame_matches}")
-        debug_log(f"   Frame mismatches: {frame_mismatches}")
-        debug_log(f"   Total evaluations: {len(eval_results)}")
-        debug_log(f"   Match rate: {frame_matches/len(eval_results)*100:.1f}%")
+        print("📊 FRAME-LEVEL MATCHING RESULTS:")
+        print("   Frame matches found: {}".format(frame_matches))
+        print("   Frame mismatches: {}".format(frame_mismatches))
+        print("   Total evaluations: {}".format(len(eval_results)))
+        print("   Match rate: {:.1f}%".format(frame_matches/len(eval_results)*100))
     
     if not eval_df.empty:
         y_true = eval_df[COL_ACTUAL]
@@ -147,8 +147,8 @@ def evaluate_predictions(predictions: pd.DataFrame,
             metrics['TN'] = int(ground_truth[ground_truth[COL_ACTUAL] == 0][COL_ACTUAL].count())
 
     eval_mode = "FRAME-LEVEL" if use_frame_matching else "VIDEO-CLASS"
-    print(f"   📊 {eval_mode} EVALUATION: F1: {metrics['f1']:.4f}, P: {metrics['precision']:.4f}, R: {metrics['recall']:.4f}. Counts: TP:{metrics['TP']}, FP:{metrics['FP']}, FN:{metrics['FN']}, TN:{metrics['TN']}")
-    debug_log(f"📊 {eval_mode} EVALUATION COMPLETE: {len(eval_df)} samples evaluated")
+    print("   📊 {eval_mode} EVALUATION: F1: {:.4f}, P: {:.4f}, R: {:.4f}. Counts: TP:{}, FP:{}, FN:{}, TN:{}".format(eval_mode, metrics['f1'], metrics['precision'], metrics['recall'], metrics['TP'], metrics['FP'], metrics['FN'], metrics['TN']))
+    print("📊 {eval_mode} EVALUATION COMPLETE: {} samples evaluated".format(len(eval_df)))
     
     return eval_df, metrics
 
@@ -163,13 +163,14 @@ def extract_false_positives(evaluation_results: pd.DataFrame,
     if fp_cases.empty:
         print("✅ No false positives found!")
         return pd.DataFrame(columns=[COL_CLASS, COL_EMBEDDING]), []
-    print(f"🚨 Found {len(fp_cases)} false positive cases (from evaluation_results).")
+    print("🚨 Found {} false positive cases (from evaluation_results).".format(len(fp_cases)))
     fp_data_list = [] 
     exclusion_list = []
     required_pred_cols = [COL_VIDEO, COL_FRAME, COL_VISUAL_PRED_OBJECT, COL_EMBEDDING]
     if not all(col in predictions_for_eval.columns for col in required_pred_cols):
         missing_cols_str = ", ".join(set(required_pred_cols) - set(predictions_for_eval.columns))
-        print(f"⚠️ 'predictions_for_eval' DataFrame is missing required columns for FP extraction: {missing_cols_str}. Available: {list(predictions_for_eval.columns)}")
+        print("⚠️ 'predictions_for_eval' DataFrame is missing required columns for FP extraction: {}".format(missing_cols_str))
+        print("   Available: {}".format(list(predictions_for_eval.columns)))
         return pd.DataFrame(columns=[COL_CLASS, COL_EMBEDDING]), []
 
     for _, fp_row in fp_cases.iterrows():
@@ -177,7 +178,7 @@ def extract_false_positives(evaluation_results: pd.DataFrame,
         wrongly_predicted_as_class_val = fp_row[COL_CLASS] 
         frame_of_fp_val = fp_row[COL_FRAME]
         if frame_of_fp_val is None or pd.isna(frame_of_fp_val):
-            print(f"⚠️ Skipping FP with no valid frame: Video {video_val}, Class {wrongly_predicted_as_class_val}")
+            print("⚠️ Skipping FP with no valid frame: Video {}, Class {}".format(video_val, wrongly_predicted_as_class_val))
             continue
         
         # Safe frame value conversion with proper validation
@@ -187,10 +188,10 @@ def extract_false_positives(evaluation_results: pd.DataFrame,
             elif isinstance(frame_of_fp_val, str):
                 frame_of_fp_val = int(float(frame_of_fp_val))  # Handle string numbers like "123.0"
             else:
-                print(f"⚠️ Skipping FP with invalid frame type: Video {video_val}, Class {wrongly_predicted_as_class_val}, Frame type: {type(frame_of_fp_val)}")
+                print("⚠️ Skipping FP with invalid frame type: Video {}, Class {}, Frame type: {}".format(video_val, wrongly_predicted_as_class_val, type(frame_of_fp_val)))
                 continue
         except (ValueError, TypeError) as e:
-            print(f"⚠️ Skipping FP with unconvertible frame value: Video {video_val}, Class {wrongly_predicted_as_class_val}, Frame: {frame_of_fp_val}, Error: {e}")
+            print("⚠️ Skipping FP with unconvertible frame value: Video {}, Class {}, Frame: {}, Error: {}".format(video_val, wrongly_predicted_as_class_val, frame_of_fp_val, e))
             continue
         original_pred_entry_df = predictions_for_eval[
             (predictions_for_eval[COL_VIDEO] == video_val) &
@@ -198,18 +199,19 @@ def extract_false_positives(evaluation_results: pd.DataFrame,
             (predictions_for_eval[COL_FRAME] == frame_of_fp_val) 
         ]
         if original_pred_entry_df.empty:
-            print(f"⚠️ Could not find original embedding for FP in 'predictions_for_eval': "
-                  f"Video '{video_val}', Frame {frame_of_fp_val}, Predicted Class '{wrongly_predicted_as_class_val}'. "
-                  f"Check if 'predictions_for_eval' data is consistent with 'evaluation_results'.")
+            print("⚠️ Could not find original embedding for FP in 'predictions_for_eval': "
+                  "Video '{}', Frame {}, Predicted Class '{}'. "
+                  "Check if 'predictions_for_eval' data is consistent with 'evaluation_results'.".format(video_val, frame_of_fp_val, wrongly_predicted_as_class_val))
             continue
         if COL_EMBEDDING not in original_pred_entry_df.columns:
-            print(f"⚠️ 'COL_EMBEDDING' column missing in found original_pred_entry for FP: V:{video_val}, F:{frame_of_fp_val}. Columns: {original_pred_entry_df.columns}")
+            print("⚠️ 'COL_EMBEDDING' column missing in found original_pred_entry for FP: V:{} F:{}".format(video_val, frame_of_fp_val))
+            print("   Columns: {}".format(original_pred_entry_df.columns))
             continue
         orig_row_embedding_val = original_pred_entry_df[COL_EMBEDDING].iloc[0]
         if not isinstance(orig_row_embedding_val, np.ndarray):
-            print(f"⚠️ Embedding for FP is not a numpy array. Type: {type(orig_row_embedding_val)}. Skipping.")
+            print("⚠️ Embedding for FP is not a numpy array. Type: {}".format(type(orig_row_embedding_val)))
             continue
-        negative_class_label = f"not_{wrongly_predicted_as_class_val}"
+        negative_class_label = "not_{}".format(wrongly_predicted_as_class_val)
         fp_data_list.append({
             COL_CLASS: negative_class_label,
             COL_EMBEDDING: orig_row_embedding_val
@@ -226,9 +228,9 @@ def extract_false_positives(evaluation_results: pd.DataFrame,
         if COL_CLASS not in fp_df_output.columns: fp_df_output[COL_CLASS] = None
         if COL_EMBEDDING not in fp_df_output.columns: fp_df_output[COL_EMBEDDING] = None
         fp_df_output = fp_df_output[[COL_CLASS, COL_EMBEDDING]] 
-    print(f"✅ Extracted {len(fp_df_output)} embeddings for negative examples.")
+    print("✅ Extracted {} embeddings for negative examples.".format(len(fp_df_output)))
     if not fp_df_output.empty:
-        print(f"🏷️ Negative classes created: {fp_df_output[COL_CLASS].value_counts().to_dict()}")
+        print("🏷️ Negative classes created: {}".format(fp_df_output[COL_CLASS].value_counts().to_dict()))
     return fp_df_output, exclusion_list 
 
 def filter_evaluation_data(resnet_data: pd.DataFrame,
@@ -245,16 +247,16 @@ def filter_evaluation_data(resnet_data: pd.DataFrame,
     Returns:
         Filtered DataFrame for evaluation
     """
-    debug_log(f"\n🔍 FILTER_EVALUATION_DATA CALLED:")
-    debug_log(f"   resnet_data size: {len(resnet_data)}")
-    debug_log(f"   exclude_training: {exclude_training}")
-    debug_log(f"   exclusion_tracker: {type(exclusion_tracker)}")
-    debug_log(f"   exclusion_tracker empty: {not exclusion_tracker}")
-    debug_log(f"   exclusion_tracker keys: {list(exclusion_tracker.keys()) if exclusion_tracker else 'None'}")
+    print("\n🔍 FILTER_EVALUATION_DATA CALLED:")
+    print("   resnet_data size: {}".format(len(resnet_data)))
+    print("   exclude_training: {}".format(exclude_training))
+    print("   exclusion_tracker: {}".format(type(exclusion_tracker)))
+    print("   exclusion_tracker empty: {}".format(not exclusion_tracker))
+    print("   exclusion_tracker keys: {}".format(list(exclusion_tracker.keys()) if exclusion_tracker else 'None'))
     
     if not exclude_training or not exclusion_tracker:
-        debug_log("🚫 No evaluation data filtering applied")
-        debug_log(f"   Reason: exclude_training={exclude_training}, exclusion_tracker_empty={not exclusion_tracker}")
+        print("🚫 No evaluation data filtering applied")
+        print("   Reason: exclude_training={}, exclusion_tracker_empty={}".format(exclude_training, not exclusion_tracker))
         return resnet_data.copy()
     
     # Collect all excluded video-frame pairs from all iterations
@@ -265,7 +267,7 @@ def filter_evaluation_data(resnet_data: pd.DataFrame,
     debug_exclusions = []
     
     for iteration_key, exclusions in exclusion_tracker.items():
-        debug_log(f"🔍 DEBUG: Processing {len(exclusions)} exclusions from iteration {iteration_key}")
+        print("🔍 DEBUG: Processing {} exclusions from iteration {}".format(len(exclusions), iteration_key))
         for exclusion in exclusions:
             video = exclusion[COL_VIDEO]
             frame = exclusion[COL_FRAME]
@@ -287,19 +289,19 @@ def filter_evaluation_data(resnet_data: pd.DataFrame,
             total_exclusions += 1
     
     if total_exclusions == 0:
-        debug_log("🚫 No exclusions to apply")
+        print("🚫 No exclusions to apply")
         return resnet_data.copy()
     
-    debug_log(f"🔍 DEBUG: Total exclusion pairs created: {len(excluded_pairs)} (includes type variants)")
-    debug_log(f"🔍 DEBUG: Sample exclusion types:")
+    print("🔍 DEBUG: Total exclusion pairs created: {} (includes type variants)".format(len(excluded_pairs)))
+    print("🔍 DEBUG: Sample exclusion types:")
     for i, exc in enumerate(debug_exclusions[:3]):
-        debug_log(f"   {i+1}: Video={exc['video']} ({exc['video_type']}), Frame={exc['frame']} ({exc['frame_type']})")
+        print("   {}: Video={} ({}), Frame={} ({})".format(i+1, exc['video'], exc['video_type'], exc['frame'], exc['frame_type']))
     
     # Debug: Check data types in resnet_data
     if COL_VIDEO in resnet_data.columns and COL_FRAME in resnet_data.columns:
         sample_video = resnet_data[COL_VIDEO].iloc[0] if len(resnet_data) > 0 else None
         sample_frame = resnet_data[COL_FRAME].iloc[0] if len(resnet_data) > 0 else None
-        debug_log(f"🔍 DEBUG: Sample resnet_data types: Video={sample_video} ({type(sample_video).__name__}), Frame={sample_frame} ({type(sample_frame).__name__})")
+        print("🔍 DEBUG: Sample resnet_data types: Video={} ({}), Frame={} ({})".format(sample_video, type(sample_video).__name__, sample_frame, type(sample_frame).__name__))
     
     # Filter out excluded pairs with detailed tracking
     def is_not_excluded(row):
@@ -317,21 +319,21 @@ def filter_evaluation_data(resnet_data: pd.DataFrame,
     filtered_count = len(filtered_data)
     excluded_count = original_count - filtered_count
     
-    debug_log(f"🚫 Excluded {excluded_count} training samples from evaluation")
-    debug_log(f"📊 Evaluation data: {original_count} → {filtered_count} samples")
-    debug_log(f"🔍 DEBUG: Expected exclusions={total_exclusions}, Actual exclusions={excluded_count}")
+    print("🚫 Excluded {} training samples from evaluation".format(excluded_count))
+    print("📊 Evaluation data: {} → {} samples".format(original_count, filtered_count))
+    print("🔍 DEBUG: Expected exclusions={}, Actual exclusions={}".format(total_exclusions, excluded_count))
     
     if excluded_count != total_exclusions:
-        debug_log(f"⚠️ WARNING: Exclusion count mismatch! Expected {total_exclusions}, got {excluded_count}")
-        debug_log(f"   Difference: {abs(excluded_count - total_exclusions)} samples")
+        print("⚠️ WARNING: Exclusion count mismatch! Expected {}, got {}".format(total_exclusions, excluded_count))
+        print("   Difference: {} samples".format(abs(excluded_count - total_exclusions)))
         
         # Additional debugging: check for duplicates in exclusions
         exclusion_pairs_list = [(exc[COL_VIDEO], exc[COL_FRAME]) for iter_exclusions in exclusion_tracker.values() for exc in iter_exclusions]
         unique_exclusion_pairs = set(exclusion_pairs_list)
-        debug_log(f"🔍 DEBUG: Total exclusion entries: {len(exclusion_pairs_list)}")
-        debug_log(f"🔍 DEBUG: Unique exclusion pairs: {len(unique_exclusion_pairs)}")
+        print("🔍 DEBUG: Total exclusion entries: {}".format(len(exclusion_pairs_list)))
+        print("🔍 DEBUG: Unique exclusion pairs: {}".format(len(unique_exclusion_pairs)))
         
         if len(exclusion_pairs_list) != len(unique_exclusion_pairs):
-            debug_log(f"🔍 DEBUG: Found {len(exclusion_pairs_list) - len(unique_exclusion_pairs)} duplicate exclusions")
+            print("🔍 DEBUG: Found {} duplicate exclusions".format(len(exclusion_pairs_list) - len(unique_exclusion_pairs)))
     
     return filtered_data 

@@ -26,9 +26,9 @@ except ImportError:
 def evaluate_predictions(predictions: pd.DataFrame,
                         ground_truth: pd.DataFrame) -> Tuple[pd.DataFrame, Dict]:
     """
-    Evaluate predictions against ground truth for presence/absence.
+    Evaluate predictions against ground truth for presence/absence at FRAME LEVEL.
     """
-    print("📊 Evaluating predictions against ground truth...")
+    print("📊 Evaluating predictions against ground truth (FRAME-LEVEL)...")
 
     if predictions.empty:
         print("⚠️ Predictions DataFrame is empty. Cannot evaluate. Returning zero metrics and empty eval_df.")
@@ -45,20 +45,62 @@ def evaluate_predictions(predictions: pd.DataFrame,
     if not pd.api.types.is_numeric_dtype(gt_eval[COL_ACTUAL]):
             gt_eval[COL_ACTUAL] = gt_eval[COL_ACTUAL].astype(int)
 
+    debug_log(f"📊 FRAME-LEVEL EVALUATION DEBUG:")
+    debug_log(f"   Ground truth rows: {len(gt_eval)}")
+    debug_log(f"   Predictions rows: {len(predictions)}")
+    debug_log(f"   Ground truth columns: {list(gt_eval.columns)}")
+    debug_log(f"   Predictions columns: {list(predictions.columns)}")
+
+    # Check if frame columns exist
+    if COL_FRAME not in gt_eval.columns:
+        debug_log(f"⚠️ WARNING: No frame column in ground truth. Available: {list(gt_eval.columns)}")
+        print(f"⚠️ WARNING: No frame column in ground truth. Falling back to video-class evaluation.")
+        # Fall back to original logic if no frame data
+        use_frame_matching = False
+    elif COL_FRAME not in predictions.columns:
+        debug_log(f"⚠️ WARNING: No frame column in predictions. Available: {list(predictions.columns)}")
+        print(f"⚠️ WARNING: No frame column in predictions. Falling back to video-class evaluation.")
+        use_frame_matching = False
+    else:
+        use_frame_matching = True
+        debug_log(f"✅ Frame columns found in both datasets. Using frame-level matching.")
+
+    frame_matches = 0
+    frame_mismatches = 0
+    
     for _, gt_row in gt_eval.iterrows():
         video_val, true_class_val, actual_val = gt_row[COL_VIDEO], gt_row[COL_TAG], gt_row[COL_ACTUAL]
-        pred_match = predictions[
-            (predictions[COL_VIDEO] == video_val) & 
-            (predictions[COL_VISUAL_PRED_OBJECT] == true_class_val)
-        ]
+        frame_val = gt_row.get(COL_FRAME) if use_frame_matching else None
+        
+        if use_frame_matching and frame_val is not None:
+            # FRAME-LEVEL MATCHING: Match video + frame + class
+            # Handle type conversion - convert both to strings for comparison
+            frame_str = str(frame_val)
+            pred_match = predictions[
+                (predictions[COL_VIDEO] == video_val) & 
+                (predictions[COL_FRAME].astype(str) == frame_str) &  # Convert to string for comparison
+                (predictions[COL_VISUAL_PRED_OBJECT] == true_class_val)
+            ]
+            if not pred_match.empty:
+                frame_matches += 1
+            else:
+                frame_mismatches += 1
+        else:
+            # VIDEO-CLASS MATCHING: Original logic (fallback)
+            pred_match = predictions[
+                (predictions[COL_VIDEO] == video_val) & 
+                (predictions[COL_VISUAL_PRED_OBJECT] == true_class_val)
+            ]
+        
         predicted_val = 0
         confidence_val = 0.0
-        frame_val = None 
+        frame_val_for_output = frame_val if use_frame_matching else None
+        
         if not pred_match.empty:
             predicted_val = 1
             confidence_val = pred_match[COL_VISUAL_MAX_SCORE].iloc[0]
-            if COL_FRAME in pred_match.columns: 
-                frame_val = pred_match[COL_FRAME].iloc[0]
+            if COL_FRAME in pred_match.columns and not use_frame_matching: 
+                frame_val_for_output = pred_match[COL_FRAME].iloc[0]
         
         classification_val = ''
         if actual_val == 0 and predicted_val == 0: classification_val = 'TN'
@@ -72,10 +114,18 @@ def evaluate_predictions(predictions: pd.DataFrame,
             COL_ACTUAL: actual_val,
             COL_PREDICTED: predicted_val,
             'confidence': confidence_val,
-            COL_FRAME: frame_val,
+            COL_FRAME: frame_val_for_output,
             COL_CLASSIFICATION: classification_val
         })
+    
     eval_df = pd.DataFrame(eval_results)
+    
+    if use_frame_matching:
+        debug_log(f"📊 FRAME-LEVEL MATCHING RESULTS:")
+        debug_log(f"   Frame matches found: {frame_matches}")
+        debug_log(f"   Frame mismatches: {frame_mismatches}")
+        debug_log(f"   Total evaluations: {len(eval_results)}")
+        debug_log(f"   Match rate: {frame_matches/len(eval_results)*100:.1f}%")
     
     if not eval_df.empty:
         y_true = eval_df[COL_ACTUAL]
@@ -96,7 +146,10 @@ def evaluate_predictions(predictions: pd.DataFrame,
             metrics['FN'] = int(ground_truth[ground_truth[COL_ACTUAL] == 1][COL_ACTUAL].count())
             metrics['TN'] = int(ground_truth[ground_truth[COL_ACTUAL] == 0][COL_ACTUAL].count())
 
-    print(f"   📊 F1: {metrics['f1']:.4f}, P: {metrics['precision']:.4f}, R: {metrics['recall']:.4f}. Counts: TP:{metrics['TP']}, FP:{metrics['FP']}, FN:{metrics['FN']}, TN:{metrics['TN']}")
+    eval_mode = "FRAME-LEVEL" if use_frame_matching else "VIDEO-CLASS"
+    print(f"   📊 {eval_mode} EVALUATION: F1: {metrics['f1']:.4f}, P: {metrics['precision']:.4f}, R: {metrics['recall']:.4f}. Counts: TP:{metrics['TP']}, FP:{metrics['FP']}, FN:{metrics['FN']}, TN:{metrics['TN']}")
+    debug_log(f"📊 {eval_mode} EVALUATION COMPLETE: {len(eval_df)} samples evaluated")
+    
     return eval_df, metrics
 
 def extract_false_positives(evaluation_results: pd.DataFrame,
@@ -226,15 +279,18 @@ def filter_evaluation_data(resnet_data: pd.DataFrame,
                 'frame_type': type(frame).__name__
             })
             
-            pair = (video, frame)
-            excluded_pairs.add(pair)
+            # Store both as string and original type for matching
+            pair_str = (video, str(frame))  # String version for matching predictions
+            pair_orig = (video, frame)      # Original version
+            excluded_pairs.add(pair_str)
+            excluded_pairs.add(pair_orig)
             total_exclusions += 1
     
     if total_exclusions == 0:
         debug_log("🚫 No exclusions to apply")
         return resnet_data.copy()
     
-    debug_log(f"🔍 DEBUG: Total exclusion pairs created: {len(excluded_pairs)}")
+    debug_log(f"🔍 DEBUG: Total exclusion pairs created: {len(excluded_pairs)} (includes type variants)")
     debug_log(f"🔍 DEBUG: Sample exclusion types:")
     for i, exc in enumerate(debug_exclusions[:3]):
         debug_log(f"   {i+1}: Video={exc['video']} ({exc['video_type']}), Frame={exc['frame']} ({exc['frame_type']})")
@@ -247,8 +303,10 @@ def filter_evaluation_data(resnet_data: pd.DataFrame,
     
     # Filter out excluded pairs with detailed tracking
     def is_not_excluded(row):
-        pair = (row[COL_VIDEO], row[COL_FRAME])
-        return pair not in excluded_pairs
+        # Try both string and original type for frame matching
+        pair_str = (row[COL_VIDEO], str(row[COL_FRAME]))
+        pair_orig = (row[COL_VIDEO], row[COL_FRAME])
+        return pair_str not in excluded_pairs and pair_orig not in excluded_pairs
     
     original_count = len(resnet_data)
     

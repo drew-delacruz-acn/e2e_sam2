@@ -1,0 +1,5 @@
+iteration,eval_mode,f1,precision,recall,tp,fp,fn,tn,eval_samples,exclusions
+1,clean_frame_level,0.506667,0.463415,0.558824,76,88,60,1594,1818,88
+2,clean_video_level_comparison,0.331288,1.000000,0.198529,27,0,109,1682,2840,143
+3,clean_frame_level,0.579926,0.586466,0.573529,78,55,58,1627,1818,143
+4,clean_video_level_comparison,0.331288,1.000000,0.198529,27,0,109,1682,2840,143

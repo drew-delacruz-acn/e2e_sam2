@@ -405,7 +405,6 @@ Examples:
 
 def main():
     """Main execution function"""
-    print('ahh')
     args = parse_args()
     
     # Initialize analyzer

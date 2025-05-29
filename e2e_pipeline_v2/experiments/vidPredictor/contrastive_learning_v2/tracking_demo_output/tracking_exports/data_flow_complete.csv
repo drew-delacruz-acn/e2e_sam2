@@ -1,0 +1,9 @@
+timestamp,iteration,step,data_size,details
+2025-05-28T19:40:59.652913,1,evaluation_data_before,100,"{'columns': ['video', 'frame', 'owl_label', 'finetuned_embedding'], 'filename': 'iteration_1_evaluation_data_before.csv'}"
+2025-05-28T19:40:59.654192,1,evaluation_data_after,80,"{'exclusions_applied': 20, 'columns': ['video', 'frame', 'owl_label', 'finetuned_embedding'], 'filename': 'iteration_1_evaluation_data_after.csv'}"
+2025-05-28T19:40:59.657764,1,exclusions_added,3,"{'filename': 'iteration_1_exclusions_added.csv', 'classes_excluded': ['not_Loki_Armor', 'not_TVA_Collar', 'not_TemPad']}"
+2025-05-28T19:40:59.659571,1,false_positives_extracted,3,"{'filename': 'iteration_1_false_positives_extracted.csv', 'classes_with_fps': ['Loki_Armor', 'TVA_Collar', 'TemPad']}"
+2025-05-28T19:40:59.661435,2,evaluation_data_before,100,"{'columns': ['video', 'frame', 'owl_label', 'finetuned_embedding'], 'filename': 'iteration_2_evaluation_data_before.csv'}"
+2025-05-28T19:40:59.663110,2,evaluation_data_after,70,"{'exclusions_applied': 30, 'columns': ['video', 'frame', 'owl_label', 'finetuned_embedding'], 'filename': 'iteration_2_evaluation_data_after.csv'}"
+2025-05-28T19:40:59.664927,2,exclusions_added,2,"{'filename': 'iteration_2_exclusions_added.csv', 'classes_excluded': ['not_Sylvie_Armor', 'not_TimeSpear']}"
+2025-05-28T19:40:59.666377,2,false_positives_extracted,2,"{'filename': 'iteration_2_false_positives_extracted.csv', 'classes_with_fps': ['Sylvie_Armor', 'TimeSpear']}"

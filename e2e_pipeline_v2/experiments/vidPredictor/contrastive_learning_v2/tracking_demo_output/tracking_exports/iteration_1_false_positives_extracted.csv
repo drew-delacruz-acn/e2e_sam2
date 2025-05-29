@@ -1,0 +1,4 @@
+video,class,actual,predicted,confidence,frame,classification,iteration,extraction_timestamp,reason,negative_class_created,embedding_available
+Scene_001,Loki_Armor,0,1,0.85,15,FP,1,2025-05-28T19:40:59.658381,false_positive_for_training,not_Loki_Armor,True
+Scene_002,TVA_Collar,0,1,0.92,25,FP,1,2025-05-28T19:40:59.658381,false_positive_for_training,not_TVA_Collar,True
+Scene_003,TemPad,0,1,0.78,35,FP,1,2025-05-28T19:40:59.658381,false_positive_for_training,not_TemPad,True

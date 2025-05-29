@@ -9,6 +9,7 @@ from typing import Dict, List, Tuple
 # e.g., from .training_utils import train_contrastive_representatives
 # from .prediction_utils import generate_predictions
 # from .evaluation_utils import evaluate_predictions, extract_false_positives
+from .tracking_utils import get_tracker
 
 # Column name constants
 COL_CLASS = 'class'
@@ -71,6 +72,11 @@ def run_single_iteration(
         predictions_for_eval, 
         exclusion_tracker 
     )
+
+    # 📊 TRACKING: Export false positives extracted
+    tracker = get_tracker()
+    if tracker:
+        tracker.export_false_positives_extracted(iteration, fp_data, evaluation_results)
 
     print(f"\n💾 Saving iteration results to {iteration_output_dir}...")
     evaluation_results.to_csv(iteration_output_dir / "evaluation_results.csv", index=False)

@@ -11,6 +11,7 @@ from .training_utils import train_contrastive_representatives
 from .prediction_utils import generate_predictions
 from .evaluation_utils import evaluate_predictions, extract_false_positives, filter_evaluation_data
 from .config import PipelineConfig 
+from .tracking_utils import initialize_tracker, get_tracker
 
 # Global debug log collector
 DEBUG_LOGS = []
@@ -40,6 +41,10 @@ def run_iterative_pipeline(
     previous_f1 = -1.0 
 
     output_base_dir = Path(config.output) 
+
+    # Initialize comprehensive tracking system
+    tracker = initialize_tracker(output_base_dir)
+    debug_log(f"📊 Comprehensive tracking system initialized")
 
     # Debug: Print configuration values
     debug_log(f"\n🔍 FILTERING DEBUG: Configuration values:")
@@ -83,6 +88,9 @@ def run_iterative_pipeline(
         original_eval_size = len(resnetPredictions)
         debug_log(f"   Original resnetPredictions size: {original_eval_size}")
         
+        # 📊 TRACKING: Export evaluation data before filtering
+        tracker.export_evaluation_data_before(i, resnetPredictions)
+        
         if config.exclude_training_from_eval:
             debug_log(f"   🔍 Calling filter_evaluation_data with exclude_training=True")
             eval_data = filter_evaluation_data(resnetPredictions, exclusion_tracker, exclude_training=True)
@@ -107,6 +115,11 @@ def run_iterative_pipeline(
             debug_log("📉 Using CLEAN evaluation (default)")
 
         filtered_eval_size = len(eval_data)
+        exclusions_applied = original_eval_size - filtered_eval_size
+        
+        # 📊 TRACKING: Export evaluation data after filtering
+        tracker.export_evaluation_data_after(i, eval_data, exclusions_applied)
+        
         debug_log(f"🔍 FILTERING DEBUG: Evaluation data size after filtering:")
         debug_log(f"   Original: {original_eval_size}")
         debug_log(f"   Filtered: {filtered_eval_size}")
@@ -153,6 +166,12 @@ def run_iterative_pipeline(
         current_training_data = new_training_data
         if new_exclusions: 
             exclusion_tracker[i] = new_exclusions 
+        
+        # 📊 TRACKING: Export exclusions added this iteration
+        tracker.export_exclusions_added(i, new_exclusions or [])
+        
+        # 📊 TRACKING: Export iteration summary
+        tracker.export_iteration_summary(i, metrics, len(new_exclusions or []), len(current_training_data))
         
         # Add evaluation mode to metrics
         metrics_to_store = {'iteration': i, 'eval_mode': eval_mode, 'evaluation_samples': actual_evaluation_size, **metrics}
@@ -244,6 +263,9 @@ def run_iterative_pipeline(
         debug_log(f"💾 Final combined training data saved to {final_data_path}.")
     except Exception as e:
         debug_log(f"❌ Error saving final training data: {e}")
+
+    # 📊 TRACKING: Generate comprehensive cumulative analysis
+    tracker.export_cumulative_analysis()
 
     # Generate analysis logs for debugging
     try:

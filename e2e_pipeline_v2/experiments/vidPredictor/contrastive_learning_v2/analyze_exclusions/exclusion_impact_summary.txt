@@ -1,0 +1,34 @@
+🎯 EXCLUSION IMPACT ANALYSIS SUMMARY
+==================================================
+
+Analysis Date: 2025-05-29 17:12:58
+Dataset Size: 18,328 evaluation samples
+Total Videos: 96
+
+📊 FRAME-LEVEL APPROACH (CURRENT)
+----------------------------------------
+Total Exclusions: 143
+Problematic Videos: 52
+Problematic Classes: 15
+Impact: 0.780% of dataset
+
+📹 VIDEO-LEVEL APPROACH (HYPOTHETICAL)
+----------------------------------------
+Samples Removed: 15,488
+Impact: 84.5% of dataset
+Amplification Factor: 108.3x
+Additional Waste: 15,345 samples
+
+⚖️  COMPARISON
+--------------------
+Efficiency Gain: 108.3x more data preserved
+Recommendation: Continue with frame-level precision approach
+Verdict: Video-level exclusions would be catastrophically wasteful!
+
+🔝 TOP PROBLEMATIC VIDEOS
+------------------------------
+ 1. 165A-4-              1,261 samples
+ 2. 156-5a- only pu        957 samples
+ 3. 211-1-                 822 samples
+ 4. 108E-1-                813 samples
+ 5. 111D-1-                783 samples

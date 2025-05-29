@@ -147,8 +147,8 @@ def evaluate_predictions(predictions: pd.DataFrame,
             metrics['TN'] = int(ground_truth[ground_truth[COL_ACTUAL] == 0][COL_ACTUAL].count())
 
     eval_mode = "FRAME-LEVEL" if use_frame_matching else "VIDEO-CLASS"
-    print("   📊 {eval_mode} EVALUATION: F1: {:.4f}, P: {:.4f}, R: {:.4f}. Counts: TP:{}, FP:{}, FN:{}, TN:{}".format(eval_mode, metrics['f1'], metrics['precision'], metrics['recall'], metrics['TP'], metrics['FP'], metrics['FN'], metrics['TN']))
-    print("📊 {eval_mode} EVALUATION COMPLETE: {} samples evaluated".format(len(eval_df)))
+    # print("   📊 {eval_mode} EVALUATION: F1: {:.4f}, P: {:.4f}, R: {:.4f}. Counts: TP:{}, FP:{}, FN:{}, TN:{}".format(eval_mode, metrics['f1'], metrics['precision'], metrics['recall'], metrics['TP'], metrics['FP'], metrics['FN'], metrics['TN']))
+    # print("📊 {eval_mode} EVALUATION COMPLETE: {} samples evaluated".format(len(eval_df)))
     
     return eval_df, metrics
 

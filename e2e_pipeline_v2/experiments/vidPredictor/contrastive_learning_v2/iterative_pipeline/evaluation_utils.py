@@ -233,31 +233,49 @@ def extract_false_positives(evaluation_results: pd.DataFrame,
         print("🏷️ Negative classes created: {}".format(fp_df_output[COL_CLASS].value_counts().to_dict()))
     return fp_df_output, exclusion_list 
 
-def filter_evaluation_data(resnet_data: pd.DataFrame,
-                          exclusion_tracker: Dict,
-                          exclude_training: bool = True) -> pd.DataFrame:
+def filter_evaluation_data_enhanced(resnet_data: pd.DataFrame,
+                                   exclusion_tracker: Dict,
+                                   exclude_training: bool = True,
+                                   exclusion_strategy: str = 'frame-level') -> pd.DataFrame:
     """
-    Filter evaluation data based on exclusion strategy.
+    Enhanced filter evaluation data based on exclusion strategy.
     
     Args:
         resnet_data: Original prediction data
         exclusion_tracker: Dictionary tracking excluded video-frame pairs
         exclude_training: Whether to exclude training data from evaluation
+        exclusion_strategy: 'frame-level', 'video-level', or 'compare-both'
         
     Returns:
         Filtered DataFrame for evaluation
     """
-    print("\n🔍 FILTER_EVALUATION_DATA CALLED:")
-    print("   resnet_data size: {}".format(len(resnet_data)))
-    print("   exclude_training: {}".format(exclude_training))
-    print("   exclusion_tracker: {}".format(type(exclusion_tracker)))
-    print("   exclusion_tracker empty: {}".format(not exclusion_tracker))
-    print("   exclusion_tracker keys: {}".format(list(exclusion_tracker.keys()) if exclusion_tracker else 'None'))
+    print(f"\n🔍 ENHANCED_FILTER_EVALUATION_DATA CALLED:")
+    print(f"   resnet_data size: {len(resnet_data)}")
+    print(f"   exclude_training: {exclude_training}")
+    print(f"   exclusion_strategy: {exclusion_strategy}")
+    print(f"   exclusion_tracker: {type(exclusion_tracker)}")
+    print(f"   exclusion_tracker empty: {not exclusion_tracker}")
+    print(f"   exclusion_tracker keys: {list(exclusion_tracker.keys()) if exclusion_tracker else 'None'}")
     
     if not exclude_training or not exclusion_tracker:
         print("🚫 No evaluation data filtering applied")
-        print("   Reason: exclude_training={}, exclusion_tracker_empty={}".format(exclude_training, not exclusion_tracker))
+        print(f"   Reason: exclude_training={exclude_training}, exclusion_tracker_empty={not exclusion_tracker}")
         return resnet_data.copy()
+    
+    # Collect exclusions by strategy
+    if exclusion_strategy == 'frame-level':
+        return _apply_frame_level_exclusions(resnet_data, exclusion_tracker)
+    elif exclusion_strategy == 'video-level':
+        return _apply_video_level_exclusions(resnet_data, exclusion_tracker)
+    else:
+        # For 'compare-both', default to frame-level (comparison handled in pipeline_manager)
+        print(f"📊 Using frame-level for compare-both strategy")
+        return _apply_frame_level_exclusions(resnet_data, exclusion_tracker)
+
+
+def _apply_frame_level_exclusions(resnet_data: pd.DataFrame, exclusion_tracker: Dict) -> pd.DataFrame:
+    """Apply frame-level exclusions (original behavior)."""
+    print(f"🔍 Applying FRAME-LEVEL exclusions...")
     
     # Collect all excluded video-frame pairs from all iterations
     excluded_pairs = set()
@@ -267,7 +285,7 @@ def filter_evaluation_data(resnet_data: pd.DataFrame,
     debug_exclusions = []
     
     for iteration_key, exclusions in exclusion_tracker.items():
-        print("🔍 DEBUG: Processing {} exclusions from iteration {}".format(len(exclusions), iteration_key))
+        print(f"🔍 DEBUG: Processing {len(exclusions)} exclusions from iteration {iteration_key}")
         for exclusion in exclusions:
             video = exclusion[COL_VIDEO]
             frame = exclusion[COL_FRAME]
@@ -292,16 +310,16 @@ def filter_evaluation_data(resnet_data: pd.DataFrame,
         print("🚫 No exclusions to apply")
         return resnet_data.copy()
     
-    print("🔍 DEBUG: Total exclusion pairs created: {} (includes type variants)".format(len(excluded_pairs)))
-    print("🔍 DEBUG: Sample exclusion types:")
+    print(f"🔍 DEBUG: Total exclusion pairs created: {len(excluded_pairs)} (includes type variants)")
+    print(f"🔍 DEBUG: Sample exclusion types:")
     for i, exc in enumerate(debug_exclusions[:3]):
-        print("   {}: Video={} ({}), Frame={} ({})".format(i+1, exc['video'], exc['video_type'], exc['frame'], exc['frame_type']))
+        print(f"   {i+1}: Video={exc['video']} ({exc['video_type']}), Frame={exc['frame']} ({exc['frame_type']})")
     
     # Debug: Check data types in resnet_data
     if COL_VIDEO in resnet_data.columns and COL_FRAME in resnet_data.columns:
         sample_video = resnet_data[COL_VIDEO].iloc[0] if len(resnet_data) > 0 else None
         sample_frame = resnet_data[COL_FRAME].iloc[0] if len(resnet_data) > 0 else None
-        print("🔍 DEBUG: Sample resnet_data types: Video={} ({}), Frame={} ({})".format(sample_video, type(sample_video).__name__, sample_frame, type(sample_frame).__name__))
+        print(f"🔍 DEBUG: Sample resnet_data types: Video={sample_video} ({type(sample_video).__name__}), Frame={sample_frame} ({type(sample_frame).__name__})")
     
     # Filter out excluded pairs with detailed tracking
     def is_not_excluded(row):
@@ -319,21 +337,71 @@ def filter_evaluation_data(resnet_data: pd.DataFrame,
     filtered_count = len(filtered_data)
     excluded_count = original_count - filtered_count
     
-    print("🚫 Excluded {} training samples from evaluation".format(excluded_count))
-    print("📊 Evaluation data: {} → {} samples".format(original_count, filtered_count))
-    print("🔍 DEBUG: Expected exclusions={}, Actual exclusions={}".format(total_exclusions, excluded_count))
+    print(f"🚫 FRAME-LEVEL: Excluded {excluded_count} training samples from evaluation")
+    print(f"📊 FRAME-LEVEL: Evaluation data: {original_count} → {filtered_count} samples")
+    print(f"🔍 DEBUG: Expected exclusions={total_exclusions}, Actual exclusions={excluded_count}")
     
-    if excluded_count != total_exclusions:
-        print("⚠️ WARNING: Exclusion count mismatch! Expected {}, got {}".format(total_exclusions, excluded_count))
-        print("   Difference: {} samples".format(abs(excluded_count - total_exclusions)))
-        
-        # Additional debugging: check for duplicates in exclusions
-        exclusion_pairs_list = [(exc[COL_VIDEO], exc[COL_FRAME]) for iter_exclusions in exclusion_tracker.values() for exc in iter_exclusions]
-        unique_exclusion_pairs = set(exclusion_pairs_list)
-        print("🔍 DEBUG: Total exclusion entries: {}".format(len(exclusion_pairs_list)))
-        print("🔍 DEBUG: Unique exclusion pairs: {}".format(len(unique_exclusion_pairs)))
-        
-        if len(exclusion_pairs_list) != len(unique_exclusion_pairs):
-            print("🔍 DEBUG: Found {} duplicate exclusions".format(len(exclusion_pairs_list) - len(unique_exclusion_pairs)))
+    return filtered_data
+
+
+def _apply_video_level_exclusions(resnet_data: pd.DataFrame, exclusion_tracker: Dict) -> pd.DataFrame:
+    """Apply video-level exclusions (exclude entire videos if any frame is problematic)."""
+    print(f"🚫 Applying VIDEO-LEVEL exclusions...")
     
-    return filtered_data 
+    # Collect all excluded videos (not just video-frame pairs)
+    excluded_videos = set()
+    total_frame_exclusions = 0
+    
+    for iteration_key, exclusions in exclusion_tracker.items():
+        print(f"🔍 DEBUG: Processing {len(exclusions)} exclusions from iteration {iteration_key}")
+        for exclusion in exclusions:
+            video = exclusion[COL_VIDEO]
+            excluded_videos.add(video)
+            total_frame_exclusions += 1
+    
+    if not excluded_videos:
+        print("🚫 No video exclusions to apply")
+        return resnet_data.copy()
+    
+    print(f"🔍 DEBUG: Videos to exclude: {len(excluded_videos)}")
+    print(f"🔍 DEBUG: Original frame exclusions: {total_frame_exclusions}")
+    print(f"🔍 DEBUG: Sample excluded videos: {list(excluded_videos)[:5]}")
+    
+    # Filter out entire videos
+    def is_video_not_excluded(row):
+        return row[COL_VIDEO] not in excluded_videos
+    
+    original_count = len(resnet_data)
+    
+    # Apply filter
+    mask = resnet_data.apply(is_video_not_excluded, axis=1)
+    filtered_data = resnet_data[mask].copy()
+    
+    filtered_count = len(filtered_data)
+    excluded_count = original_count - filtered_count
+    
+    print(f"🚫 VIDEO-LEVEL: Excluded {excluded_count} samples from {len(excluded_videos)} videos")
+    print(f"📊 VIDEO-LEVEL: Evaluation data: {original_count} → {filtered_count} samples")
+    print(f"📊 VIDEO-LEVEL: Amplification factor: {excluded_count / total_frame_exclusions:.1f}x more data excluded than frame-level")
+    
+    return filtered_data
+
+
+def filter_evaluation_data(resnet_data: pd.DataFrame,
+                          exclusion_tracker: Dict,
+                          exclude_training: bool = True,
+                          exclusion_strategy: str = 'frame-level') -> pd.DataFrame:
+    """
+    Filter evaluation data based on exclusion strategy.
+    
+    Args:
+        resnet_data: Original prediction data
+        exclusion_tracker: Dictionary tracking excluded video-frame pairs
+        exclude_training: Whether to exclude training data from evaluation
+        exclusion_strategy: 'frame-level' or 'video-level' (NEW parameter)
+        
+    Returns:
+        Filtered DataFrame for evaluation
+    """
+    # Use the enhanced filter function
+    return filter_evaluation_data_enhanced(resnet_data, exclusion_tracker, exclude_training, exclusion_strategy) 

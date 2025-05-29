@@ -25,12 +25,24 @@ class PipelineConfig:
     exclude_training_from_eval: bool = True # Default behavior
     include_training_in_eval: bool = False
     track_training_separately: bool = False
-
+    
+    # NEW: Exclusion level strategy
+    exclusion_strategy: str = 'frame-level'  # 'frame-level', 'video-level', or 'compare-both'
+    
     # Output options
     output: str = 'results_negative'
     test_mode: bool = False
 
     # Derived or helper attributes can be added in __post_init__ if needed
+    def __post_init__(self):
+        # Validate exclusion strategy
+        valid_strategies = ['frame-level', 'video-level', 'compare-both']
+        if self.exclusion_strategy not in valid_strategies:
+            raise ValueError(f"exclusion_strategy must be one of {valid_strategies}, got '{self.exclusion_strategy}'")
+        
+        # If using compare-both, automatically enable track_training_separately
+        if self.exclusion_strategy == 'compare-both':
+            self.track_training_separately = True
     # def __post_init__(self):
     #     # Example: if you wanted to ensure output path is absolute
     #     self.output_path = Path(self.output).resolve()

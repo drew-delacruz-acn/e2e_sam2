@@ -199,25 +199,16 @@ class ExclusionImpactAnalyzer:
         # Get problematic videos
         problematic_videos = set(self.exclusions_data['video'].unique())
         
-        # Check if evaluation data has required columns for simulation
-        required_columns = ['video', 'true_label', 'predicted_label']
-        missing_columns = [col for col in required_columns if col not in self.evaluation_data.columns]
-        
-        if missing_columns:
-            print(f"⚠️  Missing columns for F-score simulation: {missing_columns}")
-            print("📊 Will estimate based on data reduction only")
-            return self._estimate_performance_from_data_reduction()
-        
         # Filter evaluation data (remove entire problematic videos)
-        original_eval = self.evaluation_data.copy()
-        filtered_eval = original_eval[~original_eval['video'].isin(problematic_videos)]
+        filtered_eval = self.evaluation_data[
+            ~self.evaluation_data['video'].isin(problematic_videos)
+        ]
         
-        print(f"📊 Original evaluation samples: {len(original_eval):,}")
-        print(f"📊 Filtered evaluation samples: {len(filtered_eval):,}")
-        print(f"📊 Samples removed: {len(original_eval) - len(filtered_eval):,}")
+        # Recalculate confusion matrix with remaining data
+        # This gives us simulated F-scores
         
         # Calculate confusion matrices for both approaches
-        original_cm = self._calculate_confusion_matrix(original_eval)
+        original_cm = self._calculate_confusion_matrix(self.evaluation_data)
         filtered_cm = self._calculate_confusion_matrix(filtered_eval)
         
         # Calculate F-scores
@@ -228,7 +219,7 @@ class ExclusionImpactAnalyzer:
             'frame_level_performance': {
                 'confusion_matrix': original_cm,
                 'metrics': original_metrics,
-                'sample_count': len(original_eval)
+                'sample_count': len(self.evaluation_data)
             },
             'video_level_simulation': {
                 'confusion_matrix': filtered_cm,
@@ -242,8 +233,8 @@ class ExclusionImpactAnalyzer:
                 'f1_degradation_percent': ((original_metrics['f1'] - filtered_metrics['f1']) / original_metrics['f1']) * 100 if original_metrics['f1'] > 0 else 0
             },
             'data_availability_impact': {
-                'samples_lost': len(original_eval) - len(filtered_eval),
-                'samples_lost_percent': ((len(original_eval) - len(filtered_eval)) / len(original_eval)) * 100,
+                'samples_lost': len(self.evaluation_data) - len(filtered_eval),
+                'samples_lost_percent': ((len(self.evaluation_data) - len(filtered_eval)) / len(self.evaluation_data)) * 100,
                 'videos_removed': len(problematic_videos),
                 'videos_remaining': len(filtered_eval['video'].unique()) if 'video' in filtered_eval.columns else 0
             }

@@ -32,10 +32,23 @@ def parse_args_for_runner():
     parser.add_argument('--epochs', type=int, default=50)
     parser.add_argument('--margin', type=float, default=0.2)
     parser.add_argument('--secondary-margin', type=float, default=None)
+    
+    # Exclusion evaluation strategy (existing)
     exclusion_group = parser.add_mutually_exclusive_group()
     exclusion_group.add_argument('--exclude-training-from-eval', dest='eval_strategy', action='store_const', const='exclude')
     exclusion_group.add_argument('--include-training-in-eval', dest='eval_strategy', action='store_const', const='include')
     parser.set_defaults(eval_strategy='exclude') 
+    
+    # NEW: Exclusion level strategy
+    exclusion_level_group = parser.add_mutually_exclusive_group()
+    exclusion_level_group.add_argument('--frame-level-exclusions', dest='exclusion_strategy', action='store_const', const='frame-level',
+                                     help='Exclude only specific frames from evaluation (default, preserves more data)')
+    exclusion_level_group.add_argument('--video-level-exclusions', dest='exclusion_strategy', action='store_const', const='video-level',
+                                     help='Exclude entire videos when any frame is problematic (more aggressive)')
+    exclusion_level_group.add_argument('--compare-exclusion-strategies', dest='exclusion_strategy', action='store_const', const='compare-both',
+                                     help='Run both strategies and compare results (A/B testing mode)')
+    parser.set_defaults(exclusion_strategy='frame-level')
+    
     parser.add_argument('--output', type=str, default='results_negative_refactored')
     parser.add_argument('--test-mode', action='store_true')
     

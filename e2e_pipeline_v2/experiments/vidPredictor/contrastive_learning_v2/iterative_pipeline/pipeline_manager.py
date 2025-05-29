@@ -85,34 +85,65 @@ def run_iterative_pipeline(
 
         # Apply exclusion strategy to evaluation data
         debug_log(f"\n🔍 FILTERING DEBUG: Applying exclusion strategy...")
+        debug_log(f"   Exclusion strategy: {config.exclusion_strategy}")
         original_eval_size = len(resnetPredictions)
         debug_log(f"   Original resnetPredictions size: {original_eval_size}")
         
         # 📊 TRACKING: Export evaluation data before filtering
         tracker.export_evaluation_data_before(i, resnetPredictions)
         
-        if config.exclude_training_from_eval:
-            debug_log(f"   🔍 Calling filter_evaluation_data with exclude_training=True")
-            eval_data = filter_evaluation_data(resnetPredictions, exclusion_tracker, exclude_training=True)
-            eval_mode = "clean"
-            debug_log("📉 Using CLEAN evaluation (excluding training data)")
-        elif config.include_training_in_eval:
-            debug_log(f"   🔍 Skipping filtering - include_training_in_eval=True")
-            eval_data = resnetPredictions.copy()
-            eval_mode = "contaminated"
-            debug_log("📈 Using CONTAMINATED evaluation (including training data)")
-        elif config.track_training_separately:
-            debug_log(f"   🔍 Using both evaluations - track_training_separately=True")
-            # Use full data first, then run clean evaluation separately
-            eval_data = resnetPredictions.copy()
-            eval_mode = "both"
-            debug_log("📊 Using BOTH evaluations (will run clean and contaminated)")
-        else:
-            debug_log(f"   🔍 Default to clean - calling filter_evaluation_data")
-            # Default to clean
-            eval_data = filter_evaluation_data(resnetPredictions, exclusion_tracker, exclude_training=True)
-            eval_mode = "clean"
-            debug_log("📉 Using CLEAN evaluation (default)")
+        # NEW: Handle different exclusion strategies
+        if config.exclusion_strategy == 'compare-both':
+            debug_log(f"📊 COMPARE-BOTH MODE: Running both frame-level and video-level exclusion strategies")
+            
+            # Primary evaluation with frame-level (default behavior)
+            if config.exclude_training_from_eval:
+                eval_data = filter_evaluation_data(resnetPredictions, exclusion_tracker, exclude_training=True, exclusion_strategy='frame-level')
+                eval_mode = "clean_frame_level"
+            else:
+                eval_data = resnetPredictions.copy()
+                eval_mode = "contaminated_frame_level"
+            
+            # We'll run video-level evaluation separately after the main iteration
+            
+        elif config.exclusion_strategy == 'video-level':
+            debug_log(f"🚫 VIDEO-LEVEL MODE: Using video-level exclusions")
+            
+            if config.exclude_training_from_eval:
+                debug_log(f"   🔍 Calling filter_evaluation_data with video-level strategy")
+                eval_data = filter_evaluation_data(resnetPredictions, exclusion_tracker, exclude_training=True, exclusion_strategy='video-level')
+                eval_mode = "clean_video_level"
+                debug_log("📉 Using CLEAN VIDEO-LEVEL evaluation")
+            else:
+                debug_log(f"   🔍 Skipping filtering - include_training_in_eval=True")
+                eval_data = resnetPredictions.copy()
+                eval_mode = "contaminated_video_level"
+                debug_log("📈 Using CONTAMINATED evaluation (no exclusions)")
+                
+        else:  # frame-level (default)
+            debug_log(f"🔍 FRAME-LEVEL MODE: Using frame-level exclusions (default)")
+            
+            if config.exclude_training_from_eval:
+                debug_log(f"   🔍 Calling filter_evaluation_data with frame-level strategy")
+                eval_data = filter_evaluation_data(resnetPredictions, exclusion_tracker, exclude_training=True, exclusion_strategy='frame-level')
+                eval_mode = "clean_frame_level"
+                debug_log("📉 Using CLEAN FRAME-LEVEL evaluation")
+            elif config.include_training_in_eval:
+                debug_log(f"   🔍 Skipping filtering - include_training_in_eval=True")
+                eval_data = resnetPredictions.copy()
+                eval_mode = "contaminated_frame_level"
+                debug_log("📈 Using CONTAMINATED evaluation (including training data)")
+            elif config.track_training_separately:
+                debug_log(f"   🔍 Using both evaluations - track_training_separately=True")
+                # Use full data first, then run clean evaluation separately
+                eval_data = resnetPredictions.copy()
+                eval_mode = "both_frame_level"
+                debug_log("📊 Using BOTH evaluations (will run clean and contaminated)")
+            else:
+                debug_log(f"   🔍 Default to clean frame-level")
+                eval_data = filter_evaluation_data(resnetPredictions, exclusion_tracker, exclude_training=True, exclusion_strategy='frame-level')
+                eval_mode = "clean_frame_level"
+                debug_log("📉 Using CLEAN FRAME-LEVEL evaluation (default)")
 
         filtered_eval_size = len(eval_data)
         exclusions_applied = original_eval_size - filtered_eval_size
@@ -124,6 +155,7 @@ def run_iterative_pipeline(
         debug_log(f"   Original: {original_eval_size}")
         debug_log(f"   Filtered: {filtered_eval_size}")
         debug_log(f"   Difference: {original_eval_size - filtered_eval_size}")
+        debug_log(f"   Strategy: {config.exclusion_strategy}")
         
         if original_eval_size == filtered_eval_size and exclusion_tracker:
             debug_log(f"   ⚠️ WARNING: No size change despite having exclusions!")
@@ -174,13 +206,45 @@ def run_iterative_pipeline(
         tracker.export_iteration_summary(i, metrics, len(new_exclusions or []), len(current_training_data))
         
         # Add evaluation mode to metrics
-        metrics_to_store = {'iteration': i, 'eval_mode': eval_mode, 'evaluation_samples': actual_evaluation_size, **metrics}
+        metrics_to_store = {'iteration': i, 'eval_mode': eval_mode, 'evaluation_samples': actual_evaluation_size, 'exclusion_strategy': config.exclusion_strategy, **metrics}
         all_iteration_metrics.append(metrics_to_store)
         
-        # Handle track_training_separately mode
-        if config.track_training_separately:
-            # Run additional clean evaluation for comparison
-            clean_eval_data = filter_evaluation_data(resnetPredictions, exclusion_tracker, exclude_training=True)
+        # NEW: Handle strategy comparison and track_training_separately mode
+        if config.exclusion_strategy == 'compare-both':
+            debug_log(f"\n🔄 COMPARE-BOTH: Running video-level evaluation for comparison...")
+            
+            # Run video-level evaluation for comparison
+            video_level_eval_data = filter_evaluation_data(resnetPredictions, exclusion_tracker, exclude_training=True, exclusion_strategy='video-level')
+            
+            if len(video_level_eval_data) != len(eval_data):
+                # Load representatives and generate video-level predictions  
+                representatives_path = output_base_dir / f"iteration_{i}" / "representatives.pkl"
+                video_level_predictions = generate_predictions(video_level_eval_data, representatives_path, current_iter_threshold_to_use, i)
+                video_level_eval_results, video_level_metrics = evaluate_predictions(video_level_predictions, trackingInfo)
+                
+                debug_log(f"📊 FRAME-LEVEL vs VIDEO-LEVEL COMPARISON:")
+                debug_log(f"   Frame-level F1: {metrics['f1']:.4f} ({len(eval_data)} samples)")
+                debug_log(f"   Video-level F1: {video_level_metrics['f1']:.4f} ({len(video_level_eval_data)} samples)")
+                debug_log(f"   Data efficiency: Frame-level preserves {len(eval_data) - len(video_level_eval_data)} more samples")
+                
+                # Save video-level metrics for comparison
+                video_level_metrics['iteration'] = i
+                video_level_metrics['eval_mode'] = 'clean_video_level_comparison'
+                video_level_metrics['evaluation_samples'] = len(video_level_eval_data)
+                video_level_metrics['exclusion_strategy'] = 'video-level'
+                
+                with open(output_base_dir / f"iteration_{i}" / "video_level_metrics.json", 'w') as f:
+                    json.dump(video_level_metrics, f, indent=2)
+                    
+                # Also track the video-level metrics in our main metrics list
+                all_iteration_metrics.append(video_level_metrics)
+            else:
+                debug_log(f"\n📊 Frame-level and video-level data are the same size - no difference to compare")
+                
+        elif config.track_training_separately:
+            # Original track_training_separately logic (now with strategy awareness)
+            strategy_to_use = config.exclusion_strategy if config.exclusion_strategy != 'compare-both' else 'frame-level'
+            clean_eval_data = filter_evaluation_data(resnetPredictions, exclusion_tracker, exclude_training=True, exclusion_strategy=strategy_to_use)
             
             if len(clean_eval_data) != len(eval_data):
                 debug_log(f"\n🔄 Running clean evaluation for comparison...")
@@ -196,8 +260,9 @@ def run_iterative_pipeline(
                 
                 # Save clean metrics
                 clean_metrics['iteration'] = i
-                clean_metrics['eval_mode'] = 'clean'
+                clean_metrics['eval_mode'] = f'clean_{strategy_to_use.replace("-", "_")}'
                 clean_metrics['evaluation_samples'] = len(clean_eval_data)
+                clean_metrics['exclusion_strategy'] = strategy_to_use
                 
                 with open(output_base_dir / f"iteration_{i}" / "clean_metrics.json", 'w') as f:
                     json.dump(clean_metrics, f, indent=2)
@@ -221,7 +286,8 @@ def run_iterative_pipeline(
         'evaluation_strategy': {
             'exclude_training_from_eval': config.exclude_training_from_eval,
             'include_training_in_eval': config.include_training_in_eval,
-            'track_training_separately': config.track_training_separately
+            'track_training_separately': config.track_training_separately,
+            'exclusion_strategy': config.exclusion_strategy
         }
     }
     summary_path = output_base_dir / "pipeline_summary.json"

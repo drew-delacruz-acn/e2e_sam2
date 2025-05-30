@@ -12,14 +12,7 @@ from .prediction_utils import generate_predictions
 from .evaluation_utils import evaluate_predictions, extract_false_positives, filter_evaluation_data
 from .config import PipelineConfig 
 from .tracking_utils import initialize_tracker, get_tracker
-
-# Global debug log collector
-DEBUG_LOGS = []
-
-def debug_log(message: str):
-    """Collect debug messages for saving to file."""
-    print(message)  # Still print to console
-    DEBUG_LOGS.append(f"{datetime.now().strftime('%H:%M:%S')} | {message}")
+from .debug_utils import debug_log, get_debug_logs, clear_debug_logs
 
 def run_iterative_pipeline(
     definitiveObjects: pd.DataFrame,
@@ -30,8 +23,7 @@ def run_iterative_pipeline(
     """
     Run the full iterative contrastive learning pipeline.
     """
-    global DEBUG_LOGS
-    DEBUG_LOGS = []  # Reset debug logs
+    clear_debug_logs()  # Reset debug logs
     
     debug_log("\n🚀 Starting Iterative Contrastive Learning Pipeline (Negative Classes Mode)")
     
@@ -521,7 +513,7 @@ def create_analysis_logs(output_base_dir: Path, all_iteration_metrics: List[Dict
         f.write("=== COMPLETE DEBUG LOG ===\n")
         f.write(f"Pipeline run at: {timestamp}\n")
         f.write("=" * 50 + "\n\n")
-        for log_line in DEBUG_LOGS:
+        for log_line in get_debug_logs():
             f.write(log_line + '\n')
     
     # Print paths to all created files

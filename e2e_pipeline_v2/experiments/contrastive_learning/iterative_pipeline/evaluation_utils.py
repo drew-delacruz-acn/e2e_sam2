@@ -17,7 +17,7 @@ COL_EMBEDDING = 'finetuned_embedding'
 
 # Import debug logging function
 try:
-    from .pipeline_manager import debug_log
+    from .debug_utils import debug_log
 except ImportError:
     # Fallback if circular import
     def debug_log(message: str):

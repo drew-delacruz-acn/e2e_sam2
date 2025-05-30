@@ -10,7 +10,7 @@ from typing import Dict, List, Tuple
 # from .prediction_utils import generate_predictions
 # from .evaluation_utils import evaluate_predictions, extract_false_positives
 from .tracking_utils import get_tracker
-from .pipeline_manager import debug_log
+from .debug_utils import debug_log
 
 # Column name constants
 COL_CLASS = 'class'

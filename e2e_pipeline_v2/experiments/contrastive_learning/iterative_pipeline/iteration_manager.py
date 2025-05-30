@@ -10,6 +10,7 @@ from typing import Dict, List, Tuple
 # from .prediction_utils import generate_predictions
 # from .evaluation_utils import evaluate_predictions, extract_false_positives
 from .tracking_utils import get_tracker
+from .pipeline_manager import debug_log
 
 # Column name constants
 COL_CLASS = 'class'
@@ -74,16 +75,16 @@ def run_single_iteration(
     )
     
     # DEBUG: Log what was returned from extract_false_positives
-    print(f"🔍 DEBUG ITERATION: extract_fps_func returned:")
-    print(f"   fp_data shape: {fp_data.shape if hasattr(fp_data, 'shape') else 'Not a DataFrame'}")
-    print(f"   new_exclusions type: {type(new_exclusions)}")
-    print(f"   new_exclusions length: {len(new_exclusions) if new_exclusions else 0}")
-    print(f"   new_exclusions is None: {new_exclusions is None}")
-    print(f"   new_exclusions is empty list: {new_exclusions == []}")
+    debug_log(f"🔍 DEBUG ITERATION: extract_fps_func returned:")
+    debug_log(f"   fp_data shape: {fp_data.shape if hasattr(fp_data, 'shape') else 'Not a DataFrame'}")
+    debug_log(f"   new_exclusions type: {type(new_exclusions)}")
+    debug_log(f"   new_exclusions length: {len(new_exclusions) if new_exclusions else 0}")
+    debug_log(f"   new_exclusions is None: {new_exclusions is None}")
+    debug_log(f"   new_exclusions is empty list: {new_exclusions == []}")
     if new_exclusions and len(new_exclusions) > 0:
-        print(f"   Sample exclusion: {new_exclusions[0]}")
+        debug_log(f"   Sample exclusion: {new_exclusions[0]}")
     else:
-        print(f"   ⚠️ WARNING: new_exclusions is empty!")
+        debug_log(f"   ⚠️ WARNING: new_exclusions is empty!")
 
     # 📊 TRACKING: Export false positives extracted
     tracker = get_tracker()
@@ -98,18 +99,18 @@ def run_single_iteration(
             pickle.dump(fp_data, f)
     
     # DEBUG: Log exclusions saving logic
-    print(f"🔍 DEBUG ITERATION: Checking if exclusions should be saved...")
-    print(f"   new_exclusions: {new_exclusions}")
-    print(f"   bool(new_exclusions): {bool(new_exclusions)}")
-    print(f"   Condition 'if new_exclusions': {bool(new_exclusions)}")
+    debug_log(f"🔍 DEBUG ITERATION: Checking if exclusions should be saved...")
+    debug_log(f"   new_exclusions: {new_exclusions}")
+    debug_log(f"   bool(new_exclusions): {bool(new_exclusions)}")
+    debug_log(f"   Condition 'if new_exclusions': {bool(new_exclusions)}")
     
     if new_exclusions: 
-        print(f"🔍 DEBUG ITERATION: Saving {len(new_exclusions)} exclusions to exclusions.json")
+        debug_log(f"🔍 DEBUG ITERATION: Saving {len(new_exclusions)} exclusions to exclusions.json")
         with open(iteration_output_dir / "exclusions.json", 'w') as f:
             json.dump(new_exclusions, f, indent=2)
     else:
-        print(f"🔍 DEBUG ITERATION: NOT saving exclusions.json because new_exclusions is falsy")
-        print(f"   This is why no exclusions.json file was created!")
+        debug_log(f"🔍 DEBUG ITERATION: NOT saving exclusions.json because new_exclusions is falsy")
+        debug_log(f"   This is why no exclusions.json file was created!")
     
     with open(iteration_output_dir / "training_results.json", 'w') as f:
         json.dump(metrics, f, indent=2)

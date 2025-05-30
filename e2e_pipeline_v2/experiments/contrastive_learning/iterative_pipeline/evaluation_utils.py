@@ -161,11 +161,11 @@ def extract_false_positives(evaluation_results: pd.DataFrame,
     print("🚨 Extracting false positives as negative examples...")
     
     # DEBUG: Add detailed logging at start
-    print(f"🔍 DEBUG EXTRACT_FP: Starting extraction")
-    print(f"🔍 DEBUG EXTRACT_FP: evaluation_results shape: {evaluation_results.shape}")
-    print(f"🔍 DEBUG EXTRACT_FP: evaluation_results columns: {list(evaluation_results.columns)}")
-    print(f"🔍 DEBUG EXTRACT_FP: predictions_for_eval shape: {predictions_for_eval.shape}")
-    print(f"🔍 DEBUG EXTRACT_FP: predictions_for_eval columns: {list(predictions_for_eval.columns)}")
+    debug_log(f"🔍 DEBUG EXTRACT_FP: Starting extraction")
+    debug_log(f"🔍 DEBUG EXTRACT_FP: evaluation_results shape: {evaluation_results.shape}")
+    debug_log(f"🔍 DEBUG EXTRACT_FP: evaluation_results columns: {list(evaluation_results.columns)}")
+    debug_log(f"🔍 DEBUG EXTRACT_FP: predictions_for_eval shape: {predictions_for_eval.shape}")
+    debug_log(f"🔍 DEBUG EXTRACT_FP: predictions_for_eval columns: {list(predictions_for_eval.columns)}")
     
     fp_cases = evaluation_results[evaluation_results[COL_CLASSIFICATION] == 'FP'].copy()
     if fp_cases.empty:
@@ -175,9 +175,9 @@ def extract_false_positives(evaluation_results: pd.DataFrame,
     print("🚨 Found {} false positive cases (from evaluation_results).".format(len(fp_cases)))
     
     # DEBUG: Show sample false positive cases
-    print(f"🔍 DEBUG EXTRACT_FP: Sample FP cases:")
+    debug_log(f"🔍 DEBUG EXTRACT_FP: Sample FP cases:")
     for i, (_, row) in enumerate(fp_cases.head(3).iterrows()):
-        print(f"   FP {i+1}: Video={row.get(COL_VIDEO)}, Class={row.get(COL_CLASS)}, Frame={row.get(COL_FRAME)}")
+        debug_log(f"   FP {i+1}: Video={row.get(COL_VIDEO)}, Class={row.get(COL_CLASS)}, Frame={row.get(COL_FRAME)}")
     
     fp_data_list = [] 
     exclusion_list = []
@@ -202,10 +202,10 @@ def extract_false_positives(evaluation_results: pd.DataFrame,
         
         # DEBUG: Log each FP being processed
         if processed_count <= 5:  # Log first 5 in detail
-            print(f"🔍 DEBUG EXTRACT_FP: Processing FP #{processed_count}")
-            print(f"   Video: {video_val} (type: {type(video_val)})")
-            print(f"   Class: {wrongly_predicted_as_class_val}")
-            print(f"   Frame: {frame_of_fp_val} (type: {type(frame_of_fp_val)})")
+            debug_log(f"🔍 DEBUG EXTRACT_FP: Processing FP #{processed_count}")
+            debug_log(f"   Video: {video_val} (type: {type(video_val)})")
+            debug_log(f"   Class: {wrongly_predicted_as_class_val}")
+            debug_log(f"   Frame: {frame_of_fp_val} (type: {type(frame_of_fp_val)})")
         
         if frame_of_fp_val is None or pd.isna(frame_of_fp_val):
             print("⚠️ Skipping FP with no valid frame: Video {}, Class {}".format(video_val, wrongly_predicted_as_class_val))
@@ -229,7 +229,7 @@ def extract_false_positives(evaluation_results: pd.DataFrame,
         
         # DEBUG: Log frame conversion result
         if processed_count <= 5:
-            print(f"   Frame after conversion: {frame_of_fp_val} (type: {type(frame_of_fp_val)})")
+            debug_log(f"   Frame after conversion: {frame_of_fp_val} (type: {type(frame_of_fp_val)})")
         
         original_pred_entry_df = predictions_for_eval[
             (predictions_for_eval[COL_VIDEO] == video_val) &
@@ -239,17 +239,17 @@ def extract_false_positives(evaluation_results: pd.DataFrame,
         
         # DEBUG: Log matching results
         if processed_count <= 5:
-            print(f"   Matching predictions found: {len(original_pred_entry_df)}")
+            debug_log(f"   Matching predictions found: {len(original_pred_entry_df)}")
             if len(original_pred_entry_df) == 0:
                 # Debug why no match was found
                 video_matches = predictions_for_eval[predictions_for_eval[COL_VIDEO] == video_val]
                 class_matches = predictions_for_eval[predictions_for_eval[COL_VISUAL_PRED_OBJECT] == wrongly_predicted_as_class_val]
                 frame_matches = predictions_for_eval[predictions_for_eval[COL_FRAME] == frame_of_fp_val]
-                print(f"     Video matches: {len(video_matches)}")
-                print(f"     Class matches: {len(class_matches)}")
-                print(f"     Frame matches: {len(frame_matches)}")
+                debug_log(f"     Video matches: {len(video_matches)}")
+                debug_log(f"     Class matches: {len(class_matches)}")
+                debug_log(f"     Frame matches: {len(frame_matches)}")
                 if len(video_matches) > 0:
-                    print(f"     Sample video match frames: {video_matches[COL_FRAME].unique()[:5]}")
+                    debug_log(f"     Sample video match frames: {video_matches[COL_FRAME].unique()[:5]}")
         
         if original_pred_entry_df.empty:
             print("⚠️ Could not find original embedding for FP in 'predictions_for_eval': "
@@ -285,25 +285,25 @@ def extract_false_positives(evaluation_results: pd.DataFrame,
         
         # DEBUG: Log successful exclusion creation
         if exclusion_created_count <= 5:
-            print(f"🔍 DEBUG EXTRACT_FP: Created exclusion #{exclusion_created_count}")
-            print(f"   Exclusion: Video={video_val}, Frame={frame_of_fp_val}, Class={negative_class_label}")
+            debug_log(f"🔍 DEBUG EXTRACT_FP: Created exclusion #{exclusion_created_count}")
+            debug_log(f"   Exclusion: Video={video_val}, Frame={frame_of_fp_val}, Class={negative_class_label}")
     
     # DEBUG: Final statistics
-    print(f"🔍 DEBUG EXTRACT_FP: FINAL STATISTICS")
-    print(f"   Total FP cases found: {len(fp_cases)}")
-    print(f"   FP cases processed: {processed_count}")
-    print(f"   FP cases skipped: {skipped_count}")
-    print(f"   Successful embeddings extracted: {len(fp_data_list)}")
-    print(f"   Successful exclusions created: {exclusion_created_count}")
-    print(f"   Final exclusion_list length: {len(exclusion_list)}")
+    debug_log(f"🔍 DEBUG EXTRACT_FP: FINAL STATISTICS")
+    debug_log(f"   Total FP cases found: {len(fp_cases)}")
+    debug_log(f"   FP cases processed: {processed_count}")
+    debug_log(f"   FP cases skipped: {skipped_count}")
+    debug_log(f"   Successful embeddings extracted: {len(fp_data_list)}")
+    debug_log(f"   Successful exclusions created: {exclusion_created_count}")
+    debug_log(f"   Final exclusion_list length: {len(exclusion_list)}")
     
     # DEBUG: Show sample exclusions
     if exclusion_list:
-        print(f"🔍 DEBUG EXTRACT_FP: Sample exclusions:")
+        debug_log(f"🔍 DEBUG EXTRACT_FP: Sample exclusions:")
         for i, exc in enumerate(exclusion_list[:3]):
-            print(f"   Exclusion {i+1}: {exc}")
+            debug_log(f"   Exclusion {i+1}: {exc}")
     else:
-        print(f"🔍 DEBUG EXTRACT_FP: ⚠️ WARNING: exclusion_list is EMPTY despite finding {len(fp_cases)} FP cases!")
+        debug_log(f"🔍 DEBUG EXTRACT_FP: ⚠️ WARNING: exclusion_list is EMPTY despite finding {len(fp_cases)} FP cases!")
     
     fp_df_output = pd.DataFrame(fp_data_list) 
     if not fp_df_output.empty:
@@ -315,9 +315,9 @@ def extract_false_positives(evaluation_results: pd.DataFrame,
         print("🏷️ Negative classes created: {}".format(fp_df_output[COL_CLASS].value_counts().to_dict()))
     
     # DEBUG: Final return values
-    print(f"🔍 DEBUG EXTRACT_FP: RETURNING:")
-    print(f"   fp_df_output shape: {fp_df_output.shape}")
-    print(f"   exclusion_list length: {len(exclusion_list)}")
+    debug_log(f"🔍 DEBUG EXTRACT_FP: RETURNING:")
+    debug_log(f"   fp_df_output shape: {fp_df_output.shape}")
+    debug_log(f"   exclusion_list length: {len(exclusion_list)}")
     
     return fp_df_output, exclusion_list
 

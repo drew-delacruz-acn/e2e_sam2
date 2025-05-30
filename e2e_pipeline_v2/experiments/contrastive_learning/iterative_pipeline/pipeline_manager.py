@@ -200,16 +200,16 @@ def run_iterative_pipeline(
             exclusion_tracker[i] = new_exclusions 
         
         # DEBUG: Log exclusion tracker state after update
-        print(f"🔍 DEBUG PIPELINE: Exclusion tracker updated after iteration {i}:")
-        print(f"   new_exclusions length: {len(new_exclusions) if new_exclusions else 0}")
-        print(f"   Exclusion tracker keys: {list(exclusion_tracker.keys())}")
-        print(f"   Total exclusions in tracker: {sum(len(v) for v in exclusion_tracker.values())}")
+        debug_log(f"🔍 DEBUG PIPELINE: Exclusion tracker updated after iteration {i}:")
+        debug_log(f"   new_exclusions length: {len(new_exclusions) if new_exclusions else 0}")
+        debug_log(f"   Exclusion tracker keys: {list(exclusion_tracker.keys())}")
+        debug_log(f"   Total exclusions in tracker: {sum(len(v) for v in exclusion_tracker.values())}")
         for iter_key, exclusions in exclusion_tracker.items():
-            print(f"   Iteration {iter_key}: {len(exclusions)} exclusions")
+            debug_log(f"   Iteration {iter_key}: {len(exclusions)} exclusions")
         if i in exclusion_tracker:
-            print(f"   Iteration {i} exclusions added successfully")
+            debug_log(f"   Iteration {i} exclusions added successfully")
         else:
-            print(f"   ⚠️ WARNING: Iteration {i} exclusions NOT added to tracker!")
+            debug_log(f"   ⚠️ WARNING: Iteration {i} exclusions NOT added to tracker!")
         
         # 📊 TRACKING: Export exclusions added this iteration
         tracker.export_exclusions_added(i, new_exclusions or [])

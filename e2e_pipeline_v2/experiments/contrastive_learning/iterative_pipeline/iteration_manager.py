@@ -134,8 +134,8 @@ def run_single_iteration(
         can_use_emb_tuple = (
             'emb_tuple' in temp_td.columns and temp_td['emb_tuple'].notna().any() and
             'emb_tuple' in temp_fp.columns and temp_fp['emb_tuple'].notna().any() and
-            all(isinstance(x, tuple) for x in temp_td['emb_tuple'].dropna() if pd.notna(x)) and
-            all(isinstance(x, tuple) for x in temp_fp['emb_tuple'].dropna() if pd.notna(x))
+            all(isinstance(x, tuple) for x in temp_td['emb_tuple'].dropna() if x is not None) and
+            all(isinstance(x, tuple) for x in temp_fp['emb_tuple'].dropna() if x is not None)
         )
         
         if can_use_emb_tuple:

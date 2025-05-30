@@ -121,18 +121,61 @@ def run_single_iteration(
     current_training_data_len = len(training_data)
     new_training_data_iter = training_data.copy() 
 
+    debug_log(f"🔍 TRAINING_DATA DEBUG: Starting training data update process")
+    debug_log(f"   Iteration {iteration}: current_training_data_len = {current_training_data_len}")
+    debug_log(f"   fp_data.empty = {fp_data.empty}")
+    debug_log(f"   fp_data length = {len(fp_data) if not fp_data.empty else 0}")
+
     if not fp_data.empty:
+        debug_log(f"🔍 TRAINING_DATA DEBUG: Creating temp DataFrames")
         temp_td = new_training_data_iter.copy()
         temp_fp = fp_data.copy()
         
-        for df, _ in [(temp_td, "temp_td"), (temp_fp, "temp_fp")]:
+        # DEBUG: Log initial DataFrame info
+        debug_log(f"   temp_td shape: {temp_td.shape}")
+        debug_log(f"   temp_td columns: {list(temp_td.columns)}")
+        debug_log(f"   temp_fp shape: {temp_fp.shape}")
+        debug_log(f"   temp_fp columns: {list(temp_fp.columns)}")
+        
+        for df, name in [(temp_td, "temp_td"), (temp_fp, "temp_fp")]:
+            debug_log(f"🔍 TRAINING_DATA DEBUG: Processing {name}")
+            debug_log(f"   {name} has COL_EMBEDDING: {COL_EMBEDDING in df.columns}")
+            debug_log(f"   {name} is empty: {df.empty}")
+            
+            if COL_EMBEDDING in df.columns and not df.empty:
+                first_embedding = df[COL_EMBEDDING].iloc[0]
+                debug_log(f"   {name} first embedding type: {type(first_embedding)}")
+                debug_log(f"   {name} first embedding is ndarray: {isinstance(first_embedding, np.ndarray)}")
+            
             if COL_EMBEDDING in df.columns and not df.empty and isinstance(df[COL_EMBEDDING].iloc[0], np.ndarray):
                 df['emb_tuple'] = df[COL_EMBEDDING].apply(lambda x: tuple(x) if isinstance(x, np.ndarray) else x)
+                debug_log(f"   {name} added emb_tuple column (ndarray path)")
             elif COL_EMBEDDING in df.columns:
                 df['emb_tuple'] = df[COL_EMBEDDING] 
-            else: df['emb_tuple'] = pd.Series(dtype='object', index=df.index)
+                debug_log(f"   {name} added emb_tuple column (direct copy path)")
+            else: 
+                df['emb_tuple'] = pd.Series(dtype='object', index=df.index)
+                debug_log(f"   {name} added empty emb_tuple column (missing COL_EMBEDDING)")
         
         dedup_cols = [COL_CLASS]
+        debug_log(f"🔍 TRAINING_DATA DEBUG: Checking emb_tuple compatibility")
+        debug_log(f"   temp_td has emb_tuple: {'emb_tuple' in temp_td.columns}")
+        debug_log(f"   temp_fp has emb_tuple: {'emb_tuple' in temp_fp.columns}")
+        
+        if 'emb_tuple' in temp_td.columns:
+            debug_log(f"   temp_td emb_tuple notna count: {temp_td['emb_tuple'].notna().sum()}")
+            if temp_td['emb_tuple'].notna().any():
+                first_tuple = temp_td['emb_tuple'].dropna().iloc[0]
+                debug_log(f"   temp_td first emb_tuple type: {type(first_tuple)}")
+                debug_log(f"   temp_td first emb_tuple is tuple: {isinstance(first_tuple, tuple)}")
+        
+        if 'emb_tuple' in temp_fp.columns:
+            debug_log(f"   temp_fp emb_tuple notna count: {temp_fp['emb_tuple'].notna().sum()}")
+            if temp_fp['emb_tuple'].notna().any():
+                first_tuple = temp_fp['emb_tuple'].dropna().iloc[0]
+                debug_log(f"   temp_fp first emb_tuple type: {type(first_tuple)}")
+                debug_log(f"   temp_fp first emb_tuple is tuple: {isinstance(first_tuple, tuple)}")
+        
         can_use_emb_tuple = (
             'emb_tuple' in temp_td.columns and temp_td['emb_tuple'].notna().any() and
             'emb_tuple' in temp_fp.columns and temp_fp['emb_tuple'].notna().any() and
@@ -140,31 +183,80 @@ def run_single_iteration(
             all(isinstance(x, tuple) for x in temp_fp['emb_tuple'].dropna() if x is not None)
         )
         
+        debug_log(f"🔍 TRAINING_DATA DEBUG: can_use_emb_tuple = {can_use_emb_tuple}")
+        
         if can_use_emb_tuple:
+            debug_log(f"🔍 TRAINING_DATA DEBUG: Using sophisticated deduplication path")
             dedup_cols.append('emb_tuple')
             cols_to_keep_from_temp = [COL_CLASS, COL_EMBEDDING, 'emb_tuple']
+            debug_log(f"   cols_to_keep_from_temp: {cols_to_keep_from_temp}")
+            
             df_list_for_concat = []
-            if all(c in temp_td.columns for c in cols_to_keep_from_temp): df_list_for_concat.append(temp_td[cols_to_keep_from_temp])
-            if all(c in temp_fp.columns for c in cols_to_keep_from_temp): df_list_for_concat.append(temp_fp[cols_to_keep_from_temp])
+            
+            # Check temp_td columns
+            td_has_all_cols = all(c in temp_td.columns for c in cols_to_keep_from_temp)
+            debug_log(f"   temp_td has all required columns: {td_has_all_cols}")
+            debug_log(f"   temp_td missing columns: {[c for c in cols_to_keep_from_temp if c not in temp_td.columns]}")
+            if td_has_all_cols:
+                df_list_for_concat.append(temp_td[cols_to_keep_from_temp])
+                debug_log(f"   ✅ Added temp_td to concat list (shape: {temp_td[cols_to_keep_from_temp].shape})")
+            else:
+                debug_log(f"   ❌ temp_td REJECTED - missing required columns!")
+            
+            # Check temp_fp columns  
+            fp_has_all_cols = all(c in temp_fp.columns for c in cols_to_keep_from_temp)
+            debug_log(f"   temp_fp has all required columns: {fp_has_all_cols}")
+            debug_log(f"   temp_fp missing columns: {[c for c in cols_to_keep_from_temp if c not in temp_fp.columns]}")
+            if fp_has_all_cols:
+                df_list_for_concat.append(temp_fp[cols_to_keep_from_temp])
+                debug_log(f"   ✅ Added temp_fp to concat list (shape: {temp_fp[cols_to_keep_from_temp].shape})")
+            else:
+                debug_log(f"   ❌ temp_fp REJECTED - missing required columns!")
+
+            debug_log(f"🔍 TRAINING_DATA DEBUG: df_list_for_concat length: {len(df_list_for_concat)}")
+            debug_log(f"   DataFrames in concat list: {[df.shape for df in df_list_for_concat]}")
 
             if df_list_for_concat: 
                 combined_temp = pd.concat(df_list_for_concat, ignore_index=True)
+                debug_log(f"   Combined temp shape before dedup: {combined_temp.shape}")
+                debug_log(f"   Combined temp classes: {combined_temp[COL_CLASS].value_counts().to_dict()}")
+                
                 if not combined_temp.empty:
+                    debug_log(f"   Applying deduplication on columns: {dedup_cols}")
                     new_training_data_iter = combined_temp.drop_duplicates(subset=dedup_cols, keep='first')[[COL_CLASS, COL_EMBEDDING]].reset_index(drop=True)
+                    debug_log(f"   ✅ SOPHISTICATED PATH SUCCESS: Final shape {new_training_data_iter.shape}")
+                    debug_log(f"   Final classes: {new_training_data_iter[COL_CLASS].value_counts().to_dict()}")
                 else: 
+                    debug_log(f"   ❌ Combined temp is empty!")
                     new_training_data_iter = pd.DataFrame(columns=[COL_CLASS, COL_EMBEDDING]) 
             else: 
+                debug_log(f"   ❌ df_list_for_concat is empty - falling back!")
                 can_use_emb_tuple = False 
         
         if not can_use_emb_tuple: 
+            debug_log(f"🔍 TRAINING_DATA DEBUG: Using fallback deduplication path")
             print("⚠️ Fallback deduplication path chosen.")
             combined_orig = pd.concat([training_data, fp_data], ignore_index=True)
+            debug_log(f"   Fallback combined shape: {combined_orig.shape}")
+            debug_log(f"   Fallback combined classes: {combined_orig[COL_CLASS].value_counts().to_dict()}")
+            
             if COL_CLASS in combined_orig.columns:
                 new_training_data_iter = combined_orig.drop_duplicates(subset=[COL_CLASS], keep='first').reset_index(drop=True)
-            else: new_training_data_iter = combined_orig
+                debug_log(f"   ✅ FALLBACK PATH: Final shape {new_training_data_iter.shape}")
+                debug_log(f"   Final classes: {new_training_data_iter[COL_CLASS].value_counts().to_dict()}")
+            else: 
+                debug_log(f"   ❌ COL_CLASS missing from combined_orig!")
+                new_training_data_iter = combined_orig
 
         added_count = len(new_training_data_iter) - current_training_data_len
-        print(f"🔄 Training data update: {current_training_data_len} initial + {len(fp_data)} new FPs -> {len(new_training_data_iter)} total ({added_count} unique added).")
+        debug_log(f"🔍 TRAINING_DATA DEBUG: FINAL SUMMARY")
+        debug_log(f"   Started with: {current_training_data_len} samples")
+        debug_log(f"   Added FPs: {len(fp_data)} samples") 
+        debug_log(f"   Final result: {len(new_training_data_iter)} samples")
+        debug_log(f"   Net change: {added_count} samples")
+        debug_log(f"   Expected minimum: {current_training_data_len + len(fp_data)} samples")
+        if len(new_training_data_iter) < current_training_data_len:
+            debug_log(f"   🚨 CRITICAL BUG: Training data SHRANK by {current_training_data_len - len(new_training_data_iter)} samples!")
     else:
         print(f"🔄 No new FPs. Training data size: {len(new_training_data_iter)}.")
         

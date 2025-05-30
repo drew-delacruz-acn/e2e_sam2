@@ -1,0 +1,25 @@
+=== EXCLUSION TRACKING DETAILS ===
+Total iterations: 2
+Total exclusions: 88
+
+ITERATION 1: 88 exclusions
+  not_Aligator Loki Plushie: 7 samples
+  not_Boastful Loki Armor: 2 samples
+  not_Loki's Armor: 3 samples
+  not_Loki's Variant uniform: 6 samples
+  not_Loki's dagger: 3 samples
+  not_Ravonna Renslayer's Uniform: 5 samples
+  not_Sylvie's Armor: 1 samples
+  not_Sylvie's horned headpiece: 3 samples
+  not_Sylvie's machete: 12 samples
+  not_TVA Collar: 6 samples
+  not_TVA Monitor: 1 samples
+  not_TVA Prisoner Uniform: 11 samples
+  not_TemPad: 16 samples
+  not_Time Stick: 3 samples
+  not_TimeSpear: 9 samples
+  Sample exclusions:
+    Scenes 001-020__106D:83 -> not_Loki's Variant uniform
+    Scenes 001-020__106E:13 -> not_TVA Prisoner Uniform
+    Scenes 001-020__108E:75 -> not_Loki's Variant uniform
+    ... and 85 more

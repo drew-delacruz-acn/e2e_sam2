@@ -144,18 +144,33 @@ def run_single_iteration(
             
             if COL_EMBEDDING in df.columns and not df.empty:
                 first_embedding = df[COL_EMBEDDING].iloc[0]
-                debug_log(f"   {name} first embedding type: {type(first_embedding)}")
-                debug_log(f"   {name} first embedding is ndarray: {isinstance(first_embedding, np.ndarray)}")
-            
-            if COL_EMBEDDING in df.columns and not df.empty and isinstance(df[COL_EMBEDDING].iloc[0], np.ndarray):
-                df['emb_tuple'] = df[COL_EMBEDDING].apply(lambda x: tuple(x) if isinstance(x, np.ndarray) else x)
-                debug_log(f"   {name} added emb_tuple column (ndarray path)")
-            elif COL_EMBEDDING in df.columns:
-                df['emb_tuple'] = df[COL_EMBEDDING] 
-                debug_log(f"   {name} added emb_tuple column (direct copy path)")
-            else: 
+                debug_log(f"   {name} first embedding type BEFORE: {type(first_embedding)}")
+                debug_log(f"   {name} first embedding is ndarray BEFORE: {isinstance(first_embedding, np.ndarray)}")
+                
+                # SOLUTION 1: Normalize all embeddings to numpy arrays first
+                debug_log(f"   🔧 FIXING: Converting all embeddings to numpy arrays first")
+                df[COL_EMBEDDING] = df[COL_EMBEDDING].apply(lambda x: 
+                    np.array(x) if isinstance(x, list) else x
+                )
+                
+                # Verify conversion
+                first_embedding_after = df[COL_EMBEDDING].iloc[0]
+                debug_log(f"   {name} first embedding type AFTER: {type(first_embedding_after)}")
+                debug_log(f"   {name} first embedding is ndarray AFTER: {isinstance(first_embedding_after, np.ndarray)}")
+                
+                # Then convert to tuples consistently
+                df['emb_tuple'] = df[COL_EMBEDDING].apply(lambda x: 
+                    tuple(x) if isinstance(x, np.ndarray) else x
+                )
+                debug_log(f"   ✅ {name} standardized embeddings and added emb_tuple column")
+                
+                # Verify final tuple conversion
+                first_tuple = df['emb_tuple'].iloc[0]
+                debug_log(f"   {name} first emb_tuple type: {type(first_tuple)}")
+                debug_log(f"   {name} first emb_tuple is tuple: {isinstance(first_tuple, tuple)}")
+            else:
                 df['emb_tuple'] = pd.Series(dtype='object', index=df.index)
-                debug_log(f"   {name} added empty emb_tuple column (missing COL_EMBEDDING)")
+                debug_log(f"   {name} added empty emb_tuple column (missing COL_EMBEDDING or empty)")
         
         dedup_cols = [COL_CLASS]
         debug_log(f"🔍 TRAINING_DATA DEBUG: Checking emb_tuple compatibility")
@@ -185,8 +200,21 @@ def run_single_iteration(
         
         debug_log(f"🔍 TRAINING_DATA DEBUG: can_use_emb_tuple = {can_use_emb_tuple}")
         
+        # Additional validation logging
+        if 'emb_tuple' in temp_td.columns and temp_td['emb_tuple'].notna().any():
+            td_tuple_types = [type(x) for x in temp_td['emb_tuple'].dropna()[:3]]
+            debug_log(f"   temp_td sample emb_tuple types: {td_tuple_types}")
+            td_all_tuples = all(isinstance(x, tuple) for x in temp_td['emb_tuple'].dropna() if x is not None)
+            debug_log(f"   temp_td all emb_tuples are tuples: {td_all_tuples}")
+        
+        if 'emb_tuple' in temp_fp.columns and temp_fp['emb_tuple'].notna().any():
+            fp_tuple_types = [type(x) for x in temp_fp['emb_tuple'].dropna()[:3]]
+            debug_log(f"   temp_fp sample emb_tuple types: {fp_tuple_types}")
+            fp_all_tuples = all(isinstance(x, tuple) for x in temp_fp['emb_tuple'].dropna() if x is not None)
+            debug_log(f"   temp_fp all emb_tuples are tuples: {fp_all_tuples}")
+        
         if can_use_emb_tuple:
-            debug_log(f"🔍 TRAINING_DATA DEBUG: Using sophisticated deduplication path")
+            debug_log(f"   🎉 SUCCESS: Data types are now compatible - using sophisticated deduplication!")
             dedup_cols.append('emb_tuple')
             cols_to_keep_from_temp = [COL_CLASS, COL_EMBEDDING, 'emb_tuple']
             debug_log(f"   cols_to_keep_from_temp: {cols_to_keep_from_temp}")

@@ -151,10 +151,27 @@ class IterationTracker:
         fp_cases['extraction_timestamp'] = datetime.now().isoformat()
         fp_cases['reason'] = 'false_positive_for_training'
         
-        # Add embedding info if available in fp_data
-        if not fp_data.empty and 'finetuned_embedding' in fp_data.columns:
-            fp_cases['negative_class_created'] = fp_data['class'].tolist()
-            fp_cases['embedding_available'] = True
+        # Add embedding info if available in fp_data - FIXED for capping
+        if not fp_data.empty and 'class' in fp_data.columns:
+            # Create a mapping from fp_data to match against fp_cases
+            # fp_data contains negative classes like "not_TemPad", "not_TimeSpear"
+            # fp_cases contains original classes like "TemPad", "TimeSpear"
+            fp_data_classes = {}
+            for _, row in fp_data.iterrows():
+                negative_class = row['class']
+                if negative_class.startswith('not_'):
+                    original_class = negative_class[4:]  # Remove "not_" prefix
+                    fp_data_classes[original_class] = negative_class
+            
+            # Map fp_cases to indicate which got negative classes created
+            # This handles the length mismatch: fp_cases (88) vs fp_data (28)
+            fp_cases['negative_class_created'] = fp_cases['class'].map(fp_data_classes)
+            fp_cases['embedding_available'] = fp_cases['negative_class_created'].notna()
+            
+            # Debug info for verification
+            processed_count = fp_cases['embedding_available'].sum()
+            total_count = len(fp_cases)
+            print(f"📊 FP Processing Summary: {processed_count}/{total_count} FPs processed for training (rest kept in test set)")
         else:
             fp_cases['negative_class_created'] = None
             fp_cases['embedding_available'] = False

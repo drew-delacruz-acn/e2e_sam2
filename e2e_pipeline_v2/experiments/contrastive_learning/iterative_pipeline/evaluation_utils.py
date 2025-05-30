@@ -46,29 +46,37 @@ def evaluate_predictions(predictions: pd.DataFrame,
         debug_log(f"🔍 EVALUATE: Filtering ground truth using {exclusion_strategy} exclusion strategy")
         debug_log(f"   Original ground truth size: {len(ground_truth)}")
         
-        # Check if ground truth has required columns for filtering
-        required_cols = [COL_VIDEO, COL_FRAME]
-        missing_cols = [col for col in required_cols if col not in ground_truth.columns]
+        has_video = COL_VIDEO in ground_truth.columns
+        has_frame = COL_FRAME in ground_truth.columns
         
-        if missing_cols:
-            debug_log(f"   ⚠️ WARNING: Ground truth missing required columns {missing_cols} for filtering")
-            debug_log(f"   Available columns: {list(ground_truth.columns)}")
-            debug_log(f"   Skipping ground truth filtering - using full ground truth")
+        debug_log(f"   Ground truth columns: {list(ground_truth.columns)}")
+        debug_log(f"   Has video column: {has_video}")
+        debug_log(f"   Has frame column: {has_frame}")
+        
+        if not has_video:
+            debug_log(f"   ⚠️ ERROR: Ground truth missing video column - cannot filter")
             filtered_ground_truth = ground_truth
-        else:
-            # Filter ground truth using the same logic as prediction data
-            filtered_ground_truth = filter_evaluation_data(
-                ground_truth, exclusion_tracker, 
-                exclude_training=True, exclusion_strategy=exclusion_strategy
-            )
-            
+        elif exclusion_strategy == 'video-level':
+            # VIDEO-LEVEL: Remove entire videos that have any excluded frames
+            debug_log(f"   ✅ Applying video-level filtering to ground truth")
+            filtered_ground_truth = _filter_ground_truth_video_level(ground_truth, exclusion_tracker)
             debug_log(f"   Filtered ground truth size: {len(filtered_ground_truth)}")
             debug_log(f"   Ground truth reduction: {len(ground_truth) - len(filtered_ground_truth)} samples removed")
+        elif exclusion_strategy == 'frame-level':
+            # FRAME-LEVEL: Fallback to video-level for ground truth (since no frame column)
+            debug_log(f"   ⚠️ Frame-level requested but ground truth lacks frame column")
+            debug_log(f"   Falling back to video-level filtering for ground truth")
+            filtered_ground_truth = _filter_ground_truth_video_level(ground_truth, exclusion_tracker)
+            debug_log(f"   Filtered ground truth size: {len(filtered_ground_truth)}")
+            debug_log(f"   Ground truth reduction: {len(ground_truth) - len(filtered_ground_truth)} samples removed")
+        else:
+            debug_log(f"   ⚠️ Unknown exclusion strategy: {exclusion_strategy}")
+            filtered_ground_truth = ground_truth
             
-            if len(filtered_ground_truth) == 0:
-                debug_log(f"   ⚠️ WARNING: All ground truth samples were excluded!")
-                metrics = {'f1': 0.0, 'precision': 0.0, 'recall': 0.0, 'TP': 0, 'FP': 0, 'FN': 0, 'TN': 0}
-                return pd.DataFrame(columns=[COL_VIDEO, COL_CLASS, COL_ACTUAL, COL_PREDICTED, 'confidence', COL_FRAME, COL_CLASSIFICATION]), metrics
+        if len(filtered_ground_truth) == 0:
+            debug_log(f"   ⚠️ WARNING: All ground truth samples were excluded!")
+            metrics = {'f1': 0.0, 'precision': 0.0, 'recall': 0.0, 'TP': 0, 'FP': 0, 'FN': 0, 'TN': 0}
+            return pd.DataFrame(columns=[COL_VIDEO, COL_CLASS, COL_ACTUAL, COL_PREDICTED, 'confidence', COL_FRAME, COL_CLASSIFICATION]), metrics
     else:
         debug_log(f"🔍 EVALUATE: Using full ground truth (no exclusions)")
         filtered_ground_truth = ground_truth
@@ -537,4 +545,37 @@ def filter_evaluation_data(resnet_data: pd.DataFrame,
         Filtered DataFrame for evaluation
     """
     # Use the enhanced filter function
-    return filter_evaluation_data_enhanced(resnet_data, exclusion_tracker, exclude_training, exclusion_strategy) 
+    return filter_evaluation_data_enhanced(resnet_data, exclusion_tracker, exclude_training, exclusion_strategy)
+
+def _filter_ground_truth_video_level(ground_truth: pd.DataFrame, exclusion_tracker: Dict) -> pd.DataFrame:
+    """Filter ground truth for video-level exclusions (works with ground truth's simple structure)."""
+    debug_log(f"🔍 GT_FILTER: Applying video-level exclusions to ground truth")
+    
+    # Collect all excluded videos from exclusions
+    excluded_videos = set()
+    total_frame_exclusions = 0
+    
+    for iteration_key, exclusions in exclusion_tracker.items():
+        debug_log(f"   Processing {len(exclusions)} exclusions from iteration {iteration_key}")
+        for exclusion in exclusions:
+            video = exclusion[COL_VIDEO]
+            excluded_videos.add(video)
+            total_frame_exclusions += 1
+    
+    if not excluded_videos:
+        debug_log(f"   No videos to exclude from ground truth")
+        return ground_truth.copy()
+    
+    debug_log(f"   Videos to exclude from ground truth: {len(excluded_videos)}")
+    debug_log(f"   Sample excluded videos: {list(excluded_videos)[:3]}")
+    
+    # Filter out ground truth samples from excluded videos
+    original_count = len(ground_truth)
+    mask = ~ground_truth[COL_VIDEO].isin(excluded_videos)
+    filtered_gt = ground_truth[mask].copy()
+    filtered_count = len(filtered_gt)
+    
+    debug_log(f"   Ground truth filtering: {original_count} → {filtered_count} samples")
+    debug_log(f"   Removed {original_count - filtered_count} ground truth samples from {len(excluded_videos)} videos")
+    
+    return filtered_gt 

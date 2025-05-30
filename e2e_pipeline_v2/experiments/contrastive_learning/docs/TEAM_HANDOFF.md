@@ -39,8 +39,8 @@ This pipeline runs the contrastive learning process, filters out the false posit
 
 # Example command (WORKS)
 python run_iterative_pipeline.py \
---definitive-objects /home/ubuntu/code/drew/e2e_sam2/data/definitiveObjects_jeremiah.pkl \
---resnet-predictions /home/ubuntu/code/libby/pipeline/data/finetuned_may19.pkl \
+--definitive-objects /home/ubuntu/code/drew/e2e_sam2/data/definitiveObjects_jeremiah.pkl \ ##DREW TO CHANGE THESE TO DATAFRAMES (COLS: CLASS/EMBEDDINGS)
+--resnet-predictions /home/ubuntu/code/libby/pipeline/data/finetuned_may19.pkl \ ####DREW TO CHANGE THESE TO DATAFRAMES 
 --tracking-info /home/ubuntu/code/libby/pipeline/data/sourceTruth_jeremiah.pkl \
 --iterations 2 \
 --epochs 50 \
@@ -49,6 +49,7 @@ python run_iterative_pipeline.py \
 --output NO_FPS_CAP \
 --exclude-training-from-eval \
 --video-level-exclusions \
+--max-fps-per-class 2
 
 
 

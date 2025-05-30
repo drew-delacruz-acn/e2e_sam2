@@ -10,14 +10,14 @@ from pathlib import Path
 def explain_filtering_mechanism():
     """Explain step-by-step how filtering works."""
     
-    tracking_dir = Path("/Users/andrewdelacruz/e2e_sam2/gitignore_exception/tracking_exports")
+    tracking_dir = Path("/Users/andrewdelacruz/e2e_sam2/e2e_pipeline_v2/experiments/contrastive_learning/results/exclude_frames_not_videos/tracking_exports")
     
     print("🔧 HOW FILTERING WORKS: COMPLETE MECHANISM EXPLANATION")
     print("=" * 70)
     
     # Load data
     iter1_exclusions = pd.read_csv(tracking_dir / "iteration_1_exclusions_added.csv")
-    iter2_exclusions = pd.read_csv(tracking_dir / "iteration_2_exclusions_added.csv")
+    # iter2_exclusions = pd.read_csv(tracking_dir / "iteration_2_exclusions_added.csv")
     impact = pd.read_csv(tracking_dir / "exclusion_impact_summary.csv")
     
     print("\n🎯 STEP 1: WHAT IS AN EXCLUSION?")
@@ -175,12 +175,12 @@ def explain_filtering_mechanism():
     
     # Show evidence from actual data
     iter1_classes = iter1_exclusions['class'].value_counts()
-    iter2_classes = iter2_exclusions['class'].value_counts()
+    # iter2_classes = iter2_exclusions['class'].value_counts()
     
     print("📊 Evidence filtering works:")
     print(f"   🔧 Applied {exclusions_88} filters in Iteration 2")
     print(f"   📉 Removed {filtered_304} evaluation samples")
-    print(f"   🎯 Found only {len(iter2_exclusions)} new false positives (vs {len(iter1_exclusions)} in Iteration 1)")
+    # print(f"   🎯 Found only {len(iter2_exclusions)} new false positives (vs {len(iter1_exclusions)} in Iteration 1)")
     print(f"   📈 F1 improved from 0.5067 to 0.5799")
     
     print("\n🏆 FILTERING MECHANISM SUMMARY")

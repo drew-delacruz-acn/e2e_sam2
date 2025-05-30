@@ -1,0 +1,618 @@
+[
+  {
+    "video": "Scenes 001-020__106D-5-_20230815151758589.mp4",
+    "frame": 83,
+    "class": "not_Loki's Variant uniform",
+    "original_wrong_prediction": "Loki's Variant uniform",
+    "reason": "false_positive_negative"
+  },
+  {
+    "video": "Scenes 001-020__106E-1- mos_20230727162142209.mp4",
+    "frame": 13,
+    "class": "not_TVA Prisoner Uniform",
+    "original_wrong_prediction": "TVA Prisoner Uniform",
+    "reason": "false_positive_negative"
+  },
+  {
+    "video": "Scenes 001-020__108E-1-_20230727173710924.mp4",
+    "frame": 75,
+    "class": "not_Loki's Variant uniform",
+    "original_wrong_prediction": "Loki's Variant uniform",
+    "reason": "false_positive_negative"
+  },
+  {
+    "video": "Scenes 001-020__108E-1-_20230727173710924.mp4",
+    "frame": 83,
+    "class": "not_TemPad",
+    "original_wrong_prediction": "TemPad",
+    "reason": "false_positive_negative"
+  },
+  {
+    "video": "Scenes 001-020__110A-2-_20230815160756908.mp4",
+    "frame": 77,
+    "class": "not_TVA Prisoner Uniform",
+    "original_wrong_prediction": "TVA Prisoner Uniform",
+    "reason": "false_positive_negative"
+  },
+  {
+    "video": "Scenes 001-020__110A-2-_20230815160756908.mp4",
+    "frame": 211,
+    "class": "not_TimeSpear",
+    "original_wrong_prediction": "TimeSpear",
+    "reason": "false_positive_negative"
+  },
+  {
+    "video": "Scenes 001-020__110C-1-_20230728125333457.mp4",
+    "frame": 176,
+    "class": "not_TemPad",
+    "original_wrong_prediction": "TemPad",
+    "reason": "false_positive_negative"
+  },
+  {
+    "video": "Scenes 001-020__111D-1-_20230728135829842.mp4",
+    "frame": 54,
+    "class": "not_TVA Collar",
+    "original_wrong_prediction": "TVA Collar",
+    "reason": "false_positive_negative"
+  },
+  {
+    "video": "Scenes 001-020__111D-1-_20230728135829842.mp4",
+    "frame": 155,
+    "class": "not_TemPad",
+    "original_wrong_prediction": "TemPad",
+    "reason": "false_positive_negative"
+  },
+  {
+    "video": "Scenes 001-020__201C-1-_20230815182005024.mp4",
+    "frame": 57,
+    "class": "not_Loki's Armor",
+    "original_wrong_prediction": "Loki's Armor",
+    "reason": "false_positive_negative"
+  },
+  {
+    "video": "Scenes 001-020__201D-2-_20230815184746334.mp4",
+    "frame": 41,
+    "class": "not_TimeSpear",
+    "original_wrong_prediction": "TimeSpear",
+    "reason": "false_positive_negative"
+  },
+  {
+    "video": "Scenes 001-020__201E-2-_20230728112604212.mp4",
+    "frame": 35,
+    "class": "not_Sylvie's horned headpiece",
+    "original_wrong_prediction": "Sylvie's horned headpiece",
+    "reason": "false_positive_negative"
+  },
+  {
+    "video": "Scenes 001-020__201K-1-_20230815184646280.mp4",
+    "frame": 20,
+    "class": "not_Sylvie's horned headpiece",
+    "original_wrong_prediction": "Sylvie's horned headpiece",
+    "reason": "false_positive_negative"
+  },
+  {
+    "video": "Scenes 001-020__201L-1-_20230728112628503.mp4",
+    "frame": 97,
+    "class": "not_Loki's Variant uniform",
+    "original_wrong_prediction": "Loki's Variant uniform",
+    "reason": "false_positive_negative"
+  },
+  {
+    "video": "Scenes 001-020__207A-1-_20230815182030372.mp4",
+    "frame": 61,
+    "class": "not_TVA Prisoner Uniform",
+    "original_wrong_prediction": "TVA Prisoner Uniform",
+    "reason": "false_positive_negative"
+  },
+  {
+    "video": "Scenes 001-020__211-1-_20230815190444533.mp4",
+    "frame": 9,
+    "class": "not_Boastful Loki Armor",
+    "original_wrong_prediction": "Boastful Loki Armor",
+    "reason": "false_positive_negative"
+  },
+  {
+    "video": "Scenes 001-020__211-1-_20230815190444533.mp4",
+    "frame": 158,
+    "class": "not_Loki's Variant uniform",
+    "original_wrong_prediction": "Loki's Variant uniform",
+    "reason": "false_positive_negative"
+  },
+  {
+    "video": "Scenes 001-020__211H-2-_20230815190456898.mp4",
+    "frame": 81,
+    "class": "not_TemPad",
+    "original_wrong_prediction": "TemPad",
+    "reason": "false_positive_negative"
+  },
+  {
+    "video": "Scenes 001-020__211H-2-_20230815190456898.mp4",
+    "frame": 35,
+    "class": "not_Time Stick",
+    "original_wrong_prediction": "Time Stick",
+    "reason": "false_positive_negative"
+  },
+  {
+    "video": "Scenes 001-020__213-3-_20230815180738197.mp4",
+    "frame": 65,
+    "class": "not_Sylvie's horned headpiece",
+    "original_wrong_prediction": "Sylvie's horned headpiece",
+    "reason": "false_positive_negative"
+  },
+  {
+    "video": "Scenes 001-020__213-3-_20230815180738197.mp4",
+    "frame": 76,
+    "class": "not_TemPad",
+    "original_wrong_prediction": "TemPad",
+    "reason": "false_positive_negative"
+  },
+  {
+    "video": "Scenes 001-020__216A-4b- only_20230815182553047.mp4",
+    "frame": 119,
+    "class": "not_Ravonna Renslayer's Uniform",
+    "original_wrong_prediction": "Ravonna Renslayer's Uniform",
+    "reason": "false_positive_negative"
+  },
+  {
+    "video": "Scenes 001-020__216A-4b- only_20230815182553047.mp4",
+    "frame": 89,
+    "class": "not_TVA Monitor",
+    "original_wrong_prediction": "TVA Monitor",
+    "reason": "false_positive_negative"
+  },
+  {
+    "video": "Scenes 001-020__220D-2-_20230815190723523.mp4",
+    "frame": 72,
+    "class": "not_Loki's Variant uniform",
+    "original_wrong_prediction": "Loki's Variant uniform",
+    "reason": "false_positive_negative"
+  },
+  {
+    "video": "Scenes 001-020__220D-2-_20230815190723523.mp4",
+    "frame": 28,
+    "class": "not_TimeSpear",
+    "original_wrong_prediction": "TimeSpear",
+    "reason": "false_positive_negative"
+  },
+  {
+    "video": "Scenes 001-020__302-2_20230815200213180.mp4",
+    "frame": 31,
+    "class": "not_Ravonna Renslayer's Uniform",
+    "original_wrong_prediction": "Ravonna Renslayer's Uniform",
+    "reason": "false_positive_negative"
+  },
+  {
+    "video": "Scenes 001-020__303K-3-_20230815223320788.mp4",
+    "frame": 185,
+    "class": "not_TimeSpear",
+    "original_wrong_prediction": "TimeSpear",
+    "reason": "false_positive_negative"
+  },
+  {
+    "video": "Scenes 001-020__303L-1-_20230815223024888.mp4",
+    "frame": 28,
+    "class": "not_TVA Prisoner Uniform",
+    "original_wrong_prediction": "TVA Prisoner Uniform",
+    "reason": "false_positive_negative"
+  },
+  {
+    "video": "Scenes 001-020__303L-1-_20230815223024888.mp4",
+    "frame": 90,
+    "class": "not_TimeSpear",
+    "original_wrong_prediction": "TimeSpear",
+    "reason": "false_positive_negative"
+  },
+  {
+    "video": "Scenes 001-020__305C-1_20230815193534665.mp4",
+    "frame": 14,
+    "class": "not_Ravonna Renslayer's Uniform",
+    "original_wrong_prediction": "Ravonna Renslayer's Uniform",
+    "reason": "false_positive_negative"
+  },
+  {
+    "video": "Scenes 001-020__306-1-_20230803124944118.mp4",
+    "frame": 62,
+    "class": "not_Sylvie's machete",
+    "original_wrong_prediction": "Sylvie's machete",
+    "reason": "false_positive_negative"
+  },
+  {
+    "video": "Scenes 001-020__306B-5-_20230815201805729.mp4",
+    "frame": 30,
+    "class": "not_Aligator Loki Plushie",
+    "original_wrong_prediction": "Aligator Loki Plushie",
+    "reason": "false_positive_negative"
+  },
+  {
+    "video": "Scenes 001-020__306B-5-_20230815201805729.mp4",
+    "frame": 65,
+    "class": "not_Sylvie's machete",
+    "original_wrong_prediction": "Sylvie's machete",
+    "reason": "false_positive_negative"
+  },
+  {
+    "video": "Scenes 001-020__306C-1-_20230815201919138.mp4",
+    "frame": 3,
+    "class": "not_Aligator Loki Plushie",
+    "original_wrong_prediction": "Aligator Loki Plushie",
+    "reason": "false_positive_negative"
+  },
+  {
+    "video": "Scenes 001-020__306C-1-_20230815201919138.mp4",
+    "frame": 68,
+    "class": "not_Sylvie's machete",
+    "original_wrong_prediction": "Sylvie's machete",
+    "reason": "false_positive_negative"
+  },
+  {
+    "video": "Scenes 001-020__306C-1-_20230815201919138.mp4",
+    "frame": 38,
+    "class": "not_TVA Prisoner Uniform",
+    "original_wrong_prediction": "TVA Prisoner Uniform",
+    "reason": "false_positive_negative"
+  },
+  {
+    "video": "Scenes 001-020__306E-1-_20230815201829547.mp4",
+    "frame": 25,
+    "class": "not_Aligator Loki Plushie",
+    "original_wrong_prediction": "Aligator Loki Plushie",
+    "reason": "false_positive_negative"
+  },
+  {
+    "video": "Scenes 001-020__306E-1-_20230815201829547.mp4",
+    "frame": 65,
+    "class": "not_Sylvie's machete",
+    "original_wrong_prediction": "Sylvie's machete",
+    "reason": "false_positive_negative"
+  },
+  {
+    "video": "Scenes 001-020__306E-1-_20230815201829547.mp4",
+    "frame": 47,
+    "class": "not_TVA Prisoner Uniform",
+    "original_wrong_prediction": "TVA Prisoner Uniform",
+    "reason": "false_positive_negative"
+  },
+  {
+    "video": "Scenes 001-020__309-3-_20230815150109755.mp4",
+    "frame": 24,
+    "class": "not_Sylvie's machete",
+    "original_wrong_prediction": "Sylvie's machete",
+    "reason": "false_positive_negative"
+  },
+  {
+    "video": "Scenes 001-020__314-3_20230815232058756.mp4",
+    "frame": 119,
+    "class": "not_Sylvie's machete",
+    "original_wrong_prediction": "Sylvie's machete",
+    "reason": "false_positive_negative"
+  },
+  {
+    "video": "Scenes 001-020__319-9_20230815201611576.mp4",
+    "frame": 28,
+    "class": "not_Aligator Loki Plushie",
+    "original_wrong_prediction": "Aligator Loki Plushie",
+    "reason": "false_positive_negative"
+  },
+  {
+    "video": "Scenes 001-020__319-9_20230815201611576.mp4",
+    "frame": 58,
+    "class": "not_Sylvie's machete",
+    "original_wrong_prediction": "Sylvie's machete",
+    "reason": "false_positive_negative"
+  },
+  {
+    "video": "Scenes 001-020__504K-1-_20230816050602143.mp4",
+    "frame": 28,
+    "class": "not_Loki's Variant uniform",
+    "original_wrong_prediction": "Loki's Variant uniform",
+    "reason": "false_positive_negative"
+  },
+  {
+    "video": "Scenes 001-020__504T-3-_20230816050753649.mp4",
+    "frame": 295,
+    "class": "not_Loki's dagger",
+    "original_wrong_prediction": "Loki's dagger",
+    "reason": "false_positive_negative"
+  },
+  {
+    "video": "Scenes 001-020__506E-1ng_b_20230816043951139.mp4",
+    "frame": 0,
+    "class": "not_Sylvie's machete",
+    "original_wrong_prediction": "Sylvie's machete",
+    "reason": "false_positive_negative"
+  },
+  {
+    "video": "Scenes 001-020__509-3_20230815200533637.mp4",
+    "frame": 43,
+    "class": "not_TemPad",
+    "original_wrong_prediction": "TemPad",
+    "reason": "false_positive_negative"
+  },
+  {
+    "video": "Scenes 021-040__137E-1-_20230815175038515.mp4",
+    "frame": 86,
+    "class": "not_TimeSpear",
+    "original_wrong_prediction": "TimeSpear",
+    "reason": "false_positive_negative"
+  },
+  {
+    "video": "Scenes 021-040__221-4-_20230815180803766.mp4",
+    "frame": 100,
+    "class": "not_Loki's dagger",
+    "original_wrong_prediction": "Loki's dagger",
+    "reason": "false_positive_negative"
+  },
+  {
+    "video": "Scenes 021-040__221-4-_20230815180803766.mp4",
+    "frame": 21,
+    "class": "not_Ravonna Renslayer's Uniform",
+    "original_wrong_prediction": "Ravonna Renslayer's Uniform",
+    "reason": "false_positive_negative"
+  },
+  {
+    "video": "Scenes 021-040__221-4-_20230815180803766.mp4",
+    "frame": 83,
+    "class": "not_TVA Prisoner Uniform",
+    "original_wrong_prediction": "TVA Prisoner Uniform",
+    "reason": "false_positive_negative"
+  },
+  {
+    "video": "Scenes 021-040__221-4-_20230815180803766.mp4",
+    "frame": 37,
+    "class": "not_TemPad",
+    "original_wrong_prediction": "TemPad",
+    "reason": "false_positive_negative"
+  },
+  {
+    "video": "Scenes 021-040__222-2-_20230815185458410.mp4",
+    "frame": 58,
+    "class": "not_TemPad",
+    "original_wrong_prediction": "TemPad",
+    "reason": "false_positive_negative"
+  },
+  {
+    "video": "Scenes 021-040__226A-1-_20230815185254846.mp4",
+    "frame": 119,
+    "class": "not_Sylvie's machete",
+    "original_wrong_prediction": "Sylvie's machete",
+    "reason": "false_positive_negative"
+  },
+  {
+    "video": "Scenes 021-040__234A-2-_20230815192229849.mp4",
+    "frame": 102,
+    "class": "not_Loki's Armor",
+    "original_wrong_prediction": "Loki's Armor",
+    "reason": "false_positive_negative"
+  },
+  {
+    "video": "Scenes 021-040__234A-2-_20230815192229849.mp4",
+    "frame": 167,
+    "class": "not_TVA Collar",
+    "original_wrong_prediction": "TVA Collar",
+    "reason": "false_positive_negative"
+  },
+  {
+    "video": "Scenes 021-040__234A-2-_20230815192229849.mp4",
+    "frame": 43,
+    "class": "not_TVA Prisoner Uniform",
+    "original_wrong_prediction": "TVA Prisoner Uniform",
+    "reason": "false_positive_negative"
+  },
+  {
+    "video": "Scenes 021-040__234A-2-_20230815192229849.mp4",
+    "frame": 171,
+    "class": "not_TemPad",
+    "original_wrong_prediction": "TemPad",
+    "reason": "false_positive_negative"
+  },
+  {
+    "video": "Scenes 021-040__235C-2- mos_20230815192640043.mp4",
+    "frame": 5,
+    "class": "not_TemPad",
+    "original_wrong_prediction": "TemPad",
+    "reason": "false_positive_negative"
+  },
+  {
+    "video": "Scenes 021-040__237B-1-_20230815180326204.mp4",
+    "frame": 164,
+    "class": "not_Aligator Loki Plushie",
+    "original_wrong_prediction": "Aligator Loki Plushie",
+    "reason": "false_positive_negative"
+  },
+  {
+    "video": "Scenes 021-040__237B-1-_20230815180326204.mp4",
+    "frame": 159,
+    "class": "not_Loki's Armor",
+    "original_wrong_prediction": "Loki's Armor",
+    "reason": "false_positive_negative"
+  },
+  {
+    "video": "Scenes 021-040__237B-1-_20230815180326204.mp4",
+    "frame": 57,
+    "class": "not_Loki's dagger",
+    "original_wrong_prediction": "Loki's dagger",
+    "reason": "false_positive_negative"
+  },
+  {
+    "video": "Scenes 021-040__237B-1-_20230815180326204.mp4",
+    "frame": 205,
+    "class": "not_Sylvie's machete",
+    "original_wrong_prediction": "Sylvie's machete",
+    "reason": "false_positive_negative"
+  },
+  {
+    "video": "Scenes 021-040__237B-1-_20230815180326204.mp4",
+    "frame": 262,
+    "class": "not_TVA Prisoner Uniform",
+    "original_wrong_prediction": "TVA Prisoner Uniform",
+    "reason": "false_positive_negative"
+  },
+  {
+    "video": "Scenes 021-040__237B-1-_20230815180326204.mp4",
+    "frame": 35,
+    "class": "not_TimeSpear",
+    "original_wrong_prediction": "TimeSpear",
+    "reason": "false_positive_negative"
+  },
+  {
+    "video": "Scenes 021-040__440H-2b-_20230816031331933.mp4",
+    "frame": 55,
+    "class": "not_Aligator Loki Plushie",
+    "original_wrong_prediction": "Aligator Loki Plushie",
+    "reason": "false_positive_negative"
+  },
+  {
+    "video": "Scenes 021-040__536A-3-_20230816063724398.mp4",
+    "frame": 94,
+    "class": "not_Boastful Loki Armor",
+    "original_wrong_prediction": "Boastful Loki Armor",
+    "reason": "false_positive_negative"
+  },
+  {
+    "video": "Scenes 021-040__536A-3-_20230816063724398.mp4",
+    "frame": 22,
+    "class": "not_Sylvie's machete",
+    "original_wrong_prediction": "Sylvie's machete",
+    "reason": "false_positive_negative"
+  },
+  {
+    "video": "Scenes 021-040__536A-3-_20230816063724398.mp4",
+    "frame": 38,
+    "class": "not_TVA Collar",
+    "original_wrong_prediction": "TVA Collar",
+    "reason": "false_positive_negative"
+  },
+  {
+    "video": "Scenes 021-040__536A-3-_20230816063724398.mp4",
+    "frame": 143,
+    "class": "not_TemPad",
+    "original_wrong_prediction": "TemPad",
+    "reason": "false_positive_negative"
+  },
+  {
+    "video": "Scenes 021-040__537C-2_20230816070308783.mp4",
+    "frame": 26,
+    "class": "not_Aligator Loki Plushie",
+    "original_wrong_prediction": "Aligator Loki Plushie",
+    "reason": "false_positive_negative"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389.mp4",
+    "frame": 173,
+    "class": "not_TemPad",
+    "original_wrong_prediction": "TemPad",
+    "reason": "false_positive_negative"
+  },
+  {
+    "video": "Scenes 041-060__156-5a- only pu_20230815181240389.mp4",
+    "frame": 156,
+    "class": "not_Time Stick",
+    "original_wrong_prediction": "Time Stick",
+    "reason": "false_positive_negative"
+  },
+  {
+    "video": "Scenes 041-060__156-6a- only pu_20230815175525189.mp4",
+    "frame": 70,
+    "class": "not_TemPad",
+    "original_wrong_prediction": "TemPad",
+    "reason": "false_positive_negative"
+  },
+  {
+    "video": "Scenes 041-060__156D-1- mos_20230815181940173.mp4",
+    "frame": 171,
+    "class": "not_TVA Collar",
+    "original_wrong_prediction": "TVA Collar",
+    "reason": "false_positive_negative"
+  },
+  {
+    "video": "Scenes 041-060__156F-1-_20230815175731629.mp4",
+    "frame": 98,
+    "class": "not_TemPad",
+    "original_wrong_prediction": "TemPad",
+    "reason": "false_positive_negative"
+  },
+  {
+    "video": "Scenes 041-060__244A-7- pu_20230815211729392.mp4",
+    "frame": 56,
+    "class": "not_Ravonna Renslayer's Uniform",
+    "original_wrong_prediction": "Ravonna Renslayer's Uniform",
+    "reason": "false_positive_negative"
+  },
+  {
+    "video": "Scenes 041-060__244A-7- pu_20230815211729392.mp4",
+    "frame": 59,
+    "class": "not_TVA Collar",
+    "original_wrong_prediction": "TVA Collar",
+    "reason": "false_positive_negative"
+  },
+  {
+    "video": "Scenes 041-060__244A-7- pu_20230815211729392.mp4",
+    "frame": 13,
+    "class": "not_TVA Prisoner Uniform",
+    "original_wrong_prediction": "TVA Prisoner Uniform",
+    "reason": "false_positive_negative"
+  },
+  {
+    "video": "Scenes 041-060__244B-1-_20230815212053650.mp4",
+    "frame": 62,
+    "class": "not_TVA Prisoner Uniform",
+    "original_wrong_prediction": "TVA Prisoner Uniform",
+    "reason": "false_positive_negative"
+  },
+  {
+    "video": "Scenes 041-060__244B-1-_20230815212053650.mp4",
+    "frame": 158,
+    "class": "not_Time Stick",
+    "original_wrong_prediction": "Time Stick",
+    "reason": "false_positive_negative"
+  },
+  {
+    "video": "Scenes 061-080__165A-1-_20230815180241405.mp4",
+    "frame": 25,
+    "class": "not_Sylvie's machete",
+    "original_wrong_prediction": "Sylvie's machete",
+    "reason": "false_positive_negative"
+  },
+  {
+    "video": "Scenes 061-080__165A-1-_20230815180241405.mp4",
+    "frame": 92,
+    "class": "not_TVA Collar",
+    "original_wrong_prediction": "TVA Collar",
+    "reason": "false_positive_negative"
+  },
+  {
+    "video": "Scenes 061-080__165A-1-_20230815180241405.mp4",
+    "frame": 96,
+    "class": "not_TemPad",
+    "original_wrong_prediction": "TemPad",
+    "reason": "false_positive_negative"
+  },
+  {
+    "video": "Scenes 061-080__165A-4-_20230815180313546.mp4",
+    "frame": 102,
+    "class": "not_TemPad",
+    "original_wrong_prediction": "TemPad",
+    "reason": "false_positive_negative"
+  },
+  {
+    "video": "Scenes 061-080__265G-3-_20230815215442372.mp4",
+    "frame": 79,
+    "class": "not_Sylvie's Armor",
+    "original_wrong_prediction": "Sylvie's Armor",
+    "reason": "false_positive_negative"
+  },
+  {
+    "video": "Scenes 061-080__265G-3-_20230815215442372.mp4",
+    "frame": 88,
+    "class": "not_TimeSpear",
+    "original_wrong_prediction": "TimeSpear",
+    "reason": "false_positive_negative"
+  },
+  {
+    "video": "Scenes 061-080__265N-1_20230815220141511.mp4",
+    "frame": 34,
+    "class": "not_TimeSpear",
+    "original_wrong_prediction": "TimeSpear",
+    "reason": "false_positive_negative"
+  }
+]

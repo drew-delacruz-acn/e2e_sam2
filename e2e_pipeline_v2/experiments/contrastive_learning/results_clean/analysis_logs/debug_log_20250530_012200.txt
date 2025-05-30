@@ -1,0 +1,67 @@
+=== COMPLETE DEBUG LOG ===
+Pipeline run at: 20250530_012200
+==================================================
+
+01:21:23 | 
+🚀 Starting Iterative Contrastive Learning Pipeline (Negative Classes Mode)
+01:21:23 | 📊 Comprehensive tracking system initialized
+01:21:23 | 
+🔍 FILTERING DEBUG: Configuration values:
+01:21:23 |    exclude_training_from_eval: True
+01:21:23 |    include_training_in_eval: False
+01:21:23 |    track_training_separately: False
+01:21:23 | 📉 Evaluation behavior: Standard, FPs added to training are not re-evaluated as FPs in the same way if they are learned.
+01:21:23 | 💡 Iteration 1: Using Primary Threshold: 0.8, Primary Margin: 0.2
+01:21:23 | 
+🔍 FILTERING DEBUG (Iteration 1):
+01:21:23 |    Exclusion tracker keys: []
+01:21:23 |    Total exclusions so far: 0
+01:21:23 | 
+🔍 FILTERING DEBUG: Applying exclusion strategy...
+01:21:23 |    Exclusion strategy: frame-level
+01:21:23 |    Original resnetPredictions size: 18328
+01:21:23 | 🔍 FRAME-LEVEL MODE: Using frame-level exclusions (default)
+01:21:23 |    🔍 Calling filter_evaluation_data with frame-level strategy
+01:21:23 | 📉 Using CLEAN FRAME-LEVEL evaluation
+01:21:24 | 🔍 FILTERING DEBUG: Evaluation data size after filtering:
+01:21:24 |    Original: 18328
+01:21:24 |    Filtered: 18328
+01:21:24 |    Difference: 0
+01:21:24 |    Strategy: frame-level
+01:21:41 | 🔍 PIPELINE DEBUG: eval_data input size: 18328
+01:21:41 | 🔍 PIPELINE DEBUG: Checking if actual evaluation size differs...
+01:21:41 | 🔍 PIPELINE DEBUG: Data reduction detected!
+01:21:41 |    Input to iteration: 18328 samples
+01:21:41 |    Actual evaluation: 1818 samples
+01:21:41 |    Reduction: 16510 samples lost in generate_predictions
+01:21:41 | 💡 Iteration 2: Using Threshold: 0.8 (Primary), Margin: 0.2 (Primary)
+01:21:41 | 
+🔍 FILTERING DEBUG (Iteration 2):
+01:21:41 |    Exclusion tracker keys: [1]
+01:21:41 |    Total exclusions so far: 88
+01:21:41 |    Iteration 1: 88 exclusions
+01:21:41 | 
+🔍 FILTERING DEBUG: Applying exclusion strategy...
+01:21:41 |    Exclusion strategy: frame-level
+01:21:41 |    Original resnetPredictions size: 18328
+01:21:41 | 🔍 FRAME-LEVEL MODE: Using frame-level exclusions (default)
+01:21:41 |    🔍 Calling filter_evaluation_data with frame-level strategy
+01:21:41 | 📉 Using CLEAN FRAME-LEVEL evaluation
+01:21:41 | 🔍 FILTERING DEBUG: Evaluation data size after filtering:
+01:21:41 |    Original: 18328
+01:21:41 |    Filtered: 18024
+01:21:41 |    Difference: 304
+01:21:41 |    Strategy: frame-level
+01:21:41 |    ✅ Filtering applied: 304 samples removed
+01:22:00 | 🔍 PIPELINE DEBUG: eval_data input size: 18024
+01:22:00 | 🔍 PIPELINE DEBUG: Checking if actual evaluation size differs...
+01:22:00 | 🔍 PIPELINE DEBUG: Data reduction detected!
+01:22:00 |    Input to iteration: 18024 samples
+01:22:00 |    Actual evaluation: 1818 samples
+01:22:00 |    Reduction: 16206 samples lost in generate_predictions
+01:22:00 | 
+🏁 Maximum iterations reached.
+01:22:00 | 
+📜 Pipeline summary saved to results_clean/pipeline_summary.json. Final F1: 0.5799.
+01:22:00 | 📍 Exclusion tracker saved to results_clean/cumulative_exclusions.json.
+01:22:00 | 💾 Final combined training data saved to results_clean/final_training_data.pkl.

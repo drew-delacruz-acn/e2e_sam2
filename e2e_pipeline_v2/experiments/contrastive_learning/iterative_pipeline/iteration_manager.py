@@ -30,7 +30,8 @@ def run_single_iteration(
     train_reps_func, 
     generate_preds_func, 
     evaluate_preds_func, 
-    extract_fps_func 
+    extract_fps_func,
+    exclusion_strategy: str = 'frame-level'
 ) -> Tuple[pd.DataFrame, Dict, List[Dict]]:
     """
     Run a single iteration of the pipeline: train, predict, evaluate, extract FPs.
@@ -65,7 +66,7 @@ def run_single_iteration(
         print("DEBUG (run_single_iteration): predictions_for_eval is empty.")
 
     print(f"\n📊 Phase 2C: Evaluating predictions...")
-    evaluation_results, metrics = evaluate_preds_func(predictions_for_eval, ground_truth) 
+    evaluation_results, metrics = evaluate_preds_func(predictions_for_eval, ground_truth, exclusion_tracker, exclusion_strategy) 
 
     print(f"\n🚨 Phase 2D: Extracting false positives...")
     fp_data, new_exclusions = extract_fps_func( 

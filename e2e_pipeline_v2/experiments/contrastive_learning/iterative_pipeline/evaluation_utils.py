@@ -24,9 +24,12 @@ except ImportError:
         print(message)
 
 def evaluate_predictions(predictions: pd.DataFrame,
-                        ground_truth: pd.DataFrame) -> Tuple[pd.DataFrame, Dict]:
+                        ground_truth: pd.DataFrame,
+                        exclusion_tracker: Dict = None,
+                        exclusion_strategy: str = 'frame-level') -> Tuple[pd.DataFrame, Dict]:
     """
     Evaluate predictions against ground truth for presence/absence at FRAME LEVEL.
+    Now properly filters ground truth to match exclusion strategy.
     """
     print("📊 Evaluating predictions against ground truth (FRAME-LEVEL)...")
 
@@ -38,15 +41,48 @@ def evaluate_predictions(predictions: pd.DataFrame,
             metrics['TN'] = int(ground_truth[ground_truth[COL_ACTUAL] == 0][COL_ACTUAL].count())
         return pd.DataFrame(columns=[COL_VIDEO, COL_CLASS, COL_ACTUAL, COL_PREDICTED, 'confidence', COL_FRAME, COL_CLASSIFICATION]), metrics
 
+    # NEW: Filter ground truth to match exclusion strategy
+    if exclusion_tracker and exclusion_tracker:
+        debug_log(f"🔍 EVALUATE: Filtering ground truth using {exclusion_strategy} exclusion strategy")
+        debug_log(f"   Original ground truth size: {len(ground_truth)}")
+        
+        # Check if ground truth has required columns for filtering
+        required_cols = [COL_VIDEO, COL_FRAME]
+        missing_cols = [col for col in required_cols if col not in ground_truth.columns]
+        
+        if missing_cols:
+            debug_log(f"   ⚠️ WARNING: Ground truth missing required columns {missing_cols} for filtering")
+            debug_log(f"   Available columns: {list(ground_truth.columns)}")
+            debug_log(f"   Skipping ground truth filtering - using full ground truth")
+            filtered_ground_truth = ground_truth
+        else:
+            # Filter ground truth using the same logic as prediction data
+            filtered_ground_truth = filter_evaluation_data(
+                ground_truth, exclusion_tracker, 
+                exclude_training=True, exclusion_strategy=exclusion_strategy
+            )
+            
+            debug_log(f"   Filtered ground truth size: {len(filtered_ground_truth)}")
+            debug_log(f"   Ground truth reduction: {len(ground_truth) - len(filtered_ground_truth)} samples removed")
+            
+            if len(filtered_ground_truth) == 0:
+                debug_log(f"   ⚠️ WARNING: All ground truth samples were excluded!")
+                metrics = {'f1': 0.0, 'precision': 0.0, 'recall': 0.0, 'TP': 0, 'FP': 0, 'FN': 0, 'TN': 0}
+                return pd.DataFrame(columns=[COL_VIDEO, COL_CLASS, COL_ACTUAL, COL_PREDICTED, 'confidence', COL_FRAME, COL_CLASSIFICATION]), metrics
+    else:
+        debug_log(f"🔍 EVALUATE: Using full ground truth (no exclusions)")
+        filtered_ground_truth = ground_truth
+    
     eval_results = []
-    gt_eval = ground_truth.copy()
+    gt_eval = filtered_ground_truth.copy()  # ← NOW USING FILTERED GROUND TRUTH
     if COL_TAG not in gt_eval.columns and COL_CLASS in gt_eval.columns: 
         gt_eval = gt_eval.rename(columns={COL_CLASS: COL_TAG})
     if not pd.api.types.is_numeric_dtype(gt_eval[COL_ACTUAL]):
             gt_eval[COL_ACTUAL] = gt_eval[COL_ACTUAL].astype(int)
 
     print("📊 FRAME-LEVEL EVALUATION DEBUG:")
-    print("   Ground truth rows: {}".format(len(gt_eval)))
+    print("   Original ground truth rows: {}".format(len(ground_truth)))
+    print("   Filtered ground truth rows: {}".format(len(gt_eval)))
     print("   Predictions rows: {}".format(len(predictions)))
     print("   Ground truth columns: {}".format(list(gt_eval.columns)))
     print("   Predictions columns: {}".format(list(predictions.columns)))
@@ -119,6 +155,15 @@ def evaluate_predictions(predictions: pd.DataFrame,
         })
     
     eval_df = pd.DataFrame(eval_results)
+    
+    # DEBUG: Log the actual evaluation matrix size
+    debug_log(f"🔍 EVALUATE: FINAL EVALUATION MATRIX:")
+    debug_log(f"   Evaluation matrix size: {len(eval_df)} samples")
+    debug_log(f"   This is the confusion matrix size!")
+    if exclusion_tracker:
+        debug_log(f"   Expected reduction from exclusions: ground truth filtered")
+    else:
+        debug_log(f"   No exclusions applied - using full ground truth")
     
     if use_frame_matching:
         print("📊 FRAME-LEVEL MATCHING RESULTS:")

@@ -167,7 +167,8 @@ def run_iterative_pipeline(
             train_reps_func=train_contrastive_representatives,
             generate_preds_func=generate_predictions,
             evaluate_preds_func=evaluate_predictions,
-            extract_fps_func=extract_false_positives
+            extract_fps_func=extract_false_positives,
+            exclusion_strategy=config.exclusion_strategy
         )
         
         # Add evaluation mode to metrics with CORRECTED evaluation sample count
@@ -224,7 +225,7 @@ def run_iterative_pipeline(
                 # Load representatives and generate video-level predictions  
                 representatives_path = output_base_dir / f"iteration_{i}" / "representatives.pkl"
                 video_level_predictions = generate_predictions(video_level_eval_data, representatives_path, current_iter_threshold_to_use, i)
-                video_level_eval_results, video_level_metrics = evaluate_predictions(video_level_predictions, trackingInfo)
+                video_level_eval_results, video_level_metrics = evaluate_predictions(video_level_predictions, trackingInfo, exclusion_tracker, 'video-level')
                 
                 debug_log(f"📊 FRAME-LEVEL vs VIDEO-LEVEL COMPARISON:")
                 debug_log(f"   Frame-level F1: {metrics['f1']:.4f} ({len(eval_data)} samples)")
@@ -256,7 +257,7 @@ def run_iterative_pipeline(
                 # Load representatives and generate clean predictions  
                 representatives_path = output_base_dir / f"iteration_{i}" / "representatives.pkl"
                 clean_predictions = generate_predictions(clean_eval_data, representatives_path, current_iter_threshold_to_use, i)
-                clean_eval_results, clean_metrics = evaluate_predictions(clean_predictions, trackingInfo)
+                clean_eval_results, clean_metrics = evaluate_predictions(clean_predictions, trackingInfo, exclusion_tracker, strategy_to_use)
                 
                 debug_log(f"📊 CLEAN vs CONTAMINATED COMPARISON:")
                 debug_log(f"   Clean F1: {clean_metrics['f1']:.4f} ({len(clean_eval_data)} samples)")

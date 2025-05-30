@@ -61,6 +61,94 @@ df = pd.DataFrame(data)
 df.to_pickle('my_data.pkl')
 ```
 
+## 🔄 Flexible Data Inputs (NEW!)
+
+The pipeline now supports **flexible data inputs** using Union types. You can provide data as either pickle files (original behavior) or pandas DataFrames directly - perfect for integrating with existing data pipelines!
+
+### 🆕 New Flexible Interface
+
+```python
+def load_and_validate_data(
+    definitiveObjects_input: Union[str, pd.DataFrame], 
+    resnetPredictions_input: Union[str, pd.DataFrame], 
+    trackingInfo_input: Union[str, pd.DataFrame]
+) -> Tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame]:
+```
+
+### 📋 Usage Patterns
+
+#### 1. Original Pickle Files (Backward Compatible)
+```python
+# Still works exactly as before
+definitive, resnet, tracking = load_and_validate_data(
+    "definitiveObjects.pkl",
+    "resnetPredictions.pkl", 
+    "trackingInfo.pkl"
+)
+```
+
+#### 2. All DataFrames 
+```python
+# Perfect for when data comes from functions
+definitive_df = your_function_1()
+resnet_df = your_function_2()
+tracking_df = your_function_3()
+
+definitive, resnet, tracking = load_and_validate_data(
+    definitive_df,    # DataFrame
+    resnet_df,        # DataFrame  
+    tracking_df       # DataFrame
+)
+```
+
+#### 3. Mixed Approach
+```python
+# Mix files and DataFrames as needed
+definitive, resnet, tracking = load_and_validate_data(
+    my_existing_definitive_df,        # DataFrame
+    "resnetPredictions.pkl",          # File
+    my_existing_tracking_df           # DataFrame
+)
+```
+
+### 💡 Benefits
+- **Flexibility**: Work with data however it's generated
+- **Performance**: Skip file I/O when data is already in memory
+- **Integration**: Easy to integrate with existing data pipelines
+- **Backward Compatible**: All existing code continues to work
+- **Type Safety**: Clear Union types prevent runtime errors
+
+### 🔧 Required DataFrame Structures
+
+For reference, here are the exact structures needed when using DataFrames directly:
+
+**DefinitiveObjects DataFrame:**
+```python
+pd.DataFrame({
+    'class': ['lamp', 'mirror', 'chair'],           # Object class names
+    'finetuned_embedding': [emb1, emb2, emb3]       # Embedding vectors
+})
+```
+
+**ResnetPredictions DataFrame:**
+```python
+pd.DataFrame({
+    'video': ['video1', 'video1', 'video2'],        # Video identifiers
+    'frame': [1, 2, 1],                             # Frame numbers (int)
+    'owl_label': ['lamp', 'mirror', 'chair'],       # True class labels
+    'finetuned_embedding': [emb1, emb2, emb3]       # Embedding vectors
+})
+```
+
+**TrackingInfo DataFrame:**
+```python
+pd.DataFrame({
+    'video': ['video1', 'video1', 'video2'],        # Video identifiers  
+    'tag': ['lamp', 'mirror', 'chair'],             # Object class names
+    'actual': [1, 0, 1]                             # Binary presence (0/1)
+})
+```
+
 ## ⚙️ Key Parameters
 
 | Parameter | Default | What it does | When to change |
@@ -205,9 +293,6 @@ The iterative pipeline uses your existing `train_representatives.py` script inte
 3. **Loads** the resulting representatives for prediction
 4. **Repeats** this process, accumulating better training data
 
-
-
-
 ### Different Initialization Methods
 ```bash
 # Try different starting points
@@ -276,7 +361,7 @@ python scripts/analyze_sweep_results.py --results-dir sweep_results/
 
 # 3. Use best parameters for final training
 python train_representatives.py --data embeddings.pkl --init-method random --margin 0.22 --lambda-push 0.5
-
+```
 
 ## 🎯 The Math (Simple Version)
 

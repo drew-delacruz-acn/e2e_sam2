@@ -1,3 +1,0 @@
-iteration,timestamp,f1_score,precision,recall,tp,fp,fn,tn,exclusions_added_this_iteration,training_data_size,evaluation_samples
-1,2025-05-30T14:46:52.736960,0.0,0.0,0.0,0,0,136,1682,0,63,1818
-2,2025-05-30T14:47:08.388317,0.0,0.0,0.0,0,0,136,1682,0,63,1818

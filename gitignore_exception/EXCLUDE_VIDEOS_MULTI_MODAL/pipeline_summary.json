@@ -1,0 +1,56 @@
+{
+  "config": {
+    "definitive_objects": "/home/ubuntu/code/drew/e2e_sam2/data/multimodalEmbeddings.pkl",
+    "resnet_predictions": "/home/ubuntu/code/libby/pipeline/data/finetuned_may19.pkl",
+    "tracking_info": "/home/ubuntu/code/libby/pipeline/data/sourceTruth_jeremiah.pkl",
+    "iterations": 2,
+    "threshold": 0.8,
+    "secondary_threshold": null,
+    "convergence_threshold": 0.001,
+    "epochs": 50,
+    "margin": 0.2,
+    "secondary_margin": null,
+    "exclude_training_from_eval": true,
+    "include_training_in_eval": false,
+    "track_training_separately": false,
+    "exclusion_strategy": "video-level",
+    "output": "EXCLUDE_VIDEOS_MULTI_MODAL",
+    "test_mode": false
+  },
+  "iteration_metrics": [
+    {
+      "iteration": 1,
+      "eval_mode": "clean_video_level",
+      "evaluation_samples": 1818,
+      "exclusion_strategy": "video-level",
+      "f1": 0.0,
+      "precision": 0.0,
+      "recall": 0.0,
+      "TP": 0,
+      "FP": 0,
+      "FN": 136,
+      "TN": 1682
+    },
+    {
+      "iteration": 2,
+      "eval_mode": "clean_video_level",
+      "evaluation_samples": 1818,
+      "exclusion_strategy": "video-level",
+      "f1": 0.0,
+      "precision": 0.0,
+      "recall": 0.0,
+      "TP": 0,
+      "FP": 0,
+      "FN": 136,
+      "TN": 1682
+    }
+  ],
+  "final_training_data_size": 63,
+  "final_exclusion_count": 0,
+  "evaluation_strategy": {
+    "exclude_training_from_eval": true,
+    "include_training_in_eval": false,
+    "track_training_separately": false,
+    "exclusion_strategy": "video-level"
+  }
+}

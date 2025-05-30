@@ -1,0 +1,14 @@
+{
+  "iteration": 2,
+  "timestamp": "2025-05-30T14:47:08.388317",
+  "f1_score": 0.0,
+  "precision": 0.0,
+  "recall": 0.0,
+  "tp": 0,
+  "fp": 0,
+  "fn": 136,
+  "tn": 1682,
+  "exclusions_added_this_iteration": 0,
+  "training_data_size": 63,
+  "evaluation_samples": 1818
+}

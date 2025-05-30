@@ -1,0 +1,20 @@
+# Core computer vision and numerical computing
+opencv-python>=4.5.0
+numpy>=1.21.0
+
+# Data manipulation and analysis
+pandas>=1.3.0
+
+# Plotting and visualization
+matplotlib>=3.3.0
+seaborn>=0.11.0
+
+# Image processing
+Pillow>=8.0.0
+
+# Interactive dashboard (for blur_analysis_dashboard.py)
+streamlit>=1.0.0
+
+# Additional utility packages that may be needed
+scipy>=1.7.0
+scikit-learn>=1.0.0 

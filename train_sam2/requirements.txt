@@ -1,10 +1,36 @@
-numpy>=1.19.0
+# Core deep learning frameworks
 torch>=2.0.0
 torchvision>=0.15.0
+
+# Computer vision and image processing
 opencv-python>=4.5.0
-matplotlib>=3.5.0
 Pillow>=9.0.0
+
+# Scientific computing and data manipulation
+numpy>=1.19.0
+
+# Plotting and visualization
+matplotlib>=3.5.0
+
+# Configuration and data handling
 PyYAML>=6.0
+
+# Progress bars and utilities
 tqdm>=4.64.0
-# SAM2 related dependencies
-# Note: You might need specific versions based on the SAM2 implementation 
+
+# SAM2 (Segment Anything Model 2)
+# Note: This needs to be installed separately from the SAM2 repository
+# git clone https://github.com/facebookresearch/sam2.git && cd sam2 && pip install -e .
+
+# Optional dependencies for enhanced functionality
+# Uncomment if you want to use these features:
+
+# tensorboard>=2.8.0          # For training visualization and monitoring
+# wandb>=0.12.0                # For experiment tracking and visualization  
+# scikit-learn>=1.0.0         # For additional metrics and evaluation tools
+# seaborn>=0.11.0              # For enhanced statistical plotting
+
+# Development and testing dependencies (optional)
+# pytest>=6.0.0               # For running tests
+# black>=22.0.0                # For code formatting
+# flake8>=4.0.0                # For code linting 

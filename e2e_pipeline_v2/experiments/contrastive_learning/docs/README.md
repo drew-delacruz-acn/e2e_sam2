@@ -205,34 +205,8 @@ The iterative pipeline uses your existing `train_representatives.py` script inte
 3. **Loads** the resulting representatives for prediction
 4. **Repeats** this process, accumulating better training data
 
-### When to Use Iterative Pipeline:
-- ✅ **High false positive rate** in your predictions
-- ✅ **Confusing similar classes** (armor types, clothing variants)
-- ✅ **Large unlabeled dataset** available for learning from mistakes
-- ✅ **Video-level ground truth** available for evaluation
-- ❌ **Perfect classification** already (no room for improvement)
-- ❌ **Very small datasets** (not enough data for meaningful iterations)
 
-### Troubleshooting Iterative Pipeline:
-```bash
-# If pipeline fails, check individual components first
-python train_representatives.py --data definitiveObjects.pkl --epochs 10
-python scripts/exclusion_impact_analyzer.py
 
-# Run with fewer iterations for testing
-python run_iterative_pipeline.py --iterations 2 --test-mode ...
-
-# Check analysis logs for debugging
-cat results_negative/analysis_logs/chat_summary_*.txt
-```
-
-## 🔧 Advanced Features
-
-### Exclusion Strategy Analysis
-```bash
-# Compare frame-level vs video-level exclusions
-python scripts/exclusion_impact_analyzer.py
-```
 
 ### Different Initialization Methods
 ```bash
@@ -256,7 +230,6 @@ Open these in a browser to see interactive visualizations of how the algorithm w
 contrastive_learning/
 ├── README.md                           # This file
 ├── TEAM_HANDOFF.md                     # Team transition info
-├── TROUBLESHOOTING.md                  # Common problems
 ├── train_representatives.py            # Main training script
 ├── run_iterative_pipeline.py           # Advanced pipeline
 ├── src/                                # Core code
@@ -303,27 +276,7 @@ python scripts/analyze_sweep_results.py --results-dir sweep_results/
 
 # 3. Use best parameters for final training
 python train_representatives.py --data embeddings.pkl --init-method random --margin 0.22 --lambda-push 0.5
-```
 
-### For Research Analysis:
-```bash
-# 1. Run iterative pipeline
-python run_iterative_pipeline.py --definitive-objects data1.pkl --resnet-predictions data2.pkl --tracking-info data3.pkl
-
-# 2. Analyze exclusion impact
-python scripts/exclusion_impact_analyzer.py
-
-# 3. Generate reports
-# Check results/ and tracking_exports/ folders
-```
-
-## 🤝 Need Help?
-
-1. **Common Issues**: Check `TROUBLESHOOTING.md`
-2. **Team Handoff**: Check `TEAM_HANDOFF.md`
-3. **Detailed Docs**: Check `docs/` folder for archived documentation
-4. **Interactive Diagrams**: Open `docs/html/*.html` in browser
-5. **Tests**: Run `pytest` to verify everything works
 
 ## 🎯 The Math (Simple Version)
 

@@ -1,12 +1,9 @@
 # Team Handoff Guide - Contrastive Learning Project
 
-*Last updated: [Current Date] by [Your Name]*
 
 ## 🎯 Project Summary
 
 **What this does**: Learns better class representatives for object classification using contrastive learning. Instead of using simple class averages, this trains embeddings that are closer to same-class samples and farther from different-class samples.
-
-**Main use case**: Improving classification of armor/clothing types (TVA Monitor, Classic Loki Armor, etc.) where classes are too similar.
 
 ## ✅ What's Currently Working
 
@@ -28,15 +25,22 @@
 - ✅ Results analysis scripts - confusion matrices, F1 comparisons
 - ✅ Performance tracking across iterations
 
-## 🔄 Critical Feature: Iterative Pipeline
+## 🆕 Recent Major Improvements (2025)
 
-**This is your most powerful tool for production use.** The iterative pipeline is what sets this apart from basic contrastive learning.
+### **New Features**
+- ✅ **Per-Class FP Capping**: `--max-fps-per-class` parameter prevents excessive dataset shrinkage with video-level exclusions
+- ✅ **Enhanced Debug Logging**: Complete pipeline decisions saved to `analysis_logs/debug_log_*.txt` files for VM analysis
+- ✅ **Dynamic Ground Truth Filtering**: Evaluation properly excludes training data based on exclusion strategy
+- ✅ **Robust Deduplication**: Sophisticated embedding-based deduplication works with any input data format
+
+
+## 🔄 Iterative Pipeline
+
+
 
 ### **What It Does**
 - Automatically learns from classification mistakes
-- Adds false positives as negative training examples ("not_TVA_Monitor")
-- Improves F1 scores by 2-5% over basic training
-- Handles confusing classes (armor types, clothing variants)
+
 
 ### **Current Status: PRODUCTION READY**
 - ✅ **Core Pipeline**: Fully functional, tested on multiple datasets
@@ -45,18 +49,15 @@
 - ✅ **Comprehensive Logging**: Detailed analysis logs for debugging
 - ✅ **Data Tracking**: Complete data flow monitoring system
 
-### **Known Limitations**
-1. **Requires 3 Data Files**: definitiveObjects.pkl, resnetPredictions.pkl, trackingInfo.pkl
-2. **Memory Usage**: Large datasets may need video-level exclusions to reduce memory
-3. **Convergence**: May need 3-5 iterations to see meaningful improvement
+**Requires 3 Data Files**: definitiveObjects.pkl (ground truth embeddings of objects), resnetPredictions.pkl (predictions), trackingInfo.pkl (ground truth tracking objects)
 
 ### **Production Deployment Ready**
 ```bash
 # Standard production command
 python run_iterative_pipeline.py \
-    --definitive-objects ../../../gitignore_exception/data/definitiveObjects.pkl \
-    --resnet-predictions ../../../gitignore_exception/data/resnetPredictions.pkl \
-    --tracking-info ../../../gitignore_exception/data/trackingInfo.pkl \
+    --definitive-objects ./definitiveObjects.pkl \
+    --resnet-predictions ./resnetPredictions.pkl \
+    --tracking-info ./trackingInfo.pkl \
     --iterations 5 \
     --threshold 0.6 \
     --secondary-threshold 0.7 \
@@ -64,6 +65,30 @@ python run_iterative_pipeline.py \
     --secondary-margin 0.25 \
     --exclusion-strategy frame-level \
     --exclude-training-from-eval
+
+# NEW: For video-level exclusions (prevents dataset decimation)
+python run_iterative_pipeline.py \
+    --definitive-objects ./definitiveObjects.pkl \
+    --resnet-predictions ./resnetPredictions.pkl \
+    --tracking-info ./trackingInfo.pkl \
+    --iterations 5 \
+    --threshold 0.5 \
+    --exclusion-strategy video-level \
+    --max-fps-per-class 2 \
+    --exclude-training-from-eval
+```
+
+### **Enhanced Debugging & Analysis**
+```bash
+# Debug logs automatically saved to analysis_logs/debug_log_TIMESTAMP.txt
+# Copy from VM for detailed pipeline analysis:
+ls analysis_logs/debug_log_*.txt
+
+# Check training data growth between iterations:
+grep "FINAL SUMMARY" analysis_logs/debug_log_*.txt
+
+# Verify confusion matrix size changes:
+grep "FINAL EVALUATION MATRIX" analysis_logs/debug_log_*.txt
 ```
 
 ### **Critical Files for Team**
@@ -72,25 +97,6 @@ python run_iterative_pipeline.py \
 - `run_iterative_pipeline.py` - Entry point script
 - **DO NOT MODIFY** core pipeline logic without extensive testing
 
-## ⚠️ Current Issues & Limitations
-
-### **Known Problems**
-1. **Class Separation**: TVA Monitor and Classic Loki Armor are too similar (cosine similarity 0.535)
-   - **Fix**: Use `--margin 0.3 --lambda-push 0.6` instead of defaults
-   - **Status**: Parameters identified, needs validation on full dataset
-
-2. **Memory Usage**: Large parameter sweeps can exhaust GPU memory
-   - **Fix**: GPU memory clearing implemented in sweep script
-   - **Status**: Workaround in place, monitoring needed
-
-3. **Random Initialization**: Needs more epochs (150+) to converge
-   - **Fix**: Documentation updated with epoch recommendations
-   - **Status**: Working as expected, just needs patience
-
-### **Edge Cases**
-- Single-sample classes: Handled gracefully
-- Missing validation data: Baseline evaluation skipped correctly
-- GPU/CPU switching: Automatic detection working
 
 ## 📊 Current Experiment Status
 
@@ -100,25 +106,6 @@ python run_iterative_pipeline.py \
 - ✅ Initialization method comparison (4 methods)
 - ✅ Exclusion strategy comparison (frame-level vs video-level)
 
-### **Ongoing/Recommended Next Steps**
-1. **Validate improved parameters** on full armor dataset:
-   ```bash
-   python train_representatives.py --data your_full_dataset.pkl --init-method random --margin 0.3 --lambda-push 0.6 --epochs 150
-   ```
-
-2. **Production deployment**: Current representatives are ready for classification tasks
-   ```bash
-   # Load trained representatives
-   import pandas as pd
-   reps = pd.read_pickle('results/.../representatives.pkl')
-   ```
-
-3. **Monitor performance**: Set up regular evaluation on new data
-
-### **Research Opportunities**
-- Compare with other metric learning approaches
-- Experiment with curriculum learning (start easy, get harder)
-- Multi-scale representatives (coarse-to-fine class hierarchies)
 
 ## 📁 Important File Locations
 
@@ -126,11 +113,6 @@ python run_iterative_pipeline.py \
 - `train_representatives.py` - Main training script
 - `scripts/parameter_sweep.py` - Hyperparameter optimization
 - `run_iterative_pipeline.py` - Advanced pipeline with false positive feedback
-
-### **Data Locations**
-- Training data: `../../../../gitignore_exception/data/definitiveObjects.pkl`
-- Prediction data: `../../../../gitignore_exception/data/resnetPredictions.pkl`
-- Tracking info: `../../../../gitignore_exception/data/trackingInfo.pkl`
 
 ### **Results Storage**
 - Training results: `results/` (auto-organized by parameters)
@@ -157,18 +139,6 @@ source ../../venv/bin/activate
 pytest  # Should pass all tests
 ```
 
-## 📈 Performance Benchmarks
-
-### **Current Results** (baseline)
-- F1 Score: ~0.92-0.96 (varies by dataset)
-- Max inter-class similarity: 0.535 (too high)
-- Training time: ~30-60 seconds for 50 epochs
-- Memory usage: ~2-4GB GPU for typical datasets
-
-### **Expected with Optimized Parameters**
-- F1 Score: +2-5% improvement expected
-- Max inter-class similarity: <0.4 (target)
-- Training time: ~2-5 minutes for 150 epochs
 
 ## 🚨 Critical Information
 
@@ -192,40 +162,30 @@ pytest -v
 cp -r results/ results_backup_$(date +%Y%m%d)/
 ```
 
-## 👥 Team Contact & Handoff
-
-### **Key Knowledge Areas**
-1. **Contrastive Learning Theory**: [Your name] - understands loss function and parameter effects
-2. **Data Pipeline**: [Your name] - knows data formats and preprocessing
-3. **Analysis Tools**: [Your name] - built exclusion analyzer and sweep tools
-4. **Integration**: [Team member] - knows how this fits with broader SAM2 pipeline
+## Team Contact & Handoff
 
 ### **External Dependencies**
 - SAM2 pipeline integration points
 - Embedding generation (upstream dependency)
 - Classification deployment (downstream usage)
 
-### **Recommended Team Structure**
-- **Primary maintainer**: Someone familiar with PyTorch and metric learning
-- **Secondary support**: Someone who can run analysis scripts and interpret results
-- **Domain expert**: Someone who understands the armor/clothing classification domain
+## 🛠️ Troubleshooting Guide
 
-## 🎯 Success Metrics for Handoff
 
-**Consider handoff successful when new team member can:**
-1. ✅ Run basic training: `python train_representatives.py --data data.pkl`
-2. ✅ Interpret results: Check F1 scores and similarity metrics
-3. ✅ Debug issues: Use troubleshooting guide and tests
-4. ✅ Deploy results: Load representatives for classification
-5. ✅ Extend functionality: Add new analysis scripts or modify parameters
+**Problem: Massive dataset shrinkage with video-level exclusions**
+```bash
+# Use FP capping to prevent decimation:
+python run_iterative_pipeline.py [...] --max-fps-per-class 2
+```
 
-## 📞 Getting Help
+### **Data Format Issues**
 
-1. **Technical Issues**: Check `TROUBLESHOOTING.md` first
-2. **Algorithm Questions**: See interactive diagrams in `docs/html/`
-3. **Integration Issues**: Check test suite and example workflows
-4. **Performance Problems**: Run parameter sweep to re-optimize
-
----
-
-**Bottom Line**: This system is production-ready for basic use. The core training works reliably, and the analysis tools provide good insights. Focus next efforts on parameter optimization and production deployment rather than algorithm changes. 
+**Mixed embedding types in definitiveObjects:**
+```python
+# Check your input data format:
+import pickle
+with open('definitiveObjects.pkl', 'rb') as f:
+    data = pickle.load(f)
+print("Embedding type:", type(data.iloc[0]['finetuned_embedding']))
+# Should work with both list and numpy.ndarray formats now
+```

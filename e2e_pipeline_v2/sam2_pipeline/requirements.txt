@@ -1,0 +1,42 @@
+# Core deep learning frameworks
+torch>=2.0.0
+torchvision>=0.15.0
+
+# Hugging Face transformers for CLIP, ViT, OWL models
+transformers>=4.20.0
+
+# Computer vision and image processing
+opencv-python>=4.5.0
+Pillow>=8.0.0
+
+# Scientific computing and data manipulation
+numpy>=1.21.0
+
+# Plotting and visualization
+matplotlib>=3.3.0
+seaborn>=0.11.0
+
+# Configuration and data handling
+PyYAML>=6.0.0
+
+# Scene detection for video frame sampling
+scenedetect>=0.6.0
+
+# Machine learning metrics and utilities
+scikit-learn>=1.0.0
+
+# Progress bars and utilities
+tqdm>=4.50.0
+
+# SAM2 (Segment Anything Model 2)
+# Note: This needs to be installed separately from the SAM2 repository
+# git clone https://github.com/facebookresearch/sam2.git && cd sam2 && pip install -e .
+
+# Path handling (usually built-in but ensuring compatibility)
+pathlib2>=2.3.0; python_version<"3.4"
+
+# Command line argument parsing (usually built-in but ensuring compatibility)
+argparse; python_version<"3.2"
+
+# Additional utilities that may be needed
+scipy>=1.7.0 

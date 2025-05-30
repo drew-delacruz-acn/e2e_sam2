@@ -1,0 +1,7 @@
+timestamp,iteration,step,data_size,details
+2025-05-30T17:10:05.918601,1,evaluation_data_before,18328,"{'columns': ['video', 'frame', 'owl_label', 'finetuned_embedding'], 'filename': 'iteration_1_evaluation_data_before.csv'}"
+2025-05-30T17:10:06.090109,1,evaluation_data_after,18328,"{'exclusions_applied': 0, 'columns': ['video', 'frame', 'owl_label', 'finetuned_embedding'], 'filename': 'iteration_1_evaluation_data_after.csv'}"
+2025-05-30T17:10:23.065015,1,false_positives_extracted,31,"{'filename': 'iteration_1_false_positives_extracted.csv', 'classes_with_fps': ['TemPad', 'TimeSpear']}"
+2025-05-30T17:10:23.111752,1,exclusions_added,31,"{'filename': 'iteration_1_exclusions_added.csv', 'classes_excluded': ['not_TemPad', 'not_TimeSpear']}"
+2025-05-30T17:10:23.262030,2,evaluation_data_before,18328,"{'columns': ['video', 'frame', 'owl_label', 'finetuned_embedding'], 'filename': 'iteration_2_evaluation_data_before.csv'}"
+2025-05-30T17:10:23.417093,2,evaluation_data_after,7889,"{'exclusions_applied': 10439, 'columns': ['video', 'frame', 'owl_label', 'finetuned_embedding'], 'filename': 'iteration_2_evaluation_data_after.csv'}"

@@ -1,0 +1,3 @@
+iteration,eval_data_before_filtering,eval_data_after_filtering,samples_filtered_out,false_positives_found,new_exclusions_added,filtering_effectiveness
+1,18328,18328,0,31,31,0.0%
+2,18328,7889,10439,0,0,57.0%

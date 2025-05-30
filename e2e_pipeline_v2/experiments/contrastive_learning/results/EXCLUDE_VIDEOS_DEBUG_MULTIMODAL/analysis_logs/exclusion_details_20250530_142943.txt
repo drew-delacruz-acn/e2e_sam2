@@ -1,3 +1,0 @@
-=== EXCLUSION TRACKING DETAILS ===
-Total iterations: 2
-Total exclusions: 0

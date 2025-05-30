@@ -1,8 +1,0 @@
-=== PIPELINE ANALYSIS SUMMARY (Copy to Chat) ===
-Config: exclude_training=True, include_training=False
-Data: 18328 original samples, 2 iterations
-Results: F1 0.5067 -> 0.5312, 48 exclusions, 1404 final eval samples
-
-Iteration Details:
-  Iter 1: clean_video_level mode, 1818 samples, F1=0.5067, +28 exclusions
-  Iter 2: clean_video_level mode, 1404 samples, F1=0.5312, +20 exclusions

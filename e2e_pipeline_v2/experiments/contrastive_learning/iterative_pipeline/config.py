@@ -20,7 +20,7 @@ class PipelineConfig:
     secondary_margin: Optional[float] = None # Use Optional for clarity
     
     # False positive extraction parameters
-    max_fps_per_class: int = 2  # Maximum false positives to extract per class per iteration
+    max_fps_per_class: Optional[int] = None  # No limit by default, cap only when explicitly set
 
     # Exclusion strategy options
     # These are mutually exclusive, argparse handles this.

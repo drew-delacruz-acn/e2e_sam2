@@ -3,7 +3,7 @@ import numpy as np
 from pathlib import Path
 import pickle
 import json
-from typing import Dict, List, Tuple
+from typing import Dict, List, Tuple, Optional
 
 # Assuming other necessary utility functions will be imported from their respective modules
 # e.g., from .training_utils import train_contrastive_representatives
@@ -32,7 +32,7 @@ def run_single_iteration(
     evaluate_preds_func, 
     extract_fps_func,
     exclusion_strategy: str = 'frame-level',
-    max_fps_per_class: int = 2
+    max_fps_per_class: Optional[int] = None
 ) -> Tuple[pd.DataFrame, Dict, List[Dict]]:
     """
     Run a single iteration of the pipeline: train, predict, evaluate, extract FPs.

@@ -1,6 +1,6 @@
 import pandas as pd
 import numpy as np # For type hinting if embeddings are expected
-from typing import Dict, List, Tuple
+from typing import Dict, List, Tuple, Optional
 from sklearn.metrics import f1_score, precision_score, recall_score
 
 # Column name constants (can be shared or defined per module)
@@ -208,7 +208,7 @@ def evaluate_predictions(predictions: pd.DataFrame,
 def extract_false_positives(evaluation_results: pd.DataFrame,
                            predictions_for_eval: pd.DataFrame, 
                            exclusion_tracker: Dict,
-                           max_fps_per_class: int = 2) -> Tuple[pd.DataFrame, List[Dict]]:
+                           max_fps_per_class: Optional[int] = None) -> Tuple[pd.DataFrame, List[Dict]]:
     """
     Extract false positive cases and prepare them as negative examples for training.
     Now includes per-class capping to control dataset shrinkage.
@@ -230,46 +230,52 @@ def extract_false_positives(evaluation_results: pd.DataFrame,
     
     print("🚨 Found {} false positive cases (from evaluation_results).".format(len(fp_cases)))
     
-    # NEW: Per-class capping logic
-    debug_log(f"🔍 DEBUG EXTRACT_FP: Applying per-class capping...")
-    
-    # Group FPs by class and show distribution
-    fp_by_class = fp_cases.groupby(COL_CLASS).size().to_dict()
-    debug_log(f"🔍 DEBUG EXTRACT_FP: FP distribution by class:")
-    for class_name, count in fp_by_class.items():
-        debug_log(f"   {class_name}: {count} FPs")
-    
-    # Apply per-class capping
-    capped_fps = []
-    total_before_cap = len(fp_cases)
-    
-    for class_name, class_fps in fp_cases.groupby(COL_CLASS):
-        original_count = len(class_fps)
+    # NEW: Per-class capping logic (only if limit specified)
+    if max_fps_per_class is not None:
+        debug_log(f"🔍 DEBUG EXTRACT_FP: Applying per-class capping (limit: {max_fps_per_class})...")
         
-        if original_count <= max_fps_per_class:
-            # Keep all FPs for this class
-            selected_fps = class_fps
-            debug_log(f"🔍 DEBUG EXTRACT_FP: {class_name}: Keeping all {original_count} FPs (under limit)")
-        else:
-            # Cap this class to max_fps_per_class
-            selected_fps = class_fps.head(max_fps_per_class)
-            debug_log(f"🔍 DEBUG EXTRACT_FP: {class_name}: Capped from {original_count} to {max_fps_per_class} FPs")
-            debug_log(f"   Kept: {[f'{row[COL_VIDEO]}@{row[COL_FRAME]}' for _, row in selected_fps.iterrows()]}")
-            debug_log(f"   Dropped: {original_count - max_fps_per_class} FPs (will stay in test set)")
+        # Group FPs by class and show distribution
+        fp_by_class = fp_cases.groupby(COL_CLASS).size().to_dict()
+        debug_log(f"🔍 DEBUG EXTRACT_FP: FP distribution by class:")
+        for class_name, count in fp_by_class.items():
+            debug_log(f"   {class_name}: {count} FPs")
         
-        capped_fps.append(selected_fps)
-    
-    # Combine capped FPs from all classes
-    fp_cases = pd.concat(capped_fps, ignore_index=True) if capped_fps else pd.DataFrame()
-    total_after_cap = len(fp_cases)
-    
-    debug_log(f"🔍 DEBUG EXTRACT_FP: CAPPING SUMMARY:")
-    debug_log(f"   Total FPs before capping: {total_before_cap}")
-    debug_log(f"   Total FPs after capping: {total_after_cap}")
-    debug_log(f"   FPs dropped (staying in test set): {total_before_cap - total_after_cap}")
-    debug_log(f"   Cap savings: {((total_before_cap - total_after_cap) / total_before_cap * 100):.1f}% dataset preservation")
-    
-    print(f"🔒 CAPPED: Processing {total_after_cap} FPs (from {total_before_cap} found) - {max_fps_per_class} per class max")
+        # Apply per-class capping
+        capped_fps = []
+        total_before_cap = len(fp_cases)
+        
+        for class_name, class_fps in fp_cases.groupby(COL_CLASS):
+            original_count = len(class_fps)
+            
+            if original_count <= max_fps_per_class:
+                # Keep all FPs for this class
+                selected_fps = class_fps
+                debug_log(f"🔍 DEBUG EXTRACT_FP: {class_name}: Keeping all {original_count} FPs (under limit)")
+            else:
+                # Cap this class to max_fps_per_class
+                selected_fps = class_fps.head(max_fps_per_class)
+                debug_log(f"🔍 DEBUG EXTRACT_FP: {class_name}: Capped from {original_count} to {max_fps_per_class} FPs")
+                debug_log(f"   Kept: {[f'{row[COL_VIDEO]}@{row[COL_FRAME]}' for _, row in selected_fps.iterrows()]}")
+                debug_log(f"   Dropped: {original_count - max_fps_per_class} FPs (will stay in test set)")
+            
+            capped_fps.append(selected_fps)
+        
+        # Combine capped FPs from all classes
+        fp_cases = pd.concat(capped_fps, ignore_index=True) if capped_fps else pd.DataFrame()
+        total_after_cap = len(fp_cases)
+        
+        debug_log(f"🔍 DEBUG EXTRACT_FP: CAPPING SUMMARY:")
+        debug_log(f"   Total FPs before capping: {total_before_cap}")
+        debug_log(f"   Total FPs after capping: {total_after_cap}")
+        debug_log(f"   FPs dropped (staying in test set): {total_before_cap - total_after_cap}")
+        debug_log(f"   Cap savings: {((total_before_cap - total_after_cap) / total_before_cap * 100):.1f}% dataset preservation")
+        
+        print(f"🔒 CAPPED: Processing {total_after_cap} FPs (from {total_before_cap} found) - {max_fps_per_class} per class max")
+    else:
+        debug_log(f"🔍 DEBUG EXTRACT_FP: No capping applied - using all FPs found")
+        total_before_cap = len(fp_cases)
+        total_after_cap = total_before_cap
+        print(f"✅ NO CAPPING: Processing all {total_after_cap} FPs found")
     
     # DEBUG: Show sample false positive cases
     debug_log(f"🔍 DEBUG EXTRACT_FP: Sample FP cases (after capping):")

@@ -32,8 +32,8 @@ def parse_args_for_runner():
     parser.add_argument('--epochs', type=int, default=50)
     parser.add_argument('--margin', type=float, default=0.2)
     parser.add_argument('--secondary-margin', type=float, default=None)
-    parser.add_argument('--max-fps-per-class', type=int, default=2, 
-                       help='Maximum false positives to extract per class per iteration (default: 2)')
+    parser.add_argument('--max-fps-per-class', type=int, default=None, 
+                       help='Maximum false positives to extract per class per iteration (default: no limit)')
     
     # Exclusion evaluation strategy (existing)
     exclusion_group = parser.add_mutually_exclusive_group()

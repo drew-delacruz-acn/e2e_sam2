@@ -1,3 +1,0 @@
-video,class,actual,predicted,confidence,frame,classification,iteration,extraction_timestamp,reason,negative_class_created,embedding_available
-Scene_004,Sylvie_Armor,0,1,0.82,45,FP,2,2025-05-28T19:40:59.665303,false_positive_for_training,not_Sylvie_Armor,True
-Scene_005,TimeSpear,0,1,0.89,55,FP,2,2025-05-28T19:40:59.665303,false_positive_for_training,not_TimeSpear,True

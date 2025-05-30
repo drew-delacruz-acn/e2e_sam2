@@ -1,3 +1,0 @@
-iteration,timestamp,video,frame,class,original_wrong_prediction,reason
-2,2025-05-28T19:40:59.663580,Scene_004,45,not_Sylvie_Armor,Sylvie_Armor,false_positive_negative
-2,2025-05-28T19:40:59.663580,Scene_005,55,not_TimeSpear,TimeSpear,false_positive_negative

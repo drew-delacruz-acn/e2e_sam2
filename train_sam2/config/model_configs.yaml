@@ -1,0 +1,41 @@
+# SAM2 Model Configurations
+
+# Large model configuration (default)
+sam2_hiera_large:
+  config_path: "../configs/sam2.1/sam2.1_hiera_l.yaml"
+  checkpoint_path: "../checkpoints/sam2.1_hiera_large.pt"
+  description: "Large SAM2 model with Hiera backbone"
+  parameters: "672M"
+  recommended_for: "High accuracy tasks, sufficient compute resources"
+
+# Base model configuration  
+sam2_hiera_base:
+  config_path: "../configs/sam2.1/sam2.1_hiera_b+.yaml"
+  checkpoint_path: "../checkpoints/sam2.1_hiera_base_plus.pt"
+  description: "Base+ SAM2 model with Hiera backbone"
+  parameters: "80M"
+  recommended_for: "Balanced accuracy and speed"
+
+# Small model configuration
+sam2_hiera_small:
+  config_path: "../configs/sam2.1/sam2.1_hiera_s.yaml"
+  checkpoint_path: "../checkpoints/sam2.1_hiera_small.pt"
+  description: "Small SAM2 model with Hiera backbone"
+  parameters: "46M"
+  recommended_for: "Fast inference, limited compute resources"
+
+# Tiny model configuration
+sam2_hiera_tiny:
+  config_path: "../configs/sam2.1/sam2.1_hiera_t.yaml"
+  checkpoint_path: "../checkpoints/sam2.1_hiera_tiny.pt"
+  description: "Tiny SAM2 model with Hiera backbone"
+  parameters: "39M"
+  recommended_for: "Real-time applications, edge deployment"
+
+# Custom fine-tuned model template
+custom_finetuned:
+  config_path: "../configs/sam2.1/sam2.1_hiera_l.yaml"
+  checkpoint_path: "./outputs/models/sam2_finetuned_custom.torch"
+  description: "Custom fine-tuned SAM2 model"
+  parameters: "672M"
+  recommended_for: "Domain-specific tasks" 

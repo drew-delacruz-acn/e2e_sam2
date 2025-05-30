@@ -1,0 +1,61 @@
+# SAM2 Training Configurations
+
+# Default configuration for most use cases
+default:
+  learning_rate: 1.0e-5
+  weight_decay: 4.0e-5
+  max_iterations: 10000
+  save_interval: 1000
+  val_interval: 10
+  gap_threshold: 1.0
+  gap_increase_threshold: 0.05
+  early_stopping_patience: 5
+  max_gap: 0.3
+
+# Configuration for fine-tuning on small datasets
+fine_tuning:
+  learning_rate: 5.0e-6
+  weight_decay: 2.0e-5
+  max_iterations: 5000
+  save_interval: 500
+  val_interval: 5
+  gap_threshold: 0.8
+  gap_increase_threshold: 0.03
+  early_stopping_patience: 3
+  max_gap: 0.25
+
+# Quick test configuration for development
+quick_test:
+  learning_rate: 1.0e-4
+  weight_decay: 1.0e-4
+  max_iterations: 100
+  save_interval: 25
+  val_interval: 5
+  gap_threshold: 2.0
+  gap_increase_threshold: 0.1
+  early_stopping_patience: 10
+  max_gap: 0.5
+
+# Configuration for robust training on large datasets
+robust:
+  learning_rate: 5.0e-6
+  weight_decay: 6.0e-5
+  max_iterations: 20000
+  save_interval: 2000
+  val_interval: 20
+  gap_threshold: 0.5
+  gap_increase_threshold: 0.02
+  early_stopping_patience: 3
+  max_gap: 0.2
+
+# Configuration for aggressive training
+aggressive:
+  learning_rate: 2.0e-5
+  weight_decay: 8.0e-5
+  max_iterations: 15000
+  save_interval: 1500
+  val_interval: 15
+  gap_threshold: 1.5
+  gap_increase_threshold: 0.08
+  early_stopping_patience: 7
+  max_gap: 0.4 

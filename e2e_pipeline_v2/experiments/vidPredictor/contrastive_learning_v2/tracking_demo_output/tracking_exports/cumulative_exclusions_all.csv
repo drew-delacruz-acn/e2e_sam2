@@ -1,6 +1,0 @@
-video,frame,class,original_wrong_prediction,reason
-Scene_001,15,not_Loki_Armor,Loki_Armor,false_positive_negative
-Scene_002,25,not_TVA_Collar,TVA_Collar,false_positive_negative
-Scene_003,35,not_TemPad,TemPad,false_positive_negative
-Scene_004,45,not_Sylvie_Armor,Sylvie_Armor,false_positive_negative
-Scene_005,55,not_TimeSpear,TimeSpear,false_positive_negative

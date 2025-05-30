@@ -1,3 +1,0 @@
-iteration,eval_mode,f1,precision,recall,tp,fp,fn,tn,eval_samples,exclusions
-1,clean,0.506667,0.463415,0.558824,76,88,60,1594,1818,88
-2,clean,0.579926,0.586466,0.573529,78,55,58,1627,1818,143

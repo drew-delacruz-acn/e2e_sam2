@@ -1,0 +1,195 @@
+=== COMPLETE DEBUG LOG ===
+Pipeline run at: 20250530_150721
+==================================================
+
+15:06:50 | 
+🚀 Starting Iterative Contrastive Learning Pipeline (Negative Classes Mode)
+15:06:50 | 📊 Comprehensive tracking system initialized
+15:06:50 | 
+🔍 FILTERING DEBUG: Configuration values:
+15:06:50 |    exclude_training_from_eval: True
+15:06:50 |    include_training_in_eval: False
+15:06:50 |    track_training_separately: False
+15:06:50 | 📉 Evaluation behavior: Standard, FPs added to training are not re-evaluated as FPs in the same way if they are learned.
+15:06:50 | 💡 Iteration 1: Using Primary Threshold: 0.6, Primary Margin: 0.2
+15:06:50 | 
+🔍 FILTERING DEBUG (Iteration 1):
+15:06:50 |    Exclusion tracker keys: []
+15:06:50 |    Total exclusions so far: 0
+15:06:50 | 
+🔍 FILTERING DEBUG: Applying exclusion strategy...
+15:06:50 |    Exclusion strategy: video-level
+15:06:50 |    Original resnetPredictions size: 18328
+15:06:50 | 🚫 VIDEO-LEVEL MODE: Using video-level exclusions
+15:06:50 |    🔍 Calling filter_evaluation_data with video-level strategy
+15:06:50 | 📉 Using CLEAN VIDEO-LEVEL evaluation
+15:06:50 | 🔍 FILTERING DEBUG: Evaluation data size after filtering:
+15:06:50 |    Original: 18328
+15:06:50 |    Filtered: 18328
+15:06:50 |    Difference: 0
+15:06:50 |    Strategy: video-level
+15:07:06 | 🔍 EVALUATE: Using full ground truth (no exclusions)
+15:07:06 | 🔍 EVALUATE: FINAL EVALUATION MATRIX:
+15:07:06 |    Evaluation matrix size: 1818 samples
+15:07:06 |    This is the confusion matrix size!
+15:07:06 |    No exclusions applied - using full ground truth
+15:07:06 | 🔍 DEBUG EXTRACT_FP: Starting extraction
+15:07:06 | 🔍 DEBUG EXTRACT_FP: evaluation_results shape: (1818, 7)
+15:07:06 | 🔍 DEBUG EXTRACT_FP: evaluation_results columns: ['video', 'class', 'actual', 'predicted', 'confidence', 'frame', 'classification']
+15:07:06 | 🔍 DEBUG EXTRACT_FP: predictions_for_eval shape: (434, 6)
+15:07:06 | 🔍 DEBUG EXTRACT_FP: predictions_for_eval columns: ['video', 'frame', 'owl_label', 'finetuned_embedding', 'visual_predicted_object', 'visual_max_score']
+15:07:06 | 🔍 DEBUG EXTRACT_FP: Sample FP cases:
+15:07:06 |    FP 1: Video=Scenes 001-020__108E-1-_20230727173710924.mp4, Class=TemPad, Frame=148.0
+15:07:06 |    FP 2: Video=Scenes 001-020__110C-1-_20230728125333457.mp4, Class=TemPad, Frame=56.0
+15:07:06 |    FP 3: Video=Scenes 001-020__216A-4b- only_20230815182553047.mp4, Class=TemPad, Frame=42.0
+15:07:06 | 🔍 DEBUG EXTRACT_FP: Processing FP #1
+15:07:06 |    Video: Scenes 001-020__108E-1-_20230727173710924.mp4 (type: <class 'str'>)
+15:07:06 |    Class: TemPad
+15:07:06 |    Frame: 148.0 (type: <class 'float'>)
+15:07:06 |    Frame after conversion: 148 (type: <class 'int'>)
+15:07:06 |    Matching predictions found: 1
+15:07:06 | 🔍 DEBUG EXTRACT_FP: Created exclusion #1
+15:07:06 |    Exclusion: Video=Scenes 001-020__108E-1-_20230727173710924.mp4, Frame=148, Class=not_TemPad
+15:07:06 | 🔍 DEBUG EXTRACT_FP: Processing FP #2
+15:07:06 |    Video: Scenes 001-020__110C-1-_20230728125333457.mp4 (type: <class 'str'>)
+15:07:06 |    Class: TemPad
+15:07:06 |    Frame: 56.0 (type: <class 'float'>)
+15:07:06 |    Frame after conversion: 56 (type: <class 'int'>)
+15:07:06 |    Matching predictions found: 1
+15:07:06 | 🔍 DEBUG EXTRACT_FP: Created exclusion #2
+15:07:06 |    Exclusion: Video=Scenes 001-020__110C-1-_20230728125333457.mp4, Frame=56, Class=not_TemPad
+15:07:06 | 🔍 DEBUG EXTRACT_FP: Processing FP #3
+15:07:06 |    Video: Scenes 001-020__216A-4b- only_20230815182553047.mp4 (type: <class 'str'>)
+15:07:06 |    Class: TemPad
+15:07:06 |    Frame: 42.0 (type: <class 'float'>)
+15:07:06 |    Frame after conversion: 42 (type: <class 'int'>)
+15:07:06 |    Matching predictions found: 1
+15:07:06 | 🔍 DEBUG EXTRACT_FP: Created exclusion #3
+15:07:06 |    Exclusion: Video=Scenes 001-020__216A-4b- only_20230815182553047.mp4, Frame=42, Class=not_TemPad
+15:07:06 | 🔍 DEBUG EXTRACT_FP: Processing FP #4
+15:07:06 |    Video: Scenes 001-020__220D-2-_20230815190723523.mp4 (type: <class 'str'>)
+15:07:06 |    Class: TemPad
+15:07:06 |    Frame: 9.0 (type: <class 'float'>)
+15:07:06 |    Frame after conversion: 9 (type: <class 'int'>)
+15:07:06 |    Matching predictions found: 1
+15:07:06 | 🔍 DEBUG EXTRACT_FP: Created exclusion #4
+15:07:06 |    Exclusion: Video=Scenes 001-020__220D-2-_20230815190723523.mp4, Frame=9, Class=not_TemPad
+15:07:06 | 🔍 DEBUG EXTRACT_FP: Processing FP #5
+15:07:06 |    Video: Scenes 001-020__302-2_20230815200213180.mp4 (type: <class 'str'>)
+15:07:06 |    Class: TimeSpear
+15:07:06 |    Frame: 18.0 (type: <class 'float'>)
+15:07:06 |    Frame after conversion: 18 (type: <class 'int'>)
+15:07:06 |    Matching predictions found: 1
+15:07:06 | 🔍 DEBUG EXTRACT_FP: Created exclusion #5
+15:07:06 |    Exclusion: Video=Scenes 001-020__302-2_20230815200213180.mp4, Frame=18, Class=not_TimeSpear
+15:07:06 | 🔍 DEBUG EXTRACT_FP: FINAL STATISTICS
+15:07:06 |    Total FP cases found: 17
+15:07:06 |    FP cases processed: 17
+15:07:06 |    FP cases skipped: 0
+15:07:06 |    Successful embeddings extracted: 17
+15:07:06 |    Successful exclusions created: 17
+15:07:06 |    Final exclusion_list length: 17
+15:07:06 | 🔍 DEBUG EXTRACT_FP: Sample exclusions:
+15:07:06 |    Exclusion 1: {'video': 'Scenes 001-020__108E-1-_20230727173710924.mp4', 'frame': 148, 'class': 'not_TemPad', 'original_wrong_prediction': 'TemPad', 'reason': 'false_positive_negative'}
+15:07:06 |    Exclusion 2: {'video': 'Scenes 001-020__110C-1-_20230728125333457.mp4', 'frame': 56, 'class': 'not_TemPad', 'original_wrong_prediction': 'TemPad', 'reason': 'false_positive_negative'}
+15:07:06 |    Exclusion 3: {'video': 'Scenes 001-020__216A-4b- only_20230815182553047.mp4', 'frame': 42, 'class': 'not_TemPad', 'original_wrong_prediction': 'TemPad', 'reason': 'false_positive_negative'}
+15:07:06 | 🔍 DEBUG EXTRACT_FP: RETURNING:
+15:07:06 |    fp_df_output shape: (17, 2)
+15:07:06 |    exclusion_list length: 17
+15:07:06 | 🔍 DEBUG ITERATION: extract_fps_func returned:
+15:07:06 |    fp_data shape: (17, 2)
+15:07:06 |    new_exclusions type: <class 'list'>
+15:07:06 |    new_exclusions length: 17
+15:07:06 |    new_exclusions is None: False
+15:07:06 |    new_exclusions is empty list: False
+15:07:06 |    Sample exclusion: {'video': 'Scenes 001-020__108E-1-_20230727173710924.mp4', 'frame': 148, 'class': 'not_TemPad', 'original_wrong_prediction': 'TemPad', 'reason': 'false_positive_negative'}
+15:07:06 | 🔍 DEBUG ITERATION: Checking if exclusions should be saved...
+15:07:06 |    new_exclusions: [{'video': 'Scenes 001-020__108E-1-_20230727173710924.mp4', 'frame': 148, 'class': 'not_TemPad', 'original_wrong_prediction': 'TemPad', 'reason': 'false_positive_negative'}, {'video': 'Scenes 001-020__110C-1-_20230728125333457.mp4', 'frame': 56, 'class': 'not_TemPad', 'original_wrong_prediction': 'TemPad', 'reason': 'false_positive_negative'}, {'video': 'Scenes 001-020__216A-4b- only_20230815182553047.mp4', 'frame': 42, 'class': 'not_TemPad', 'original_wrong_prediction': 'TemPad', 'reason': 'false_positive_negative'}, {'video': 'Scenes 001-020__220D-2-_20230815190723523.mp4', 'frame': 9, 'class': 'not_TemPad', 'original_wrong_prediction': 'TemPad', 'reason': 'false_positive_negative'}, {'video': 'Scenes 001-020__302-2_20230815200213180.mp4', 'frame': 18, 'class': 'not_TimeSpear', 'original_wrong_prediction': 'TimeSpear', 'reason': 'false_positive_negative'}, {'video': 'Scenes 001-020__303K-3-_20230815223320788.mp4', 'frame': 247, 'class': 'not_TemPad', 'original_wrong_prediction': 'TemPad', 'reason': 'false_positive_negative'}, {'video': 'Scenes 001-020__303L-1-_20230815223024888.mp4', 'frame': 107, 'class': 'not_TemPad', 'original_wrong_prediction': 'TemPad', 'reason': 'false_positive_negative'}, {'video': 'Scenes 001-020__317-9-_20230815232900331.mp4', 'frame': 22, 'class': 'not_TimeSpear', 'original_wrong_prediction': 'TimeSpear', 'reason': 'false_positive_negative'}, {'video': 'Scenes 021-040__222-2-_20230815185458410.mp4', 'frame': 40, 'class': 'not_TemPad', 'original_wrong_prediction': 'TemPad', 'reason': 'false_positive_negative'}, {'video': 'Scenes 021-040__226A-1-_20230815185254846.mp4', 'frame': 102, 'class': 'not_TemPad', 'original_wrong_prediction': 'TemPad', 'reason': 'false_positive_negative'}, {'video': 'Scenes 021-040__536A-3-_20230816063724398.mp4', 'frame': 147, 'class': 'not_TemPad', 'original_wrong_prediction': 'TemPad', 'reason': 'false_positive_negative'}, {'video': 'Scenes 041-060__156-5a- only pu_20230815181240389.mp4', 'frame': 180, 'class': 'not_TemPad', 'original_wrong_prediction': 'TemPad', 'reason': 'false_positive_negative'}, {'video': 'Scenes 041-060__156-6a- only pu_20230815175525189.mp4', 'frame': 79, 'class': 'not_TemPad', 'original_wrong_prediction': 'TemPad', 'reason': 'false_positive_negative'}, {'video': 'Scenes 061-080__165A-1-_20230815180241405.mp4', 'frame': 39, 'class': 'not_TemPad', 'original_wrong_prediction': 'TemPad', 'reason': 'false_positive_negative'}, {'video': 'Scenes 061-080__165A-1-_20230815180241405.mp4', 'frame': 128, 'class': 'not_TimeSpear', 'original_wrong_prediction': 'TimeSpear', 'reason': 'false_positive_negative'}, {'video': 'Scenes 061-080__165A-4-_20230815180313546.mp4', 'frame': 208, 'class': 'not_TemPad', 'original_wrong_prediction': 'TemPad', 'reason': 'false_positive_negative'}, {'video': 'Scenes 061-080__165A-4-_20230815180313546.mp4', 'frame': 26, 'class': 'not_TimeSpear', 'original_wrong_prediction': 'TimeSpear', 'reason': 'false_positive_negative'}]
+15:07:06 |    bool(new_exclusions): True
+15:07:06 |    Condition 'if new_exclusions': True
+15:07:06 | 🔍 DEBUG ITERATION: Saving 17 exclusions to exclusions.json
+15:07:06 | 🔍 PIPELINE DEBUG: eval_data input size: 18328
+15:07:06 | 🔍 PIPELINE DEBUG: Checking if actual evaluation size differs...
+15:07:06 | 🔍 PIPELINE DEBUG: Data reduction detected!
+15:07:06 |    Input to iteration: 18328 samples
+15:07:06 |    Actual evaluation: 1818 samples
+15:07:06 |    Reduction: 16510 samples lost in generate_predictions
+15:07:06 | 🔍 DEBUG PIPELINE: Exclusion tracker updated after iteration 1:
+15:07:06 |    new_exclusions length: 17
+15:07:06 |    Exclusion tracker keys: [1]
+15:07:06 |    Total exclusions in tracker: 17
+15:07:06 |    Iteration 1: 17 exclusions
+15:07:06 |    Iteration 1 exclusions added successfully
+15:07:06 | 💡 Iteration 2: Using Threshold: 0.6 (Primary), Margin: 0.2 (Primary)
+15:07:06 | 
+🔍 FILTERING DEBUG (Iteration 2):
+15:07:06 |    Exclusion tracker keys: [1]
+15:07:06 |    Total exclusions so far: 17
+15:07:06 |    Iteration 1: 17 exclusions
+15:07:06 | 
+🔍 FILTERING DEBUG: Applying exclusion strategy...
+15:07:06 |    Exclusion strategy: video-level
+15:07:06 |    Original resnetPredictions size: 18328
+15:07:07 | 🚫 VIDEO-LEVEL MODE: Using video-level exclusions
+15:07:07 |    🔍 Calling filter_evaluation_data with video-level strategy
+15:07:07 | 📉 Using CLEAN VIDEO-LEVEL evaluation
+15:07:07 | 🔍 FILTERING DEBUG: Evaluation data size after filtering:
+15:07:07 |    Original: 18328
+15:07:07 |    Filtered: 11743
+15:07:07 |    Difference: 6585
+15:07:07 |    Strategy: video-level
+15:07:07 |    ✅ Filtering applied: 6585 samples removed
+15:07:20 | 🔍 EVALUATE: Filtering ground truth using video-level exclusion strategy
+15:07:20 |    Original ground truth size: 1818
+15:07:20 |    Ground truth columns: ['video', 'tag', 'actual']
+15:07:20 |    Has video column: True
+15:07:20 |    Has frame column: False
+15:07:20 |    ✅ Applying video-level filtering to ground truth
+15:07:20 | 🔍 GT_FILTER: Applying video-level exclusions to ground truth
+15:07:20 |    Processing 17 exclusions from iteration 1
+15:07:20 |    Videos to exclude from ground truth: 15
+15:07:20 |    Sample excluded videos: ['Scenes 001-020__302-2_20230815200213180.mp4', 'Scenes 061-080__165A-1-_20230815180241405.mp4', 'Scenes 001-020__110C-1-_20230728125333457.mp4']
+15:07:20 |    Ground truth filtering: 1818 → 1548 samples
+15:07:20 |    Removed 270 ground truth samples from 15 videos
+15:07:20 |    Filtered ground truth size: 1548
+15:07:20 |    Ground truth reduction: 270 samples removed
+15:07:21 | 🔍 EVALUATE: FINAL EVALUATION MATRIX:
+15:07:21 |    Evaluation matrix size: 1548 samples
+15:07:21 |    This is the confusion matrix size!
+15:07:21 |    Expected reduction from exclusions: ground truth filtered
+15:07:21 | 🔍 DEBUG EXTRACT_FP: Starting extraction
+15:07:21 | 🔍 DEBUG EXTRACT_FP: evaluation_results shape: (1548, 7)
+15:07:21 | 🔍 DEBUG EXTRACT_FP: evaluation_results columns: ['video', 'class', 'actual', 'predicted', 'confidence', 'frame', 'classification']
+15:07:21 | 🔍 DEBUG EXTRACT_FP: predictions_for_eval shape: (63, 6)
+15:07:21 | 🔍 DEBUG EXTRACT_FP: predictions_for_eval columns: ['video', 'frame', 'owl_label', 'finetuned_embedding', 'visual_predicted_object', 'visual_max_score']
+15:07:21 | 🔍 DEBUG ITERATION: extract_fps_func returned:
+15:07:21 |    fp_data shape: (0, 2)
+15:07:21 |    new_exclusions type: <class 'list'>
+15:07:21 |    new_exclusions length: 0
+15:07:21 |    new_exclusions is None: False
+15:07:21 |    new_exclusions is empty list: True
+15:07:21 |    ⚠️ WARNING: new_exclusions is empty!
+15:07:21 | 🔍 DEBUG ITERATION: Checking if exclusions should be saved...
+15:07:21 |    new_exclusions: []
+15:07:21 |    bool(new_exclusions): False
+15:07:21 |    Condition 'if new_exclusions': False
+15:07:21 | 🔍 DEBUG ITERATION: NOT saving exclusions.json because new_exclusions is falsy
+15:07:21 |    This is why no exclusions.json file was created!
+15:07:21 | 🔍 PIPELINE DEBUG: eval_data input size: 11743
+15:07:21 | 🔍 PIPELINE DEBUG: Checking if actual evaluation size differs...
+15:07:21 | 🔍 PIPELINE DEBUG: Data reduction detected!
+15:07:21 |    Input to iteration: 11743 samples
+15:07:21 |    Actual evaluation: 1548 samples
+15:07:21 |    Reduction: 10195 samples lost in generate_predictions
+15:07:21 | 🔍 DEBUG PIPELINE: Exclusion tracker updated after iteration 2:
+15:07:21 |    new_exclusions length: 0
+15:07:21 |    Exclusion tracker keys: [1]
+15:07:21 |    Total exclusions in tracker: 17
+15:07:21 |    Iteration 1: 17 exclusions
+15:07:21 |    ⚠️ WARNING: Iteration 2 exclusions NOT added to tracker!
+15:07:21 | 
+🏁 Maximum iterations reached.
+15:07:21 | 
+📜 Pipeline summary saved to EXCLUDE_VIDEOS_MULTI_MODAL/pipeline_summary.json. Final F1: 0.0000.
+15:07:21 | 📍 Exclusion tracker saved to EXCLUDE_VIDEOS_MULTI_MODAL/cumulative_exclusions.json.
+15:07:21 | 💾 Final combined training data saved to EXCLUDE_VIDEOS_MULTI_MODAL/final_training_data.pkl.

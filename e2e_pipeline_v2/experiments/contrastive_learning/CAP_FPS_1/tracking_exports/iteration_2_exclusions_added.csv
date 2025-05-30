@@ -1,0 +1,14 @@
+iteration,timestamp,video,frame,class,original_wrong_prediction,reason
+2,2025-05-30T16:10:39.294944,Scenes 001-020__306C-1-_20230815201919138.mp4,3,not_Aligator Loki Plushie,Aligator Loki Plushie,false_positive_negative
+2,2025-05-30T16:10:39.294944,Scenes 021-040__536A-3-_20230816063724398.mp4,94,not_Boastful Loki Armor,Boastful Loki Armor,false_positive_negative
+2,2025-05-30T16:10:39.294944,Scenes 021-040__235-1-_20230815192601740.mp4,25,not_Kid Loki Armor,Kid Loki Armor,false_positive_negative
+2,2025-05-30T16:10:39.294944,Scenes 021-040__234A-2-_20230815192229849.mp4,102,not_Loki's Armor,Loki's Armor,false_positive_negative
+2,2025-05-30T16:10:39.294944,Scenes 001-020__201L-1-_20230728112628503.mp4,97,not_Loki's Variant uniform,Loki's Variant uniform,false_positive_negative
+2,2025-05-30T16:10:39.294944,Scenes 021-040__221-4-_20230815180803766.mp4,100,not_Loki's dagger,Loki's dagger,false_positive_negative
+2,2025-05-30T16:10:39.294944,Scenes 001-020__302-2_20230815200213180.mp4,31,not_Ravonna Renslayer's Uniform,Ravonna Renslayer's Uniform,false_positive_negative
+2,2025-05-30T16:10:39.294944,Scenes 001-020__201K-1-_20230815184646280.mp4,20,not_Sylvie's horned headpiece,Sylvie's horned headpiece,false_positive_negative
+2,2025-05-30T16:10:39.294944,Scenes 001-020__110C-1-_20230728125333457.mp4,184,not_Sylvie's machete,Sylvie's machete,false_positive_negative
+2,2025-05-30T16:10:39.294944,Scenes 021-040__234A-2-_20230815192229849.mp4,167,not_TVA Collar,TVA Collar,false_positive_negative
+2,2025-05-30T16:10:39.294944,Scenes 001-020__207A-1-_20230815182030372.mp4,61,not_TVA Prisoner Uniform,TVA Prisoner Uniform,false_positive_negative
+2,2025-05-30T16:10:39.294944,Scenes 001-020__110C-1-_20230728125333457.mp4,176,not_TemPad,TemPad,false_positive_negative
+2,2025-05-30T16:10:39.294944,Scenes 001-020__201D-2-_20230815184746334.mp4,41,not_TimeSpear,TimeSpear,false_positive_negative

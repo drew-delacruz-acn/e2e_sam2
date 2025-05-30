@@ -1,0 +1,20 @@
+=== EXCLUSION TRACKING DETAILS ===
+Total iterations: 2
+Total exclusions: 37
+
+ITERATION 1: 31 exclusions
+  not_TemPad: 18 samples
+  not_TimeSpear: 13 samples
+  Sample exclusions:
+    Scenes 001-020__108E:148 -> not_TemPad
+    Scenes 001-020__110A:197 -> not_TimeSpear
+    Scenes 001-020__110C:56 -> not_TemPad
+    ... and 28 more
+
+ITERATION 2: 6 exclusions
+  not_TemPad: 6 samples
+  Sample exclusions:
+    Scenes 001-020__206B:0 -> not_TemPad
+    Scenes 001-020__211H:118 -> not_TemPad
+    Scenes 001-020__306C:7 -> not_TemPad
+    ... and 3 more

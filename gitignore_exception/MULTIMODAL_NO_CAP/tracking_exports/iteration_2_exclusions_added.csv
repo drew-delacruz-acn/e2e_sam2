@@ -1,0 +1,7 @@
+iteration,timestamp,video,frame,class,original_wrong_prediction,reason
+2,2025-05-30T16:48:30.663297,Scenes 001-020__206B-1_20230815190937932.mp4,0,not_TemPad,TemPad,false_positive_negative
+2,2025-05-30T16:48:30.663297,Scenes 001-020__211H-2-_20230815190456898.mp4,118,not_TemPad,TemPad,false_positive_negative
+2,2025-05-30T16:48:30.663297,Scenes 001-020__306C-1-_20230815201919138.mp4,7,not_TemPad,TemPad,false_positive_negative
+2,2025-05-30T16:48:30.663297,Scenes 021-040__230-1ng_20230815191241114.mp4,2,not_TemPad,TemPad,false_positive_negative
+2,2025-05-30T16:48:30.663297,Scenes 021-040__234A-2-_20230815192229849.mp4,102,not_TemPad,TemPad,false_positive_negative
+2,2025-05-30T16:48:30.663297,Scenes 061-080__163A-1- mos_20230815180055695.mp4,11,not_TemPad,TemPad,false_positive_negative

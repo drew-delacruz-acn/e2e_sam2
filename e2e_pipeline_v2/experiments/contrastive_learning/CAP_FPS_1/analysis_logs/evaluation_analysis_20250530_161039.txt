@@ -1,0 +1,15 @@
+=== EVALUATION STRATEGY ANALYSIS ===
+Timestamp: 20250530_161039
+Strategy: exclude_training=True, include_training=False, track_separately=False
+Original Data Size: 18328
+
+ITER | MODE         | EVAL_SIZE | EXCLUSIONS | F1      | PRECISION | RECALL
+-----|--------------|-----------|------------|---------|-----------|--------
+   1 | clean_video_level |      1818 |         15 |  0.5067 |    0.4634 |  0.5588
+   2 | clean_video_level |      1566 |         28 |  0.5063 |    0.4724 |  0.5455
+
+=== KEY DIAGNOSTICS ===
+Expected final eval size: 18300
+Actual final eval size: 1566
+Size difference: 16734
+⚠️  WARNING: Eval size mismatch - filtering may not be working correctly!

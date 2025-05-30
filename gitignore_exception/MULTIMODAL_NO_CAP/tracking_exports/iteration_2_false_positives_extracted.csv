@@ -1,0 +1,7 @@
+video,class,actual,predicted,confidence,frame,classification,iteration,extraction_timestamp,reason,negative_class_created,embedding_available
+Scenes 001-020__206B-1_20230815190937932.mp4,TemPad,0.0,1,0.5405099987983704,0.0,FP,2,2025-05-30T16:48:30.650530,false_positive_for_training,not_TemPad,True
+Scenes 001-020__211H-2-_20230815190456898.mp4,TemPad,0.0,1,0.5146343111991882,118.0,FP,2,2025-05-30T16:48:30.650530,false_positive_for_training,not_TemPad,True
+Scenes 001-020__306C-1-_20230815201919138.mp4,TemPad,0.0,1,0.5119977593421936,7.0,FP,2,2025-05-30T16:48:30.650530,false_positive_for_training,not_TemPad,True
+Scenes 021-040__230-1ng_20230815191241114.mp4,TemPad,0.0,1,0.5448033809661865,2.0,FP,2,2025-05-30T16:48:30.650530,false_positive_for_training,not_TemPad,True
+Scenes 021-040__234A-2-_20230815192229849.mp4,TemPad,0.0,1,0.5498366355895996,102.0,FP,2,2025-05-30T16:48:30.650530,false_positive_for_training,not_TemPad,True
+Scenes 061-080__163A-1- mos_20230815180055695.mp4,TemPad,0.0,1,0.5844554901123047,11.0,FP,2,2025-05-30T16:48:30.650530,false_positive_for_training,not_TemPad,True

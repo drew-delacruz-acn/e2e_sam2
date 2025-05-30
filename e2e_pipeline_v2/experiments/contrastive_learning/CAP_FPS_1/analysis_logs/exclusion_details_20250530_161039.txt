@@ -1,0 +1,45 @@
+=== EXCLUSION TRACKING DETAILS ===
+Total iterations: 2
+Total exclusions: 28
+
+ITERATION 1: 15 exclusions
+  not_Aligator Loki Plushie: 1 samples
+  not_Boastful Loki Armor: 1 samples
+  not_Loki's Armor: 1 samples
+  not_Loki's Variant uniform: 1 samples
+  not_Loki's dagger: 1 samples
+  not_Ravonna Renslayer's Uniform: 1 samples
+  not_Sylvie's Armor: 1 samples
+  not_Sylvie's horned headpiece: 1 samples
+  not_Sylvie's machete: 1 samples
+  not_TVA Collar: 1 samples
+  not_TVA Monitor: 1 samples
+  not_TVA Prisoner Uniform: 1 samples
+  not_TemPad: 1 samples
+  not_Time Stick: 1 samples
+  not_TimeSpear: 1 samples
+  Sample exclusions:
+    Scenes 001-020__306B:30 -> not_Aligator Loki Plushie
+    Scenes 001-020__211-:9 -> not_Boastful Loki Armor
+    Scenes 001-020__201C:57 -> not_Loki's Armor
+    ... and 12 more
+
+ITERATION 2: 13 exclusions
+  not_Aligator Loki Plushie: 1 samples
+  not_Boastful Loki Armor: 1 samples
+  not_Kid Loki Armor: 1 samples
+  not_Loki's Armor: 1 samples
+  not_Loki's Variant uniform: 1 samples
+  not_Loki's dagger: 1 samples
+  not_Ravonna Renslayer's Uniform: 1 samples
+  not_Sylvie's horned headpiece: 1 samples
+  not_Sylvie's machete: 1 samples
+  not_TVA Collar: 1 samples
+  not_TVA Prisoner Uniform: 1 samples
+  not_TemPad: 1 samples
+  not_TimeSpear: 1 samples
+  Sample exclusions:
+    Scenes 001-020__306C:3 -> not_Aligator Loki Plushie
+    Scenes 021-040__536A:94 -> not_Boastful Loki Armor
+    Scenes 021-040__235-:25 -> not_Kid Loki Armor
+    ... and 10 more

@@ -1,0 +1,46 @@
+video,class,actual,predicted,confidence,frame,classification,iteration,extraction_timestamp,reason,negative_class_created,embedding_available
+Scenes 001-020__201L-1-_20230728112628503.mp4,Loki's Variant uniform,0.0,1,0.8683943748474121,97.0,FP,2,2025-05-30T16:08:26.256160,false_positive_for_training,not_Loki's Variant uniform,True
+Scenes 001-020__207A-1-_20230815182030372.mp4,TVA Prisoner Uniform,0.0,1,0.862597644329071,61.0,FP,2,2025-05-30T16:08:26.256160,false_positive_for_training,not_TVA Prisoner Uniform,True
+Scenes 001-020__213-3-_20230815180738197.mp4,Sylvie's horned headpiece,0.0,1,0.8348636627197266,65.0,FP,2,2025-05-30T16:08:26.256160,false_positive_for_training,not_Sylvie's horned headpiece,True
+Scenes 001-020__213-3-_20230815180738197.mp4,TemPad,0.0,1,0.8406983613967896,76.0,FP,2,2025-05-30T16:08:26.256160,false_positive_for_training,not_TemPad,True
+Scenes 001-020__220D-2-_20230815190723523.mp4,Loki's Variant uniform,0.0,1,0.8589889407157898,72.0,FP,2,2025-05-30T16:08:26.256160,false_positive_for_training,not_Loki's Variant uniform,True
+Scenes 001-020__220D-2-_20230815190723523.mp4,TimeSpear,0.0,1,0.8070792555809021,28.0,FP,2,2025-05-30T16:08:26.256160,false_positive_for_training,not_TimeSpear,True
+Scenes 001-020__303K-3-_20230815223320788.mp4,TimeSpear,0.0,1,0.854817271232605,185.0,FP,2,2025-05-30T16:08:26.256160,false_positive_for_training,not_TimeSpear,True
+Scenes 001-020__303L-1-_20230815223024888.mp4,TVA Prisoner Uniform,0.0,1,0.8991042971611023,28.0,FP,2,2025-05-30T16:08:26.256160,false_positive_for_training,not_TVA Prisoner Uniform,True
+Scenes 001-020__303L-1-_20230815223024888.mp4,TimeSpear,0.0,1,0.8871247172355652,90.0,FP,2,2025-05-30T16:08:26.256160,false_positive_for_training,not_TimeSpear,True
+Scenes 001-020__305C-1_20230815193534665.mp4,Ravonna Renslayer's Uniform,0.0,1,0.8026875853538513,14.0,FP,2,2025-05-30T16:08:26.256160,false_positive_for_training,not_Ravonna Renslayer's Uniform,True
+Scenes 001-020__306E-1-_20230815201829547.mp4,Aligator Loki Plushie,0.0,1,0.8190032243728638,25.0,FP,2,2025-05-30T16:08:26.256160,false_positive_for_training,not_Aligator Loki Plushie,True
+Scenes 001-020__306E-1-_20230815201829547.mp4,Sylvie's machete,0.0,1,0.8147640228271484,65.0,FP,2,2025-05-30T16:08:26.256160,false_positive_for_training,not_Sylvie's machete,True
+Scenes 001-020__306E-1-_20230815201829547.mp4,TVA Prisoner Uniform,0.0,1,0.8215604424476624,47.0,FP,2,2025-05-30T16:08:26.256160,false_positive_for_training,not_TVA Prisoner Uniform,True
+Scenes 001-020__309-3-_20230815150109755.mp4,Sylvie's machete,0.0,1,0.899899959564209,24.0,FP,2,2025-05-30T16:08:26.256160,false_positive_for_training,not_Sylvie's machete,True
+Scenes 001-020__314-3_20230815232058756.mp4,Sylvie's machete,0.0,1,0.8186546564102173,119.0,FP,2,2025-05-30T16:08:26.256160,false_positive_for_training,not_Sylvie's machete,True
+Scenes 001-020__319-9_20230815201611576.mp4,Aligator Loki Plushie,0.0,1,0.8530153632164001,28.0,FP,2,2025-05-30T16:08:26.256160,false_positive_for_training,not_Aligator Loki Plushie,True
+Scenes 001-020__504K-1-_20230816050602143.mp4,Loki's Variant uniform,0.0,1,0.8186154365539551,28.0,FP,2,2025-05-30T16:08:26.256160,false_positive_for_training,not_Loki's Variant uniform,True
+Scenes 001-020__506E-1ng_b_20230816043951139.mp4,Sylvie's machete,0.0,1,0.8572950959205627,0.0,FP,2,2025-05-30T16:08:26.256160,false_positive_for_training,not_Sylvie's machete,True
+Scenes 001-020__509-3_20230815200533637.mp4,TemPad,0.0,1,0.8833030462265015,43.0,FP,2,2025-05-30T16:08:26.256160,false_positive_for_training,not_TemPad,True
+Scenes 021-040__137E-1-_20230815175038515.mp4,TimeSpear,0.0,1,0.8774340748786926,86.0,FP,2,2025-05-30T16:08:26.256160,false_positive_for_training,not_TimeSpear,True
+Scenes 021-040__222-2-_20230815185458410.mp4,Sylvie's machete,0.0,1,0.8032329678535461,38.0,FP,2,2025-05-30T16:08:26.256160,false_positive_for_training,not_Sylvie's machete,True
+Scenes 021-040__222-2-_20230815185458410.mp4,TemPad,0.0,1,0.8450053930282593,58.0,FP,2,2025-05-30T16:08:26.256160,false_positive_for_training,not_TemPad,True
+Scenes 021-040__226A-1-_20230815185254846.mp4,Loki's dagger,0.0,1,0.8078429102897644,19.0,FP,2,2025-05-30T16:08:26.256160,false_positive_for_training,not_Loki's dagger,True
+Scenes 021-040__226A-1-_20230815185254846.mp4,Sylvie's machete,0.0,1,0.8731623888015747,119.0,FP,2,2025-05-30T16:08:26.256160,false_positive_for_training,not_Sylvie's machete,True
+Scenes 021-040__235C-2- mos_20230815192640043.mp4,TemPad,0.0,1,0.8297918438911438,5.0,FP,2,2025-05-30T16:08:26.256160,false_positive_for_training,not_TemPad,True
+Scenes 021-040__237B-1-_20230815180326204.mp4,Aligator Loki Plushie,0.0,1,0.828784704208374,164.0,FP,2,2025-05-30T16:08:26.256160,false_positive_for_training,not_Aligator Loki Plushie,True
+Scenes 021-040__237B-1-_20230815180326204.mp4,Loki's Armor,0.0,1,0.8628377914428711,159.0,FP,2,2025-05-30T16:08:26.256160,false_positive_for_training,not_Loki's Armor,True
+Scenes 021-040__237B-1-_20230815180326204.mp4,Loki's dagger,0.0,1,0.8360793590545654,57.0,FP,2,2025-05-30T16:08:26.256160,false_positive_for_training,not_Loki's dagger,True
+Scenes 021-040__237B-1-_20230815180326204.mp4,Sylvie's machete,0.0,1,0.8945833444595337,205.0,FP,2,2025-05-30T16:08:26.256160,false_positive_for_training,not_Sylvie's machete,True
+Scenes 021-040__237B-1-_20230815180326204.mp4,TVA Prisoner Uniform,0.0,1,0.8330487012863159,109.0,FP,2,2025-05-30T16:08:26.256160,false_positive_for_training,not_TVA Prisoner Uniform,True
+Scenes 021-040__237B-1-_20230815180326204.mp4,TimeSpear,0.0,1,0.9030346274375916,35.0,FP,2,2025-05-30T16:08:26.256160,false_positive_for_training,not_TimeSpear,True
+Scenes 021-040__440H-2b-_20230816031331933.mp4,Aligator Loki Plushie,0.0,1,0.8466017246246338,55.0,FP,2,2025-05-30T16:08:26.256160,false_positive_for_training,not_Aligator Loki Plushie,True
+Scenes 041-060__156-6a- only pu_20230815175525189.mp4,TemPad,0.0,1,0.8129251003265381,70.0,FP,2,2025-05-30T16:08:26.256160,false_positive_for_training,not_TemPad,True
+Scenes 041-060__156D-1- mos_20230815181940173.mp4,TVA Collar,0.0,1,0.8393920660018921,171.0,FP,2,2025-05-30T16:08:26.256160,false_positive_for_training,not_TVA Collar,True
+Scenes 041-060__156F-1-_20230815175731629.mp4,TemPad,0.0,1,0.8343374133110046,98.0,FP,2,2025-05-30T16:08:26.256160,false_positive_for_training,not_TemPad,True
+Scenes 041-060__244A-7- pu_20230815211729392.mp4,Ravonna Renslayer's Uniform,0.0,1,0.814937174320221,56.0,FP,2,2025-05-30T16:08:26.256160,false_positive_for_training,not_Ravonna Renslayer's Uniform,True
+Scenes 041-060__244A-7- pu_20230815211729392.mp4,TVA Collar,0.0,1,0.8259767889976501,59.0,FP,2,2025-05-30T16:08:26.256160,false_positive_for_training,not_TVA Collar,True
+Scenes 041-060__244A-7- pu_20230815211729392.mp4,TVA Prisoner Uniform,0.0,1,0.8571072816848755,13.0,FP,2,2025-05-30T16:08:26.256160,false_positive_for_training,not_TVA Prisoner Uniform,True
+Scenes 041-060__244B-1-_20230815212053650.mp4,TVA Prisoner Uniform,0.0,1,0.8776364326477051,62.0,FP,2,2025-05-30T16:08:26.256160,false_positive_for_training,not_TVA Prisoner Uniform,True
+Scenes 061-080__165A-1-_20230815180241405.mp4,Sylvie's machete,0.0,1,0.8282374143600464,25.0,FP,2,2025-05-30T16:08:26.256160,false_positive_for_training,not_Sylvie's machete,True
+Scenes 061-080__165A-1-_20230815180241405.mp4,TVA Collar,0.0,1,0.8339523673057556,92.0,FP,2,2025-05-30T16:08:26.256160,false_positive_for_training,not_TVA Collar,True
+Scenes 061-080__165A-1-_20230815180241405.mp4,TemPad,0.0,1,0.8326566815376282,37.0,FP,2,2025-05-30T16:08:26.256160,false_positive_for_training,not_TemPad,True
+Scenes 061-080__165A-4-_20230815180313546.mp4,Sylvie's machete,0.0,1,0.8181771039962769,178.0,FP,2,2025-05-30T16:08:26.256160,false_positive_for_training,not_Sylvie's machete,True
+Scenes 061-080__165A-4-_20230815180313546.mp4,TemPad,0.0,1,0.8377796411514282,315.0,FP,2,2025-05-30T16:08:26.256160,false_positive_for_training,not_TemPad,True
+Scenes 061-080__265N-1_20230815220141511.mp4,TimeSpear,0.0,1,0.8411878943443298,34.0,FP,2,2025-05-30T16:08:26.256160,false_positive_for_training,not_TimeSpear,True

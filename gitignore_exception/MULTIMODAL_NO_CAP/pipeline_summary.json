@@ -1,0 +1,57 @@
+{
+  "config": {
+    "definitive_objects": "/home/ubuntu/code/drew/e2e_sam2/data/multimodalEmbeddings.pkl",
+    "resnet_predictions": "/home/ubuntu/code/libby/pipeline/data/finetuned_may19.pkl",
+    "tracking_info": "/home/ubuntu/code/libby/pipeline/data/sourceTruth_jeremiah.pkl",
+    "iterations": 2,
+    "threshold": 0.5,
+    "secondary_threshold": null,
+    "convergence_threshold": 0.001,
+    "epochs": 50,
+    "margin": 0.2,
+    "secondary_margin": null,
+    "max_fps_per_class": null,
+    "exclude_training_from_eval": true,
+    "include_training_in_eval": false,
+    "track_training_separately": false,
+    "exclusion_strategy": "video-level",
+    "output": "MULTIMODAL_NO_CAP",
+    "test_mode": false
+  },
+  "iteration_metrics": [
+    {
+      "iteration": 1,
+      "eval_mode": "clean_video_level",
+      "evaluation_samples": 1818,
+      "exclusion_strategy": "video-level",
+      "f1": 0.11299435028248588,
+      "precision": 0.24390243902439024,
+      "recall": 0.07352941176470588,
+      "TP": 10,
+      "FP": 31,
+      "FN": 126,
+      "TN": 1651
+    },
+    {
+      "iteration": 2,
+      "eval_mode": "clean_video_level",
+      "evaluation_samples": 1314,
+      "exclusion_strategy": "video-level",
+      "f1": 0.020202020202020204,
+      "precision": 0.14285714285714285,
+      "recall": 0.010869565217391304,
+      "TP": 1,
+      "FP": 6,
+      "FN": 91,
+      "TN": 1216
+    }
+  ],
+  "final_training_data_size": 20,
+  "final_exclusion_count": 37,
+  "evaluation_strategy": {
+    "exclude_training_from_eval": true,
+    "include_training_in_eval": false,
+    "track_training_separately": false,
+    "exclusion_strategy": "video-level"
+  }
+}

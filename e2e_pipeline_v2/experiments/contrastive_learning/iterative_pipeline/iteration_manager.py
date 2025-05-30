@@ -31,7 +31,8 @@ def run_single_iteration(
     generate_preds_func, 
     evaluate_preds_func, 
     extract_fps_func,
-    exclusion_strategy: str = 'frame-level'
+    exclusion_strategy: str = 'frame-level',
+    max_fps_per_class: int = 2
 ) -> Tuple[pd.DataFrame, Dict, List[Dict]]:
     """
     Run a single iteration of the pipeline: train, predict, evaluate, extract FPs.
@@ -72,7 +73,8 @@ def run_single_iteration(
     fp_data, new_exclusions = extract_fps_func( 
         evaluation_results, 
         predictions_for_eval, 
-        exclusion_tracker 
+        exclusion_tracker,
+        max_fps_per_class
     )
     
     # DEBUG: Log what was returned from extract_false_positives

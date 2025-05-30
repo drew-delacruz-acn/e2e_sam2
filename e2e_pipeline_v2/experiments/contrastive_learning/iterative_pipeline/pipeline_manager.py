@@ -168,7 +168,8 @@ def run_iterative_pipeline(
             generate_preds_func=generate_predictions,
             evaluate_preds_func=evaluate_predictions,
             extract_fps_func=extract_false_positives,
-            exclusion_strategy=config.exclusion_strategy
+            exclusion_strategy=config.exclusion_strategy,
+            max_fps_per_class=config.max_fps_per_class  # Use config value instead of hardcoded
         )
         
         # Add evaluation mode to metrics with CORRECTED evaluation sample count

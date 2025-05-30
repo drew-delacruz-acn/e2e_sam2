@@ -18,6 +18,9 @@ class PipelineConfig:
     epochs: int = 50
     margin: float = 0.2
     secondary_margin: Optional[float] = None # Use Optional for clarity
+    
+    # False positive extraction parameters
+    max_fps_per_class: int = 2  # Maximum false positives to extract per class per iteration
 
     # Exclusion strategy options
     # These are mutually exclusive, argparse handles this.

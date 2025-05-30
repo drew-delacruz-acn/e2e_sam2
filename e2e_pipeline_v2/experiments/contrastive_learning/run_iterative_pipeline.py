@@ -32,6 +32,8 @@ def parse_args_for_runner():
     parser.add_argument('--epochs', type=int, default=50)
     parser.add_argument('--margin', type=float, default=0.2)
     parser.add_argument('--secondary-margin', type=float, default=None)
+    parser.add_argument('--max-fps-per-class', type=int, default=2, 
+                       help='Maximum false positives to extract per class per iteration (default: 2)')
     
     # Exclusion evaluation strategy (existing)
     exclusion_group = parser.add_mutually_exclusive_group()
@@ -65,6 +67,7 @@ def parse_args_for_runner():
     config_dict['secondary_threshold'] = config_dict.pop('secondary_threshold')
     config_dict['convergence_threshold'] = config_dict.pop('convergence_threshold')
     config_dict['secondary_margin'] = config_dict.pop('secondary_margin')
+    config_dict['max_fps_per_class'] = config_dict.pop('max_fps_per_class')
     config_dict['test_mode'] = config_dict.pop('test_mode')
     
     # Create config with properly named fields

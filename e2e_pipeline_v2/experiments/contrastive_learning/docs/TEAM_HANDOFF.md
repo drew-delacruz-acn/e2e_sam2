@@ -35,6 +35,20 @@
 
 
 ## 🔄 Iterative Pipeline
+This pipeline runs the contrastive learning process, filters out the false positives and retrains the contrastive learner with these added to the dataset
+
+# Example command (WORKS)
+python run_iterative_pipeline.py \
+--definitive-objects /home/ubuntu/code/drew/e2e_sam2/data/definitiveObjects_jeremiah.pkl \
+--resnet-predictions /home/ubuntu/code/libby/pipeline/data/finetuned_may19.pkl \
+--tracking-info /home/ubuntu/code/libby/pipeline/data/sourceTruth_jeremiah.pkl \
+--iterations 2 \
+--epochs 50 \
+--threshold 0.8 \
+--margin 0.2 \
+--output NO_FPS_CAP \
+--exclude-training-from-eval \
+--video-level-exclusions \
 
 
 
@@ -52,6 +66,8 @@
 **Requires 3 Data Files**: definitiveObjects.pkl (ground truth embeddings of objects), resnetPredictions.pkl (predictions), trackingInfo.pkl (ground truth tracking objects)
 
 ### **Production Deployment Ready**
+
+
 ```bash
 # Standard production command
 python run_iterative_pipeline.py \
@@ -76,6 +92,9 @@ python run_iterative_pipeline.py \
     --exclusion-strategy video-level \
     --max-fps-per-class 2 \
     --exclude-training-from-eval
+```
+
+
 ```
 
 ### **Enhanced Debugging & Analysis**

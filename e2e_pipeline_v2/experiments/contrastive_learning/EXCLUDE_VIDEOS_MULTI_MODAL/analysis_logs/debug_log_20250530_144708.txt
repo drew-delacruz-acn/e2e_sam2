@@ -1,0 +1,111 @@
+=== COMPLETE DEBUG LOG ===
+Pipeline run at: 20250530_144708
+==================================================
+
+14:46:37 | 
+🚀 Starting Iterative Contrastive Learning Pipeline (Negative Classes Mode)
+14:46:37 | 📊 Comprehensive tracking system initialized
+14:46:37 | 
+🔍 FILTERING DEBUG: Configuration values:
+14:46:37 |    exclude_training_from_eval: True
+14:46:37 |    include_training_in_eval: False
+14:46:37 |    track_training_separately: False
+14:46:37 | 📉 Evaluation behavior: Standard, FPs added to training are not re-evaluated as FPs in the same way if they are learned.
+14:46:37 | 💡 Iteration 1: Using Primary Threshold: 0.8, Primary Margin: 0.2
+14:46:37 | 
+🔍 FILTERING DEBUG (Iteration 1):
+14:46:37 |    Exclusion tracker keys: []
+14:46:37 |    Total exclusions so far: 0
+14:46:37 | 
+🔍 FILTERING DEBUG: Applying exclusion strategy...
+14:46:37 |    Exclusion strategy: video-level
+14:46:37 |    Original resnetPredictions size: 18328
+14:46:37 | 🚫 VIDEO-LEVEL MODE: Using video-level exclusions
+14:46:37 |    🔍 Calling filter_evaluation_data with video-level strategy
+14:46:37 | 📉 Using CLEAN VIDEO-LEVEL evaluation
+14:46:37 | 🔍 FILTERING DEBUG: Evaluation data size after filtering:
+14:46:37 |    Original: 18328
+14:46:37 |    Filtered: 18328
+14:46:37 |    Difference: 0
+14:46:37 |    Strategy: video-level
+14:46:52 | 🔍 DEBUG EXTRACT_FP: Starting extraction
+14:46:52 | 🔍 DEBUG EXTRACT_FP: evaluation_results shape: (0, 7)
+14:46:52 | 🔍 DEBUG EXTRACT_FP: evaluation_results columns: ['video', 'class', 'actual', 'predicted', 'confidence', 'frame', 'classification']
+14:46:52 | 🔍 DEBUG EXTRACT_FP: predictions_for_eval shape: (0, 6)
+14:46:52 | 🔍 DEBUG EXTRACT_FP: predictions_for_eval columns: ['video', 'frame', 'owl_label', 'finetuned_embedding', 'visual_predicted_object', 'visual_max_score']
+14:46:52 | 🔍 DEBUG ITERATION: extract_fps_func returned:
+14:46:52 |    fp_data shape: (0, 2)
+14:46:52 |    new_exclusions type: <class 'list'>
+14:46:52 |    new_exclusions length: 0
+14:46:52 |    new_exclusions is None: False
+14:46:52 |    new_exclusions is empty list: True
+14:46:52 |    ⚠️ WARNING: new_exclusions is empty!
+14:46:52 | 🔍 DEBUG ITERATION: Checking if exclusions should be saved...
+14:46:52 |    new_exclusions: []
+14:46:52 |    bool(new_exclusions): False
+14:46:52 |    Condition 'if new_exclusions': False
+14:46:52 | 🔍 DEBUG ITERATION: NOT saving exclusions.json because new_exclusions is falsy
+14:46:52 |    This is why no exclusions.json file was created!
+14:46:52 | 🔍 PIPELINE DEBUG: eval_data input size: 18328
+14:46:52 | 🔍 PIPELINE DEBUG: Checking if actual evaluation size differs...
+14:46:52 | 🔍 PIPELINE DEBUG: Data reduction detected!
+14:46:52 |    Input to iteration: 18328 samples
+14:46:52 |    Actual evaluation: 1818 samples
+14:46:52 |    Reduction: 16510 samples lost in generate_predictions
+14:46:52 | 🔍 DEBUG PIPELINE: Exclusion tracker updated after iteration 1:
+14:46:52 |    new_exclusions length: 0
+14:46:52 |    Exclusion tracker keys: []
+14:46:52 |    Total exclusions in tracker: 0
+14:46:52 |    ⚠️ WARNING: Iteration 1 exclusions NOT added to tracker!
+14:46:52 | 💡 Iteration 2: Using Threshold: 0.8 (Primary), Margin: 0.2 (Primary)
+14:46:52 | 
+🔍 FILTERING DEBUG (Iteration 2):
+14:46:52 |    Exclusion tracker keys: []
+14:46:52 |    Total exclusions so far: 0
+14:46:52 | 
+🔍 FILTERING DEBUG: Applying exclusion strategy...
+14:46:52 |    Exclusion strategy: video-level
+14:46:52 |    Original resnetPredictions size: 18328
+14:46:52 | 🚫 VIDEO-LEVEL MODE: Using video-level exclusions
+14:46:52 |    🔍 Calling filter_evaluation_data with video-level strategy
+14:46:52 | 📉 Using CLEAN VIDEO-LEVEL evaluation
+14:46:53 | 🔍 FILTERING DEBUG: Evaluation data size after filtering:
+14:46:53 |    Original: 18328
+14:46:53 |    Filtered: 18328
+14:46:53 |    Difference: 0
+14:46:53 |    Strategy: video-level
+14:47:08 | 🔍 DEBUG EXTRACT_FP: Starting extraction
+14:47:08 | 🔍 DEBUG EXTRACT_FP: evaluation_results shape: (0, 7)
+14:47:08 | 🔍 DEBUG EXTRACT_FP: evaluation_results columns: ['video', 'class', 'actual', 'predicted', 'confidence', 'frame', 'classification']
+14:47:08 | 🔍 DEBUG EXTRACT_FP: predictions_for_eval shape: (0, 6)
+14:47:08 | 🔍 DEBUG EXTRACT_FP: predictions_for_eval columns: ['video', 'frame', 'owl_label', 'finetuned_embedding', 'visual_predicted_object', 'visual_max_score']
+14:47:08 | 🔍 DEBUG ITERATION: extract_fps_func returned:
+14:47:08 |    fp_data shape: (0, 2)
+14:47:08 |    new_exclusions type: <class 'list'>
+14:47:08 |    new_exclusions length: 0
+14:47:08 |    new_exclusions is None: False
+14:47:08 |    new_exclusions is empty list: True
+14:47:08 |    ⚠️ WARNING: new_exclusions is empty!
+14:47:08 | 🔍 DEBUG ITERATION: Checking if exclusions should be saved...
+14:47:08 |    new_exclusions: []
+14:47:08 |    bool(new_exclusions): False
+14:47:08 |    Condition 'if new_exclusions': False
+14:47:08 | 🔍 DEBUG ITERATION: NOT saving exclusions.json because new_exclusions is falsy
+14:47:08 |    This is why no exclusions.json file was created!
+14:47:08 | 🔍 PIPELINE DEBUG: eval_data input size: 18328
+14:47:08 | 🔍 PIPELINE DEBUG: Checking if actual evaluation size differs...
+14:47:08 | 🔍 PIPELINE DEBUG: Data reduction detected!
+14:47:08 |    Input to iteration: 18328 samples
+14:47:08 |    Actual evaluation: 1818 samples
+14:47:08 |    Reduction: 16510 samples lost in generate_predictions
+14:47:08 | 🔍 DEBUG PIPELINE: Exclusion tracker updated after iteration 2:
+14:47:08 |    new_exclusions length: 0
+14:47:08 |    Exclusion tracker keys: []
+14:47:08 |    Total exclusions in tracker: 0
+14:47:08 |    ⚠️ WARNING: Iteration 2 exclusions NOT added to tracker!
+14:47:08 | 
+✅ Convergence reached at iteration 2: F1 improvement (0.0000) is less than threshold (0.0010).
+14:47:08 | 
+📜 Pipeline summary saved to EXCLUDE_VIDEOS_MULTI_MODAL/pipeline_summary.json. Final F1: 0.0000.
+14:47:08 | 📍 Exclusion tracker saved to EXCLUDE_VIDEOS_MULTI_MODAL/cumulative_exclusions.json.
+14:47:08 | 💾 Final combined training data saved to EXCLUDE_VIDEOS_MULTI_MODAL/final_training_data.pkl.

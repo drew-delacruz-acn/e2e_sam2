@@ -1,0 +1,5 @@
+timestamp,iteration,step,data_size,details
+2025-05-30T14:28:51.614104,1,evaluation_data_before,18328,"{'columns': ['video', 'frame', 'owl_label', 'finetuned_embedding'], 'filename': 'iteration_1_evaluation_data_before.csv'}"
+2025-05-30T14:28:51.903067,1,evaluation_data_after,18328,"{'exclusions_applied': 0, 'columns': ['video', 'frame', 'owl_label', 'finetuned_embedding'], 'filename': 'iteration_1_evaluation_data_after.csv'}"
+2025-05-30T14:29:17.498427,2,evaluation_data_before,18328,"{'columns': ['video', 'frame', 'owl_label', 'finetuned_embedding'], 'filename': 'iteration_2_evaluation_data_before.csv'}"
+2025-05-30T14:29:17.796922,2,evaluation_data_after,18328,"{'exclusions_applied': 0, 'columns': ['video', 'frame', 'owl_label', 'finetuned_embedding'], 'filename': 'iteration_2_evaluation_data_after.csv'}"

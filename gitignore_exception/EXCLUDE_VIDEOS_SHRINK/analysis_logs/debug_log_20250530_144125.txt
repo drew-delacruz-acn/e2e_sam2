@@ -1,0 +1,195 @@
+=== COMPLETE DEBUG LOG ===
+Pipeline run at: 20250530_144125
+==================================================
+
+14:40:55 | 
+🚀 Starting Iterative Contrastive Learning Pipeline (Negative Classes Mode)
+14:40:55 | 📊 Comprehensive tracking system initialized
+14:40:55 | 
+🔍 FILTERING DEBUG: Configuration values:
+14:40:55 |    exclude_training_from_eval: True
+14:40:55 |    include_training_in_eval: False
+14:40:55 |    track_training_separately: False
+14:40:55 | 📉 Evaluation behavior: Standard, FPs added to training are not re-evaluated as FPs in the same way if they are learned.
+14:40:55 | 💡 Iteration 1: Using Primary Threshold: 0.8, Primary Margin: 0.2
+14:40:55 | 
+🔍 FILTERING DEBUG (Iteration 1):
+14:40:55 |    Exclusion tracker keys: []
+14:40:55 |    Total exclusions so far: 0
+14:40:55 | 
+🔍 FILTERING DEBUG: Applying exclusion strategy...
+14:40:55 |    Exclusion strategy: video-level
+14:40:55 |    Original resnetPredictions size: 18328
+14:40:55 | 🚫 VIDEO-LEVEL MODE: Using video-level exclusions
+14:40:55 |    🔍 Calling filter_evaluation_data with video-level strategy
+14:40:55 | 📉 Using CLEAN VIDEO-LEVEL evaluation
+14:40:56 | 🔍 FILTERING DEBUG: Evaluation data size after filtering:
+14:40:56 |    Original: 18328
+14:40:56 |    Filtered: 18328
+14:40:56 |    Difference: 0
+14:40:56 |    Strategy: video-level
+14:41:11 | 🔍 EVALUATE: Using full ground truth (no exclusions)
+14:41:12 | 🔍 EVALUATE: FINAL EVALUATION MATRIX:
+14:41:12 |    Evaluation matrix size: 1818 samples
+14:41:12 |    This is the confusion matrix size!
+14:41:12 |    No exclusions applied - using full ground truth
+14:41:12 | 🔍 DEBUG EXTRACT_FP: Starting extraction
+14:41:12 | 🔍 DEBUG EXTRACT_FP: evaluation_results shape: (1818, 7)
+14:41:12 | 🔍 DEBUG EXTRACT_FP: evaluation_results columns: ['video', 'class', 'actual', 'predicted', 'confidence', 'frame', 'classification']
+14:41:12 | 🔍 DEBUG EXTRACT_FP: predictions_for_eval shape: (164, 6)
+14:41:12 | 🔍 DEBUG EXTRACT_FP: predictions_for_eval columns: ['video', 'frame', 'owl_label', 'finetuned_embedding', 'visual_predicted_object', 'visual_max_score']
+14:41:12 | 🔍 DEBUG EXTRACT_FP: Sample FP cases:
+14:41:12 |    FP 1: Video=Scenes 001-020__106D-5-_20230815151758589.mp4, Class=Loki's Variant uniform, Frame=83.0
+14:41:12 |    FP 2: Video=Scenes 001-020__106E-1- mos_20230727162142209.mp4, Class=TVA Prisoner Uniform, Frame=13.0
+14:41:12 |    FP 3: Video=Scenes 001-020__108E-1-_20230727173710924.mp4, Class=Loki's Variant uniform, Frame=75.0
+14:41:12 | 🔍 DEBUG EXTRACT_FP: Processing FP #1
+14:41:12 |    Video: Scenes 001-020__106D-5-_20230815151758589.mp4 (type: <class 'str'>)
+14:41:12 |    Class: Loki's Variant uniform
+14:41:12 |    Frame: 83.0 (type: <class 'float'>)
+14:41:12 |    Frame after conversion: 83 (type: <class 'int'>)
+14:41:12 |    Matching predictions found: 1
+14:41:12 | 🔍 DEBUG EXTRACT_FP: Created exclusion #1
+14:41:12 |    Exclusion: Video=Scenes 001-020__106D-5-_20230815151758589.mp4, Frame=83, Class=not_Loki's Variant uniform
+14:41:12 | 🔍 DEBUG EXTRACT_FP: Processing FP #2
+14:41:12 |    Video: Scenes 001-020__106E-1- mos_20230727162142209.mp4 (type: <class 'str'>)
+14:41:12 |    Class: TVA Prisoner Uniform
+14:41:12 |    Frame: 13.0 (type: <class 'float'>)
+14:41:12 |    Frame after conversion: 13 (type: <class 'int'>)
+14:41:12 |    Matching predictions found: 1
+14:41:12 | 🔍 DEBUG EXTRACT_FP: Created exclusion #2
+14:41:12 |    Exclusion: Video=Scenes 001-020__106E-1- mos_20230727162142209.mp4, Frame=13, Class=not_TVA Prisoner Uniform
+14:41:12 | 🔍 DEBUG EXTRACT_FP: Processing FP #3
+14:41:12 |    Video: Scenes 001-020__108E-1-_20230727173710924.mp4 (type: <class 'str'>)
+14:41:12 |    Class: Loki's Variant uniform
+14:41:12 |    Frame: 75.0 (type: <class 'float'>)
+14:41:12 |    Frame after conversion: 75 (type: <class 'int'>)
+14:41:12 |    Matching predictions found: 1
+14:41:12 | 🔍 DEBUG EXTRACT_FP: Created exclusion #3
+14:41:12 |    Exclusion: Video=Scenes 001-020__108E-1-_20230727173710924.mp4, Frame=75, Class=not_Loki's Variant uniform
+14:41:12 | 🔍 DEBUG EXTRACT_FP: Processing FP #4
+14:41:12 |    Video: Scenes 001-020__108E-1-_20230727173710924.mp4 (type: <class 'str'>)
+14:41:12 |    Class: TemPad
+14:41:12 |    Frame: 83.0 (type: <class 'float'>)
+14:41:12 |    Frame after conversion: 83 (type: <class 'int'>)
+14:41:12 |    Matching predictions found: 1
+14:41:12 | 🔍 DEBUG EXTRACT_FP: Created exclusion #4
+14:41:12 |    Exclusion: Video=Scenes 001-020__108E-1-_20230727173710924.mp4, Frame=83, Class=not_TemPad
+14:41:12 | 🔍 DEBUG EXTRACT_FP: Processing FP #5
+14:41:12 |    Video: Scenes 001-020__110A-2-_20230815160756908.mp4 (type: <class 'str'>)
+14:41:12 |    Class: TVA Prisoner Uniform
+14:41:12 |    Frame: 77.0 (type: <class 'float'>)
+14:41:12 |    Frame after conversion: 77 (type: <class 'int'>)
+14:41:12 |    Matching predictions found: 1
+14:41:12 | 🔍 DEBUG EXTRACT_FP: Created exclusion #5
+14:41:12 |    Exclusion: Video=Scenes 001-020__110A-2-_20230815160756908.mp4, Frame=77, Class=not_TVA Prisoner Uniform
+14:41:12 | 🔍 DEBUG EXTRACT_FP: FINAL STATISTICS
+14:41:12 |    Total FP cases found: 88
+14:41:12 |    FP cases processed: 88
+14:41:12 |    FP cases skipped: 0
+14:41:12 |    Successful embeddings extracted: 88
+14:41:12 |    Successful exclusions created: 88
+14:41:12 |    Final exclusion_list length: 88
+14:41:12 | 🔍 DEBUG EXTRACT_FP: Sample exclusions:
+14:41:12 |    Exclusion 1: {'video': 'Scenes 001-020__106D-5-_20230815151758589.mp4', 'frame': 83, 'class': "not_Loki's Variant uniform", 'original_wrong_prediction': "Loki's Variant uniform", 'reason': 'false_positive_negative'}
+14:41:12 |    Exclusion 2: {'video': 'Scenes 001-020__106E-1- mos_20230727162142209.mp4', 'frame': 13, 'class': 'not_TVA Prisoner Uniform', 'original_wrong_prediction': 'TVA Prisoner Uniform', 'reason': 'false_positive_negative'}
+14:41:12 |    Exclusion 3: {'video': 'Scenes 001-020__108E-1-_20230727173710924.mp4', 'frame': 75, 'class': "not_Loki's Variant uniform", 'original_wrong_prediction': "Loki's Variant uniform", 'reason': 'false_positive_negative'}
+14:41:12 | 🔍 DEBUG EXTRACT_FP: RETURNING:
+14:41:12 |    fp_df_output shape: (88, 2)
+14:41:12 |    exclusion_list length: 88
+14:41:12 | 🔍 DEBUG ITERATION: extract_fps_func returned:
+14:41:12 |    fp_data shape: (88, 2)
+14:41:12 |    new_exclusions type: <class 'list'>
+14:41:12 |    new_exclusions length: 88
+14:41:12 |    new_exclusions is None: False
+14:41:12 |    new_exclusions is empty list: False
+14:41:12 |    Sample exclusion: {'video': 'Scenes 001-020__106D-5-_20230815151758589.mp4', 'frame': 83, 'class': "not_Loki's Variant uniform", 'original_wrong_prediction': "Loki's Variant uniform", 'reason': 'false_positive_negative'}
+14:41:12 | 🔍 DEBUG ITERATION: Checking if exclusions should be saved...
+14:41:12 |    new_exclusions: [{'video': 'Scenes 001-020__106D-5-_20230815151758589.mp4', 'frame': 83, 'class': "not_Loki's Variant uniform", 'original_wrong_prediction': "Loki's Variant uniform", 'reason': 'false_positive_negative'}, {'video': 'Scenes 001-020__106E-1- mos_20230727162142209.mp4', 'frame': 13, 'class': 'not_TVA Prisoner Uniform', 'original_wrong_prediction': 'TVA Prisoner Uniform', 'reason': 'false_positive_negative'}, {'video': 'Scenes 001-020__108E-1-_20230727173710924.mp4', 'frame': 75, 'class': "not_Loki's Variant uniform", 'original_wrong_prediction': "Loki's Variant uniform", 'reason': 'false_positive_negative'}, {'video': 'Scenes 001-020__108E-1-_20230727173710924.mp4', 'frame': 83, 'class': 'not_TemPad', 'original_wrong_prediction': 'TemPad', 'reason': 'false_positive_negative'}, {'video': 'Scenes 001-020__110A-2-_20230815160756908.mp4', 'frame': 77, 'class': 'not_TVA Prisoner Uniform', 'original_wrong_prediction': 'TVA Prisoner Uniform', 'reason': 'false_positive_negative'}, {'video': 'Scenes 001-020__110A-2-_20230815160756908.mp4', 'frame': 211, 'class': 'not_TimeSpear', 'original_wrong_prediction': 'TimeSpear', 'reason': 'false_positive_negative'}, {'video': 'Scenes 001-020__110C-1-_20230728125333457.mp4', 'frame': 176, 'class': 'not_TemPad', 'original_wrong_prediction': 'TemPad', 'reason': 'false_positive_negative'}, {'video': 'Scenes 001-020__111D-1-_20230728135829842.mp4', 'frame': 54, 'class': 'not_TVA Collar', 'original_wrong_prediction': 'TVA Collar', 'reason': 'false_positive_negative'}, {'video': 'Scenes 001-020__111D-1-_20230728135829842.mp4', 'frame': 155, 'class': 'not_TemPad', 'original_wrong_prediction': 'TemPad', 'reason': 'false_positive_negative'}, {'video': 'Scenes 001-020__201C-1-_20230815182005024.mp4', 'frame': 57, 'class': "not_Loki's Armor", 'original_wrong_prediction': "Loki's Armor", 'reason': 'false_positive_negative'}, {'video': 'Scenes 001-020__201D-2-_20230815184746334.mp4', 'frame': 41, 'class': 'not_TimeSpear', 'original_wrong_prediction': 'TimeSpear', 'reason': 'false_positive_negative'}, {'video': 'Scenes 001-020__201E-2-_20230728112604212.mp4', 'frame': 35, 'class': "not_Sylvie's horned headpiece", 'original_wrong_prediction': "Sylvie's horned headpiece", 'reason': 'false_positive_negative'}, {'video': 'Scenes 001-020__201K-1-_20230815184646280.mp4', 'frame': 20, 'class': "not_Sylvie's horned headpiece", 'original_wrong_prediction': "Sylvie's horned headpiece", 'reason': 'false_positive_negative'}, {'video': 'Scenes 001-020__201L-1-_20230728112628503.mp4', 'frame': 97, 'class': "not_Loki's Variant uniform", 'original_wrong_prediction': "Loki's Variant uniform", 'reason': 'false_positive_negative'}, {'video': 'Scenes 001-020__207A-1-_20230815182030372.mp4', 'frame': 61, 'class': 'not_TVA Prisoner Uniform', 'original_wrong_prediction': 'TVA Prisoner Uniform', 'reason': 'false_positive_negative'}, {'video': 'Scenes 001-020__211-1-_20230815190444533.mp4', 'frame': 9, 'class': 'not_Boastful Loki Armor', 'original_wrong_prediction': 'Boastful Loki Armor', 'reason': 'false_positive_negative'}, {'video': 'Scenes 001-020__211-1-_20230815190444533.mp4', 'frame': 158, 'class': "not_Loki's Variant uniform", 'original_wrong_prediction': "Loki's Variant uniform", 'reason': 'false_positive_negative'}, {'video': 'Scenes 001-020__211H-2-_20230815190456898.mp4', 'frame': 81, 'class': 'not_TemPad', 'original_wrong_prediction': 'TemPad', 'reason': 'false_positive_negative'}, {'video': 'Scenes 001-020__211H-2-_20230815190456898.mp4', 'frame': 35, 'class': 'not_Time Stick', 'original_wrong_prediction': 'Time Stick', 'reason': 'false_positive_negative'}, {'video': 'Scenes 001-020__213-3-_20230815180738197.mp4', 'frame': 65, 'class': "not_Sylvie's horned headpiece", 'original_wrong_prediction': "Sylvie's horned headpiece", 'reason': 'false_positive_negative'}, {'video': 'Scenes 001-020__213-3-_20230815180738197.mp4', 'frame': 76, 'class': 'not_TemPad', 'original_wrong_prediction': 'TemPad', 'reason': 'false_positive_negative'}, {'video': 'Scenes 001-020__216A-4b- only_20230815182553047.mp4', 'frame': 119, 'class': "not_Ravonna Renslayer's Uniform", 'original_wrong_prediction': "Ravonna Renslayer's Uniform", 'reason': 'false_positive_negative'}, {'video': 'Scenes 001-020__216A-4b- only_20230815182553047.mp4', 'frame': 89, 'class': 'not_TVA Monitor', 'original_wrong_prediction': 'TVA Monitor', 'reason': 'false_positive_negative'}, {'video': 'Scenes 001-020__220D-2-_20230815190723523.mp4', 'frame': 72, 'class': "not_Loki's Variant uniform", 'original_wrong_prediction': "Loki's Variant uniform", 'reason': 'false_positive_negative'}, {'video': 'Scenes 001-020__220D-2-_20230815190723523.mp4', 'frame': 28, 'class': 'not_TimeSpear', 'original_wrong_prediction': 'TimeSpear', 'reason': 'false_positive_negative'}, {'video': 'Scenes 001-020__302-2_20230815200213180.mp4', 'frame': 31, 'class': "not_Ravonna Renslayer's Uniform", 'original_wrong_prediction': "Ravonna Renslayer's Uniform", 'reason': 'false_positive_negative'}, {'video': 'Scenes 001-020__303K-3-_20230815223320788.mp4', 'frame': 185, 'class': 'not_TimeSpear', 'original_wrong_prediction': 'TimeSpear', 'reason': 'false_positive_negative'}, {'video': 'Scenes 001-020__303L-1-_20230815223024888.mp4', 'frame': 28, 'class': 'not_TVA Prisoner Uniform', 'original_wrong_prediction': 'TVA Prisoner Uniform', 'reason': 'false_positive_negative'}, {'video': 'Scenes 001-020__303L-1-_20230815223024888.mp4', 'frame': 90, 'class': 'not_TimeSpear', 'original_wrong_prediction': 'TimeSpear', 'reason': 'false_positive_negative'}, {'video': 'Scenes 001-020__305C-1_20230815193534665.mp4', 'frame': 14, 'class': "not_Ravonna Renslayer's Uniform", 'original_wrong_prediction': "Ravonna Renslayer's Uniform", 'reason': 'false_positive_negative'}, {'video': 'Scenes 001-020__306-1-_20230803124944118.mp4', 'frame': 62, 'class': "not_Sylvie's machete", 'original_wrong_prediction': "Sylvie's machete", 'reason': 'false_positive_negative'}, {'video': 'Scenes 001-020__306B-5-_20230815201805729.mp4', 'frame': 30, 'class': 'not_Aligator Loki Plushie', 'original_wrong_prediction': 'Aligator Loki Plushie', 'reason': 'false_positive_negative'}, {'video': 'Scenes 001-020__306B-5-_20230815201805729.mp4', 'frame': 65, 'class': "not_Sylvie's machete", 'original_wrong_prediction': "Sylvie's machete", 'reason': 'false_positive_negative'}, {'video': 'Scenes 001-020__306C-1-_20230815201919138.mp4', 'frame': 3, 'class': 'not_Aligator Loki Plushie', 'original_wrong_prediction': 'Aligator Loki Plushie', 'reason': 'false_positive_negative'}, {'video': 'Scenes 001-020__306C-1-_20230815201919138.mp4', 'frame': 68, 'class': "not_Sylvie's machete", 'original_wrong_prediction': "Sylvie's machete", 'reason': 'false_positive_negative'}, {'video': 'Scenes 001-020__306C-1-_20230815201919138.mp4', 'frame': 38, 'class': 'not_TVA Prisoner Uniform', 'original_wrong_prediction': 'TVA Prisoner Uniform', 'reason': 'false_positive_negative'}, {'video': 'Scenes 001-020__306E-1-_20230815201829547.mp4', 'frame': 25, 'class': 'not_Aligator Loki Plushie', 'original_wrong_prediction': 'Aligator Loki Plushie', 'reason': 'false_positive_negative'}, {'video': 'Scenes 001-020__306E-1-_20230815201829547.mp4', 'frame': 65, 'class': "not_Sylvie's machete", 'original_wrong_prediction': "Sylvie's machete", 'reason': 'false_positive_negative'}, {'video': 'Scenes 001-020__306E-1-_20230815201829547.mp4', 'frame': 47, 'class': 'not_TVA Prisoner Uniform', 'original_wrong_prediction': 'TVA Prisoner Uniform', 'reason': 'false_positive_negative'}, {'video': 'Scenes 001-020__309-3-_20230815150109755.mp4', 'frame': 24, 'class': "not_Sylvie's machete", 'original_wrong_prediction': "Sylvie's machete", 'reason': 'false_positive_negative'}, {'video': 'Scenes 001-020__314-3_20230815232058756.mp4', 'frame': 119, 'class': "not_Sylvie's machete", 'original_wrong_prediction': "Sylvie's machete", 'reason': 'false_positive_negative'}, {'video': 'Scenes 001-020__319-9_20230815201611576.mp4', 'frame': 28, 'class': 'not_Aligator Loki Plushie', 'original_wrong_prediction': 'Aligator Loki Plushie', 'reason': 'false_positive_negative'}, {'video': 'Scenes 001-020__319-9_20230815201611576.mp4', 'frame': 58, 'class': "not_Sylvie's machete", 'original_wrong_prediction': "Sylvie's machete", 'reason': 'false_positive_negative'}, {'video': 'Scenes 001-020__504K-1-_20230816050602143.mp4', 'frame': 28, 'class': "not_Loki's Variant uniform", 'original_wrong_prediction': "Loki's Variant uniform", 'reason': 'false_positive_negative'}, {'video': 'Scenes 001-020__504T-3-_20230816050753649.mp4', 'frame': 295, 'class': "not_Loki's dagger", 'original_wrong_prediction': "Loki's dagger", 'reason': 'false_positive_negative'}, {'video': 'Scenes 001-020__506E-1ng_b_20230816043951139.mp4', 'frame': 0, 'class': "not_Sylvie's machete", 'original_wrong_prediction': "Sylvie's machete", 'reason': 'false_positive_negative'}, {'video': 'Scenes 001-020__509-3_20230815200533637.mp4', 'frame': 43, 'class': 'not_TemPad', 'original_wrong_prediction': 'TemPad', 'reason': 'false_positive_negative'}, {'video': 'Scenes 021-040__137E-1-_20230815175038515.mp4', 'frame': 86, 'class': 'not_TimeSpear', 'original_wrong_prediction': 'TimeSpear', 'reason': 'false_positive_negative'}, {'video': 'Scenes 021-040__221-4-_20230815180803766.mp4', 'frame': 100, 'class': "not_Loki's dagger", 'original_wrong_prediction': "Loki's dagger", 'reason': 'false_positive_negative'}, {'video': 'Scenes 021-040__221-4-_20230815180803766.mp4', 'frame': 21, 'class': "not_Ravonna Renslayer's Uniform", 'original_wrong_prediction': "Ravonna Renslayer's Uniform", 'reason': 'false_positive_negative'}, {'video': 'Scenes 021-040__221-4-_20230815180803766.mp4', 'frame': 83, 'class': 'not_TVA Prisoner Uniform', 'original_wrong_prediction': 'TVA Prisoner Uniform', 'reason': 'false_positive_negative'}, {'video': 'Scenes 021-040__221-4-_20230815180803766.mp4', 'frame': 37, 'class': 'not_TemPad', 'original_wrong_prediction': 'TemPad', 'reason': 'false_positive_negative'}, {'video': 'Scenes 021-040__222-2-_20230815185458410.mp4', 'frame': 58, 'class': 'not_TemPad', 'original_wrong_prediction': 'TemPad', 'reason': 'false_positive_negative'}, {'video': 'Scenes 021-040__226A-1-_20230815185254846.mp4', 'frame': 119, 'class': "not_Sylvie's machete", 'original_wrong_prediction': "Sylvie's machete", 'reason': 'false_positive_negative'}, {'video': 'Scenes 021-040__234A-2-_20230815192229849.mp4', 'frame': 102, 'class': "not_Loki's Armor", 'original_wrong_prediction': "Loki's Armor", 'reason': 'false_positive_negative'}, {'video': 'Scenes 021-040__234A-2-_20230815192229849.mp4', 'frame': 167, 'class': 'not_TVA Collar', 'original_wrong_prediction': 'TVA Collar', 'reason': 'false_positive_negative'}, {'video': 'Scenes 021-040__234A-2-_20230815192229849.mp4', 'frame': 43, 'class': 'not_TVA Prisoner Uniform', 'original_wrong_prediction': 'TVA Prisoner Uniform', 'reason': 'false_positive_negative'}, {'video': 'Scenes 021-040__234A-2-_20230815192229849.mp4', 'frame': 171, 'class': 'not_TemPad', 'original_wrong_prediction': 'TemPad', 'reason': 'false_positive_negative'}, {'video': 'Scenes 021-040__235C-2- mos_20230815192640043.mp4', 'frame': 5, 'class': 'not_TemPad', 'original_wrong_prediction': 'TemPad', 'reason': 'false_positive_negative'}, {'video': 'Scenes 021-040__237B-1-_20230815180326204.mp4', 'frame': 164, 'class': 'not_Aligator Loki Plushie', 'original_wrong_prediction': 'Aligator Loki Plushie', 'reason': 'false_positive_negative'}, {'video': 'Scenes 021-040__237B-1-_20230815180326204.mp4', 'frame': 159, 'class': "not_Loki's Armor", 'original_wrong_prediction': "Loki's Armor", 'reason': 'false_positive_negative'}, {'video': 'Scenes 021-040__237B-1-_20230815180326204.mp4', 'frame': 57, 'class': "not_Loki's dagger", 'original_wrong_prediction': "Loki's dagger", 'reason': 'false_positive_negative'}, {'video': 'Scenes 021-040__237B-1-_20230815180326204.mp4', 'frame': 205, 'class': "not_Sylvie's machete", 'original_wrong_prediction': "Sylvie's machete", 'reason': 'false_positive_negative'}, {'video': 'Scenes 021-040__237B-1-_20230815180326204.mp4', 'frame': 262, 'class': 'not_TVA Prisoner Uniform', 'original_wrong_prediction': 'TVA Prisoner Uniform', 'reason': 'false_positive_negative'}, {'video': 'Scenes 021-040__237B-1-_20230815180326204.mp4', 'frame': 35, 'class': 'not_TimeSpear', 'original_wrong_prediction': 'TimeSpear', 'reason': 'false_positive_negative'}, {'video': 'Scenes 021-040__440H-2b-_20230816031331933.mp4', 'frame': 55, 'class': 'not_Aligator Loki Plushie', 'original_wrong_prediction': 'Aligator Loki Plushie', 'reason': 'false_positive_negative'}, {'video': 'Scenes 021-040__536A-3-_20230816063724398.mp4', 'frame': 94, 'class': 'not_Boastful Loki Armor', 'original_wrong_prediction': 'Boastful Loki Armor', 'reason': 'false_positive_negative'}, {'video': 'Scenes 021-040__536A-3-_20230816063724398.mp4', 'frame': 22, 'class': "not_Sylvie's machete", 'original_wrong_prediction': "Sylvie's machete", 'reason': 'false_positive_negative'}, {'video': 'Scenes 021-040__536A-3-_20230816063724398.mp4', 'frame': 38, 'class': 'not_TVA Collar', 'original_wrong_prediction': 'TVA Collar', 'reason': 'false_positive_negative'}, {'video': 'Scenes 021-040__536A-3-_20230816063724398.mp4', 'frame': 143, 'class': 'not_TemPad', 'original_wrong_prediction': 'TemPad', 'reason': 'false_positive_negative'}, {'video': 'Scenes 021-040__537C-2_20230816070308783.mp4', 'frame': 26, 'class': 'not_Aligator Loki Plushie', 'original_wrong_prediction': 'Aligator Loki Plushie', 'reason': 'false_positive_negative'}, {'video': 'Scenes 041-060__156-5a- only pu_20230815181240389.mp4', 'frame': 173, 'class': 'not_TemPad', 'original_wrong_prediction': 'TemPad', 'reason': 'false_positive_negative'}, {'video': 'Scenes 041-060__156-5a- only pu_20230815181240389.mp4', 'frame': 156, 'class': 'not_Time Stick', 'original_wrong_prediction': 'Time Stick', 'reason': 'false_positive_negative'}, {'video': 'Scenes 041-060__156-6a- only pu_20230815175525189.mp4', 'frame': 70, 'class': 'not_TemPad', 'original_wrong_prediction': 'TemPad', 'reason': 'false_positive_negative'}, {'video': 'Scenes 041-060__156D-1- mos_20230815181940173.mp4', 'frame': 171, 'class': 'not_TVA Collar', 'original_wrong_prediction': 'TVA Collar', 'reason': 'false_positive_negative'}, {'video': 'Scenes 041-060__156F-1-_20230815175731629.mp4', 'frame': 98, 'class': 'not_TemPad', 'original_wrong_prediction': 'TemPad', 'reason': 'false_positive_negative'}, {'video': 'Scenes 041-060__244A-7- pu_20230815211729392.mp4', 'frame': 56, 'class': "not_Ravonna Renslayer's Uniform", 'original_wrong_prediction': "Ravonna Renslayer's Uniform", 'reason': 'false_positive_negative'}, {'video': 'Scenes 041-060__244A-7- pu_20230815211729392.mp4', 'frame': 59, 'class': 'not_TVA Collar', 'original_wrong_prediction': 'TVA Collar', 'reason': 'false_positive_negative'}, {'video': 'Scenes 041-060__244A-7- pu_20230815211729392.mp4', 'frame': 13, 'class': 'not_TVA Prisoner Uniform', 'original_wrong_prediction': 'TVA Prisoner Uniform', 'reason': 'false_positive_negative'}, {'video': 'Scenes 041-060__244B-1-_20230815212053650.mp4', 'frame': 62, 'class': 'not_TVA Prisoner Uniform', 'original_wrong_prediction': 'TVA Prisoner Uniform', 'reason': 'false_positive_negative'}, {'video': 'Scenes 041-060__244B-1-_20230815212053650.mp4', 'frame': 158, 'class': 'not_Time Stick', 'original_wrong_prediction': 'Time Stick', 'reason': 'false_positive_negative'}, {'video': 'Scenes 061-080__165A-1-_20230815180241405.mp4', 'frame': 25, 'class': "not_Sylvie's machete", 'original_wrong_prediction': "Sylvie's machete", 'reason': 'false_positive_negative'}, {'video': 'Scenes 061-080__165A-1-_20230815180241405.mp4', 'frame': 92, 'class': 'not_TVA Collar', 'original_wrong_prediction': 'TVA Collar', 'reason': 'false_positive_negative'}, {'video': 'Scenes 061-080__165A-1-_20230815180241405.mp4', 'frame': 96, 'class': 'not_TemPad', 'original_wrong_prediction': 'TemPad', 'reason': 'false_positive_negative'}, {'video': 'Scenes 061-080__165A-4-_20230815180313546.mp4', 'frame': 102, 'class': 'not_TemPad', 'original_wrong_prediction': 'TemPad', 'reason': 'false_positive_negative'}, {'video': 'Scenes 061-080__265G-3-_20230815215442372.mp4', 'frame': 79, 'class': "not_Sylvie's Armor", 'original_wrong_prediction': "Sylvie's Armor", 'reason': 'false_positive_negative'}, {'video': 'Scenes 061-080__265G-3-_20230815215442372.mp4', 'frame': 88, 'class': 'not_TimeSpear', 'original_wrong_prediction': 'TimeSpear', 'reason': 'false_positive_negative'}, {'video': 'Scenes 061-080__265N-1_20230815220141511.mp4', 'frame': 34, 'class': 'not_TimeSpear', 'original_wrong_prediction': 'TimeSpear', 'reason': 'false_positive_negative'}]
+14:41:12 |    bool(new_exclusions): True
+14:41:12 |    Condition 'if new_exclusions': True
+14:41:12 | 🔍 DEBUG ITERATION: Saving 88 exclusions to exclusions.json
+14:41:12 | 🔍 PIPELINE DEBUG: eval_data input size: 18328
+14:41:12 | 🔍 PIPELINE DEBUG: Checking if actual evaluation size differs...
+14:41:12 | 🔍 PIPELINE DEBUG: Data reduction detected!
+14:41:12 |    Input to iteration: 18328 samples
+14:41:12 |    Actual evaluation: 1818 samples
+14:41:12 |    Reduction: 16510 samples lost in generate_predictions
+14:41:12 | 🔍 DEBUG PIPELINE: Exclusion tracker updated after iteration 1:
+14:41:12 |    new_exclusions length: 88
+14:41:12 |    Exclusion tracker keys: [1]
+14:41:12 |    Total exclusions in tracker: 88
+14:41:12 |    Iteration 1: 88 exclusions
+14:41:12 |    Iteration 1 exclusions added successfully
+14:41:12 | 💡 Iteration 2: Using Threshold: 0.8 (Primary), Margin: 0.2 (Primary)
+14:41:12 | 
+🔍 FILTERING DEBUG (Iteration 2):
+14:41:12 |    Exclusion tracker keys: [1]
+14:41:12 |    Total exclusions so far: 88
+14:41:12 |    Iteration 1: 88 exclusions
+14:41:12 | 
+🔍 FILTERING DEBUG: Applying exclusion strategy...
+14:41:12 |    Exclusion strategy: video-level
+14:41:12 |    Original resnetPredictions size: 18328
+14:41:12 | 🚫 VIDEO-LEVEL MODE: Using video-level exclusions
+14:41:12 |    🔍 Calling filter_evaluation_data with video-level strategy
+14:41:12 | 📉 Using CLEAN VIDEO-LEVEL evaluation
+14:41:12 | 🔍 FILTERING DEBUG: Evaluation data size after filtering:
+14:41:12 |    Original: 18328
+14:41:12 |    Filtered: 2840
+14:41:12 |    Difference: 15488
+14:41:12 |    Strategy: video-level
+14:41:12 |    ✅ Filtering applied: 15488 samples removed
+14:41:25 | 🔍 EVALUATE: Filtering ground truth using video-level exclusion strategy
+14:41:25 |    Original ground truth size: 1818
+14:41:25 |    Ground truth columns: ['video', 'tag', 'actual']
+14:41:25 |    Has video column: True
+14:41:25 |    Has frame column: False
+14:41:25 |    ✅ Applying video-level filtering to ground truth
+14:41:25 | 🔍 GT_FILTER: Applying video-level exclusions to ground truth
+14:41:25 |    Processing 88 exclusions from iteration 1
+14:41:25 |    Videos to exclude from ground truth: 52
+14:41:25 |    Sample excluded videos: ['Scenes 001-020__213-3-_20230815180738197.mp4', 'Scenes 021-040__221-4-_20230815180803766.mp4', 'Scenes 021-040__235C-2- mos_20230815192640043.mp4']
+14:41:25 |    Ground truth filtering: 1818 → 882 samples
+14:41:25 |    Removed 936 ground truth samples from 52 videos
+14:41:25 |    Filtered ground truth size: 882
+14:41:25 |    Ground truth reduction: 936 samples removed
+14:41:25 | 🔍 EVALUATE: FINAL EVALUATION MATRIX:
+14:41:25 |    Evaluation matrix size: 882 samples
+14:41:25 |    This is the confusion matrix size!
+14:41:25 |    Expected reduction from exclusions: ground truth filtered
+14:41:25 | 🔍 DEBUG EXTRACT_FP: Starting extraction
+14:41:25 | 🔍 DEBUG EXTRACT_FP: evaluation_results shape: (882, 7)
+14:41:25 | 🔍 DEBUG EXTRACT_FP: evaluation_results columns: ['video', 'class', 'actual', 'predicted', 'confidence', 'frame', 'classification']
+14:41:25 | 🔍 DEBUG EXTRACT_FP: predictions_for_eval shape: (27, 6)
+14:41:25 | 🔍 DEBUG EXTRACT_FP: predictions_for_eval columns: ['video', 'frame', 'owl_label', 'finetuned_embedding', 'visual_predicted_object', 'visual_max_score']
+14:41:25 | 🔍 DEBUG ITERATION: extract_fps_func returned:
+14:41:25 |    fp_data shape: (0, 2)
+14:41:25 |    new_exclusions type: <class 'list'>
+14:41:25 |    new_exclusions length: 0
+14:41:25 |    new_exclusions is None: False
+14:41:25 |    new_exclusions is empty list: True
+14:41:25 |    ⚠️ WARNING: new_exclusions is empty!
+14:41:25 | 🔍 DEBUG ITERATION: Checking if exclusions should be saved...
+14:41:25 |    new_exclusions: []
+14:41:25 |    bool(new_exclusions): False
+14:41:25 |    Condition 'if new_exclusions': False
+14:41:25 | 🔍 DEBUG ITERATION: NOT saving exclusions.json because new_exclusions is falsy
+14:41:25 |    This is why no exclusions.json file was created!
+14:41:25 | 🔍 PIPELINE DEBUG: eval_data input size: 2840
+14:41:25 | 🔍 PIPELINE DEBUG: Checking if actual evaluation size differs...
+14:41:25 | 🔍 PIPELINE DEBUG: Data reduction detected!
+14:41:25 |    Input to iteration: 2840 samples
+14:41:25 |    Actual evaluation: 882 samples
+14:41:25 |    Reduction: 1958 samples lost in generate_predictions
+14:41:25 | 🔍 DEBUG PIPELINE: Exclusion tracker updated after iteration 2:
+14:41:25 |    new_exclusions length: 0
+14:41:25 |    Exclusion tracker keys: [1]
+14:41:25 |    Total exclusions in tracker: 88
+14:41:25 |    Iteration 1: 88 exclusions
+14:41:25 |    ⚠️ WARNING: Iteration 2 exclusions NOT added to tracker!
+14:41:25 | 
+🏁 Maximum iterations reached.
+14:41:25 | 
+📜 Pipeline summary saved to EXCLUDE_VIDEOS_SHRINK/pipeline_summary.json. Final F1: 0.7105.
+14:41:25 | 📍 Exclusion tracker saved to EXCLUDE_VIDEOS_SHRINK/cumulative_exclusions.json.
+14:41:25 | 💾 Final combined training data saved to EXCLUDE_VIDEOS_SHRINK/final_training_data.pkl.
